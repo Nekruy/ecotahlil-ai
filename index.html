@@ -691,10 +691,116 @@ footer b { color:#fff; }
 }
 
 /* ============================================================
+   СТРАНИЦА 4 — ДАННЫЕ (Всемирный банк + НБТ)
+============================================================ */
+.dp-header {
+  background:linear-gradient(135deg, #1a0a2e 0%, #0d1a3c 50%, #0a1a2e 100%);
+  padding:28px 28px 24px; color:#fff;
+}
+.dp-header h1 { font-size:22px; font-weight:800; margin-bottom:6px; }
+.dp-header p  { font-size:13px; color:rgba(255,255,255,.65); }
+.dp-header-badges { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.ab-indigo { background:rgba(99,102,241,.2); border:1px solid rgba(99,102,241,.4); color:#a5b4fc; }
+.ab-orange { background:rgba(249,115,22,.2); border:1px solid rgba(249,115,22,.4); color:#fdba74; }
+
+.dp-section { padding:20px 24px; }
+.dp-section-title {
+  font-size:16px; font-weight:800; color:var(--navy);
+  margin-bottom:16px; padding-bottom:10px;
+  border-bottom:2px solid var(--navy-pale);
+  display:flex; align-items:center; gap:8px;
+}
+
+/* World Bank кнопки */
+.wb-btns { display:flex; gap:10px; margin-bottom:18px; flex-wrap:wrap; }
+.wb-btn {
+  padding:10px 20px; border-radius:8px;
+  border:2px solid var(--border); background:var(--bg);
+  font-size:13px; font-weight:700; color:var(--text2);
+  cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:6px;
+}
+.wb-btn:hover  { border-color:var(--navy2); color:var(--navy2); background:var(--navy-pale); }
+.wb-btn.active { border-color:var(--navy2); background:var(--navy2); color:#fff; }
+
+.dp-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; box-shadow:var(--shadow2); overflow:hidden;
+  margin-bottom:16px;
+}
+.dp-card-head {
+  background:var(--navy); color:#fff;
+  padding:13px 18px; font-size:13px; font-weight:700;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.dp-card-body { padding:16px; }
+.dp-chart-wrap { height:260px; }
+
+/* НБТ — карточки курсов */
+.nbt-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px; }
+.nbt-rate-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; padding:18px; box-shadow:var(--shadow);
+  text-align:center; position:relative; overflow:hidden;
+}
+.nbt-rate-card::before {
+  content:''; position:absolute; top:0; left:0; width:4px; height:100%;
+}
+.nrc-usd::before { background:#0050b3; }
+.nrc-eur::before { background:#1a7a3c; }
+.nrc-rub::before { background:#c0392b; }
+.nrc-ref::before { background:var(--gold); }
+.nbt-flag  { font-size:22px; margin-bottom:6px; }
+.nbt-name  { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.nbt-rate  { font-size:24px; font-weight:800; color:var(--navy); }
+.nbt-unit  { font-size:11px; color:var(--text3); margin-top:3px; }
+.nbt-loading { font-size:12px; color:var(--text3); font-style:italic; }
+
+.nbt-refresh-btn {
+  padding:8px 18px; border-radius:8px;
+  background:var(--navy-pale); border:1px solid var(--navy2);
+  color:var(--navy2); font-size:12px; font-weight:700;
+  cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:6px;
+}
+.nbt-refresh-btn:hover { background:var(--navy2); color:#fff; }
+.nbt-refresh-btn:disabled { opacity:.5; cursor:not-allowed; }
+
+.dp-two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.dp-info-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;
+}
+.dic-blue { background:var(--navy-pale); color:var(--navy2); }
+.dic-green { background:#f0fdf4; color:var(--green); border:1px solid #bbf7d0; }
+
+/* Кнопка анализа */
+.send-to-ai-btn {
+  padding:10px 20px; border-radius:8px; border:none;
+  background:linear-gradient(135deg, var(--teal), var(--teal2));
+  color:#fff; font-size:13px; font-weight:700; cursor:pointer;
+  transition:all .2s; display:inline-flex; align-items:center; gap:6px;
+  margin-top:12px;
+}
+.send-to-ai-btn:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(13,148,136,.3); }
+
+/* WB таблица */
+.wb-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.wb-tbl thead th {
+  background:var(--navy); color:#fff; font-size:11px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.5px; padding:9px 12px; text-align:left;
+}
+.wb-tbl tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
+.wb-tbl tbody tr:last-child { border-bottom:none; }
+.wb-tbl tbody tr:hover { background:var(--navy-pale); }
+.wb-tbl td { padding:9px 12px; }
+.wb-val { font-weight:700; color:var(--navy); }
+
+/* ============================================================
    АДАПТИВ
 ============================================================ */
 @media(max-width:1100px) {
   .fc-layout { grid-template-columns:1fr; }
+  .nbt-cards { grid-template-columns:repeat(2,1fr); }
+  .dp-two-col { grid-template-columns:1fr; }
 }
 @media(max-width:900px) {
   .stat-row { grid-template-columns:repeat(2,1fr); }
@@ -704,6 +810,7 @@ footer b { color:#fff; }
   .fc-table-row { grid-template-columns:1fr; }
 }
 @media(max-width:600px) {
+  .nbt-cards { grid-template-columns:1fr 1fr; }
   .stat-row { grid-template-columns:1fr 1fr; }
   .topbar-right { display:none; }
   header { padding:10px 14px; }
@@ -761,6 +868,12 @@ footer b { color:#fff; }
   <button class="nav-tab" onclick="showPage('forecast',this)">
     📈 Прогнозирование
   </button>
+  <button class="nav-tab" onclick="showPage('data',this)">
+    📡 Данные
+  </button>
+  <a class="nav-tab" href="/report" style="text-decoration:none">
+    📝 Отчёт по ценам
+  </a>
 </nav>
 
 <!-- ============================================================
@@ -1202,6 +1315,144 @@ footer b { color:#fff; }
   </div>
 </div>
 
+<!-- ============================================================
+   СТРАНИЦА 4 — ДАННЫЕ
+============================================================ -->
+<div class="page" id="page-data">
+
+  <div class="dp-header">
+    <h1>📡 Автоматический сбор экономических данных</h1>
+    <p>Данные в реальном времени из Всемирного банка и Национального банка Таджикистана</p>
+    <div class="dp-header-badges">
+      <span class="ai-badge2 ab-indigo">🌐 World Bank API</span>
+      <span class="ai-badge2 ab-orange">🏦 nbt.tj — Официальные курсы</span>
+      <span class="ai-badge2 ab-green">📅 Обновление по запросу</span>
+    </div>
+  </div>
+
+  <!-- ── ВСЕМИРНЫЙ БАНК ──────────────────────────────────────────────────── -->
+  <div class="dp-section">
+    <div class="dp-section-title">🌐 Всемирный банк — Данные по Таджикистану</div>
+
+    <div class="wb-btns">
+      <button class="wb-btn active" id="wbBtnGDP" onclick="loadWorldBank('GDP',this)">
+        📈 ВВП (NY.GDP.MKTP.CD)
+      </button>
+      <button class="wb-btn" id="wbBtnCPI" onclick="loadWorldBank('CPI',this)">
+        📊 Инфляция (FP.CPI.TOTL.ZG)
+      </button>
+      <button class="wb-btn" id="wbBtnUNEMP" onclick="loadWorldBank('UNEMPLOYMENT',this)">
+        👷 Безработица (SL.UEM.TOTL.ZS)
+      </button>
+    </div>
+
+    <!-- Плейсхолдер / статус -->
+    <div id="wbStatus" style="padding:14px;background:var(--navy-pale);border-radius:8px;font-size:13px;color:var(--navy2);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+      <span>ℹ️</span> <span id="wbStatusText">Нажмите кнопку выше для загрузки данных</span>
+    </div>
+
+    <div id="wbChartBlock" style="display:none">
+      <div class="dp-two-col">
+        <!-- График -->
+        <div class="dp-card">
+          <div class="dp-card-head">
+            <span id="wbChartTitle">График</span>
+            <span id="wbChartMeta" class="dp-info-chip dic-blue" style="font-size:11px"></span>
+          </div>
+          <div class="dp-card-body">
+            <div class="dp-chart-wrap">
+              <canvas id="wbChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Таблица -->
+        <div class="dp-card">
+          <div class="dp-card-head">
+            <span>📋 Данные по годам</span>
+            <span id="wbTableSource" style="font-size:11px;opacity:.7"></span>
+          </div>
+          <div class="dp-card-body" style="padding:0;max-height:300px;overflow-y:auto">
+            <table class="wb-tbl">
+              <thead><tr><th>Год</th><th>Значение</th><th>Изменение</th></tr></thead>
+              <tbody id="wbTableBody"></tbody>
+            </table>
+          </div>
+          <div style="padding:10px 14px">
+            <button class="send-to-ai-btn" onclick="sendWBToAI()">
+              🤖 Отправить на AI анализ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:0 24px">
+
+  <!-- ── НАЦИОНАЛЬНЫЙ БАНК ТАДЖИКИСТАНА ─────────────────────────────────── -->
+  <div class="dp-section">
+    <div class="dp-section-title" style="justify-content:space-between">
+      <span>🏦 Национальный банк Таджикистана — Курсы валют</span>
+      <button class="nbt-refresh-btn" id="nbtRefreshBtn" onclick="loadNBT()">
+        🔄 Обновить
+      </button>
+    </div>
+
+    <!-- Статус -->
+    <div id="nbtStatus" style="padding:12px 14px;background:var(--navy-pale);border-radius:8px;font-size:13px;color:var(--navy2);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+      <span>ℹ️</span> <span id="nbtStatusText">Нажмите «Обновить» для загрузки актуальных курсов</span>
+    </div>
+
+    <!-- Карточки курсов -->
+    <div class="nbt-cards">
+      <div class="nbt-rate-card nrc-usd">
+        <div class="nbt-flag">🇺🇸</div>
+        <div class="nbt-name">USD / TJS</div>
+        <div class="nbt-rate" id="nbtUSD"><span class="nbt-loading">—</span></div>
+        <div class="nbt-unit">Доллар США</div>
+      </div>
+      <div class="nbt-rate-card nrc-eur">
+        <div class="nbt-flag">🇪🇺</div>
+        <div class="nbt-name">EUR / TJS</div>
+        <div class="nbt-rate" id="nbtEUR"><span class="nbt-loading">—</span></div>
+        <div class="nbt-unit">Евро</div>
+      </div>
+      <div class="nbt-rate-card nrc-rub">
+        <div class="nbt-flag">🇷🇺</div>
+        <div class="nbt-name">RUB / TJS</div>
+        <div class="nbt-rate" id="nbtRUB"><span class="nbt-loading">—</span></div>
+        <div class="nbt-unit">Российский рубль</div>
+      </div>
+      <div class="nbt-rate-card nrc-ref">
+        <div class="nbt-flag">📊</div>
+        <div class="nbt-name">Ставка НБТ</div>
+        <div class="nbt-rate" id="nbtRef"><span class="nbt-loading">—</span></div>
+        <div class="nbt-unit">% рефинансирования</div>
+      </div>
+    </div>
+
+    <!-- 30-дневный график -->
+    <div class="dp-card" id="nbtHistoryBlock" style="display:none">
+      <div class="dp-card-head">
+        <span>📈 Динамика курса USD/TJS</span>
+        <span id="nbtHistoryMeta" style="font-size:11px;opacity:.7"></span>
+      </div>
+      <div class="dp-card-body">
+        <div class="dp-chart-wrap">
+          <canvas id="nbtChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:8px;font-size:11px;color:var(--text3)">
+      Источник: <a href="https://nbt.tj" target="_blank" style="color:var(--navy2)">nbt.tj</a> ·
+      Данные обновляются при каждом нажатии «Обновить»
+    </div>
+  </div>
+
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div>
@@ -1546,6 +1797,226 @@ function clearResult() {
   document.getElementById('fileDrop').classList.remove('has-file');
   document.getElementById('fileName').textContent = '';
 }
+
+// ============================================================
+// ДАННЫЕ — ВСЕМИРНЫЙ БАНК
+// ============================================================
+let wbChartInstance = null;
+let wbCurrentData   = null;
+
+async function loadWorldBank(indicator, btn) {
+  // Переключаем кнопки
+  document.querySelectorAll('.wb-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  setWBStatus('⏳ Загрузка данных Всемирного банка...', 'loading');
+  document.getElementById('wbChartBlock').style.display = 'none';
+
+  try {
+    const resp = await fetch(`/api/worldbank?indicator=${indicator}`);
+    const data = await resp.json();
+
+    if (!resp.ok || data.error) throw new Error(data.error || 'Ошибка API');
+
+    wbCurrentData = data;
+    renderWBChart(data);
+    setWBStatus(`✅ Загружено ${data.series.length} наблюдений · Источник: ${data.source}`, 'ok');
+    document.getElementById('wbChartBlock').style.display = 'block';
+
+  } catch (err) {
+    setWBStatus('❌ ' + err.message, 'error');
+  }
+}
+
+function setWBStatus(msg, type) {
+  const el = document.getElementById('wbStatus');
+  const tx = document.getElementById('wbStatusText');
+  tx.textContent = msg;
+  el.style.background = type === 'error'   ? '#fff5f5' :
+                         type === 'ok'      ? '#f0fdf4' : 'var(--navy-pale)';
+  el.style.color      = type === 'error'   ? '#c53030' :
+                         type === 'ok'      ? 'var(--green)' : 'var(--navy2)';
+}
+
+function renderWBChart(data) {
+  const labels = data.series.map(d => String(d.year));
+  const values = data.series.map(d => d.value);
+
+  document.getElementById('wbChartTitle').textContent = data.label;
+  document.getElementById('wbChartMeta').textContent  = `${data.country} · ${data.series.length} лет`;
+  document.getElementById('wbTableSource').textContent = data.source;
+
+  // График
+  if (wbChartInstance) { wbChartInstance.destroy(); wbChartInstance = null; }
+  wbChartInstance = new Chart(document.getElementById('wbChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: data.label,
+        data: values,
+        borderColor: '#0050b3',
+        backgroundColor: 'rgba(0,80,179,0.08)',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        tension: 0.35,
+        fill: true,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${data.label}: ${ctx.raw.toLocaleString('ru-RU')}` } },
+      },
+      scales: {
+        x: { grid: { color: '#f0f4f9' } },
+        y: { grid: { color: '#f0f4f9' }, ticks: { callback: v => v >= 1e9 ? (v/1e9).toFixed(1)+'B' : v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v } },
+      },
+    },
+  });
+
+  // Таблица (от новых к старым)
+  const rows = [...data.series].reverse();
+  document.getElementById('wbTableBody').innerHTML = rows.map((row, i) => {
+    const prev  = rows[i + 1];
+    const delta = prev ? row.value - prev.value : null;
+    const pct   = prev && prev.value !== 0 ? ((delta / prev.value) * 100).toFixed(1) : null;
+    const cls   = delta === null ? '' : delta > 0 ? 'ar-up' : delta < 0 ? 'ar-down' : 'ar-neutral';
+    const arrow = delta === null ? '—' : delta > 0 ? `▲ +${pct}%` : `▼ ${pct}%`;
+    const fmtVal = row.value >= 1e9 ? (row.value/1e9).toFixed(2)+' B' :
+                   row.value >= 1e6 ? (row.value/1e6).toFixed(2)+' M' :
+                   row.value.toFixed(2);
+    return `<tr><td>${row.year}</td><td class="wb-val">${fmtVal}</td><td class="${cls}">${arrow}</td></tr>`;
+  }).join('');
+}
+
+function sendWBToAI() {
+  if (!wbCurrentData) return;
+  const text = `Проанализируй данные Всемирного банка по Таджикистану.\n\nПоказатель: ${wbCurrentData.label}\n\nДанные по годам:\n${
+    wbCurrentData.series.map(d => `${d.year}: ${d.value}`).join('\n')
+  }\n\nВыяви тренды, сравни с мировыми показателями и дай прогноз.`;
+  document.getElementById('question').value = text;
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-analysis').classList.add('active');
+  // активируем нужный таб
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach(t => { if (t.textContent.includes('AI')) t.classList.add('active'); });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// ДАННЫЕ — НБТ
+// ============================================================
+let nbtChartInstance = null;
+
+async function loadNBT() {
+  const btn = document.getElementById('nbtRefreshBtn');
+  btn.disabled = true;
+  setNBTStatus('⏳ Загрузка данных с сайта НБТ (nbt.tj)...', 'loading');
+
+  try {
+    const resp = await fetch('/api/nbt');
+    const data = await resp.json();
+
+    if (!resp.ok || data.error) throw new Error(data.error || 'Ошибка подключения к НБТ');
+
+    // Обновляем карточки
+    const fmt = v => v != null ? v.toFixed(v >= 10 ? 4 : 4) : '—';
+    document.getElementById('nbtUSD').textContent = data.rates?.USD?.rate != null ? data.rates.USD.rate.toFixed(4) : '—';
+    document.getElementById('nbtEUR').textContent = data.rates?.EUR?.rate != null ? data.rates.EUR.rate.toFixed(4) : '—';
+    document.getElementById('nbtRUB').textContent = data.rates?.RUB?.rate != null ? data.rates.RUB.rate.toFixed(4) : '—';
+    document.getElementById('nbtRef').textContent = data.refinancingRate != null ? data.refinancingRate + '%' : '—';
+
+    setNBTStatus(`✅ Данные НБТ загружены · Дата: ${data.date} · Источник: ${data.source}`, 'ok');
+
+    // Обновляем тикер с реальными данными
+    updateTickerRates(data.rates);
+
+    // График истории
+    if (data.history && data.history.length > 1) {
+      renderNBTChart(data.history);
+      document.getElementById('nbtHistoryBlock').style.display = 'block';
+    }
+
+  } catch (err) {
+    setNBTStatus('❌ ' + err.message + ' (сайт НБТ может быть недоступен)', 'error');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function setNBTStatus(msg, type) {
+  const el = document.getElementById('nbtStatus');
+  const tx = document.getElementById('nbtStatusText');
+  tx.textContent = msg;
+  el.style.background = type === 'error'   ? '#fff5f5' :
+                         type === 'ok'      ? '#f0fdf4' : 'var(--navy-pale)';
+  el.style.color      = type === 'error'   ? '#c53030' :
+                         type === 'ok'      ? 'var(--green)' : 'var(--navy2)';
+}
+
+function renderNBTChart(history) {
+  const labels  = history.map(h => h.date.slice(5));  // MM-DD
+  const usdData = history.map(h => h.USD);
+
+  document.getElementById('nbtHistoryMeta').textContent = `${history.length} дней · USD/TJS`;
+
+  if (nbtChartInstance) { nbtChartInstance.destroy(); nbtChartInstance = null; }
+  nbtChartInstance = new Chart(document.getElementById('nbtChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'USD/TJS',
+        data: usdData,
+        borderColor: '#0050b3',
+        backgroundColor: 'rgba(0,80,179,0.08)',
+        borderWidth: 2.5,
+        pointRadius: 3,
+        tension: 0.3,
+        fill: true,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#f0f4f9' } },
+        y: { grid: { color: '#f0f4f9' }, ticks: { callback: v => v.toFixed(2) } },
+      },
+    },
+  });
+}
+
+// Обновляет тикер на главной странице реальными курсами НБТ
+function updateTickerRates(rates) {
+  if (!rates) return;
+  const map = { 'USD/TJS': rates.USD?.rate, 'EUR/TJS': rates.EUR?.rate, 'RUB/TJS': rates.RUB?.rate };
+  document.querySelectorAll('.ticker-item').forEach(item => {
+    const nameEl = item.querySelector('.t-name');
+    const priceEl = item.querySelector('.t-price');
+    if (!nameEl || !priceEl) return;
+    for (const [key, val] of Object.entries(map)) {
+      if (nameEl.textContent.includes(key.split('/')[0]) && priceEl.textContent.includes('TJS') && val != null) {
+        priceEl.textContent = val.toFixed(4) + ' TJS';
+        break;
+      }
+    }
+  });
+}
+
+// При загрузке страницы пробуем обновить тикер тихо
+(async function initTickerFromNBT() {
+  try {
+    const resp = await fetch('/api/nbt');
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (!data.error) updateTickerRates(data.rates);
+  } catch {}
+})();
 
 // ============================================================
 // ПРОГНОЗИРОВАНИЕ

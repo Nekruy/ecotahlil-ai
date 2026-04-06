@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Форма отчёта о ценах — МЭРиТ РТ</title>
+<style>
+:root {
+  --navy:      #003580;
+  --navy2:     #0050b3;
+  --navy-pale: #e6f0ff;
+  --teal:      #0d9488;
+  --teal2:     #14b8a6;
+  --gold:      #d4a017;
+  --red:       #c0392b;
+  --green:     #1a7a3c;
+  --text:      #1a1a2e;
+  --text2:     #4a5568;
+  --text3:     #718096;
+  --border:    #d0daea;
+  --bg:        #f4f7fc;
+  --white:     #ffffff;
+  --shadow:    0 2px 12px rgba(0,53,128,0.10);
+  --shadow2:   0 4px 24px rgba(0,53,128,0.14);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); font-size:14px; min-height:100vh; }
+
+/* ТОПБАР */
+.topbar {
+  background:var(--navy); color:rgba(255,255,255,.7);
+  font-size:11px; padding:5px 24px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.topbar a { color:rgba(255,255,255,.7); text-decoration:none; }
+.topbar a:hover { color:#fff; }
+
+/* HEADER */
+header {
+  background:var(--white); border-bottom:4px solid var(--navy2);
+  padding:14px 24px; display:flex; align-items:center; gap:18px;
+  box-shadow:var(--shadow);
+}
+.logo-emblem {
+  width:50px; height:50px;
+  background:linear-gradient(135deg, var(--navy), var(--navy2));
+  border-radius:8px; display:flex; align-items:center; justify-content:center;
+  font-size:24px; flex-shrink:0;
+}
+.header-text { flex:1; }
+.header-name { font-size:11px; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:.5px; margin-bottom:2px; }
+.header-title { font-size:15px; font-weight:700; color:var(--navy); }
+
+/* MAIN */
+.main { max-width:700px; margin:30px auto; padding:0 20px 40px; }
+
+/* FORM CARD */
+.form-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden; box-shadow:var(--shadow2);
+}
+.form-card-header {
+  background:linear-gradient(135deg, var(--navy), var(--navy2));
+  padding:20px 24px; color:#fff;
+}
+.form-card-header h2 { font-size:17px; font-weight:800; margin-bottom:4px; }
+.form-card-header p  { font-size:12px; color:rgba(255,255,255,.7); }
+.form-card-body { padding:28px 24px; }
+
+/* FORM ELEMENTS */
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-group { margin-bottom:18px; }
+.form-group:last-of-type { margin-bottom:0; }
+.form-label {
+  display:block; font-size:12px; font-weight:700;
+  color:var(--navy); text-transform:uppercase; letter-spacing:.5px;
+  margin-bottom:7px;
+}
+.form-required { color:var(--red); }
+
+.form-input, .form-select {
+  width:100%; border:2px solid var(--border); border-radius:8px;
+  padding:11px 14px; font-size:13px; color:var(--text);
+  font-family:inherit; transition:border-color .2s; background:var(--white);
+}
+.form-input:focus, .form-select:focus { outline:none; border-color:var(--navy2); }
+.form-select {
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23718096' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center;
+}
+
+.price-row { display:grid; grid-template-columns:2fr 1fr; gap:12px; }
+
+/* SUBMIT */
+.submit-btn {
+  width:100%; margin-top:24px;
+  background:linear-gradient(135deg, var(--navy), var(--navy2));
+  color:#fff; border:none; border-radius:8px;
+  padding:14px; font-size:14px; font-weight:800; cursor:pointer;
+  letter-spacing:.5px; transition:all .2s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.submit-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,80,179,.3); }
+.submit-btn:disabled { opacity:.6; cursor:not-allowed; }
+
+/* DIVIDER */
+.form-divider {
+  border:none; border-top:2px solid var(--navy-pale);
+  margin:22px 0;
+}
+
+/* SECTION TITLE */
+.section-title {
+  font-size:12px; font-weight:800; color:var(--navy);
+  text-transform:uppercase; letter-spacing:.8px;
+  margin-bottom:16px; display:flex; align-items:center; gap:6px;
+}
+
+/* ALERT */
+.alert { border-radius:8px; padding:12px 16px; font-size:13px; margin-bottom:16px; display:none; }
+.alert-error   { background:#fff5f5; border:1px solid #fca5a5; color:#c53030; }
+.alert-success { background:#f0fdf4; border:1px solid #86efac; color:var(--green); font-weight:600; }
+
+/* BACK LINK */
+.back-link {
+  display:inline-flex; align-items:center; gap:6px;
+  color:var(--navy2); text-decoration:none; font-size:13px; font-weight:600;
+  margin-bottom:20px; padding:8px 14px; border-radius:8px;
+  background:var(--navy-pale); transition:all .2s;
+}
+.back-link:hover { background:var(--navy2); color:#fff; }
+
+/* FOOTER */
+footer {
+  background:var(--navy); color:rgba(255,255,255,.6);
+  padding:16px 24px; font-size:11px; text-align:center; margin-top:auto;
+}
+
+@media(max-width:600px) {
+  .form-row  { grid-template-columns:1fr; }
+  .price-row { grid-template-columns:1fr; }
+  .main { padding:0 12px 30px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>🇹🇯 Республика Таджикистан · МЭРиТ</span>
+  <span id="topDate"></span>
+</div>
+
+<header>
+  <div class="logo-emblem">📋</div>
+  <div class="header-text">
+    <div class="header-name">Министерство экономического развития и торговли РТ</div>
+    <div class="header-title">Форма сбора данных о потребительских ценах</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <a class="back-link" href="/">← Вернуться на главную</a>
+
+  <div class="form-card">
+    <div class="form-card-header">
+      <h2>📝 Отчёт о ценах по региону</h2>
+      <p>Заполните форму для передачи данных о потребительских ценах в систему мониторинга МЭРиТ РТ</p>
+    </div>
+    <div class="form-card-body">
+
+      <div id="alertError"   class="alert alert-error"></div>
+      <div id="alertSuccess" class="alert alert-success"></div>
+
+      <!-- РАЗДЕЛ 1: СОТРУДНИК -->
+      <div class="section-title">👤 Сведения о сотруднике</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="district">Район / Город <span class="form-required">*</span></label>
+          <select id="district" class="form-select">
+            <option value="">— Выберите район —</option>
+            <optgroup label="г. Душанбе">
+              <option>г. Душанбе</option>
+            </optgroup>
+            <optgroup label="Согдийская область">
+              <option>Худжанд</option><option>Исфара</option><option>Кайраккум</option>
+              <option>Конибодом</option><option>Пенджикент</option><option>Шахристан</option>
+              <option>Зафарободский р-н</option><option>Ганчинский р-н</option>
+              <option>Джаббор Расуловский р-н</option><option>Дж. Расуловский р-н</option>
+            </optgroup>
+            <optgroup label="Хатлонская область">
+              <option>Курган-Тюбе</option><option>Куляб</option><option>Вахш</option>
+              <option>Пяндж</option><option>Шаартуз</option><option>Кумсангир</option>
+              <option>Бохтар</option><option>Хамадони</option>
+            </optgroup>
+            <optgroup label="РРП">
+              <option>Вахдат</option><option>Гиссар</option><option>Турсунзаде</option>
+              <option>Рудаки</option><option>Файзабад</option><option>Варзоб</option>
+            </optgroup>
+            <optgroup label="ГБАО">
+              <option>Хорог</option><option>Ишкашим</option><option>Мургаб</option>
+              <option>Рошткала</option><option>Шугнан</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reportDate">Дата сбора данных <span class="form-required">*</span></label>
+          <input type="date" id="reportDate" class="form-input">
+        </div>
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- РАЗДЕЛ 2: ТОВАР -->
+      <div class="section-title">🛒 Данные о товаре</div>
+
+      <div class="form-group">
+        <label class="form-label" for="product">Наименование товара <span class="form-required">*</span></label>
+        <select id="product" class="form-select">
+          <option value="">— Выберите товар —</option>
+          <optgroup label="Хлеб и мука">
+            <option>Хлеб пшеничный 1 сорт</option>
+            <option>Хлеб ржаной</option>
+            <option>Мука пшеничная в/с</option>
+            <option>Мука пшеничная 1 сорт</option>
+            <option>Лепёшка</option>
+          </optgroup>
+          <optgroup label="Масла и жиры">
+            <option>Масло подсолнечное</option>
+            <option>Масло сливочное</option>
+            <option>Маргарин</option>
+          </optgroup>
+          <optgroup label="Крупы и бобовые">
+            <option>Рис</option>
+            <option>Гречка</option>
+            <option>Горох</option>
+            <option>Фасоль</option>
+            <option>Нут</option>
+          </optgroup>
+          <optgroup label="Сахар и соль">
+            <option>Сахар</option>
+            <option>Соль</option>
+          </optgroup>
+          <optgroup label="Молочные продукты">
+            <option>Молоко (пастеризованное)</option>
+            <option>Кефир</option>
+            <option>Творог</option>
+            <option>Сметана</option>
+          </optgroup>
+          <optgroup label="Мясо">
+            <option>Говядина</option>
+            <option>Баранина</option>
+            <option>Курица</option>
+          </optgroup>
+          <optgroup label="Овощи">
+            <option>Картофель</option>
+            <option>Морковь</option>
+            <option>Лук репчатый</option>
+            <option>Капуста</option>
+            <option>Помидоры</option>
+            <option>Огурцы</option>
+          </optgroup>
+          <optgroup label="Другое">
+            <option value="custom">Другое (указать вручную)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group" id="customProductGroup" style="display:none">
+        <label class="form-label" for="customProduct">Наименование (вручную)</label>
+        <input type="text" id="customProduct" class="form-input" placeholder="Введите название товара">
+      </div>
+
+      <div class="price-row">
+        <div class="form-group">
+          <label class="form-label" for="price">Цена (TJS) <span class="form-required">*</span></label>
+          <input type="number" id="price" class="form-input" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="unit">Единица <span class="form-required">*</span></label>
+          <select id="unit" class="form-select">
+            <option>кг</option>
+            <option>л</option>
+            <option>шт</option>
+            <option>100 г</option>
+            <option>упак.</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="notes">Примечание</label>
+        <input type="text" id="notes" class="form-input" placeholder="Сезонное изменение, дефицит, акция...">
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitReport()">
+        <span>📤</span> ОТПРАВИТЬ ОТЧЁТ
+      </button>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Министерство экономического развития и торговли Республики Таджикистан · EcotahlilAI v2.0
+</footer>
+
+<script>
+// Устанавливаем сегодняшнюю дату
+window.onload = function() {
+  const today = new Date().toISOString().slice(0, 10);
+  document.getElementById('reportDate').value = today;
+  document.getElementById('topDate').textContent =
+    new Date().toLocaleDateString('ru-RU', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  // Показать поле для ввода вручную при выборе "Другое"
+  document.getElementById('product').addEventListener('change', function() {
+    document.getElementById('customProductGroup').style.display =
+      this.value === 'custom' ? 'block' : 'none';
+  });
+};
+
+async function submitReport() {
+  const district   = document.getElementById('district').value;
+  const reportDate = document.getElementById('reportDate').value;
+  const productSel = document.getElementById('product').value;
+  const customProd = document.getElementById('customProduct').value.trim();
+  const product    = productSel === 'custom' ? customProd : productSel;
+  const price      = parseFloat(document.getElementById('price').value);
+  const unit       = document.getElementById('unit').value;
+  const notes      = document.getElementById('notes').value.trim();
+
+  const err = document.getElementById('alertError');
+  const ok  = document.getElementById('alertSuccess');
+  err.style.display = 'none';
+  ok.style.display  = 'none';
+
+  // Валидация
+  if (!district)         { showError('Выберите район / город'); return; }
+  if (!reportDate)       { showError('Укажите дату сбора данных'); return; }
+  if (!product)          { showError('Выберите или введите наименование товара'); return; }
+  if (!price || price <= 0) { showError('Введите корректную цену (больше 0)'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> ОТПРАВЛЯЕТСЯ...';
+
+  try {
+    const resp = await fetch('/api/report', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ district, date: reportDate, product, price, unit, notes }),
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok || data.error) {
+      throw new Error(data.error || 'Ошибка сервера');
+    }
+
+    ok.textContent = `✅ Отчёт #${data.id} успешно сохранён! Спасибо за предоставленные данные.`;
+    ok.style.display = 'block';
+
+    // Сбрасываем форму
+    document.getElementById('district').value   = '';
+    document.getElementById('product').value    = '';
+    document.getElementById('price').value      = '';
+    document.getElementById('notes').value      = '';
+    document.getElementById('customProductGroup').style.display = 'none';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (e) {
+    showError('❌ ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>📤</span> ОТПРАВИТЬ ОТЧЁТ';
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('alertError');
+  el.textContent = '⚠️ ' + msg;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+</script>
+
+</body>
+</html>

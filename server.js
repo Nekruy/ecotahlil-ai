@@ -160,6 +160,94 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Serve report.html
+  if (req.method === 'GET' && req.url === '/report') {
+    const filePath = path.join(__dirname, 'report.html');
+    fs.readFile(filePath, (err, data) => {
+      if (err) { res.writeHead(404); return res.end('report.html not found'); }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+    });
+    return;
+  }
+
+  // GET /api/worldbank?indicator=GDP
+  if (req.method === 'GET' && req.url.startsWith('/api/worldbank')) {
+    try {
+      const qs        = new URL('http://x' + req.url).searchParams;
+      const indicator = qs.get('indicator') || 'GDP';
+      const { fetchWorldBank } = require('./dataCollector');
+      const result = await fetchWorldBank(indicator);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/worldbank]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/nbt
+  if (req.method === 'GET' && req.url === '/api/nbt') {
+    try {
+      const { fetchNBT, getRatesHistory } = require('./dataCollector');
+      const current = await fetchNBT();
+      const history = getRatesHistory();
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ...current, history }));
+    } catch (err) {
+      console.error('[/api/nbt]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // POST /api/report
+  if (req.method === 'POST' && req.url === '/api/report') {
+    try {
+      const body   = await readBody(req);
+      const entry  = JSON.parse(body.toString('utf8'));
+      const reportsFile = path.join(__dirname, 'reports.json');
+
+      let reports = [];
+      try {
+        if (fs.existsSync(reportsFile)) {
+          reports = JSON.parse(fs.readFileSync(reportsFile, 'utf8'));
+        }
+      } catch {}
+
+      const record = {
+        id:          reports.length + 1,
+        district:    String(entry.district || '').trim(),
+        date:        String(entry.date || '').trim(),
+        product:     String(entry.product || '').trim(),
+        price:       parseFloat(entry.price) || 0,
+        unit:        String(entry.unit || 'кг').trim(),
+        notes:       String(entry.notes || '').trim(),
+        submittedAt: new Date().toISOString(),
+      };
+
+      if (!record.district || !record.product || record.price <= 0) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Заполните обязательные поля' }));
+      }
+
+      reports.push(record);
+      fs.writeFileSync(reportsFile, JSON.stringify(reports, null, 2), 'utf8');
+
+      console.log(`[/api/report] id=${record.id} district="${record.district}" product="${record.product}" price=${record.price}`);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, id: record.id }));
+    } catch (err) {
+      console.error('[/api/report]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Forecast endpoint
   if (req.method === 'POST' && req.url === '/forecast') {
     try {
