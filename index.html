@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcotahlilAI — Главное управление макроэкономического анализа · МЭРиТ РТ</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   ПЕРЕМЕННЫЕ
+============================================================ */
+:root {
+  --navy:      #003580;
+  --navy2:     #0050b3;
+  --navy3:     #1677ff;
+  --navy-pale: #e6f0ff;
+  --teal:      #0d9488;
+  --teal2:     #14b8a6;
+  --gold:      #d4a017;
+  --gold2:     #f59e0b;
+  --red:       #c0392b;
+  --green:     #1a7a3c;
+  --green2:    #22c55e;
+  --text:      #1a1a2e;
+  --text2:     #4a5568;
+  --text3:     #718096;
+  --border:    #d0daea;
+  --bg:        #f4f7fc;
+  --white:     #ffffff;
+  --shadow:    0 2px 12px rgba(0,53,128,0.10);
+  --shadow2:   0 4px 24px rgba(0,53,128,0.14);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); font-size:14px; }
+
+/* ============================================================
+   ТОПБАР
+============================================================ */
+.topbar {
+  background: var(--navy);
+  color: rgba(255,255,255,.7);
+  font-size:11px;
+  padding: 5px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.topbar-left { display:flex; gap:16px; align-items:center; }
+.topbar-right { display:flex; gap:14px; align-items:center; }
+.topbar a { color:rgba(255,255,255,.7); text-decoration:none; }
+.topbar a:hover { color:#fff; }
+#currentDate { color:rgba(255,255,255,.9); }
+
+/* ============================================================
+   HEADER
+============================================================ */
+header {
+  background: var(--white);
+  border-bottom: 4px solid var(--navy2);
+  padding: 14px 24px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  box-shadow: var(--shadow);
+}
+.logo-emblem {
+  width:60px; height:60px;
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:28px;
+  flex-shrink:0;
+}
+.header-text { flex:1; }
+.header-name {
+  font-size:11px; font-weight:700;
+  color:var(--navy); text-transform:uppercase; letter-spacing:.5px;
+  margin-bottom:3px;
+}
+.header-title {
+  font-size:16px; font-weight:700; color:var(--navy);
+  line-height:1.3;
+}
+.header-sub { font-size:12px; color:var(--text3); margin-top:3px; }
+.header-right {
+  display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+}
+.flag-bar { display:flex; gap:4px; }
+.flag-bar span {
+  width:22px; height:14px; border-radius:2px; display:inline-block;
+}
+.f-red { background:#C41E3A; }
+.f-white { background:#fff; border:1px solid #ddd; }
+.f-green { background:#009A44; }
+.ai-badge {
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  color:#fff; font-size:10px; font-weight:700;
+  padding:3px 10px; border-radius:20px; letter-spacing:.5px;
+}
+
+/* ============================================================
+   ТИКЕР
+============================================================ */
+.ticker-wrap {
+  background: var(--navy);
+  overflow:hidden;
+  padding:6px 0;
+}
+.ticker-track {
+  display:flex; gap:0;
+  animation: ticker 35s linear infinite;
+  white-space:nowrap;
+}
+@keyframes ticker {
+  0%{transform:translateX(0)} 100%{transform:translateX(-50%)}
+}
+.ticker-item {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:0 24px;
+  border-right:1px solid rgba(255,255,255,.15);
+  font-size:12px; color:#fff;
+}
+.t-name { color:rgba(255,255,255,.7); }
+.t-price { font-weight:700; }
+.t-up { color:#4ade80; }
+.t-down { color:#f87171; }
+
+/* ============================================================
+   НАВИГАЦИЯ
+============================================================ */
+.nav {
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;
+  display:flex;
+  gap:0;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.nav-tab {
+  padding:12px 20px;
+  border:none; background:none;
+  font-size:13px; font-weight:600;
+  color:var(--text2); cursor:pointer;
+  border-bottom:3px solid transparent;
+  transition:all .2s;
+  display:flex; align-items:center; gap:6px;
+}
+.nav-tab:hover { color:var(--navy2); background:var(--navy-pale); }
+.nav-tab.active { color:var(--navy2); border-bottom-color:var(--navy2); background:var(--navy-pale); }
+
+/* ============================================================
+   СТРАНИЦЫ
+============================================================ */
+.page { display:none; }
+.page.active { display:block; }
+
+/* ============================================================
+   СТРАНИЦА 1 — МОНИТОРИНГ ЦЕН
+============================================================ */
+.page-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  padding: 24px;
+  color:#fff;
+}
+.page-header h1 { font-size:20px; font-weight:800; margin-bottom:4px; }
+.page-header p { font-size:13px; color:rgba(255,255,255,.75); }
+.ph-meta { display:flex; gap:16px; margin-top:10px; flex-wrap:wrap; }
+.ph-chip {
+  background:rgba(255,255,255,.15);
+  color:#fff; font-size:11px; font-weight:600;
+  padding:3px 12px; border-radius:20px;
+}
+
+/* STAT CARDS */
+.stat-row {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:14px; padding:20px 24px;
+}
+.stat-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.stat-card::before {
+  content:''; position:absolute;
+  top:0; left:0; width:4px; height:100%;
+}
+.sc-blue::before { background:var(--navy2); }
+.sc-green::before { background:var(--green); }
+.sc-red::before { background:var(--red); }
+.sc-gold::before { background:var(--gold2); }
+.stat-icon { font-size:22px; margin-bottom:8px; }
+.stat-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.stat-value { font-size:26px; font-weight:800; color:var(--navy); }
+.stat-change { font-size:12px; margin-top:4px; font-weight:600; }
+.ch-up { color:var(--green); }
+.ch-down { color:var(--red); }
+.ch-neutral { color:var(--text3); }
+
+/* CHARTS ROW */
+.charts-row {
+  display:grid; grid-template-columns:2fr 1fr 1fr;
+  gap:14px; padding:0 24px 20px;
+}
+.chart-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+.chart-title {
+  font-size:13px; font-weight:700; color:var(--navy);
+  margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;
+}
+.filter-btns { display:flex; gap:4px; }
+.filter-btn {
+  padding:3px 10px; border-radius:6px;
+  border:1px solid var(--border);
+  background:none; cursor:pointer;
+  font-size:11px; color:var(--text3);
+  transition:all .15s;
+}
+.filter-btn.active { background:var(--navy2); color:#fff; border-color:var(--navy2); }
+.chart-canvas-wrap { height:200px; }
+
+/* TABLE */
+.table-section { padding:0 24px 24px; }
+.section-title {
+  font-size:15px; font-weight:800; color:var(--navy);
+  margin-bottom:14px; padding-bottom:8px;
+  border-bottom:2px solid var(--navy-pale);
+  display:flex; align-items:center; gap:8px;
+}
+.tbl-wrap {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.tbl thead th {
+  background:var(--navy);
+  color:#fff; font-size:11px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.5px;
+  padding:10px 14px; text-align:left;
+}
+.tbl tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
+.tbl tbody tr:last-child { border-bottom:none; }
+.tbl tbody tr:hover { background:var(--navy-pale); }
+.tbl td { padding:10px 14px; }
+.td-price { font-weight:700; font-size:14px; color:var(--navy); }
+.tag-region {
+  background:var(--navy-pale); color:var(--navy2);
+  font-size:11px; padding:2px 8px; border-radius:4px; font-weight:600;
+}
+.ar-up { color:var(--green); font-weight:700; }
+.ar-down { color:var(--red); font-weight:700; }
+.ar-neutral { color:var(--text3); }
+.tbl-footer {
+  background:#f9fafc; padding:10px 16px;
+  font-size:11px; color:var(--text3);
+  border-top:1px solid var(--border);
+}
+
+/* REGIONAL */
+.regional-grid {
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:12px; padding:0 24px 24px;
+}
+.reg-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.reg-name { font-size:11px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+.reg-price { font-size:20px; font-weight:800; color:var(--navy2); }
+.reg-unit { font-size:10px; color:var(--text3); }
+.reg-change { font-size:12px; font-weight:600; margin-top:4px; }
+
+/* ============================================================
+   СТРАНИЦА 2 — AI АНАЛИЗ
+============================================================ */
+.ai-page { padding:0; }
+.ai-header {
+  background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
+  padding:28px 28px 24px;
+  color:#fff;
+}
+.ai-header h1 { font-size:22px; font-weight:800; margin-bottom:6px; }
+.ai-header p { font-size:13px; color:rgba(255,255,255,.65); }
+.ai-header-badges { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.ai-badge2 {
+  padding:4px 14px; border-radius:20px;
+  font-size:11px; font-weight:700;
+  display:flex; align-items:center; gap:5px;
+}
+.ab-teal { background:rgba(20,184,166,.2); border:1px solid rgba(20,184,166,.4); color:#5eead4; }
+.ab-gold { background:rgba(245,158,11,.15); border:1px solid rgba(245,158,11,.35); color:#fcd34d; }
+.ab-green { background:rgba(34,197,94,.15); border:1px solid rgba(34,197,94,.35); color:#86efac; }
+
+.ai-layout {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:20px; padding:20px 24px;
+}
+
+/* ФОРМА */
+.ai-form-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--shadow2);
+}
+.form-top {
+  background:var(--navy);
+  padding:14px 18px;
+  color:#fff; font-size:13px; font-weight:700;
+}
+.form-body { padding:20px; }
+.form-group { margin-bottom:18px; }
+.form-label {
+  font-size:12px; font-weight:700;
+  color:var(--navy); text-transform:uppercase; letter-spacing:.5px;
+  margin-bottom:8px; display:block;
+}
+
+/* Сценарии */
+.scenarios {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:8px; margin-bottom:18px;
+}
+.sc-btn {
+  padding:10px 12px;
+  border:2px solid var(--border);
+  border-radius:8px;
+  background:var(--bg);
+  cursor:pointer;
+  font-size:12px; font-weight:600; color:var(--text2);
+  display:flex; align-items:center; gap:6px;
+  transition:all .2s;
+}
+.sc-btn:hover { border-color:var(--navy2); color:var(--navy2); background:var(--navy-pale); }
+.sc-btn.selected {
+  border-color:var(--navy2);
+  background:var(--navy-pale);
+  color:var(--navy);
+}
+.sc-icon { font-size:16px; }
+
+/* Поле вопроса */
+.q-field {
+  width:100%;
+  border:2px solid var(--border);
+  border-radius:8px;
+  padding:12px 14px;
+  font-size:13px; color:var(--text);
+  font-family:inherit;
+  resize:vertical; min-height:90px;
+  transition:border-color .2s;
+}
+.q-field:focus { outline:none; border-color:var(--navy2); }
+
+/* Загрузка файла */
+.file-drop {
+  border:2px dashed var(--border);
+  border-radius:8px;
+  padding:18px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s;
+  background:#fafbff;
+}
+.file-drop:hover { border-color:var(--navy2); background:var(--navy-pale); }
+.file-drop.has-file { border-color:var(--green); background:#f0fdf4; border-style:solid; }
+.file-drop-icon { font-size:24px; margin-bottom:6px; }
+.file-drop-text { font-size:12px; color:var(--text3); }
+.file-name { font-size:12px; font-weight:700; color:var(--green); margin-top:4px; }
+.file-formats {
+  display:flex; gap:4px; justify-content:center;
+  margin-top:8px; flex-wrap:wrap;
+}
+.fmt-tag {
+  background:var(--navy-pale); color:var(--navy2);
+  font-size:10px; font-weight:700;
+  padding:2px 7px; border-radius:4px;
+}
+#fileInput { display:none; }
+
+/* Роль */
+.role-select {
+  width:100%;
+  border:2px solid var(--border);
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:13px; color:var(--text);
+  background:var(--white); cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23718096' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center;
+}
+.role-select:focus { outline:none; border-color:var(--navy2); }
+
+/* Кнопка */
+.submit-btn {
+  width:100%;
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  color:#fff;
+  border:none; border-radius:8px;
+  padding:14px;
+  font-size:14px; font-weight:800;
+  cursor:pointer;
+  letter-spacing:.5px;
+  transition:all .2s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.submit-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,80,179,.3); }
+.submit-btn:disabled { opacity:.65; cursor:not-allowed; transform:none; }
+
+.alert-box {
+  background:#fff5f5; border:1px solid #fca5a5; border-radius:8px;
+  padding:10px 14px; color:#c53030; font-size:13px;
+  margin-bottom:14px; display:none;
+}
+
+/* РЕЗУЛЬТАТ */
+.ai-result-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--shadow2);
+  display:flex; flex-direction:column;
+}
+.result-top {
+  background: linear-gradient(135deg, #0a1628, #0d1f3c);
+  padding:14px 18px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.result-top-title { font-size:13px; font-weight:700; color:#fff; }
+.result-actions { display:flex; gap:8px; }
+.action-btn {
+  padding:5px 12px; border-radius:6px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff; font-size:11px; cursor:pointer;
+  transition:all .15s;
+}
+.action-btn:hover { background:rgba(255,255,255,.2); }
+
+.result-meta-bar {
+  padding:10px 16px;
+  background:#f8faff;
+  border-bottom:1px solid var(--border);
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.meta-chip {
+  padding:3px 10px; border-radius:20px;
+  font-size:11px; font-weight:600;
+}
+.mc-blue { background:var(--navy-pale); color:var(--navy2); }
+.mc-green { background:#f0fdf4; color:var(--green); border:1px solid #bbf7d0; }
+.mc-gray { background:#f8fafc; color:var(--text3); border:1px solid var(--border); }
+.mc-teal { background:#f0fdfa; color:var(--teal); border:1px solid #99f6e4; }
+
+/* СОСТОЯНИЯ РЕЗУЛЬТАТА */
+.result-placeholder {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:40px 24px; text-align:center;
+}
+.rp-icon { font-size:48px; margin-bottom:14px; }
+.rp-title { font-size:15px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+.rp-text { font-size:13px; color:var(--text3); line-height:1.6; }
+.rp-steps { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; justify-content:center; }
+.rp-step {
+  background:var(--navy-pale); border-radius:8px;
+  padding:8px 14px; font-size:12px; color:var(--navy2); font-weight:600;
+  display:flex; align-items:center; gap:5px;
+}
+
+/* LOADING */
+.loading-div {
+  flex:1; display:none;
+  flex-direction:column; align-items:center; justify-content:center;
+  padding:40px 24px;
+}
+.loader {
+  width:52px; height:52px;
+  border:4px solid var(--navy-pale);
+  border-top-color:var(--navy2);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-bottom:20px;
+}
+@keyframes spin { to{ transform:rotate(360deg); } }
+.loading-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:14px; }
+.loading-steps { display:flex; flex-direction:column; gap:8px; width:100%; max-width:280px; }
+.ld-step {
+  display:flex; align-items:center; gap:10px;
+  padding:8px 12px; border-radius:8px;
+  background:var(--bg); border:1px solid var(--border);
+  font-size:12px; color:var(--text3);
+  transition:all .3s;
+}
+.ld-step.visible {
+  background:var(--navy-pale);
+  border-color:var(--navy2);
+  color:var(--navy);
+}
+.ld-icon { font-size:14px; }
+
+/* РЕЗУЛЬТАТ ТЕКСТ */
+.result-content {
+  flex:1; display:none;
+  flex-direction:column;
+}
+.result-text-wrap {
+  flex:1; padding:20px;
+  overflow-y:auto; max-height:450px;
+}
+.result-text {
+  font-size:13.5px; line-height:1.8;
+  color:var(--text);
+  word-wrap:break-word;
+}
+
+/* FADE IN */
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation:fadeIn .4s ease; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  background:var(--navy);
+  color:rgba(255,255,255,.65);
+  padding:20px 24px;
+  font-size:11px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:10px;
+}
+footer b { color:#fff; }
+.footer-right { display:flex; gap:16px; }
+.footer-right a { color:rgba(255,255,255,.5); text-decoration:none; }
+.footer-right a:hover { color:#fff; }
+
+/* ============================================================
+   АДАПТИВ
+============================================================ */
+@media(max-width:900px) {
+  .stat-row { grid-template-columns:repeat(2,1fr); }
+  .charts-row { grid-template-columns:1fr; }
+  .regional-grid { grid-template-columns:repeat(2,1fr); }
+  .ai-layout { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+  .stat-row { grid-template-columns:1fr 1fr; }
+  .topbar-right { display:none; }
+  header { padding:10px 14px; }
+  .header-title { font-size:14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ТОПБАР -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span>🇹🇯 Республика Таджикистан</span>
+    <span id="currentDate"></span>
+  </div>
+  <div class="topbar-right">
+    <a href="#">Главная</a>
+    <a href="#">Контакты</a>
+    <a href="#">Помощь</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-emblem">🏛️</div>
+  <div class="header-text">
+    <div class="header-name">Республика Таджикистан · Министерство экономического развития и торговли</div>
+    <div class="header-title">Главное управление макроэкономического анализа, прогнозирования и экономических реформ</div>
+    <div class="header-sub">Система мониторинга цен и AI-анализа экономических документов</div>
+  </div>
+  <div class="header-right">
+    <div class="flag-bar">
+      <span class="f-red"></span>
+      <span class="f-white"></span>
+      <span class="f-green"></span>
+    </div>
+    <div class="ai-badge">⚡ EcotahlilAI v2.0</div>
+    <div style="font-size:11px;color:var(--text3)" id="updateDate"></div>
+  </div>
+</header>
+
+<!-- ТИКЕР -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- НАВИГАЦИЯ -->
+<nav class="nav">
+  <button class="nav-tab active" onclick="showPage('prices',this)">
+    📊 Мониторинг цен
+  </button>
+  <button class="nav-tab" onclick="showPage('analysis',this)">
+    🤖 AI Анализ документов
+  </button>
+</nav>
+
+<!-- ============================================================
+   СТРАНИЦА 1 — МОНИТОРИНГ ЦЕН
+============================================================ -->
+<div class="page active" id="page-prices">
+
+  <div class="page-header">
+    <h1>📊 Мониторинг потребительских цен</h1>
+    <p>Еженедельный мониторинг цен на основные продовольственные товары по регионам Таджикистана</p>
+    <div class="ph-meta">
+      <span class="ph-chip">📅 Данные актуальны</span>
+      <span class="ph-chip">📍 5 регионов</span>
+      <span class="ph-chip">🛒 18 товарных позиций</span>
+      <span class="ph-chip">🤖 EcotahlilAI</span>
+    </div>
+  </div>
+
+  <!-- СТАТЫ -->
+  <div class="stat-row">
+    <div class="stat-card sc-blue">
+      <div class="stat-icon">📈</div>
+      <div class="stat-label">ИПЦ (год к году)</div>
+      <div class="stat-value">108.3%</div>
+      <div class="stat-change ch-up">▲ +3.1% к прошлому месяцу</div>
+    </div>
+    <div class="stat-card sc-green">
+      <div class="stat-icon">🍞</div>
+      <div class="stat-label">Хлеб пшеничный</div>
+      <div class="stat-value">4.20 <span style="font-size:14px;font-weight:400">TJS</span></div>
+      <div class="stat-change ch-up">▲ +2.4% за месяц</div>
+    </div>
+    <div class="stat-card sc-red">
+      <div class="stat-icon">🫙</div>
+      <div class="stat-label">Масло подсолнечное</div>
+      <div class="stat-value">18.50 <span style="font-size:14px;font-weight:400">TJS</span></div>
+      <div class="stat-change ch-down">▼ -9.8% за год</div>
+    </div>
+    <div class="stat-card sc-gold">
+      <div class="stat-icon">💱</div>
+      <div class="stat-label">Курс USD/TJS</div>
+      <div class="stat-value">10.92</div>
+      <div class="stat-change ch-up">▲ +0.2% за неделю</div>
+    </div>
+  </div>
+
+  <!-- ГРАФИКИ -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">
+        Динамика цен на продовольствие (TJS)
+        <div class="filter-btns">
+          <button class="filter-btn active" onclick="filterChart('3m',this)">3М</button>
+          <button class="filter-btn" onclick="filterChart('6m',this)">6М</button>
+          <button class="filter-btn" onclick="filterChart('1y',this)">1Г</button>
+        </div>
+      </div>
+      <div class="chart-canvas-wrap"><canvas id="priceChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Годовое изменение цен</div>
+      <div class="chart-canvas-wrap"><canvas id="pieChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Цена хлеба по регионам</div>
+      <div class="chart-canvas-wrap"><canvas id="regionChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ТАБЛИЦА -->
+  <div class="table-section">
+    <div class="section-title">
+      🛒 Сводная таблица цен
+      <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:auto">
+        Источник: ГУМАПЭР МЭРиТ РТ
+      </span>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Наименование товара</th>
+            <th>Регион</th>
+            <th>Цена (TJS)</th>
+            <th>Ед.</th>
+            <th>Неделя</th>
+            <th>Месяц</th>
+            <th>Год</th>
+          </tr>
+        </thead>
+        <tbody id="priceTableBody"></tbody>
+      </table>
+      <div class="tbl-footer">
+        Данные Главного управления макроэкономического анализа, прогнозирования и экономических реформ МЭРиТ РТ · <span id="tblDate"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- РЕГИОНАЛЬНЫЕ КАРТОЧКИ -->
+  <div class="table-section">
+    <div class="section-title">📍 Цена хлеба по регионам (TJS/кг)</div>
+  </div>
+  <div class="regional-grid">
+    <div class="reg-card">
+      <div class="reg-name">г. Душанбе</div>
+      <div class="reg-price">4.20</div>
+      <div class="reg-unit">TJS / кг</div>
+      <div class="reg-change ch-up">▲ +2.4%</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">Согдийская обл.</div>
+      <div class="reg-price">4.05</div>
+      <div class="reg-unit">TJS / кг</div>
+      <div class="reg-change ch-up">▲ +1.8%</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">Хатлонская обл.</div>
+      <div class="reg-price">3.95</div>
+      <div class="reg-unit">TJS / кг</div>
+      <div class="reg-change ch-up">▲ +1.5%</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">ГБАО</div>
+      <div class="reg-price">4.35</div>
+      <div class="reg-unit">TJS / кг</div>
+      <div class="reg-change ch-up">▲ +3.1%</div>
+    </div>
+    <div class="reg-card">
+      <div class="reg-name">РРП</div>
+      <div class="reg-price">3.90</div>
+      <div class="reg-unit">TJS / кг</div>
+      <div class="reg-change ch-up">▲ +1.2%</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+   СТРАНИЦА 2 — AI АНАЛИЗ
+============================================================ -->
+<div class="page" id="page-analysis">
+
+  <div class="ai-header">
+    <h1>🤖 Система AI экономического анализа</h1>
+    <p>Загрузите экономический документ и задайте вопрос — Claude проанализирует содержимое и даст профессиональный ответ</p>
+    <div class="ai-header-badges">
+      <span class="ai-badge2 ab-teal">⚡ Powered by Claude API</span>
+      <span class="ai-badge2 ab-gold">📄 PDF · Excel · Word · CSV · JSON · TXT</span>
+      <span class="ai-badge2 ab-green">🇹🇯 Ответы на русском языке</span>
+    </div>
+  </div>
+
+  <div class="ai-layout">
+
+    <!-- ФОРМА -->
+    <div class="ai-form-card">
+      <div class="form-top">📋 Параметры анализа</div>
+      <div class="form-body">
+
+        <div id="alertBox" class="alert-box"></div>
+
+        <!-- Сценарий -->
+        <div class="form-group">
+          <label class="form-label">Сценарий анализа</label>
+          <div class="scenarios">
+            <button class="sc-btn selected" onclick="selectScenario(this,'анализ')">
+              <span class="sc-icon">📊</span> Текущий анализ
+            </button>
+            <button class="sc-btn" onclick="selectScenario(this,'прогноз')">
+              <span class="sc-icon">🔮</span> Прогноз
+            </button>
+            <button class="sc-btn" onclick="selectScenario(this,'сценарий')">
+              <span class="sc-icon">🔀</span> Сценарий "что если"
+            </button>
+            <button class="sc-btn" onclick="selectScenario(this,'отчёт')">
+              <span class="sc-icon">📋</span> Подготовить отчёт
+            </button>
+          </div>
+        </div>
+
+        <!-- Вопрос -->
+        <div class="form-group">
+          <label class="form-label" for="question">Вопрос / Задание</label>
+          <textarea
+            id="question"
+            class="q-field"
+            placeholder="Проанализируй динамику ВВП Таджикистана за 2024 год и выяви ключевые тренды..."
+          ></textarea>
+        </div>
+
+        <!-- Файл -->
+        <div class="form-group">
+          <label class="form-label">Документ для анализа</label>
+          <div class="file-drop" id="fileDrop" onclick="document.getElementById('fileInput').click()"
+            ondragover="event.preventDefault();this.style.borderColor='var(--navy2)'"
+            ondragleave="this.style.borderColor=''"
+            ondrop="handleDrop(event)">
+            <div class="file-drop-icon">📎</div>
+            <div class="file-drop-text">Перетащите файл или нажмите для выбора</div>
+            <div class="file-name" id="fileName"></div>
+            <div class="file-formats">
+              <span class="fmt-tag">PDF</span>
+              <span class="fmt-tag">XLSX</span>
+              <span class="fmt-tag">CSV</span>
+              <span class="fmt-tag">DOCX</span>
+              <span class="fmt-tag">JSON</span>
+              <span class="fmt-tag">TXT</span>
+            </div>
+          </div>
+          <input type="file" id="fileInput"
+            accept=".pdf,.xlsx,.xls,.csv,.docx,.doc,.json,.txt"
+            onchange="handleFile(this.files[0])">
+        </div>
+
+        <!-- Роль -->
+        <div class="form-group">
+          <label class="form-label" for="role">Ваша роль</label>
+          <select id="role" class="role-select">
+            <option value="Экономический аналитик">📊 Экономический аналитик</option>
+            <option value="Министр">🏛️ Министр / Заместитель министра</option>
+            <option value="Начальник отдела">👔 Начальник отдела</option>
+            <option value="Специалист">💼 Специалист</option>
+            <option value="Эксперт">🎓 Эксперт / Консультант</option>
+          </select>
+        </div>
+
+        <!-- Кнопка -->
+        <button class="submit-btn" id="submitBtn" onclick="sendRequest()">
+          <span>⚡</span> ВЫПОЛНИТЬ АНАЛИЗ
+        </button>
+
+      </div>
+    </div>
+
+    <!-- РЕЗУЛЬТАТ -->
+    <div class="ai-result-card">
+      <div class="result-top">
+        <div class="result-top-title">📄 Результат анализа</div>
+        <div class="result-actions">
+          <button class="action-btn" id="copyBtn" onclick="copyResult()">📋 Копировать</button>
+          <button class="action-btn" onclick="clearResult()">🗑️ Очистить</button>
+        </div>
+      </div>
+
+      <div class="result-meta-bar" id="resultMetaBar" style="display:none">
+        <div id="resultMeta"></div>
+      </div>
+
+      <!-- Плейсхолдер -->
+      <div class="result-placeholder" id="resultPlaceholder">
+        <div class="rp-icon">🤖</div>
+        <div class="rp-title">Готов к анализу</div>
+        <div class="rp-text">
+          Выберите сценарий, загрузите документ<br>
+          и задайте вопрос — Claude проанализирует<br>
+          содержимое и даст профессиональный ответ
+        </div>
+        <div class="rp-steps">
+          <div class="rp-step">① Сценарий</div>
+          <div class="rp-step">② Вопрос</div>
+          <div class="rp-step">③ Файл</div>
+          <div class="rp-step">④ Анализ →</div>
+        </div>
+      </div>
+
+      <!-- Загрузка -->
+      <div class="loading-div" id="loadingDiv">
+        <div class="loader"></div>
+        <div class="loading-title">Claude анализирует документ...</div>
+        <div class="loading-steps">
+          <div class="ld-step" id="ld1"><span class="ld-icon">📤</span> Отправка документа</div>
+          <div class="ld-step" id="ld2"><span class="ld-icon">📖</span> Чтение содержимого</div>
+          <div class="ld-step" id="ld3"><span class="ld-icon">🧠</span> AI анализ</div>
+          <div class="ld-step" id="ld4"><span class="ld-icon">✍️</span> Формирование ответа</div>
+        </div>
+      </div>
+
+      <!-- Результат -->
+      <div class="result-content" id="resultContent">
+        <div class="result-text-wrap">
+          <div class="result-text" id="resultText"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <b>Главное управление макроэкономического анализа, прогнозирования и экономических реформ</b><br>
+    Министерство экономического развития и торговли Республики Таджикистан · г. Душанбе
+  </div>
+  <div class="footer-right">
+    <span>⚡ EcotahlilAI v2.0</span>
+    <span>🤖 Claude API</span>
+    <span>n8n Cloud</span>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// КОНФИГУРАЦИЯ
+// ============================================================
+const WEBHOOK_URL = 'http://localhost:3000/webhook';
+
+// ============================================================
+// ДАННЫЕ
+// ============================================================
+const priceData = {
+  labels3m: ['Окт','Ноя','Дек','Янв','Фев','Мар'],
+  labels6m: ['Июл','Авг','Сен','Окт','Ноя','Дек','Янв','Фев','Мар'],
+  labels1y: ['Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек','Янв','Фев','Мар'],
+  bread3m:  [3.95,4.05,4.10,4.10,4.15,4.20],
+  bread6m:  [3.75,3.80,3.85,3.95,4.05,4.10,4.10,4.15,4.20],
+  bread1y:  [3.50,3.55,3.60,3.65,3.70,3.75,3.80,3.85,3.90,4.00,4.10,4.20],
+  flour3m:  [3.70,3.75,3.78,3.80,3.82,3.85],
+  flour6m:  [3.50,3.55,3.60,3.65,3.70,3.75,3.78,3.82,3.85],
+  flour1y:  [3.20,3.25,3.30,3.35,3.40,3.45,3.55,3.60,3.65,3.70,3.78,3.85],
+  oil3m:    [19.20,19.00,18.80,18.70,18.60,18.50],
+  oil6m:    [19.60,19.50,19.40,19.20,19.00,18.80,18.70,18.60,18.50],
+  oil1y:    [20.50,20.30,20.10,19.90,19.70,19.50,19.60,19.50,19.40,19.20,18.80,18.50],
+};
+
+const tableData = [
+  {name:'Хлеб пшеничный 1 сорт',  region:'Душанбе',price:'4.20', unit:'кг',  wv:'+0.5%',mv:'+2.4%',yv:'+8.2%',  wd:'up',  md:'up',  yd:'up'},
+  {name:'Хлеб ржаной',             region:'Душанбе',price:'3.80', unit:'кг',  wv:'+0.3%',mv:'+1.9%',yv:'+7.5%',  wd:'up',  md:'up',  yd:'up'},
+  {name:'Мука пшеничная в/с',      region:'Душанбе',price:'3.85', unit:'кг',  wv:'+0.2%',mv:'+1.8%',yv:'+6.8%',  wd:'up',  md:'up',  yd:'up'},
+  {name:'Мука пшеничная 1 сорт',   region:'Душанбе',price:'3.40', unit:'кг',  wv:'0.0%', mv:'+1.2%',yv:'+5.9%',  wd:'neutral',md:'up',yd:'up'},
+  {name:'Масло подсолнечное',       region:'Душанбе',price:'18.50',unit:'л',   wv:'-0.3%',mv:'-0.8%',yv:'-9.8%',  wd:'down',md:'down',yd:'down'},
+  {name:'Масло сливочное',          region:'Душанбе',price:'52.00',unit:'кг',  wv:'+0.8%',mv:'+3.2%',yv:'+12.4%', wd:'up',  md:'up',  yd:'up'},
+  {name:'Рис',                      region:'Душанбе',price:'9.50', unit:'кг',  wv:'+0.1%',mv:'+0.9%',yv:'+4.2%',  wd:'up',  md:'up',  yd:'up'},
+  {name:'Сахар',                    region:'Душанбе',price:'7.20', unit:'кг',  wv:'0.0%', mv:'+0.5%',yv:'+3.1%',  wd:'neutral',md:'up',yd:'up'},
+];
+
+const tickerItems = [
+  {n:'Хлеб пшен.', p:'4.20 TJS/кг', c:'▲2.4%', u:true},
+  {n:'Мука в/с',   p:'3.85 TJS/кг', c:'▲1.8%', u:true},
+  {n:'Масло подс.',p:'18.50 TJS/л', c:'▼0.8%', u:false},
+  {n:'Масло слив.',p:'52.00 TJS/кг',c:'▲3.2%', u:true},
+  {n:'ИПЦ',        p:'108.3%',       c:'▲3.1%', u:true},
+  {n:'USD/TJS',    p:'10.92',        c:'▲0.2%', u:true},
+  {n:'EUR/TJS',    p:'11.85',        c:'▲0.1%', u:true},
+  {n:'RUB/TJS',    p:'0.118',        c:'▼0.3%', u:false},
+  {n:'Рис',        p:'9.50 TJS/кг',  c:'▲0.9%', u:true},
+  {n:'Сахар',      p:'7.20 TJS/кг',  c:'▲0.5%', u:true},
+];
+
+// ============================================================
+// ИНИЦИАЛИЗАЦИЯ
+// ============================================================
+let selectedScenario = 'анализ';
+let priceChart;
+
+window.onload = function() {
+  const now = new Date();
+  document.getElementById('currentDate').textContent =
+    now.toLocaleDateString('ru-RU',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('updateDate').textContent =
+    'Обновлено: ' + now.toLocaleDateString('ru-RU');
+  if (document.getElementById('tblDate'))
+    document.getElementById('tblDate').textContent = now.toLocaleDateString('ru-RU');
+  buildTicker();
+  buildTable();
+  buildCharts();
+};
+
+// ============================================================
+// ТИКЕР
+// ============================================================
+function buildTicker() {
+  const items = [...tickerItems,...tickerItems,...tickerItems];
+  document.getElementById('ticker').innerHTML = items.map(t=>`
+    <div class="ticker-item">
+      <span class="t-name">${t.n}</span>
+      <span class="t-price">${t.p}</span>
+      <span class="${t.u?'t-up':'t-down'}">${t.c}</span>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// ТАБЛИЦА
+// ============================================================
+function buildTable() {
+  document.getElementById('priceTableBody').innerHTML = tableData.map(r=>`
+    <tr>
+      <td>${r.name}</td>
+      <td><span class="tag-region">${r.region}</span></td>
+      <td class="td-price">${r.price}</td>
+      <td style="color:var(--text3)">${r.unit}</td>
+      <td class="ar-${r.wd}">${r.wv}</td>
+      <td class="ar-${r.md}">${r.mv}</td>
+      <td class="ar-${r.yd}">${r.yv}</td>
+    </tr>
+  `).join('');
+}
+
+// ============================================================
+// ГРАФИКИ
+// ============================================================
+function buildCharts() {
+  Chart.defaults.color = '#718096';
+  Chart.defaults.borderColor = '#e8edf5';
+
+  priceChart = new Chart(document.getElementById('priceChart'), {
+    type:'line',
+    data:{
+      labels: priceData.labels3m,
+      datasets:[
+        {label:'Хлеб (TJS/кг)',  data:priceData.bread3m, borderColor:'#0050b3',backgroundColor:'rgba(0,80,179,0.07)', borderWidth:2,pointRadius:4,tension:0.4,fill:true},
+        {label:'Мука (TJS/кг)',  data:priceData.flour3m, borderColor:'#1a7a3c',backgroundColor:'rgba(26,122,60,0.07)',  borderWidth:2,pointRadius:4,tension:0.4,fill:true},
+        {label:'Масло (TJS/л)',  data:priceData.oil3m,   borderColor:'#c0392b',backgroundColor:'rgba(192,57,43,0.07)',  borderWidth:2,pointRadius:4,tension:0.4,fill:true},
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{position:'top',labels:{padding:14,font:{size:11}}},tooltip:{mode:'index',intersect:false}},
+      scales:{x:{grid:{color:'#f0f4f9'}},y:{grid:{color:'#f0f4f9'},ticks:{callback:v=>v+' TJS'}}}
+    }
+  });
+
+  new Chart(document.getElementById('pieChart'),{
+    type:'doughnut',
+    data:{
+      labels:['Хлеб (+8.2%)','Мука (+6.8%)','Масло(-9.8%)','М.слив(+12.4%)'],
+      datasets:[{data:[8.2,6.8,9.8,12.4],backgroundColor:['#0050b3','#1a7a3c','#e8a838','#c0392b'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false, cutout:'60%',
+      plugins:{legend:{position:'bottom',labels:{padding:8,font:{size:10},boxWidth:10}}}
+    }
+  });
+
+  new Chart(document.getElementById('regionChart'),{
+    type:'bar',
+    data:{
+      labels:['Душанбе','Согд','Хатлон','ГБАО','РРП'],
+      datasets:[{label:'TJS/кг',data:[4.20,4.05,3.95,4.35,3.90],backgroundColor:['#003580','#0050b3','#1677ff','#0050b3','#1677ff'],borderRadius:4,borderWidth:0}]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'#f0f4f9'},ticks:{callback:v=>v+' TJS'},min:3.5}}
+    }
+  });
+}
+
+function filterChart(period, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  priceChart.data.labels = priceData['labels'+period];
+  priceChart.data.datasets[0].data = priceData['bread'+period];
+  priceChart.data.datasets[1].data = priceData['flour'+period];
+  priceChart.data.datasets[2].data = priceData['oil'+period];
+  priceChart.update();
+}
+
+// ============================================================
+// НАВИГАЦИЯ
+// ============================================================
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// ФОРМА — СЦЕНАРИЙ
+// ============================================================
+function selectScenario(btn, scenario) {
+  document.querySelectorAll('.sc-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedScenario = scenario;
+  const ph = {
+    анализ:   'Проанализируй динамику ВВП Таджикистана за 2024 год и выяви ключевые тренды...',
+    прогноз:  'Каким будет прогноз инфляции и роста ВВП Таджикистана на 2025 год?',
+    сценарий: 'Что если поднять ставку рефинансирования НБТ на 2 процентных пункта?',
+    отчёт:    'Подготовь официальный квартальный экономический отчёт для руководства...',
+  };
+  document.getElementById('question').placeholder = ph[scenario]||'Введите ваш вопрос...';
+}
+
+// ============================================================
+// ФОРМА — ФАЙЛ
+// ============================================================
+function handleFile(file) {
+  if (!file) return;
+  const drop = document.getElementById('fileDrop');
+  drop.classList.add('has-file');
+  document.getElementById('fileName').textContent = '✅ ' + file.name + ' (' + (file.size/1024).toFixed(0) + ' КБ)';
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('fileDrop').style.borderColor = '';
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    document.getElementById('fileInput').files = e.dataTransfer.files;
+    handleFile(file);
+  }
+}
+
+// ============================================================
+// ОСНОВНАЯ ФУНКЦИЯ — ОТПРАВКА ЗАПРОСА
+// ============================================================
+async function sendRequest() {
+  const question  = document.getElementById('question').value.trim();
+  const file      = document.getElementById('fileInput').files[0];
+  const role      = document.getElementById('role').value;
+  const btn       = document.getElementById('submitBtn');
+  const alertBox  = document.getElementById('alertBox');
+
+  // Валидация
+  alertBox.style.display = 'none';
+  if (!question) {
+    alertBox.textContent = '⚠️ Пожалуйста, введите вопрос или задание для анализа';
+    alertBox.style.display = 'block';
+    return;
+  }
+
+  // Начало загрузки
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> ВЫПОЛНЯЕТСЯ АНАЛИЗ...';
+  document.getElementById('resultPlaceholder').style.display = 'none';
+  document.getElementById('resultContent').style.display = 'none';
+  document.getElementById('resultMetaBar').style.display = 'none';
+  document.getElementById('loadingDiv').style.display = 'flex';
+
+  // Анимация шагов
+  const steps = ['ld1','ld2','ld3','ld4'];
+  steps.forEach((s,i) => setTimeout(() => {
+    document.getElementById(s).classList.add('visible');
+  }, i * 2500));
+
+  // Формируем запрос
+  const formData = new FormData();
+  formData.append('question', selectedScenario + ': ' + question);
+  formData.append('userRole', role);
+
+  if (file) {
+    formData.append('file', file);
+    formData.append('fileFormat', file.name.split('.').pop().toLowerCase());
+  } else {
+    // Если файл не загружен — отправляем текстовый запрос
+    formData.append('fileFormat', 'txt');
+    formData.append('file', new Blob([question], {type:'text/plain'}), 'question.txt');
+  }
+
+  try {
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status + ' — ' + response.statusText);
+    }
+
+    const text = await response.text();
+
+    // Показываем результат
+    document.getElementById('loadingDiv').style.display = 'none';
+    document.getElementById('resultMetaBar').style.display = 'flex';
+    document.getElementById('resultContent').style.display = 'flex';
+
+    const sNames = {
+      анализ:  '📊 Текущий анализ',
+      прогноз: '🔮 Прогноз',
+      сценарий:'🔀 Сценарный анализ',
+      отчёт:   '📋 Официальный отчёт'
+    };
+
+    document.getElementById('resultMeta').innerHTML = `
+      <span class="meta-chip mc-blue">${sNames[selectedScenario]||selectedScenario}</span>
+      <span class="meta-chip mc-green">👤 ${role}</span>
+      <span class="meta-chip mc-teal">${file ? '📎 '+file.name : '💬 Текстовый запрос'}</span>
+      <span class="meta-chip mc-gray">🕐 ${new Date().toLocaleTimeString('ru-RU')}</span>
+    `;
+
+    document.getElementById('resultText').innerHTML = text;
+    document.getElementById('resultContent').classList.add('fade-in');
+
+  } catch(error) {
+    document.getElementById('loadingDiv').style.display = 'none';
+    document.getElementById('resultMetaBar').style.display = 'flex';
+    document.getElementById('resultContent').style.display = 'flex';
+
+    document.getElementById('resultMeta').innerHTML =
+      '<span class="meta-chip" style="background:#fff5f5;color:#c53030;border:1px solid #fca5a5">❌ Ошибка подключения</span>';
+
+    document.getElementById('resultText').innerHTML =
+      '<div style="color:#c0392b;font-weight:700;font-size:15px;margin-bottom:12px">❌ ОШИБКА: ' + error.message + '</div>' +
+      '<div style="background:#fff5f5;border:1px solid #fca5a5;border-radius:8px;padding:14px;font-size:13px;line-height:2">' +
+      '<b>Возможные причины:</b><br>' +
+      '1. Сервер не запущен — выполни <code>node server.js</code><br>' +
+      '2. ANTHROPIC_API_KEY не задан — проверь переменную окружения<br>' +
+      '3. Неправильный URL — убедись что запрос идёт на <code>/webhook</code>' +
+      '</div>';
+
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>⚡</span> ВЫПОЛНИТЬ АНАЛИЗ';
+    steps.forEach(s => document.getElementById(s).classList.remove('visible'));
+  }
+}
+
+// ============================================================
+// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+// ============================================================
+function copyResult() {
+  const text = document.getElementById('resultText').innerText;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Скопировано';
+    setTimeout(() => btn.textContent = '📋 Копировать', 2000);
+  });
+}
+
+function clearResult() {
+  document.getElementById('resultContent').style.display = 'none';
+  document.getElementById('resultMetaBar').style.display = 'none';
+  document.getElementById('resultPlaceholder').style.display = 'flex';
+  document.getElementById('resultText').innerHTML = '';
+  // Сброс файла
+  document.getElementById('fileInput').value = '';
+  document.getElementById('fileDrop').classList.remove('has-file');
+  document.getElementById('fileName').textContent = '';
+}
+</script>
+
+</body>
+</html>

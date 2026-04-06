@@ -1,0 +1,15 @@
+{
+  "name": "ecotahlil-ai",
+  "version": "1.0.0",
+  "description": "Macroeconomic analysis backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "mammoth": "^1.12.0",
+    "pdf-parse": "^1.1.1",
+    "xlsx": "^0.18.5"
+  }
+}
