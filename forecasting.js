@@ -1,15 +1,46 @@
 /**
  * forecasting.js — ARIMA и Prophet-подобные модели прогнозирования
- * Использует ml-regression и simple-statistics
+ * Чистый JavaScript без внешних зависимостей
  */
 
-const ss = require('simple-statistics');
-const { SimpleLinearRegression } = require('ml-regression');
-
-// ─── Вспомогательные функции ──────────────────────────────────────────────────
+// ─── Математические вспомогательные функции ───────────────────────────────────
 
 function round2(v) {
   return Math.round(v * 100) / 100;
+}
+
+function mean(arr) {
+  return arr.reduce((s, v) => s + v, 0) / arr.length;
+}
+
+function variance(arr) {
+  const m = mean(arr);
+  return arr.reduce((s, v) => s + (v - m) ** 2, 0) / arr.length;
+}
+
+function stdDev(arr) {
+  return Math.sqrt(variance(arr));
+}
+
+// Простая линейная регрессия: y = slope * x + intercept
+function linearRegression(xs, ys) {
+  const n = xs.length;
+  const mx = mean(xs);
+  const my = mean(ys);
+  const num = xs.reduce((s, x, i) => s + (x - mx) * (ys[i] - my), 0);
+  const den = xs.reduce((s, x) => s + (x - mx) ** 2, 0);
+  const slope = den !== 0 ? num / den : 0;
+  const intercept = my - slope * mx;
+  return { slope, intercept, predict: t => slope * t + intercept };
+}
+
+// Квантиль методом линейной интерполяции
+function quantile(arr, p) {
+  const sorted = [...arr].sort((a, b) => a - b);
+  const idx = p * (sorted.length - 1);
+  const lo = Math.floor(idx);
+  const hi = Math.ceil(idx);
+  return sorted[lo] + (sorted[hi] - sorted[lo]) * (idx - lo);
 }
 
 function validateData(data) {
@@ -35,25 +66,16 @@ function arima(data, periods) {
     diff.push(nums[i] - nums[i - 1]);
   }
 
-  // Шаг 2: AR(1) на разностном ряду
-  // y_t = c + φ·y_{t-1}
+  // Шаг 2: AR(1) на разностном ряду — y_t = intercept + phi * y_{t-1}
   let phi = 0;
   let intercept = 0;
 
   if (diff.length >= 2) {
-    const xVals = diff.slice(0, -1);
-    const yVals = diff.slice(1);
-    try {
-      const reg = new SimpleLinearRegression(xVals, yVals);
-      phi = reg.slope;
-      intercept = reg.intercept;
-    } catch {
-      // fallback: бесконечно-периодическая модель
-      phi = ss.sampleCorrelation(diff.slice(0, -1), diff.slice(1));
-      intercept = ss.mean(diff) * (1 - phi);
-    }
+    const reg = linearRegression(diff.slice(0, -1), diff.slice(1));
+    phi = reg.slope;
+    intercept = reg.intercept;
   } else {
-    intercept = ss.mean(diff);
+    intercept = mean(diff);
   }
 
   // Ограничиваем phi для стационарности
@@ -63,12 +85,12 @@ function arima(data, periods) {
   const forecastDiff = [];
   let lastDiff = diff[diff.length - 1];
   for (let i = 0; i < periods; i++) {
-    const next = round2(intercept + phi * lastDiff);
+    const next = intercept + phi * lastDiff;
     forecastDiff.push(next);
     lastDiff = next;
   }
 
-  // Шаг 4: обратное разностное преобразование
+  // Шаг 4: обратное разностное преобразование (cumsum)
   const forecast = [];
   let prev = nums[nums.length - 1];
   for (const d of forecastDiff) {
@@ -80,7 +102,7 @@ function arima(data, periods) {
 }
 
 // ─── Prophet-подобная модель ──────────────────────────────────────────────────
-// Алгоритм: линейный тренд + сезонная компонента (скользящее среднее по периоду)
+// Алгоритм: линейный тренд + сезонная компонента (усреднение по периоду)
 
 function prophet(data, periods) {
   const nums = validateData(data);
@@ -88,66 +110,62 @@ function prophet(data, periods) {
 
   // Шаг 1: линейный тренд
   const xs = Array.from({ length: n }, (_, i) => i);
-  const reg = new SimpleLinearRegression(xs, nums);
+  const reg = linearRegression(xs, nums);
 
-  // Шаг 2: остатки (сезонность)
-  const trendLine = xs.map(x => reg.predict(x));
-  const residuals = nums.map((v, i) => v - trendLine[i]);
+  // Шаг 2: остатки = реальные значения − тренд
+  const residuals = nums.map((v, i) => v - reg.predict(i));
 
   // Шаг 3: период сезонности (авто-определение, min 3, max 12)
   const period = Math.min(12, Math.max(3, Math.floor(n / 2)));
-  const seasonSum = new Array(period).fill(0);
+  const seasonSum   = new Array(period).fill(0);
   const seasonCount = new Array(period).fill(0);
   residuals.forEach((r, i) => {
-    const idx = i % period;
-    seasonSum[idx] += r;
-    seasonCount[idx]++;
+    seasonSum[i % period]   += r;
+    seasonCount[i % period] += 1;
   });
   const seasonal = seasonSum.map((s, i) =>
     seasonCount[i] > 0 ? s / seasonCount[i] : 0
   );
 
-  // Нормализуем сезонность (сумма = 0)
-  const seasonMean = ss.mean(seasonal);
-  const seasonAdj = seasonal.map(s => s - seasonMean);
+  // Нормализуем сезонность (среднее = 0)
+  const seasonMean = mean(seasonal);
+  const seasonAdj  = seasonal.map(s => s - seasonMean);
 
   // Шаг 4: прогноз = тренд + сезонность
   const forecast = [];
   for (let i = 0; i < periods; i++) {
     const t = n + i;
-    const trend = reg.predict(t);
-    const season = seasonAdj[t % period];
-    forecast.push(round2(trend + season));
+    forecast.push(round2(reg.predict(t) + seasonAdj[t % period]));
   }
 
   return forecast;
 }
 
-// ─── Обнаружение аномалий (метод Z-score + IQR) ───────────────────────────────
+// ─── Обнаружение аномалий (Z-score + IQR) ────────────────────────────────────
 
 function detectAnomalies(data) {
   const nums = validateData(data);
-  const m = ss.mean(nums);
-  const s = ss.standardDeviation(nums);
-  const q1 = ss.quantile(nums, 0.25);
-  const q3 = ss.quantile(nums, 0.75);
-  const iqr = q3 - q1;
-  const iqrLow = q1 - 1.5 * iqr;
+  const m    = mean(nums);
+  const s    = stdDev(nums);
+  const q1   = quantile(nums, 0.25);
+  const q3   = quantile(nums, 0.75);
+  const iqr  = q3 - q1;
+  const iqrLow  = q1 - 1.5 * iqr;
   const iqrHigh = q3 + 1.5 * iqr;
 
   const anomalies = [];
   nums.forEach((v, i) => {
-    const z = s !== 0 ? Math.abs(v - m) / s : 0;
+    const z        = s !== 0 ? Math.abs(v - m) / s : 0;
     const isZscore = z > 2;
-    const isIQR = v < iqrLow || v > iqrHigh;
+    const isIQR    = v < iqrLow || v > iqrHigh;
 
     if (isZscore || isIQR) {
       anomalies.push({
-        index: i,
-        value: v,
-        zscore: round2(z),
+        index:     i,
+        value:     v,
+        zscore:    round2(z),
         direction: v > m ? 'high' : 'low',
-        method: isZscore && isIQR ? 'Z-score + IQR' : isZscore ? 'Z-score' : 'IQR',
+        method:    isZscore && isIQR ? 'Z-score + IQR' : isZscore ? 'Z-score' : 'IQR',
       });
     }
   });
