@@ -160,6 +160,55 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Forecast endpoint
+  if (req.method === 'POST' && req.url === '/forecast') {
+    try {
+      const body = await readBody(req);
+      const { data, periods, method } = JSON.parse(body.toString('utf8'));
+
+      const { arima, prophet, detectAnomalies } = require('./forecasting');
+
+      const numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      if (numData.length < 4) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Необходимо минимум 4 точки данных' }));
+      }
+
+      const n = Math.max(1, Math.min(24, parseInt(periods) || 6));
+
+      let forecast;
+      if (method === 'prophet') {
+        forecast = prophet(numData, n);
+      } else {
+        forecast = arima(numData, n);
+      }
+
+      const anomalies = detectAnomalies(numData);
+
+      // Метки для исторических данных
+      const histLabels = numData.map((_, i) => `T${i + 1}`);
+
+      // Метки для прогноза
+      const forecastLabels = Array.from({ length: n }, (_, i) => `T${numData.length + i + 1}`);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        historical: numData,
+        forecast,
+        histLabels,
+        forecastLabels,
+        anomalies,
+        method: method || 'arima',
+        periods: n,
+      }));
+    } catch (err) {
+      console.error('Error handling /forecast:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Webhook endpoint
   if (req.method === 'POST' && req.url === '/webhook') {
     try {

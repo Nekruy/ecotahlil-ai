@@ -554,13 +554,154 @@ footer b { color:#fff; }
 .footer-right a:hover { color:#fff; }
 
 /* ============================================================
+   СТРАНИЦА 3 — ПРОГНОЗИРОВАНИЕ
+============================================================ */
+.fc-header {
+  background: linear-gradient(135deg, #0d1f3c 0%, #0a2e1a 60%, #0d1f3c 100%);
+  padding:28px 28px 24px; color:#fff;
+}
+.fc-header h1 { font-size:22px; font-weight:800; margin-bottom:6px; }
+.fc-header p  { font-size:13px; color:rgba(255,255,255,.65); }
+.fc-header-badges { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.ab-purple { background:rgba(139,92,246,.2); border:1px solid rgba(139,92,246,.4); color:#c4b5fd; }
+
+.fc-layout {
+  display:grid; grid-template-columns:340px 1fr;
+  gap:20px; padding:20px 24px;
+}
+
+/* Форма прогноза */
+.fc-form-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; box-shadow:var(--shadow2);
+  align-self:start;
+}
+.fc-form-top {
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  padding:14px 18px; color:#fff; font-size:13px; font-weight:700;
+}
+.fc-form-body { padding:20px; }
+
+.method-group { display:flex; flex-direction:column; gap:8px; margin-bottom:4px; }
+.method-radio {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:12px 14px; border-radius:8px;
+  border:2px solid var(--border);
+  cursor:pointer; transition:all .2s; background:var(--bg);
+}
+.method-radio:hover { border-color:var(--teal2); background:#f0fdfa; }
+.method-radio.selected { border-color:var(--teal); background:#f0fdfa; }
+.method-radio input[type=radio] { margin-top:2px; accent-color:var(--teal); }
+.method-radio-title { font-size:13px; font-weight:700; color:var(--navy); }
+.method-radio-desc  { font-size:11px; color:var(--text3); margin-top:2px; line-height:1.4; }
+
+.period-group { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.period-btn {
+  padding:10px 0; border:2px solid var(--border);
+  border-radius:8px; background:var(--bg);
+  font-size:13px; font-weight:700; color:var(--text2);
+  cursor:pointer; transition:all .2s; text-align:center;
+}
+.period-btn:hover  { border-color:var(--teal); color:var(--teal); background:#f0fdfa; }
+.period-btn.active { border-color:var(--teal); background:var(--teal); color:#fff; }
+
+.data-textarea {
+  width:100%; border:2px solid var(--border); border-radius:8px;
+  padding:12px 14px; font-size:13px; color:var(--text);
+  font-family:monospace; resize:vertical; min-height:100px;
+  transition:border-color .2s; background:#fafbff;
+}
+.data-textarea:focus { outline:none; border-color:var(--teal); }
+.data-hint { font-size:11px; color:var(--text3); margin-top:5px; line-height:1.5; }
+
+.fc-btn {
+  width:100%;
+  background:linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+  color:#fff; border:none; border-radius:8px;
+  padding:14px; font-size:14px; font-weight:800;
+  cursor:pointer; letter-spacing:.5px; transition:all .2s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.fc-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 20px rgba(13,148,136,.35); }
+.fc-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+
+/* Результат прогноза */
+.fc-result-area {
+  display:flex; flex-direction:column; gap:16px;
+}
+
+.fc-placeholder {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; padding:60px 24px; text-align:center;
+}
+
+.fc-chart-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; box-shadow:var(--shadow2);
+  overflow:hidden;
+}
+.fc-card-header {
+  padding:14px 18px; background:var(--navy);
+  color:#fff; font-size:13px; font-weight:700;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.fc-card-body { padding:18px; }
+.fc-chart-wrap { height:300px; }
+
+/* Таблица прогноза */
+.fc-table-row {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.fc-tbl { width:100%; border-collapse:collapse; font-size:13px; }
+.fc-tbl thead th {
+  background:var(--teal); color:#fff; font-size:11px;
+  font-weight:700; text-transform:uppercase; letter-spacing:.5px;
+  padding:9px 12px; text-align:left;
+}
+.fc-tbl tbody tr { border-bottom:1px solid var(--border); }
+.fc-tbl tbody tr:last-child { border-bottom:none; }
+.fc-tbl tbody tr:hover { background:var(--navy-pale); }
+.fc-tbl td { padding:9px 12px; }
+.fc-val { font-weight:700; color:var(--navy); }
+.fc-delta-up   { color:var(--green);  font-weight:600; }
+.fc-delta-down { color:var(--red);    font-weight:600; }
+.fc-delta-flat { color:var(--text3);  font-weight:600; }
+
+/* Аномалии */
+.anomaly-list { display:flex; flex-direction:column; gap:8px; }
+.anomaly-item {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 14px; border-radius:8px;
+  background:#fff5f5; border:1px solid #fecaca;
+}
+.anomaly-badge {
+  background:#fee2e2; color:#c0392b;
+  font-size:10px; font-weight:700;
+  padding:3px 8px; border-radius:4px;
+  white-space:nowrap;
+}
+.anomaly-info { font-size:12px; color:var(--text2); line-height:1.5; }
+.no-anomalies {
+  padding:16px; text-align:center; font-size:13px;
+  color:var(--green); background:#f0fdf4;
+  border-radius:8px; border:1px solid #bbf7d0; font-weight:600;
+}
+
+/* ============================================================
    АДАПТИВ
 ============================================================ */
+@media(max-width:1100px) {
+  .fc-layout { grid-template-columns:1fr; }
+}
 @media(max-width:900px) {
   .stat-row { grid-template-columns:repeat(2,1fr); }
   .charts-row { grid-template-columns:1fr; }
   .regional-grid { grid-template-columns:repeat(2,1fr); }
   .ai-layout { grid-template-columns:1fr; }
+  .fc-table-row { grid-template-columns:1fr; }
 }
 @media(max-width:600px) {
   .stat-row { grid-template-columns:1fr 1fr; }
@@ -616,6 +757,9 @@ footer b { color:#fff; }
   </button>
   <button class="nav-tab" onclick="showPage('analysis',this)">
     🤖 AI Анализ документов
+  </button>
+  <button class="nav-tab" onclick="showPage('forecast',this)">
+    📈 Прогнозирование
   </button>
 </nav>
 
@@ -904,6 +1048,158 @@ footer b { color:#fff; }
     </div>
   </div>
 
+</div>
+
+<!-- ============================================================
+   СТРАНИЦА 3 — ПРОГНОЗИРОВАНИЕ
+============================================================ -->
+<div class="page" id="page-forecast">
+
+  <div class="fc-header">
+    <h1>📈 Модели прогнозирования временных рядов</h1>
+    <p>Прогнозирование макроэкономических показателей методами ARIMA и Prophet с выявлением аномалий</p>
+    <div class="fc-header-badges">
+      <span class="ai-badge2 ab-teal">📐 ARIMA(1,1,0)</span>
+      <span class="ai-badge2 ab-purple">🔮 Prophet (тренд + сезонность)</span>
+      <span class="ai-badge2 ab-gold">⚠️ Детектор аномалий</span>
+      <span class="ai-badge2 ab-green">📊 Chart.js визуализация</span>
+    </div>
+  </div>
+
+  <div class="fc-layout">
+
+    <!-- ФОРМА -->
+    <div class="fc-form-card">
+      <div class="fc-form-top">⚙️ Параметры прогноза</div>
+      <div class="fc-form-body">
+
+        <div id="fcAlertBox" class="alert-box"></div>
+
+        <!-- Исторические данные -->
+        <div class="form-group">
+          <label class="form-label">Исторические данные</label>
+          <textarea id="fcData" class="data-textarea"
+            placeholder="Введите числа через запятую&#10;Пример: 108.3, 109.1, 107.8, 110.2, 111.5, 112.0, 113.4"></textarea>
+          <div class="data-hint">
+            📌 Минимум 4 значения · Разделитель: запятая или пробел<br>
+            💡 Порядок: от старого к новому (хронологически)
+          </div>
+        </div>
+
+        <!-- Метод -->
+        <div class="form-group">
+          <label class="form-label">Метод прогнозирования</label>
+          <div class="method-group">
+            <label class="method-radio selected" id="methodArima" onclick="selectMethod('arima')">
+              <input type="radio" name="fcMethod" value="arima" checked>
+              <div>
+                <div class="method-radio-title">📐 ARIMA (1,1,0)</div>
+                <div class="method-radio-desc">Авторегрессионная интегрированная скользящая средняя. Подходит для трендовых рядов без выраженной сезонности.</div>
+              </div>
+            </label>
+            <label class="method-radio" id="methodProphet" onclick="selectMethod('prophet')">
+              <input type="radio" name="fcMethod" value="prophet">
+              <div>
+                <div class="method-radio-title">🔮 Prophet (тренд + сезонность)</div>
+                <div class="method-radio-desc">Декомпозиция ряда на тренд и сезонную компоненту. Подходит для данных с периодическими паттернами.</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Периоды -->
+        <div class="form-group">
+          <label class="form-label">Горизонт прогноза</label>
+          <div class="period-group">
+            <button class="period-btn" onclick="selectPeriod(3,this)">3 мес.</button>
+            <button class="period-btn active" onclick="selectPeriod(6,this)">6 мес.</button>
+            <button class="period-btn" onclick="selectPeriod(12,this)">12 мес.</button>
+          </div>
+        </div>
+
+        <!-- Кнопка -->
+        <button class="fc-btn" id="fcBtn" onclick="runForecast()">
+          <span>📈</span> ПОСТРОИТЬ ПРОГНОЗ
+        </button>
+
+      </div>
+    </div>
+
+    <!-- РЕЗУЛЬТАТЫ -->
+    <div class="fc-result-area" id="fcResultArea">
+
+      <!-- Плейсхолдер -->
+      <div class="fc-placeholder" id="fcPlaceholder">
+        <div class="rp-icon">📈</div>
+        <div class="rp-title">Готов к прогнозированию</div>
+        <div class="rp-text">
+          Введите исторические данные, выберите метод<br>
+          и горизонт прогноза — система рассчитает<br>
+          прогноз и выявит аномалии в ряду
+        </div>
+        <div class="rp-steps">
+          <div class="rp-step">① Данные</div>
+          <div class="rp-step">② Метод</div>
+          <div class="rp-step">③ Период</div>
+          <div class="rp-step">④ Прогноз →</div>
+        </div>
+      </div>
+
+      <!-- Блок с результатами (скрыт по умолчанию) -->
+      <div id="fcResults" style="display:none">
+
+        <!-- График -->
+        <div class="fc-chart-card">
+          <div class="fc-card-header">
+            <span>📊 График прогноза</span>
+            <span id="fcMethodBadge" style="font-size:11px;opacity:.8"></span>
+          </div>
+          <div class="fc-card-body">
+            <div class="fc-chart-wrap">
+              <canvas id="forecastChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Таблицы -->
+        <div class="fc-table-row">
+
+          <!-- Таблица прогноза -->
+          <div class="fc-chart-card">
+            <div class="fc-card-header">
+              <span>🔮 Прогнозные значения</span>
+            </div>
+            <div class="fc-card-body" style="padding:0">
+              <table class="fc-tbl">
+                <thead>
+                  <tr>
+                    <th>Период</th>
+                    <th>Прогноз</th>
+                    <th>Изменение</th>
+                  </tr>
+                </thead>
+                <tbody id="fcForecastTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Аномалии -->
+          <div class="fc-chart-card">
+            <div class="fc-card-header">
+              <span>⚠️ Аномалии в данных</span>
+              <span id="fcAnomalyCount" style="font-size:11px;opacity:.8"></span>
+            </div>
+            <div class="fc-card-body">
+              <div id="fcAnomaliesList"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -1249,6 +1545,208 @@ function clearResult() {
   document.getElementById('fileInput').value = '';
   document.getElementById('fileDrop').classList.remove('has-file');
   document.getElementById('fileName').textContent = '';
+}
+
+// ============================================================
+// ПРОГНОЗИРОВАНИЕ
+// ============================================================
+const FORECAST_URL = 'http://localhost:3000/forecast';
+
+let fcMethod  = 'arima';
+let fcPeriods = 6;
+let forecastChartInstance = null;
+
+function selectMethod(method) {
+  fcMethod = method;
+  document.querySelectorAll('.method-radio').forEach(el => el.classList.remove('selected'));
+  document.getElementById('method' + (method === 'arima' ? 'Arima' : 'Prophet')).classList.add('selected');
+  document.querySelector(`input[value="${method}"]`).checked = true;
+}
+
+function selectPeriod(p, btn) {
+  fcPeriods = p;
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function runForecast() {
+  const raw = document.getElementById('fcData').value.trim();
+  const alertBox = document.getElementById('fcAlertBox');
+  alertBox.style.display = 'none';
+
+  if (!raw) {
+    alertBox.textContent = '⚠️ Введите исторические данные';
+    alertBox.style.display = 'block';
+    return;
+  }
+
+  // Парсим числа (запятая или пробел как разделитель)
+  const data = raw.split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
+
+  if (data.length < 4) {
+    alertBox.textContent = '⚠️ Необходимо минимум 4 точки данных (сейчас: ' + data.length + ')';
+    alertBox.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('fcBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> ВЫЧИСЛЯЕТСЯ...';
+
+  document.getElementById('fcPlaceholder').style.display = 'none';
+  document.getElementById('fcResults').style.display = 'none';
+
+  try {
+    const resp = await fetch(FORECAST_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data, periods: fcPeriods, method: fcMethod }),
+    });
+
+    const result = await resp.json();
+
+    if (!resp.ok || result.error) {
+      throw new Error(result.error || 'HTTP ' + resp.status);
+    }
+
+    renderForecast(result);
+
+  } catch (err) {
+    alertBox.textContent = '❌ Ошибка: ' + err.message;
+    alertBox.style.display = 'block';
+    document.getElementById('fcPlaceholder').style.display = 'flex';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>📈</span> ПОСТРОИТЬ ПРОГНОЗ';
+  }
+}
+
+function renderForecast(result) {
+  const { historical, forecast, histLabels, forecastLabels, anomalies, method, periods } = result;
+
+  document.getElementById('fcResults').style.display = 'block';
+  document.getElementById('fcMethodBadge').textContent =
+    method === 'prophet' ? '🔮 Prophet' : '📐 ARIMA(1,1,0)';
+
+  // ── График ─────────────────────────────────────────────────────────────────
+  const allLabels = [...histLabels, ...forecastLabels];
+  const histPoints   = historical.map((v, i) => ({ x: i, y: v }));
+  const forecastLine = [
+    { x: historical.length - 1, y: historical[historical.length - 1] }, // соединение с историей
+    ...forecast.map((v, i) => ({ x: historical.length + i, y: v })),
+  ];
+
+  if (forecastChartInstance) {
+    forecastChartInstance.destroy();
+    forecastChartInstance = null;
+  }
+
+  const ctx = document.getElementById('forecastChart').getContext('2d');
+  forecastChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: allLabels,
+      datasets: [
+        {
+          label: 'Исторические данные',
+          data: [...historical, ...new Array(periods).fill(null)],
+          borderColor: '#0050b3',
+          backgroundColor: 'rgba(0,80,179,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.35,
+          fill: true,
+        },
+        {
+          label: 'Прогноз (' + (method === 'prophet' ? 'Prophet' : 'ARIMA') + ')',
+          data: [...new Array(historical.length - 1).fill(null), historical[historical.length - 1], ...forecast],
+          borderColor: '#0d9488',
+          backgroundColor: 'rgba(13,148,136,0.10)',
+          borderWidth: 2.5,
+          borderDash: [6, 4],
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          pointStyle: 'rectRot',
+          tension: 0.35,
+          fill: true,
+        },
+        // Аномалии
+        {
+          label: 'Аномалии',
+          data: historical.map((v, i) =>
+            anomalies.some(a => a.index === i) ? v : null
+          ).concat(new Array(periods).fill(null)),
+          borderColor: '#c0392b',
+          backgroundColor: 'rgba(192,57,43,0.8)',
+          borderWidth: 0,
+          pointRadius: 8,
+          pointHoverRadius: 10,
+          pointStyle: 'triangle',
+          showLine: false,
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { padding: 14, font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.raw === null) return null;
+              return ` ${ctx.dataset.label}: ${ctx.raw}`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: { grid: { color: '#f0f4f9' } },
+        y: { grid: { color: '#f0f4f9' } },
+      },
+    },
+  });
+
+  // ── Таблица прогноза ────────────────────────────────────────────────────────
+  const lastHistVal = historical[historical.length - 1];
+  document.getElementById('fcForecastTable').innerHTML = forecast.map((v, i) => {
+    const prev = i === 0 ? lastHistVal : forecast[i - 1];
+    const delta = v - prev;
+    const pct   = prev !== 0 ? ((delta / prev) * 100).toFixed(2) : '—';
+    const cls   = delta > 0 ? 'fc-delta-up' : delta < 0 ? 'fc-delta-down' : 'fc-delta-flat';
+    const arrow = delta > 0 ? '▲' : delta < 0 ? '▼' : '—';
+    return `<tr>
+      <td>${forecastLabels[i]}</td>
+      <td class="fc-val">${v}</td>
+      <td class="${cls}">${arrow} ${Math.abs(pct)}%</td>
+    </tr>`;
+  }).join('');
+
+  // ── Аномалии ───────────────────────────────────────────────────────────────
+  const anomCount = anomalies.length;
+  document.getElementById('fcAnomalyCount').textContent =
+    anomCount > 0 ? `${anomCount} найдено` : '';
+
+  if (anomCount === 0) {
+    document.getElementById('fcAnomaliesList').innerHTML =
+      '<div class="no-anomalies">✅ Аномалий не обнаружено</div>';
+  } else {
+    document.getElementById('fcAnomaliesList').innerHTML =
+      '<div class="anomaly-list">' +
+      anomalies.map(a => `
+        <div class="anomaly-item">
+          <span class="anomaly-badge">${a.direction === 'high' ? '📈 ВЫСОКОЕ' : '📉 НИЗКОЕ'}</span>
+          <div class="anomaly-info">
+            <b>${histLabels[a.index]}</b> — значение: <b>${a.value}</b><br>
+            Z-score: ${a.zscore} · Метод: ${a.method}
+          </div>
+        </div>
+      `).join('') +
+      '</div>';
+  }
 }
 </script>
 
