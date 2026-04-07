@@ -691,6 +691,109 @@ footer b { color:#fff; }
 }
 
 /* ============================================================
+   GARCH — секция волатильности
+============================================================ */
+.garch-section {
+  padding:20px 24px 28px;
+  border-top:2px solid var(--border);
+}
+.garch-section-title {
+  font-size:17px; font-weight:800; color:var(--navy);
+  margin-bottom:18px; padding-bottom:10px;
+  border-bottom:2px solid var(--navy-pale);
+  display:flex; align-items:center; gap:8px;
+}
+.garch-layout {
+  display:grid; grid-template-columns:340px 1fr;
+  gap:20px;
+}
+.garch-form-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; box-shadow:var(--shadow2);
+  align-self:start;
+}
+.garch-form-top {
+  background:linear-gradient(135deg,#7c3aed,#5b21b6);
+  padding:14px 18px; color:#fff; font-size:13px; font-weight:700;
+}
+.garch-form-body { padding:20px; }
+.garch-select {
+  width:100%; border:2px solid var(--border); border-radius:8px;
+  padding:10px 12px; font-size:13px; color:var(--text);
+  background:#fafbff; cursor:pointer; transition:border-color .2s;
+  appearance:none; -webkit-appearance:none;
+}
+.garch-select:focus { outline:none; border-color:#7c3aed; }
+.garch-btn {
+  width:100%; padding:14px; border:none; border-radius:10px;
+  background:linear-gradient(135deg,#7c3aed,#5b21b6);
+  color:#fff; font-size:13px; font-weight:800;
+  letter-spacing:.5px; cursor:pointer; transition:all .2s;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.garch-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 20px rgba(124,58,237,.35); }
+.garch-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.garch-result-area { min-height:200px; }
+.garch-placeholder {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height:240px; text-align:center; gap:10px;
+  background:var(--bg); border-radius:12px; border:2px dashed var(--border);
+  padding:32px;
+}
+.garch-params-row {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px;
+}
+.garch-param-box {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; padding:12px 14px; text-align:center;
+}
+.garch-param-label { font-size:10px; color:var(--text3); font-weight:600; text-transform:uppercase; margin-bottom:4px; }
+.garch-param-val   { font-size:18px; font-weight:800; color:var(--navy); }
+.garch-param-sub   { font-size:10px; color:var(--text3); margin-top:2px; }
+.garch-chart-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; box-shadow:var(--shadow2); margin-bottom:16px;
+}
+.garch-card-header {
+  padding:12px 16px; font-size:13px; font-weight:700; color:var(--navy);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.garch-card-body  { padding:16px; }
+.garch-chart-wrap { height:320px; position:relative; }
+.garch-legend {
+  display:flex; gap:16px; flex-wrap:wrap; margin-top:10px;
+}
+.garch-legend-item {
+  display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text3);
+}
+.garch-legend-dot {
+  width:12px; height:12px; border-radius:3px; flex-shrink:0;
+}
+/* Сигнал для руководства */
+.garch-signal {
+  border-radius:12px; padding:18px 20px;
+  border-left:5px solid;
+  display:flex; gap:16px; align-items:flex-start;
+}
+.garch-signal.risk-low      { background:#f0fdf4; border-color:#22c55e; }
+.garch-signal.risk-moderate { background:#fefce8; border-color:#eab308; }
+.garch-signal.risk-high     { background:#fff7ed; border-color:#f97316; }
+.garch-signal.risk-critical { background:#fff1f2; border-color:#ef4444; }
+.garch-signal-icon  { font-size:28px; flex-shrink:0; }
+.garch-signal-body  { flex:1; }
+.garch-signal-title { font-size:13px; font-weight:800; color:var(--navy); margin-bottom:6px; }
+.garch-signal-text  { font-size:13px; color:var(--text2); line-height:1.65; }
+.garch-risk-badge {
+  display:inline-block; padding:3px 10px; border-radius:20px;
+  font-size:11px; font-weight:700; text-transform:uppercase; margin-left:8px;
+}
+.garch-risk-badge.risk-low      { background:#dcfce7; color:#15803d; }
+.garch-risk-badge.risk-moderate { background:#fef9c3; color:#854d0e; }
+.garch-risk-badge.risk-high     { background:#ffedd5; color:#c2410c; }
+.garch-risk-badge.risk-critical { background:#fee2e2; color:#b91c1c; }
+
+/* ============================================================
    СТРАНИЦА 4 — ДАННЫЕ (Всемирный банк + НБТ)
 ============================================================ */
 .dp-header {
@@ -799,6 +902,7 @@ footer b { color:#fff; }
 ============================================================ */
 @media(max-width:1100px) {
   .fc-layout { grid-template-columns:1fr; }
+  .garch-layout { grid-template-columns:1fr; }
   .nbt-cards { grid-template-columns:repeat(2,1fr); }
   .dp-two-col { grid-template-columns:1fr; }
 }
@@ -808,6 +912,7 @@ footer b { color:#fff; }
   .regional-grid { grid-template-columns:repeat(2,1fr); }
   .ai-layout { grid-template-columns:1fr; }
   .fc-table-row { grid-template-columns:1fr; }
+  .garch-params-row { grid-template-columns:repeat(2,1fr); }
 }
 @media(max-width:600px) {
   .nbt-cards { grid-template-columns:1fr 1fr; }
@@ -1176,6 +1281,7 @@ footer b { color:#fff; }
       <span class="ai-badge2 ab-purple">🔮 Prophet (тренд + сезонность)</span>
       <span class="ai-badge2 ab-gold">⚠️ Детектор аномалий</span>
       <span class="ai-badge2 ab-green">📊 Chart.js визуализация</span>
+      <span class="ai-badge2" style="background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;">📉 GARCH(1,1) волатильность</span>
     </div>
   </div>
 
@@ -1313,6 +1419,117 @@ footer b { color:#fff; }
     </div>
 
   </div>
+
+  <!-- ══════════ GARCH(1,1) СЕКЦИЯ ══════════ -->
+  <div class="garch-section">
+    <div class="garch-section-title">
+      📉 GARCH(1,1) — Моделирование волатильности курса валют
+    </div>
+
+    <div class="garch-layout">
+
+      <!-- ФОРМА -->
+      <div class="garch-form-card">
+        <div class="garch-form-top">⚙️ Параметры GARCH-модели</div>
+        <div class="garch-form-body">
+
+          <div id="garchAlertBox" class="alert-box"></div>
+
+          <!-- Валюта -->
+          <div class="form-group">
+            <label class="form-label">Валютная пара</label>
+            <select id="garchCurrency" class="garch-select">
+              <option value="USD/TJS">🇺🇸 USD/TJS — Доллар США к сомони</option>
+              <option value="EUR/TJS">🇪🇺 EUR/TJS — Евро к сомони</option>
+              <option value="RUB/TJS">🇷🇺 RUB/TJS — Российский рубль к сомони</option>
+            </select>
+          </div>
+
+          <!-- Исторические курсы -->
+          <div class="form-group" style="margin-top:14px">
+            <label class="form-label">Исторические курсы</label>
+            <textarea id="garchData" class="data-textarea" style="min-height:120px"
+              placeholder="Введите курсы через запятую&#10;Пример: 10.85, 10.90, 10.88, 10.95, 11.02, 10.97, ..."></textarea>
+            <div class="data-hint">
+              📌 Минимум 10 значений · Разделитель: запятая или пробел<br>
+              💡 Хронологический порядок: от старого к новому
+            </div>
+          </div>
+
+          <!-- Горизонт прогноза -->
+          <div class="form-group" style="margin-top:14px">
+            <label class="form-label">Горизонт прогноза (дней)</label>
+            <div class="period-group" style="grid-template-columns:repeat(4,1fr)">
+              <button class="period-btn" onclick="selectGarchPeriod(5,this)">5</button>
+              <button class="period-btn active" onclick="selectGarchPeriod(10,this)">10</button>
+              <button class="period-btn" onclick="selectGarchPeriod(20,this)">20</button>
+              <button class="period-btn" onclick="selectGarchPeriod(30,this)">30</button>
+            </div>
+          </div>
+
+          <!-- Кнопка -->
+          <button class="garch-btn" id="garchBtn" onclick="runGarch()" style="margin-top:18px">
+            <span>📉</span> РАССЧИТАТЬ ВОЛАТИЛЬНОСТЬ
+          </button>
+
+          <!-- Пояснение метода -->
+          <div style="margin-top:16px;padding:12px;background:#f5f3ff;border-radius:8px;border:1px solid #e9d5ff;font-size:11px;color:#6d28d9;line-height:1.6">
+            <b>GARCH(1,1):</b> σ²<sub>t</sub> = ω + α·r²<sub>t-1</sub> + β·σ²<sub>t-1</sub><br>
+            Параметры оцениваются через максимальное правдоподобие (метод Нелдера–Мида).<br>
+            Прогноз: E[σ²<sub>t+h</sub>] = σ̄² + (α+β)<sup>h</sup>·(σ²<sub>t</sub> − σ̄²)
+          </div>
+
+        </div>
+      </div>
+
+      <!-- РЕЗУЛЬТАТЫ -->
+      <div class="garch-result-area" id="garchResultArea">
+
+        <div class="garch-placeholder" id="garchPlaceholder">
+          <div style="font-size:42px">📉</div>
+          <div style="font-weight:800;font-size:15px;color:var(--navy)">Готов к анализу волатильности</div>
+          <div style="font-size:13px;color:var(--text3);max-width:280px">
+            Введите исторические курсы, выберите пару и горизонт — GARCH(1,1) оценит параметры и построит прогноз волатильности
+          </div>
+        </div>
+
+        <div id="garchResults" style="display:none">
+
+          <!-- Параметры модели -->
+          <div class="garch-params-row" id="garchParamsRow"></div>
+
+          <!-- Сигнал для руководства -->
+          <div id="garchSignalBlock" style="margin-bottom:16px"></div>
+
+          <!-- График волатильности -->
+          <div class="garch-chart-card">
+            <div class="garch-card-header">
+              <span>📊 Условная волатильность курса (дневная, %)</span>
+              <span id="garchCurrencyBadge" style="font-size:11px;opacity:.8"></span>
+            </div>
+            <div class="garch-card-body">
+              <div class="garch-chart-wrap">
+                <canvas id="garchChart"></canvas>
+              </div>
+              <div class="garch-legend">
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#7c3aed"></div>Историческая волатильность</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#f97316;border:2px dashed #f97316;background:transparent"></div>Прогноз</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:rgba(124,58,237,.25)"></div>±1σ доверительный интервал</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:rgba(124,58,237,.1)"></div>±2σ доверительный интервал</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#22c55e;opacity:.4"></div>Низкий риск (&lt;5%)</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#eab308;opacity:.4"></div>Умеренный (5–15%)</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#f97316;opacity:.4"></div>Высокий (15–25%)</div>
+                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#ef4444;opacity:.4"></div>Критический (&gt;25%)</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
 <!-- ============================================================
@@ -2218,6 +2435,307 @@ function renderForecast(result) {
       `).join('') +
       '</div>';
   }
+}
+
+// ============================================================
+// GARCH(1,1)
+// ============================================================
+
+let garchPeriods     = 10;
+let garchChartInst   = null;
+
+function selectGarchPeriod(p, btn) {
+  garchPeriods = p;
+  btn.closest('.period-group').querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function runGarch() {
+  const raw      = document.getElementById('garchData').value.trim();
+  const alertBox = document.getElementById('garchAlertBox');
+  alertBox.style.display = 'none';
+
+  if (!raw) {
+    alertBox.textContent = '⚠️ Введите исторические курсы валюты';
+    alertBox.style.display = 'block';
+    return;
+  }
+
+  const data = raw.split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
+  if (data.length < 10) {
+    alertBox.textContent = `⚠️ Необходимо минимум 10 точек данных (сейчас: ${data.length})`;
+    alertBox.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('garchBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> ВЫЧИСЛЯЕТСЯ...';
+  document.getElementById('garchPlaceholder').style.display = 'none';
+  document.getElementById('garchResults').style.display    = 'none';
+
+  try {
+    const resp = await fetch('/api/garch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data, periods: garchPeriods }),
+    });
+    const result = await resp.json();
+    if (!resp.ok || result.error) throw new Error(result.error || 'HTTP ' + resp.status);
+    renderGarch(result);
+  } catch (err) {
+    alertBox.textContent = '❌ Ошибка: ' + err.message;
+    alertBox.style.display = 'block';
+    document.getElementById('garchPlaceholder').style.display = 'flex';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>📉</span> РАССЧИТАТЬ ВОЛАТИЛЬНОСТЬ';
+  }
+}
+
+function renderGarch(r) {
+  const currency = document.getElementById('garchCurrency').value;
+  const riskClass = {
+    'низкий':    'risk-low',
+    'умеренный': 'risk-moderate',
+    'высокий':   'risk-high',
+    'критический': 'risk-critical',
+  }[r.riskLevel] || 'risk-low';
+
+  const riskIcons = {
+    'risk-low': '✅', 'risk-moderate': '⚠️', 'risk-high': '🔴', 'risk-critical': '🚨',
+  };
+  const riskLabels = {
+    'risk-low': 'Низкий', 'risk-moderate': 'Умеренный', 'risk-high': 'Высокий', 'risk-critical': 'Критический',
+  };
+
+  document.getElementById('garchResults').style.display = 'block';
+  document.getElementById('garchCurrencyBadge').textContent = currency;
+
+  // ── Параметры модели ─────────────────────────────────────────────────────────
+  document.getElementById('garchParamsRow').innerHTML = `
+    <div class="garch-param-box">
+      <div class="garch-param-label">ω (omega)</div>
+      <div class="garch-param-val">${r.omega}</div>
+      <div class="garch-param-sub">базовая дисп.</div>
+    </div>
+    <div class="garch-param-box">
+      <div class="garch-param-label">α (alpha)</div>
+      <div class="garch-param-val">${r.alpha}</div>
+      <div class="garch-param-sub">шок прошлого</div>
+    </div>
+    <div class="garch-param-box">
+      <div class="garch-param-label">β (beta)</div>
+      <div class="garch-param-val">${r.beta}</div>
+      <div class="garch-param-sub">инерция вол.</div>
+    </div>
+    <div class="garch-param-box" style="border-color:${r.persistence > 0.95 ? '#fca5a5' : r.persistence > 0.9 ? '#fde68a' : '#bbf7d0'}">
+      <div class="garch-param-label">α+β (устойч.)</div>
+      <div class="garch-param-val" style="color:${r.persistence > 0.95 ? '#dc2626' : r.persistence > 0.9 ? '#d97706' : '#16a34a'}">${r.persistence}</div>
+      <div class="garch-param-sub">персистентность</div>
+    </div>
+  `;
+
+  // ── Сигнал для руководства ──────────────────────────────────────────────────
+  document.getElementById('garchSignalBlock').innerHTML = `
+    <div class="garch-signal ${riskClass}">
+      <div class="garch-signal-icon">${riskIcons[riskClass]}</div>
+      <div class="garch-signal-body">
+        <div class="garch-signal-title">
+          Уровень валютного риска: ${riskLabels[riskClass]}
+          <span class="garch-risk-badge ${riskClass}">${r.riskLevel.toUpperCase()}</span>
+          &nbsp;·&nbsp; Годовая волатильность: <b>${r.annualizedVol}%</b>
+          &nbsp;·&nbsp; Дневная: <b>${r.currentDailyVol}%</b>
+        </div>
+        <div class="garch-signal-text">${r.signal}</div>
+      </div>
+    </div>
+  `;
+
+  // ── График ───────────────────────────────────────────────────────────────────
+  const nHist = r.historicalVol.length;
+  const nFore = r.forecastVol.length;
+
+  const histLabels = r.historicalVol.map((_, i) => `T${i + 1}`);
+  const foreLabels = r.forecastVol.map((_, i) => `T${nHist + i + 1}`);
+  const allLabels  = [...histLabels, ...foreLabels];
+
+  // Соединяем исторические и прогнозные (перекрытие на одну точку)
+  const lastHistVol = r.historicalVol[nHist - 1];
+  const forecastLine = [
+    ...new Array(nHist - 1).fill(null),
+    lastHistVol,
+    ...r.forecastVol,
+  ];
+  const ci1LowerLine = [...new Array(nHist).fill(null), ...r.ci1Lower];
+  const ci1UpperLine = [...new Array(nHist).fill(null), ...r.ci1Upper];
+  const ci2LowerLine = [...new Array(nHist).fill(null), ...r.ci2Lower];
+  const ci2UpperLine = [...new Array(nHist).fill(null), ...r.ci2Upper];
+
+  if (garchChartInst) { garchChartInst.destroy(); garchChartInst = null; }
+
+  // Плагин для цветовых зон риска
+  const riskZonesPlugin = {
+    id: 'garchRiskZones',
+    beforeDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      if (!chartArea || !scales.y) return;
+      const { left, right, top, bottom } = chartArea;
+      const yS = scales.y;
+      const zones = [
+        { lo: 0,  hi: 5,        color: 'rgba(34,197,94,0.08)' },
+        { lo: 5,  hi: 15,       color: 'rgba(234,179,8,0.10)' },
+        { lo: 15, hi: 25,       color: 'rgba(249,115,22,0.12)' },
+        { lo: 25, hi: Infinity, color: 'rgba(239,68,68,0.12)' },
+      ];
+      ctx.save();
+      for (const z of zones) {
+        const yMax = yS.getPixelForValue(z.hi === Infinity ? yS.max : z.hi);
+        const yMin = yS.getPixelForValue(z.lo);
+        const y0   = Math.max(top,    Math.min(bottom, yMax));
+        const y1   = Math.max(top,    Math.min(bottom, yMin));
+        if (y1 > y0) {
+          ctx.fillStyle = z.color;
+          ctx.fillRect(left, y0, right - left, y1 - y0);
+        }
+      }
+      ctx.restore();
+    },
+  };
+
+  const ctx = document.getElementById('garchChart').getContext('2d');
+  garchChartInst = new Chart(ctx, {
+    type: 'line',
+    plugins: [riskZonesPlugin],
+    data: {
+      labels: allLabels,
+      datasets: [
+        // ±2σ верх (невидимая линия с заливкой к ±1σ)
+        {
+          label: '+2σ',
+          data: ci2UpperLine,
+          borderColor: 'transparent',
+          backgroundColor: 'rgba(124,58,237,0.07)',
+          pointRadius: 0,
+          fill: '+1',  // заливка до следующего (ci1Upper)
+          tension: 0.3,
+          order: 5,
+        },
+        // ±1σ верх
+        {
+          label: '+1σ',
+          data: ci1UpperLine,
+          borderColor: 'rgba(124,58,237,0.3)',
+          backgroundColor: 'rgba(124,58,237,0.12)',
+          borderWidth: 1,
+          borderDash: [4, 3],
+          pointRadius: 0,
+          fill: '+1',  // заливка до ci1Lower
+          tension: 0.3,
+          order: 4,
+        },
+        // ±1σ низ
+        {
+          label: '-1σ',
+          data: ci1LowerLine,
+          borderColor: 'rgba(124,58,237,0.3)',
+          backgroundColor: 'rgba(124,58,237,0.07)',
+          borderWidth: 1,
+          borderDash: [4, 3],
+          pointRadius: 0,
+          fill: '+1',  // заливка до ci2Lower
+          tension: 0.3,
+          order: 3,
+        },
+        // ±2σ низ
+        {
+          label: '-2σ',
+          data: ci2LowerLine,
+          borderColor: 'transparent',
+          backgroundColor: 'transparent',
+          pointRadius: 0,
+          fill: false,
+          tension: 0.3,
+          order: 6,
+        },
+        // Прогноз
+        {
+          label: 'Прогноз волатильности',
+          data: forecastLine,
+          borderColor: '#f97316',
+          backgroundColor: 'rgba(249,115,22,0.08)',
+          borderWidth: 2.5,
+          borderDash: [7, 4],
+          pointRadius: (ctx) => ctx.dataIndex >= nHist ? 5 : 0,
+          pointStyle: 'rectRot',
+          pointHoverRadius: 7,
+          tension: 0.3,
+          fill: false,
+          order: 2,
+        },
+        // Историческая волатильность
+        {
+          label: 'Историческая волатильность',
+          data: [...r.historicalVol, ...new Array(nFore).fill(null)],
+          borderColor: '#7c3aed',
+          backgroundColor: 'rgba(124,58,237,0.08)',
+          borderWidth: 2,
+          pointRadius: 2,
+          pointHoverRadius: 5,
+          tension: 0.3,
+          fill: true,
+          order: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            filter: item => !['  +2σ', '+1σ', '-1σ', '-2σ'].includes(item.text),
+            padding: 12, font: { size: 11 },
+          },
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.raw === null) return null;
+              const map = {
+                'Историческая волатильность': `Историческая: ${ctx.raw}%`,
+                'Прогноз волатильности':      `Прогноз: ${ctx.raw}%`,
+                '+1σ': `+1σ: ${ctx.raw}%`,
+                '-1σ': `-1σ: ${ctx.raw}%`,
+                '+2σ': `+2σ: ${ctx.raw}%`,
+                '-2σ': `-2σ: ${ctx.raw}%`,
+              };
+              return ` ${map[ctx.dataset.label] || ctx.dataset.label + ': ' + ctx.raw + '%'}`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid: { color: '#f0f4f9' },
+          ticks: { maxTicksLimit: 12, font: { size: 10 } },
+        },
+        y: {
+          grid: { color: '#f0f4f9' },
+          title: {
+            display: true, text: 'Волатильность (%)',
+            font: { size: 11 }, color: 'var(--text3)',
+          },
+          ticks: {
+            callback: v => v.toFixed(2) + '%',
+            font: { size: 10 },
+          },
+        },
+      },
+    },
+  });
 }
 </script>
 

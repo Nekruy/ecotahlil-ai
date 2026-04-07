@@ -248,6 +248,33 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/garch
+  if (req.method === 'POST' && req.url === '/api/garch') {
+    try {
+      const body = await readBody(req);
+      const { data, periods } = JSON.parse(body.toString('utf8'));
+
+      const { garch } = require('./forecasting');
+
+      const numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      if (numData.length < 10) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Для GARCH необходимо минимум 10 точек данных' }));
+      }
+
+      const n      = Math.max(1, Math.min(30, parseInt(periods) || 10));
+      const result = garch(numData, n);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/garch]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Forecast endpoint
   if (req.method === 'POST' && req.url === '/forecast') {
     try {
