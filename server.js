@@ -248,6 +248,27 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/var
+  if (req.method === 'POST' && req.url === '/api/var') {
+    try {
+      const body = await readBody(req);
+      const { data, periods } = JSON.parse(body.toString('utf8'));
+
+      const { var_model } = require('./forecasting');
+      const n      = Math.max(1, Math.min(24, parseInt(periods) || 6));
+      const result = var_model(data, n);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/var]', err.message);
+      const code = /необходимо|Недостаточно/i.test(err.message) ? 400 : 500;
+      res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/garch
   if (req.method === 'POST' && req.url === '/api/garch') {
     try {

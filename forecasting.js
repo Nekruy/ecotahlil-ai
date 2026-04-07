@@ -408,4 +408,290 @@ function garch(data, periods) {
   };
 }
 
-module.exports = { arima, prophet, detectAnomalies, garch };
+// ─── VAR(1) — векторная авторегрессия ─────────────────────────────────────────
+
+// ── Матричные утилиты ─────────────────────────────────────────────────────────
+
+function matCreate(r, c, fill = 0) {
+  return Array.from({ length: r }, () => new Array(c).fill(fill));
+}
+
+function matTranspose(A) {
+  const r = A.length, c = A[0].length;
+  const T = matCreate(c, r);
+  for (let i = 0; i < r; i++) for (let j = 0; j < c; j++) T[j][i] = A[i][j];
+  return T;
+}
+
+function matMul(A, B) {
+  const rA = A.length, cA = A[0].length, cB = B[0].length;
+  const C = matCreate(rA, cB);
+  for (let i = 0; i < rA; i++)
+    for (let m = 0; m < cA; m++)
+      if (A[i][m] !== 0)
+        for (let j = 0; j < cB; j++)
+          C[i][j] += A[i][m] * B[m][j];
+  return C;
+}
+
+// Гаусс-Жордан: инверсия квадратной матрицы
+function matInverse(A) {
+  const n = A.length;
+  const aug = A.map((row, i) => {
+    const id = new Array(n).fill(0); id[i] = 1;
+    return [...row, ...id];
+  });
+  for (let col = 0; col < n; col++) {
+    let pr = col;
+    for (let r = col + 1; r < n; r++)
+      if (Math.abs(aug[r][col]) > Math.abs(aug[pr][col])) pr = r;
+    [aug[col], aug[pr]] = [aug[pr], aug[col]];
+    const piv = aug[col][col];
+    if (Math.abs(piv) < 1e-14)
+      throw new Error('Матрица вырождена — проверьте данные на мультиколлинеарность или добавьте наблюдений');
+    for (let j = 0; j < 2 * n; j++) aug[col][j] /= piv;
+    for (let r = 0; r < n; r++) {
+      if (r === col) continue;
+      const f = aug[r][col];
+      for (let j = 0; j < 2 * n; j++) aug[r][j] -= f * aug[col][j];
+    }
+  }
+  return aug.map(row => row.slice(n));
+}
+
+function matVecMul(A, v) {
+  return A.map(row => row.reduce((s, a, j) => s + a * v[j], 0));
+}
+
+function vecAdd(a, b) { return a.map((v, i) => v + b[i]); }
+
+// ── OLS-оценка VAR(1) ─────────────────────────────────────────────────────────
+// series — массив нормализованных рядов [k × T]
+function estimateVAR(series) {
+  const k = series.length;
+  const T = series[0].length;
+  const n = T - 1; // число строк после лагирования
+
+  // Design matrix X: n × (k+1), строки = [1, y1_{t-1}, ..., yk_{t-1}]
+  const X = [];
+  for (let t = 1; t < T; t++) X.push([1, ...series.map(s => s[t - 1])]);
+
+  // Целевая матрица Ymat: n × k
+  const Ymat = [];
+  for (let t = 1; t < T; t++) Ymat.push(series.map(s => s[t]));
+
+  const Xt       = matTranspose(X);
+  const XtX      = matMul(Xt, X);
+  const XtXinv   = matInverse(XtX);
+  const XtXinvXt = matMul(XtXinv, Xt);
+
+  const constants = [];
+  const A         = matCreate(k, k); // A[i][j]: коэф. y_j,t-1 в уравнении i
+  const rss       = new Array(k).fill(0);
+  const residuals = Array.from({ length: k }, () => []);
+
+  for (let i = 0; i < k; i++) {
+    const yi   = Ymat.map(row => row[i]);
+    const beta = matVecMul(XtXinvXt, yi);
+    constants[i] = beta[0];
+    for (let j = 0; j < k; j++) A[i][j] = beta[j + 1];
+
+    for (let t = 0; t < n; t++) {
+      let fit = beta[0];
+      for (let j = 0; j < k; j++) fit += A[i][j] * series[j][t];
+      const res = series[i][t + 1] - fit;
+      residuals[i].push(res);
+      rss[i] += res * res;
+    }
+  }
+
+  const df = Math.max(1, n - k - 1);
+  // Стандартные ошибки коэффициентов: SE(β_{i,p}) = sqrt(XtXinv[p][p] * σ²_i)
+  const seMatrix = A.map((_, i) => {
+    const s2 = rss[i] / df;
+    return Array.from({ length: k + 1 }, (_, p) =>
+      Math.sqrt(Math.max(0, XtXinv[p][p] * s2))
+    );
+  });
+
+  return { A, constants, residuals, seMatrix, rss, df };
+}
+
+// ── Прогноз VAR на periods шагов ──────────────────────────────────────────────
+function forecastVAR(A, constants, lastZ, periods) {
+  const out = [];
+  let prev = lastZ.slice();
+  for (let h = 0; h < periods; h++) {
+    const next = vecAdd(constants, matVecMul(A, prev));
+    out.push(next.slice());
+    prev = next;
+  }
+  return out;
+}
+
+// ── Импульсные функции отклика (IRF) ─────────────────────────────────────────
+// irf[j][h][i] = отклик переменной i на горизонте h при единичном шоке в j
+function computeIRF(A, maxH) {
+  const k   = A.length;
+  const irf = Array.from({ length: k }, () => []);
+  for (let j = 0; j < k; j++) {
+    let resp = new Array(k).fill(0);
+    resp[j] = 1;
+    for (let h = 0; h <= maxH; h++) {
+      irf[j].push(resp.map(v => round4(v)));
+      if (h < maxH) resp = matVecMul(A, resp);
+    }
+  }
+  return irf;
+}
+
+// ── Тест причинности Грейнджера (t-тест на a_ij) ─────────────────────────────
+// granger[j][i] = { coefficient, tStat, significant }: влияет ли j на i
+function grangerCausality(A, seMatrix) {
+  const k = A.length;
+  const g = Array.from({ length: k }, () => new Array(k).fill(null));
+  for (let i = 0; i < k; i++)
+    for (let j = 0; j < k; j++) {
+      if (i === j) continue;
+      const se = seMatrix[i][j + 1]; // +1: beta[0] — константа
+      const t  = se > 1e-10 ? A[i][j] / se : 0;
+      g[j][i]  = { coefficient: round4(A[i][j]), tStat: round4(t), significant: Math.abs(t) > 1.96 };
+    }
+  return g;
+}
+
+// ── Текстовая интерпретация для руководства ───────────────────────────────────
+function buildVARInterpretation(keys, labels, A, granger, forecasts, series, periods) {
+  const k       = keys.length;
+  const lastObs = keys.map((_, i) => series[i][series[i].length - 1]);
+  const lines   = [];
+
+  lines.push(`Анализ VAR(1) макроэкономических показателей Таджикистана. Горизонт прогноза: ${periods} периодов.`);
+  lines.push('');
+
+  // Причинность Грейнджера
+  const sigLinks = [];
+  for (let j = 0; j < k; j++)
+    for (let i = 0; i < k; i++)
+      if (i !== j && granger[j][i]?.significant)
+        sigLinks.push({ cause: j, effect: i, coef: granger[j][i].coefficient });
+
+  if (sigLinks.length > 0) {
+    lines.push('ПРИЧИННОСТЬ ГРЕЙНДЖЕРА (α = 5%):');
+    for (const s of sigLinks) {
+      const sign = s.coef > 0 ? 'положительно влияет на' : 'отрицательно влияет на';
+      lines.push(`  • ${labels[keys[s.cause]]} ${sign} ${labels[keys[s.effect]]} (коэф. ${s.coef > 0 ? '+' : ''}${s.coef})`);
+    }
+  } else {
+    lines.push('ПРИЧИННОСТЬ ГРЕЙНДЖЕРА: при текущем объёме данных статистически значимых связей не выявлено. Рекомендуется расширить временной ряд для более точных выводов.');
+  }
+  lines.push('');
+
+  // Прогнозные изменения
+  lines.push('ПРОГНОЗНЫЕ ИЗМЕНЕНИЯ (1-й период вперёд):');
+  for (let i = 0; i < k; i++) {
+    const last = lastObs[i], next = forecasts[0][i];
+    const delta = next - last;
+    const pct   = last !== 0 ? (delta / Math.abs(last) * 100).toFixed(1) : '—';
+    const arrow = delta >= 0 ? '↑' : '↓';
+    lines.push(`  • ${labels[keys[i]]}: ${arrow} ${Math.abs(pct)}% (${round4(last)} → ${round4(next)})`);
+  }
+  lines.push('');
+
+  // Сильнейшие межпеременные взаимодействия
+  const cross = [];
+  for (let i = 0; i < k; i++)
+    for (let j = 0; j < k; j++)
+      if (i !== j) cross.push({ from: j, to: i, coef: A[i][j] });
+  cross.sort((a, b) => Math.abs(b.coef) - Math.abs(a.coef));
+
+  if (cross.length > 0) {
+    lines.push('СИЛЬНЕЙШИЕ ВЗАИМОДЕЙСТВИЯ (стандартизованные β):');
+    for (const cc of cross.slice(0, 4)) {
+      const eff = cc.coef > 0 ? 'усиливает' : 'сдерживает';
+      lines.push(`  • ${labels[keys[cc.from]]} ${eff} ${labels[keys[cc.to]]} (A = ${cc.coef > 0 ? '+' : ''}${round4(cc.coef)})`);
+    }
+    lines.push('');
+  }
+
+  lines.push('РЕКОМЕНДАЦИИ: При формировании монетарной и фискальной политики учитывайте выявленные взаимозависимости. Динамика денежных переводов традиционно поддерживает внутренний спрос и может усиливать инфляционное давление. Курс USD/TJS влияет на импортную инфляцию через ценовой канал. Прогноз основан на исторических данных — при структурных шоках в экономике рекомендуется переоценка модели.');
+
+  return lines.join('\n');
+}
+
+/**
+ * VAR(1) — Векторная авторегрессия для макроэкономических показателей.
+ *
+ * @param {{ gdp, inflation, exchange_rate, remittances }: Record<string,number[]>} data
+ * @param {number} periods  горизонт прогноза
+ */
+function var_model(data, periods) {
+  const KEYS   = ['gdp', 'inflation', 'exchange_rate', 'remittances'];
+  const LABELS = {
+    gdp:           'ВВП',
+    inflation:     'Инфляция',
+    exchange_rate: 'Курс USD/TJS',
+    remittances:   'Переводы мигрантов',
+  };
+
+  // 1. Валидация входных данных
+  const raw = [];
+  for (const key of KEYS) {
+    const arr = (Array.isArray(data[key]) ? data[key] : []).map(Number);
+    if (arr.length < 6)  throw new Error(`${LABELS[key]}: необходимо минимум 6 наблюдений`);
+    if (arr.some(isNaN)) throw new Error(`${LABELS[key]}: все значения должны быть числами`);
+    raw.push(arr);
+  }
+
+  const k = KEYS.length;
+  const T = Math.min(...raw.map(s => s.length));
+  if (T < k + 3) throw new Error(`Недостаточно наблюдений (нужно минимум ${k + 3}, есть ${T})`);
+
+  const series = raw.map(s => s.slice(0, T));
+
+  // 2. Z-нормализация для численной стабильности OLS
+  const mu  = series.map(mean);
+  const sig = series.map(s => { const sd = stdDev(s); return sd > 1e-10 ? sd : 1; });
+  const zS  = series.map((s, i) => s.map(v => (v - mu[i]) / sig[i]));
+
+  // 3. Оценка VAR(1) методом МНК
+  const { A, constants, rss, seMatrix } = estimateVAR(zS);
+
+  // 4. Прогноз в нормализованных единицах, затем денормализация
+  const lastZ      = zS.map(s => s[s.length - 1]);
+  const zForecasts = forecastVAR(A, constants, lastZ, periods);
+  const forecasts  = zForecasts.map(zv => zv.map((z, i) => round4(z * sig[i] + mu[i])));
+
+  // 5. R² каждого уравнения (инвариантен к нормализации)
+  const r2 = zS.map((s, i) => {
+    const resp = s.slice(1);
+    const mR   = mean(resp);
+    const tss  = resp.reduce((a, v) => a + (v - mR) ** 2, 0);
+    return tss > 0 ? round4(1 - rss[i] / tss) : 0;
+  });
+
+  // 6. IRF (до 8 горизонтов)
+  const irf = computeIRF(A, Math.min(periods, 8));
+
+  // 7. Тест Грейнджера
+  const granger = grangerCausality(A, seMatrix);
+
+  // 8. Интерпретация
+  const interpretation = buildVARInterpretation(KEYS, LABELS, A, granger, forecasts, series, periods);
+
+  return {
+    keys:         KEYS,
+    labels:       LABELS,
+    historical:   series,
+    forecasts,
+    irf,
+    granger,
+    r2,
+    coefficients: A.map(row => row.map(round4)),
+    constants:    constants.map(round4),
+    interpretation,
+    periods,
+  };
+}
+
+module.exports = { arima, prophet, detectAnomalies, garch, var_model };

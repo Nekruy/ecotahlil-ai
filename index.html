@@ -691,6 +691,121 @@ footer b { color:#fff; }
 }
 
 /* ============================================================
+   VAR(1) — секция векторной авторегрессии
+============================================================ */
+.var-section {
+  padding:20px 24px 28px;
+  border-top:2px solid var(--border);
+}
+.var-section-title {
+  font-size:17px; font-weight:800; color:var(--navy);
+  margin-bottom:18px; padding-bottom:10px;
+  border-bottom:2px solid var(--navy-pale);
+  display:flex; align-items:center; gap:8px;
+}
+.var-layout {
+  display:grid; grid-template-columns:310px 1fr; gap:20px;
+}
+.var-form-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; box-shadow:var(--shadow2);
+  align-self:start;
+}
+.var-form-top {
+  background:linear-gradient(135deg,#1d4ed8,#1e3a8a);
+  padding:14px 18px; color:#fff; font-size:13px; font-weight:700;
+}
+.var-form-body { padding:18px; }
+.var-var-label {
+  font-size:12px; font-weight:700; color:var(--navy);
+  margin-bottom:5px; display:flex; align-items:center; gap:6px;
+}
+.var-var-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+.var-textarea {
+  width:100%; border:2px solid var(--border); border-radius:8px;
+  padding:8px 12px; font-size:12px; font-family:monospace;
+  resize:vertical; min-height:56px; background:#fafbff;
+  transition:border-color .2s; color:var(--text);
+}
+.var-textarea:focus { outline:none; border-color:#1d4ed8; }
+.var-btn {
+  width:100%; padding:13px; border:none; border-radius:10px;
+  background:linear-gradient(135deg,#1d4ed8,#1e3a8a);
+  color:#fff; font-size:13px; font-weight:800; letter-spacing:.4px;
+  cursor:pointer; transition:all .2s; margin-top:14px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.var-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 20px rgba(29,78,216,.35); }
+.var-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+
+.var-result-area { min-height:200px; }
+.var-placeholder {
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; min-height:240px; text-align:center;
+  gap:10px; background:var(--bg); border-radius:12px;
+  border:2px dashed var(--border); padding:32px;
+}
+.var-r2-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:14px; }
+.var-r2-box {
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; padding:10px; text-align:center;
+}
+.var-r2-label { font-size:10px; color:var(--text3); font-weight:700; text-transform:uppercase; margin-bottom:3px; }
+.var-r2-val   { font-size:18px; font-weight:800; }
+
+.var-chart-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; box-shadow:var(--shadow2); margin-bottom:14px;
+}
+.var-card-header {
+  padding:12px 16px; font-size:13px; font-weight:700; color:var(--navy);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.var-card-body { padding:16px; }
+.var-charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.var-mini-chart { height:155px; position:relative; }
+.var-mini-title {
+  font-size:11px; font-weight:700; color:var(--navy);
+  margin-bottom:5px; display:flex; align-items:center; gap:5px;
+}
+
+.var-two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+
+/* Таблица Грейнджера и коэффициентов */
+.var-mat-tbl { width:100%; border-collapse:collapse; font-size:11px; }
+.var-mat-tbl th {
+  padding:7px 8px; background:var(--navy-pale);
+  color:var(--navy); font-weight:700; text-align:center;
+}
+.var-mat-tbl th:first-child { text-align:left; }
+.var-mat-tbl td { padding:7px 8px; border-bottom:1px solid var(--border); text-align:center; }
+.var-mat-tbl td:first-child { text-align:left; font-weight:700; }
+.granger-sig { background:#dcfce7; color:#15803d; font-weight:700; border-radius:5px; padding:2px 7px; font-size:10px; }
+.granger-not { background:#f1f5f9; color:var(--text3); border-radius:5px; padding:2px 7px; font-size:10px; }
+.granger-self { color:var(--border); font-size:16px; }
+
+/* IRF сетка */
+.var-irf-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.var-irf-sub-title {
+  font-size:11px; font-weight:700; color:var(--navy);
+  margin-bottom:6px; display:flex; align-items:center; gap:5px;
+}
+.var-irf-tbl { width:100%; border-collapse:collapse; font-size:10px; }
+.var-irf-tbl th { padding:5px 7px; background:var(--navy-pale); color:var(--navy); font-weight:700; text-align:right; }
+.var-irf-tbl th:first-child { text-align:left; }
+.var-irf-tbl td { padding:5px 7px; border-bottom:1px solid var(--border); text-align:right; font-family:monospace; }
+.var-irf-tbl td:first-child { text-align:left; font-family:inherit; font-weight:600; font-size:10px; }
+
+/* Интерпретация */
+.var-interp {
+  background:linear-gradient(135deg,#eff6ff,#f0f9ff);
+  border:1px solid #bfdbfe; border-radius:12px; padding:18px 20px;
+}
+.var-interp-title { font-size:13px; font-weight:800; color:#1e40af; margin-bottom:10px; }
+.var-interp-body  { font-size:12px; color:var(--text2); white-space:pre-line; line-height:1.75; }
+
+/* ============================================================
    GARCH — секция волатильности
 ============================================================ */
 .garch-section {
@@ -903,6 +1018,7 @@ footer b { color:#fff; }
 @media(max-width:1100px) {
   .fc-layout { grid-template-columns:1fr; }
   .garch-layout { grid-template-columns:1fr; }
+  .var-layout { grid-template-columns:1fr; }
   .nbt-cards { grid-template-columns:repeat(2,1fr); }
   .dp-two-col { grid-template-columns:1fr; }
 }
@@ -913,6 +1029,10 @@ footer b { color:#fff; }
   .ai-layout { grid-template-columns:1fr; }
   .fc-table-row { grid-template-columns:1fr; }
   .garch-params-row { grid-template-columns:repeat(2,1fr); }
+  .var-charts-grid { grid-template-columns:1fr; }
+  .var-two-col { grid-template-columns:1fr; }
+  .var-irf-grid { grid-template-columns:1fr; }
+  .var-r2-row { grid-template-columns:repeat(2,1fr); }
 }
 @media(max-width:600px) {
   .nbt-cards { grid-template-columns:1fr 1fr; }
@@ -1282,6 +1402,7 @@ footer b { color:#fff; }
       <span class="ai-badge2 ab-gold">⚠️ Детектор аномалий</span>
       <span class="ai-badge2 ab-green">📊 Chart.js визуализация</span>
       <span class="ai-badge2" style="background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;">📉 GARCH(1,1) волатильность</span>
+      <span class="ai-badge2" style="background:rgba(29,78,216,.2);border:1px solid rgba(29,78,216,.4);color:#93c5fd;">📊 VAR(1) взаимосвязи</span>
     </div>
   </div>
 
@@ -1522,6 +1643,147 @@ footer b { color:#fff; }
                 <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#ef4444;opacity:.4"></div>Критический (&gt;25%)</div>
               </div>
             </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ VAR(1) СЕКЦИЯ ══════════ -->
+  <div class="var-section">
+    <div class="var-section-title">📊 VAR(1) — Векторная авторегрессия макроэкономических показателей</div>
+
+    <div class="var-layout">
+
+      <!-- ФОРМА -->
+      <div class="var-form-card">
+        <div class="var-form-top">⚙️ Параметры VAR-модели</div>
+        <div class="var-form-body">
+
+          <div id="varAlertBox" class="alert-box"></div>
+
+          <div class="form-group">
+            <label class="var-var-label"><span class="var-var-dot" style="background:#0050b3"></span>ВВП (темп роста, %)</label>
+            <textarea id="varGdp" class="var-textarea" placeholder="7.5, 8.2, 7.9, 8.8, 7.4, 8.5, 7.8, 9.1"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="var-var-label"><span class="var-var-dot" style="background:#dc2626"></span>Инфляция (ИПЦ, %)</label>
+            <textarea id="varInflation" class="var-textarea" placeholder="5.2, 6.1, 4.8, 7.3, 6.5, 5.9, 6.8, 7.1"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="var-var-label"><span class="var-var-dot" style="background:#16a34a"></span>Курс USD/TJS (сомони)</label>
+            <textarea id="varExchange" class="var-textarea" placeholder="10.5, 10.8, 11.0, 11.2, 11.4, 11.3, 11.6, 11.8"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="var-var-label"><span class="var-var-dot" style="background:#d97706"></span>Переводы мигрантов (млрд $)</label>
+            <textarea id="varRemit" class="var-textarea" placeholder="2.5, 2.8, 3.1, 2.9, 3.4, 3.6, 3.2, 3.8"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Горизонт прогноза</label>
+            <div class="period-group">
+              <button class="period-btn" onclick="selectVarPeriod(3,this)">3 пер.</button>
+              <button class="period-btn active" onclick="selectVarPeriod(6,this)">6 пер.</button>
+              <button class="period-btn" onclick="selectVarPeriod(12,this)">12 пер.</button>
+            </div>
+          </div>
+
+          <button class="var-btn" id="varBtn" onclick="runVAR()">
+            <span>📊</span> ПОСТРОИТЬ VAR-МОДЕЛЬ
+          </button>
+
+          <div style="margin-top:14px;padding:12px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe;font-size:11px;color:#1e40af;line-height:1.7">
+            <b>VAR(1):</b> Y<sub>t</sub> = c + A·Y<sub>t-1</sub> + ε<sub>t</sub><br>
+            Оценка МНК отдельно для каждого уравнения.<br>
+            Z-нормализация перед оценкой для стабильности.<br>
+            Минимум: 6 наблюдений по каждому показателю.
+          </div>
+
+        </div>
+      </div>
+
+      <!-- РЕЗУЛЬТАТЫ -->
+      <div class="var-result-area">
+
+        <div class="var-placeholder" id="varPlaceholder">
+          <div style="font-size:42px">📊</div>
+          <div style="font-weight:800;font-size:15px;color:var(--navy)">Готов к VAR-анализу</div>
+          <div style="font-size:13px;color:var(--text3);max-width:300px">
+            Введите временные ряды 4 макроэкономических показателей — система оценит VAR(1), проверит причинность Грейнджера и построит импульсные отклики
+          </div>
+        </div>
+
+        <div id="varResults" style="display:none">
+
+          <!-- R² уравнений -->
+          <div class="var-r2-row" id="varR2Row"></div>
+
+          <!-- Графики прогноза 2×2 -->
+          <div class="var-chart-card">
+            <div class="var-card-header">
+              <span>📈 Прогноз VAR(1) — все переменные</span>
+              <span id="varPeriodsBadge" style="font-size:11px;opacity:.8"></span>
+            </div>
+            <div class="var-card-body">
+              <div class="var-charts-grid">
+                <div>
+                  <div class="var-mini-title"><span class="var-var-dot" style="background:#0050b3"></span>ВВП (%)</div>
+                  <div class="var-mini-chart"><canvas id="varChartGdp"></canvas></div>
+                </div>
+                <div>
+                  <div class="var-mini-title"><span class="var-var-dot" style="background:#dc2626"></span>Инфляция (%)</div>
+                  <div class="var-mini-chart"><canvas id="varChartInflation"></canvas></div>
+                </div>
+                <div>
+                  <div class="var-mini-title"><span class="var-var-dot" style="background:#16a34a"></span>Курс USD/TJS</div>
+                  <div class="var-mini-chart"><canvas id="varChartExchange"></canvas></div>
+                </div>
+                <div>
+                  <div class="var-mini-title"><span class="var-var-dot" style="background:#d97706"></span>Переводы (млрд $)</div>
+                  <div class="var-mini-chart"><canvas id="varChartRemit"></canvas></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Грейнджер + матрица коэф. -->
+          <div class="var-two-col">
+
+            <div class="var-chart-card" style="margin:0">
+              <div class="var-card-header">🔗 Тест причинности Грейнджера</div>
+              <div class="var-card-body" style="padding:12px">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:8px">↓ причина &nbsp;→&nbsp; следствие · ✅ значимо (|t|&gt;1.96) · t-статистика</div>
+                <div id="varGrangerTable"></div>
+              </div>
+            </div>
+
+            <div class="var-chart-card" style="margin:0">
+              <div class="var-card-header">📐 Матрица коэффициентов A</div>
+              <div class="var-card-body" style="padding:12px">
+                <div style="font-size:10px;color:var(--text3);margin-bottom:8px">A[строка][столбец] — влияние столбца на строку (стандартизованные)</div>
+                <div id="varCoeffTable"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- IRF -->
+          <div class="var-chart-card">
+            <div class="var-card-header">
+              <span>⚡ Импульсные функции отклика (IRF)</span>
+              <span style="font-size:11px;opacity:.8">реакция переменных на единичный шок (в σ)</span>
+            </div>
+            <div class="var-card-body">
+              <div class="var-irf-grid" id="varIrfGrid"></div>
+            </div>
+          </div>
+
+          <!-- Интерпретация -->
+          <div class="var-interp">
+            <div class="var-interp-title">📋 Интерпретация для руководства</div>
+            <div class="var-interp-body" id="varInterpretation"></div>
           </div>
 
         </div>
@@ -2435,6 +2697,206 @@ function renderForecast(result) {
       `).join('') +
       '</div>';
   }
+}
+
+// ============================================================
+// VAR(1)
+// ============================================================
+
+let varPeriods = 6;
+const varCharts = {};
+
+const VAR_COLORS = {
+  gdp:           { main: '#0050b3', bg: 'rgba(0,80,179,0.1)' },
+  inflation:     { main: '#dc2626', bg: 'rgba(220,38,38,0.1)' },
+  exchange_rate: { main: '#16a34a', bg: 'rgba(22,163,74,0.1)' },
+  remittances:   { main: '#d97706', bg: 'rgba(217,119,6,0.1)' },
+};
+const VAR_SHORT = { gdp: 'ВВП', inflation: 'Инфл.', exchange_rate: 'USD/TJS', remittances: 'Перев.' };
+
+function selectVarPeriod(p, btn) {
+  varPeriods = p;
+  btn.closest('.period-group').querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function runVAR() {
+  const alertBox = document.getElementById('varAlertBox');
+  alertBox.style.display = 'none';
+
+  const parse = id => document.getElementById(id).value.trim()
+    .split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
+
+  const data = {
+    gdp:           parse('varGdp'),
+    inflation:     parse('varInflation'),
+    exchange_rate: parse('varExchange'),
+    remittances:   parse('varRemit'),
+  };
+
+  const minLen = Math.min(...Object.values(data).map(a => a.length));
+  if (minLen < 6) {
+    alertBox.textContent = `⚠️ Каждый ряд должен содержать минимум 6 наблюдений (сейчас: ${minLen})`;
+    alertBox.style.display = 'block';
+    return;
+  }
+
+  const btn = document.getElementById('varBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳</span> ВЫЧИСЛЯЕТСЯ...';
+  document.getElementById('varPlaceholder').style.display = 'none';
+  document.getElementById('varResults').style.display    = 'none';
+
+  try {
+    const resp = await fetch('/api/var', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data, periods: varPeriods }),
+    });
+    const result = await resp.json();
+    if (!resp.ok || result.error) throw new Error(result.error || 'HTTP ' + resp.status);
+    renderVAR(result);
+  } catch (err) {
+    alertBox.textContent = '❌ Ошибка: ' + err.message;
+    alertBox.style.display = 'block';
+    document.getElementById('varPlaceholder').style.display = 'flex';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>📊</span> ПОСТРОИТЬ VAR-МОДЕЛЬ';
+  }
+}
+
+function renderVAR(r) {
+  document.getElementById('varResults').style.display = 'block';
+  document.getElementById('varPeriodsBadge').textContent = `прогноз: ${r.periods} периодов`;
+
+  // ── R² уравнений ──────────────────────────────────────────────────────────
+  document.getElementById('varR2Row').innerHTML = r.keys.map((key, i) => {
+    const v   = r.r2[i];
+    const col = v >= 0.7 ? '#16a34a' : v >= 0.4 ? '#d97706' : '#dc2626';
+    return `<div class="var-r2-box">
+      <div class="var-r2-label">${VAR_SHORT[key]}</div>
+      <div class="var-r2-val" style="color:${col}">${v !== null ? (v * 100).toFixed(0) + '%' : '—'}</div>
+      <div style="font-size:10px;color:var(--text3)">R²</div>
+    </div>`;
+  }).join('');
+
+  // ── 4 мини-графика ─────────────────────────────────────────────────────────
+  const canvasIds = {
+    gdp: 'varChartGdp', inflation: 'varChartInflation',
+    exchange_rate: 'varChartExchange', remittances: 'varChartRemit',
+  };
+
+  r.keys.forEach((key, i) => {
+    const hist = r.historical[i];
+    const fore = r.forecasts.map(fv => fv[i]);
+    const n    = hist.length, nF = fore.length;
+    const all  = [...hist.map((_, t) => `T${t + 1}`), ...fore.map((_, t) => `T${n + t + 1}`)];
+    const clr  = VAR_COLORS[key];
+
+    if (varCharts[key]) { varCharts[key].destroy(); }
+    const ctx = document.getElementById(canvasIds[key]).getContext('2d');
+    varCharts[key] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: all,
+        datasets: [
+          {
+            label: 'История',
+            data: [...hist, ...new Array(nF).fill(null)],
+            borderColor: clr.main, backgroundColor: clr.bg,
+            borderWidth: 2, pointRadius: 2, pointHoverRadius: 4,
+            tension: 0.3, fill: true,
+          },
+          {
+            label: 'Прогноз',
+            data: [...new Array(n - 1).fill(null), hist[n - 1], ...fore],
+            borderColor: clr.main, backgroundColor: 'transparent',
+            borderWidth: 2, borderDash: [5, 4],
+            pointRadius: (ctx) => ctx.dataIndex >= n ? 3 : 0,
+            tension: 0.3, fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ctx.raw !== null ? ` ${ctx.dataset.label}: ${ctx.raw}` : null } },
+        },
+        scales: {
+          x: { grid: { color: '#f0f4f9' }, ticks: { maxTicksLimit: 6, font: { size: 9 } } },
+          y: { grid: { color: '#f0f4f9' }, ticks: { font: { size: 9 }, maxTicksLimit: 5 } },
+        },
+      },
+    });
+  });
+
+  // ── Грейнджер ──────────────────────────────────────────────────────────────
+  let gHtml = `<table class="var-mat-tbl"><thead><tr><th>↓ / →</th>`;
+  r.keys.forEach(k => { gHtml += `<th>${VAR_SHORT[k]}</th>`; });
+  gHtml += '</tr></thead><tbody>';
+  r.keys.forEach((causeKey, j) => {
+    gHtml += `<tr><td>${VAR_SHORT[causeKey]}</td>`;
+    r.keys.forEach((_, i) => {
+      if (i === j) {
+        gHtml += `<td class="granger-self">—</td>`;
+      } else {
+        const g   = r.granger[j][i];
+        const sig = g?.significant;
+        const ts  = g?.tStat ?? '—';
+        gHtml += `<td><span class="${sig ? 'granger-sig' : 'granger-not'}">${sig ? '✅' : '✗'} ${ts}</span></td>`;
+      }
+    });
+    gHtml += '</tr>';
+  });
+  gHtml += '</tbody></table>';
+  document.getElementById('varGrangerTable').innerHTML = gHtml;
+
+  // ── Матрица коэффициентов A ────────────────────────────────────────────────
+  let cHtml = `<table class="var-mat-tbl"><thead><tr><th>A[i][j]</th>`;
+  r.keys.forEach(k => { cHtml += `<th>${VAR_SHORT[k]}</th>`; });
+  cHtml += '</tr></thead><tbody>';
+  r.keys.forEach((rowKey, i) => {
+    cHtml += `<tr><td>${VAR_SHORT[rowKey]}</td>`;
+    r.keys.forEach((_, j) => {
+      const v   = r.coefficients[i][j];
+      const col = v > 0.1 ? '#15803d' : v < -0.1 ? '#dc2626' : 'var(--text3)';
+      const bg  = Math.abs(v) > 0.3 ? (v > 0 ? '#dcfce7' : '#fee2e2') : '';
+      cHtml += `<td style="color:${col};background:${bg};font-weight:${Math.abs(v) > 0.1 ? 700 : 400}">${v > 0 ? '+' : ''}${v}</td>`;
+    });
+    cHtml += '</tr>';
+  });
+  cHtml += '</tbody></table>';
+  document.getElementById('varCoeffTable').innerHTML = cHtml;
+
+  // ── IRF ──────────────────────────────────────────────────────────────────
+  const maxH = Math.min(r.irf[0].length - 1, 6);
+  document.getElementById('varIrfGrid').innerHTML = r.keys.map((shockKey, j) => {
+    const clr = VAR_COLORS[shockKey];
+    let tbl = `<div>
+      <div class="var-irf-sub-title">
+        <span style="width:8px;height:8px;border-radius:2px;display:inline-block;background:${clr.main}"></span>
+        Шок в: ${r.labels[shockKey]}
+      </div>
+      <table class="var-irf-tbl">
+        <thead><tr><th>Гор.</th>`;
+    r.keys.forEach(k => { tbl += `<th>${VAR_SHORT[k]}</th>`; });
+    tbl += '</tr></thead><tbody>';
+    for (let h = 1; h <= maxH; h++) {
+      tbl += `<tr><td>t+${h}</td>`;
+      r.irf[j][h].forEach(v => {
+        const col = v > 0.05 ? '#15803d' : v < -0.05 ? '#dc2626' : 'var(--text3)';
+        tbl += `<td style="color:${col};font-weight:${Math.abs(v) > 0.05 ? 700 : 400}">${v > 0 ? '+' : ''}${v}</td>`;
+      });
+      tbl += '</tr>';
+    }
+    tbl += '</tbody></table></div>';
+    return tbl;
+  }).join('');
+
+  // ── Интерпретация ───────────────────────────────────────────────────────
+  document.getElementById('varInterpretation').textContent = r.interpretation;
 }
 
 // ============================================================
