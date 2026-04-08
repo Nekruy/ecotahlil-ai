@@ -269,6 +269,31 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/stress-test
+  if (req.method === 'POST' && req.url === '/api/stress-test') {
+    try {
+      const body = await readBody(req);
+      const { scenario, params } = JSON.parse(body.toString('utf8'));
+
+      if (!scenario || !params) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Необходимо указать scenario и params' }));
+      }
+
+      const { runStressTest } = require('./stressTest');
+      const result = runStressTest(scenario, params);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/stress-test]', err.message);
+      const code = /Неизвестный сценарий/i.test(err.message) ? 400 : 500;
+      res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/garch
   if (req.method === 'POST' && req.url === '/api/garch') {
     try {

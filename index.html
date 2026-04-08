@@ -1041,6 +1041,239 @@ footer b { color:#fff; }
   header { padding:10px 14px; }
   .header-title { font-size:14px; }
 }
+
+/* ============================================================
+   СТРАНИЦА 5 — СТРЕСС-ТЕСТ
+============================================================ */
+.st-header {
+  background: linear-gradient(135deg, #1a0533 0%, #2d0a4e 50%, #1a0533 100%);
+  padding:28px 28px 24px; color:#fff;
+}
+.st-header h1 { font-size:22px; font-weight:800; margin-bottom:6px; }
+.st-header p  { font-size:13px; color:rgba(255,255,255,.65); }
+.st-header-badges { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.ab-violet { background:rgba(167,139,250,.2); border:1px solid rgba(167,139,250,.4); color:#c4b5fd; }
+.ab-orange { background:rgba(251,146,60,.15); border:1px solid rgba(251,146,60,.35); color:#fdba74; }
+.ab-red    { background:rgba(248,113,113,.15); border:1px solid rgba(248,113,113,.35); color:#fca5a5; }
+
+/* Карточки сценариев */
+.st-scenarios-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:14px; padding:20px 24px;
+}
+.st-scenario-card {
+  background:var(--white);
+  border:2px solid var(--border);
+  border-radius:12px;
+  padding:18px 16px;
+  cursor:pointer;
+  transition:all .2s;
+  box-shadow:var(--shadow);
+}
+.st-scenario-card:hover { border-color:var(--navy2); transform:translateY(-2px); box-shadow:var(--shadow2); }
+.st-scenario-card.active {
+  border-color:var(--navy2);
+  background:var(--navy-pale);
+  box-shadow: 0 0 0 3px rgba(0,80,179,.12);
+}
+.st-sc-icon { font-size:36px; text-align:center; margin-bottom:10px; }
+.st-sc-title { font-size:14px; font-weight:800; color:var(--navy); text-align:center; margin-bottom:6px; }
+.st-sc-desc  { font-size:11px; color:var(--text3); text-align:center; line-height:1.5; }
+
+/* Панель параметров */
+.st-params-panel {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin:0 24px 20px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  display:none;
+}
+.st-params-panel.visible { display:block; animation:fadeIn .3s ease; }
+.st-params-title {
+  font-size:14px; font-weight:800; color:var(--navy);
+  margin-bottom:16px; display:flex; align-items:center; gap:8px;
+}
+.st-param-group { margin-bottom:16px; }
+.st-param-label {
+  font-size:12px; font-weight:700; color:var(--navy2);
+  text-transform:uppercase; letter-spacing:.5px;
+  margin-bottom:8px; display:flex; justify-content:space-between;
+}
+.st-param-value {
+  font-size:18px; font-weight:800; color:var(--navy);
+}
+.st-slider {
+  width:100%; height:6px;
+  -webkit-appearance:none; appearance:none;
+  background:linear-gradient(to right, var(--navy2) 0%, var(--navy2) 50%, var(--border) 50%);
+  border-radius:3px; outline:none;
+  cursor:pointer;
+}
+.st-slider::-webkit-slider-thumb {
+  -webkit-appearance:none; appearance:none;
+  width:18px; height:18px;
+  border-radius:50%; background:var(--navy2);
+  cursor:pointer; box-shadow:0 2px 6px rgba(0,80,179,.3);
+}
+.st-presets { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+.st-preset-btn {
+  padding:4px 12px; border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--bg); cursor:pointer;
+  font-size:11px; font-weight:700; color:var(--text2);
+  transition:all .15s;
+}
+.st-preset-btn:hover { border-color:var(--navy2); color:var(--navy2); }
+
+.st-run-btn {
+  width:100%;
+  background:linear-gradient(135deg, #2d0a4e 0%, #4c1d95 100%);
+  color:#fff; border:none; border-radius:8px;
+  padding:14px; font-size:14px; font-weight:800;
+  cursor:pointer; letter-spacing:.5px;
+  transition:all .2s; margin-top:4px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.st-run-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 20px rgba(76,29,149,.4); }
+.st-run-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+
+/* Дашборд результатов */
+.st-dashboard {
+  display:none;
+  animation:fadeIn .4s ease;
+  padding:0 24px 24px;
+}
+.st-dashboard.visible { display:block; }
+
+.st-risk-banner {
+  padding:14px 20px;
+  border-radius:10px;
+  margin-bottom:16px;
+  display:flex; align-items:center; gap:12px;
+  font-size:14px; font-weight:700;
+}
+.risk-low      { background:#f0fdf4; border:1px solid #86efac; color:#15803d; }
+.risk-moderate { background:#fffbeb; border:1px solid #fcd34d; color:#92400e; }
+.risk-high     { background:#fff5f5; border:1px solid #fca5a5; color:#c0392b; }
+.risk-critical { background:#1a0000; border:1px solid #ef4444; color:#fca5a5; }
+
+.st-kpi-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:12px; margin-bottom:16px;
+}
+.st-kpi-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px 16px;
+  box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
+}
+.st-kpi-card::before {
+  content:''; position:absolute;
+  top:0; left:0; width:4px; height:100%;
+}
+.kpi-neg::before   { background:var(--red); }
+.kpi-pos::before   { background:var(--green); }
+.kpi-warn::before  { background:var(--gold2); }
+.kpi-info::before  { background:var(--navy2); }
+.st-kpi-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.st-kpi-val   { font-size:24px; font-weight:800; }
+.st-kpi-sub   { font-size:11px; color:var(--text3); margin-top:3px; }
+.kpi-red   { color:var(--red); }
+.kpi-green { color:var(--green); }
+.kpi-gold  { color:var(--gold2); }
+.kpi-navy  { color:var(--navy2); }
+
+/* Нижняя секция: график + регионы */
+.st-bottom-row {
+  display:grid; grid-template-columns:1.5fr 1fr;
+  gap:14px; margin-bottom:16px;
+}
+.st-card {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+  box-shadow:var(--shadow);
+}
+.st-card-title {
+  font-size:13px; font-weight:700; color:var(--navy);
+  margin-bottom:14px; display:flex; align-items:center; gap:6px;
+}
+
+/* Региональная карта */
+.st-region-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:8px; margin-top:4px;
+}
+.st-region-item {
+  padding:10px 12px; border-radius:8px;
+  border:1px solid var(--border);
+  display:flex; flex-direction:column; gap:4px;
+}
+.st-region-name  { font-size:12px; font-weight:700; color:var(--navy); }
+.st-region-val   { font-size:18px; font-weight:800; }
+.st-region-badge {
+  font-size:10px; font-weight:700;
+  padding:2px 7px; border-radius:20px;
+  display:inline-block; margin-top:2px;
+}
+.rb-low      { background:#f0fdf4; color:#15803d; }
+.rb-moderate { background:#fffbeb; color:#92400e; }
+.rb-high     { background:#fff5f5; color:#c0392b; }
+.rb-critical { background:#1a0000; color:#fca5a5; }
+
+/* Рекомендации */
+.st-recs-section { margin-bottom:0; }
+.st-rec-item {
+  display:flex; gap:10px; align-items:flex-start;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px; color:var(--text); line-height:1.5;
+}
+.st-rec-item:last-child { border-bottom:none; }
+.st-rec-num {
+  min-width:22px; height:22px;
+  background:var(--navy2); color:#fff;
+  border-radius:50%; font-size:11px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+
+/* Прелоадер */
+.st-loading {
+  display:none; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:48px 24px; text-align:center;
+}
+.st-loading.visible { display:flex; }
+.st-loader {
+  width:52px; height:52px;
+  border:4px solid var(--navy-pale);
+  border-top-color:#4c1d95;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-bottom:18px;
+}
+.st-load-title { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+.st-load-sub   { font-size:12px; color:var(--text3); }
+
+/* Плейсхолдер (до запуска теста) */
+.st-placeholder {
+  text-align:center; padding:40px 24px;
+  color:var(--text3);
+}
+.st-placeholder-icon { font-size:56px; margin-bottom:14px; }
+.st-placeholder-title { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+
+@media(max-width:900px){
+  .st-scenarios-grid { grid-template-columns:1fr 1fr; }
+  .st-kpi-grid { grid-template-columns:1fr 1fr; }
+  .st-bottom-row { grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
@@ -1095,6 +1328,9 @@ footer b { color:#fff; }
   </button>
   <button class="nav-tab" onclick="showPage('data',this)">
     📡 Данные
+  </button>
+  <button class="nav-tab" onclick="showPage('stress',this)">
+    ⚠️ Стресс-тест
   </button>
   <a class="nav-tab" href="/report" style="text-decoration:none">
     📝 Отчёт по ценам
@@ -1944,6 +2180,232 @@ footer b { color:#fff; }
     <span>n8n Cloud</span>
   </div>
 </footer>
+
+<!-- ============================================================
+   СТРАНИЦА 5 — СТРЕСС-ТЕСТ
+============================================================ -->
+<div class="page" id="page-stress">
+
+  <div class="st-header">
+    <h1>⚠️ Стресс-тестирование экономики Таджикистана</h1>
+    <p>Моделирование макроэкономических шоков и их каскадного влияния на ключевые показатели</p>
+    <div class="st-header-badges">
+      <span class="ai-badge2 ab-violet">🔬 4 сценария шоков</span>
+      <span class="ai-badge2 ab-orange">🗺️ Региональный анализ</span>
+      <span class="ai-badge2 ab-red">📋 Рекомендации для руководства</span>
+      <span class="ai-badge2 ab-green">📅 Квартальный прогноз</span>
+    </div>
+  </div>
+
+  <!-- Карточки сценариев -->
+  <div class="st-scenarios-grid">
+    <div class="st-scenario-card active" id="stCard-oil" onclick="stSelectScenario('oil')">
+      <div class="st-sc-icon">🛢️</div>
+      <div class="st-sc-title">Падение нефти</div>
+      <div class="st-sc-desc">Снижение нефтяных цен → замедление РФ → сокращение переводов мигрантов → ослабление TJS</div>
+    </div>
+    <div class="st-scenario-card" id="stCard-remittances" onclick="stSelectScenario('remittances')">
+      <div class="st-sc-icon">💸</div>
+      <div class="st-sc-title">Ограничение переводов</div>
+      <div class="st-sc-desc">Санкции или ограничения на переводы из России → дефицит валюты → инфляция → падение ВВП</div>
+    </div>
+    <div class="st-scenario-card" id="stCard-crop" onclick="stSelectScenario('crop')">
+      <div class="st-sc-icon">🌾</div>
+      <div class="st-sc-title">Неурожай</div>
+      <div class="st-sc-desc">Засуха или иные факторы → рост импорта зерна → продовольственная инфляция по регионам</div>
+    </div>
+    <div class="st-scenario-card" id="stCard-hydro" onclick="stSelectScenario('hydro')">
+      <div class="st-sc-icon">💧</div>
+      <div class="st-sc-title">Гидроэнергетический кризис</div>
+      <div class="st-sc-desc">Снижение уровня рек → дефицит электроэнергии → остановка ТАЛКО → падение промышленности</div>
+    </div>
+  </div>
+
+  <!-- Панель параметров: Нефть -->
+  <div class="st-params-panel visible" id="stParams-oil">
+    <div class="st-params-title">🛢️ Параметры сценария: Падение цены нефти</div>
+    <div class="st-param-group">
+      <div class="st-param-label">
+        <span>Цена нефти (Brent, $/барр.)</span>
+        <span class="st-param-value" id="stVal-oilPrice">$40</span>
+      </div>
+      <input type="range" class="st-slider" id="stSlider-oilPrice" min="20" max="50" step="5" value="40"
+        oninput="stUpdateSlider('oilPrice', this.value, '$', '')">
+      <div class="st-presets">
+        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',20,'$','')">$20 — кризис</button>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',30,'$','')">$30 — низкий</button>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',40,'$','')">$40 — умеренный</button>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',50,'$','')">$50 — базовый</button>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+        📌 Базовая цена нефти: <b>$70/барр.</b> &nbsp;|&nbsp; Переводы мигрантов: <b>~$3.45 млрд (~30% ВВП)</b> &nbsp;|&nbsp; Коэффициенты: кризис 2015–2016
+      </div>
+    </div>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+  </div>
+
+  <!-- Панель параметров: Переводы -->
+  <div class="st-params-panel" id="stParams-remittances">
+    <div class="st-params-title">💸 Параметры сценария: Ограничение переводов из России</div>
+    <div class="st-param-group">
+      <div class="st-param-label">
+        <span>Ограничение переводов</span>
+        <span class="st-param-value" id="stVal-restrictionPct">50%</span>
+      </div>
+      <input type="range" class="st-slider" id="stSlider-restrictionPct" min="25" max="100" step="25" value="50"
+        oninput="stUpdateSlider('restrictionPct', this.value, '', '%')">
+      <div class="st-presets">
+        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',25,'','%')">25% — частичный</button>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',50,'','%')">50% — половина</button>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',75,'','%')">75% — критичный</button>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',100,'','%')">100% — полная блокада</button>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+        📌 Переводы = <b>30% ВВП Таджикистана</b> &nbsp;|&nbsp; Объём: <b>~$3.45 млрд/год</b> &nbsp;|&nbsp; ~95% переводов поступают из России
+      </div>
+    </div>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+  </div>
+
+  <!-- Панель параметров: Урожай -->
+  <div class="st-params-panel" id="stParams-crop">
+    <div class="st-params-title">🌾 Параметры сценария: Неурожай</div>
+    <div class="st-param-group">
+      <div class="st-param-label">
+        <span>Падение урожая</span>
+        <span class="st-param-value" id="stVal-cropFailurePct">30%</span>
+      </div>
+      <input type="range" class="st-slider" id="stSlider-cropFailurePct" min="20" max="50" step="10" value="30"
+        oninput="stUpdateSlider('cropFailurePct', this.value, '', '%')">
+      <div class="st-presets">
+        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',20,'','%')">20% — засуха</button>
+        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',30,'','%')">30% — сильная засуха</button>
+        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',50,'','%')">50% — катастрофа</button>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+        📌 С/х = <b>~20% ВВП</b> &nbsp;|&nbsp; Продовольственная корзина = <b>~45% ИПЦ</b> &nbsp;|&nbsp; Импорт зерна: <b>~$150–200 млн/год</b>
+      </div>
+    </div>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+  </div>
+
+  <!-- Панель параметров: Гидро -->
+  <div class="st-params-panel" id="stParams-hydro">
+    <div class="st-params-title">💧 Параметры сценария: Гидроэнергетический кризис</div>
+    <div class="st-param-group">
+      <div class="st-param-label">
+        <span>Падение уровня воды в реках</span>
+        <span class="st-param-value" id="stVal-waterDropPct">20%</span>
+      </div>
+      <input type="range" class="st-slider" id="stSlider-waterDropPct" min="10" max="50" step="10" value="20"
+        oninput="stUpdateSlider('waterDropPct', this.value, '', '%')">
+      <div class="st-presets">
+        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',10,'','%')">10% — умеренный</button>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',20,'','%')">20% — значительный</button>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',30,'','%')">30% — критичный</button>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',50,'','%')">50% — катастрофа</button>
+      </div>
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+        📌 98% электроэнергии — ГЭС &nbsp;|&nbsp; Экспорт э/э: <b>$300 млн/год</b> &nbsp;|&nbsp; ТАЛКО: <b>15% экспорта страны</b> &nbsp;|&nbsp; 10%↓ воды = 8%↓ э/э = 1.5%↓ ВВП
+      </div>
+    </div>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+  </div>
+
+  <!-- Лоадер -->
+  <div class="st-loading" id="stLoading">
+    <div class="st-loader"></div>
+    <div class="st-load-title">Вычисление сценария...</div>
+    <div class="st-load-sub">Анализ каскадных эффектов по всем секторам экономики</div>
+  </div>
+
+  <!-- Дашборд результатов -->
+  <div class="st-dashboard" id="stDashboard">
+
+    <!-- Баннер уровня риска -->
+    <div id="stRiskBanner" class="st-risk-banner risk-high">
+      <span id="stRiskIcon" style="font-size:24px;">⚠️</span>
+      <div>
+        <div id="stRiskTitle" style="font-size:16px;font-weight:800;">Высокий уровень риска</div>
+        <div id="stRiskDesc" style="font-size:12px;font-weight:400;margin-top:2px;opacity:.85;"></div>
+      </div>
+    </div>
+
+    <!-- 6 KPI карточек -->
+    <div class="st-kpi-grid">
+      <div class="st-kpi-card kpi-neg" id="kpiGDP">
+        <div class="st-kpi-label">📉 Изменение ВВП</div>
+        <div class="st-kpi-val kpi-red" id="kpiGDPVal">—</div>
+        <div class="st-kpi-sub">п.п. к базовому сценарию</div>
+      </div>
+      <div class="st-kpi-card kpi-warn" id="kpiInflation">
+        <div class="st-kpi-label">📊 Рост инфляции</div>
+        <div class="st-kpi-val kpi-gold" id="kpiInflationVal">—</div>
+        <div class="st-kpi-sub">доп. п.п. к текущей инфляции</div>
+      </div>
+      <div class="st-kpi-card kpi-neg" id="kpiExchange">
+        <div class="st-kpi-label">💱 Курс TJS/USD</div>
+        <div class="st-kpi-val kpi-red" id="kpiExchangeVal">—</div>
+        <div class="st-kpi-sub">% изменение (–= ослабление TJS)</div>
+      </div>
+      <div class="st-kpi-card kpi-neg" id="kpiRemittances">
+        <div class="st-kpi-label">💸 Переводы мигрантов</div>
+        <div class="st-kpi-val kpi-red" id="kpiRemittancesVal">—</div>
+        <div class="st-kpi-sub">% изменение</div>
+      </div>
+      <div class="st-kpi-card kpi-info" id="kpiReserves">
+        <div class="st-kpi-label">🏦 Резервы НБТ</div>
+        <div class="st-kpi-val kpi-navy" id="kpiReservesVal">—</div>
+        <div class="st-kpi-sub">% изменение</div>
+      </div>
+      <div class="st-kpi-card kpi-warn" id="kpiElectricity">
+        <div class="st-kpi-label">⚡ Дефицит электроэнергии</div>
+        <div class="st-kpi-val kpi-gold" id="kpiElectricityVal">—</div>
+        <div class="st-kpi-sub">% от нормальной выработки</div>
+      </div>
+    </div>
+
+    <!-- Нижняя строка: квартальный график + регионы -->
+    <div class="st-bottom-row">
+
+      <!-- Квартальный график -->
+      <div class="st-card">
+        <div class="st-card-title">📈 Динамика кризиса по кварталам</div>
+        <div style="height:220px;position:relative;">
+          <canvas id="stTimelineChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Региональная карта -->
+      <div class="st-card">
+        <div class="st-card-title">🗺️ Региональный эффект (% изм. ВВП)</div>
+        <div class="st-region-grid" id="stRegionGrid"></div>
+      </div>
+
+    </div>
+
+    <!-- Рекомендации -->
+    <div class="st-card st-recs-section">
+      <div class="st-card-title">📋 Рекомендации для руководства</div>
+      <div id="stRecommendations"></div>
+    </div>
+
+  </div>
+
+  <!-- Плейсхолдер (до первого запуска) -->
+  <div class="st-placeholder" id="stPlaceholder">
+    <div class="st-placeholder-icon">🔬</div>
+    <div class="st-placeholder-title">Выберите сценарий и настройте параметры</div>
+    <p style="font-size:13px;max-width:420px;margin:8px auto 0;line-height:1.6;">
+      Стресс-тест смоделирует каскадные экономические эффекты выбранного шока и покажет его влияние на ВВП, инфляцию, курс TJS, переводы и резервы НБТ по регионам страны.
+    </p>
+  </div>
+
+</div>
 
 <script>
 // ============================================================
@@ -3195,6 +3657,266 @@ function renderGarch(r) {
             font: { size: 10 },
           },
         },
+      },
+    },
+  });
+}
+
+// ============================================================
+// СТРЕСС-ТЕСТ
+// ============================================================
+let stCurrentScenario = 'oil';
+let stTimelineChartInst = null;
+
+function stSelectScenario(name) {
+  stCurrentScenario = name;
+
+  // Сбросить активные карточки
+  document.querySelectorAll('.st-scenario-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('stCard-' + name).classList.add('active');
+
+  // Показать нужную панель параметров
+  document.querySelectorAll('.st-params-panel').forEach(p => {
+    p.classList.remove('visible');
+  });
+  document.getElementById('stParams-' + name).classList.add('visible');
+
+  // Скрыть дашборд и показать плейсхолдер
+  document.getElementById('stDashboard').classList.remove('visible');
+  document.getElementById('stLoading').classList.remove('visible');
+  document.getElementById('stPlaceholder').style.display = 'block';
+}
+
+function stUpdateSlider(key, val, prefix, suffix) {
+  document.getElementById('stVal-' + key).textContent = prefix + val + suffix;
+  // Обновить градиент слайдера
+  const slider = document.getElementById('stSlider-' + key);
+  const min = parseFloat(slider.min), max = parseFloat(slider.max), v = parseFloat(val);
+  const pct = ((v - min) / (max - min)) * 100;
+  slider.style.background = `linear-gradient(to right, var(--navy2) 0%, var(--navy2) ${pct}%, var(--border) ${pct}%)`;
+}
+
+function stSetSlider(key, val, prefix, suffix) {
+  const slider = document.getElementById('stSlider-' + key);
+  slider.value = val;
+  stUpdateSlider(key, val, prefix, suffix);
+}
+
+function stGetParams() {
+  const p = {};
+  switch (stCurrentScenario) {
+    case 'oil':
+      p.oilPrice = parseFloat(document.getElementById('stSlider-oilPrice').value);
+      break;
+    case 'remittances':
+      p.restrictionPct = parseFloat(document.getElementById('stSlider-restrictionPct').value);
+      break;
+    case 'crop':
+      p.cropFailurePct = parseFloat(document.getElementById('stSlider-cropFailurePct').value);
+      break;
+    case 'hydro':
+      p.waterDropPct = parseFloat(document.getElementById('stSlider-waterDropPct').value);
+      break;
+  }
+  return p;
+}
+
+async function stRunTest() {
+  // Скрыть плейсхолдер и дашборд, показать лоадер
+  document.getElementById('stPlaceholder').style.display = 'none';
+  document.getElementById('stDashboard').classList.remove('visible');
+  document.getElementById('stLoading').classList.add('visible');
+
+  const params = stGetParams();
+
+  try {
+    const res = await fetch('/api/stress-test', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ scenario: stCurrentScenario, params }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Ошибка сервера' }));
+      throw new Error(err.error || 'Ошибка сервера');
+    }
+    const data = await res.json();
+    stRenderDashboard(data);
+  } catch (e) {
+    alert('Ошибка стресс-теста: ' + e.message);
+    document.getElementById('stLoading').classList.remove('visible');
+    document.getElementById('stPlaceholder').style.display = 'block';
+  }
+}
+
+const ST_RISK_CFG = {
+  низкий:      { cls: 'risk-low',      icon: '✅', title: 'Низкий уровень риска',      desc: 'Экономика способна абсорбировать шок без критических последствий' },
+  умеренный:   { cls: 'risk-moderate', icon: '⚠️', title: 'Умеренный уровень риска',   desc: 'Требуется реакция политики — превентивные меры смягчат последствия' },
+  высокий:     { cls: 'risk-high',     icon: '🔴', title: 'Высокий уровень риска',     desc: 'Необходимы срочные антикризисные меры для предотвращения рецессии' },
+  критический: { cls: 'risk-critical', icon: '🚨', title: 'Критический уровень риска', desc: 'Системный кризис — требуется экстренная мобилизация всех ресурсов' },
+};
+
+const ST_REGION_RISK = { низкий: 'rb-low', умеренный: 'rb-moderate', высокий: 'rb-high', критический: 'rb-critical' };
+
+function stRegionRisk(gdpChg) {
+  const a = Math.abs(gdpChg);
+  if (a < 2) return { level: 'низкий', cls: 'rb-low' };
+  if (a < 5) return { level: 'умеренный', cls: 'rb-moderate' };
+  if (a < 10) return { level: 'высокий', cls: 'rb-high' };
+  return { level: 'критический', cls: 'rb-critical' };
+}
+
+function stFmtPct(v, showPlus) {
+  if (v === 0) return '0%';
+  const s = v > 0 && showPlus ? '+' : '';
+  return s + v.toFixed(2) + '%';
+}
+
+function stFmtPp(v) {
+  if (v === 0) return '0 п.п.';
+  const s = v > 0 ? '+' : '';
+  return s + v.toFixed(2) + ' п.п.';
+}
+
+function stRenderDashboard(d) {
+  document.getElementById('stLoading').classList.remove('visible');
+
+  // Риск
+  const rc = ST_RISK_CFG[d.riskLevel] || ST_RISK_CFG['умеренный'];
+  const banner = document.getElementById('stRiskBanner');
+  banner.className = 'st-risk-banner ' + rc.cls;
+  document.getElementById('stRiskIcon').textContent  = rc.icon;
+  document.getElementById('stRiskTitle').textContent = rc.title;
+  document.getElementById('stRiskDesc').textContent  = rc.desc + '  |  Сценарий: ' + d.scenarioName;
+
+  // KPI
+  document.getElementById('kpiGDPVal').textContent         = stFmtPp(d.gdpChange);
+  document.getElementById('kpiInflationVal').textContent   = stFmtPp(d.inflationChange);
+  document.getElementById('kpiExchangeVal').textContent    = stFmtPct(d.exchangeRateChange, true);
+  document.getElementById('kpiRemittancesVal').textContent = stFmtPct(d.remittancesChange, true);
+  document.getElementById('kpiReservesVal').textContent    = stFmtPct(d.reservesChange, true);
+  document.getElementById('kpiElectricityVal').textContent = d.electricityDeficit > 0
+    ? stFmtPct(d.electricityDeficit, false) : '—';
+
+  // Цвета KPI по знаку
+  const gdpEl = document.getElementById('kpiGDPVal');
+  gdpEl.className = 'st-kpi-val ' + (d.gdpChange < 0 ? 'kpi-red' : 'kpi-green');
+  const exchEl = document.getElementById('kpiExchangeVal');
+  exchEl.className = 'st-kpi-val ' + (d.exchangeRateChange < 0 ? 'kpi-red' : 'kpi-green');
+  const remEl = document.getElementById('kpiRemittancesVal');
+  remEl.className = 'st-kpi-val ' + (d.remittancesChange < 0 ? 'kpi-red' : 'kpi-green');
+  const resEl = document.getElementById('kpiReservesVal');
+  resEl.className = 'st-kpi-val ' + (d.reservesChange < 0 ? 'kpi-red' : 'kpi-green');
+
+  // Квартальный график
+  stRenderTimeline(d.timeline, d.scenario);
+
+  // Регионы
+  const regionGrid = document.getElementById('stRegionGrid');
+  regionGrid.innerHTML = '';
+  const regions = d.regionalImpact || {};
+  const regionIcons = { 'Душанбе': '🏙️', 'Согд': '🏭', 'Хатлон': '🌾', 'ГБАО': '⛰️', 'РРП': '🏡' };
+  Object.entries(regions).forEach(([reg, val]) => {
+    const rr = stRegionRisk(val);
+    regionGrid.innerHTML += `
+      <div class="st-region-item">
+        <div class="st-region-name">${regionIcons[reg] || '📍'} ${reg}</div>
+        <div class="st-region-val ${val < 0 ? 'kpi-red' : 'kpi-green'}">${stFmtPp(val)}</div>
+        <span class="st-region-badge ${rr.cls}">${rr.level}</span>
+      </div>`;
+  });
+
+  // Рекомендации
+  const recsEl = document.getElementById('stRecommendations');
+  recsEl.innerHTML = (d.recommendations || []).map((r, i) => `
+    <div class="st-rec-item">
+      <div class="st-rec-num">${i + 1}</div>
+      <div>${r}</div>
+    </div>`).join('');
+
+  document.getElementById('stDashboard').classList.add('visible');
+}
+
+function stRenderTimeline(timeline, scenario) {
+  const ctx = document.getElementById('stTimelineChart').getContext('2d');
+  if (stTimelineChartInst) { stTimelineChartInst.destroy(); stTimelineChartInst = null; }
+
+  const labels = timeline.map(t => t.quarter);
+  const gdpData = timeline.map(t => t.gdpChange);
+  const inflData = timeline.map(t => t.inflationChange);
+
+  const datasets = [
+    {
+      label: 'ВВП (п.п.)',
+      data: gdpData,
+      borderColor: '#c0392b',
+      backgroundColor: 'rgba(192,57,43,.12)',
+      fill: true,
+      tension: 0.35,
+      pointRadius: 5,
+      pointBackgroundColor: '#c0392b',
+      yAxisID: 'y',
+    },
+    {
+      label: 'Инфляция (п.п.)',
+      data: inflData,
+      borderColor: '#f59e0b',
+      backgroundColor: 'rgba(245,158,11,.10)',
+      fill: true,
+      tension: 0.35,
+      pointRadius: 5,
+      pointBackgroundColor: '#f59e0b',
+      yAxisID: 'y',
+    },
+  ];
+
+  // Для гидро добавим дефицит э/э
+  if (scenario === 'hydro') {
+    datasets.push({
+      label: 'Дефицит э/э (%)',
+      data: timeline.map(t => t.electricityDeficit || 0),
+      borderColor: '#3b82f6',
+      backgroundColor: 'rgba(59,130,246,.08)',
+      fill: false,
+      tension: 0.35,
+      pointRadius: 5,
+      pointBackgroundColor: '#3b82f6',
+      yAxisID: 'y2',
+    });
+  }
+
+  stTimelineChartInst = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { font: { size: 11 }, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const v = ctx.parsed.y;
+              const s = v > 0 ? '+' : '';
+              return ` ${ctx.dataset.label}: ${s}${v.toFixed(2)}`;
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          position: 'left',
+          title: { display: true, text: 'п.п.', font: { size: 11 } },
+          ticks: { font: { size: 10 }, callback: v => v.toFixed(1) },
+          grid: { color: 'rgba(0,0,0,.05)' },
+        },
+        y2: {
+          position: 'right',
+          display: scenario === 'hydro',
+          title: { display: true, text: '%', font: { size: 11 } },
+          ticks: { font: { size: 10 }, callback: v => v.toFixed(0) + '%' },
+          grid: { drawOnChartArea: false },
+        },
+        x: { ticks: { font: { size: 11 } }, grid: { color: 'rgba(0,0,0,.04)' } },
       },
     },
   });
