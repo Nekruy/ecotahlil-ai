@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вход — МЭРиТ РТ · Система мониторинга</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #001f4d 0%, #003580 40%, #004d99 70%, #0050b3 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 20px;
+  position: relative; overflow: hidden;
+}
+
+/* Фоновые декоративные кольца */
+body::before, body::after {
+  content: ''; position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,.03);
+}
+body::before { width: 600px; height: 600px; top: -200px; right: -200px; }
+body::after  { width: 400px; height: 400px; bottom: -150px; left: -150px; }
+
+/* ── Флаг Таджикистана ── */
+.tj-flag {
+  display: flex; width: 220px; height: 22px;
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  margin-bottom: 24px;
+}
+.flag-red   { background: #C41E3A; flex: 1; }
+.flag-white { background: #fff; flex: 1; display: flex; align-items: center; justify-content: center; }
+.flag-green { background: #009A44; flex: 1; }
+.flag-crown { color: #d4a017; font-size: 11px; letter-spacing: .5px; font-weight: 700; }
+
+/* ── Карточка входа ── */
+.card {
+  background: rgba(255,255,255,.97);
+  border-radius: 18px;
+  padding: 42px 44px 36px;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.30), 0 4px 16px rgba(0,0,0,.20);
+  position: relative; z-index: 1;
+  animation: slideUp .5s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes slideUp {
+  from { opacity:0; transform: translateY(24px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── Логотип ── */
+.logo-area {
+  text-align: center; margin-bottom: 28px;
+}
+.emblem {
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, #003580, #0050b3);
+  border-radius: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 32px; margin-bottom: 14px;
+  box-shadow: 0 4px 16px rgba(0,53,128,.30);
+}
+.ministry-name {
+  font-size: 10px; font-weight: 700; color: #003580;
+  text-transform: uppercase; letter-spacing: .8px;
+  margin-bottom: 4px; line-height: 1.5;
+}
+.system-name {
+  font-size: 17px; font-weight: 800; color: #003580;
+}
+.system-sub {
+  font-size: 12px; color: #718096; margin-top: 4px;
+}
+
+/* ── Разделитель ── */
+.divider {
+  height: 1px; background: #e2e8f0; margin: 24px 0 22px;
+}
+
+/* ── Форма ── */
+.form-group { margin-bottom: 18px; }
+.form-label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: #003580; text-transform: uppercase; letter-spacing: .5px;
+  margin-bottom: 7px;
+}
+.form-input {
+  width: 100%; padding: 13px 15px;
+  border: 2px solid #d0daea; border-radius: 10px;
+  font-size: 14px; color: #1a1a2e;
+  background: #f8faff; transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+.form-input:focus {
+  border-color: #0050b3;
+  box-shadow: 0 0 0 3px rgba(0,80,179,.12);
+  background: #fff;
+}
+.form-input::placeholder { color: #a0aec0; }
+
+/* ── Кнопка ── */
+.btn-login {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, #003580 0%, #0050b3 100%);
+  color: #fff; border: none; border-radius: 10px;
+  font-size: 15px; font-weight: 800; letter-spacing: .5px;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  margin-top: 8px;
+}
+.btn-login:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,53,128,.35);
+}
+.btn-login:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+
+/* ── Спиннер ── */
+.spinner {
+  width: 18px; height: 18px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Ошибка ── */
+.error-box {
+  padding: 11px 15px; border-radius: 8px;
+  background: #fee2e2; color: #c0392b;
+  border: 1px solid #fca5a5;
+  font-size: 13px; font-weight: 600;
+  display: none; margin-bottom: 16px;
+  align-items: center; gap: 8px;
+}
+.error-box.show { display: flex; animation: shake .3s; }
+
+@keyframes shake {
+  0%,100%{ transform:translateX(0) }
+  25%    { transform:translateX(-5px) }
+  75%    { transform:translateX(5px) }
+}
+
+/* ── Нижний блок ── */
+.card-footer {
+  text-align: center; font-size: 11px; color: #a0aec0;
+  margin-top: 24px; line-height: 1.6;
+}
+
+/* ── Внешний footer ── */
+.page-footer {
+  text-align: center; color: rgba(255,255,255,.5);
+  font-size: 11px; margin-top: 28px;
+  line-height: 1.8; position: relative; z-index: 1;
+}
+
+/* ── Декоративная линия флага под карточкой ── */
+.flag-strip {
+  width: 420px; max-width: 100%;
+  height: 5px; border-radius: 0 0 8px 8px;
+  background: linear-gradient(to right, #C41E3A 33.3%, #fff 33.3% 66.6%, #009A44 66.6%);
+  margin-top: -4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+</style>
+</head>
+<body>
+
+<!-- Флаг Таджикистана над карточкой -->
+<div class="tj-flag">
+  <div class="flag-red"></div>
+  <div class="flag-white"><span class="flag-crown">★</span></div>
+  <div class="flag-green"></div>
+</div>
+
+<!-- Карточка входа -->
+<div class="card">
+
+  <!-- Логотип -->
+  <div class="logo-area">
+    <div class="emblem">🏛️</div>
+    <div class="ministry-name">Министерство экономического развития и торговли<br>Республики Таджикистан</div>
+    <div class="system-name">Система мониторинга цен</div>
+    <div class="system-sub">Личный кабинет сотрудника</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Ошибка -->
+  <div class="error-box" id="errorBox">
+    <span>⚠️</span>
+    <span id="errorText">Неверный логин или пароль</span>
+  </div>
+
+  <!-- Форма -->
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label class="form-label" for="loginInput">Логин</label>
+      <input class="form-input" type="text" id="loginInput"
+        placeholder="Введите логин района" autocomplete="username" required>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="passwordInput">Пароль</label>
+      <input class="form-input" type="password" id="passwordInput"
+        placeholder="Введите пароль" autocomplete="current-password" required>
+    </div>
+
+    <button class="btn-login" type="submit" id="loginBtn">
+      <div class="spinner" id="spinner"></div>
+      <span id="btnText">🔐 Войти</span>
+    </button>
+  </form>
+
+  <div class="card-footer">
+    Доступ разрешён только уполномоченным сотрудникам МЭРиТ РТ
+  </div>
+</div>
+
+<!-- Декоративная полоса флага -->
+<div class="flag-strip"></div>
+
+<!-- Нижний footer -->
+<div class="page-footer">
+  Главное управление макроэкономического анализа, прогнозирования и экономических реформ<br>
+  МЭРиТ Республики Таджикистан · г. Душанбе · ⚡ EcotahlilAI v2.0
+</div>
+
+<script>
+async function handleLogin(e) {
+  e.preventDefault();
+  const btn     = document.getElementById('loginBtn');
+  const spinner = document.getElementById('spinner');
+  const btnText = document.getElementById('btnText');
+  const errBox  = document.getElementById('errorBox');
+  const errText = document.getElementById('errorText');
+
+  errBox.classList.remove('show');
+  btn.disabled = true;
+  spinner.style.display = 'block';
+  btnText.textContent   = 'Проверка...';
+
+  const login    = document.getElementById('loginInput').value.trim();
+  const password = document.getElementById('passwordInput').value;
+
+  try {
+    const resp = await fetch('/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login, password }),
+    });
+    const data = await resp.json();
+
+    if (!resp.ok || !data.ok) {
+      errText.textContent = data.error || 'Неверный логин или пароль';
+      errBox.classList.add('show');
+    } else {
+      // Сохранить токен в localStorage (cookie уже установлен сервером)
+      localStorage.setItem('medt_token', data.token);
+      localStorage.setItem('medt_user', JSON.stringify(data.user));
+      // Перенаправить в личный кабинет
+      window.location.href = '/dashboard';
+    }
+  } catch (err) {
+    errText.textContent = 'Ошибка соединения с сервером';
+    errBox.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    btnText.textContent = '🔐 Войти';
+  }
+}
+
+// Если уже авторизован — сразу перенаправить
+(async () => {
+  const token = localStorage.getItem('medt_token');
+  if (!token) return;
+  try {
+    const r = await fetch('/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (r.ok) window.location.href = '/dashboard';
+  } catch {}
+})();
+</script>
+</body>
+</html>

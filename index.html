@@ -1276,6 +1276,216 @@ footer b { color:#fff; }
 }
 
 /* ============================================================
+   СТРАНИЦА 6 — CGE МОДЕЛЬ
+============================================================ */
+.cge-header {
+  background: linear-gradient(135deg, #0a1a3a 0%, #003580 45%, #0a2a4a 100%);
+  padding:28px 28px 24px; color:#fff;
+}
+.cge-header h1 { font-size:22px; font-weight:800; margin-bottom:6px; }
+.cge-header p  { font-size:13px; color:rgba(255,255,255,.65); }
+.cge-header-badges { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+.ab-cyan  { background:rgba(6,182,212,.18); border:1px solid rgba(6,182,212,.4); color:#67e8f9; }
+.ab-emerald { background:rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); color:#6ee7b7; }
+.ab-sky   { background:rgba(56,189,248,.15); border:1px solid rgba(56,189,248,.35); color:#bae6fd; }
+.ab-blue  { background:rgba(99,179,237,.15); border:1px solid rgba(99,179,237,.35); color:#90cdf4; }
+.ai-badge2 {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:4px 12px; border-radius:20px; font-size:11px; font-weight:700;
+}
+
+/* Панель слайдеров */
+.cge-panel {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; margin:20px 24px; padding:22px 24px;
+  box-shadow:var(--shadow2);
+}
+.cge-panel-title {
+  font-size:15px; font-weight:800; color:var(--navy);
+  margin-bottom:18px; padding-bottom:12px;
+  border-bottom:2px solid var(--navy-pale);
+  display:flex; align-items:center; gap:8px;
+}
+.cge-sliders-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:18px 32px; margin-bottom:20px;
+}
+.cge-slider-group { display:flex; flex-direction:column; gap:6px; }
+.cge-slider-label {
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:12px; font-weight:700; color:var(--navy2);
+  text-transform:uppercase; letter-spacing:.4px;
+}
+.cge-slider-val {
+  font-size:18px; font-weight:800; color:var(--navy);
+  min-width:60px; text-align:right;
+}
+.cge-slider-val.pos { color:var(--green); }
+.cge-slider-val.neg { color:var(--red); }
+.cge-slider {
+  width:100%; height:6px;
+  -webkit-appearance:none; appearance:none;
+  border-radius:3px; outline:none; cursor:pointer;
+  background: linear-gradient(to right, var(--border) 0%, var(--border) 50%, var(--border) 100%);
+}
+.cge-slider::-webkit-slider-thumb {
+  -webkit-appearance:none; appearance:none;
+  width:18px; height:18px; border-radius:50%;
+  background:var(--navy2); cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,80,179,.3);
+}
+.cge-slider-minmax {
+  display:flex; justify-content:space-between;
+  font-size:10px; color:var(--text3);
+}
+.cge-run-btn {
+  width:100%;
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  color:#fff; border:none; border-radius:10px;
+  padding:15px; font-size:14px; font-weight:800;
+  cursor:pointer; letter-spacing:.5px;
+  transition:all .2s; margin-top:4px;
+  display:flex; align-items:center; justify-content:center; gap:9px;
+}
+.cge-run-btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 6px 22px rgba(0,53,128,.35); }
+.cge-run-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.cge-reset-btn {
+  padding:8px 18px; border-radius:8px;
+  border:2px solid var(--border); background:var(--bg);
+  font-size:12px; font-weight:700; color:var(--text2);
+  cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:6px;
+}
+.cge-reset-btn:hover { border-color:var(--navy2); color:var(--navy2); }
+.cge-btn-row { display:flex; gap:10px; align-items:center; }
+.cge-alert-box {
+  padding:11px 15px; border-radius:8px; font-size:13px; font-weight:600;
+  display:none; margin-bottom:12px;
+}
+.cge-alert-box.error { display:flex; background:#fee2e2; color:#c0392b; border:1px solid #fca5a5; }
+
+/* Дашборд результатов */
+.cge-dashboard {
+  padding:0 24px 28px;
+  display:none; animation:fadeIn .4s ease;
+}
+.cge-dashboard.visible { display:block; }
+
+.cge-kpi-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:12px; margin-bottom:16px;
+}
+.cge-kpi-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:10px; padding:14px 16px; box-shadow:var(--shadow);
+  position:relative; overflow:hidden;
+}
+.cge-kpi-card::before {
+  content:''; position:absolute; top:0; left:0; width:4px; height:100%;
+}
+.ck-blue::before   { background:var(--navy2); }
+.ck-green::before  { background:var(--green); }
+.ck-teal::before   { background:var(--teal); }
+.ck-red::before    { background:var(--red); }
+.ck-gold::before   { background:var(--gold2); }
+.ck-purple::before { background:#7c3aed; }
+.cge-kpi-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+.cge-kpi-val   { font-size:24px; font-weight:800; }
+.cge-kpi-sub   { font-size:11px; color:var(--text3); margin-top:3px; }
+.ckv-pos   { color:var(--green); }
+.ckv-neg   { color:var(--red); }
+.ckv-navy  { color:var(--navy2); }
+.ckv-gold  { color:var(--gold2); }
+.ckv-teal  { color:var(--teal); }
+.ckv-purple { color:#7c3aed; }
+
+/* График секторов */
+.cge-chart-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; box-shadow:var(--shadow2);
+  overflow:hidden; margin-bottom:16px;
+}
+.cge-card-head {
+  padding:14px 18px; background:var(--navy); color:#fff;
+  font-size:13px; font-weight:700;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.cge-card-body { padding:18px; }
+.cge-chart-wrap { height:300px; }
+
+/* Таблица победителей/проигравших */
+.cge-two-col {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:14px; margin-bottom:16px;
+}
+.cge-winners-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; padding:16px; box-shadow:var(--shadow);
+}
+.cge-wl-title {
+  font-size:13px; font-weight:800; margin-bottom:12px;
+  display:flex; align-items:center; gap:7px;
+}
+.cge-wl-title.win { color:var(--green); }
+.cge-wl-title.lose { color:var(--red); }
+.cge-wl-item {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 10px; border-radius:8px; margin-bottom:6px;
+  font-size:13px; font-weight:600;
+}
+.cge-wl-item.win  { background:#f0fdf4; color:var(--green); border:1px solid #bbf7d0; }
+.cge-wl-item.lose { background:#fff5f5; color:var(--red);   border:1px solid #fecaca; }
+.cge-wl-val { font-weight:800; font-size:14px; }
+.cge-empty-msg { font-size:12px; color:var(--text3); font-style:italic; padding:8px; }
+
+/* Блок интерпретации */
+.cge-interp-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:12px; box-shadow:var(--shadow2); overflow:hidden; margin-bottom:16px;
+}
+.cge-interp-head {
+  padding:14px 18px; background:linear-gradient(135deg, var(--teal), var(--teal2));
+  color:#fff; font-size:13px; font-weight:700;
+  display:flex; align-items:center; gap:8px;
+}
+.cge-interp-body {
+  padding:18px; font-size:13px; color:var(--text2); line-height:1.75;
+}
+.cge-interp-body b { color:var(--navy); }
+
+/* Плейсхолдер */
+.cge-placeholder {
+  text-align:center; padding:56px 24px; color:var(--text3);
+}
+.cge-placeholder-icon  { font-size:64px; margin-bottom:16px; }
+.cge-placeholder-title { font-size:17px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+.cge-placeholder-sub   { font-size:13px; color:var(--text3); max-width:400px; margin:0 auto; line-height:1.6; }
+
+/* Индикатор загрузки */
+.cge-loading {
+  display:none; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:48px 24px; text-align:center;
+}
+.cge-loading.visible { display:flex; }
+.cge-loader {
+  width:50px; height:50px;
+  border:4px solid var(--navy-pale);
+  border-top-color:var(--navy2);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin-bottom:16px;
+}
+
+@media(max-width:900px){
+  .cge-sliders-grid { grid-template-columns:1fr; }
+  .cge-kpi-grid { grid-template-columns:1fr 1fr; }
+  .cge-two-col { grid-template-columns:1fr; }
+}
+@media(max-width:600px){
+  .cge-kpi-grid { grid-template-columns:1fr 1fr; }
+}
+
+/* ============================================================
    ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ
 ============================================================ */
 .lang-switcher {
@@ -1359,6 +1569,9 @@ footer b { color:#fff; }
   </button>
   <button class="nav-tab" onclick="showPage('stress',this)">
     ⚠️ <span data-i18n="nav.stress">Стресс-тест</span>
+  </button>
+  <button class="nav-tab" onclick="showPage('cge',this)">
+    ⚖️ CGE Модель
   </button>
   <a class="nav-tab" href="/report" style="text-decoration:none">
     📝 <span data-i18n="nav.report">Отчёт по ценам</span>
@@ -4428,6 +4641,198 @@ function updateLangButtons(lang) {
   });
 }
 
+// ============================================================
+// CGE МОДЕЛЬ — JavaScript
+// ============================================================
+
+let cgeChart = null;
+
+function cgeUpdateSlider(id, val) {
+  const num = parseFloat(val);
+  const el = document.getElementById('cgeVal-' + id);
+  el.textContent = (num >= 0 ? '+' : '') + num + '%';
+  el.className = 'cge-slider-val' + (num > 0 ? ' pos' : num < 0 ? ' neg' : '');
+  // Обновить градиент слайдера
+  const slider = document.getElementById('cgeSlider-' + id);
+  const cfg = CGE_SLIDERS.find(s => s.id === id);
+  if (cfg) {
+    const pct = ((num - cfg.min) / (cfg.max - cfg.min)) * 100;
+    slider.style.background = `linear-gradient(to right, var(--navy2) 0%, var(--navy2) ${pct}%, var(--border) ${pct}%)`;
+  }
+}
+
+const CGE_SLIDERS = [
+  { id:'tax',    min:-5,   max:5,   step:0.5,  label:'Изменение налоговой ставки' },
+  { id:'wage',   min:-20,  max:20,  step:1,    label:'Изменение заработных плат' },
+  { id:'expPx',  min:-30,  max:30,  step:2,    label:'Изменение мировых цен на экспорт' },
+  { id:'remit',  min:-50,  max:50,  step:5,    label:'Изменение переводов мигрантов' },
+  { id:'gov',    min:-20,  max:20,  step:1,    label:'Изменение госрасходов' },
+];
+
+function cgeInit() {
+  CGE_SLIDERS.forEach(cfg => {
+    const slider = document.getElementById('cgeSlider-' + cfg.id);
+    if (slider) {
+      const pct = ((0 - cfg.min) / (cfg.max - cfg.min)) * 100;
+      slider.style.background = `linear-gradient(to right, var(--navy2) 0%, var(--navy2) ${pct}%, var(--border) ${pct}%)`;
+    }
+  });
+}
+
+function cgeReset() {
+  CGE_SLIDERS.forEach(cfg => {
+    const slider = document.getElementById('cgeSlider-' + cfg.id);
+    if (slider) { slider.value = 0; cgeUpdateSlider(cfg.id, 0); }
+  });
+  document.getElementById('cgeDashboard').classList.remove('visible');
+  document.getElementById('cgePlaceholder').style.display = '';
+  document.getElementById('cgeAlertBox').style.display = 'none';
+}
+
+async function cgeRun() {
+  const btn = document.getElementById('cgeRunBtn');
+  const alertBox = document.getElementById('cgeAlertBox');
+  alertBox.style.display = 'none';
+
+  const shock = {
+    tax_change:                  parseFloat(document.getElementById('cgeSlider-tax').value),
+    wage_change:                 parseFloat(document.getElementById('cgeSlider-wage').value),
+    export_price_change:         parseFloat(document.getElementById('cgeSlider-expPx').value),
+    remittances_change:          parseFloat(document.getElementById('cgeSlider-remit').value),
+    government_spending_change:  parseFloat(document.getElementById('cgeSlider-gov').value),
+  };
+
+  const allZero = Object.values(shock).every(v => v === 0);
+  if (allZero) {
+    alertBox.className = 'cge-alert-box error';
+    alertBox.style.display = 'flex';
+    alertBox.textContent = 'Задайте хотя бы один шок с помощью слайдеров.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="cge-loader" style="width:20px;height:20px;border-width:3px;margin:0"></span> Расчёт...';
+  document.getElementById('cgePlaceholder').style.display = 'none';
+  document.getElementById('cgeDashboard').classList.remove('visible');
+
+  try {
+    const resp = await fetch('/api/cge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(shock),
+    });
+    if (!resp.ok) { const e = await resp.json(); throw new Error(e.error || resp.statusText); }
+    const data = await resp.json();
+    cgeRenderDashboard(data, shock);
+  } catch (err) {
+    alertBox.className = 'cge-alert-box error';
+    alertBox.style.display = 'flex';
+    alertBox.textContent = 'Ошибка: ' + err.message;
+    document.getElementById('cgePlaceholder').style.display = '';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '⚖️ Рассчитать равновесие';
+  }
+}
+
+function cgeSign(v) { return v >= 0 ? '+' : ''; }
+
+function cgeKpiClass(v, positiveIsGood) {
+  if (v === 0) return 'ckv-navy';
+  if (positiveIsGood) return v > 0 ? 'ckv-pos' : 'ckv-neg';
+  return v > 0 ? 'ckv-neg' : 'ckv-pos'; // for inflation, positive is bad
+}
+
+function cgeRenderDashboard(d, shock) {
+  const fmt = v => (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+
+  // ─── 6 KPI карточек ──────────────────────────────────────────────────────
+  const kpis = [
+    { id:'kpi-gdp',    label:'ВВП',             val:d.gdp_change,               pos:true,  sub:'изменение реального ВВП', color:'ck-blue' },
+    { id:'kpi-hh',     label:'Доходы населения', val:d.household_income_change,  pos:true,  sub:'изменение доходов домохозяйств', color:'ck-green' },
+    { id:'kpi-emp',    label:'Занятость',        val:d.employment_change,        pos:true,  sub:'изменение совокупной занятости', color:'ck-teal' },
+    { id:'kpi-price',  label:'Уровень цен',      val:d.price_level_change,       pos:false, sub:'изменение ИПЦ', color:'ck-gold' },
+    { id:'kpi-export', label:'Экспорт',          val:d.export_change,            pos:true,  sub:'изменение экспорта', color:'ck-purple' },
+    { id:'kpi-govrev', label:'Гос. доходы',      val:d.government_revenue_change, pos:true, sub:'изменение налоговых поступлений', color:'ck-red' },
+  ];
+  kpis.forEach(k => {
+    const card = document.getElementById('cge-' + k.id.replace('kpi-', 'kpi-card-'));
+    if (!card) return;
+    card.className = 'cge-kpi-card ' + k.color;
+    card.innerHTML = `
+      <div class="cge-kpi-label">${k.label}</div>
+      <div class="cge-kpi-val ${cgeKpiClass(k.val, k.pos)}">${fmt(k.val)}</div>
+      <div class="cge-kpi-sub">${k.sub}</div>`;
+  });
+
+  // ─── Секторальный график ─────────────────────────────────────────────────
+  const sectorNames  = Object.keys(d.sector_impacts);
+  const sectorValues = Object.values(d.sector_impacts);
+  const barColors = sectorValues.map(v => v >= 0 ? 'rgba(26,122,60,0.82)' : 'rgba(192,57,43,0.82)');
+  const borderColors = sectorValues.map(v => v >= 0 ? '#1a7a3c' : '#c0392b');
+
+  const ctx = document.getElementById('cgeBarChart').getContext('2d');
+  if (cgeChart) cgeChart.destroy();
+  cgeChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sectorNames,
+      datasets: [{
+        label: 'Изменение выпуска (%)',
+        data: sectorValues,
+        backgroundColor: barColors,
+        borderColor: borderColors,
+        borderWidth: 1.5,
+        borderRadius: 4,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => (ctx.parsed.y >= 0 ? '+' : '') + ctx.parsed.y.toFixed(2) + '%',
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: { font: { size: 11 }, maxRotation: 35 },
+          grid: { display: false },
+        },
+        y: {
+          ticks: {
+            font: { size: 11 },
+            callback: v => (v >= 0 ? '+' : '') + v + '%',
+          },
+          grid: { color: 'rgba(0,0,0,.06)' },
+        },
+      },
+    },
+  });
+
+  // ─── Победители / Проигравшие ─────────────────────────────────────────────
+  const winnersEl = document.getElementById('cgeWinnersList');
+  const losersEl  = document.getElementById('cgeLoserssList');
+  winnersEl.innerHTML = d.winners.length
+    ? d.winners.map(name => `<div class="cge-wl-item win"><span>${name}</span><span class="cge-wl-val">${fmt(d.sector_impacts[name])}</span></div>`).join('')
+    : '<div class="cge-empty-msg">Нет выигравших секторов</div>';
+  losersEl.innerHTML = d.losers.length
+    ? d.losers.map(name => `<div class="cge-wl-item lose"><span>${name}</span><span class="cge-wl-val">${fmt(d.sector_impacts[name])}</span></div>`).join('')
+    : '<div class="cge-empty-msg">Нет пострадавших секторов</div>';
+
+  // ─── Интерпретация ────────────────────────────────────────────────────────
+  document.getElementById('cgeInterpText').innerHTML = d.interpretation;
+
+  // ─── Показываем дашборд ───────────────────────────────────────────────────
+  document.getElementById('cgeDashboard').classList.add('visible');
+  document.getElementById('cgeDashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Инициализация слайдеров при загрузке
+document.addEventListener('DOMContentLoaded', cgeInit);
+
 // Публичная функция переключения языка
 function setLanguage(lang) {
   if (!i18n[lang]) return;
@@ -4443,6 +4848,161 @@ function setLanguage(lang) {
   updateLangButtons(saved);
 })();
 </script>
+
+<!-- ============================================================
+   СТРАНИЦА 6 — CGE МОДЕЛЬ
+============================================================ -->
+<div class="page" id="page-cge">
+
+  <!-- Шапка -->
+  <div class="cge-header">
+    <h1>⚖️ Модель общего равновесия (CGE) — SAM Таджикистана 2019</h1>
+    <p>Симуляция макроэкономических шоков на основе матрицы социальных счетов · Функция Кобба-Дугласа · 10 секторов</p>
+    <div class="cge-header-badges">
+      <span class="ai-badge2 ab-cyan">📊 SAM 2019</span>
+      <span class="ai-badge2 ab-emerald">🏭 10 секторов</span>
+      <span class="ai-badge2 ab-sky">📐 Кобба-Дугласа</span>
+      <span class="ai-badge2 ab-blue">5 каналов передачи</span>
+    </div>
+  </div>
+
+  <!-- Панель параметров шока -->
+  <div class="cge-panel">
+    <div class="cge-panel-title">⚡ Задайте параметры шока</div>
+
+    <div id="cgeAlertBox" class="cge-alert-box"></div>
+
+    <div class="cge-sliders-grid">
+
+      <!-- Налоговая ставка -->
+      <div class="cge-slider-group">
+        <div class="cge-slider-label">
+          <span>💰 Изменение налоговой ставки</span>
+          <span class="cge-slider-val" id="cgeVal-tax">+0%</span>
+        </div>
+        <input type="range" class="cge-slider" id="cgeSlider-tax"
+          min="-5" max="5" step="0.5" value="0"
+          oninput="cgeUpdateSlider('tax', this.value)">
+        <div class="cge-slider-minmax"><span>−5%</span><span>0</span><span>+5%</span></div>
+      </div>
+
+      <!-- Заработные платы -->
+      <div class="cge-slider-group">
+        <div class="cge-slider-label">
+          <span>👷 Изменение заработных плат</span>
+          <span class="cge-slider-val" id="cgeVal-wage">+0%</span>
+        </div>
+        <input type="range" class="cge-slider" id="cgeSlider-wage"
+          min="-20" max="20" step="1" value="0"
+          oninput="cgeUpdateSlider('wage', this.value)">
+        <div class="cge-slider-minmax"><span>−20%</span><span>0</span><span>+20%</span></div>
+      </div>
+
+      <!-- Мировые цены на экспорт -->
+      <div class="cge-slider-group">
+        <div class="cge-slider-label">
+          <span>🌍 Мировые цены на экспорт</span>
+          <span class="cge-slider-val" id="cgeVal-expPx">+0%</span>
+        </div>
+        <input type="range" class="cge-slider" id="cgeSlider-expPx"
+          min="-30" max="30" step="2" value="0"
+          oninput="cgeUpdateSlider('expPx', this.value)">
+        <div class="cge-slider-minmax"><span>−30%</span><span>0</span><span>+30%</span></div>
+      </div>
+
+      <!-- Переводы мигрантов -->
+      <div class="cge-slider-group">
+        <div class="cge-slider-label">
+          <span>💸 Переводы мигрантов</span>
+          <span class="cge-slider-val" id="cgeVal-remit">+0%</span>
+        </div>
+        <input type="range" class="cge-slider" id="cgeSlider-remit"
+          min="-50" max="50" step="5" value="0"
+          oninput="cgeUpdateSlider('remit', this.value)">
+        <div class="cge-slider-minmax"><span>−50%</span><span>0</span><span>+50%</span></div>
+      </div>
+
+      <!-- Государственные расходы -->
+      <div class="cge-slider-group">
+        <div class="cge-slider-label">
+          <span>🏛️ Изменение госрасходов</span>
+          <span class="cge-slider-val" id="cgeVal-gov">+0%</span>
+        </div>
+        <input type="range" class="cge-slider" id="cgeSlider-gov"
+          min="-20" max="20" step="1" value="0"
+          oninput="cgeUpdateSlider('gov', this.value)">
+        <div class="cge-slider-minmax"><span>−20%</span><span>0</span><span>+20%</span></div>
+      </div>
+
+    </div>
+
+    <div class="cge-btn-row">
+      <button class="cge-run-btn" id="cgeRunBtn" onclick="cgeRun()" style="flex:1">
+        ⚖️ Рассчитать равновесие
+      </button>
+      <button class="cge-reset-btn" onclick="cgeReset()">↺ Сбросить</button>
+    </div>
+  </div>
+
+  <!-- Плейсхолдер -->
+  <div id="cgePlaceholder" class="cge-placeholder">
+    <div class="cge-placeholder-icon">⚖️</div>
+    <div class="cge-placeholder-title">Модель готова к расчёту</div>
+    <div class="cge-placeholder-sub">
+      Задайте параметры шока с помощью слайдеров выше и нажмите
+      «Рассчитать равновесие» для получения полного секторального анализа.
+    </div>
+  </div>
+
+  <!-- Дашборд результатов -->
+  <div class="cge-dashboard" id="cgeDashboard">
+
+    <!-- 6 KPI карточек -->
+    <div class="cge-kpi-grid">
+      <div class="cge-kpi-card ck-blue"  id="cge-kpi-card-gdp"></div>
+      <div class="cge-kpi-card ck-green" id="cge-kpi-card-hh"></div>
+      <div class="cge-kpi-card ck-teal"  id="cge-kpi-card-emp"></div>
+      <div class="cge-kpi-card ck-gold"  id="cge-kpi-card-price"></div>
+      <div class="cge-kpi-card ck-purple" id="cge-kpi-card-export"></div>
+      <div class="cge-kpi-card ck-red"   id="cge-kpi-card-govrev"></div>
+    </div>
+
+    <!-- Столбчатый график — 10 секторов -->
+    <div class="cge-chart-card">
+      <div class="cge-card-head">
+        📊 Влияние шока на выпуск по секторам (% изменение)
+        <span style="font-size:11px;font-weight:400;opacity:.75">SAM 2019 · Кобба-Дугласа</span>
+      </div>
+      <div class="cge-card-body">
+        <div class="cge-chart-wrap">
+          <canvas id="cgeBarChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Победители и проигравшие -->
+    <div class="cge-two-col">
+      <div class="cge-winners-card">
+        <div class="cge-wl-title win">✅ Сектора-выигравшие</div>
+        <div id="cgeWinnersList"></div>
+      </div>
+      <div class="cge-winners-card">
+        <div class="cge-wl-title lose">⚠️ Сектора-проигравшие</div>
+        <div id="cgeLoserssList"></div>
+      </div>
+    </div>
+
+    <!-- Интерпретация для руководства -->
+    <div class="cge-interp-card">
+      <div class="cge-interp-head">
+        🧠 Интерпретация результатов для руководства
+      </div>
+      <div class="cge-interp-body" id="cgeInterpText"></div>
+    </div>
+
+  </div>
+
+</div>
 
 </body>
 </html>

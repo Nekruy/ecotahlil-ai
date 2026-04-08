@@ -1,0 +1,25 @@
+[
+  {
+    "id": "r_1775645346045",
+    "createdAt": "2026-04-08T10:49:06.045Z",
+    "userId": "u_002",
+    "login": "khujand",
+    "name": "Отдел г. Худжанд",
+    "role": "district",
+    "region": "Согд",
+    "district": "г. Худжанд",
+    "date": "2026-04-08",
+    "prices": {
+      "bread": 4.5,
+      "flour": 3.2,
+      "beef": 65,
+      "rice": 8.5
+    },
+    "metrics": {
+      "avg_wage": 1850,
+      "employed": 12400,
+      "trade_vol": 3200
+    },
+    "notes": "Тестовый отчёт"
+  }
+]

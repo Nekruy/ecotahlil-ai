@@ -8,6 +8,11 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
+// ─── Инициализация базы данных ───────────────────────────────────────────────
+const { initDB, saveReport: dbSaveReport, getReports: dbGetReports } = require('./database');
+const authModule = require('./auth');
+initDB();
+
 // ─── File text extraction ────────────────────────────────────────────────────
 
 async function extractText(buffer, fileFormat, filename) {
@@ -321,6 +326,25 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/cge
+  if (req.method === 'POST' && req.url === '/api/cge') {
+    try {
+      const body = await readBody(req);
+      const shock = JSON.parse(body.toString('utf8'));
+
+      const { cgeSimulate } = require('./cgeModel');
+      const result = cgeSimulate(shock);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/cge]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Forecast endpoint
   if (req.method === 'POST' && req.url === '/forecast') {
     try {
@@ -439,6 +463,139 @@ const server = http.createServer(async (req, res) => {
       console.error('Error handling /webhook:', err);
       res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
       res.end(`Server error: ${err.message}`);
+    }
+    return;
+  }
+
+  // ── Статические страницы ─────────────────────────────────────────────────
+
+  if (req.method === 'GET' && req.url === '/login') {
+    const fp = path.join(__dirname, 'login.html');
+    fs.readFile(fp, (err, data) => {
+      if (err) { res.writeHead(404); return res.end('login.html not found'); }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+    });
+    return;
+  }
+
+  if (req.method === 'GET' && req.url === '/dashboard') {
+    const fp = path.join(__dirname, 'dashboard.html');
+    fs.readFile(fp, (err, data) => {
+      if (err) { res.writeHead(404); return res.end('dashboard.html not found'); }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+    });
+    return;
+  }
+
+  // ── POST /auth/login ──────────────────────────────────────────────────────
+  if (req.method === 'POST' && req.url === '/auth/login') {
+    try {
+      const body = await readBody(req);
+      const { login, password } = JSON.parse(body.toString('utf8'));
+      if (!login || !password) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Введите логин и пароль' }));
+      }
+      const result = authModule.login(login.trim(), password);
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Set-Cookie': authModule.makeCookie(result.token),
+      });
+      res.end(JSON.stringify({ ok: true, token: result.token, user: result.user }));
+    } catch (err) {
+      console.error('[/auth/login]', err.message);
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // ── POST /auth/logout ─────────────────────────────────────────────────────
+  if (req.method === 'POST' && req.url === '/auth/logout') {
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Set-Cookie': authModule.clearCookie(),
+    });
+    res.end(JSON.stringify({ ok: true }));
+    return;
+  }
+
+  // ── GET /auth/me ──────────────────────────────────────────────────────────
+  if (req.method === 'GET' && req.url === '/auth/me') {
+    try {
+      const user = authModule.verifyToken(req);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ user }));
+    } catch (err) {
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/reports — сохранить ежедневный отчёт района ────────────────
+  if (req.method === 'POST' && req.url === '/api/reports') {
+    try {
+      const user = authModule.verifyToken(req);
+      const body = await readBody(req);
+      const payload = JSON.parse(body.toString('utf8'));
+
+      if (!payload.date) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Укажите дату отчёта' }));
+      }
+
+      const record = dbSaveReport({
+        userId:   user.id,
+        login:    user.login,
+        name:     user.name,
+        role:     user.role,
+        region:   user.region,
+        district: user.district,
+        date:     payload.date,
+        prices:   payload.prices   || {},
+        metrics:  payload.metrics  || {},
+        notes:    payload.notes    || '',
+      });
+
+      console.log(`[/api/reports] ${user.login} → ${payload.date}`);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, id: record.id }));
+    } catch (err) {
+      console.error('[/api/reports]', err.message);
+      const code = err.message.includes('токен') || err.message.includes('Нет') ? 401 : 500;
+      res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // ── GET /api/reports — получить историю отчётов ───────────────────────────
+  if (req.method === 'GET' && req.url.startsWith('/api/reports')) {
+    try {
+      const user = authModule.verifyToken(req);
+      const qs   = new URL('http://x' + req.url).searchParams;
+      const days = Math.max(1, Math.min(90, parseInt(qs.get('days') || '7')));
+
+      const from = new Date();
+      from.setDate(from.getDate() - days);
+      const fromStr = from.toISOString().slice(0, 10);
+
+      const filters = { from: fromStr };
+      if (user.role === 'district') filters.userId   = user.id;
+      if (user.role === 'region')   filters.region   = user.region;
+      // admin sees everything
+
+      const reports = dbGetReports(filters).sort((a, b) => b.date.localeCompare(a.date));
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ reports }));
+    } catch (err) {
+      console.error('[GET /api/reports]', err.message);
+      const code = err.message.includes('токен') || err.message.includes('Нет') ? 401 : 500;
+      res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
     }
     return;
   }
