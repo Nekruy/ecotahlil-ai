@@ -1274,6 +1274,29 @@ footer b { color:#fff; }
   .st-kpi-grid { grid-template-columns:1fr 1fr; }
   .st-bottom-row { grid-template-columns:1fr; }
 }
+
+/* ============================================================
+   ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ
+============================================================ */
+.lang-switcher {
+  display:flex; gap:4px; align-items:center;
+}
+.lang-btn {
+  padding:4px 9px;
+  border:1px solid rgba(0,53,128,.2);
+  border-radius:6px;
+  background:var(--bg);
+  font-size:11px; font-weight:700;
+  color:var(--text2); cursor:pointer;
+  transition:all .15s;
+  display:flex; align-items:center; gap:4px;
+  white-space:nowrap;
+}
+.lang-btn:hover { border-color:var(--navy2); color:var(--navy2); background:var(--navy-pale); }
+.lang-btn.active {
+  background:var(--navy2); color:#fff;
+  border-color:var(--navy2);
+}
 </style>
 </head>
 <body>
@@ -1281,13 +1304,13 @@ footer b { color:#fff; }
 <!-- ТОПБАР -->
 <div class="topbar">
   <div class="topbar-left">
-    <span>🇹🇯 Республика Таджикистан</span>
+    <span>🇹🇯 <span data-i18n="topbar.country">Республика Таджикистан</span></span>
     <span id="currentDate"></span>
   </div>
   <div class="topbar-right">
-    <a href="#">Главная</a>
-    <a href="#">Контакты</a>
-    <a href="#">Помощь</a>
+    <a href="#" data-i18n="topbar.home">Главная</a>
+    <a href="#" data-i18n="topbar.contacts">Контакты</a>
+    <a href="#" data-i18n="topbar.help">Помощь</a>
   </div>
 </div>
 
@@ -1295,15 +1318,20 @@ footer b { color:#fff; }
 <header>
   <div class="logo-emblem">🏛️</div>
   <div class="header-text">
-    <div class="header-name">Республика Таджикистан · Министерство экономического развития и торговли</div>
-    <div class="header-title">Главное управление макроэкономического анализа, прогнозирования и экономических реформ</div>
-    <div class="header-sub">Система мониторинга цен и AI-анализа экономических документов</div>
+    <div class="header-name" data-i18n="header.ministry">Республика Таджикистан · Министерство экономического развития и торговли</div>
+    <div class="header-title" data-i18n="header.title">Главное управление макроэкономического анализа, прогнозирования и экономических реформ</div>
+    <div class="header-sub" data-i18n="header.sub">Система мониторинга цен и AI-анализа экономических документов</div>
   </div>
   <div class="header-right">
     <div class="flag-bar">
       <span class="f-red"></span>
       <span class="f-white"></span>
       <span class="f-green"></span>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">🇷🇺 РУС</button>
+      <button class="lang-btn" data-lang="tj" onclick="setLanguage('tj')">🇹🇯 ТОҶ</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 ENG</button>
     </div>
     <div class="ai-badge">⚡ EcotahlilAI v2.0</div>
     <div style="font-size:11px;color:var(--text3)" id="updateDate"></div>
@@ -1318,22 +1346,22 @@ footer b { color:#fff; }
 <!-- НАВИГАЦИЯ -->
 <nav class="nav">
   <button class="nav-tab active" onclick="showPage('prices',this)">
-    📊 Мониторинг цен
+    📊 <span data-i18n="nav.prices">Мониторинг цен</span>
   </button>
   <button class="nav-tab" onclick="showPage('analysis',this)">
-    🤖 AI Анализ документов
+    🤖 <span data-i18n="nav.analysis">AI Анализ документов</span>
   </button>
   <button class="nav-tab" onclick="showPage('forecast',this)">
-    📈 Прогнозирование
+    📈 <span data-i18n="nav.forecast">Прогнозирование</span>
   </button>
   <button class="nav-tab" onclick="showPage('data',this)">
-    📡 Данные
+    📡 <span data-i18n="nav.data">Данные</span>
   </button>
   <button class="nav-tab" onclick="showPage('stress',this)">
-    ⚠️ Стресс-тест
+    ⚠️ <span data-i18n="nav.stress">Стресс-тест</span>
   </button>
   <a class="nav-tab" href="/report" style="text-decoration:none">
-    📝 Отчёт по ценам
+    📝 <span data-i18n="nav.report">Отчёт по ценам</span>
   </a>
 </nav>
 
@@ -1343,12 +1371,12 @@ footer b { color:#fff; }
 <div class="page active" id="page-prices">
 
   <div class="page-header">
-    <h1>📊 Мониторинг потребительских цен</h1>
-    <p>Еженедельный мониторинг цен на основные продовольственные товары по регионам Таджикистана</p>
+    <h1>📊 <span data-i18n="p1.h1">Мониторинг потребительских цен</span></h1>
+    <p data-i18n="p1.sub">Еженедельный мониторинг цен на основные продовольственные товары по регионам Таджикистана</p>
     <div class="ph-meta">
-      <span class="ph-chip">📅 Данные актуальны</span>
-      <span class="ph-chip">📍 5 регионов</span>
-      <span class="ph-chip">🛒 18 товарных позиций</span>
+      <span class="ph-chip">📅 <span data-i18n="p1.chip.data">Данные актуальны</span></span>
+      <span class="ph-chip">📍 <span data-i18n="p1.chip.regions">5 регионов</span></span>
+      <span class="ph-chip">🛒 <span data-i18n="p1.chip.products">18 товарных позиций</span></span>
       <span class="ph-chip">🤖 EcotahlilAI</span>
     </div>
   </div>
@@ -1357,27 +1385,27 @@ footer b { color:#fff; }
   <div class="stat-row">
     <div class="stat-card sc-blue">
       <div class="stat-icon">📈</div>
-      <div class="stat-label">ИПЦ (год к году)</div>
+      <div class="stat-label" data-i18n="p1.stat.cpi">ИПЦ (год к году)</div>
       <div class="stat-value">108.3%</div>
-      <div class="stat-change ch-up">▲ +3.1% к прошлому месяцу</div>
+      <div class="stat-change ch-up">▲ +3.1% <span data-i18n="p1.stat.month">к прошлому месяцу</span></div>
     </div>
     <div class="stat-card sc-green">
       <div class="stat-icon">🍞</div>
-      <div class="stat-label">Хлеб пшеничный</div>
+      <div class="stat-label" data-i18n="p1.stat.bread">Хлеб пшеничный</div>
       <div class="stat-value">4.20 <span style="font-size:14px;font-weight:400">TJS</span></div>
-      <div class="stat-change ch-up">▲ +2.4% за месяц</div>
+      <div class="stat-change ch-up">▲ +2.4% <span data-i18n="p1.stat.permonth">за месяц</span></div>
     </div>
     <div class="stat-card sc-red">
       <div class="stat-icon">🫙</div>
-      <div class="stat-label">Масло подсолнечное</div>
+      <div class="stat-label" data-i18n="p1.stat.oil">Масло подсолнечное</div>
       <div class="stat-value">18.50 <span style="font-size:14px;font-weight:400">TJS</span></div>
-      <div class="stat-change ch-down">▼ -9.8% за год</div>
+      <div class="stat-change ch-down">▼ -9.8% <span data-i18n="p1.stat.peryear">за год</span></div>
     </div>
     <div class="stat-card sc-gold">
       <div class="stat-icon">💱</div>
-      <div class="stat-label">Курс USD/TJS</div>
+      <div class="stat-label" data-i18n="p1.stat.rate">Курс USD/TJS</div>
       <div class="stat-value">10.92</div>
-      <div class="stat-change ch-up">▲ +0.2% за неделю</div>
+      <div class="stat-change ch-up">▲ +0.2% <span data-i18n="p1.stat.perweek">за неделю</span></div>
     </div>
   </div>
 
@@ -1385,7 +1413,7 @@ footer b { color:#fff; }
   <div class="charts-row">
     <div class="chart-card">
       <div class="chart-title">
-        Динамика цен на продовольствие (TJS)
+        <span data-i18n="p1.chart.food">Динамика цен на продовольствие (TJS)</span>
         <div class="filter-btns">
           <button class="filter-btn active" onclick="filterChart('3m',this)">3М</button>
           <button class="filter-btn" onclick="filterChart('6m',this)">6М</button>
@@ -1395,11 +1423,11 @@ footer b { color:#fff; }
       <div class="chart-canvas-wrap"><canvas id="priceChart"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title">Годовое изменение цен</div>
+      <div class="chart-title" data-i18n="p1.chart.annual">Годовое изменение цен</div>
       <div class="chart-canvas-wrap"><canvas id="pieChart"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title">Цена хлеба по регионам</div>
+      <div class="chart-title" data-i18n="p1.chart.bread">Цена хлеба по регионам</div>
       <div class="chart-canvas-wrap"><canvas id="regionChart"></canvas></div>
     </div>
   </div>
@@ -1407,8 +1435,8 @@ footer b { color:#fff; }
   <!-- ТАБЛИЦА -->
   <div class="table-section">
     <div class="section-title">
-      🛒 Сводная таблица цен
-      <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:auto">
+      🛒 <span data-i18n="p1.tbl.title">Сводная таблица цен</span>
+      <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:auto" data-i18n="p1.tbl.source">
         Источник: ГУМАПЭР МЭРиТ РТ
       </span>
     </div>
@@ -1416,18 +1444,18 @@ footer b { color:#fff; }
       <table class="tbl">
         <thead>
           <tr>
-            <th>Наименование товара</th>
-            <th>Регион</th>
-            <th>Цена (TJS)</th>
-            <th>Ед.</th>
-            <th>Неделя</th>
-            <th>Месяц</th>
-            <th>Год</th>
+            <th data-i18n="p1.tbl.product">Наименование товара</th>
+            <th data-i18n="p1.tbl.region">Регион</th>
+            <th data-i18n="p1.tbl.price">Цена (TJS)</th>
+            <th data-i18n="p1.tbl.unit">Ед.</th>
+            <th data-i18n="p1.tbl.week">Неделя</th>
+            <th data-i18n="p1.tbl.month">Месяц</th>
+            <th data-i18n="p1.tbl.year">Год</th>
           </tr>
         </thead>
         <tbody id="priceTableBody"></tbody>
       </table>
-      <div class="tbl-footer">
+      <div class="tbl-footer" data-i18n="p1.tbl.footer">
         Данные Главного управления макроэкономического анализа, прогнозирования и экономических реформ МЭРиТ РТ · <span id="tblDate"></span>
       </div>
     </div>
@@ -1435,7 +1463,7 @@ footer b { color:#fff; }
 
   <!-- РЕГИОНАЛЬНЫЕ КАРТОЧКИ -->
   <div class="table-section">
-    <div class="section-title">📍 Цена хлеба по регионам (TJS/кг)</div>
+    <div class="section-title">📍 <span data-i18n="p1.bread.section">Цена хлеба по регионам (TJS/кг)</span></div>
   </div>
   <div class="regional-grid">
     <div class="reg-card">
@@ -1478,12 +1506,12 @@ footer b { color:#fff; }
 <div class="page" id="page-analysis">
 
   <div class="ai-header">
-    <h1>🤖 Система AI экономического анализа</h1>
-    <p>Загрузите экономический документ и задайте вопрос — Claude проанализирует содержимое и даст профессиональный ответ</p>
+    <h1>🤖 <span data-i18n="ai.h1">Система AI экономического анализа</span></h1>
+    <p data-i18n="ai.sub">Загрузите экономический документ и задайте вопрос — Claude проанализирует содержимое и даст профессиональный ответ</p>
     <div class="ai-header-badges">
       <span class="ai-badge2 ab-teal">⚡ Powered by Claude API</span>
       <span class="ai-badge2 ab-gold">📄 PDF · Excel · Word · CSV · JSON · TXT</span>
-      <span class="ai-badge2 ab-green">🇹🇯 Ответы на русском языке</span>
+      <span class="ai-badge2 ab-green">🇹🇯 <span data-i18n="ai.badge.lang">Ответы на русском языке</span></span>
     </div>
   </div>
 
@@ -1491,33 +1519,33 @@ footer b { color:#fff; }
 
     <!-- ФОРМА -->
     <div class="ai-form-card">
-      <div class="form-top">📋 Параметры анализа</div>
+      <div class="form-top">📋 <span data-i18n="ai.form.top">Параметры анализа</span></div>
       <div class="form-body">
 
         <div id="alertBox" class="alert-box"></div>
 
         <!-- Сценарий -->
         <div class="form-group">
-          <label class="form-label">Сценарий анализа</label>
+          <label class="form-label" data-i18n="ai.sc.label">Сценарий анализа</label>
           <div class="scenarios">
             <button class="sc-btn selected" onclick="selectScenario(this,'анализ')">
-              <span class="sc-icon">📊</span> Текущий анализ
+              <span class="sc-icon">📊</span> <span data-i18n="ai.sc.current">Текущий анализ</span>
             </button>
             <button class="sc-btn" onclick="selectScenario(this,'прогноз')">
-              <span class="sc-icon">🔮</span> Прогноз
+              <span class="sc-icon">🔮</span> <span data-i18n="ai.sc.forecast">Прогноз</span>
             </button>
             <button class="sc-btn" onclick="selectScenario(this,'сценарий')">
-              <span class="sc-icon">🔀</span> Сценарий "что если"
+              <span class="sc-icon">🔀</span> <span data-i18n="ai.sc.whatif">Сценарий "что если"</span>
             </button>
             <button class="sc-btn" onclick="selectScenario(this,'отчёт')">
-              <span class="sc-icon">📋</span> Подготовить отчёт
+              <span class="sc-icon">📋</span> <span data-i18n="ai.sc.report">Подготовить отчёт</span>
             </button>
           </div>
         </div>
 
         <!-- Вопрос -->
         <div class="form-group">
-          <label class="form-label" for="question">Вопрос / Задание</label>
+          <label class="form-label" for="question" data-i18n="ai.q.label">Вопрос / Задание</label>
           <textarea
             id="question"
             class="q-field"
@@ -1527,13 +1555,13 @@ footer b { color:#fff; }
 
         <!-- Файл -->
         <div class="form-group">
-          <label class="form-label">Документ для анализа</label>
+          <label class="form-label" data-i18n="ai.file.label">Документ для анализа</label>
           <div class="file-drop" id="fileDrop" onclick="document.getElementById('fileInput').click()"
             ondragover="event.preventDefault();this.style.borderColor='var(--navy2)'"
             ondragleave="this.style.borderColor=''"
             ondrop="handleDrop(event)">
             <div class="file-drop-icon">📎</div>
-            <div class="file-drop-text">Перетащите файл или нажмите для выбора</div>
+            <div class="file-drop-text" data-i18n="ai.file.text">Перетащите файл или нажмите для выбора</div>
             <div class="file-name" id="fileName"></div>
             <div class="file-formats">
               <span class="fmt-tag">PDF</span>
@@ -1551,19 +1579,19 @@ footer b { color:#fff; }
 
         <!-- Роль -->
         <div class="form-group">
-          <label class="form-label" for="role">Ваша роль</label>
+          <label class="form-label" for="role" data-i18n="ai.role.label">Ваша роль</label>
           <select id="role" class="role-select">
-            <option value="Экономический аналитик">📊 Экономический аналитик</option>
-            <option value="Министр">🏛️ Министр / Заместитель министра</option>
-            <option value="Начальник отдела">👔 Начальник отдела</option>
-            <option value="Специалист">💼 Специалист</option>
-            <option value="Эксперт">🎓 Эксперт / Консультант</option>
+            <option value="Экономический аналитик" data-i18n="ai.role.1">📊 Экономический аналитик</option>
+            <option value="Министр" data-i18n="ai.role.2">🏛️ Министр / Заместитель министра</option>
+            <option value="Начальник отдела" data-i18n="ai.role.3">👔 Начальник отдела</option>
+            <option value="Специалист" data-i18n="ai.role.4">💼 Специалист</option>
+            <option value="Эксперт" data-i18n="ai.role.5">🎓 Эксперт / Консультант</option>
           </select>
         </div>
 
         <!-- Кнопка -->
         <button class="submit-btn" id="submitBtn" onclick="sendRequest()">
-          <span>⚡</span> ВЫПОЛНИТЬ АНАЛИЗ
+          <span>⚡</span> <span data-i18n="ai.submit">ВЫПОЛНИТЬ АНАЛИЗ</span>
         </button>
 
       </div>
@@ -1572,10 +1600,10 @@ footer b { color:#fff; }
     <!-- РЕЗУЛЬТАТ -->
     <div class="ai-result-card">
       <div class="result-top">
-        <div class="result-top-title">📄 Результат анализа</div>
+        <div class="result-top-title">📄 <span data-i18n="ai.result.title">Результат анализа</span></div>
         <div class="result-actions">
-          <button class="action-btn" id="copyBtn" onclick="copyResult()">📋 Копировать</button>
-          <button class="action-btn" onclick="clearResult()">🗑️ Очистить</button>
+          <button class="action-btn" id="copyBtn" onclick="copyResult()">📋 <span data-i18n="ai.copy">Копировать</span></button>
+          <button class="action-btn" onclick="clearResult()">🗑️ <span data-i18n="ai.clear">Очистить</span></button>
         </div>
       </div>
 
@@ -1586,29 +1614,29 @@ footer b { color:#fff; }
       <!-- Плейсхолдер -->
       <div class="result-placeholder" id="resultPlaceholder">
         <div class="rp-icon">🤖</div>
-        <div class="rp-title">Готов к анализу</div>
-        <div class="rp-text">
+        <div class="rp-title" data-i18n="ai.ph.title">Готов к анализу</div>
+        <div class="rp-text" data-i18n="ai.ph.text">
           Выберите сценарий, загрузите документ<br>
           и задайте вопрос — Claude проанализирует<br>
           содержимое и даст профессиональный ответ
         </div>
         <div class="rp-steps">
-          <div class="rp-step">① Сценарий</div>
-          <div class="rp-step">② Вопрос</div>
-          <div class="rp-step">③ Файл</div>
-          <div class="rp-step">④ Анализ →</div>
+          <div class="rp-step">① <span data-i18n="ai.step1">Сценарий</span></div>
+          <div class="rp-step">② <span data-i18n="ai.step2">Вопрос</span></div>
+          <div class="rp-step">③ <span data-i18n="ai.step3">Файл</span></div>
+          <div class="rp-step">④ <span data-i18n="ai.step4">Анализ</span> →</div>
         </div>
       </div>
 
       <!-- Загрузка -->
       <div class="loading-div" id="loadingDiv">
         <div class="loader"></div>
-        <div class="loading-title">Claude анализирует документ...</div>
+        <div class="loading-title" data-i18n="ai.ld.title">Claude анализирует документ...</div>
         <div class="loading-steps">
-          <div class="ld-step" id="ld1"><span class="ld-icon">📤</span> Отправка документа</div>
-          <div class="ld-step" id="ld2"><span class="ld-icon">📖</span> Чтение содержимого</div>
-          <div class="ld-step" id="ld3"><span class="ld-icon">🧠</span> AI анализ</div>
-          <div class="ld-step" id="ld4"><span class="ld-icon">✍️</span> Формирование ответа</div>
+          <div class="ld-step" id="ld1"><span class="ld-icon">📤</span> <span data-i18n="ai.ld.1">Отправка документа</span></div>
+          <div class="ld-step" id="ld2"><span class="ld-icon">📖</span> <span data-i18n="ai.ld.2">Чтение содержимого</span></div>
+          <div class="ld-step" id="ld3"><span class="ld-icon">🧠</span> <span data-i18n="ai.ld.3">AI анализ</span></div>
+          <div class="ld-step" id="ld4"><span class="ld-icon">✍️</span> <span data-i18n="ai.ld.4">Формирование ответа</span></div>
         </div>
       </div>
 
@@ -1630,8 +1658,8 @@ footer b { color:#fff; }
 <div class="page" id="page-forecast">
 
   <div class="fc-header">
-    <h1>📈 Модели прогнозирования временных рядов</h1>
-    <p>Прогнозирование макроэкономических показателей методами ARIMA и Prophet с выявлением аномалий</p>
+    <h1>📈 <span data-i18n="fc.h1">Модели прогнозирования временных рядов</span></h1>
+    <p data-i18n="fc.sub">Прогнозирование макроэкономических показателей методами ARIMA и Prophet с выявлением аномалий</p>
     <div class="fc-header-badges">
       <span class="ai-badge2 ab-teal">📐 ARIMA(1,1,0)</span>
       <span class="ai-badge2 ab-purple">🔮 Prophet (тренд + сезонность)</span>
@@ -1646,14 +1674,14 @@ footer b { color:#fff; }
 
     <!-- ФОРМА -->
     <div class="fc-form-card">
-      <div class="fc-form-top">⚙️ Параметры прогноза</div>
+      <div class="fc-form-top">⚙️ <span data-i18n="fc.form.top">Параметры прогноза</span></div>
       <div class="fc-form-body">
 
         <div id="fcAlertBox" class="alert-box"></div>
 
         <!-- Исторические данные -->
         <div class="form-group">
-          <label class="form-label">Исторические данные</label>
+          <label class="form-label" data-i18n="fc.data.label">Исторические данные</label>
           <textarea id="fcData" class="data-textarea"
             placeholder="Введите числа через запятую&#10;Пример: 108.3, 109.1, 107.8, 110.2, 111.5, 112.0, 113.4"></textarea>
           <div class="data-hint">
@@ -1664,20 +1692,20 @@ footer b { color:#fff; }
 
         <!-- Метод -->
         <div class="form-group">
-          <label class="form-label">Метод прогнозирования</label>
+          <label class="form-label" data-i18n="fc.method.label">Метод прогнозирования</label>
           <div class="method-group">
             <label class="method-radio selected" id="methodArima" onclick="selectMethod('arima')">
               <input type="radio" name="fcMethod" value="arima" checked>
               <div>
                 <div class="method-radio-title">📐 ARIMA (1,1,0)</div>
-                <div class="method-radio-desc">Авторегрессионная интегрированная скользящая средняя. Подходит для трендовых рядов без выраженной сезонности.</div>
+                <div class="method-radio-desc" data-i18n="fc.method.arima.desc">Авторегрессионная интегрированная скользящая средняя. Подходит для трендовых рядов без выраженной сезонности.</div>
               </div>
             </label>
             <label class="method-radio" id="methodProphet" onclick="selectMethod('prophet')">
               <input type="radio" name="fcMethod" value="prophet">
               <div>
-                <div class="method-radio-title">🔮 Prophet (тренд + сезонность)</div>
-                <div class="method-radio-desc">Декомпозиция ряда на тренд и сезонную компоненту. Подходит для данных с периодическими паттернами.</div>
+                <div class="method-radio-title">🔮 Prophet (<span data-i18n="fc.method.prophet.label">тренд + сезонность</span>)</div>
+                <div class="method-radio-desc" data-i18n="fc.method.prophet.desc">Декомпозиция ряда на тренд и сезонную компоненту. Подходит для данных с периодическими паттернами.</div>
               </div>
             </label>
           </div>
@@ -1685,17 +1713,17 @@ footer b { color:#fff; }
 
         <!-- Периоды -->
         <div class="form-group">
-          <label class="form-label">Горизонт прогноза</label>
+          <label class="form-label" data-i18n="fc.horizon.label">Горизонт прогноза</label>
           <div class="period-group">
-            <button class="period-btn" onclick="selectPeriod(3,this)">3 мес.</button>
-            <button class="period-btn active" onclick="selectPeriod(6,this)">6 мес.</button>
-            <button class="period-btn" onclick="selectPeriod(12,this)">12 мес.</button>
+            <button class="period-btn" onclick="selectPeriod(3,this)">3 <span data-i18n="fc.months">мес.</span></button>
+            <button class="period-btn active" onclick="selectPeriod(6,this)">6 <span data-i18n="fc.months">мес.</span></button>
+            <button class="period-btn" onclick="selectPeriod(12,this)">12 <span data-i18n="fc.months">мес.</span></button>
           </div>
         </div>
 
         <!-- Кнопка -->
         <button class="fc-btn" id="fcBtn" onclick="runForecast()">
-          <span>📈</span> ПОСТРОИТЬ ПРОГНОЗ
+          <span>📈</span> <span data-i18n="fc.submit">ПОСТРОИТЬ ПРОГНОЗ</span>
         </button>
 
       </div>
@@ -1707,17 +1735,17 @@ footer b { color:#fff; }
       <!-- Плейсхолдер -->
       <div class="fc-placeholder" id="fcPlaceholder">
         <div class="rp-icon">📈</div>
-        <div class="rp-title">Готов к прогнозированию</div>
-        <div class="rp-text">
+        <div class="rp-title" data-i18n="fc.ph.title">Готов к прогнозированию</div>
+        <div class="rp-text" data-i18n="fc.ph.text">
           Введите исторические данные, выберите метод<br>
           и горизонт прогноза — система рассчитает<br>
           прогноз и выявит аномалии в ряду
         </div>
         <div class="rp-steps">
-          <div class="rp-step">① Данные</div>
-          <div class="rp-step">② Метод</div>
-          <div class="rp-step">③ Период</div>
-          <div class="rp-step">④ Прогноз →</div>
+          <div class="rp-step">① <span data-i18n="fc.step1">Данные</span></div>
+          <div class="rp-step">② <span data-i18n="fc.step2">Метод</span></div>
+          <div class="rp-step">③ <span data-i18n="fc.step3">Период</span></div>
+          <div class="rp-step">④ <span data-i18n="fc.step4">Прогноз</span> →</div>
         </div>
       </div>
 
@@ -2187,13 +2215,13 @@ footer b { color:#fff; }
 <div class="page" id="page-stress">
 
   <div class="st-header">
-    <h1>⚠️ Стресс-тестирование экономики Таджикистана</h1>
-    <p>Моделирование макроэкономических шоков и их каскадного влияния на ключевые показатели</p>
+    <h1>⚠️ <span data-i18n="st.h1">Стресс-тестирование экономики Таджикистана</span></h1>
+    <p data-i18n="st.sub">Моделирование макроэкономических шоков и их каскадного влияния на ключевые показатели</p>
     <div class="st-header-badges">
-      <span class="ai-badge2 ab-violet">🔬 4 сценария шоков</span>
-      <span class="ai-badge2 ab-orange">🗺️ Региональный анализ</span>
-      <span class="ai-badge2 ab-red">📋 Рекомендации для руководства</span>
-      <span class="ai-badge2 ab-green">📅 Квартальный прогноз</span>
+      <span class="ai-badge2 ab-violet">🔬 <span data-i18n="st.badge.scenarios">4 сценария шоков</span></span>
+      <span class="ai-badge2 ab-orange">🗺️ <span data-i18n="st.badge.regional">Региональный анализ</span></span>
+      <span class="ai-badge2 ab-red">📋 <span data-i18n="st.badge.recs">Рекомендации для руководства</span></span>
+      <span class="ai-badge2 ab-green">📅 <span data-i18n="st.badge.timeline">Квартальный прогноз</span></span>
     </div>
   </div>
 
@@ -2201,126 +2229,126 @@ footer b { color:#fff; }
   <div class="st-scenarios-grid">
     <div class="st-scenario-card active" id="stCard-oil" onclick="stSelectScenario('oil')">
       <div class="st-sc-icon">🛢️</div>
-      <div class="st-sc-title">Падение нефти</div>
-      <div class="st-sc-desc">Снижение нефтяных цен → замедление РФ → сокращение переводов мигрантов → ослабление TJS</div>
+      <div class="st-sc-title" data-i18n="st.oil.title">Падение нефти</div>
+      <div class="st-sc-desc" data-i18n="st.oil.desc">Снижение нефтяных цен → замедление РФ → сокращение переводов мигрантов → ослабление TJS</div>
     </div>
     <div class="st-scenario-card" id="stCard-remittances" onclick="stSelectScenario('remittances')">
       <div class="st-sc-icon">💸</div>
-      <div class="st-sc-title">Ограничение переводов</div>
-      <div class="st-sc-desc">Санкции или ограничения на переводы из России → дефицит валюты → инфляция → падение ВВП</div>
+      <div class="st-sc-title" data-i18n="st.rem.title">Ограничение переводов</div>
+      <div class="st-sc-desc" data-i18n="st.rem.desc">Санкции или ограничения на переводы из России → дефицит валюты → инфляция → падение ВВП</div>
     </div>
     <div class="st-scenario-card" id="stCard-crop" onclick="stSelectScenario('crop')">
       <div class="st-sc-icon">🌾</div>
-      <div class="st-sc-title">Неурожай</div>
-      <div class="st-sc-desc">Засуха или иные факторы → рост импорта зерна → продовольственная инфляция по регионам</div>
+      <div class="st-sc-title" data-i18n="st.crop.title">Неурожай</div>
+      <div class="st-sc-desc" data-i18n="st.crop.desc">Засуха или иные факторы → рост импорта зерна → продовольственная инфляция по регионам</div>
     </div>
     <div class="st-scenario-card" id="stCard-hydro" onclick="stSelectScenario('hydro')">
       <div class="st-sc-icon">💧</div>
-      <div class="st-sc-title">Гидроэнергетический кризис</div>
-      <div class="st-sc-desc">Снижение уровня рек → дефицит электроэнергии → остановка ТАЛКО → падение промышленности</div>
+      <div class="st-sc-title" data-i18n="st.hydro.title">Гидроэнергетический кризис</div>
+      <div class="st-sc-desc" data-i18n="st.hydro.desc">Снижение уровня рек → дефицит электроэнергии → остановка ТАЛКО → падение промышленности</div>
     </div>
   </div>
 
   <!-- Панель параметров: Нефть -->
   <div class="st-params-panel visible" id="stParams-oil">
-    <div class="st-params-title">🛢️ Параметры сценария: Падение цены нефти</div>
+    <div class="st-params-title">🛢️ <span data-i18n="st.params.oil">Параметры сценария: Падение цены нефти</span></div>
     <div class="st-param-group">
       <div class="st-param-label">
-        <span>Цена нефти (Brent, $/барр.)</span>
+        <span data-i18n="st.oil.param">Цена нефти (Brent, $/барр.)</span>
         <span class="st-param-value" id="stVal-oilPrice">$40</span>
       </div>
       <input type="range" class="st-slider" id="stSlider-oilPrice" min="20" max="50" step="5" value="40"
         oninput="stUpdateSlider('oilPrice', this.value, '$', '')">
       <div class="st-presets">
-        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
-        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',20,'$','')">$20 — кризис</button>
-        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',30,'$','')">$30 — низкий</button>
-        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',40,'$','')">$40 — умеренный</button>
-        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',50,'$','')">$50 — базовый</button>
+        <span style="font-size:11px;color:var(--text3);align-self:center;" data-i18n="st.presets">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',20,'$','')">$20 — <span data-i18n="st.level.crisis">кризис</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',30,'$','')">$30 — <span data-i18n="st.level.low">низкий</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',40,'$','')">$40 — <span data-i18n="st.level.moderate">умеренный</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('oilPrice',50,'$','')">$50 — <span data-i18n="st.level.base">базовый</span></button>
       </div>
-      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);" data-i18n="st.oil.hint">
         📌 Базовая цена нефти: <b>$70/барр.</b> &nbsp;|&nbsp; Переводы мигрантов: <b>~$3.45 млрд (~30% ВВП)</b> &nbsp;|&nbsp; Коэффициенты: кризис 2015–2016
       </div>
     </div>
-    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ <span data-i18n="st.run">Запустить стресс-тест</span></button>
   </div>
 
   <!-- Панель параметров: Переводы -->
   <div class="st-params-panel" id="stParams-remittances">
-    <div class="st-params-title">💸 Параметры сценария: Ограничение переводов из России</div>
+    <div class="st-params-title">💸 <span data-i18n="st.params.rem">Параметры сценария: Ограничение переводов из России</span></div>
     <div class="st-param-group">
       <div class="st-param-label">
-        <span>Ограничение переводов</span>
+        <span data-i18n="st.rem.param">Ограничение переводов</span>
         <span class="st-param-value" id="stVal-restrictionPct">50%</span>
       </div>
       <input type="range" class="st-slider" id="stSlider-restrictionPct" min="25" max="100" step="25" value="50"
         oninput="stUpdateSlider('restrictionPct', this.value, '', '%')">
       <div class="st-presets">
-        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
-        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',25,'','%')">25% — частичный</button>
-        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',50,'','%')">50% — половина</button>
-        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',75,'','%')">75% — критичный</button>
-        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',100,'','%')">100% — полная блокада</button>
+        <span style="font-size:11px;color:var(--text3);align-self:center;" data-i18n="st.presets">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',25,'','%')">25% — <span data-i18n="st.level.partial">частичный</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',50,'','%')">50% — <span data-i18n="st.level.half">половина</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',75,'','%')">75% — <span data-i18n="st.level.critical">критичный</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('restrictionPct',100,'','%')">100% — <span data-i18n="st.level.full">полная блокада</span></button>
       </div>
-      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);" data-i18n="st.rem.hint">
         📌 Переводы = <b>30% ВВП Таджикистана</b> &nbsp;|&nbsp; Объём: <b>~$3.45 млрд/год</b> &nbsp;|&nbsp; ~95% переводов поступают из России
       </div>
     </div>
-    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ <span data-i18n="st.run">Запустить стресс-тест</span></button>
   </div>
 
   <!-- Панель параметров: Урожай -->
   <div class="st-params-panel" id="stParams-crop">
-    <div class="st-params-title">🌾 Параметры сценария: Неурожай</div>
+    <div class="st-params-title">🌾 <span data-i18n="st.params.crop">Параметры сценария: Неурожай</span></div>
     <div class="st-param-group">
       <div class="st-param-label">
-        <span>Падение урожая</span>
+        <span data-i18n="st.crop.param">Падение урожая</span>
         <span class="st-param-value" id="stVal-cropFailurePct">30%</span>
       </div>
       <input type="range" class="st-slider" id="stSlider-cropFailurePct" min="20" max="50" step="10" value="30"
         oninput="stUpdateSlider('cropFailurePct', this.value, '', '%')">
       <div class="st-presets">
-        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
-        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',20,'','%')">20% — засуха</button>
-        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',30,'','%')">30% — сильная засуха</button>
-        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',50,'','%')">50% — катастрофа</button>
+        <span style="font-size:11px;color:var(--text3);align-self:center;" data-i18n="st.presets">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',20,'','%')">20% — <span data-i18n="st.level.drought">засуха</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',30,'','%')">30% — <span data-i18n="st.level.severe">сильная засуха</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('cropFailurePct',50,'','%')">50% — <span data-i18n="st.level.disaster">катастрофа</span></button>
       </div>
-      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);" data-i18n="st.crop.hint">
         📌 С/х = <b>~20% ВВП</b> &nbsp;|&nbsp; Продовольственная корзина = <b>~45% ИПЦ</b> &nbsp;|&nbsp; Импорт зерна: <b>~$150–200 млн/год</b>
       </div>
     </div>
-    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ <span data-i18n="st.run">Запустить стресс-тест</span></button>
   </div>
 
   <!-- Панель параметров: Гидро -->
   <div class="st-params-panel" id="stParams-hydro">
-    <div class="st-params-title">💧 Параметры сценария: Гидроэнергетический кризис</div>
+    <div class="st-params-title">💧 <span data-i18n="st.params.hydro">Параметры сценария: Гидроэнергетический кризис</span></div>
     <div class="st-param-group">
       <div class="st-param-label">
-        <span>Падение уровня воды в реках</span>
+        <span data-i18n="st.hydro.param">Падение уровня воды в реках</span>
         <span class="st-param-value" id="stVal-waterDropPct">20%</span>
       </div>
       <input type="range" class="st-slider" id="stSlider-waterDropPct" min="10" max="50" step="10" value="20"
         oninput="stUpdateSlider('waterDropPct', this.value, '', '%')">
       <div class="st-presets">
-        <span style="font-size:11px;color:var(--text3);align-self:center;">Пресеты:</span>
-        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',10,'','%')">10% — умеренный</button>
-        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',20,'','%')">20% — значительный</button>
-        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',30,'','%')">30% — критичный</button>
-        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',50,'','%')">50% — катастрофа</button>
+        <span style="font-size:11px;color:var(--text3);align-self:center;" data-i18n="st.presets">Пресеты:</span>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',10,'','%')">10% — <span data-i18n="st.level.moderate">умеренный</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',20,'','%')">20% — <span data-i18n="st.level.significant">значительный</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',30,'','%')">30% — <span data-i18n="st.level.critical">критичный</span></button>
+        <button class="st-preset-btn" onclick="stSetSlider('waterDropPct',50,'','%')">50% — <span data-i18n="st.level.disaster">катастрофа</span></button>
       </div>
-      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);">
+      <div style="margin-top:10px;padding:10px 14px;background:var(--navy-pale);border-radius:8px;font-size:12px;color:var(--navy2);" data-i18n="st.hydro.hint">
         📌 98% электроэнергии — ГЭС &nbsp;|&nbsp; Экспорт э/э: <b>$300 млн/год</b> &nbsp;|&nbsp; ТАЛКО: <b>15% экспорта страны</b> &nbsp;|&nbsp; 10%↓ воды = 8%↓ э/э = 1.5%↓ ВВП
       </div>
     </div>
-    <button class="st-run-btn" onclick="stRunTest()">⚡ Запустить стресс-тест</button>
+    <button class="st-run-btn" onclick="stRunTest()">⚡ <span data-i18n="st.run">Запустить стресс-тест</span></button>
   </div>
 
   <!-- Лоадер -->
   <div class="st-loading" id="stLoading">
     <div class="st-loader"></div>
-    <div class="st-load-title">Вычисление сценария...</div>
-    <div class="st-load-sub">Анализ каскадных эффектов по всем секторам экономики</div>
+    <div class="st-load-title" data-i18n="st.loading.title">Вычисление сценария...</div>
+    <div class="st-load-sub" data-i18n="st.loading.sub">Анализ каскадных эффектов по всем секторам экономики</div>
   </div>
 
   <!-- Дашборд результатов -->
@@ -2338,34 +2366,34 @@ footer b { color:#fff; }
     <!-- 6 KPI карточек -->
     <div class="st-kpi-grid">
       <div class="st-kpi-card kpi-neg" id="kpiGDP">
-        <div class="st-kpi-label">📉 Изменение ВВП</div>
+        <div class="st-kpi-label">📉 <span data-i18n="st.kpi.gdp">Изменение ВВП</span></div>
         <div class="st-kpi-val kpi-red" id="kpiGDPVal">—</div>
-        <div class="st-kpi-sub">п.п. к базовому сценарию</div>
+        <div class="st-kpi-sub" data-i18n="st.kpi.gdp.sub">п.п. к базовому сценарию</div>
       </div>
       <div class="st-kpi-card kpi-warn" id="kpiInflation">
-        <div class="st-kpi-label">📊 Рост инфляции</div>
+        <div class="st-kpi-label">📊 <span data-i18n="st.kpi.infl">Рост инфляции</span></div>
         <div class="st-kpi-val kpi-gold" id="kpiInflationVal">—</div>
-        <div class="st-kpi-sub">доп. п.п. к текущей инфляции</div>
+        <div class="st-kpi-sub" data-i18n="st.kpi.infl.sub">доп. п.п. к текущей инфляции</div>
       </div>
       <div class="st-kpi-card kpi-neg" id="kpiExchange">
-        <div class="st-kpi-label">💱 Курс TJS/USD</div>
+        <div class="st-kpi-label">💱 <span data-i18n="st.kpi.exch">Курс TJS/USD</span></div>
         <div class="st-kpi-val kpi-red" id="kpiExchangeVal">—</div>
-        <div class="st-kpi-sub">% изменение (–= ослабление TJS)</div>
+        <div class="st-kpi-sub" data-i18n="st.kpi.exch.sub">% изменение (–= ослабление TJS)</div>
       </div>
       <div class="st-kpi-card kpi-neg" id="kpiRemittances">
-        <div class="st-kpi-label">💸 Переводы мигрантов</div>
+        <div class="st-kpi-label">💸 <span data-i18n="st.kpi.rem">Переводы мигрантов</span></div>
         <div class="st-kpi-val kpi-red" id="kpiRemittancesVal">—</div>
-        <div class="st-kpi-sub">% изменение</div>
+        <div class="st-kpi-sub" data-i18n="st.kpi.pct">% изменение</div>
       </div>
       <div class="st-kpi-card kpi-info" id="kpiReserves">
-        <div class="st-kpi-label">🏦 Резервы НБТ</div>
+        <div class="st-kpi-label">🏦 <span data-i18n="st.kpi.res">Резервы НБТ</span></div>
         <div class="st-kpi-val kpi-navy" id="kpiReservesVal">—</div>
-        <div class="st-kpi-sub">% изменение</div>
+        <div class="st-kpi-sub" data-i18n="st.kpi.pct">% изменение</div>
       </div>
       <div class="st-kpi-card kpi-warn" id="kpiElectricity">
-        <div class="st-kpi-label">⚡ Дефицит электроэнергии</div>
+        <div class="st-kpi-label">⚡ <span data-i18n="st.kpi.elec">Дефицит электроэнергии</span></div>
         <div class="st-kpi-val kpi-gold" id="kpiElectricityVal">—</div>
-        <div class="st-kpi-sub">% от нормальной выработки</div>
+        <div class="st-kpi-sub" data-i18n="st.kpi.elec.sub">% от нормальной выработки</div>
       </div>
     </div>
 
@@ -2374,7 +2402,7 @@ footer b { color:#fff; }
 
       <!-- Квартальный график -->
       <div class="st-card">
-        <div class="st-card-title">📈 Динамика кризиса по кварталам</div>
+        <div class="st-card-title">📈 <span data-i18n="st.chart.timeline">Динамика кризиса по кварталам</span></div>
         <div style="height:220px;position:relative;">
           <canvas id="stTimelineChart"></canvas>
         </div>
@@ -2382,7 +2410,7 @@ footer b { color:#fff; }
 
       <!-- Региональная карта -->
       <div class="st-card">
-        <div class="st-card-title">🗺️ Региональный эффект (% изм. ВВП)</div>
+        <div class="st-card-title">🗺️ <span data-i18n="st.chart.regional">Региональный эффект (% изм. ВВП)</span></div>
         <div class="st-region-grid" id="stRegionGrid"></div>
       </div>
 
@@ -2390,7 +2418,7 @@ footer b { color:#fff; }
 
     <!-- Рекомендации -->
     <div class="st-card st-recs-section">
-      <div class="st-card-title">📋 Рекомендации для руководства</div>
+      <div class="st-card-title">📋 <span data-i18n="st.card.recs">Рекомендации для руководства</span></div>
       <div id="stRecommendations"></div>
     </div>
 
@@ -2399,8 +2427,8 @@ footer b { color:#fff; }
   <!-- Плейсхолдер (до первого запуска) -->
   <div class="st-placeholder" id="stPlaceholder">
     <div class="st-placeholder-icon">🔬</div>
-    <div class="st-placeholder-title">Выберите сценарий и настройте параметры</div>
-    <p style="font-size:13px;max-width:420px;margin:8px auto 0;line-height:1.6;">
+    <div class="st-placeholder-title" data-i18n="st.ph.title">Выберите сценарий и настройте параметры</div>
+    <p style="font-size:13px;max-width:420px;margin:8px auto 0;line-height:1.6;" data-i18n="st.ph.text">
       Стресс-тест смоделирует каскадные экономические эффекты выбранного шока и покажет его влияние на ВВП, инфляцию, курс TJS, переводы и резервы НБТ по регионам страны.
     </p>
   </div>
@@ -3921,6 +3949,499 @@ function stRenderTimeline(timeline, scenario) {
     },
   });
 }
+
+// ============================================================
+// I18N — ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ
+// ============================================================
+const i18n = {
+  ru: {
+    // Топбар
+    'topbar.country':   'Республика Таджикистан',
+    'topbar.home':      'Главная',
+    'topbar.contacts':  'Контакты',
+    'topbar.help':      'Помощь',
+    // Шапка
+    'header.ministry':  'Республика Таджикистан · Министерство экономического развития и торговли',
+    'header.title':     'Главное управление макроэкономического анализа, прогнозирования и экономических реформ',
+    'header.sub':       'Система мониторинга цен и AI-анализа экономических документов',
+    // Навигация
+    'nav.prices':    'Мониторинг цен',
+    'nav.analysis':  'AI Анализ документов',
+    'nav.forecast':  'Прогнозирование',
+    'nav.data':      'Данные',
+    'nav.stress':    'Стресс-тест',
+    'nav.report':    'Отчёт по ценам',
+    // Страница 1 — Мониторинг цен
+    'p1.h1':               'Мониторинг потребительских цен',
+    'p1.sub':              'Еженедельный мониторинг цен на основные продовольственные товары по регионам Таджикистана',
+    'p1.chip.data':        'Данные актуальны',
+    'p1.chip.regions':     '5 регионов',
+    'p1.chip.products':    '18 товарных позиций',
+    'p1.stat.cpi':         'ИПЦ (год к году)',
+    'p1.stat.bread':       'Хлеб пшеничный',
+    'p1.stat.oil':         'Масло подсолнечное',
+    'p1.stat.rate':        'Курс USD/TJS',
+    'p1.stat.month':       'к прошлому месяцу',
+    'p1.stat.permonth':    'за месяц',
+    'p1.stat.peryear':     'за год',
+    'p1.stat.perweek':     'за неделю',
+    'p1.chart.food':       'Динамика цен на продовольствие (TJS)',
+    'p1.chart.annual':     'Годовое изменение цен',
+    'p1.chart.bread':      'Цена хлеба по регионам',
+    'p1.tbl.title':        'Сводная таблица цен',
+    'p1.tbl.source':       'Источник: ГУМАПЭР МЭРиТ РТ',
+    'p1.tbl.product':      'Наименование товара',
+    'p1.tbl.region':       'Регион',
+    'p1.tbl.price':        'Цена (TJS)',
+    'p1.tbl.unit':         'Ед.',
+    'p1.tbl.week':         'Неделя',
+    'p1.tbl.month':        'Месяц',
+    'p1.tbl.year':         'Год',
+    'p1.tbl.footer':       'Данные Главного управления макроэкономического анализа, прогнозирования и экономических реформ МЭРиТ РТ',
+    'p1.bread.section':    'Цена хлеба по регионам (TJS/кг)',
+    // Страница 2 — AI Анализ
+    'ai.h1':            'Система AI экономического анализа',
+    'ai.sub':           'Загрузите экономический документ и задайте вопрос — Claude проанализирует содержимое и даст профессиональный ответ',
+    'ai.badge.lang':    'Ответы на русском языке',
+    'ai.form.top':      'Параметры анализа',
+    'ai.sc.label':      'Сценарий анализа',
+    'ai.sc.current':    'Текущий анализ',
+    'ai.sc.forecast':   'Прогноз',
+    'ai.sc.whatif':     'Сценарий "что если"',
+    'ai.sc.report':     'Подготовить отчёт',
+    'ai.q.label':       'Вопрос / Задание',
+    'ai.file.label':    'Документ для анализа',
+    'ai.file.text':     'Перетащите файл или нажмите для выбора',
+    'ai.role.label':    'Ваша роль',
+    'ai.role.1':        '📊 Экономический аналитик',
+    'ai.role.2':        '🏛️ Министр / Заместитель министра',
+    'ai.role.3':        '👔 Начальник отдела',
+    'ai.role.4':        '💼 Специалист',
+    'ai.role.5':        '🎓 Эксперт / Консультант',
+    'ai.submit':        'ВЫПОЛНИТЬ АНАЛИЗ',
+    'ai.result.title':  'Результат анализа',
+    'ai.copy':          'Копировать',
+    'ai.clear':         'Очистить',
+    'ai.ph.title':      'Готов к анализу',
+    'ai.ph.text':       'Выберите сценарий, загрузите документ и задайте вопрос — Claude проанализирует содержимое и даст профессиональный ответ',
+    'ai.step1': 'Сценарий', 'ai.step2': 'Вопрос', 'ai.step3': 'Файл', 'ai.step4': 'Анализ',
+    'ai.ld.title': 'Claude анализирует документ...',
+    'ai.ld.1': 'Отправка документа',
+    'ai.ld.2': 'Чтение содержимого',
+    'ai.ld.3': 'AI анализ',
+    'ai.ld.4': 'Формирование ответа',
+    // Страница 3 — Прогнозирование
+    'fc.h1':                   'Модели прогнозирования временных рядов',
+    'fc.sub':                  'Прогнозирование макроэкономических показателей методами ARIMA и Prophet с выявлением аномалий',
+    'fc.form.top':             'Параметры прогноза',
+    'fc.data.label':           'Исторические данные',
+    'fc.method.label':         'Метод прогнозирования',
+    'fc.method.arima.desc':    'Авторегрессионная интегрированная скользящая средняя. Подходит для трендовых рядов без выраженной сезонности.',
+    'fc.method.prophet.label': 'тренд + сезонность',
+    'fc.method.prophet.desc':  'Декомпозиция ряда на тренд и сезонную компоненту. Подходит для данных с периодическими паттернами.',
+    'fc.horizon.label':        'Горизонт прогноза',
+    'fc.months':               'мес.',
+    'fc.submit':               'ПОСТРОИТЬ ПРОГНОЗ',
+    'fc.ph.title':             'Готов к прогнозированию',
+    'fc.ph.text':              'Введите исторические данные, выберите метод и горизонт прогноза — система рассчитает прогноз и выявит аномалии в ряду',
+    'fc.step1': 'Данные', 'fc.step2': 'Метод', 'fc.step3': 'Период', 'fc.step4': 'Прогноз',
+    // Страница 5 — Стресс-тест
+    'st.h1':  'Стресс-тестирование экономики Таджикистана',
+    'st.sub': 'Моделирование макроэкономических шоков и их каскадного влияния на ключевые показатели',
+    'st.badge.scenarios': '4 сценария шоков',
+    'st.badge.regional':  'Региональный анализ',
+    'st.badge.recs':      'Рекомендации для руководства',
+    'st.badge.timeline':  'Квартальный прогноз',
+    'st.oil.title':   'Падение нефти',
+    'st.oil.desc':    'Снижение нефтяных цен → замедление РФ → сокращение переводов мигрантов → ослабление TJS',
+    'st.rem.title':   'Ограничение переводов',
+    'st.rem.desc':    'Санкции или ограничения на переводы из России → дефицит валюты → инфляция → падение ВВП',
+    'st.crop.title':  'Неурожай',
+    'st.crop.desc':   'Засуха или иные факторы → рост импорта зерна → продовольственная инфляция по регионам',
+    'st.hydro.title': 'Гидроэнергетический кризис',
+    'st.hydro.desc':  'Снижение уровня рек → дефицит электроэнергии → остановка ТАЛКО → падение промышленности',
+    'st.params.oil':   'Параметры сценария: Падение цены нефти',
+    'st.params.rem':   'Параметры сценария: Ограничение переводов из России',
+    'st.params.crop':  'Параметры сценария: Неурожай',
+    'st.params.hydro': 'Параметры сценария: Гидроэнергетический кризис',
+    'st.oil.param':    'Цена нефти (Brent, $/барр.)',
+    'st.rem.param':    'Ограничение переводов',
+    'st.crop.param':   'Падение урожая',
+    'st.hydro.param':  'Падение уровня воды в реках',
+    'st.oil.hint':   '📌 Базовая цена нефти: $70/барр. | Переводы мигрантов: ~$3.45 млрд (~30% ВВП) | Коэффициенты: кризис 2015–2016',
+    'st.rem.hint':   '📌 Переводы = 30% ВВП Таджикистана | Объём: ~$3.45 млрд/год | ~95% переводов поступают из России',
+    'st.crop.hint':  '📌 С/х = ~20% ВВП | Продовольственная корзина = ~45% ИПЦ | Импорт зерна: ~$150–200 млн/год',
+    'st.hydro.hint': '📌 98% электроэнергии — ГЭС | Экспорт э/э: $300 млн/год | ТАЛКО: 15% экспорта страны | 10%↓ воды = 8%↓ э/э = 1.5%↓ ВВП',
+    'st.presets': 'Пресеты:',
+    'st.run': 'Запустить стресс-тест',
+    'st.level.crisis':    'кризис',
+    'st.level.low':       'низкий',
+    'st.level.moderate':  'умеренный',
+    'st.level.base':      'базовый',
+    'st.level.partial':   'частичный',
+    'st.level.half':      'половина',
+    'st.level.critical':  'критичный',
+    'st.level.full':      'полная блокада',
+    'st.level.drought':   'засуха',
+    'st.level.severe':    'сильная засуха',
+    'st.level.disaster':  'катастрофа',
+    'st.level.significant':'значительный',
+    'st.loading.title': 'Вычисление сценария...',
+    'st.loading.sub':   'Анализ каскадных эффектов по всем секторам экономики',
+    'st.kpi.gdp':      'Изменение ВВП',
+    'st.kpi.gdp.sub':  'п.п. к базовому сценарию',
+    'st.kpi.infl':     'Рост инфляции',
+    'st.kpi.infl.sub': 'доп. п.п. к текущей инфляции',
+    'st.kpi.exch':     'Курс TJS/USD',
+    'st.kpi.exch.sub': '% изменение (–= ослабление TJS)',
+    'st.kpi.rem':      'Переводы мигрантов',
+    'st.kpi.res':      'Резервы НБТ',
+    'st.kpi.elec':     'Дефицит электроэнергии',
+    'st.kpi.elec.sub': '% от нормальной выработки',
+    'st.kpi.pct':      '% изменение',
+    'st.chart.timeline': 'Динамика кризиса по кварталам',
+    'st.chart.regional': 'Региональный эффект (% изм. ВВП)',
+    'st.card.recs':      'Рекомендации для руководства',
+    'st.ph.title': 'Выберите сценарий и настройте параметры',
+    'st.ph.text':  'Стресс-тест смоделирует каскадные экономические эффекты выбранного шока и покажет его влияние на ВВП, инфляцию, курс TJS, переводы и резервы НБТ по регионам страны.',
+  },
+
+  tj: {
+    // Топбар
+    'topbar.country':   'Ҷумҳурии Тоҷикистон',
+    'topbar.home':      'Асосӣ',
+    'topbar.contacts':  'Тамос',
+    'topbar.help':      'Ёрдам',
+    // Шапка
+    'header.ministry':  'Ҷумҳурии Тоҷикистон · Вазорати рушди иқтисодӣ ва савдо',
+    'header.title':     'Идораи асосии таҳлили макроиқтисодӣ, пешбинӣ ва ислоҳоти иқтисодӣ',
+    'header.sub':       'Низоми назорати нарх ва таҳлили AI-и ҳуҷҷатҳои иқтисодӣ',
+    // Навигация
+    'nav.prices':   'Назорати нарх',
+    'nav.analysis': 'Таҳлили AI',
+    'nav.forecast': 'Дурнамо',
+    'nav.data':     'Маълумот',
+    'nav.stress':   'Санҷиши стресс',
+    'nav.report':   'Ҳисобот оид ба нарх',
+    // Страница 1
+    'p1.h1':            'Назорати нархи истеъмолӣ',
+    'p1.sub':           'Назорати ҳафтаинаи нарх ба молҳои асосии озуқавории минтақаҳои Тоҷикистон',
+    'p1.chip.data':     'Маълумот навшуда',
+    'p1.chip.regions':  '5 минтақа',
+    'p1.chip.products': '18 мавқеи молӣ',
+    'p1.stat.cpi':      'ИНА (сол ба сол)',
+    'p1.stat.bread':    'Нони гандумӣ',
+    'p1.stat.oil':      'Равғани офтобпараст',
+    'p1.stat.rate':     'Курси USD/TJS',
+    'p1.stat.month':    'нисбат ба моҳи гузашта',
+    'p1.stat.permonth': 'дар як моҳ',
+    'p1.stat.peryear':  'дар як сол',
+    'p1.stat.perweek':  'дар як ҳафта',
+    'p1.chart.food':    'Динамикаи нархи озуқавории (TJS)',
+    'p1.chart.annual':  'Тағйироти солонаи нарх',
+    'p1.chart.bread':   'Нархи нон аз рӯи минтақаҳо',
+    'p1.tbl.title':     'Ҷадвали умумии нарх',
+    'p1.tbl.source':    'Манбаъ: ИМТИИ ВРИС ҶТ',
+    'p1.tbl.product':   'Номи мол',
+    'p1.tbl.region':    'Минтақа',
+    'p1.tbl.price':     'Нарх (TJS)',
+    'p1.tbl.unit':      'Вҳд.',
+    'p1.tbl.week':      'Ҳафта',
+    'p1.tbl.month':     'Моҳ',
+    'p1.tbl.year':      'Сол',
+    'p1.tbl.footer':    'Маълумоти Идораи асосии таҳлили макроиқтисодӣ, пешбинӣ ва ислоҳоти иқтисодии ВРИС ҶТ',
+    'p1.bread.section': 'Нархи нон аз рӯи минтақаҳо (TJS/кг)',
+    // Страница 2 — AI
+    'ai.h1':         'Низоми таҳлили иқтисодии AI',
+    'ai.sub':        'Ҳуҷҷати иқтисодӣ бор кунед ва савол диҳед — Claude мундариҷаро таҳлил карда, ҷавоби касбӣ медиҳад',
+    'ai.badge.lang': 'Ҷавобҳо ба забони тоҷикӣ',
+    'ai.form.top':   'Параметрҳои таҳлил',
+    'ai.sc.label':   'Сенарияи таҳлил',
+    'ai.sc.current': 'Таҳлили ҷорӣ',
+    'ai.sc.forecast':'Дурнамо',
+    'ai.sc.whatif':  'Агар чӣ мешавад',
+    'ai.sc.report':  'Тайёр кардани ҳисобот',
+    'ai.q.label':    'Савол / Супориш',
+    'ai.file.label': 'Санад барои таҳлил',
+    'ai.file.text':  'Файлро кашед ё барои интихоб пахш кунед',
+    'ai.role.label': 'Нақши Шумо',
+    'ai.role.1':     '📊 Таҳлилгари иқтисодӣ',
+    'ai.role.2':     '🏛️ Вазир / Муовини вазир',
+    'ai.role.3':     '👔 Сардори шӯъба',
+    'ai.role.4':     '💼 Мутахассис',
+    'ai.role.5':     '🎓 Коршинос / Машваратгар',
+    'ai.submit':     'ИҶРОИ ТАҲЛИЛ',
+    'ai.result.title': 'Натиҷаи таҳлил',
+    'ai.copy':       'Нусхабардорӣ',
+    'ai.clear':      'Тоза кардан',
+    'ai.ph.title':   'Барои таҳлил омода',
+    'ai.ph.text':    'Сенария интихоб кунед, ҳуҷҷат бор кунед ва савол диҳед — Claude мундариҷаро таҳлил карда, ҷавоби касбӣ медиҳад',
+    'ai.step1': 'Сенария', 'ai.step2': 'Савол', 'ai.step3': 'Файл', 'ai.step4': 'Таҳлил',
+    'ai.ld.title': 'Claude ҳуҷҷатро таҳлил мекунад...',
+    'ai.ld.1': 'Ирсоли ҳуҷҷат',
+    'ai.ld.2': 'Хондани мундариҷа',
+    'ai.ld.3': 'Таҳлили AI',
+    'ai.ld.4': 'Таҳияи ҷавоб',
+    // Страница 3 — Прогноз
+    'fc.h1':                   'Моделҳои пешбинии қатори вақтӣ',
+    'fc.sub':                  'Пешбинии нишондиҳандаҳои макроиқтисодӣ бо усулҳои ARIMA ва Prophet',
+    'fc.form.top':             'Параметрҳои пешбинӣ',
+    'fc.data.label':           'Маълумоти таърихӣ',
+    'fc.method.label':         'Усули пешбинӣ',
+    'fc.method.arima.desc':    'Миёнаи ҳаракаткунандаи интегралии авторегрессивӣ. Барои қаторҳои трендӣ мувофиқ аст.',
+    'fc.method.prophet.label': 'тренд + мавсимӣ',
+    'fc.method.prophet.desc':  'Таҷзияи қатор ба тренд ва ҷузъи мавсимӣ. Барои маълумоти давравӣ мувофиқ аст.',
+    'fc.horizon.label':        'Уфуқи пешбинӣ',
+    'fc.months':               'моҳ',
+    'fc.submit':               'СОХТАНИ ДУРНАМО',
+    'fc.ph.title':             'Барои пешбинӣ омода',
+    'fc.ph.text':              'Маълумоти таърихӣ ворид кунед, усул ва уфуқи пешбиниро интихоб кунед — система пешбиниро ҳисоб мекунад',
+    'fc.step1': 'Маълумот', 'fc.step2': 'Усул', 'fc.step3': 'Давра', 'fc.step4': 'Дурнамо',
+    // Страница 5 — Стресс-тест
+    'st.h1':  'Санҷиши стрессии иқтисоди Тоҷикистон',
+    'st.sub': 'Моделсозии шокҳои макроиқтисодӣ ва таъсири каскадии онҳо ба нишондиҳандаҳои асосӣ',
+    'st.badge.scenarios': '4 сенарияи шок',
+    'st.badge.regional':  'Таҳлили минтақавӣ',
+    'st.badge.recs':      'Тавсияҳо барои роҳбарият',
+    'st.badge.timeline':  'Пешбинии семоҳа',
+    'st.oil.title':   'Афтодани нафт',
+    'st.oil.desc':    'Паст шудани нархи нафт → суст шудани ИФ → кам шудани интиқоли маблағ → заиф шудани TJS',
+    'st.rem.title':   'Маҳдудияти интиқоли маблағҳо',
+    'st.rem.desc':    'Таҳримҳо ё маҳдудиятҳо → камбуди асъор → таваррум → афтодани ММД',
+    'st.crop.title':  'Камҳосилӣ',
+    'st.crop.desc':   'Хушксолӣ ё омилҳои дигар → афзоиши воридоти ғалла → таварруми озуқавории минтақаҳо',
+    'st.hydro.title': 'Бӯҳрони гидроэнергетикӣ',
+    'st.hydro.desc':  'Паст шудани сатҳи дарёҳо → норасоии барқ → истодани ТАЛКО → афтодани саноат',
+    'st.params.oil':   'Параметрҳои сенария: Афтодани нархи нафт',
+    'st.params.rem':   'Параметрҳои сенария: Маҳдудияти интиқоли маблағ',
+    'st.params.crop':  'Параметрҳои сенария: Камҳосилӣ',
+    'st.params.hydro': 'Параметрҳои сенария: Бӯҳрони гидроэнергетикӣ',
+    'st.oil.param':    'Нархи нафт (Brent, $/барр.)',
+    'st.rem.param':    'Маҳдудияти интиқол',
+    'st.crop.param':   'Афтодани ҳосил',
+    'st.hydro.param':  'Паст шудани сатҳи дарёҳо',
+    'st.oil.hint':   '📌 Нархи асосии нафт: $70/барр. | Интиқоли муҳоҷирон: ~$3.45 млрд (~30% ММД) | ضریбҳо: бӯҳрони 2015–2016',
+    'st.rem.hint':   '📌 Интиқол = 30% ММД Тоҷикистон | Ҳаҷм: ~$3.45 млрд/сол | ~95% интиқол аз Русия',
+    'st.crop.hint':  '📌 К/Х = ~20% ММД | Сабади озуқавории = ~45% ИНА | Воридоти ғалла: ~$150–200 млн/сол',
+    'st.hydro.hint': '📌 98% барқ — НЭС | Содироти барқ: $300 млн/сол | ТАЛКО: 15% содироти кишвар | 10%↓ об = 8%↓ барқ = 1.5%↓ ММД',
+    'st.presets':       'Пешфарзҳо:',
+    'st.run':           'Оғоз кардани санҷиш',
+    'st.level.crisis':     'бӯҳрон',
+    'st.level.low':        'паст',
+    'st.level.moderate':   'мӯътадил',
+    'st.level.base':       'асосӣ',
+    'st.level.partial':    'қисман',
+    'st.level.half':       'нисфӣ',
+    'st.level.critical':   'танқидӣ',
+    'st.level.full':       'блокадаи пурра',
+    'st.level.drought':    'хушксолӣ',
+    'st.level.severe':     'хушксолии шадид',
+    'st.level.disaster':   'фалокат',
+    'st.level.significant':'назаррас',
+    'st.loading.title': 'Ҳисоби сенария...',
+    'st.loading.sub':   'Таҳлили таъсироти каскадии ҳамаи бахшҳои иқтисодиёт',
+    'st.kpi.gdp':      'Тағйири ММД',
+    'st.kpi.gdp.sub':  'п.п. нисбат ба сенарияи асосӣ',
+    'st.kpi.infl':     'Афзоиши таваррум',
+    'st.kpi.infl.sub': 'п.п. иловагӣ ба таваррум',
+    'st.kpi.exch':     'Курси TJS/USD',
+    'st.kpi.exch.sub': '% тағйир (–= заифшавии TJS)',
+    'st.kpi.rem':      'Интиқоли муҳоҷирон',
+    'st.kpi.res':      'Захираҳои БМТ',
+    'st.kpi.elec':     'Норасоии барқ',
+    'st.kpi.elec.sub': '% аз истеҳсоли муқаррарӣ',
+    'st.kpi.pct':      '% тағйир',
+    'st.chart.timeline': 'Динамикаи бӯҳрон аз рӯи семоҳаҳо',
+    'st.chart.regional': 'Таъсири минтақавӣ (% тағйири ММД)',
+    'st.card.recs':      'Тавсияҳо барои роҳбарият',
+    'st.ph.title': 'Сенарияро интихоб ва параметрҳоро танзим кунед',
+    'st.ph.text':  'Санҷиши стресс таъсироти каскадии иқтисодии шоки интихобшударо моделсозӣ мекунад.',
+  },
+
+  en: {
+    // Topbar
+    'topbar.country':   'Republic of Tajikistan',
+    'topbar.home':      'Home',
+    'topbar.contacts':  'Contacts',
+    'topbar.help':      'Help',
+    // Header
+    'header.ministry':  'Republic of Tajikistan · Ministry of Economic Development and Trade',
+    'header.title':     'Department of Macroeconomic Analysis, Forecasting and Economic Reforms',
+    'header.sub':       'Price Monitoring and AI Analysis System',
+    // Navigation
+    'nav.prices':   'Price Monitoring',
+    'nav.analysis': 'AI Document Analysis',
+    'nav.forecast': 'Forecasting',
+    'nav.data':     'Data',
+    'nav.stress':   'Stress Test',
+    'nav.report':   'Price Report',
+    // Page 1
+    'p1.h1':            'Consumer Price Monitoring',
+    'p1.sub':           'Weekly monitoring of basic food prices across regions of Tajikistan',
+    'p1.chip.data':     'Data up to date',
+    'p1.chip.regions':  '5 regions',
+    'p1.chip.products': '18 product lines',
+    'p1.stat.cpi':      'CPI (year-on-year)',
+    'p1.stat.bread':    'Wheat bread',
+    'p1.stat.oil':      'Sunflower oil',
+    'p1.stat.rate':     'USD/TJS rate',
+    'p1.stat.month':    'vs last month',
+    'p1.stat.permonth': 'per month',
+    'p1.stat.peryear':  'per year',
+    'p1.stat.perweek':  'per week',
+    'p1.chart.food':    'Food Price Dynamics (TJS)',
+    'p1.chart.annual':  'Annual Price Change',
+    'p1.chart.bread':   'Bread Price by Region',
+    'p1.tbl.title':     'Price Summary Table',
+    'p1.tbl.source':    'Source: DMA MEDT RT',
+    'p1.tbl.product':   'Product Name',
+    'p1.tbl.region':    'Region',
+    'p1.tbl.price':     'Price (TJS)',
+    'p1.tbl.unit':      'Unit',
+    'p1.tbl.week':      'Week',
+    'p1.tbl.month':     'Month',
+    'p1.tbl.year':      'Year',
+    'p1.tbl.footer':    'Data from the Department of Macroeconomic Analysis, Forecasting and Economic Reforms, MEDT RT',
+    'p1.bread.section': 'Bread Price by Region (TJS/kg)',
+    // Page 2 — AI Analysis
+    'ai.h1':         'AI Economic Analysis System',
+    'ai.sub':        'Upload an economic document and ask a question — Claude will analyse the content and provide a professional response',
+    'ai.badge.lang': 'Responses in English',
+    'ai.form.top':   'Analysis Parameters',
+    'ai.sc.label':   'Analysis Scenario',
+    'ai.sc.current': 'Current Analysis',
+    'ai.sc.forecast':'Forecast',
+    'ai.sc.whatif':  'What If Scenario',
+    'ai.sc.report':  'Prepare Report',
+    'ai.q.label':    'Question / Task',
+    'ai.file.label': 'Document for Analysis',
+    'ai.file.text':  'Drag & drop a file or click to select',
+    'ai.role.label': 'Your Role',
+    'ai.role.1':     '📊 Economic Analyst',
+    'ai.role.2':     '🏛️ Minister / Deputy Minister',
+    'ai.role.3':     '👔 Head of Department',
+    'ai.role.4':     '💼 Specialist',
+    'ai.role.5':     '🎓 Expert / Consultant',
+    'ai.submit':     'RUN ANALYSIS',
+    'ai.result.title': 'Analysis Result',
+    'ai.copy':       'Copy',
+    'ai.clear':      'Clear',
+    'ai.ph.title':   'Ready to Analyse',
+    'ai.ph.text':    'Select a scenario, upload a document and ask a question — Claude will analyse the content and provide a professional response',
+    'ai.step1': 'Scenario', 'ai.step2': 'Question', 'ai.step3': 'File', 'ai.step4': 'Analyse',
+    'ai.ld.title': 'Claude is analysing the document...',
+    'ai.ld.1': 'Sending document',
+    'ai.ld.2': 'Reading content',
+    'ai.ld.3': 'AI analysis',
+    'ai.ld.4': 'Generating response',
+    // Page 3 — Forecasting
+    'fc.h1':                   'Time Series Forecasting Models',
+    'fc.sub':                  'Forecasting macroeconomic indicators using ARIMA and Prophet with anomaly detection',
+    'fc.form.top':             'Forecast Parameters',
+    'fc.data.label':           'Historical Data',
+    'fc.method.label':         'Forecasting Method',
+    'fc.method.arima.desc':    'Autoregressive Integrated Moving Average. Suitable for trend series without pronounced seasonality.',
+    'fc.method.prophet.label': 'trend + seasonality',
+    'fc.method.prophet.desc':  'Decomposition into trend and seasonal components. Suitable for data with periodic patterns.',
+    'fc.horizon.label':        'Forecast Horizon',
+    'fc.months':               'mo.',
+    'fc.submit':               'BUILD FORECAST',
+    'fc.ph.title':             'Ready to Forecast',
+    'fc.ph.text':              'Enter historical data, select a method and forecast horizon — the system will calculate the forecast and detect anomalies',
+    'fc.step1': 'Data', 'fc.step2': 'Method', 'fc.step3': 'Period', 'fc.step4': 'Forecast',
+    // Page 5 — Stress Test
+    'st.h1':  'Tajikistan Economy Stress Testing',
+    'st.sub': 'Modelling macroeconomic shocks and their cascading impact on key indicators',
+    'st.badge.scenarios': '4 shock scenarios',
+    'st.badge.regional':  'Regional analysis',
+    'st.badge.recs':      'Management recommendations',
+    'st.badge.timeline':  'Quarterly forecast',
+    'st.oil.title':   'Oil Price Drop',
+    'st.oil.desc':    'Oil price decline → Russia slowdown → migrant remittances fall → TJS weakens',
+    'st.rem.title':   'Remittance Restrictions',
+    'st.rem.desc':    'Sanctions or restrictions on transfers from Russia → FX shortage → inflation → GDP drop',
+    'st.crop.title':  'Crop Failure',
+    'st.crop.desc':   'Drought or other factors → grain import surge → food inflation across regions',
+    'st.hydro.title': 'Hydropower Crisis',
+    'st.hydro.desc':  'River level decline → electricity deficit → TALCO shutdown → industry drop',
+    'st.params.oil':   'Scenario Parameters: Oil Price Drop',
+    'st.params.rem':   'Scenario Parameters: Remittance Restrictions',
+    'st.params.crop':  'Scenario Parameters: Crop Failure',
+    'st.params.hydro': 'Scenario Parameters: Hydropower Crisis',
+    'st.oil.param':    'Oil price (Brent, $/bbl)',
+    'st.rem.param':    'Remittance restriction',
+    'st.crop.param':   'Crop failure',
+    'st.hydro.param':  'River level decline',
+    'st.oil.hint':   '📌 Base oil price: $70/bbl | Migrant remittances: ~$3.45B (~30% GDP) | Coefficients: 2015–2016 crisis',
+    'st.rem.hint':   '📌 Remittances = 30% of Tajikistan GDP | Volume: ~$3.45B/year | ~95% from Russia',
+    'st.crop.hint':  '📌 Agriculture = ~20% GDP | Food basket = ~45% CPI | Grain imports: ~$150–200M/year',
+    'st.hydro.hint': '📌 98% electricity from HPP | Power exports: $300M/year | TALCO: 15% of exports | 10%↓ water = 8%↓ power = 1.5%↓ GDP',
+    'st.presets':       'Presets:',
+    'st.run':           'Run Stress Test',
+    'st.level.crisis':     'crisis',
+    'st.level.low':        'low',
+    'st.level.moderate':   'moderate',
+    'st.level.base':       'baseline',
+    'st.level.partial':    'partial',
+    'st.level.half':       'half',
+    'st.level.critical':   'critical',
+    'st.level.full':       'full blockade',
+    'st.level.drought':    'drought',
+    'st.level.severe':     'severe drought',
+    'st.level.disaster':   'disaster',
+    'st.level.significant':'significant',
+    'st.loading.title': 'Computing scenario...',
+    'st.loading.sub':   'Analysing cascading effects across all economic sectors',
+    'st.kpi.gdp':      'GDP Change',
+    'st.kpi.gdp.sub':  'p.p. vs baseline scenario',
+    'st.kpi.infl':     'Inflation Rise',
+    'st.kpi.infl.sub': 'additional p.p. to current inflation',
+    'st.kpi.exch':     'TJS/USD Rate',
+    'st.kpi.exch.sub': '% change (–= TJS weakening)',
+    'st.kpi.rem':      'Migrant Remittances',
+    'st.kpi.res':      'NBT Reserves',
+    'st.kpi.elec':     'Electricity Deficit',
+    'st.kpi.elec.sub': '% of normal generation',
+    'st.kpi.pct':      '% change',
+    'st.chart.timeline': 'Crisis Dynamics by Quarter',
+    'st.chart.regional': 'Regional Impact (% GDP change)',
+    'st.card.recs':      'Management Recommendations',
+    'st.ph.title': 'Select a scenario and configure parameters',
+    'st.ph.text':  'The stress test will model cascading economic effects of the selected shock and show its impact on GDP, inflation, TJS rate, remittances and NBT reserves across regions.',
+  },
+};
+
+// Применить переводы ко всем data-i18n элементам
+function applyTranslations(lang) {
+  const t = i18n[lang];
+  if (!t) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+}
+
+// Обновить активную кнопку языка
+function updateLangButtons(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+}
+
+// Публичная функция переключения языка
+function setLanguage(lang) {
+  if (!i18n[lang]) return;
+  localStorage.setItem('lang', lang);
+  applyTranslations(lang);
+  updateLangButtons(lang);
+}
+
+// Инициализация: применить язык из localStorage при загрузке
+(function initLang() {
+  const saved = localStorage.getItem('lang') || 'ru';
+  applyTranslations(saved);
+  updateLangButtons(saved);
+})();
 </script>
 
 </body>
