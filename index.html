@@ -3355,8 +3355,13 @@ function filterChart(period, btn) {
 function showPage(name, btn) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  btn.classList.add('active');
+  const pageEl = document.getElementById('page-'+name);
+  if (pageEl) pageEl.classList.add('active');
+  if (btn) btn.classList.add('active');
+  // Автозагрузка данных для вкладки Data Science
+  if (name === 'datascience') {
+    setTimeout(dsRefreshAll, 50);
+  }
 }
 
 // ============================================================
@@ -3617,19 +3622,26 @@ function renderWBChart(data) {
   }).join('');
 }
 
+function navigateToAnalysis(prompt) {
+  // Находим кнопку анализа по onclick атрибуту — надёжнее чем по тексту
+  const analysisBtn = Array.from(document.querySelectorAll('.nav-tab'))
+    .find(t => t.getAttribute('onclick')?.includes("'analysis'"));
+  showPage('analysis', analysisBtn || null);
+  if (prompt) {
+    setTimeout(() => {
+      const q = document.getElementById('question');
+      if (q) { q.value = prompt; q.dispatchEvent(new Event('input')); }
+    }, 100);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function sendWBToAI() {
   if (!wbCurrentData) return;
   const text = `Проанализируй данные Всемирного банка по Таджикистану.\n\nПоказатель: ${wbCurrentData.label}\n\nДанные по годам:\n${
     wbCurrentData.series.map(d => `${d.year}: ${d.value}`).join('\n')
   }\n\nВыяви тренды, сравни с мировыми показателями и дай прогноз.`;
-  document.getElementById('question').value = text;
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-analysis').classList.add('active');
-  // активируем нужный таб
-  const tabs = document.querySelectorAll('.nav-tab');
-  tabs.forEach(t => { if (t.textContent.includes('AI')) t.classList.add('active'); });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  navigateToAnalysis(text);
 }
 
 // ============================================================
@@ -3919,15 +3931,7 @@ ${impactMap[type]}
 
 Дай профессиональный макроэкономический анализ: текущий тренд, риски для Таджикистана, прогноз на ближайший месяц и рекомендации для экономической политики.`;
 
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const tabs = document.querySelectorAll('.nav-tab');
-  tabs.forEach(t => { if (t.textContent.includes('AI') || t.textContent.includes('Анализ')) t.classList.add('active'); });
-  showPage('analysis', document.querySelector('.nav-tab.active'));
-
-  setTimeout(() => {
-    const q = document.getElementById('question');
-    if (q) { q.value = prompt; q.dispatchEvent(new Event('input')); }
-  }, 200);
+  navigateToAnalysis(prompt);
 }
 
 function sendAllCommoditiesToAI() {
@@ -3952,15 +3956,7 @@ ${fmt(cmData.wheat,    'Пшеница',    '$/бушель','Импорт пш�
 4. Экспортную выручку (алюминий → ТАЛКО)
 5. Рекомендации для НБТ и Министерства экономики`;
 
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const tabs = document.querySelectorAll('.nav-tab');
-  tabs.forEach(t => { if (t.textContent.includes('AI') || t.textContent.includes('Анализ')) t.classList.add('active'); });
-  showPage('analysis', document.querySelector('.nav-tab.active'));
-
-  setTimeout(() => {
-    const q = document.getElementById('question');
-    if (q) { q.value = prompt; q.dispatchEvent(new Event('input')); }
-  }, 200);
+  navigateToAnalysis(prompt);
 }
 
 // ============================================================
@@ -4300,15 +4296,6 @@ async function dsLoadLog() {
     }).join('');
   } catch (e) {
     console.warn('[dsLoadLog]', e.message);
-  }
-}
-
-// Автозагрузка данных при открытии вкладки
-const _origShowPage = showPage;
-function showPage(name, btn) {
-  _origShowPage(name, btn);
-  if (name === 'datascience') {
-    dsRefreshAll();
   }
 }
 

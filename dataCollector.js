@@ -496,6 +496,67 @@ async function fetchOilPrice() {
   return fetchYahooFinance('CL=F', 'Нефть Brent (WTI)', '$/барр.');
 }
 
+// ─── МВФ — данные по Таджикистану ────────────────────────────────────────
+
+async function fetchIMF() {
+  const cacheKey = 'imf';
+  // IMF DataMapper API — несколько индикаторов для TJK
+  const INDICATORS = {
+    NGDP_RPCH:  'Рост реального ВВП (%)',
+    PCPIPCH:    'Инфляция (%)',
+    BCA_NGDPD:  'Счёт текущих операций (% ВВП)',
+    LUR:        'Безработица (%)',
+    GGXCNL_NGDP: 'Чистые займы правительства (% ВВП)',
+  };
+
+  let allData = {};
+  const errors = [];
+
+  for (const [code, label] of Object.entries(INDICATORS)) {
+    try {
+      const url = `https://www.imf.org/external/datamapper/api/v1/${code}/TJK`;
+      const { body, status } = await fetchUrl(url);
+      if (status !== 200) throw new Error(`статус ${status}`);
+      const parsed = JSON.parse(body);
+
+      const series = parsed?.values?.[code]?.TJK;
+      if (series) {
+        allData[code] = {
+          label,
+          series: Object.entries(series)
+            .map(([year, value]) => ({ year: parseInt(year), value }))
+            .filter(d => d.value !== null && d.value !== undefined)
+            .sort((a, b) => a.year - b.year),
+        };
+      }
+    } catch (err) {
+      errors.push(`${code}: ${err.message}`);
+    }
+  }
+
+  if (Object.keys(allData).length === 0) {
+    const cached = getCached(cacheKey);
+    if (cached) {
+      console.log('[IMF] Возврат из кэша');
+      return { ...cached, fromCache: true };
+    }
+    throw new Error('МВФ: нет данных. Ошибки: ' + errors.join('; '));
+  }
+
+  const data = {
+    source:    'imf.org/external/datamapper',
+    country:   'Таджикистан (TJK)',
+    indicators: allData,
+    errors:    errors.length ? errors : undefined,
+    fetched:   new Date().toISOString(),
+    fromCache: false,
+  };
+
+  console.log(`[IMF] OK — ${Object.keys(allData).length} индикаторов, ошибок: ${errors.length}`);
+  setCached(cacheKey, data);
+  return data;
+}
+
 // ─── Источник 5: Цена алюминия ────────────────────────────────────────────
 
 async function fetchAluminumPrice() {
@@ -515,6 +576,7 @@ module.exports = {
   fetchADB,
   fetchWTO,
   fetchCBR,
+  fetchIMF,
   fetchOilPrice,
   fetchAluminumPrice,
   fetchWheatPrice,

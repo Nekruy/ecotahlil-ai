@@ -667,6 +667,21 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/imf — данные МВФ по Таджикистану
+  if (req.method === 'GET' && req.url === '/api/imf') {
+    try {
+      const { fetchIMF } = require('./dataCollector');
+      const result = await fetchIMF();
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/imf]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // GET /api/correlation — матрица корреляций
   if (req.method === 'GET' && req.url === '/api/correlation') {
     try {
