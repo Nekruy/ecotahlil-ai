@@ -8,6 +8,11 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_URL     = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL   = 'llama-3.3-70b-versatile';
 
+// ─── Отладка переменных окружения ────────────────────────────────────────────
+console.log('GROQ_API_KEY присутствует:', !!process.env.GROQ_API_KEY);
+console.log('GROQ_API_KEY длина:', process.env.GROQ_API_KEY ? process.env.GROQ_API_KEY.length : 0);
+console.log('NODE_ENV:', process.env.NODE_ENV || 'не задан');
+
 // ─── Groq API helper ─────────────────────────────────────────────────────────
 function groqChat(systemPrompt, userContent, maxTokens = 4000) {
   if (!GROQ_API_KEY) {
