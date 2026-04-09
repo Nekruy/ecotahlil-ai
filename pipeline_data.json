@@ -1,0 +1,445 @@
+{
+  "runAt": "2026-04-09T11:45:38.401Z",
+  "completedAt": "2026-04-09T11:45:40.325Z",
+  "sources": [
+    "nbt.tj",
+    "worldbank:GDP",
+    "worldbank:CPI",
+    "yahoo:CL=F",
+    "yahoo:ALI=F",
+    "yahoo:ZW=F"
+  ],
+  "fxCurrent": 9.5466,
+  "rubRate": 0.122,
+  "oilPrice": 99.36,
+  "oilPrev": 94.77,
+  "oilChangePct": 4.84,
+  "aluminumPrice": 3365.75,
+  "aluminumPrev": 3292,
+  "aluminumChangePct": 2.24,
+  "wheatPrice": 588,
+  "wheatPrev": 598,
+  "wheatChangePct": -1.67,
+  "inflation": 6,
+  "inflationPrev": 5.71,
+  "correlations": {
+    "keys": [
+      "USD/TJS",
+      "Нефть",
+      "Алюминий",
+      "Пшеница",
+      "ВВП",
+      "Инфляция"
+    ],
+    "matrix": {
+      "USD/TJS": {
+        "USD/TJS": {
+          "r": 1,
+          "label": "Сильная положительная",
+          "color": "#15803d",
+          "strength": "strong_pos"
+        },
+        "Нефть": {
+          "r": null,
+          "n": 2,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Алюминий": {
+          "r": null,
+          "n": 2,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Пшеница": {
+          "r": null,
+          "n": 2,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "ВВП": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Инфляция": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        }
+      },
+      "Нефть": {
+        "USD/TJS": {
+          "r": null,
+          "n": 2,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Нефть": {
+          "r": 1,
+          "label": "Сильная положительная",
+          "color": "#15803d",
+          "strength": "strong_pos"
+        },
+        "Алюминий": {
+          "r": 0.448,
+          "n": 23,
+          "label": "Умеренная положительная",
+          "color": "#0284c7",
+          "strength": "moderate_pos"
+        },
+        "Пшеница": {
+          "r": 0.351,
+          "n": 23,
+          "label": "Умеренная положительная",
+          "color": "#0284c7",
+          "strength": "moderate_pos"
+        },
+        "ВВП": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Инфляция": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        }
+      },
+      "Алюминий": {
+        "USD/TJS": {
+          "r": null,
+          "n": 2,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Нефть": {
+          "r": 0.448,
+          "n": 23,
+          "label": "Умеренная положительная",
+          "color": "#0284c7",
+          "strength": "moderate_pos"
+        },
+        "Алюминий": {
+          "r": 1,
+          "label": "Сильная положительная",
+          "color": "#15803d",
+          "strength": "strong_pos"
+        },
+        "Пшеница": {
+          "r": 0.009,
+          "n": 23,
+          "label": "Слабая связь",
+          "color": "#6b7280",
+          "strength": "weak"
+        },
+        "ВВП": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Инфляция": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        }
+      },
+      "Пшеница": {
+        "USD/TJS": {
+          "r": null,
+          "n": 2,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Нефть": {
+          "r": 0.351,
+          "n": 23,
+          "label": "Умеренная положительная",
+          "color": "#0284c7",
+          "strength": "moderate_pos"
+        },
+        "Алюминий": {
+          "r": 0.009,
+          "n": 23,
+          "label": "Слабая связь",
+          "color": "#6b7280",
+          "strength": "weak"
+        },
+        "Пшеница": {
+          "r": 1,
+          "label": "Сильная положительная",
+          "color": "#15803d",
+          "strength": "strong_pos"
+        },
+        "ВВП": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Инфляция": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        }
+      },
+      "ВВП": {
+        "USD/TJS": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Нефть": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Алюминий": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Пшеница": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "ВВП": {
+          "r": 1,
+          "label": "Сильная положительная",
+          "color": "#15803d",
+          "strength": "strong_pos"
+        },
+        "Инфляция": {
+          "r": -0.532,
+          "n": 16,
+          "label": "Умеренная отрицательная",
+          "color": "#ea580c",
+          "strength": "moderate_neg"
+        }
+      },
+      "Инфляция": {
+        "USD/TJS": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Нефть": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Алюминий": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "Пшеница": {
+          "r": null,
+          "n": 0,
+          "label": "Нет данных",
+          "color": "#9ca3af",
+          "strength": "none"
+        },
+        "ВВП": {
+          "r": -0.532,
+          "n": 16,
+          "label": "Умеренная отрицательная",
+          "color": "#ea580c",
+          "strength": "moderate_neg"
+        },
+        "Инфляция": {
+          "r": 1,
+          "label": "Сильная положительная",
+          "color": "#15803d",
+          "strength": "strong_pos"
+        }
+      }
+    },
+    "topPairs": [
+      {
+        "a": "ВВП",
+        "b": "Инфляция",
+        "r": -0.532,
+        "n": 16,
+        "label": "Умеренная отрицательная",
+        "color": "#ea580c",
+        "strength": "moderate_neg"
+      },
+      {
+        "a": "Алюминий",
+        "b": "Нефть",
+        "r": 0.448,
+        "n": 23,
+        "label": "Умеренная положительная",
+        "color": "#0284c7",
+        "strength": "moderate_pos"
+      },
+      {
+        "a": "Нефть",
+        "b": "Пшеница",
+        "r": 0.351,
+        "n": 23,
+        "label": "Умеренная положительная",
+        "color": "#0284c7",
+        "strength": "moderate_pos"
+      },
+      {
+        "a": "Алюминий",
+        "b": "Пшеница",
+        "r": 0.009,
+        "n": 23,
+        "label": "Слабая связь",
+        "color": "#6b7280",
+        "strength": "weak"
+      }
+    ],
+    "computed": "2026-04-09T11:45:40.325Z"
+  },
+  "nowcast": {
+    "gdpGrowthEstimate": -1.6,
+    "gdpGrowthBase": -2.1,
+    "commodityAdjustment": 0.5,
+    "confidence": 45,
+    "dataPoints": 2,
+    "components": {
+      "remittances": {
+        "growth": null,
+        "weight": 0.3,
+        "contribution": null,
+        "label": "Переводы мигрантов",
+        "note": "~25-30% ВВП Таджикистана"
+      },
+      "trade": {
+        "growth": null,
+        "weight": 0.25,
+        "contribution": null,
+        "label": "Объём торговли",
+        "note": "Экспорт + импорт $млн"
+      },
+      "fxRate": {
+        "growth": 0.29764702196322834,
+        "weight": 0.25,
+        "contribution": 0.07441175549080709,
+        "label": "Стабильность курса TJS",
+        "note": "Укрепление TJS позитивно для реального ВВП"
+      },
+      "prices": {
+        "growth": -5.078809106830123,
+        "weight": 0.2,
+        "contribution": -1.0157618213660247,
+        "label": "Инфляция (инв.)",
+        "note": "Снижение инфляции повышает реальный ВВП"
+      }
+    },
+    "interpretation": {
+      "label": "Стагнация",
+      "color": "#ea580c"
+    },
+    "method": "Взвешенная сумма HF-индикаторов (МВФ-подход)",
+    "computed": "2026-04-09T11:45:40.325Z"
+  },
+  "healthIndex": {
+    "index": 73,
+    "level": "Здоровая",
+    "levelColor": "#15803d",
+    "levelIcon": "✅",
+    "scores": {
+      "inflation": {
+        "weight": 0.25,
+        "label": "Инфляция",
+        "value": 6,
+        "score": 93
+      },
+      "fxStability": {
+        "weight": 0.2,
+        "label": "Стабильность курса",
+        "value": 0.29764702196322834,
+        "valueStr": "0.30% изм./мес.",
+        "score": 100
+      },
+      "remittances": {
+        "weight": 0.2,
+        "label": "Переводы мигрантов",
+        "value": null,
+        "score": 50
+      },
+      "foodPrices": {
+        "weight": 0.2,
+        "label": "Цены на продовольствие",
+        "value": null,
+        "score": 50
+      },
+      "commodities": {
+        "weight": 0.15,
+        "label": "Товарные рынки",
+        "score": 66
+      }
+    },
+    "computed": "2026-04-09T11:45:40.325Z"
+  },
+  "topCorrelations": [
+    {
+      "a": "ВВП",
+      "b": "Инфляция",
+      "r": -0.532,
+      "n": 16,
+      "label": "Умеренная отрицательная",
+      "color": "#ea580c",
+      "strength": "moderate_neg"
+    },
+    {
+      "a": "Алюминий",
+      "b": "Нефть",
+      "r": 0.448,
+      "n": 23,
+      "label": "Умеренная положительная",
+      "color": "#0284c7",
+      "strength": "moderate_pos"
+    },
+    {
+      "a": "Нефть",
+      "b": "Пшеница",
+      "r": 0.351,
+      "n": 23,
+      "label": "Умеренная положительная",
+      "color": "#0284c7",
+      "strength": "moderate_pos"
+    }
+  ]
+}

@@ -10,6 +10,9 @@ const GROQ_MODEL   = 'llama-3.3-70b-versatile';
 
 // ─── Groq API helper ─────────────────────────────────────────────────────────
 function groqChat(systemPrompt, userContent, maxTokens = 4000) {
+  if (!GROQ_API_KEY) {
+    return Promise.reject(new Error('GROQ_API_KEY не задан — проверь переменную окружения на сервере'));
+  }
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
       model:       GROQ_MODEL,
