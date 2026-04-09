@@ -193,6 +193,73 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/commodities — нефть, алюминий, пшеница
+  if (req.method === 'GET' && req.url === '/api/commodities') {
+    try {
+      const { fetchOilPrice, fetchAluminumPrice, fetchWheatPrice } = require('./dataCollector');
+      const [oil, aluminum, wheat] = await Promise.allSettled([
+        fetchOilPrice(),
+        fetchAluminumPrice(),
+        fetchWheatPrice(),
+      ]);
+
+      const result = {
+        oil:      oil.status      === 'fulfilled' ? oil.value      : { error: oil.reason?.message },
+        aluminum: aluminum.status === 'fulfilled' ? aluminum.value : { error: aluminum.reason?.message },
+        wheat:    wheat.status    === 'fulfilled' ? wheat.value    : { error: wheat.reason?.message },
+        fetched:  new Date().toISOString(),
+      };
+
+      console.log(`[/api/commodities] oil=${oil.status} alu=${aluminum.status} wheat=${wheat.status}`);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/commodities]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/external — все внешние источники
+  if (req.method === 'GET' && req.url === '/api/external') {
+    try {
+      const {
+        fetchADB, fetchWTO, fetchCBR,
+        fetchOilPrice, fetchAluminumPrice, fetchWheatPrice,
+      } = require('./dataCollector');
+
+      const [adb, wto, cbr, oil, aluminum, wheat] = await Promise.allSettled([
+        fetchADB(),
+        fetchWTO(),
+        fetchCBR(),
+        fetchOilPrice(),
+        fetchAluminumPrice(),
+        fetchWheatPrice(),
+      ]);
+
+      const pick = r => r.status === 'fulfilled' ? r.value : { error: r.reason?.message };
+      const result = {
+        adb:      pick(adb),
+        wto:      pick(wto),
+        cbr:      pick(cbr),
+        oil:      pick(oil),
+        aluminum: pick(aluminum),
+        wheat:    pick(wheat),
+        fetched:  new Date().toISOString(),
+      };
+
+      console.log(`[/api/external] adb=${adb.status} wto=${wto.status} cbr=${cbr.status} oil=${oil.status} alu=${aluminum.status} wheat=${wheat.status}`);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/external]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // GET /api/nbt
   if (req.method === 'GET' && req.url === '/api/nbt') {
     try {
@@ -600,9 +667,140 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/correlation — матрица корреляций
+  if (req.method === 'GET' && req.url === '/api/correlation') {
+    try {
+      const { getPipelineData, runNightlyPipeline } = require('./dataPipeline');
+      let pd = getPipelineData();
+
+      // Если нет свежих данных — запускаем прямо сейчас
+      if (!pd || !pd.correlations) {
+        console.log('[/api/correlation] Нет данных пайплайна, запускаем ETL...');
+        const result = await runNightlyPipeline();
+        pd = result.pipelineData;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(pd?.correlations || { error: 'Нет данных' }));
+    } catch (err) {
+      console.error('[/api/correlation]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/nowcast — nowcasting ВВП
+  if (req.method === 'GET' && req.url === '/api/nowcast') {
+    try {
+      const { getPipelineData, runNightlyPipeline } = require('./dataPipeline');
+      let pd = getPipelineData();
+
+      if (!pd || !pd.nowcast) {
+        console.log('[/api/nowcast] Нет данных пайплайна, запускаем ETL...');
+        const result = await runNightlyPipeline();
+        pd = result.pipelineData;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(pd?.nowcast || { error: 'Нет данных' }));
+    } catch (err) {
+      console.error('[/api/nowcast]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/morning-digest — утренний дайджест
+  if (req.method === 'GET' && req.url === '/api/morning-digest') {
+    try {
+      const { getMorningDigest, runNightlyPipeline } = require('./dataPipeline');
+      let digest = getMorningDigest();
+
+      if (!digest) {
+        console.log('[/api/morning-digest] Нет дайджеста, запускаем ETL...');
+        const result = await runNightlyPipeline();
+        digest = result.digest;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(digest || { error: 'Нет данных' }));
+    } catch (err) {
+      console.error('[/api/morning-digest]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/health-index — индекс экономического здоровья
+  if (req.method === 'GET' && req.url === '/api/health-index') {
+    try {
+      const { getPipelineData, runNightlyPipeline } = require('./dataPipeline');
+      let pd = getPipelineData();
+
+      if (!pd || !pd.healthIndex) {
+        console.log('[/api/health-index] Нет данных, запускаем ETL...');
+        const result = await runNightlyPipeline();
+        pd = result.pipelineData;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(pd?.healthIndex || { error: 'Нет данных' }));
+    } catch (err) {
+      console.error('[/api/health-index]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/pipeline-log — лог пайплайна
+  if (req.method === 'GET' && req.url.startsWith('/api/pipeline-log')) {
+    try {
+      const { getPipelineLog } = require('./dataPipeline');
+      const qs    = new URL('http://x' + req.url).searchParams;
+      const limit = Math.min(200, parseInt(qs.get('limit') || '50'));
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ log: getPipelineLog(limit) }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // POST /api/pipeline-run — запустить ETL вручную
+  if (req.method === 'POST' && req.url === '/api/pipeline-run') {
+    try {
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ok: true, message: 'Пайплайн запущен в фоне' }));
+
+      // Запускаем асинхронно чтобы не блокировать ответ
+      const { runNightlyPipeline } = require('./dataPipeline');
+      runNightlyPipeline().catch(e => console.error('[pipeline-run]', e.message));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
+
+// Запускаем планировщик ночного ETL при старте сервера
+(function initPipeline() {
+  try {
+    const { schedulePipeline } = require('./dataPipeline');
+    schedulePipeline({ runNow: false }); // Не запускаем сразу, ждём 02:00
+    console.log('[pipeline] Планировщик ETL активирован (02:00 ежедневно)');
+  } catch (e) {
+    console.warn('[pipeline] Не удалось запустить планировщик:', e.message);
+  }
+})();
 
 server.listen(PORT, () => {
   console.log(`EcotahlilAI server running at http://localhost:${PORT}`);

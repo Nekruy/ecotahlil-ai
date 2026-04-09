@@ -1012,6 +1012,230 @@ footer b { color:#fff; }
 .wb-tbl td { padding:9px 12px; }
 .wb-val { font-weight:700; color:var(--navy); }
 
+/* ── Мировые рынки ─────────────────────────────────────────────────────── */
+.cm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.cm-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.cm-card:hover { box-shadow: 0 4px 18px rgba(0,53,128,.10); }
+.cm-card-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cm-icon { font-size: 22px; margin-right: 8px; }
+.cm-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.cm-badge {
+  font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px;
+  letter-spacing: .4px; text-transform: uppercase;
+}
+.cm-badge-up   { background: #dcfce7; color: #15803d; }
+.cm-badge-down { background: #fee2e2; color: #b91c1c; }
+.cm-badge-neu  { background: var(--navy-pale); color: var(--navy2); }
+.cm-body { padding: 14px 16px; }
+.cm-price {
+  font-size: 28px; font-weight: 800; color: var(--navy); margin-bottom: 2px;
+}
+.cm-unit { font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.cm-change { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.cm-change.up   { color: var(--green); }
+.cm-change.down { color: var(--red);   }
+.cm-change.neu  { color: var(--text3); }
+.cm-note {
+  font-size: 11px; color: var(--text3); background: var(--navy-pale);
+  border-radius: 6px; padding: 7px 10px; line-height: 1.4;
+}
+.cm-chart-wrap { height: 120px; padding: 8px 16px 14px; }
+.cm-loading {
+  font-size: 12px; color: var(--text3); font-style: italic;
+  padding: 10px 16px;
+}
+.cm-ai-btn {
+  display: block; width: calc(100% - 32px); margin: 0 16px 16px;
+  background: linear-gradient(135deg,#0d9488,#0891b2);
+  color: #fff; border: none; border-radius: 8px; padding: 9px 16px;
+  font-size: 12px; font-weight: 700; cursor: pointer; text-align: center;
+  transition: opacity .2s;
+}
+.cm-ai-btn:hover { opacity: .85; }
+.cm-refresh-btn {
+  background: transparent; border: 1.5px solid var(--navy2); color: var(--navy2);
+  border-radius: 7px; padding: 6px 14px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.cm-refresh-btn:hover { background: var(--navy2); color: #fff; }
+.cm-refresh-btn:disabled { opacity: .5; cursor: not-allowed; }
+.cm-status {
+  padding: 10px 14px; background: var(--navy-pale); border-radius: 8px;
+  font-size: 13px; color: var(--navy2); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── Data Science страница ────────────────────────────────────────────────── */
+.ds-header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0c4a6e 100%);
+  padding: 28px 28px 24px; color: #fff;
+}
+.ds-header h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.ds-header p  { font-size: 13px; color: rgba(255,255,255,.65); }
+.ds-header-badges { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.ab-cyan    { background: rgba(6,182,212,.15); border:1px solid rgba(6,182,212,.4); color:#67e8f9; }
+.ab-emerald { background: rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.4); color:#6ee7b7; }
+.ab-sky     { background: rgba(14,165,233,.15); border:1px solid rgba(14,165,233,.4); color:#7dd3fc; }
+.ab-blue    { background: rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.4); color:#93c5fd; }
+
+.ds-section { padding: 20px 24px; }
+.ds-section-title {
+  font-size: 14px; font-weight: 700; color: var(--navy);
+  text-transform: uppercase; letter-spacing: .6px;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 16px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--navy-pale);
+}
+
+/* Индекс здоровья */
+.hi-wrap {
+  display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center;
+}
+.hi-circle {
+  width: 130px; height: 130px; border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .5px; flex-shrink: 0;
+  border: 6px solid currentColor; transition: all .4s;
+}
+.hi-number { font-size: 42px; font-weight: 900; line-height: 1; }
+.hi-label  { font-size: 11px; opacity: .75; margin-top: 2px; }
+.hi-bars   { display: flex; flex-direction: column; gap: 10px; }
+.hi-bar-row { display: flex; align-items: center; gap: 10px; }
+.hi-bar-label { font-size: 12px; color: var(--text2); width: 170px; flex-shrink: 0; }
+.hi-bar-track {
+  flex: 1; height: 8px; background: var(--navy-pale);
+  border-radius: 4px; overflow: hidden;
+}
+.hi-bar-fill { height: 100%; border-radius: 4px; transition: width .6s; }
+.hi-bar-val  { font-size: 12px; font-weight: 700; width: 36px; text-align: right; color: var(--navy); }
+
+/* Nowcast */
+.nc-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;
+}
+.nc-card {
+  background: #fff; border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 16px; text-align: center;
+}
+.nc-value { font-size: 28px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.nc-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; }
+.nc-note  { font-size: 11px; color: var(--text2); margin-top: 6px; }
+.nc-component-row {
+  display: flex; align-items: center; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid var(--navy-pale); font-size: 13px;
+}
+.nc-component-row:last-child { border-bottom: none; }
+.nc-comp-label { flex: 1; color: var(--text2); }
+.nc-comp-weight { font-size: 11px; color: var(--text3); width: 40px; }
+.nc-comp-val { font-weight: 700; width: 70px; text-align: right; }
+
+/* Матрица корреляций */
+.corr-table-wrap { overflow-x: auto; }
+.corr-table {
+  width: 100%; border-collapse: collapse; font-size: 12px;
+}
+.corr-table th {
+  background: var(--navy); color: #fff; padding: 8px 10px;
+  font-size: 11px; font-weight: 700; text-align: center; white-space: nowrap;
+}
+.corr-table th:first-child { text-align: left; }
+.corr-table td {
+  padding: 7px 10px; text-align: center; font-weight: 700;
+  border: 1px solid rgba(0,0,0,.06);
+  transition: opacity .2s;
+}
+.corr-table tr:hover td { opacity: .85; }
+.corr-table td:first-child { text-align: left; font-weight: 600; color: var(--text2); background: #fafafa; }
+.corr-self { background: var(--navy-pale); color: var(--navy2); }
+
+/* Алерты дайджеста */
+.digest-alerts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.digest-alert {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px; border-radius: 8px; font-size: 13px;
+}
+.da-warning { background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; }
+.da-danger  { background: #fee2e2; border: 1px solid #ef4444; color: #7f1d1d; }
+.da-info    { background: #e0f2fe; border: 1px solid #0284c7; color: #0c4a6e; }
+.da-icon    { font-size: 16px; flex-shrink: 0; }
+.da-empty   { color: var(--text3); font-style: italic; font-size: 13px; }
+
+/* Топ изменений */
+.tc-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 0; border-bottom: 1px solid var(--navy-pale); font-size: 13px;
+}
+.tc-row:last-child { border-bottom: none; }
+.tc-label  { flex: 1; color: var(--text2); }
+.tc-val    { font-weight: 700; color: var(--navy); }
+.tc-impact { font-size: 11px; color: var(--text3); }
+.tc-pct    { font-weight: 700; width: 70px; text-align: right; }
+.tc-pct.up   { color: var(--green); }
+.tc-pct.down { color: var(--red); }
+
+/* Рекомендации */
+.rec-cards { display: flex; flex-direction: column; gap: 12px; }
+.rec-card {
+  background: #fff; border: 1.5px solid var(--border);
+  border-left: 4px solid var(--navy2); border-radius: 8px; padding: 14px 16px;
+}
+.rec-card.high   { border-left-color: var(--red); }
+.rec-card.medium { border-left-color: #f59e0b; }
+.rec-card.low    { border-left-color: var(--green); }
+.rec-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.rec-priority {
+  font-size: 10px; font-weight: 700; padding: 2px 7px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: .4px;
+}
+.rp-high   { background: #fee2e2; color: #b91c1c; }
+.rp-medium { background: #fef3c7; color: #92400e; }
+.rp-low    { background: #dcfce7; color: #15803d; }
+.rec-title { font-size: 13px; font-weight: 700; color: var(--navy); }
+.rec-text  { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+/* Pipeline log */
+.log-row {
+  display: flex; gap: 10px; padding: 5px 0;
+  border-bottom: 1px solid var(--navy-pale); font-size: 12px;
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+.log-row:last-child { border-bottom: none; }
+.log-ts     { color: var(--text3); flex-shrink: 0; width: 140px; }
+.log-level  { flex-shrink: 0; width: 50px; font-weight: 700; }
+.log-source { flex-shrink: 0; width: 100px; color: var(--navy2); }
+.log-msg    { color: var(--text); }
+.ll-info    { color: var(--green); }
+.ll-warn    { color: #d97706; }
+.ll-error   { color: var(--red); }
+
+.ds-run-btn {
+  background: linear-gradient(135deg, #0f172a, #1e3a5f);
+  color: #fff; border: none; border-radius: 8px; padding: 10px 20px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 8px; transition: opacity .2s;
+}
+.ds-run-btn:hover { opacity: .85; }
+.ds-run-btn:disabled { opacity: .5; cursor: not-allowed; }
+
 /* ============================================================
    АДАПТИВ
 ============================================================ */
@@ -1021,6 +1245,9 @@ footer b { color:#fff; }
   .var-layout { grid-template-columns:1fr; }
   .nbt-cards { grid-template-columns:repeat(2,1fr); }
   .dp-two-col { grid-template-columns:1fr; }
+  .cm-grid { grid-template-columns:1fr 1fr; }
+  .nc-grid { grid-template-columns:1fr 1fr; }
+  .hi-wrap { grid-template-columns:1fr; }
 }
 @media(max-width:900px) {
   .stat-row { grid-template-columns:repeat(2,1fr); }
@@ -1040,6 +1267,7 @@ footer b { color:#fff; }
   .topbar-right { display:none; }
   header { padding:10px 14px; }
   .header-title { font-size:14px; }
+  .cm-grid { grid-template-columns:1fr; }
 }
 
 /* ============================================================
@@ -1586,6 +1814,9 @@ footer b { color:#fff; }
   </button>
   <button class="nav-tab" onclick="showPage('cge',this)">
     ⚖️ CGE Модель
+  </button>
+  <button class="nav-tab" onclick="showPage('datascience',this)">
+    🔬 Data Science
   </button>
   <a class="nav-tab" href="/report" style="text-decoration:none">
     📝 <span data-i18n="nav.report">Отчёт по ценам</span>
@@ -2421,6 +2652,304 @@ footer b { color:#fff; }
     </div>
   </div>
 
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:0 24px">
+
+  <!-- ── МИРОВЫЕ РЫНКИ ──────────────────────────────────────────────────── -->
+  <div class="dp-section">
+    <div class="dp-section-title" style="justify-content:space-between">
+      <span>🌍 Мировые рынки — Влияние на экономику Таджикистана</span>
+      <button class="cm-refresh-btn" id="cmRefreshBtn" onclick="loadCommodities()">
+        🔄 Обновить
+      </button>
+    </div>
+
+    <div class="cm-status" id="cmStatus">
+      <span>ℹ️</span>
+      <span id="cmStatusText">Нажмите «Обновить» для загрузки цен мировых рынков</span>
+    </div>
+
+    <!-- Три карточки: нефть, алюминий, пшеница -->
+    <div class="cm-grid">
+
+      <!-- Нефть -->
+      <div class="dp-card cm-card" id="cmCardOil">
+        <div class="cm-card-header">
+          <div style="display:flex;align-items:center">
+            <span class="cm-icon">🛢️</span>
+            <span class="cm-title">Нефть Brent (WTI)</span>
+          </div>
+          <span class="cm-badge cm-badge-neu" id="cmBadgeOil">—</span>
+        </div>
+        <div class="cm-body">
+          <div class="cm-price" id="cmPriceOil"><span class="cm-loading">Загрузка…</span></div>
+          <div class="cm-unit">$/баррель</div>
+          <div class="cm-change neu" id="cmChangeOil">—</div>
+          <div class="cm-note">📦 Влияет на переводы мигрантов из России: при росте нефти укрепляется рубль → мигранты отправляют больше сомони</div>
+        </div>
+        <div class="cm-chart-wrap">
+          <canvas id="cmChartOil"></canvas>
+        </div>
+        <button class="cm-ai-btn" onclick="sendCommodityToAI('oil')">🤖 Отправить на AI анализ</button>
+      </div>
+
+      <!-- Алюминий -->
+      <div class="dp-card cm-card" id="cmCardAlu">
+        <div class="cm-card-header">
+          <div style="display:flex;align-items:center">
+            <span class="cm-icon">⚙️</span>
+            <span class="cm-title">Алюминий</span>
+          </div>
+          <span class="cm-badge cm-badge-neu" id="cmBadgeAlu">—</span>
+        </div>
+        <div class="cm-body">
+          <div class="cm-price" id="cmPriceAlu"><span class="cm-loading">Загрузка…</span></div>
+          <div class="cm-unit">$/тонна</div>
+          <div class="cm-change neu" id="cmChangeAlu">—</div>
+          <div class="cm-note">🏭 ТАЛКО — 15% экспорта страны: рост цены алюминия напрямую увеличивает валютную выручку Таджикистана</div>
+        </div>
+        <div class="cm-chart-wrap">
+          <canvas id="cmChartAlu"></canvas>
+        </div>
+        <button class="cm-ai-btn" onclick="sendCommodityToAI('aluminum')">🤖 Отправить на AI анализ</button>
+      </div>
+
+      <!-- Пшеница -->
+      <div class="dp-card cm-card" id="cmCardWheat">
+        <div class="cm-card-header">
+          <div style="display:flex;align-items:center">
+            <span class="cm-icon">🌾</span>
+            <span class="cm-title">Пшеница</span>
+          </div>
+          <span class="cm-badge cm-badge-neu" id="cmBadgeWheat">—</span>
+        </div>
+        <div class="cm-body">
+          <div class="cm-price" id="cmPriceWheat"><span class="cm-loading">Загрузка…</span></div>
+          <div class="cm-unit">$/бушель</div>
+          <div class="cm-change neu" id="cmChangeWheat">—</div>
+          <div class="cm-note">🍞 Определяет цену хлеба и муки: Таджикистан импортирует ~80% пшеницы — рост цены ускоряет продовольственную инфляцию</div>
+        </div>
+        <div class="cm-chart-wrap">
+          <canvas id="cmChartWheat"></canvas>
+        </div>
+        <button class="cm-ai-btn" onclick="sendCommodityToAI('wheat')">🤖 Отправить на AI анализ</button>
+      </div>
+
+    </div><!-- /cm-grid -->
+
+    <!-- Единый AI-анализ всех трёх -->
+    <div style="text-align:center;margin-top:4px">
+      <button class="send-to-ai-btn" onclick="sendAllCommoditiesToAI()" id="cmSendAllBtn" style="display:none">
+        🤖 Отправить все данные мировых рынков на AI анализ
+      </button>
+    </div>
+
+    <div style="margin-top:12px;font-size:11px;color:var(--text3)">
+      Источники: finance.yahoo.com · Кэш обновляется 1 раз в час
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+   СТРАНИЦА — DATA SCIENCE
+============================================================ -->
+<div class="page" id="page-datascience">
+
+  <!-- Шапка -->
+  <div class="ds-header">
+    <h1>🔬 Data Science Pipeline — Таджикистан</h1>
+    <p>Корреляционный анализ · Nowcasting ВВП · Индекс экономического здоровья · Утренний дайджест</p>
+    <div class="ds-header-badges">
+      <span class="ai-badge2 ab-cyan">📐 Корреляция Пирсона</span>
+      <span class="ai-badge2 ab-emerald">🔮 Nowcasting GDP</span>
+      <span class="ai-badge2 ab-sky">🏥 Health Index 0–100</span>
+      <span class="ai-badge2 ab-blue">🌅 ETL 02:00 ежедневно</span>
+    </div>
+  </div>
+
+  <!-- Панель управления -->
+  <div class="ds-section" style="display:flex;align-items:center;gap:16px;padding-bottom:0;flex-wrap:wrap">
+    <button class="ds-run-btn" id="dsPipelineBtn" onclick="dsRunPipeline()">
+      ⚡ Запустить Data Pipeline
+    </button>
+    <div id="dsPipelineStatus" style="font-size:13px;color:var(--text3)">
+      Нажмите для сбора и анализа всех данных
+    </div>
+    <div style="margin-left:auto;font-size:11px;color:var(--text3)" id="dsPipelineTime"></div>
+  </div>
+
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:20px 24px 0">
+
+  <!-- 1. ИНДЕКС ЭКОНОМИЧЕСКОГО ЗДОРОВЬЯ ──────────────────────────────────── -->
+  <div class="ds-section">
+    <div class="ds-section-title">🏥 Индекс экономического здоровья</div>
+
+    <div class="dp-two-col">
+      <!-- Круг с индексом -->
+      <div class="dp-card">
+        <div class="dp-card-head"><span>Сводный индекс</span></div>
+        <div class="dp-card-body" style="display:flex;align-items:center;justify-content:center;padding:24px">
+          <div class="hi-wrap" style="width:100%">
+            <div class="hi-circle" id="hiCircle" style="color:#6b7280">
+              <span class="hi-number" id="hiNumber">—</span>
+              <span class="hi-label">из 100</span>
+            </div>
+            <div>
+              <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px" id="hiLevel">Нет данных</div>
+              <div style="font-size:13px;color:var(--text2);margin-bottom:12px" id="hiDesc"></div>
+              <div style="font-size:11px;color:var(--text3)" id="hiComputed"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Компоненты (бар-чарт) -->
+      <div class="dp-card">
+        <div class="dp-card-head"><span>Компоненты индекса</span></div>
+        <div class="dp-card-body">
+          <div class="hi-bars" id="hiBars">
+            <div style="color:var(--text3);font-style:italic;font-size:13px">Запустите пайплайн для расчёта</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:0 24px">
+
+  <!-- 2. NOWCASTING ВВП ───────────────────────────────────────────────────── -->
+  <div class="ds-section">
+    <div class="ds-section-title">🔮 Nowcasting ВВП Таджикистана</div>
+
+    <div class="nc-grid">
+      <div class="nc-card" style="border-top:3px solid var(--navy2)">
+        <div class="nc-value" id="ncGDPValue">—</div>
+        <div class="nc-label">Оценка роста ВВП</div>
+        <div class="nc-note" id="ncGDPInterp">Текущий квартал, %</div>
+      </div>
+      <div class="nc-card" style="border-top:3px solid #0d9488">
+        <div class="nc-value" id="ncConfidence">—</div>
+        <div class="nc-label">Уверенность модели</div>
+        <div class="nc-note">% от макс. данных</div>
+      </div>
+      <div class="nc-card" style="border-top:3px solid #d97706">
+        <div class="nc-value" id="ncDataPoints">—</div>
+        <div class="nc-label">Индикаторов использовано</div>
+        <div class="nc-note">из 4 возможных</div>
+      </div>
+    </div>
+
+    <div class="dp-card">
+      <div class="dp-card-head">
+        <span>Компоненты Nowcast</span>
+        <span style="font-size:11px;opacity:.7">Метод: МВФ HF-индикаторы</span>
+      </div>
+      <div class="dp-card-body" style="padding:0">
+        <div id="ncComponents" style="padding:4px 16px 8px">
+          <div style="color:var(--text3);font-style:italic;font-size:13px;padding:12px 0">Данные недоступны — запустите пайплайн</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:0 24px">
+
+  <!-- 3. МАТРИЦА КОРРЕЛЯЦИЙ ───────────────────────────────────────────────── -->
+  <div class="ds-section">
+    <div class="ds-section-title">📊 Матрица корреляций</div>
+
+    <div id="corrStatus" style="padding:10px 0;font-size:13px;color:var(--text3)">
+      Запустите пайплайн для расчёта корреляций
+    </div>
+
+    <!-- Легенда -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:12px" id="corrLegend" style="display:none">
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:2px;background:#15803d;display:inline-block"></span>Сильная + (>0.7)</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:2px;background:#0284c7;display:inline-block"></span>Умеренная + (0.3–0.7)</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:2px;background:#b91c1c;display:inline-block"></span>Сильная − (<−0.7)</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:2px;background:#ea580c;display:inline-block"></span>Умеренная − (−0.3 – −0.7)</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:2px;background:#6b7280;display:inline-block"></span>Слабая</span>
+    </div>
+
+    <div class="dp-card" id="corrMatrixCard" style="display:none">
+      <div class="dp-card-body" style="padding:0">
+        <div class="corr-table-wrap">
+          <table class="corr-table" id="corrMatrix"></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Топ пар -->
+    <div class="dp-card" id="corrTopCard" style="display:none;margin-top:14px">
+      <div class="dp-card-head"><span>🔗 Сильнейшие зависимости</span></div>
+      <div class="dp-card-body" style="padding:0 16px">
+        <div id="corrTopPairs"></div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:0 24px">
+
+  <!-- 4. УТРЕННИЙ ДАЙДЖЕСТ ────────────────────────────────────────────────── -->
+  <div class="ds-section">
+    <div class="ds-section-title" style="justify-content:space-between">
+      <span>🌅 Утренний дайджест</span>
+      <span style="font-size:11px;font-weight:400;color:var(--text3)" id="digestDate">—</span>
+    </div>
+
+    <div class="dp-two-col">
+      <!-- Алерты + Топ изменений -->
+      <div>
+        <!-- Алерты -->
+        <div class="dp-card" style="margin-bottom:14px">
+          <div class="dp-card-head"><span>🚨 Критические изменения</span></div>
+          <div class="dp-card-body">
+            <div class="digest-alerts" id="digestAlerts">
+              <div class="da-empty">Запустите пайплайн для получения дайджеста</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Топ изменений -->
+        <div class="dp-card">
+          <div class="dp-card-head"><span>📈 Топ-5 изменений за 24ч</span></div>
+          <div class="dp-card-body" style="padding:0 16px 4px">
+            <div id="digestTopChanges">
+              <div style="color:var(--text3);font-style:italic;font-size:13px;padding:12px 0">Нет данных</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Рекомендации -->
+      <div class="dp-card">
+        <div class="dp-card-head"><span>📋 Рекомендации для руководства</span></div>
+        <div class="dp-card-body">
+          <div class="rec-cards" id="digestRecs">
+            <div style="color:var(--text3);font-style:italic;font-size:13px">Нет данных</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:2px solid var(--navy-pale);margin:0 24px">
+
+  <!-- 5. ЛОГ ПАЙПЛАЙНА ───────────────────────────────────────────────────── -->
+  <div class="ds-section">
+    <div class="ds-section-title" style="justify-content:space-between">
+      <span>📋 Лог ETL-пайплайна</span>
+      <button class="nbt-refresh-btn" onclick="dsLoadLog()">🔄 Обновить лог</button>
+    </div>
+    <div class="dp-card">
+      <div class="dp-card-body" style="max-height:260px;overflow-y:auto;padding:0 16px">
+        <div id="pipelineLog">
+          <div style="color:var(--text3);font-style:italic;font-size:13px;padding:12px 0">Лог пуст — запустите пайплайн</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- FOOTER -->
@@ -3213,6 +3742,575 @@ function updateTickerRates(rates) {
     if (!data.error) updateTickerRates(data.rates);
   } catch {}
 })();
+
+// ============================================================
+// МИРОВЫЕ РЫНКИ (нефть, алюминий, пшеница)
+// ============================================================
+
+let cmData = null; // кэш последних загруженных данных
+const cmCharts = {}; // Chart.js instances
+
+function cmSetStatus(text, isError = false) {
+  const el = document.getElementById('cmStatusText');
+  if (el) el.textContent = text;
+  const box = document.getElementById('cmStatus');
+  if (box) box.style.background = isError ? '#fee2e2' : '';
+}
+
+function cmFormatChange(item, elId, badgeId) {
+  const el    = document.getElementById(elId);
+  const badge = document.getElementById(badgeId);
+  if (!el || !item) return;
+
+  const pct = item.changePct;
+  const abs = item.change;
+  if (pct === null || pct === undefined) {
+    el.textContent = '—';
+    el.className = 'cm-change neu';
+    if (badge) { badge.textContent = '—'; badge.className = 'cm-badge cm-badge-neu'; }
+    return;
+  }
+
+  const sign  = pct > 0 ? '+' : '';
+  el.textContent = `${sign}${abs?.toFixed(2)} (${sign}${pct.toFixed(2)}%) за день`;
+  if (pct > 0) {
+    el.className = 'cm-change up';
+    if (badge) { badge.textContent = '▲ ' + pct.toFixed(2) + '%'; badge.className = 'cm-badge cm-badge-up'; }
+  } else if (pct < 0) {
+    el.className = 'cm-change down';
+    if (badge) { badge.textContent = '▼ ' + Math.abs(pct).toFixed(2) + '%'; badge.className = 'cm-badge cm-badge-down'; }
+  } else {
+    el.className = 'cm-change neu';
+    if (badge) { badge.textContent = '= 0%'; badge.className = 'cm-badge cm-badge-neu'; }
+  }
+}
+
+function cmRenderChart(canvasId, item) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || !item || !item.history30 || !item.history30.length) return;
+
+  if (cmCharts[canvasId]) { cmCharts[canvasId].destroy(); }
+
+  const labels = item.history30.map(d => d.date.slice(5)); // MM-DD
+  const values = item.history30.map(d => d.value);
+
+  const isUp = values.length > 1 && values[values.length - 1] >= values[0];
+  const color = isUp ? 'rgba(21,128,61,1)' : 'rgba(185,28,28,1)';
+  const fill  = isUp ? 'rgba(21,128,61,0.08)' : 'rgba(185,28,28,0.08)';
+
+  cmCharts[canvasId] = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        borderColor: color,
+        backgroundColor: fill,
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0.3,
+        fill: true,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: {
+          label: ctx => `${ctx.parsed.y.toFixed(2)} ${item.currency || 'USD'}`,
+        },
+      }},
+      scales: {
+        x: { ticks: { font: { size: 9 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8 }, grid: { display: false } },
+        y: { ticks: { font: { size: 9 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+      },
+    },
+  });
+}
+
+async function loadCommodities() {
+  const btn = document.getElementById('cmRefreshBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Загрузка…'; }
+  cmSetStatus('Загрузка данных мировых рынков…');
+
+  // Сброс цен
+  ['Oil','Alu','Wheat'].forEach(k => {
+    const el = document.getElementById(`cmPrice${k}`);
+    if (el) el.innerHTML = '<span class="cm-loading">Загрузка…</span>';
+  });
+
+  try {
+    const resp = await fetch('/api/commodities');
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    cmData = data;
+
+    const now = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
+    // Нефть
+    if (data.oil && !data.oil.error) {
+      document.getElementById('cmPriceOil').textContent = '$' + (data.oil.price?.toFixed(2) ?? '—');
+      cmFormatChange(data.oil, 'cmChangeOil', 'cmBadgeOil');
+      cmRenderChart('cmChartOil', data.oil);
+    } else {
+      document.getElementById('cmPriceOil').textContent = '—';
+      document.getElementById('cmChangeOil').textContent = data.oil?.error || 'Нет данных';
+    }
+
+    // Алюминий
+    if (data.aluminum && !data.aluminum.error) {
+      document.getElementById('cmPriceAlu').textContent = '$' + (data.aluminum.price?.toFixed(0) ?? '—');
+      cmFormatChange(data.aluminum, 'cmChangeAlu', 'cmBadgeAlu');
+      cmRenderChart('cmChartAlu', data.aluminum);
+    } else {
+      document.getElementById('cmPriceAlu').textContent = '—';
+      document.getElementById('cmChangeAlu').textContent = data.aluminum?.error || 'Нет данных';
+    }
+
+    // Пшеница
+    if (data.wheat && !data.wheat.error) {
+      document.getElementById('cmPriceWheat').textContent = '$' + (data.wheat.price?.toFixed(2) ?? '—');
+      cmFormatChange(data.wheat, 'cmChangeWheat', 'cmBadgeWheat');
+      cmRenderChart('cmChartWheat', data.wheat);
+    } else {
+      document.getElementById('cmPriceWheat').textContent = '—';
+      document.getElementById('cmChangeWheat').textContent = data.wheat?.error || 'Нет данных';
+    }
+
+    const cached = [data.oil, data.aluminum, data.wheat].some(d => d?.fromCache);
+    cmSetStatus(`Обновлено в ${now}${cached ? ' (частично из кэша)' : ''}`);
+
+    const allBtn = document.getElementById('cmSendAllBtn');
+    if (allBtn) allBtn.style.display = 'inline-block';
+
+  } catch (err) {
+    console.error('[loadCommodities]', err);
+    cmSetStatus('Ошибка загрузки: ' + err.message, true);
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '🔄 Обновить'; }
+  }
+}
+
+function sendCommodityToAI(type) {
+  if (!cmData) { alert('Сначала загрузите данные мировых рынков'); return; }
+
+  const item = cmData[type];
+  if (!item || item.error) { alert('Данные недоступны'); return; }
+
+  const nameMap = { oil: 'Нефть WTI', aluminum: 'Алюминий', wheat: 'Пшеница' };
+  const impactMap = {
+    oil:      'Влияние на Таджикистан: нефть определяет состояние российской экономики, от которой зависят переводы мигрантов (20-30% ВВП Таджикистана). При росте нефти укрепляется рубль и мигранты отправляют больше сомони.',
+    aluminum: 'Влияние на Таджикистан: ТАЛКО (Таджикская алюминиевая компания) — крупнейший экспортёр страны, обеспечивает ~15% экспортной выручки. Рост цен на алюминий напрямую улучшает торговый баланс.',
+    wheat:    'Влияние на Таджикистан: страна импортирует около 80% потребляемой пшеницы. Рост мировых цен транслируется в рост цен на муку и хлеб, усугубляет продовольственную инфляцию у наиболее уязвимых слоёв населения.',
+  };
+
+  const history = (item.history30 || []).slice(-10).map(d => `${d.date}: ${d.value}`).join('\n');
+  const prompt = `Проанализируй текущую ситуацию на рынке "${nameMap[type]}" и её влияние на экономику Таджикистана.
+
+ТЕКУЩИЕ ДАННЫЕ:
+- Цена: ${item.price} ${item.currency}/${item.unit}
+- Изменение за день: ${item.change > 0 ? '+' : ''}${item.change} (${item.changePct > 0 ? '+' : ''}${item.changePct}%)
+- Предыдущее закрытие: ${item.prevClose} ${item.currency}
+
+ДИНАМИКА ЗА ПОСЛЕДНИЕ 10 ДНЕЙ:
+${history}
+
+${impactMap[type]}
+
+Дай профессиональный макроэкономический анализ: текущий тренд, риски для Таджикистана, прогноз на ближайший месяц и рекомендации для экономической политики.`;
+
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach(t => { if (t.textContent.includes('AI') || t.textContent.includes('Анализ')) t.classList.add('active'); });
+  showPage('analysis', document.querySelector('.nav-tab.active'));
+
+  setTimeout(() => {
+    const q = document.getElementById('question');
+    if (q) { q.value = prompt; q.dispatchEvent(new Event('input')); }
+  }, 200);
+}
+
+function sendAllCommoditiesToAI() {
+  if (!cmData) { alert('Сначала загрузите данные'); return; }
+
+  const fmt = (item, name, unit, note) => {
+    if (!item || item.error) return `${name}: нет данных`;
+    const sign = item.changePct > 0 ? '+' : '';
+    return `${name}: $${item.price} ${unit} (${sign}${item.changePct?.toFixed(2)}% за день)\n  ${note}`;
+  };
+
+  const prompt = `Проведи комплексный анализ влияния мировых товарных рынков на экономику Таджикистана на основе актуальных данных:
+
+${fmt(cmData.oil,      'Нефть WTI',  '$/барр.', 'Влияет на переводы мигрантов из России')}
+${fmt(cmData.aluminum, 'Алюминий',   '$/т',     'ТАЛКО — 15% экспорта Таджикистана')}
+${fmt(cmData.wheat,    'Пшеница',    '$/бушель','Импорт пшеницы — 80% потребления страны')}
+
+Проанализируй:
+1. Совокупный эффект для платёжного баланса Таджикистана
+2. Инфляционные риски (пшеница → цены на хлеб)
+3. Перспективы поступления переводов (нефть → рубль → сомони)
+4. Экспортную выручку (алюминий → ТАЛКО)
+5. Рекомендации для НБТ и Министерства экономики`;
+
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach(t => { if (t.textContent.includes('AI') || t.textContent.includes('Анализ')) t.classList.add('active'); });
+  showPage('analysis', document.querySelector('.nav-tab.active'));
+
+  setTimeout(() => {
+    const q = document.getElementById('question');
+    if (q) { q.value = prompt; q.dispatchEvent(new Event('input')); }
+  }, 200);
+}
+
+// ============================================================
+// DATA SCIENCE PIPELINE
+// ============================================================
+
+let dsLastPipelineData = null;
+
+// ── Запуск пайплайна ────────────────────────────────────────────────────────
+async function dsRunPipeline() {
+  const btn = document.getElementById('dsPipelineBtn');
+  const status = document.getElementById('dsPipelineStatus');
+  if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Сбор данных…'; }
+  if (status) status.textContent = 'Запускаем ETL: НБТ, Всемирный банк, Yahoo Finance…';
+
+  try {
+    // Запускаем ETL на сервере
+    const runResp = await fetch('/api/pipeline-run', { method: 'POST' });
+    if (!runResp.ok) throw new Error('Ошибка запуска пайплайна');
+
+    if (status) status.textContent = 'Пайплайн запущен, загружаем результаты…';
+
+    // Небольшая задержка, чтобы пайплайн успел завершиться
+    await new Promise(r => setTimeout(r, 4000));
+
+    // Загружаем все данные параллельно
+    await dsRefreshAll();
+
+    const now = new Date().toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' });
+    if (status) status.textContent = `Пайплайн завершён в ${now}`;
+    const timeEl = document.getElementById('dsPipelineTime');
+    if (timeEl) timeEl.textContent = `Обновлено: ${new Date().toLocaleString('ru-RU')}`;
+
+  } catch (err) {
+    console.error('[dsRunPipeline]', err);
+    if (status) status.textContent = 'Ошибка: ' + err.message;
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '⚡ Запустить Data Pipeline'; }
+  }
+}
+
+async function dsRefreshAll() {
+  await Promise.allSettled([
+    dsLoadHealthIndex(),
+    dsLoadNowcast(),
+    dsLoadCorrelation(),
+    dsLoadDigest(),
+    dsLoadLog(),
+  ]);
+}
+
+// ── Индекс экономического здоровья ─────────────────────────────────────────
+async function dsLoadHealthIndex() {
+  try {
+    const resp = await fetch('/api/health-index');
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data.error) return;
+    dsRenderHealthIndex(data);
+  } catch (e) {
+    console.warn('[dsLoadHealthIndex]', e.message);
+  }
+}
+
+function dsRenderHealthIndex(data) {
+  const circle = document.getElementById('hiCircle');
+  const number = document.getElementById('hiNumber');
+  const level  = document.getElementById('hiLevel');
+  const desc   = document.getElementById('hiDesc');
+  const comp   = document.getElementById('hiComputed');
+  const bars   = document.getElementById('hiBars');
+
+  if (number)  number.textContent  = data.index;
+  if (level)   level.textContent   = data.levelIcon + ' ' + data.level;
+  if (circle)  { circle.style.color = data.levelColor; circle.style.borderColor = data.levelColor; }
+  if (comp)    comp.textContent = 'Рассчитано: ' + new Date(data.computed).toLocaleString('ru-RU');
+
+  const descriptions = {
+    'Здоровая':       'Экономика устойчива. Основные показатели в норме.',
+    'Умеренный риск': 'Присутствуют умеренные риски. Требует мониторинга.',
+    'Уязвимая':       'Экономика уязвима. Необходимы корректирующие меры.',
+    'Кризис':         'Критическое состояние. Требуется немедленное вмешательство.',
+  };
+  if (desc) desc.textContent = descriptions[data.level] || '';
+
+  // Компоненты-бары
+  if (bars && data.scores) {
+    const COLORS = {
+      inflation:    '#0284c7',
+      fxStability:  '#0d9488',
+      remittances:  '#7c3aed',
+      foodPrices:   '#d97706',
+      commodities:  '#64748b',
+    };
+    bars.innerHTML = Object.entries(data.scores).map(([key, s]) => {
+      const col  = COLORS[key] || '#0284c7';
+      const pct  = s.score;
+      return `
+        <div class="hi-bar-row">
+          <div class="hi-bar-label">${s.label}
+            <span style="color:var(--text3);font-size:10px"> (вес ${Math.round(s.weight*100)}%)</span>
+          </div>
+          <div class="hi-bar-track">
+            <div class="hi-bar-fill" style="width:${pct}%;background:${col}"></div>
+          </div>
+          <div class="hi-bar-val" style="color:${col}">${pct}</div>
+        </div>`;
+    }).join('');
+  }
+}
+
+// ── Nowcasting ──────────────────────────────────────────────────────────────
+async function dsLoadNowcast() {
+  try {
+    const resp = await fetch('/api/nowcast');
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data.error) return;
+    dsRenderNowcast(data);
+  } catch (e) {
+    console.warn('[dsLoadNowcast]', e.message);
+  }
+}
+
+function dsRenderNowcast(data) {
+  const valEl  = document.getElementById('ncGDPValue');
+  const confEl = document.getElementById('ncConfidence');
+  const dpEl   = document.getElementById('ncDataPoints');
+  const intEl  = document.getElementById('ncGDPInterp');
+  const compEl = document.getElementById('ncComponents');
+
+  if (valEl && data.gdpGrowthEstimate !== null) {
+    const sign = data.gdpGrowthEstimate > 0 ? '+' : '';
+    valEl.textContent  = sign + data.gdpGrowthEstimate?.toFixed(1) + '%';
+    valEl.style.color  = data.interpretation?.color || 'var(--navy)';
+  }
+  if (intEl) intEl.textContent = data.interpretation?.label || 'Нет оценки';
+  if (confEl) confEl.textContent = (data.confidence || 0) + '%';
+  if (dpEl)   dpEl.textContent   = (data.dataPoints || 0) + ' / 4';
+
+  if (compEl && data.components) {
+    const WEIGHTS_LABEL = {
+      remittances: 30, trade: 25, fxRate: 25, prices: 20,
+    };
+    compEl.innerHTML = Object.entries(data.components).map(([key, c]) => {
+      const growth = c.growth !== null && c.growth !== undefined
+        ? (c.growth > 0 ? '+' : '') + c.growth.toFixed(1) + '%'
+        : '—';
+      const contrib = c.contribution !== null && c.contribution !== undefined
+        ? (c.contribution > 0 ? '+' : '') + c.contribution.toFixed(2)
+        : '—';
+      const col = c.contribution > 0 ? 'var(--green)' : c.contribution < 0 ? 'var(--red)' : 'var(--text3)';
+      return `
+        <div class="nc-component-row">
+          <div class="nc-comp-label">${c.label}
+            <span style="color:var(--text3);font-size:11px"> — ${c.note || ''}</span>
+          </div>
+          <div class="nc-comp-weight">${Math.round(c.weight*100)}%</div>
+          <div class="nc-comp-val" style="color:var(--navy)">${growth}</div>
+          <div class="nc-comp-val" style="color:${col}">${contrib} вкл.</div>
+        </div>`;
+    }).join('');
+  }
+}
+
+// ── Матрица корреляций ──────────────────────────────────────────────────────
+async function dsLoadCorrelation() {
+  try {
+    const resp = await fetch('/api/correlation');
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data.error || !data.matrix) return;
+    dsRenderCorrelation(data);
+  } catch (e) {
+    console.warn('[dsLoadCorrelation]', e.message);
+  }
+}
+
+function dsRenderCorrelation(data) {
+  const statusEl = document.getElementById('corrStatus');
+  const cardEl   = document.getElementById('corrMatrixCard');
+  const legendEl = document.getElementById('corrLegend');
+  const topEl    = document.getElementById('corrTopCard');
+  const tableEl  = document.getElementById('corrMatrix');
+  const topPairs = document.getElementById('corrTopPairs');
+
+  if (statusEl) statusEl.style.display = 'none';
+  if (cardEl)   cardEl.style.display = 'block';
+  if (legendEl) legendEl.style.display = 'flex';
+  if (topEl)    topEl.style.display = 'block';
+
+  const keys = data.keys || [];
+
+  // Строим таблицу
+  if (tableEl && keys.length) {
+    const CELL_COLORS = {
+      strong_pos:  { bg: '#dcfce7', color: '#15803d' },
+      moderate_pos:{ bg: '#dbeafe', color: '#1e40af' },
+      strong_neg:  { bg: '#fee2e2', color: '#b91c1c' },
+      moderate_neg:{ bg: '#ffedd5', color: '#c2410c' },
+      weak:        { bg: '#f9fafb', color: '#6b7280' },
+      none:        { bg: '#f1f5f9', color: '#94a3b8' },
+    };
+
+    const header = `<thead><tr>
+      <th>Индикатор</th>
+      ${keys.map(k => `<th title="${k}">${k.length > 8 ? k.slice(0,7)+'…' : k}</th>`).join('')}
+    </tr></thead>`;
+
+    const body = `<tbody>${keys.map(rKey => `
+      <tr>
+        <td>${rKey}</td>
+        ${keys.map(cKey => {
+          if (rKey === cKey) return `<td class="corr-self">1.000</td>`;
+          const cell = data.matrix[rKey]?.[cKey];
+          if (!cell || cell.r === null) return `<td style="background:#f1f5f9;color:#94a3b8">—</td>`;
+          const style = CELL_COLORS[cell.strength] || CELL_COLORS.weak;
+          return `<td style="background:${style.bg};color:${style.color}" title="${cell.label} (n=${cell.n})">${cell.r.toFixed(3)}</td>`;
+        }).join('')}
+      </tr>`).join('')}
+    </tbody>`;
+
+    tableEl.innerHTML = header + body;
+  }
+
+  // Топ пар
+  if (topPairs && data.topPairs?.length) {
+    topPairs.innerHTML = data.topPairs.map(pair => {
+      const sign = pair.r > 0 ? '+' : '';
+      const col  = pair.strength.includes('strong') ? (pair.r > 0 ? 'var(--green)' : 'var(--red)') : '#0284c7';
+      return `
+        <div class="tc-row">
+          <div class="tc-label">
+            <strong>${pair.a}</strong> ↔ <strong>${pair.b}</strong>
+            <span style="font-size:11px;color:var(--text3);margin-left:8px">(n=${pair.n})</span>
+          </div>
+          <div style="font-size:12px;color:var(--text3)">${pair.label}</div>
+          <div class="tc-pct ${pair.r > 0 ? 'up' : 'down'}" style="color:${col}">r = ${sign}${pair.r.toFixed(3)}</div>
+        </div>`;
+    }).join('');
+  }
+}
+
+// ── Утренний дайджест ────────────────────────────────────────────────────────
+async function dsLoadDigest() {
+  try {
+    const resp = await fetch('/api/morning-digest');
+    if (!resp.ok) return;
+    const data = await resp.json();
+    if (data.error) return;
+    dsRenderDigest(data);
+  } catch (e) {
+    console.warn('[dsLoadDigest]', e.message);
+  }
+}
+
+function dsRenderDigest(data) {
+  const dateEl    = document.getElementById('digestDate');
+  const alertsEl  = document.getElementById('digestAlerts');
+  const changesEl = document.getElementById('digestTopChanges');
+  const recsEl    = document.getElementById('digestRecs');
+
+  if (dateEl)   dateEl.textContent = 'Дата: ' + (data.date || '—');
+
+  // Алерты
+  if (alertsEl) {
+    if (!data.alerts?.length) {
+      alertsEl.innerHTML = '<div class="da-empty">✅ Критических изменений нет</div>';
+    } else {
+      const ALERT_CLASS = { warning: 'da-warning', danger: 'da-danger', info: 'da-info' };
+      alertsEl.innerHTML = data.alerts.map(a => `
+        <div class="digest-alert ${ALERT_CLASS[a.level] || 'da-info'}">
+          <span class="da-icon">${a.icon}</span>
+          <span>${a.message}</span>
+        </div>`).join('');
+    }
+  }
+
+  // Топ изменений
+  if (changesEl) {
+    if (!data.topChanges?.length) {
+      changesEl.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:12px 0">Нет данных</div>';
+    } else {
+      changesEl.innerHTML = data.topChanges.map(c => {
+        const sign = c.pct > 0 ? '+' : '';
+        const cls  = c.pct > 0 ? 'up' : c.pct < 0 ? 'down' : '';
+        return `
+          <div class="tc-row">
+            <div class="tc-label">${c.label}</div>
+            <div class="tc-val">${c.value?.toFixed(2)} ${c.unit}</div>
+            <div class="tc-impact">${c.impact}</div>
+            <div class="tc-pct ${cls}">${sign}${c.pct?.toFixed(1)}%</div>
+          </div>`;
+      }).join('');
+    }
+  }
+
+  // Рекомендации
+  if (recsEl) {
+    if (!data.recommendations?.length) {
+      recsEl.innerHTML = '<div style="color:var(--text3);font-size:13px">Нет рекомендаций</div>';
+    } else {
+      const PCLASS = { высокий: 'high', средний: 'medium', низкий: 'low' };
+      const PBADGE = { высокий: 'rp-high', средний: 'rp-medium', низкий: 'rp-low' };
+      recsEl.innerHTML = data.recommendations.map(r => `
+        <div class="rec-card ${PCLASS[r.priority] || ''}">
+          <div class="rec-head">
+            <span style="font-size:18px">${r.icon}</span>
+            <span class="rec-title">${r.title}</span>
+            <span class="rec-priority ${PBADGE[r.priority] || ''}">${r.priority} приоритет</span>
+          </div>
+          <div class="rec-text">${r.text}</div>
+        </div>`).join('');
+    }
+  }
+}
+
+// ── Лог пайплайна ────────────────────────────────────────────────────────────
+async function dsLoadLog() {
+  try {
+    const resp = await fetch('/api/pipeline-log?limit=30');
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const logEl = document.getElementById('pipelineLog');
+    if (!logEl || !data.log?.length) return;
+
+    const LEV_CLASS = { info: 'll-info', warn: 'll-warn', error: 'll-error' };
+    logEl.innerHTML = data.log.map(entry => {
+      const ts  = new Date(entry.ts).toLocaleString('ru-RU', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+      return `
+        <div class="log-row">
+          <span class="log-ts">${ts}</span>
+          <span class="log-level ${LEV_CLASS[entry.level] || ''}">${entry.level.toUpperCase()}</span>
+          <span class="log-source">${entry.source}</span>
+          <span class="log-msg">${entry.message}</span>
+        </div>`;
+    }).join('');
+  } catch (e) {
+    console.warn('[dsLoadLog]', e.message);
+  }
+}
+
+// Автозагрузка данных при открытии вкладки
+const _origShowPage = showPage;
+function showPage(name, btn) {
+  _origShowPage(name, btn);
+  if (name === 'datascience') {
+    dsRefreshAll();
+  }
+}
 
 // ============================================================
 // ПРОГНОЗИРОВАНИЕ
