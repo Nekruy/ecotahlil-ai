@@ -1,12 +1,58 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-const Anthropic = require('@anthropic-ai/sdk');
+const http  = require('http');
+const https = require('https');
+const fs    = require('fs');
+const path  = require('path');
 
-const PORT = 3000;
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+const PORT         = 3000;
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
+const GROQ_URL     = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_MODEL   = 'llama-3.3-70b-versatile';
 
-const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
+// ─── Groq API helper ─────────────────────────────────────────────────────────
+function groqChat(systemPrompt, userContent, maxTokens = 4000) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      model:       GROQ_MODEL,
+      messages:    [
+        { role: 'system', content: systemPrompt },
+        { role: 'user',   content: userContent  },
+      ],
+      max_tokens:  maxTokens,
+      temperature: 0.3,
+    });
+
+    const options = {
+      hostname: 'api.groq.com',
+      path:     '/openai/v1/chat/completions',
+      method:   'POST',
+      headers:  {
+        'Authorization': 'Bearer ' + GROQ_API_KEY,
+        'Content-Type':  'application/json',
+        'Content-Length': Buffer.byteLength(body),
+      },
+    };
+
+    const req = https.request(options, (res) => {
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
+      res.on('end', () => {
+        try {
+          const parsed = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+          if (parsed.error) return reject(new Error(parsed.error.message || 'Groq API error'));
+          const text = parsed.choices?.[0]?.message?.content || '';
+          resolve(text);
+        } catch (e) {
+          reject(new Error('Groq: invalid JSON response'));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.setTimeout(60000, () => { req.destroy(); reject(new Error('Groq request timeout')); });
+    req.write(body);
+    req.end();
+  });
+}
 
 // ─── Инициализация базы данных ───────────────────────────────────────────────
 const { initDB, saveReport: dbSaveReport, getReports: dbGetReports } = require('./database');
@@ -512,17 +558,7 @@ const server = http.createServer(async (req, res) => {
         ? `Вопрос: ${question}\n\nСодержимое документа:\n${trimmedText}`
         : `Вопрос: ${question}`;
 
-      const message = await client.messages.create({
-        model: 'claude-sonnet-4-5',
-        max_tokens: 4096,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userContent }],
-      });
-
-      const answer = message.content
-        .filter(b => b.type === 'text')
-        .map(b => b.text)
-        .join('\n');
+      const answer = await groqChat(systemPrompt, userContent, 4000);
 
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(answer);
@@ -819,7 +855,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`EcotahlilAI server running at http://localhost:${PORT}`);
-  if (!ANTHROPIC_API_KEY) {
-    console.warn('WARNING: ANTHROPIC_API_KEY environment variable is not set');
+  if (!GROQ_API_KEY) {
+    console.warn('WARNING: GROQ_API_KEY environment variable is not set');
   }
 });
