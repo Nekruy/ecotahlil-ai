@@ -1507,6 +1507,19 @@ footer b { color:#fff; }
   background:var(--navy2); color:#fff;
   border-color:var(--navy2);
 }
+.cabinet-btn {
+  padding:5px 12px;
+  border:none;
+  border-radius:6px;
+  background:var(--green);
+  font-size:11px; font-weight:700;
+  color:#fff; cursor:pointer;
+  transition:all .15s;
+  display:flex; align-items:center; gap:5px;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.cabinet-btn:hover { background:var(--green2); color:#fff; }
 </style>
 </head>
 <body>
@@ -1543,6 +1556,7 @@ footer b { color:#fff; }
       <button class="lang-btn" data-lang="tj" onclick="setLanguage('tj')">🇹🇯 ТОҶ</button>
       <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 ENG</button>
     </div>
+    <a class="cabinet-btn" href="/login">👤 Личный кабинет</a>
     <div class="ai-badge">⚡ EcotahlilAI v2.0</div>
     <div style="font-size:11px;color:var(--text3)" id="updateDate"></div>
   </div>
