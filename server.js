@@ -846,6 +846,114 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/dashboard-data — агрегированные данные для дашборда
+  if (req.method === 'GET' && req.url === '/api/dashboard-data') {
+    const DASHBOARD_CACHE = path.join(__dirname, 'dashboard_cache.json');
+    const DASHBOARD_TTL   = 60 * 60 * 1000; // 1 час
+
+    // Отдаём из кэша если свежий
+    try {
+      if (fs.existsSync(DASHBOARD_CACHE)) {
+        const cached = JSON.parse(fs.readFileSync(DASHBOARD_CACHE, 'utf8'));
+        const age = Date.now() - new Date(cached.last_updated).getTime();
+        if (age < DASHBOARD_TTL) {
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ ...cached, from_cache: true }));
+          return;
+        }
+      }
+    } catch {}
+
+    try {
+      const {
+        fetchNBT, fetchWorldBank,
+        fetchOilPrice, fetchAluminumPrice, fetchWheatPrice,
+      } = require('./dataCollector');
+
+      const [nbtR, wbR, oilR, alR, wheatR] = await Promise.allSettled([
+        fetchNBT(),
+        fetchWorldBank('FP.CPI.TOTL.ZG'),
+        fetchOilPrice(),
+        fetchAluminumPrice(),
+        fetchWheatPrice(),
+      ]);
+
+      // Курсы НБТ
+      let usd_tjs = null, eur_tjs = null, rub_tjs = null, nbtDate = null;
+      if (nbtR.status === 'fulfilled') {
+        const r = nbtR.value.rates;
+        usd_tjs = r.USD?.rate ?? null;
+        eur_tjs = r.EUR?.rate ?? null;
+        rub_tjs = r.RUB?.rate ?? null;
+        nbtDate = nbtR.value.date;
+      }
+
+      // ИПЦ из Всемирного банка — последнее значение
+      let cpi = null, cpiYear = null;
+      if (wbR.status === 'fulfilled') {
+        const series = wbR.value.series.filter(s => s.value !== null);
+        if (series.length > 0) {
+          const last = series[series.length - 1];
+          cpi     = last.value;
+          cpiYear = last.year;
+        }
+      }
+
+      // Товарные цены
+      const oil_price       = oilR.status       === 'fulfilled' ? oilR.value.price       : null;
+      const aluminum_price  = alR.status         === 'fulfilled' ? alR.value.price         : null;
+      const wheat_price     = wheatR.status      === 'fulfilled' ? wheatR.value.price      : null;
+      const oil_change_pct  = oilR.status        === 'fulfilled' ? oilR.value.changePct    : null;
+      const wheat_change_pct = wheatR.status     === 'fulfilled' ? wheatR.value.changePct  : null;
+      const al_change_pct   = alR.status          === 'fulfilled' ? alR.value.changePct     : null;
+
+      const sources = [
+        nbtR.status       === 'fulfilled' ? 'nbt.tj'           : null,
+        wbR.status        === 'fulfilled' ? 'worldbank.org'    : null,
+        oilR.status       === 'fulfilled' ? 'yahoo.finance'    : null,
+      ].filter(Boolean);
+
+      const data = {
+        cpi,
+        cpi_year:       cpiYear,
+        usd_tjs,
+        eur_tjs,
+        rub_tjs,
+        nbt_date:       nbtDate,
+        oil_price,
+        oil_change_pct,
+        wheat_price,
+        wheat_change_pct,
+        aluminum_price,
+        al_change_pct,
+        last_updated:   new Date().toISOString(),
+        source:         sources.join(', ') || 'нет данных',
+        errors: {
+          nbt:       nbtR.status   === 'rejected' ? nbtR.reason.message   : null,
+          worldbank: wbR.status    === 'rejected' ? wbR.reason.message    : null,
+          yahoo:     oilR.status   === 'rejected' ? oilR.reason.message   : null,
+        },
+      };
+
+      // Сохраняем кэш
+      try { fs.writeFileSync(DASHBOARD_CACHE, JSON.stringify(data, null, 2), 'utf8'); } catch {}
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(data));
+    } catch (err) {
+      // Отдаём устаревший кэш если есть
+      try {
+        const stale = JSON.parse(fs.readFileSync(path.join(__dirname, 'dashboard_cache.json'), 'utf8'));
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ ...stale, from_cache: true, stale: true }));
+        return;
+      } catch {}
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });

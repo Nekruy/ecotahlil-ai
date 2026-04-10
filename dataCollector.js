@@ -8,9 +8,10 @@ const http  = require('http');
 const fs    = require('fs');
 const path  = require('path');
 
-const HISTORY_FILE = path.join(__dirname, 'rates-history.json');
-const CACHE_FILE   = path.join(__dirname, 'cache.json');
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 час
+const HISTORY_FILE    = path.join(__dirname, 'rates-history.json');
+const CACHE_FILE      = path.join(__dirname, 'cache.json');
+const PRICE_CACHE_FILE = path.join(__dirname, 'price_cache.json');
+const CACHE_TTL_MS    = 60 * 60 * 1000; // 1 час
 
 // ─── HTTP/HTTPS утилита ───────────────────────────────────────────────────────
 
@@ -125,65 +126,134 @@ async function fetchWorldBank(indicator) {
 
 // ─── Национальный банк Таджикистана ──────────────────────────────────────────
 
-async function fetchNBT() {
-  let body = '';
-
-  try {
-    // index.php редиректит на kurs.php — запрашиваем сразу финальный URL
-    const res = await fetchUrl('https://nbt.tj/ru/kurs/kurs.php');
-    body = res.body;
-  } catch (err) {
-    throw new Error('Не удалось подключиться к сайту НБТ: ' + err.message);
-  }
+// Парсим XML-ответ НБТ (формат совместим с ЦБ РФ)
+function parseNBTXml(body) {
+  const currencyMap = [
+    { key: 'USD', name: 'Доллар США',      flag: '🇺🇸', codes: ['USD'] },
+    { key: 'EUR', name: 'Евро',            flag: '🇪🇺', codes: ['EUR'] },
+    { key: 'RUB', name: 'Российский рубль', flag: '🇷🇺', codes: ['RUB'] },
+  ];
 
   const rates = {};
+  for (const cur of currencyMap) {
+    let found = false;
+    for (const code of cur.codes) {
+      // <CharCode>USD</CharCode> ... <Value>9.5466</Value>
+      const pat = new RegExp(
+        `<CharCode>${code}<\\/CharCode>[\\s\\S]{0,400}?<Value>([\\d.,]+)<\\/Value>`, 'i'
+      );
+      const m = body.match(pat);
+      if (m) {
+        // Некоторые XML используют номинал — ищем Nominal
+        const nomPat = new RegExp(
+          `<CharCode>${code}<\\/CharCode>[\\s\\S]{0,200}?<Nominal>([\\d]+)<\\/Nominal>`, 'i'
+        );
+        const nomM = body.match(nomPat);
+        const nominal = nomM ? parseInt(nomM[1]) : 1;
+        const val = parseFloat(m[1].replace(',', '.')) / nominal;
+        if (!isNaN(val) && val > 0) {
+          rates[cur.key] = { rate: Math.round(val * 10000) / 10000, name: cur.name, flag: cur.flag };
+          found = true;
+          break;
+        }
+      }
+    }
+    if (!found) rates[cur.key] = { rate: null, name: cur.name, flag: cur.flag };
+  }
 
-  // Структура страницы НБТ:
-  // <td ...>Доллар США</td><td ...>9.5751</td>
-  // Ищем по русскому названию валюты → следующий td с числом
+  const dateMatch = body.match(/Date="([\d.]+)"/);
+  const rateDate  = dateMatch ? dateMatch[1] : new Date().toLocaleDateString('ru-RU');
+  return { rates, rateDate };
+}
+
+async function fetchNBT() {
   const currencyMap = [
-    { key: 'USD', name: 'Доллар США',     flag: '🇺🇸', search: 'Доллар США' },
-    { key: 'EUR', name: 'Евро',           flag: '🇪🇺', search: 'Евро' },
+    { key: 'USD', name: 'Доллар США',      flag: '🇺🇸', search: 'Доллар США' },
+    { key: 'EUR', name: 'Евро',            flag: '🇪🇺', search: 'Евро' },
     { key: 'RUB', name: 'Российский рубль', flag: '🇷🇺', search: 'Рубл' },
   ];
 
-  for (const cur of currencyMap) {
-    // Паттерн: после названия валюты идёт <td ...>ЧИСЛО</td>
-    const pat = new RegExp(
-      cur.search + '[\\s\\S]{0,300}?<td[^>]*>\\s*([\\d]+[.,][\\d]+)\\s*<\\/td>',
-      'i'
-    );
-    const m = body.match(pat);
-    if (m) {
-      const v = parseFloat(m[1].replace(',', '.'));
-      if (!isNaN(v) && v > 0) {
-        rates[cur.key] = { rate: v, name: cur.name, flag: cur.flag };
-        continue;
+  let rates = {};
+  let rateDate = new Date().toLocaleDateString('ru-RU');
+
+  // Попытка 1: XML API НБТ (структурированные данные)
+  const xmlUrls = [
+    'https://nbt.tj/rates/xml.php',
+    'https://nbt.tj/ru/kurs/kursi.xml',
+  ];
+  for (const xmlUrl of xmlUrls) {
+    try {
+      const res = await fetchUrl(xmlUrl);
+      if (res.status === 200 && (res.body.includes('CharCode') || res.body.includes('ValCurs') || res.body.includes('<USD') || res.body.includes('<Valute'))) {
+        const parsed = parseNBTXml(res.body);
+        if (Object.values(parsed.rates).some(r => r.rate !== null)) {
+          rates   = parsed.rates;
+          rateDate = parsed.rateDate;
+          console.log('[NBT] OK via XML:', xmlUrl);
+          break;
+        }
+      }
+    } catch {}
+  }
+
+  // Попытка 2: HTML-парсинг
+  if (!Object.values(rates).some(r => r.rate !== null)) {
+    let body = '';
+    try {
+      const res = await fetchUrl('https://nbt.tj/ru/kurs/kurs.php');
+      body = res.body;
+    } catch (err) {
+      throw new Error('Не удалось подключиться к сайту НБТ: ' + err.message);
+    }
+
+    for (const cur of currencyMap) {
+      // Расширенный набор паттернов для разных версий вёрстки НБТ
+      const patterns = [
+        // Название → число в следующих td
+        new RegExp(cur.search + '[\\s\\S]{0,400}?<td[^>]*>\\s*([\\d]+[.,][\\d]+)\\s*<\\/td>', 'i'),
+        // data-атрибут или JSON внутри тега
+        new RegExp('"' + cur.key + '"\\s*:\\s*"?([\\d]+[.,][\\d]+)"?', 'i'),
+        // ISO-код в ячейке
+        new RegExp('<td[^>]*>' + cur.key + '<\\/td>[\\s\\S]{0,200}?<td[^>]*>([\\d]+[.,][\\d]+)<\\/td>', 'i'),
+      ];
+
+      let found = false;
+      for (const pat of patterns) {
+        const m = body.match(pat);
+        if (m) {
+          const v = parseFloat(m[1].replace(',', '.'));
+          if (!isNaN(v) && v > 0 && v < 10000) {
+            rates[cur.key] = { rate: v, name: cur.name, flag: cur.flag };
+            found = true;
+            break;
+          }
+        }
+      }
+      if (!found) rates[cur.key] = { rate: null, name: cur.name, flag: cur.flag };
+    }
+
+    const dateMatch = body.match(/(\d{2})[.\-/](\d{2})[.\-/](\d{4})/);
+    if (dateMatch) rateDate = `${dateMatch[1]}.${dateMatch[2]}.${dateMatch[3]}`;
+    console.log('[NBT] OK via HTML scraping');
+  }
+
+  // Ставка рефинансирования (если удастся найти на странице)
+  let refinancingRate = null;
+  try {
+    const refRes = await fetchUrl('https://nbt.tj/ru/kurs/kurs.php');
+    const refPatterns = [
+      /рефинансиров[^<]{0,80}([\d]+[.,][\d]+)\s*%/i,
+      /учётн[^<]{0,80}([\d]+[.,][\d]+)\s*%/i,
+      /ставк[^<]{0,80}([\d]+[.,][\d]+)\s*%/i,
+    ];
+    for (const pat of refPatterns) {
+      const m = refRes.body.match(pat);
+      if (m) {
+        const v = parseFloat(m[1].replace(',', '.'));
+        if (!isNaN(v) && v > 0 && v < 50) { refinancingRate = v; break; }
       }
     }
-    rates[cur.key] = { rate: null, name: cur.name, flag: cur.flag };
-  }
-
-  // Ставка рефинансирования (обычно на отдельной странице, ищем на текущей)
-  let refinancingRate = null;
-  const refPatterns = [
-    /рефинансиров[^<]{0,80}([\d]+[.,][\d]+)\s*%/i,
-    /учётн[^<]{0,80}([\d]+[.,][\d]+)\s*%/i,
-    /ставк[^<]{0,80}([\d]+[.,][\d]+)\s*%/i,
-  ];
-  for (const pat of refPatterns) {
-    const m = body.match(pat);
-    if (m) {
-      const v = parseFloat(m[1].replace(',', '.'));
-      if (!isNaN(v) && v > 0 && v < 50) { refinancingRate = v; break; }
-    }
-  }
-
-  // Дата из страницы
-  const dateMatch = body.match(/(\d{2})[.\-/](\d{2})[.\-/](\d{4})/);
-  const rateDate  = dateMatch
-    ? `${dateMatch[1]}.${dateMatch[2]}.${dateMatch[3]}`
-    : new Date().toLocaleDateString('ru-RU');
+  } catch {}
 
   const result = {
     date:           rateDate,
@@ -569,9 +639,98 @@ async function fetchWheatPrice() {
   return fetchYahooFinance('ZW=F', 'Пшеница', '$/бушель');
 }
 
+// ─── Цены Таджикистана: ИПЦ из ВБ + районные отчёты + кэш ───────────────
+
+async function fetchTajikPrices() {
+  // 1. ИПЦ из Всемирного банка (FP.CPI.TOTL.ZG)
+  let cpiData = null;
+  try {
+    const wb = await fetchWorldBank('FP.CPI.TOTL.ZG');
+    const series = wb.series.filter(s => s.value !== null);
+    if (series.length > 0) {
+      const latest = series[series.length - 1];
+      cpiData = {
+        value:  latest.value,
+        year:   latest.year,
+        label:  'Инфляция (% год к году)',
+        source: 'data.worldbank.org',
+      };
+      console.log(`[TajikPrices] ВБ CPI OK — ${latest.value}% (${latest.year})`);
+    }
+  } catch (err) {
+    console.warn('[TajikPrices] ВБ CPI недоступен:', err.message);
+  }
+
+  // 2. Районные отчёты (district_reports.json)
+  const districtFile = path.join(__dirname, 'district_reports.json');
+  let districtPrices = null;
+  try {
+    if (fs.existsSync(districtFile)) {
+      const reports = JSON.parse(fs.readFileSync(districtFile, 'utf8'));
+      if (Array.isArray(reports) && reports.length > 0) {
+        // Агрегируем цены по всем отчётам (среднее)
+        const priceKeys = new Set();
+        reports.forEach(r => r.prices && Object.keys(r.prices).forEach(k => priceKeys.add(k)));
+
+        const aggregated = {};
+        for (const key of priceKeys) {
+          const vals = reports
+            .map(r => r.prices?.[key])
+            .filter(v => typeof v === 'number' && v > 0);
+          if (vals.length > 0) {
+            aggregated[key] = Math.round((vals.reduce((s, v) => s + v, 0) / vals.length) * 100) / 100;
+          }
+        }
+
+        districtPrices = {
+          aggregated,
+          reportsCount: reports.length,
+          lastDate:     reports.map(r => r.date).sort().pop(),
+          source:       'district_reports.json',
+        };
+        console.log(`[TajikPrices] Районных отчётов: ${reports.length}`);
+      }
+    }
+  } catch (err) {
+    console.warn('[TajikPrices] Ошибка чтения районных отчётов:', err.message);
+  }
+
+  // Формируем результат
+  const result = {
+    cpi:            cpiData,
+    districtPrices,
+    source:         [
+      cpiData ? 'worldbank.org' : null,
+      districtPrices ? 'district_reports.json' : null,
+    ].filter(Boolean).join(', ') || 'нет данных',
+    fetched:        new Date().toISOString(),
+    fromCache:      false,
+  };
+
+  // Сохраняем в кэш если получили хоть что-то
+  if (cpiData || districtPrices) {
+    try {
+      fs.writeFileSync(PRICE_CACHE_FILE, JSON.stringify(result, null, 2), 'utf8');
+    } catch {}
+    return result;
+  }
+
+  // 3. Fallback: последний кэш (price_cache.json)
+  try {
+    if (fs.existsSync(PRICE_CACHE_FILE)) {
+      const cached = JSON.parse(fs.readFileSync(PRICE_CACHE_FILE, 'utf8'));
+      console.log('[TajikPrices] Возврат из price_cache.json');
+      return { ...cached, fromCache: true };
+    }
+  } catch {}
+
+  throw new Error('TajikPrices: нет данных ни из одного источника');
+}
+
 module.exports = {
   fetchWorldBank,
   fetchNBT,
+  fetchTajikPrices,
   getRatesHistory,
   fetchADB,
   fetchWTO,

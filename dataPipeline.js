@@ -9,9 +9,10 @@
 const fs   = require('fs');
 const path = require('path');
 
-const PIPELINE_FILE = path.join(__dirname, 'pipeline_data.json');
-const DIGEST_FILE   = path.join(__dirname, 'morning_digest.json');
-const LOG_FILE      = path.join(__dirname, 'pipeline_log.json');
+const PIPELINE_FILE   = path.join(__dirname, 'pipeline_data.json');
+const DIGEST_FILE     = path.join(__dirname, 'morning_digest.json');
+const LOG_FILE        = path.join(__dirname, 'pipeline_log.json');
+const DASHBOARD_CACHE = path.join(__dirname, 'dashboard_cache.json');
 
 // ─── Утилиты ─────────────────────────────────────────────────────────────────
 
@@ -686,6 +687,34 @@ async function runNightlyPipeline() {
   };
 
   writeJSON(PIPELINE_FILE, pipelineData);
+
+  // Обновляем dashboard_cache.json из данных пайплайна
+  try {
+    const nbtRates = results.nbt?.rates || {};
+    const cpiSeries = results.wbCpi?.series?.filter(s => s.value !== null) || [];
+    const lastCpi   = cpiSeries.length > 0 ? cpiSeries[cpiSeries.length - 1] : null;
+
+    const dashCache = {
+      cpi:              lastCpi?.value ?? null,
+      cpi_year:         lastCpi?.year ?? null,
+      usd_tjs:          nbtRates.USD?.rate ?? null,
+      eur_tjs:          nbtRates.EUR?.rate ?? null,
+      rub_tjs:          nbtRates.RUB?.rate ?? null,
+      nbt_date:         results.nbt?.date ?? null,
+      oil_price:        results.oil?.price ?? null,
+      oil_change_pct:   results.oil?.changePct ?? null,
+      wheat_price:      results.wheat?.price ?? null,
+      wheat_change_pct: results.wheat?.changePct ?? null,
+      aluminum_price:   results.aluminum?.price ?? null,
+      al_change_pct:    results.aluminum?.changePct ?? null,
+      last_updated:     new Date().toISOString(),
+      source:           sources.join(', '),
+    };
+    writeJSON(DASHBOARD_CACHE, dashCache);
+    pipelineLog('info', 'etl', 'dashboard_cache.json обновлён');
+  } catch (e) {
+    pipelineLog('warn', 'etl', 'Не удалось обновить dashboard_cache: ' + e.message);
+  }
 
   // Генерируем дайджест
   const digest = generateMorningDigest(pipelineData);

@@ -1829,10 +1829,17 @@ footer b { color:#fff; }
 <div class="page active" id="page-prices">
 
   <div class="page-header">
-    <h1>📊 <span data-i18n="p1.h1">Мониторинг потребительских цен</span></h1>
-    <p data-i18n="p1.sub">Еженедельный мониторинг цен на основные продовольственные товары по регионам Таджикистана</p>
-    <div class="ph-meta">
-      <span class="ph-chip">📅 <span data-i18n="p1.chip.data">Данные актуальны</span></span>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div>
+        <h1>📊 <span data-i18n="p1.h1">Мониторинг потребительских цен</span></h1>
+        <p data-i18n="p1.sub">Еженедельный мониторинг цен на основные продовольственные товары по регионам Таджикистана</p>
+      </div>
+      <button id="dashRefreshBtn" onclick="fetchDashboardData()" style="white-space:nowrap;padding:8px 16px;background:var(--primary,#0050b3);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;height:fit-content">
+        🔄 Обновить данные
+      </button>
+    </div>
+    <div class="ph-meta" style="margin-top:8px">
+      <span class="ph-chip">📅 <span id="dashLastUpdated">загрузка…</span></span>
       <span class="ph-chip">📍 <span data-i18n="p1.chip.regions">5 регионов</span></span>
       <span class="ph-chip">🛒 <span data-i18n="p1.chip.products">18 товарных позиций</span></span>
       <span class="ph-chip">🤖 EcotahlilAI</span>
@@ -1844,13 +1851,13 @@ footer b { color:#fff; }
     <div class="stat-card sc-blue">
       <div class="stat-icon">📈</div>
       <div class="stat-label" data-i18n="p1.stat.cpi">ИПЦ (год к году)</div>
-      <div class="stat-value">108.3%</div>
-      <div class="stat-change ch-up">▲ +3.1% <span data-i18n="p1.stat.month">к прошлому месяцу</span></div>
+      <div class="stat-value" id="statCpiValue">108.3%</div>
+      <div class="stat-change ch-up" id="statCpiChange">▲ +3.1% <span data-i18n="p1.stat.month">к прошлому месяцу</span></div>
     </div>
     <div class="stat-card sc-green">
       <div class="stat-icon">🍞</div>
       <div class="stat-label" data-i18n="p1.stat.bread">Хлеб пшеничный</div>
-      <div class="stat-value">4.20 <span style="font-size:14px;font-weight:400">TJS</span></div>
+      <div class="stat-value" id="statBreadValue">4.20 <span style="font-size:14px;font-weight:400">TJS</span></div>
       <div class="stat-change ch-up">▲ +2.4% <span data-i18n="p1.stat.permonth">за месяц</span></div>
     </div>
     <div class="stat-card sc-red">
@@ -1862,8 +1869,8 @@ footer b { color:#fff; }
     <div class="stat-card sc-gold">
       <div class="stat-icon">💱</div>
       <div class="stat-label" data-i18n="p1.stat.rate">Курс USD/TJS</div>
-      <div class="stat-value">10.92</div>
-      <div class="stat-change ch-up">▲ +0.2% <span data-i18n="p1.stat.perweek">за неделю</span></div>
+      <div class="stat-value" id="statUsdValue">10.92</div>
+      <div class="stat-change ch-up" id="statUsdChange">▲ +0.2% <span data-i18n="p1.stat.perweek">за неделю</span></div>
     </div>
   </div>
 
@@ -3256,7 +3263,89 @@ window.onload = function() {
   buildTicker();
   buildTable();
   buildCharts();
+  fetchDashboardData();
 };
+
+// ============================================================
+// ДАШБОРД: загрузка реальных данных
+// ============================================================
+
+async function fetchDashboardData() {
+  const btn = document.getElementById('dashRefreshBtn');
+  const lastUpdatedEl = document.getElementById('dashLastUpdated');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Загрузка…'; }
+
+  try {
+    const resp = await fetch('/api/dashboard-data');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const d = await resp.json();
+
+    // ── ИПЦ ──────────────────────────────────────────────
+    const cpiEl  = document.getElementById('statCpiValue');
+    const cpiChg = document.getElementById('statCpiChange');
+    if (cpiEl && d.cpi != null) {
+      const cpiVal = (+d.cpi).toFixed(1);
+      cpiEl.textContent = cpiVal + '%';
+      if (cpiChg) {
+        const yr = d.cpi_year ? ' (' + d.cpi_year + ')' : '';
+        cpiChg.className = 'stat-change ' + (d.cpi >= 0 ? 'ch-up' : 'ch-down');
+        cpiChg.textContent = (d.cpi >= 0 ? '▲' : '▼') + ' ' + cpiVal + '% год к году' + yr;
+      }
+    }
+
+    // ── USD/TJS ──────────────────────────────────────────
+    const usdEl  = document.getElementById('statUsdValue');
+    const usdChg = document.getElementById('statUsdChange');
+    if (usdEl && d.usd_tjs != null) {
+      usdEl.textContent = (+d.usd_tjs).toFixed(4);
+      if (usdChg && d.nbt_date) {
+        usdChg.className = 'stat-change';
+        usdChg.textContent = 'НБТ · ' + d.nbt_date;
+      }
+    }
+
+    // ── Тикер: обновляем валютные позиции ────────────────
+    if (d.usd_tjs != null || d.eur_tjs != null || d.rub_tjs != null) {
+      const rateMap = {
+        'USD/TJS': d.usd_tjs,
+        'EUR/TJS': d.eur_tjs,
+        'RUB/TJS': d.rub_tjs,
+        'ИПЦ':     d.cpi != null ? { val: (+d.cpi).toFixed(1) + '%', chg: null } : null,
+      };
+
+      document.querySelectorAll('.ticker-item').forEach(item => {
+        const nameEl  = item.querySelector('.t-name');
+        const priceEl = item.querySelector('.t-price');
+        if (!nameEl || !priceEl) return;
+        const name = nameEl.textContent.trim();
+
+        if (name === 'USD/TJS' && d.usd_tjs != null) {
+          priceEl.textContent = (+d.usd_tjs).toFixed(4);
+        } else if (name === 'EUR/TJS' && d.eur_tjs != null) {
+          priceEl.textContent = (+d.eur_tjs).toFixed(4);
+        } else if (name === 'RUB/TJS' && d.rub_tjs != null) {
+          priceEl.textContent = (+d.rub_tjs).toFixed(4);
+        } else if (name === 'ИПЦ' && d.cpi != null) {
+          priceEl.textContent = (+d.cpi).toFixed(1) + '%';
+        }
+      });
+    }
+
+    // ── Время обновления ─────────────────────────────────
+    if (lastUpdatedEl) {
+      const ts = new Date(d.last_updated);
+      const fromCache = d.from_cache ? ' (кэш)' : '';
+      const stale = d.stale ? ' ⚠️' : '';
+      lastUpdatedEl.textContent = 'Обновлено: ' + ts.toLocaleString('ru-RU') + fromCache + stale;
+    }
+
+  } catch (err) {
+    console.warn('[dashboard] Ошибка загрузки данных:', err.message);
+    if (lastUpdatedEl) lastUpdatedEl.textContent = '⚠️ Не удалось загрузить данные';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '🔄 Обновить данные'; }
+  }
+}
 
 // ============================================================
 // ТИКЕР
