@@ -1748,6 +1748,107 @@ footer b { color:#fff; }
   text-decoration:none;
 }
 .cabinet-btn:hover { background:var(--green2); color:#fff; }
+
+/* ── Блок МВФ ────────────────────────────────────────────── */
+.imf-section {
+  margin: 28px 0 0;
+}
+.imf-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.imf-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.imf-section-meta {
+  font-size: 12px;
+  color: var(--text3);
+}
+.imf-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) { .imf-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .imf-cards { grid-template-columns: 1fr; } }
+.imf-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e8edf4;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.imf-card:hover { box-shadow: 0 4px 16px rgba(0,80,179,.1); }
+.imf-card-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+  display: block;
+}
+.imf-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.imf-card-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.imf-card-unit {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text3);
+}
+.imf-card-year {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 11px;
+  color: #aab;
+  background: #f4f7fb;
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.imf-card-skeleton .imf-card-value {
+  background: #e8edf4;
+  color: transparent;
+  border-radius: 6px;
+  animation: imf-pulse 1.4s ease-in-out infinite;
+}
+@keyframes imf-pulse {
+  0%,100% { opacity:1 } 50% { opacity:.4 }
+}
+.imf-ai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #0050b3, #0073e6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.imf-ai-btn:hover { opacity: .88; }
+.imf-ai-btn:disabled { opacity: .5; cursor: not-allowed; }
 </style>
 </head>
 <body>
@@ -1871,6 +1972,28 @@ footer b { color:#fff; }
       <div class="stat-label" data-i18n="p1.stat.rate">Курс USD/TJS</div>
       <div class="stat-value" id="statUsdValue">10.92</div>
       <div class="stat-change ch-up" id="statUsdChange">▲ +0.2% <span data-i18n="p1.stat.perweek">за неделю</span></div>
+    </div>
+  </div>
+
+  <!-- ДАННЫЕ МВФ -->
+  <div class="imf-section" id="imfSection">
+    <div class="imf-section-header">
+      <div class="imf-section-title">
+        🏦 Данные МВФ — Таджикистан
+        <span class="imf-section-meta" id="imfMeta">загрузка…</span>
+      </div>
+      <button class="imf-ai-btn" id="imfAiBtn" onclick="sendIMFToAI()" disabled>
+        🤖 Отправить на AI анализ
+      </button>
+    </div>
+    <div class="imf-cards" id="imfCards">
+      <!-- 6 skeleton-карточек до загрузки данных -->
+      <div class="imf-card imf-card-skeleton"><span class="imf-card-icon">📈</span><div class="imf-card-label">Инфляция</div><div class="imf-card-value">—</div></div>
+      <div class="imf-card imf-card-skeleton"><span class="imf-card-icon">📊</span><div class="imf-card-label">Рост ВВП</div><div class="imf-card-value">—</div></div>
+      <div class="imf-card imf-card-skeleton"><span class="imf-card-icon">⚖️</span><div class="imf-card-label">Счёт тек. операций</div><div class="imf-card-value">—</div></div>
+      <div class="imf-card imf-card-skeleton"><span class="imf-card-icon">🏛️</span><div class="imf-card-label">Госдолг</div><div class="imf-card-value">—</div></div>
+      <div class="imf-card imf-card-skeleton"><span class="imf-card-icon">👥</span><div class="imf-card-label">Безработица</div><div class="imf-card-value">—</div></div>
+      <div class="imf-card imf-card-skeleton"><span class="imf-card-icon">💰</span><div class="imf-card-label">ВВП на душу</div><div class="imf-card-value">—</div></div>
     </div>
   </div>
 
@@ -3331,6 +3454,11 @@ async function fetchDashboardData() {
       });
     }
 
+    // ── Данные МВФ ───────────────────────────────────────
+    if (d.imf && d.imf.indicators) {
+      renderIMFCards(d.imf);
+    }
+
     // ── Время обновления ─────────────────────────────────
     if (lastUpdatedEl) {
       const ts = new Date(d.last_updated);
@@ -3344,6 +3472,101 @@ async function fetchDashboardData() {
     if (lastUpdatedEl) lastUpdatedEl.textContent = '⚠️ Не удалось загрузить данные';
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = '🔄 Обновить данные'; }
+  }
+}
+
+// ── МВФ: рендер карточек ─────────────────────────────────────────────────
+
+let _imfData = null; // хранится для кнопки AI
+
+function renderIMFCards(imf) {
+  _imfData = imf;
+  const container = document.getElementById('imfCards');
+  const metaEl    = document.getElementById('imfMeta');
+  const aiBtn     = document.getElementById('imfAiBtn');
+  if (!container) return;
+
+  const ORDER = ['PCPIPCH','NGDP_RPCH','BCA_NGDPD','GGXWDG_NGDP','LUR','NGDPDPC'];
+  const ind = imf.indicators || {};
+
+  container.innerHTML = ORDER.map(code => {
+    const item = ind[code];
+    if (!item) return `
+      <div class="imf-card" style="opacity:.5">
+        <span class="imf-card-icon">❓</span>
+        <div class="imf-card-label">${code}</div>
+        <div class="imf-card-value" style="font-size:18px">нет данных</div>
+      </div>`;
+
+    const valFmt = code === 'NGDPDPC'
+      ? '$' + item.value.toLocaleString('ru-RU')
+      : item.value.toFixed(1) + ' ' + item.unit;
+
+    // Мини-тренд: стрелка по последним 2 значениям истории
+    let trendHtml = '';
+    if (item.history && item.history.length >= 2) {
+      const prev = item.history[item.history.length - 2].value;
+      const curr = item.history[item.history.length - 1].value;
+      const diff = curr - prev;
+      const sign = diff > 0 ? '+' : '';
+      const color = diff > 0 ? 'var(--green,#16a34a)' : diff < 0 ? '#dc2626' : '#888';
+      trendHtml = `<div style="font-size:11px;color:${color};margin-top:4px">${diff > 0 ? '▲' : diff < 0 ? '▼' : '—'} ${sign}${diff.toFixed(1)} vs ${prev.toFixed(1)} (${item.history[item.history.length-2].year})</div>`;
+    }
+
+    return `
+      <div class="imf-card">
+        <span class="imf-card-year">${item.year}</span>
+        <span class="imf-card-icon">${item.icon}</span>
+        <div class="imf-card-label">${item.label}</div>
+        <div class="imf-card-value">${valFmt}</div>
+        ${trendHtml}
+      </div>`;
+  }).join('');
+
+  if (metaEl) {
+    const cacheNote = imf.fromCache ? ' · кэш' : '';
+    const staleNote = imf.stale    ? ' · ⚠️ устарел' : '';
+    metaEl.textContent = 'Источник: imf.org/datamapper' + cacheNote + staleNote;
+  }
+  if (aiBtn) aiBtn.disabled = false;
+}
+
+// ── МВФ: отправка на AI анализ ───────────────────────────────────────────
+
+async function sendIMFToAI() {
+  if (!_imfData) return;
+  const aiBtn = document.getElementById('imfAiBtn');
+  if (aiBtn) { aiBtn.disabled = true; aiBtn.textContent = '⏳ Анализирую…'; }
+
+  // Формируем текстовое резюме индикаторов
+  const ind = _imfData.indicators || {};
+  const lines = Object.values(ind).map(item =>
+    `${item.label} (${item.year}): ${item.value.toFixed(2)} ${item.unit}`
+  ).join('\n');
+
+  const prompt = `Проанализируй макроэкономические показатели Таджикистана по данным МВФ:\n\n${lines}\n\nДай краткую оценку состояния экономики, выдели ключевые риски и возможности.`;
+
+  try {
+    // Переходим на вкладку AI и вставляем запрос
+    const aiTab = document.querySelector('.nav-tab[onclick*="analysis"]');
+    if (aiTab) { aiTab.click(); }
+
+    // Ищем textarea или input для запроса
+    await new Promise(r => setTimeout(r, 300));
+    const ta = document.getElementById('userInput') || document.querySelector('textarea[placeholder]');
+    if (ta) {
+      ta.value = prompt;
+      ta.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    // Пробуем найти кнопку отправки
+    const sendBtn = document.getElementById('sendBtn') || document.querySelector('button[onclick*="sendMessage"]');
+    if (sendBtn && !sendBtn.disabled) sendBtn.click();
+
+  } catch (e) {
+    console.warn('[IMF AI]', e.message);
+  } finally {
+    if (aiBtn) { aiBtn.disabled = false; aiBtn.textContent = '🤖 Отправить на AI анализ'; }
   }
 }
 

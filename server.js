@@ -868,14 +868,16 @@ const server = http.createServer(async (req, res) => {
       const {
         fetchNBT, fetchWorldBank,
         fetchOilPrice, fetchAluminumPrice, fetchWheatPrice,
+        fetchIMFRealtime,
       } = require('./dataCollector');
 
-      const [nbtR, wbR, oilR, alR, wheatR] = await Promise.allSettled([
+      const [nbtR, wbR, oilR, alR, wheatR, imfR] = await Promise.allSettled([
         fetchNBT(),
         fetchWorldBank('FP.CPI.TOTL.ZG'),
         fetchOilPrice(),
         fetchAluminumPrice(),
         fetchWheatPrice(),
+        fetchIMFRealtime(),
       ]);
 
       // Курсы НБТ
@@ -913,6 +915,8 @@ const server = http.createServer(async (req, res) => {
         oilR.status       === 'fulfilled' ? 'yahoo.finance'    : null,
       ].filter(Boolean);
 
+      if (imfR.status === 'fulfilled') sources.push('imf.org');
+
       const data = {
         cpi,
         cpi_year:       cpiYear,
@@ -926,12 +930,14 @@ const server = http.createServer(async (req, res) => {
         wheat_change_pct,
         aluminum_price,
         al_change_pct,
+        imf:            imfR.status === 'fulfilled' ? imfR.value : null,
         last_updated:   new Date().toISOString(),
         source:         sources.join(', ') || 'нет данных',
         errors: {
-          nbt:       nbtR.status   === 'rejected' ? nbtR.reason.message   : null,
-          worldbank: wbR.status    === 'rejected' ? wbR.reason.message    : null,
-          yahoo:     oilR.status   === 'rejected' ? oilR.reason.message   : null,
+          nbt:       nbtR.status  === 'rejected' ? nbtR.reason.message  : null,
+          worldbank: wbR.status   === 'rejected' ? wbR.reason.message   : null,
+          yahoo:     oilR.status  === 'rejected' ? oilR.reason.message  : null,
+          imf:       imfR.status  === 'rejected' ? imfR.reason.message  : null,
         },
       };
 
