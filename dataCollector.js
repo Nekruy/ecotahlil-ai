@@ -566,7 +566,7 @@ async function fetchOilPrice() {
   return fetchYahooFinance('CL=F', 'Нефть Brent (WTI)', '$/барр.');
 }
 
-// ─── МВФ Realtime — 6 индикаторов Таджикистана, кэш 24 часа ─────────────
+// ─── МВФ (IMF DataMapper API) ─────────────────────────────────────────────
 
 const IMF_CACHE_FILE = path.join(__dirname, 'imf_cache.json');
 const IMF_CACHE_TTL  = 24 * 60 * 60 * 1000; // 24 часа
@@ -580,50 +580,82 @@ const IMF_INDICATORS_RT = [
   { code: 'NGDPDPC',     label: 'ВВП на душу населения',   unit: 'USD',            icon: '💰' },
 ];
 
-async function fetchIMFRealtime() {
-  // Проверяем кэш (24 часа)
+function loadIMFCache() {
   try {
-    if (fs.existsSync(IMF_CACHE_FILE)) {
-      const cached = JSON.parse(fs.readFileSync(IMF_CACHE_FILE, 'utf8'));
-      const age = Date.now() - new Date(cached.fetchedAt).getTime();
-      if (age < IMF_CACHE_TTL) {
-        console.log('[IMF-RT] Возврат из кэша');
-        return { ...cached, fromCache: true };
-      }
-    }
+    if (fs.existsSync(IMF_CACHE_FILE)) return JSON.parse(fs.readFileSync(IMF_CACHE_FILE, 'utf8'));
   } catch {}
+  return {};
+}
 
+function saveIMFCache(cache) {
+  try { fs.writeFileSync(IMF_CACHE_FILE, JSON.stringify(cache, null, 2), 'utf8'); } catch {}
+}
+
+/**
+ * Получает ряд данных одного индикатора МВФ для заданной страны.
+ * URL: https://www.imf.org/external/datamapper/api/v1/{indicator}/{country}
+ * Возвращает [{year, value}] — отсортировано по году.
+ * Кэш per-indicator в imf_cache.json, TTL 24 часа.
+ */
+async function fetchIMF(indicator, country = 'TJK') {
+  const cacheKey = `${indicator}_${country}`;
+  const cache    = loadIMFCache();
+  const entry    = cache[cacheKey];
+
+  if (entry && Date.now() - new Date(entry.fetchedAt).getTime() < IMF_CACHE_TTL) {
+    console.log(`[IMF] ${cacheKey} из кэша`);
+    return entry.data;
+  }
+
+  const url = `https://www.imf.org/external/datamapper/api/v1/${indicator}/${country}`;
+  const { body, status } = await fetchUrl(url);
+
+  if (status !== 200) throw new Error(`IMF вернул статус ${status}`);
+
+  let parsed;
+  try {
+    parsed = JSON.parse(body);
+  } catch {
+    throw new Error('Неверный формат ответа IMF (не JSON)');
+  }
+
+  const series = parsed?.values?.[indicator]?.[country];
+  if (!series) throw new Error(`IMF: нет данных для ${indicator}/${country}`);
+
+  const data = Object.entries(series)
+    .map(([year, value]) => ({ year: parseInt(year), value: Math.round(value * 100) / 100 }))
+    .filter(d => d.value !== null && d.value !== undefined)
+    .sort((a, b) => a.year - b.year);
+
+  // Перечитываем кэш перед записью — защита от race condition при параллельных запросах
+  const freshCache = loadIMFCache();
+  freshCache[cacheKey] = { data, fetchedAt: new Date().toISOString() };
+  saveIMFCache(freshCache);
+
+  console.log(`[IMF] ${cacheKey} OK — ${data.length} точек, последняя: ${data[data.length - 1]?.year}`);
+  return data;
+}
+
+// ─── МВФ Realtime — 6 индикаторов Таджикистана, дашборд ──────────────────
+
+async function fetchIMFRealtime() {
   const indicators = {};
-  const errors = [];
+  const errors     = [];
 
   await Promise.allSettled(
     IMF_INDICATORS_RT.map(async ({ code, label, unit, icon }) => {
       try {
-        const url = `https://www.imf.org/external/datamapper/api/v1/${code}/TJK`;
-        const { body, status } = await fetchUrl(url);
-        if (status !== 200) throw new Error(`статус ${status}`);
-        const parsed = JSON.parse(body);
-
-        const series = parsed?.values?.[code]?.TJK;
-        if (!series) throw new Error('нет данных TJK');
-
-        // Берём последнее ненулевое значение
-        const entries = Object.entries(series)
-          .map(([year, value]) => ({ year: parseInt(year), value }))
-          .filter(d => d.value !== null && d.value !== undefined)
-          .sort((a, b) => a.year - b.year);
-
-        const latest = entries[entries.length - 1];
+        const series = await fetchIMF(code);
+        const latest = series[series.length - 1];
         if (!latest) throw new Error('пустой ряд');
 
         indicators[code] = {
           label,
           unit,
           icon,
-          value:    Math.round(latest.value * 100) / 100,
-          year:     latest.year,
-          // 5-летняя история для мини-тренда
-          history:  entries.slice(-5).map(e => ({ year: e.year, value: Math.round(e.value * 100) / 100 })),
+          value:   latest.value,
+          year:    latest.year,
+          history: series.slice(-5),
         };
         console.log(`[IMF-RT] ${code} OK — ${latest.value} (${latest.year})`);
       } catch (err) {
@@ -634,87 +666,17 @@ async function fetchIMFRealtime() {
   );
 
   if (Object.keys(indicators).length === 0) {
-    // Полный фейл — возвращаем устаревший кэш если есть
-    try {
-      const stale = JSON.parse(fs.readFileSync(IMF_CACHE_FILE, 'utf8'));
-      console.log('[IMF-RT] Возврат устаревшего кэша');
-      return { ...stale, fromCache: true, stale: true };
-    } catch {}
     throw new Error('МВФ RT: нет данных. ' + errors.join('; '));
   }
 
-  const result = {
-    source:     'imf.org/external/datamapper',
-    country:    'Таджикистан (TJK)',
-    indicators,
-    errors:     errors.length ? errors : undefined,
-    fetchedAt:  new Date().toISOString(),
-    fromCache:  false,
-  };
-
-  try { fs.writeFileSync(IMF_CACHE_FILE, JSON.stringify(result, null, 2), 'utf8'); } catch {}
-  return result;
-}
-
-// ─── МВФ — данные по Таджикистану ────────────────────────────────────────
-
-async function fetchIMF() {
-  const cacheKey = 'imf';
-  // IMF DataMapper API — несколько индикаторов для TJK
-  const INDICATORS = {
-    NGDP_RPCH:  'Рост реального ВВП (%)',
-    PCPIPCH:    'Инфляция (%)',
-    BCA_NGDPD:  'Счёт текущих операций (% ВВП)',
-    LUR:        'Безработица (%)',
-    GGXCNL_NGDP: 'Чистые займы правительства (% ВВП)',
-  };
-
-  let allData = {};
-  const errors = [];
-
-  for (const [code, label] of Object.entries(INDICATORS)) {
-    try {
-      const url = `https://www.imf.org/external/datamapper/api/v1/${code}/TJK`;
-      const { body, status } = await fetchUrl(url);
-      if (status !== 200) throw new Error(`статус ${status}`);
-      const parsed = JSON.parse(body);
-
-      const series = parsed?.values?.[code]?.TJK;
-      if (series) {
-        allData[code] = {
-          label,
-          series: Object.entries(series)
-            .map(([year, value]) => ({ year: parseInt(year), value }))
-            .filter(d => d.value !== null && d.value !== undefined)
-            .sort((a, b) => a.year - b.year),
-        };
-      }
-    } catch (err) {
-      errors.push(`${code}: ${err.message}`);
-    }
-  }
-
-  if (Object.keys(allData).length === 0) {
-    const cached = getCached(cacheKey);
-    if (cached) {
-      console.log('[IMF] Возврат из кэша');
-      return { ...cached, fromCache: true };
-    }
-    throw new Error('МВФ: нет данных. Ошибки: ' + errors.join('; '));
-  }
-
-  const data = {
+  return {
     source:    'imf.org/external/datamapper',
     country:   'Таджикистан (TJK)',
-    indicators: allData,
+    indicators,
     errors:    errors.length ? errors : undefined,
-    fetched:   new Date().toISOString(),
+    fetchedAt: new Date().toISOString(),
     fromCache: false,
   };
-
-  console.log(`[IMF] OK — ${Object.keys(allData).length} индикаторов, ошибок: ${errors.length}`);
-  setCached(cacheKey, data);
-  return data;
 }
 
 // ─── Источник 5: Цена алюминия ────────────────────────────────────────────

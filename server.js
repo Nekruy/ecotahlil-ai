@@ -711,13 +711,25 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // GET /api/imf — данные МВФ по Таджикистану
-  if (req.method === 'GET' && req.url === '/api/imf') {
+  // GET /api/imf?indicator=PCPIPCH — данные МВФ по одному индикатору Таджикистана
+  if (req.method === 'GET' && req.url.startsWith('/api/imf')) {
     try {
+      const urlObj    = new URL(req.url, 'http://localhost');
+      const indicator = urlObj.searchParams.get('indicator');
+      if (!indicator) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({
+          error: 'Параметр indicator обязателен',
+          example: '/api/imf?indicator=PCPIPCH',
+          available: ['PCPIPCH', 'NGDP_RPCH', 'BCA_NGDPD', 'GGXWDG_NGDP', 'LUR', 'NGDPDPC'],
+        }));
+        return;
+      }
+      const country = urlObj.searchParams.get('country') || 'TJK';
       const { fetchIMF } = require('./dataCollector');
-      const result = await fetchIMF();
+      const series = await fetchIMF(indicator, country);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify(result));
+      res.end(JSON.stringify({ indicator, country, series, source: 'imf.org/external/datamapper' }));
     } catch (err) {
       console.error('[/api/imf]', err.message);
       res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
