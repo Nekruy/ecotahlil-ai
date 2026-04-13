@@ -972,6 +972,30 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/smart-data — гибридные данные: районы + НБТ + МВФ
+  if (req.method === 'GET' && req.url === '/api/smart-data') {
+    try {
+      const { mergeDataSources, getCachedSmartData } = require('./dataManager');
+
+      let data;
+      try {
+        data = await mergeDataSources();
+      } catch (fetchErr) {
+        console.warn('[/api/smart-data] Ошибка загрузки, используем кэш:', fetchErr.message);
+        data = getCachedSmartData();
+        if (!data) throw fetchErr;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(data));
+    } catch (err) {
+      console.error('[/api/smart-data]', err.message);
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
