@@ -1,0 +1,12 @@
+[
+  {"year": 2015, "month": null, "cpi": 105.1, "food_inflation": 6.2,  "source": "Агентство по статистике РТ"},
+  {"year": 2016, "month": null, "cpi": 106.1, "food_inflation": 7.1,  "source": "Агентство по статистике РТ"},
+  {"year": 2017, "month": null, "cpi": 107.3, "food_inflation": 8.2,  "source": "Агентство по статистике РТ"},
+  {"year": 2018, "month": null, "cpi": 103.9, "food_inflation": 4.5,  "source": "Агентство по статистике РТ"},
+  {"year": 2019, "month": null, "cpi": 108.0, "food_inflation": 9.1,  "source": "Агентство по статистике РТ"},
+  {"year": 2020, "month": null, "cpi": 109.4, "food_inflation": 10.2, "source": "Агентство по статистике РТ"},
+  {"year": 2021, "month": null, "cpi": 109.0, "food_inflation": 9.8,  "source": "Агентство по статистике РТ"},
+  {"year": 2022, "month": null, "cpi": 107.8, "food_inflation": 8.5,  "source": "Агентство по статистике РТ"},
+  {"year": 2023, "month": null, "cpi": 103.8, "food_inflation": 4.2,  "source": "Агентство по статистике РТ"},
+  {"year": 2024, "month": null, "cpi": 105.0, "food_inflation": 5.5,  "source": "МЭРиТ оценка"}
+]

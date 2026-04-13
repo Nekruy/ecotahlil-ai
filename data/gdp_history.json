@@ -1,0 +1,12 @@
+[
+  {"year": 2015, "gdp_bln_somoni": 54.5,  "gdp_growth": 6.0, "gdp_per_capita_usd": 890,  "source": "МЭРиТ"},
+  {"year": 2016, "gdp_bln_somoni": 58.1,  "gdp_growth": 6.9, "gdp_per_capita_usd": 740,  "source": "МЭРиТ"},
+  {"year": 2017, "gdp_bln_somoni": 64.5,  "gdp_growth": 7.1, "gdp_per_capita_usd": 800,  "source": "МЭРиТ"},
+  {"year": 2018, "gdp_bln_somoni": 71.4,  "gdp_growth": 7.3, "gdp_per_capita_usd": 870,  "source": "МЭРиТ"},
+  {"year": 2019, "gdp_bln_somoni": 79.2,  "gdp_growth": 7.5, "gdp_per_capita_usd": 930,  "source": "МЭРиТ"},
+  {"year": 2020, "gdp_bln_somoni": 80.1,  "gdp_growth": 4.5, "gdp_per_capita_usd": 870,  "source": "МЭРиТ"},
+  {"year": 2021, "gdp_bln_somoni": 89.7,  "gdp_growth": 9.4, "gdp_per_capita_usd": 950,  "source": "МЭРиТ"},
+  {"year": 2022, "gdp_bln_somoni": 104.2, "gdp_growth": 8.0, "gdp_per_capita_usd": 1100, "source": "МЭРиТ"},
+  {"year": 2023, "gdp_bln_somoni": 117.5, "gdp_growth": 8.3, "gdp_per_capita_usd": 1200, "source": "МЭРиТ"},
+  {"year": 2024, "gdp_bln_somoni": 128.0, "gdp_growth": 8.0, "gdp_per_capita_usd": 1300, "source": "МЭРиТ"}
+]

@@ -1,0 +1,12 @@
+[
+  {"year": 2015, "usd_tjs": 6.52,  "rub_tjs": 0.098, "eur_tjs": 7.14,  "source": "НБТ"},
+  {"year": 2016, "usd_tjs": 7.84,  "rub_tjs": 0.112, "eur_tjs": 8.62,  "source": "НБТ"},
+  {"year": 2017, "usd_tjs": 8.76,  "rub_tjs": 0.152, "eur_tjs": 9.81,  "source": "НБТ"},
+  {"year": 2018, "usd_tjs": 9.33,  "rub_tjs": 0.141, "eur_tjs": 10.98, "source": "НБТ"},
+  {"year": 2019, "usd_tjs": 9.53,  "rub_tjs": 0.148, "eur_tjs": 10.67, "source": "НБТ"},
+  {"year": 2020, "usd_tjs": 10.32, "rub_tjs": 0.139, "eur_tjs": 12.22, "source": "НБТ"},
+  {"year": 2021, "usd_tjs": 11.31, "rub_tjs": 0.154, "eur_tjs": 13.32, "source": "НБТ"},
+  {"year": 2022, "usd_tjs": 10.85, "rub_tjs": 0.178, "eur_tjs": 11.42, "source": "НБТ"},
+  {"year": 2023, "usd_tjs": 10.93, "rub_tjs": 0.121, "eur_tjs": 11.95, "source": "НБТ"},
+  {"year": 2024, "usd_tjs": 10.92, "rub_tjs": 0.118, "eur_tjs": 11.85, "source": "НБТ"}
+]

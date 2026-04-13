@@ -1,0 +1,12 @@
+[
+  {"year": 2015, "export_mln_usd": 572,  "import_mln_usd": 2966, "balance_mln_usd": -2394, "source": "Агентство по статистике РТ"},
+  {"year": 2016, "export_mln_usd": 691,  "import_mln_usd": 2682, "balance_mln_usd": -1991, "source": "Агентство по статистике РТ"},
+  {"year": 2017, "export_mln_usd": 872,  "import_mln_usd": 3017, "balance_mln_usd": -2145, "source": "Агентство по статистике РТ"},
+  {"year": 2018, "export_mln_usd": 934,  "import_mln_usd": 3276, "balance_mln_usd": -2342, "source": "Агентство по статистике РТ"},
+  {"year": 2019, "export_mln_usd": 1168, "import_mln_usd": 3544, "balance_mln_usd": -2376, "source": "Агентство по статистике РТ"},
+  {"year": 2020, "export_mln_usd": 1011, "import_mln_usd": 2934, "balance_mln_usd": -1923, "source": "Агентство по статистике РТ"},
+  {"year": 2021, "export_mln_usd": 1383, "import_mln_usd": 3892, "balance_mln_usd": -2509, "source": "Агентство по статистике РТ"},
+  {"year": 2022, "export_mln_usd": 1621, "import_mln_usd": 4513, "balance_mln_usd": -2892, "source": "Агентство по статистике РТ"},
+  {"year": 2023, "export_mln_usd": 1842, "import_mln_usd": 4721, "balance_mln_usd": -2879, "source": "Агентство по статистике РТ"},
+  {"year": 2024, "export_mln_usd": 1950, "import_mln_usd": 4850, "balance_mln_usd": -2900, "source": "МЭРиТ оценка"}
+]

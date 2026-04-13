@@ -1,0 +1,12 @@
+[
+  {"year": 2015, "amount_mln_usd": 1985, "pct_gdp": 27.1, "source": "НБТ"},
+  {"year": 2016, "amount_mln_usd": 1672, "pct_gdp": 28.4, "source": "НБТ"},
+  {"year": 2017, "amount_mln_usd": 1873, "pct_gdp": 28.0, "source": "НБТ"},
+  {"year": 2018, "amount_mln_usd": 2173, "pct_gdp": 28.6, "source": "НБТ"},
+  {"year": 2019, "amount_mln_usd": 2345, "pct_gdp": 27.8, "source": "НБТ"},
+  {"year": 2020, "amount_mln_usd": 1951, "pct_gdp": 26.4, "source": "НБТ"},
+  {"year": 2021, "amount_mln_usd": 2571, "pct_gdp": 32.2, "source": "НБТ"},
+  {"year": 2022, "amount_mln_usd": 3837, "pct_gdp": 50.8, "source": "НБТ"},
+  {"year": 2023, "amount_mln_usd": 3241, "pct_gdp": 38.5, "source": "НБТ"},
+  {"year": 2024, "amount_mln_usd": 3100, "pct_gdp": 35.0, "source": "НБТ оценка"}
+]

@@ -996,6 +996,85 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/history?indicator=gdp — исторические данные по показателю
+  if (req.method === 'GET' && req.url.startsWith('/api/history')) {
+    try {
+      const urlObj    = new URL(req.url, 'http://localhost');
+      const indicator = urlObj.searchParams.get('indicator');
+      const from      = parseInt(urlObj.searchParams.get('from') || '2015');
+      const to        = parseInt(urlObj.searchParams.get('to')   || '2024');
+      const hdb = require('./historicalDB');
+
+      // /api/history/all — все данные
+      if (req.url === '/api/history/all' || indicator === 'all') {
+        const data = hdb.getAllHistory();
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify(data));
+      }
+
+      if (!indicator) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({
+          error: 'Параметр indicator обязателен',
+          available: ['gdp','gdp_growth','gdp_per_capita','inflation','food_inflation',
+                      'usd_tjs','eur_tjs','rub_tjs','remittances','remittances_pct_gdp',
+                      'export','import','trade_balance','var','correlation','cge_calibration',
+                      'last_year','crisis'],
+        }));
+      }
+
+      let result;
+      switch (indicator) {
+        case 'gdp':
+          result = hdb.getYearRange(hdb.getGDPHistory(), from, to);
+          break;
+        case 'inflation':
+          result = hdb.getYearRange(hdb.getInflationHistory(), from, to);
+          break;
+        case 'exchange_rates':
+          result = hdb.getYearRange(hdb.getExchangeRateHistory(), from, to);
+          break;
+        case 'remittances':
+          result = hdb.getYearRange(hdb.getRemittancesHistory(), from, to);
+          break;
+        case 'trade':
+          result = hdb.getYearRange(hdb.getTradeHistory(), from, to);
+          break;
+        case 'var':
+          result = hdb.getVARData();
+          break;
+        case 'correlation':
+          result = hdb.getCorrelationData();
+          break;
+        case 'cge_calibration':
+          result = hdb.getCGECalibration();
+          break;
+        case 'last_year':
+          result = hdb.getLastYear();
+          break;
+        case 'crisis':
+          result = hdb.getCrisisContext(urlObj.searchParams.get('scenario') || 'oil');
+          break;
+        default:
+          // Числовой ряд для прогнозирования
+          result = {
+            indicator,
+            values: hdb.getDataForForecasting(indicator),
+            years:  hdb.getGDPHistory().map(r => r.year),
+            source: 'МЭРиТ / НБТ / Агентство по статистике РТ',
+          };
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/history]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
