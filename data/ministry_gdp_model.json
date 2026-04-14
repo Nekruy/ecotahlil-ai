@@ -1,0 +1,1196 @@
+{
+  "meta": {
+    "source": "Модель ВВП МЭРиТ РТ, файл Model_GDP_-8_04_2025.xlsx",
+    "period": "1997–2024",
+    "imported_at": "2026-04-14T15:15:49.532Z",
+    "note": "Все показатели роста — в % (7.5 означает 7.5%, не 107.5). ИПЦ: 100-base (107.4 = 7.4% инфляция)."
+  },
+  "gdp": [
+    {
+      "year": 1997,
+      "gdp_mln_somoni": 518.4,
+      "gdp_bln_somoni": 0.52,
+      "gdp_growth": 1.7,
+      "gdp_deflator": 165.2,
+      "gdp_per_capita_usd": 158.7,
+      "population_thou": 5814.4
+    },
+    {
+      "year": 1998,
+      "gdp_mln_somoni": 1025.2,
+      "gdp_bln_somoni": 1.03,
+      "gdp_growth": 5.3,
+      "gdp_deflator": 187.8,
+      "gdp_per_capita_usd": 221.8,
+      "population_thou": 5930.5
+    },
+    {
+      "year": 1999,
+      "gdp_mln_somoni": 1345,
+      "gdp_bln_somoni": 1.35,
+      "gdp_growth": 3.7,
+      "gdp_deflator": 123.5,
+      "gdp_per_capita_usd": 178.2,
+      "population_thou": 6056
+    },
+    {
+      "year": 2000,
+      "gdp_mln_somoni": 1786.8,
+      "gdp_bln_somoni": 1.79,
+      "gdp_growth": 8.3,
+      "gdp_deflator": 124.3,
+      "gdp_per_capita_usd": 158,
+      "population_thou": 6196.5
+    },
+    {
+      "year": 2001,
+      "gdp_mln_somoni": 2563.8,
+      "gdp_bln_somoni": 2.56,
+      "gdp_growth": 9.6,
+      "gdp_deflator": 130.9,
+      "gdp_per_capita_usd": 171.2,
+      "population_thou": 6317.9
+    },
+    {
+      "year": 2002,
+      "gdp_mln_somoni": 3375.3,
+      "gdp_bln_somoni": 3.38,
+      "gdp_growth": 10.8,
+      "gdp_deflator": 118.8,
+      "gdp_per_capita_usd": 190,
+      "population_thou": 6429.2
+    },
+    {
+      "year": 2003,
+      "gdp_mln_somoni": 4761.5,
+      "gdp_bln_somoni": 4.76,
+      "gdp_growth": 11.1,
+      "gdp_deflator": 127.1,
+      "gdp_per_capita_usd": 236.7,
+      "population_thou": 6543
+    },
+    {
+      "year": 2004,
+      "gdp_mln_somoni": 6167.2,
+      "gdp_bln_somoni": 6.17,
+      "gdp_growth": 10.3,
+      "gdp_deflator": 117.5,
+      "gdp_per_capita_usd": 309.7,
+      "population_thou": 6658.9
+    },
+    {
+      "year": 2005,
+      "gdp_mln_somoni": 7206.6,
+      "gdp_bln_somoni": 7.21,
+      "gdp_growth": 6.7,
+      "gdp_deflator": 109.52,
+      "gdp_per_capita_usd": 337.5,
+      "population_thou": 6780.6
+    },
+    {
+      "year": 2006,
+      "gdp_mln_somoni": 9335.3,
+      "gdp_bln_somoni": 9.34,
+      "gdp_growth": 7,
+      "gdp_deflator": 121.06,
+      "gdp_per_capita_usd": 410,
+      "population_thou": 6903.9
+    },
+    {
+      "year": 2007,
+      "gdp_mln_somoni": 12804.3,
+      "gdp_bln_somoni": 12.8,
+      "gdp_growth": 7.8,
+      "gdp_deflator": 127.24,
+      "gdp_per_capita_usd": 529,
+      "population_thou": 7031.2
+    },
+    {
+      "year": 2008,
+      "gdp_mln_somoni": 17706.9,
+      "gdp_bln_somoni": 17.71,
+      "gdp_growth": 7.9,
+      "gdp_deflator": 128.16,
+      "gdp_per_capita_usd": 719.8,
+      "population_thou": 7173.8
+    },
+    {
+      "year": 2009,
+      "gdp_mln_somoni": 20629,
+      "gdp_bln_somoni": 20.63,
+      "gdp_growth": 3.9,
+      "gdp_deflator": 112.13,
+      "gdp_per_capita_usd": 678.8,
+      "population_thou": 7334.1
+    },
+    {
+      "year": 2010,
+      "gdp_mln_somoni": 24707.1,
+      "gdp_bln_somoni": 24.71,
+      "gdp_growth": 6.5,
+      "gdp_deflator": 112.45,
+      "gdp_per_capita_usd": 750.4,
+      "population_thou": 7519.3
+    },
+    {
+      "year": 2011,
+      "gdp_mln_somoni": 30071.1,
+      "gdp_bln_somoni": 30.07,
+      "gdp_growth": 7.4,
+      "gdp_deflator": 113.32,
+      "gdp_per_capita_usd": 845.65,
+      "population_thou": 7714.2
+    },
+    {
+      "year": 2012,
+      "gdp_mln_somoni": 36163.1,
+      "gdp_bln_somoni": 36.16,
+      "gdp_growth": 7.5,
+      "gdp_deflator": 111.87,
+      "gdp_per_capita_usd": 961.47,
+      "population_thou": 7897.3
+    },
+    {
+      "year": 2013,
+      "gdp_mln_somoni": 40525.2,
+      "gdp_bln_somoni": 40.53,
+      "gdp_growth": 7.4,
+      "gdp_deflator": 104.34,
+      "gdp_per_capita_usd": 1053.5,
+      "population_thou": 8074.3
+    },
+    {
+      "year": 2014,
+      "gdp_mln_somoni": 45606.6,
+      "gdp_bln_somoni": 45.61,
+      "gdp_growth": 6.7,
+      "gdp_deflator": 105.47,
+      "gdp_per_capita_usd": 1119.31,
+      "population_thou": 8256.6
+    },
+    {
+      "year": 2015,
+      "gdp_mln_somoni": 50977.4,
+      "gdp_bln_somoni": 50.98,
+      "gdp_growth": 6,
+      "gdp_deflator": 105.45,
+      "gdp_per_capita_usd": 978.46,
+      "population_thou": 8451.6
+    },
+    {
+      "year": 2016,
+      "gdp_mln_somoni": 54790.3,
+      "gdp_bln_somoni": 54.79,
+      "gdp_growth": 6.9,
+      "gdp_deflator": 100.54,
+      "gdp_per_capita_usd": 808.66,
+      "population_thou": 8647
+    },
+    {
+      "year": 2017,
+      "gdp_mln_somoni": 64434.3,
+      "gdp_bln_somoni": 64.43,
+      "gdp_growth": 7.1,
+      "gdp_deflator": 109.81,
+      "gdp_per_capita_usd": 852.83,
+      "population_thou": 8837
+    },
+    {
+      "year": 2018,
+      "gdp_mln_somoni": 71059.2,
+      "gdp_bln_somoni": 71.06,
+      "gdp_growth": 7.57,
+      "gdp_deflator": 102.52,
+      "gdp_per_capita_usd": 860.02,
+      "population_thou": 9028.9
+    },
+    {
+      "year": 2019,
+      "gdp_mln_somoni": 79109.8,
+      "gdp_bln_somoni": 79.11,
+      "gdp_growth": 7.42,
+      "gdp_deflator": 103.64,
+      "gdp_per_capita_usd": 900.32,
+      "population_thou": 9220.2
+    },
+    {
+      "year": 2020,
+      "gdp_mln_somoni": 83958.3,
+      "gdp_bln_somoni": 83.96,
+      "gdp_growth": 4.45,
+      "gdp_deflator": 101.61,
+      "gdp_per_capita_usd": 864.4,
+      "population_thou": 9410
+    },
+    {
+      "year": 2021,
+      "gdp_mln_somoni": 101076.3,
+      "gdp_bln_somoni": 101.08,
+      "gdp_growth": 9.42,
+      "gdp_deflator": 110.03,
+      "gdp_per_capita_usd": 911.85,
+      "population_thou": 9801.81
+    },
+    {
+      "year": 2022,
+      "gdp_mln_somoni": 118181.7,
+      "gdp_bln_somoni": 118.18,
+      "gdp_growth": 8.04,
+      "gdp_deflator": 108.23,
+      "gdp_per_capita_usd": 1073.74,
+      "population_thou": 9982.6
+    },
+    {
+      "year": 2023,
+      "gdp_mln_somoni": 132781.9,
+      "gdp_bln_somoni": 132.78,
+      "gdp_growth": 8.32,
+      "gdp_deflator": 103.72,
+      "gdp_per_capita_usd": 1202.41,
+      "population_thou": 10183.3
+    },
+    {
+      "year": 2024,
+      "gdp_mln_somoni": 153402.2,
+      "gdp_bln_somoni": 153.4,
+      "gdp_growth": 8.35,
+      "gdp_deflator": 106.62,
+      "gdp_per_capita_usd": 1368.31,
+      "population_thou": 10382.1
+    }
+  ],
+  "inflation": [
+    {
+      "year": 1997,
+      "cpi": 0,
+      "cpi_growth_pct": -100
+    },
+    {
+      "year": 1998,
+      "cpi": 0,
+      "cpi_growth_pct": -100
+    },
+    {
+      "year": 1999,
+      "cpi": 0,
+      "cpi_growth_pct": -100
+    },
+    {
+      "year": 2000,
+      "cpi": 160.63,
+      "cpi_growth_pct": 60.63
+    },
+    {
+      "year": 2001,
+      "cpi": 112.48,
+      "cpi_growth_pct": 12.48
+    },
+    {
+      "year": 2002,
+      "cpi": 114.51,
+      "cpi_growth_pct": 14.51
+    },
+    {
+      "year": 2003,
+      "cpi": 113.65,
+      "cpi_growth_pct": 13.65
+    },
+    {
+      "year": 2004,
+      "cpi": 105.62,
+      "cpi_growth_pct": 5.62
+    },
+    {
+      "year": 2005,
+      "cpi": 106.89,
+      "cpi_growth_pct": 6.89
+    },
+    {
+      "year": 2006,
+      "cpi": 111.9,
+      "cpi_growth_pct": 11.9
+    },
+    {
+      "year": 2007,
+      "cpi": 121.5,
+      "cpi_growth_pct": 21.5
+    },
+    {
+      "year": 2008,
+      "cpi": 120.4,
+      "cpi_growth_pct": 20.4
+    },
+    {
+      "year": 2009,
+      "cpi": 106.4,
+      "cpi_growth_pct": 6.4
+    },
+    {
+      "year": 2010,
+      "cpi": 106.5,
+      "cpi_growth_pct": 6.5
+    },
+    {
+      "year": 2011,
+      "cpi": 112.5,
+      "cpi_growth_pct": 12.5
+    },
+    {
+      "year": 2012,
+      "cpi": 105.8,
+      "cpi_growth_pct": 5.8
+    },
+    {
+      "year": 2013,
+      "cpi": 103.7,
+      "cpi_growth_pct": 3.7
+    },
+    {
+      "year": 2014,
+      "cpi": 107.4,
+      "cpi_growth_pct": 7.4
+    },
+    {
+      "year": 2015,
+      "cpi": 105.1,
+      "cpi_growth_pct": 5.1
+    },
+    {
+      "year": 2016,
+      "cpi": 106.1,
+      "cpi_growth_pct": 6.1
+    },
+    {
+      "year": 2017,
+      "cpi": 106.74,
+      "cpi_growth_pct": 6.74
+    },
+    {
+      "year": 2018,
+      "cpi": 105.38,
+      "cpi_growth_pct": 5.38
+    },
+    {
+      "year": 2019,
+      "cpi": 108,
+      "cpi_growth_pct": 8
+    },
+    {
+      "year": 2020,
+      "cpi": 109.4,
+      "cpi_growth_pct": 9.4
+    },
+    {
+      "year": 2021,
+      "cpi": 108,
+      "cpi_growth_pct": 8
+    },
+    {
+      "year": 2022,
+      "cpi": 104.2,
+      "cpi_growth_pct": 4.2
+    },
+    {
+      "year": 2023,
+      "cpi": 103.8,
+      "cpi_growth_pct": 3.8
+    },
+    {
+      "year": 2024,
+      "cpi": 103.6,
+      "cpi_growth_pct": 3.6
+    }
+  ],
+  "agriculture": [
+    {
+      "year": 1997,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 1998,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 1999,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 2000,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 2001,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 2002,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 2003,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 2004,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "crop_mln_somoni": 0,
+      "livestock_mln_somoni": 0
+    },
+    {
+      "year": 2005,
+      "value_mln_somoni": 6855.9,
+      "growth_pct": 1.6,
+      "crop_mln_somoni": 4724.9,
+      "livestock_mln_somoni": 2134.1
+    },
+    {
+      "year": 2006,
+      "value_mln_somoni": 7246.7,
+      "growth_pct": 5.7,
+      "crop_mln_somoni": 5032,
+      "livestock_mln_somoni": 2208.8
+    },
+    {
+      "year": 2007,
+      "value_mln_somoni": 7500.4,
+      "growth_pct": 3.5,
+      "crop_mln_somoni": 5147.7,
+      "livestock_mln_somoni": 2356.8
+    },
+    {
+      "year": 2008,
+      "value_mln_somoni": 7957.9,
+      "growth_pct": 7.9,
+      "crop_mln_somoni": 5523.5,
+      "livestock_mln_somoni": 2429.8
+    },
+    {
+      "year": 2009,
+      "value_mln_somoni": 8793.5,
+      "growth_pct": 10.5,
+      "crop_mln_somoni": 6219.5,
+      "livestock_mln_somoni": 2573.2
+    },
+    {
+      "year": 2010,
+      "value_mln_somoni": 9391.4,
+      "growth_pct": 6.8,
+      "crop_mln_somoni": 6617.5,
+      "livestock_mln_somoni": 2773.9
+    },
+    {
+      "year": 2011,
+      "value_mln_somoni": 14853.3,
+      "growth_pct": 7.9,
+      "crop_mln_somoni": 10894.7,
+      "livestock_mln_somoni": 3958.6
+    },
+    {
+      "year": 2012,
+      "value_mln_somoni": 16477.5,
+      "growth_pct": 10.4,
+      "crop_mln_somoni": 11836.3,
+      "livestock_mln_somoni": 3958.6
+    },
+    {
+      "year": 2013,
+      "value_mln_somoni": 16756.6,
+      "growth_pct": 7.6,
+      "crop_mln_somoni": 11502.5,
+      "livestock_mln_somoni": 3958.6
+    },
+    {
+      "year": 2014,
+      "value_mln_somoni": 21021.9,
+      "growth_pct": 4.5,
+      "crop_mln_somoni": 14532.8,
+      "livestock_mln_somoni": 3958.6
+    },
+    {
+      "year": 2015,
+      "value_mln_somoni": 21577.8,
+      "growth_pct": 3.2,
+      "crop_mln_somoni": 14623.7,
+      "livestock_mln_somoni": 6954.1
+    },
+    {
+      "year": 2016,
+      "value_mln_somoni": 22907.67,
+      "growth_pct": 5.2,
+      "crop_mln_somoni": 15066.6,
+      "livestock_mln_somoni": 7841.07
+    },
+    {
+      "year": 2017,
+      "value_mln_somoni": 24576,
+      "growth_pct": 6.8,
+      "crop_mln_somoni": 16977.8,
+      "livestock_mln_somoni": 7598.2
+    },
+    {
+      "year": 2018,
+      "value_mln_somoni": 26370.3,
+      "growth_pct": 7,
+      "crop_mln_somoni": 18229.2,
+      "livestock_mln_somoni": 8141.1
+    },
+    {
+      "year": 2019,
+      "value_mln_somoni": 27750.4,
+      "growth_pct": 7,
+      "crop_mln_somoni": 19279.7,
+      "livestock_mln_somoni": 8470.7
+    },
+    {
+      "year": 2020,
+      "value_mln_somoni": 37298.4,
+      "growth_pct": 7.9,
+      "crop_mln_somoni": 27130,
+      "livestock_mln_somoni": 10168.4
+    },
+    {
+      "year": 2021,
+      "value_mln_somoni": 39769.4,
+      "growth_pct": -0.3,
+      "crop_mln_somoni": 28743.9,
+      "livestock_mln_somoni": 11025.5
+    },
+    {
+      "year": 2022,
+      "value_mln_somoni": 49272.4,
+      "growth_pct": 8,
+      "crop_mln_somoni": 33902,
+      "livestock_mln_somoni": 15370.4
+    },
+    {
+      "year": 2023,
+      "value_mln_somoni": 63028.4,
+      "growth_pct": 9,
+      "crop_mln_somoni": 43365.7,
+      "livestock_mln_somoni": 19662.7
+    },
+    {
+      "year": 2024,
+      "value_mln_somoni": 73981.3,
+      "growth_pct": 10.6,
+      "crop_mln_somoni": 50984.8,
+      "livestock_mln_somoni": 22996.5
+    }
+  ],
+  "industry": [
+    {
+      "year": 1997,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 0
+    },
+    {
+      "year": 1998,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 0
+    },
+    {
+      "year": 1999,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 0
+    },
+    {
+      "year": 2000,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 0
+    },
+    {
+      "year": 2001,
+      "value_mln_somoni": 0,
+      "growth_pct": -100,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 0
+    },
+    {
+      "year": 2002,
+      "value_mln_somoni": 2418,
+      "growth_pct": 8.4,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 140.24
+    },
+    {
+      "year": 2003,
+      "value_mln_somoni": 3205,
+      "growth_pct": 9.9,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 240.38
+    },
+    {
+      "year": 2004,
+      "value_mln_somoni": 3952,
+      "growth_pct": 15.1,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 233.17
+    },
+    {
+      "year": 2005,
+      "value_mln_somoni": 4278,
+      "growth_pct": 10.4,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 273.79
+    },
+    {
+      "year": 2006,
+      "value_mln_somoni": 4663,
+      "growth_pct": 5.5,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 289.11
+    },
+    {
+      "year": 2007,
+      "value_mln_somoni": 5571,
+      "growth_pct": 9.9,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 384.4
+    },
+    {
+      "year": 2008,
+      "value_mln_somoni": 6106,
+      "growth_pct": -3.5,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 647.24
+    },
+    {
+      "year": 2009,
+      "value_mln_somoni": 6501,
+      "growth_pct": -6.5,
+      "mining_mln": 0,
+      "manufacturing_mln": 0,
+      "energy_mln": 897.14
+    },
+    {
+      "year": 2010,
+      "value_mln_somoni": 6164.7,
+      "growth_pct": 9.2,
+      "mining_mln": 755,
+      "manufacturing_mln": 3959.3,
+      "energy_mln": 1450.4
+    },
+    {
+      "year": 2011,
+      "value_mln_somoni": 7862,
+      "growth_pct": 5.7,
+      "mining_mln": 975,
+      "manufacturing_mln": 5428,
+      "energy_mln": 1459
+    },
+    {
+      "year": 2012,
+      "value_mln_somoni": 9504,
+      "growth_pct": 10.8,
+      "mining_mln": 1227,
+      "manufacturing_mln": 6536,
+      "energy_mln": 1741
+    },
+    {
+      "year": 2013,
+      "value_mln_somoni": 9952,
+      "growth_pct": 3.8,
+      "mining_mln": 1117,
+      "manufacturing_mln": 6916,
+      "energy_mln": 1919
+    },
+    {
+      "year": 2014,
+      "value_mln_somoni": 10534.66,
+      "growth_pct": 5,
+      "mining_mln": 1402,
+      "manufacturing_mln": 6959,
+      "energy_mln": 2173.66
+    },
+    {
+      "year": 2015,
+      "value_mln_somoni": 12196,
+      "growth_pct": 11.3,
+      "mining_mln": 1641,
+      "manufacturing_mln": 8006,
+      "energy_mln": 2549
+    },
+    {
+      "year": 2016,
+      "value_mln_somoni": 15090,
+      "growth_pct": 16,
+      "mining_mln": 3004,
+      "manufacturing_mln": 9368,
+      "energy_mln": 2718
+    },
+    {
+      "year": 2017,
+      "value_mln_somoni": 20028.51,
+      "growth_pct": 21.3,
+      "mining_mln": 4523.51,
+      "manufacturing_mln": 11776,
+      "energy_mln": 3729
+    },
+    {
+      "year": 2018,
+      "value_mln_somoni": 23893.9,
+      "growth_pct": 10.6,
+      "mining_mln": 4685.9,
+      "manufacturing_mln": 13520,
+      "energy_mln": 5688
+    },
+    {
+      "year": 2019,
+      "value_mln_somoni": 27613.3,
+      "growth_pct": 13.2,
+      "mining_mln": 4853.3,
+      "manufacturing_mln": 15952,
+      "energy_mln": 6808
+    },
+    {
+      "year": 2020,
+      "value_mln_somoni": 30890,
+      "growth_pct": 8.8,
+      "mining_mln": 4309,
+      "manufacturing_mln": 19054,
+      "energy_mln": 7527
+    },
+    {
+      "year": 2021,
+      "value_mln_somoni": 38829,
+      "growth_pct": 20.8,
+      "mining_mln": 8409,
+      "manufacturing_mln": 22313,
+      "energy_mln": 8107
+    },
+    {
+      "year": 2022,
+      "value_mln_somoni": 42221.4,
+      "growth_pct": 15.4,
+      "mining_mln": 8890.9,
+      "manufacturing_mln": 25708.7,
+      "energy_mln": 7621.8
+    },
+    {
+      "year": 2023,
+      "value_mln_somoni": 46816,
+      "growth_pct": 12,
+      "mining_mln": 9373,
+      "manufacturing_mln": 28459.8,
+      "energy_mln": 8983.2
+    },
+    {
+      "year": 2024,
+      "value_mln_somoni": 53819,
+      "growth_pct": 20,
+      "mining_mln": 13363.1,
+      "manufacturing_mln": 30275.6,
+      "energy_mln": 9872.2
+    }
+  ],
+  "trade": [
+    {
+      "year": 1997,
+      "export_mln_usd": 0,
+      "import_mln_usd": 0,
+      "balance_mln_usd": 0
+    },
+    {
+      "year": 1998,
+      "export_mln_usd": 0,
+      "import_mln_usd": 0,
+      "balance_mln_usd": 0
+    },
+    {
+      "year": 1999,
+      "export_mln_usd": 0,
+      "import_mln_usd": 0,
+      "balance_mln_usd": 0
+    },
+    {
+      "year": 2000,
+      "export_mln_usd": 901.53,
+      "import_mln_usd": 977.48,
+      "balance_mln_usd": -75.95
+    },
+    {
+      "year": 2001,
+      "export_mln_usd": 713.77,
+      "import_mln_usd": 835.28,
+      "balance_mln_usd": -121.51
+    },
+    {
+      "year": 2002,
+      "export_mln_usd": 768.14,
+      "import_mln_usd": 927.78,
+      "balance_mln_usd": -159.64
+    },
+    {
+      "year": 2003,
+      "export_mln_usd": 994.72,
+      "import_mln_usd": 1147.26,
+      "balance_mln_usd": -152.54
+    },
+    {
+      "year": 2004,
+      "export_mln_usd": 1219.84,
+      "import_mln_usd": 1444.96,
+      "balance_mln_usd": -225.12
+    },
+    {
+      "year": 2005,
+      "export_mln_usd": 1254.43,
+      "import_mln_usd": 1682.44,
+      "balance_mln_usd": -428.01
+    },
+    {
+      "year": 2006,
+      "export_mln_usd": 1589.63,
+      "import_mln_usd": 2370.78,
+      "balance_mln_usd": -781.15
+    },
+    {
+      "year": 2007,
+      "export_mln_usd": 1705.57,
+      "import_mln_usd": 3707.08,
+      "balance_mln_usd": -2001.52
+    },
+    {
+      "year": 2008,
+      "export_mln_usd": 1686.31,
+      "import_mln_usd": 4084.52,
+      "balance_mln_usd": -2398.21
+    },
+    {
+      "year": 2009,
+      "export_mln_usd": 600.15,
+      "import_mln_usd": 2833.9,
+      "balance_mln_usd": -2233.75
+    },
+    {
+      "year": 2010,
+      "export_mln_usd": 791.25,
+      "import_mln_usd": 3460.29,
+      "balance_mln_usd": -2669.04
+    },
+    {
+      "year": 2011,
+      "export_mln_usd": 1821.8,
+      "import_mln_usd": 3646.76,
+      "balance_mln_usd": -1824.96
+    },
+    {
+      "year": 2012,
+      "export_mln_usd": 1847.3,
+      "import_mln_usd": 4358.9,
+      "balance_mln_usd": -2511.6
+    },
+    {
+      "year": 2013,
+      "export_mln_usd": 1306.77,
+      "import_mln_usd": 4836.09,
+      "balance_mln_usd": -3529.32
+    },
+    {
+      "year": 2014,
+      "export_mln_usd": 1229.7,
+      "import_mln_usd": 4759.9,
+      "balance_mln_usd": -3530.2
+    },
+    {
+      "year": 2015,
+      "export_mln_usd": 1143,
+      "import_mln_usd": 3898.14,
+      "balance_mln_usd": -2755.14
+    },
+    {
+      "year": 2016,
+      "export_mln_usd": 1130.5,
+      "import_mln_usd": 3405.3,
+      "balance_mln_usd": -2274.8
+    },
+    {
+      "year": 2017,
+      "export_mln_usd": 1450,
+      "import_mln_usd": 3149.08,
+      "balance_mln_usd": -1699.08
+    },
+    {
+      "year": 2018,
+      "export_mln_usd": 1315.5,
+      "import_mln_usd": 3608.8,
+      "balance_mln_usd": -2293.3
+    },
+    {
+      "year": 2019,
+      "export_mln_usd": 1416.75,
+      "import_mln_usd": 3837.1,
+      "balance_mln_usd": -2420.35
+    },
+    {
+      "year": 2020,
+      "export_mln_usd": 1545.4,
+      "import_mln_usd": 3560,
+      "balance_mln_usd": -2014.6
+    },
+    {
+      "year": 2021,
+      "export_mln_usd": 2296.4,
+      "import_mln_usd": 4741.1,
+      "balance_mln_usd": -2444.7
+    },
+    {
+      "year": 2022,
+      "export_mln_usd": 2279.4,
+      "import_mln_usd": 5852.82,
+      "balance_mln_usd": -3573.42
+    },
+    {
+      "year": 2023,
+      "export_mln_usd": 2692.3,
+      "import_mln_usd": 6628.38,
+      "balance_mln_usd": -3936.08
+    },
+    {
+      "year": 2024,
+      "export_mln_usd": 2108.41,
+      "import_mln_usd": 7685.7,
+      "balance_mln_usd": -5577.3
+    }
+  ],
+  "monetary": [
+    {
+      "year": 1997,
+      "cpi_avg_annual": 0,
+      "cpi_food": 0,
+      "cpi_nonfood": 0,
+      "cpi_services": 0
+    },
+    {
+      "year": 1998,
+      "cpi_avg_annual": 0,
+      "cpi_food": 0,
+      "cpi_nonfood": 0,
+      "cpi_services": 0
+    },
+    {
+      "year": 1999,
+      "cpi_avg_annual": 0,
+      "cpi_food": 0,
+      "cpi_nonfood": 0,
+      "cpi_services": 0
+    },
+    {
+      "year": 2000,
+      "cpi_avg_annual": 124,
+      "cpi_food": 123.9,
+      "cpi_nonfood": 125.9,
+      "cpi_services": 128.1
+    },
+    {
+      "year": 2001,
+      "cpi_avg_annual": 136.5,
+      "cpi_food": 139.1,
+      "cpi_nonfood": 130.5,
+      "cpi_services": 127
+    },
+    {
+      "year": 2002,
+      "cpi_avg_annual": 110.2,
+      "cpi_food": 110.4,
+      "cpi_nonfood": 107.2,
+      "cpi_services": 114.8
+    },
+    {
+      "year": 2003,
+      "cpi_avg_annual": 117.1,
+      "cpi_food": 115.8,
+      "cpi_nonfood": 110.5,
+      "cpi_services": 140.8
+    },
+    {
+      "year": 2004,
+      "cpi_avg_annual": 106.8,
+      "cpi_food": 105,
+      "cpi_nonfood": 107.4,
+      "cpi_services": 117.3
+    },
+    {
+      "year": 2005,
+      "cpi_avg_annual": 107.8,
+      "cpi_food": 108.9,
+      "cpi_nonfood": 103.6,
+      "cpi_services": 109.8
+    },
+    {
+      "year": 2006,
+      "cpi_avg_annual": 111.9,
+      "cpi_food": 113.6,
+      "cpi_nonfood": 103.8,
+      "cpi_services": 118.6
+    },
+    {
+      "year": 2007,
+      "cpi_avg_annual": 121.5,
+      "cpi_food": 125.4,
+      "cpi_nonfood": 110.3,
+      "cpi_services": 127.1
+    },
+    {
+      "year": 2008,
+      "cpi_avg_annual": 120.4,
+      "cpi_food": 125.9,
+      "cpi_nonfood": 107.7,
+      "cpi_services": 120.5
+    },
+    {
+      "year": 2009,
+      "cpi_avg_annual": 106.4,
+      "cpi_food": 105.2,
+      "cpi_nonfood": 105.2,
+      "cpi_services": 114.5
+    },
+    {
+      "year": 2010,
+      "cpi_avg_annual": 106.5,
+      "cpi_food": 105.9,
+      "cpi_nonfood": 106.6,
+      "cpi_services": 108.8
+    },
+    {
+      "year": 2011,
+      "cpi_avg_annual": 112.01,
+      "cpi_food": 113.61,
+      "cpi_nonfood": 109.3,
+      "cpi_services": 110.7
+    },
+    {
+      "year": 2012,
+      "cpi_avg_annual": 116.17,
+      "cpi_food": 118.93,
+      "cpi_nonfood": 112.69,
+      "cpi_services": 110
+    },
+    {
+      "year": 2013,
+      "cpi_avg_annual": 114.61,
+      "cpi_food": 118.49,
+      "cpi_nonfood": 108.93,
+      "cpi_services": 110
+    },
+    {
+      "year": 2014,
+      "cpi_avg_annual": 112.76,
+      "cpi_food": 118.89,
+      "cpi_nonfood": 102.7,
+      "cpi_services": 104
+    },
+    {
+      "year": 2015,
+      "cpi_avg_annual": 105.8,
+      "cpi_food": 106.8,
+      "cpi_nonfood": 104.8,
+      "cpi_services": 103
+    },
+    {
+      "year": 2016,
+      "cpi_avg_annual": 105.9,
+      "cpi_food": 105,
+      "cpi_nonfood": 108.2,
+      "cpi_services": 104.9
+    },
+    {
+      "year": 2017,
+      "cpi_avg_annual": 107.3,
+      "cpi_food": 109.1,
+      "cpi_nonfood": 104.3,
+      "cpi_services": 106
+    },
+    {
+      "year": 2018,
+      "cpi_avg_annual": 103.7,
+      "cpi_food": 102.5,
+      "cpi_nonfood": 105.2,
+      "cpi_services": 105.9
+    },
+    {
+      "year": 2019,
+      "cpi_avg_annual": 107.9,
+      "cpi_food": 111,
+      "cpi_nonfood": 105.1,
+      "cpi_services": 102.6
+    },
+    {
+      "year": 2020,
+      "cpi_avg_annual": 108.6,
+      "cpi_food": 111.7,
+      "cpi_nonfood": 105,
+      "cpi_services": 104.7
+    },
+    {
+      "year": 2021,
+      "cpi_avg_annual": 109,
+      "cpi_food": 110.3,
+      "cpi_nonfood": 107.8,
+      "cpi_services": 106.7
+    },
+    {
+      "year": 2022,
+      "cpi_avg_annual": 106.6,
+      "cpi_food": 107.2,
+      "cpi_nonfood": 105.7,
+      "cpi_services": 106.7
+    },
+    {
+      "year": 2023,
+      "cpi_avg_annual": 103.7,
+      "cpi_food": 103.6,
+      "cpi_nonfood": 105.2,
+      "cpi_services": 102
+    },
+    {
+      "year": 2024,
+      "cpi_avg_annual": 103.5,
+      "cpi_food": 102.2,
+      "cpi_nonfood": 105,
+      "cpi_services": 104.6
+    }
+  ]
+}

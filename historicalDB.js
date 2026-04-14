@@ -12,7 +12,8 @@
 const fs   = require('fs');
 const path = require('path');
 
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR      = path.join(__dirname, 'data');
+const MINISTRY_FILE = path.join(DATA_DIR, 'ministry_gdp_model.json');
 
 // ─── Чтение JSON файлов ──────────────────────────────────────────────────────
 
@@ -25,15 +26,41 @@ function readData(filename) {
   }
 }
 
+/** Данные модели МЭРиТ 1997–2024 (ministry_gdp_model.json) */
+function getMinistryData() {
+  try { return JSON.parse(fs.readFileSync(MINISTRY_FILE, 'utf8')); }
+  catch (e) { return null; }
+}
+
 // ─── Основные геттеры ────────────────────────────────────────────────────────
 
-/** ВВП Таджикистана 2015–2024 */
+/** ВВП Таджикистана — приоритет МЭРиТ 1997–2024, fallback → gdp_history.json */
 function getGDPHistory() {
+  const m = getMinistryData();
+  if (m && m.gdp && m.gdp.length) {
+    return m.gdp.map(r => ({
+      year:               r.year,
+      gdp_bln_somoni:     r.gdp_bln_somoni,
+      gdp_growth:         r.gdp_growth,
+      gdp_per_capita_usd: r.gdp_per_capita_usd,
+      population_thou:    r.population_thou,
+      source:             'МЭРиТ РТ',
+    }));
+  }
   return readData('gdp_history.json');
 }
 
-/** Инфляция (ИПЦ) 2015–2024 */
+/** Инфляция (ИПЦ) — приоритет МЭРиТ 1997–2024, fallback → inflation_history.json */
 function getInflationHistory() {
+  const m = getMinistryData();
+  if (m && m.monetary && m.monetary.length) {
+    return m.monetary.map(r => ({
+      year:           r.year,
+      cpi:            r.cpi_avg_annual,                                         // 100-based (105.8 = 5.8%)
+      food_inflation: r.cpi_food != null ? Math.round((r.cpi_food - 100) * 10) / 10 : null, // % (6.8)
+      source:         'МЭРиТ РТ',
+    }));
+  }
   return readData('inflation_history.json');
 }
 
@@ -57,8 +84,18 @@ function getRemittancesHistory() {
   return readData('remittances_history.json');
 }
 
-/** Внешняя торговля 2015–2024 */
+/** Внешняя торговля — приоритет МЭРиТ 1997–2024, fallback → trade_history.json */
 function getTradeHistory() {
+  const m = getMinistryData();
+  if (m && m.trade && m.trade.length) {
+    return m.trade.map(r => ({
+      year:            r.year,
+      export_mln_usd:  r.export_mln_usd,
+      import_mln_usd:  r.import_mln_usd,
+      balance_mln_usd: r.balance_mln_usd,
+      source:          'МЭРиТ РТ',
+    }));
+  }
   return readData('trade_history.json');
 }
 
@@ -178,8 +215,8 @@ function getLastYear() {
     gdp_growth:        last(gdp)?.gdp_growth    ?? 8.0,
     gdp_bln_somoni:    last(gdp)?.gdp_bln_somoni ?? 128.0,
     gdp_per_capita_usd: last(gdp)?.gdp_per_capita_usd ?? 1300,
-    inflation:         last(infl)?.cpi          ?? 105.0,
-    food_inflation:    last(infl)?.food_inflation ?? 5.5,
+    inflation:         last(infl)?.cpi                                          ?? 105.0, // 100-based
+    food_inflation:    last(infl)?.food_inflation                               ?? 5.5,
     usd_tjs:           last(fx)?.usd_tjs         ?? 10.92,
     eur_tjs:           last(fx)?.eur_tjs         ?? 11.85,
     rub_tjs:           last(fx)?.rub_tjs         ?? 0.118,

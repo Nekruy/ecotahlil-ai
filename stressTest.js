@@ -14,6 +14,15 @@
 
 'use strict';
 
+// ─── Базовые значения из реальных данных МЭРиТ ──────────────────────────────
+const hdb   = require('./historicalDB');
+const _last = hdb.getLastYear();
+
+const BASE_GDP_BLN   = _last.gdp_bln_somoni;       // ВВП, млрд сомони
+const BASE_REMIT     = _last.remittances_mln;       // переводы мигрантов, млн USD
+const BASE_INFLATION = _last.inflation;             // ИПЦ, 100-base (105.0 = 5%)
+const BASE_RATE      = _last.usd_tjs;               // курс USD/TJS
+
 // ─── Вспомогательные функции ────────────────────────────────────────────────
 
 function riskLevel(gdpChange) {
@@ -289,8 +298,9 @@ function scenarioHydropower(waterDropPct) {
   // Выработка электроэнергии
   const electricityDeficit = round2(waterDropPct * 0.8);            // %
 
-  // Сокращение экспорта электроэнергии ($300 млн в год)
-  const exportElectricityCut = round2(electricityDeficit / 100 * 300); // $млн
+  // Сокращение экспорта электроэнергии (~$300 млн/год при BASE_REMIT/10 ≈ 300)
+  const ELEC_EXPORT_BASE = Math.round(BASE_REMIT / 10); // ~$300 млн/год
+  const exportElectricityCut = round2(electricityDeficit / 100 * ELEC_EXPORT_BASE); // $млн
 
   // ТАЛКО (алюминий): крупнейший потребитель э/э; при нехватке снижает производство
   // ТАЛКО потребляет ~40% электроэнергии страны
@@ -309,8 +319,10 @@ function scenarioHydropower(waterDropPct) {
   const inflationChange    = round2(electricityDeficit * 0.15 + 1.0);
 
   // Курс TJS: сокращение экспорта ($э/э + ТАЛКО) давит на валюту
-  const exportLoss = exportElectricityCut + (talcoProductionCut / 100) * 255;
-  const exchangeRateChange = round2(-(exportLoss / 3800) * 100 * 0.8); // % от резервов
+  const TALCO_EXPORT_BASE = Math.round(BASE_REMIT * 0.08); // ТАЛКО ~8% переводов ≈ $248 млн
+  const NBT_RESERVES_BASE = Math.round(BASE_REMIT * 1.23); // резервы НБТ ≈ $3.8 млрд
+  const exportLoss = exportElectricityCut + (talcoProductionCut / 100) * TALCO_EXPORT_BASE;
+  const exchangeRateChange = round2(-(exportLoss / NBT_RESERVES_BASE) * 100 * 0.8); // % от резервов
 
   const reservesChange     = round2(exchangeRateChange * 0.5);
   const remittancesChange  = round2(gdpChange * 0.15); // вторичный эффект на занятость мигрантов
