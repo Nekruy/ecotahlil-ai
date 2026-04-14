@@ -1,0 +1,148 @@
+{
+  "prices": {
+    "bread": {
+      "value": 4.5,
+      "source": "МЭРиТ (г. Худжанд)",
+      "date": "2026-04-08",
+      "fresh": false,
+      "label": "Хлеб"
+    },
+    "flour": {
+      "value": 3.2,
+      "source": "МЭРиТ (г. Худжанд)",
+      "date": "2026-04-08",
+      "fresh": false,
+      "label": "Мука"
+    },
+    "beef": {
+      "value": 65,
+      "source": "МЭРиТ (г. Худжанд)",
+      "date": "2026-04-08",
+      "fresh": false,
+      "label": "Говядина"
+    },
+    "rice": {
+      "value": 8.5,
+      "source": "МЭРиТ (г. Худжанд)",
+      "date": "2026-04-08",
+      "fresh": false,
+      "label": "Рис"
+    },
+    "oil": {
+      "value": null,
+      "source": "нет данных",
+      "date": "—",
+      "fresh": false,
+      "label": "Масло растительное"
+    },
+    "sugar": {
+      "value": null,
+      "source": "нет данных",
+      "date": "—",
+      "fresh": false,
+      "label": "Сахар"
+    },
+    "milk": {
+      "value": null,
+      "source": "нет данных",
+      "date": "—",
+      "fresh": false,
+      "label": "Молоко"
+    },
+    "potato": {
+      "value": null,
+      "source": "нет данных",
+      "date": "—",
+      "fresh": false,
+      "label": "Картофель"
+    }
+  },
+  "macro": {
+    "gdp_growth": {
+      "value": 4.5,
+      "source": "МВФ 2030",
+      "date": "2030",
+      "unit": "% г/г"
+    },
+    "inflation": {
+      "value": 5,
+      "source": "МВФ 2030",
+      "date": "2030",
+      "unit": "% г/г",
+      "imf_value": 5,
+      "district_fresh": false
+    },
+    "gov_debt": {
+      "value": 26.1,
+      "source": "МВФ 2030",
+      "date": "2030",
+      "unit": "% ВВП"
+    },
+    "unemployment": {
+      "value": 2.5,
+      "source": "МВФ 2011",
+      "date": "2011",
+      "unit": "% раб. силы"
+    },
+    "usd_tjs": {
+      "value": 9.52,
+      "source": "НБТ",
+      "date": "13.04.2026",
+      "unit": "TJS за 1 USD"
+    },
+    "eur_tjs": {
+      "value": 11.16,
+      "source": "НБТ",
+      "date": "13.04.2026",
+      "unit": "TJS за 1 EUR"
+    },
+    "rub_tjs": {
+      "value": 0.12,
+      "source": "НБТ",
+      "date": "13.04.2026",
+      "unit": "TJS за 100 RUB"
+    },
+    "trade_vol": {
+      "value": 3200,
+      "source": "МЭРиТ (районные данные)",
+      "date": "2026-04-08",
+      "unit": "млн TJS"
+    },
+    "avg_wage": {
+      "value": 1850,
+      "source": "МЭРиТ (районные данные)",
+      "date": "2026-04-08",
+      "unit": "TJS"
+    }
+  },
+  "comparison": {
+    "ministry_vs_imf": {
+      "note": "Ценовой мониторинг МЭРиТ vs базовая инфляция МВФ",
+      "imf_inflation": 5,
+      "imf_year": 2030,
+      "district_bread_price": 4.5,
+      "district_date": "2026-04-08",
+      "available": true
+    },
+    "ministry_vs_nbt": {
+      "note": "Торговый оборот МЭРиТ vs курс НБТ",
+      "usd_rate": 9.52,
+      "trade_vol": 3200,
+      "district_date": "2026-04-08",
+      "available": true
+    }
+  },
+  "data_quality": {
+    "districts_reported_today": 0,
+    "total_districts": 32,
+    "coverage": 0,
+    "districts_list": []
+  },
+  "sources_used": {
+    "district_reports": false,
+    "nbt": true,
+    "imf": true,
+    "worldbank": true
+  },
+  "generated_at": "2026-04-13T09:28:52.084Z"
+}
