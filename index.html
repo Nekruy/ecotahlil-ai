@@ -2438,7 +2438,8 @@ footer b { color:#fff; }
     <h1>📈 <span data-i18n="fc.h1">Модели прогнозирования временных рядов</span></h1>
     <p data-i18n="fc.sub">Прогнозирование макроэкономических показателей методами ARIMA и Prophet с выявлением аномалий</p>
     <div class="fc-header-badges">
-      <span class="ai-badge2 ab-teal">📐 ARIMA(1,1,0)</span>
+      <span class="ai-badge2 ab-teal">🎯 AutoARIMA</span>
+      <span class="ai-badge2" style="background:rgba(14,116,144,.2);border:1px solid rgba(14,116,144,.4);color:#67e8f9;">🔀 Ensemble CI</span>
       <span class="ai-badge2 ab-purple">🔮 Prophet (тренд + сезонность)</span>
       <span class="ai-badge2 ab-gold">⚠️ Детектор аномалий</span>
       <span class="ai-badge2 ab-green">📊 Chart.js визуализация</span>
@@ -2491,6 +2492,42 @@ footer b { color:#fff; }
           </div>
         </div>
 
+        <!-- Метод прогнозирования -->
+        <div style="margin-bottom:16px">
+          <label style="font-size:12px;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px">МЕТОД ПРОГНОЗИРОВАНИЯ</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button onclick="selectMethod('auto-arima')" id="btn-auto-arima"
+              style="background:#1a4a8a;color:white;border:2px solid #1a4a8a;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
+              🎯 AutoARIMA<br><span style="font-size:10px;opacity:0.85;font-weight:400">авто p,d,q по AIC</span>
+            </button>
+            <button onclick="selectMethod('ensemble')" id="btn-ensemble"
+              style="background:white;color:#475569;border:2px solid #e2e8f0;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
+              🔀 Ensemble<br><span style="font-size:10px;opacity:0.7;font-weight:400">ARIMA+Prophet с CI</span>
+            </button>
+            <button onclick="selectMethod('arima')" id="btn-arima"
+              style="background:white;color:#475569;border:2px solid #e2e8f0;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
+              📈 ARIMA (1,1,0)<br><span style="font-size:10px;opacity:0.7;font-weight:400">классический</span>
+            </button>
+            <button onclick="selectMethod('prophet')" id="btn-prophet"
+              style="background:white;color:#475569;border:2px solid #e2e8f0;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
+              🔮 Prophet<br><span style="font-size:10px;opacity:0.7;font-weight:400">сезонный тренд</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Быстрая загрузка данных -->
+        <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:10px;margin-bottom:10px">
+          <div style="font-size:11px;font-weight:600;color:#0369a1;margin-bottom:8px">📥 Быстрая загрузка данных</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+            <button onclick="autoLoadIndicator('gdp')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">ВВП (МЭРиТ)</button>
+            <button onclick="autoLoadIndicator('gdp_growth')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Рост ВВП %</button>
+            <button onclick="autoLoadIndicator('inflation')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Инфляция</button>
+            <button onclick="autoLoadIndicator('usd_tjs')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">USD/TJS (НБТ)</button>
+            <button onclick="autoLoadIndicator('remittances')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Переводы</button>
+            <button onclick="autoLoadIndicator('trade_balance')" style="background:#166534;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Торг. баланс</button>
+          </div>
+        </div>
+
         <!-- Исторические данные -->
         <div class="form-group">
           <label class="form-label" data-i18n="fc.data.label">Исторические данные</label>
@@ -2499,27 +2536,6 @@ footer b { color:#fff; }
           <div class="data-hint">
             📌 Минимум 4 значения · Разделитель: запятая или пробел<br>
             💡 Порядок: от старого к новому (хронологически)
-          </div>
-        </div>
-
-        <!-- Метод -->
-        <div class="form-group">
-          <label class="form-label" data-i18n="fc.method.label">Метод прогнозирования</label>
-          <div class="method-group">
-            <label class="method-radio selected" id="methodArima" onclick="selectMethod('arima')">
-              <input type="radio" name="fcMethod" value="arima" checked>
-              <div>
-                <div class="method-radio-title">📐 ARIMA (1,1,0)</div>
-                <div class="method-radio-desc" data-i18n="fc.method.arima.desc">Авторегрессионная интегрированная скользящая средняя. Подходит для трендовых рядов без выраженной сезонности.</div>
-              </div>
-            </label>
-            <label class="method-radio" id="methodProphet" onclick="selectMethod('prophet')">
-              <input type="radio" name="fcMethod" value="prophet">
-              <div>
-                <div class="method-radio-title">🔮 Prophet (<span data-i18n="fc.method.prophet.label">тренд + сезонность</span>)</div>
-                <div class="method-radio-desc" data-i18n="fc.method.prophet.desc">Декомпозиция ряда на тренд и сезонную компоненту. Подходит для данных с периодическими паттернами.</div>
-              </div>
-            </label>
           </div>
         </div>
 
@@ -2558,6 +2574,17 @@ footer b { color:#fff; }
           <div class="rp-step">② <span data-i18n="fc.step2">Метод</span></div>
           <div class="rp-step">③ <span data-i18n="fc.step3">Период</span></div>
           <div class="rp-step">④ <span data-i18n="fc.step4">Прогноз</span> →</div>
+        </div>
+      </div>
+
+      <!-- МЭРиТ vs Модели (скрыт по умолчанию) -->
+      <div id="mert-comparison-block" style="margin-top:16px;display:none">
+        <div style="background:#0d2342;color:white;padding:10px 14px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:13px;font-weight:600">📋 vs Прогноз МЭРиТ 2025–2027</span>
+          <button onclick="loadMERTComparison()" style="background:#c9a84c;color:#0d2342;border:none;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer">Загрузить</button>
+        </div>
+        <div id="mert-comparison-content" style="background:white;border:1px solid #e2e8f0;border-top:none;padding:12px;border-radius:0 0 8px 8px">
+          <div style="color:#94a3b8;font-size:12px">Нажмите "Загрузить" для сравнения с официальным прогнозом МЭРиТ</div>
         </div>
       </div>
 
@@ -5196,15 +5223,86 @@ async function dsLoadLog() {
 // ============================================================
 const FORECAST_URL = '/forecast';
 
-let fcMethod  = 'arima';
+let fcMethod  = 'auto-arima';
 let fcPeriods = 6;
 let forecastChartInstance = null;
 
 function selectMethod(method) {
   fcMethod = method;
-  document.querySelectorAll('.method-radio').forEach(el => el.classList.remove('selected'));
-  document.getElementById('method' + (method === 'arima' ? 'Arima' : 'Prophet')).classList.add('selected');
-  document.querySelector(`input[value="${method}"]`).checked = true;
+  ['auto-arima','ensemble','arima','prophet'].forEach(m => {
+    const btn = document.getElementById('btn-' + m);
+    if (btn) {
+      btn.style.background = 'white';
+      btn.style.color = '#475569';
+      btn.style.borderColor = '#e2e8f0';
+    }
+  });
+  const active = document.getElementById('btn-' + method);
+  if (active) {
+    active.style.background = '#1a4a8a';
+    active.style.color = 'white';
+    active.style.borderColor = '#1a4a8a';
+  }
+}
+
+async function autoLoadIndicator(indicator) {
+  const btn = event.target;
+  const orig = btn.textContent;
+  btn.textContent = '⏳';
+  btn.disabled = true;
+  try {
+    let values = [];
+    if (indicator === 'usd_tjs') {
+      const res = await fetch('/api/rates-history?currency=usd&days=3650');
+      const json = await res.json();
+      values = (json.data || []).map(r => r.usd).filter(Boolean);
+    } else {
+      const res = await fetch('/api/history?indicator=' + indicator);
+      const json = await res.json();
+      values = json.values || [];
+    }
+    if (values.length > 0) {
+      const field = document.getElementById('fcData') || document.querySelector('textarea');
+      if (field) field.value = values.join(', ');
+      btn.textContent = '✅ ' + values.length;
+      btn.style.background = '#166534';
+    } else {
+      btn.textContent = '—';
+    }
+  } catch(e) { btn.textContent = '❌'; }
+  setTimeout(() => {
+    btn.textContent = orig;
+    btn.disabled = false;
+    btn.style.background = '';
+  }, 2000);
+}
+
+async function loadMERTComparison() {
+  document.getElementById('mert-comparison-block').style.display = 'block';
+  const content = document.getElementById('mert-comparison-content');
+  content.innerHTML = '<div style="color:#64748b;font-size:12px">⏳ Загружаю...</div>';
+  try {
+    const res = await fetch('/api/model-vs-official?indicator=gdp');
+    const data = await res.json();
+    const years = data.years || [2025, 2026, 2027];
+    let html = '<table style="width:100%;border-collapse:collapse;font-size:12px">';
+    html += '<tr style="background:#f8fafc"><th style="padding:6px;text-align:left">Год</th><th style="padding:6px;text-align:right">ARIMA</th><th style="padding:6px;text-align:right">МЭРиТ</th><th style="padding:6px;text-align:right">Откл.</th></tr>';
+    years.forEach((yr, i) => {
+      const dev = parseFloat(data.deviation_arima_pct?.[i]);
+      const color = Math.abs(dev) < 5 ? '#166534' : Math.abs(dev) < 10 ? '#92400e' : '#991b1b';
+      html += '<tr>';
+      html += '<td style="padding:6px;border-top:1px solid #f1f5f9;font-weight:600">' + yr + '</td>';
+      html += '<td style="padding:6px;border-top:1px solid #f1f5f9;text-align:right">' + (data.model_arima?.[i]?.toFixed(1) || '—') + '</td>';
+      html += '<td style="padding:6px;border-top:1px solid #f1f5f9;text-align:right;font-weight:600">' + (data.official_mert?.[i]?.toFixed(1) || '—') + '</td>';
+      html += '<td style="padding:6px;border-top:1px solid #f1f5f9;text-align:right;color:' + color + ';font-weight:600">' + (data.deviation_arima_pct?.[i] || '—') + '</td>';
+      html += '</tr>';
+    });
+    html += '</table>';
+    html += '<div style="margin-top:6px;font-size:10px;color:#64748b">' + (data.verdict || '') + '</div>';
+    content.innerHTML = html;
+  } catch(e) {
+    content.innerHTML = '<div style="color:#991b1b;font-size:12px">❌ ' + e.message + '</div>';
+  }
 }
 
 function selectPeriod(p, btn) {
@@ -5244,7 +5342,7 @@ async function runForecast() {
     const resp = await fetch(FORECAST_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data, periods: fcPeriods, method: fcMethod }),
+      body: JSON.stringify({ data, periods: fcPeriods, method: fcMethod || 'auto-arima' }),
     });
 
     const result = await resp.json();
@@ -5254,6 +5352,8 @@ async function runForecast() {
     }
 
     renderForecast(result);
+    // Показываем блок сравнения с МЭРиТ
+    document.getElementById('mert-comparison-block').style.display = 'block';
 
   } catch (err) {
     alertBox.textContent = '❌ Ошибка: ' + err.message;
@@ -5269,8 +5369,13 @@ function renderForecast(result) {
   const { historical, forecast, histLabels, forecastLabels, anomalies, method, periods } = result;
 
   document.getElementById('fcResults').style.display = 'block';
-  document.getElementById('fcMethodBadge').textContent =
-    method === 'prophet' ? '🔮 Prophet' : '📐 ARIMA(1,1,0)';
+  const methodLabels = {
+    'auto-arima': '🎯 AutoARIMA',
+    'ensemble':   '🔀 Ensemble (ARIMA+Prophet)',
+    'arima':      '📐 ARIMA(1,1,0)',
+    'prophet':    '🔮 Prophet',
+  };
+  document.getElementById('fcMethodBadge').textContent = methodLabels[method] || method;
 
   // ── График ─────────────────────────────────────────────────────────────────
   const allLabels = [...histLabels, ...forecastLabels];
@@ -5303,7 +5408,7 @@ function renderForecast(result) {
           fill: true,
         },
         {
-          label: 'Прогноз (' + (method === 'prophet' ? 'Prophet' : 'ARIMA') + ')',
+          label: 'Прогноз (' + (methodLabels[method] || method) + ')',
           data: [...new Array(historical.length - 1).fill(null), historical[historical.length - 1], ...forecast],
           borderColor: '#0d9488',
           backgroundColor: 'rgba(13,148,136,0.10)',
