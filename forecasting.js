@@ -1,13 +1,15 @@
+'use strict';
+
 /**
- * forecasting.js — ARIMA и Prophet-подобные модели прогнозирования
+ * forecasting.js — Профессиональные эконометрические модели
+ * Auto-ARIMA, EGARCH(1,1), VAR(p) с ADF-тестом, Backtest, Ensemble
  * Чистый JavaScript без внешних зависимостей
  */
 
 // ─── Математические вспомогательные функции ───────────────────────────────────
 
-function round2(v) {
-  return Math.round(v * 100) / 100;
-}
+function round2(v) { return Math.round(v * 100) / 100; }
+function round4(v) { return Math.round(v * 10000) / 10000; }
 
 function mean(arr) {
   return arr.reduce((s, v) => s + v, 0) / arr.length;
@@ -18,175 +20,39 @@ function variance(arr) {
   return arr.reduce((s, v) => s + (v - m) ** 2, 0) / arr.length;
 }
 
-function stdDev(arr) {
-  return Math.sqrt(variance(arr));
-}
+function stdDev(arr) { return Math.sqrt(variance(arr)); }
 
-// Простая линейная регрессия: y = slope * x + intercept
 function linearRegression(xs, ys) {
-  const n = xs.length;
-  const mx = mean(xs);
-  const my = mean(ys);
+  const n  = xs.length;
+  const mx = mean(xs), my = mean(ys);
   const num = xs.reduce((s, x, i) => s + (x - mx) * (ys[i] - my), 0);
   const den = xs.reduce((s, x) => s + (x - mx) ** 2, 0);
-  const slope = den !== 0 ? num / den : 0;
+  const slope     = den !== 0 ? num / den : 0;
   const intercept = my - slope * mx;
   return { slope, intercept, predict: t => slope * t + intercept };
 }
 
-// Квантиль методом линейной интерполяции
 function quantile(arr, p) {
   const sorted = [...arr].sort((a, b) => a - b);
   const idx = p * (sorted.length - 1);
-  const lo = Math.floor(idx);
-  const hi = Math.ceil(idx);
+  const lo = Math.floor(idx), hi = Math.ceil(idx);
   return sorted[lo] + (sorted[hi] - sorted[lo]) * (idx - lo);
 }
 
 function validateData(data) {
-  if (!Array.isArray(data) || data.length < 4) {
+  if (!Array.isArray(data) || data.length < 4)
     throw new Error('Необходимо минимум 4 точки данных');
-  }
   const nums = data.map(Number);
-  if (nums.some(isNaN)) {
-    throw new Error('Все значения должны быть числами');
-  }
+  if (nums.some(isNaN)) throw new Error('Все значения должны быть числами');
   return nums;
 }
 
-// ─── ARIMA (1,1,0) ────────────────────────────────────────────────────────────
-// Алгоритм: первое разностное преобразование + авторегрессия AR(1)
+// ─── Метод Нелдера–Мида (минимизация без производных) ────────────────────────
 
-function arima(data, periods) {
-  const nums = validateData(data);
-
-  // Шаг 1: первое разностное преобразование (I(1))
-  const diff = [];
-  for (let i = 1; i < nums.length; i++) {
-    diff.push(nums[i] - nums[i - 1]);
-  }
-
-  // Шаг 2: AR(1) на разностном ряду — y_t = intercept + phi * y_{t-1}
-  let phi = 0;
-  let intercept = 0;
-
-  if (diff.length >= 2) {
-    const reg = linearRegression(diff.slice(0, -1), diff.slice(1));
-    phi = reg.slope;
-    intercept = reg.intercept;
-  } else {
-    intercept = mean(diff);
-  }
-
-  // Ограничиваем phi для стационарности
-  phi = Math.max(-0.99, Math.min(0.99, phi));
-
-  // Шаг 3: прогноз разностного ряда
-  const forecastDiff = [];
-  let lastDiff = diff[diff.length - 1];
-  for (let i = 0; i < periods; i++) {
-    const next = intercept + phi * lastDiff;
-    forecastDiff.push(next);
-    lastDiff = next;
-  }
-
-  // Шаг 4: обратное разностное преобразование (cumsum)
-  const forecast = [];
-  let prev = nums[nums.length - 1];
-  for (const d of forecastDiff) {
-    prev = round2(prev + d);
-    forecast.push(prev);
-  }
-
-  return forecast;
-}
-
-// ─── Prophet-подобная модель ──────────────────────────────────────────────────
-// Алгоритм: линейный тренд + сезонная компонента (усреднение по периоду)
-
-function prophet(data, periods) {
-  const nums = validateData(data);
-  const n = nums.length;
-
-  // Шаг 1: линейный тренд
-  const xs = Array.from({ length: n }, (_, i) => i);
-  const reg = linearRegression(xs, nums);
-
-  // Шаг 2: остатки = реальные значения − тренд
-  const residuals = nums.map((v, i) => v - reg.predict(i));
-
-  // Шаг 3: период сезонности (авто-определение, min 3, max 12)
-  const period = Math.min(12, Math.max(3, Math.floor(n / 2)));
-  const seasonSum   = new Array(period).fill(0);
-  const seasonCount = new Array(period).fill(0);
-  residuals.forEach((r, i) => {
-    seasonSum[i % period]   += r;
-    seasonCount[i % period] += 1;
-  });
-  const seasonal = seasonSum.map((s, i) =>
-    seasonCount[i] > 0 ? s / seasonCount[i] : 0
-  );
-
-  // Нормализуем сезонность (среднее = 0)
-  const seasonMean = mean(seasonal);
-  const seasonAdj  = seasonal.map(s => s - seasonMean);
-
-  // Шаг 4: прогноз = тренд + сезонность
-  const forecast = [];
-  for (let i = 0; i < periods; i++) {
-    const t = n + i;
-    forecast.push(round2(reg.predict(t) + seasonAdj[t % period]));
-  }
-
-  return forecast;
-}
-
-// ─── Обнаружение аномалий (Z-score + IQR) ────────────────────────────────────
-
-function detectAnomalies(data) {
-  const nums = validateData(data);
-  const m    = mean(nums);
-  const s    = stdDev(nums);
-  const q1   = quantile(nums, 0.25);
-  const q3   = quantile(nums, 0.75);
-  const iqr  = q3 - q1;
-  const iqrLow  = q1 - 1.5 * iqr;
-  const iqrHigh = q3 + 1.5 * iqr;
-
-  const anomalies = [];
-  nums.forEach((v, i) => {
-    const z        = s !== 0 ? Math.abs(v - m) / s : 0;
-    const isZscore = z > 2;
-    const isIQR    = v < iqrLow || v > iqrHigh;
-
-    if (isZscore || isIQR) {
-      anomalies.push({
-        index:     i,
-        value:     v,
-        zscore:    round2(z),
-        direction: v > m ? 'high' : 'low',
-        method:    isZscore && isIQR ? 'Z-score + IQR' : isZscore ? 'Z-score' : 'IQR',
-      });
-    }
-  });
-
-  return anomalies;
-}
-
-// ─── GARCH(1,1) — моделирование волатильности ────────────────────────────────
-
-function round4(v) {
-  return Math.round(v * 10000) / 10000;
-}
-
-/**
- * Метод Нелдера–Мида (Simplex) для минимизации f(x) без производных.
- */
 function nelderMead(fn, x0, { maxIter = 2000, tol = 1e-10 } = {}) {
   const n = x0.length;
   const A = 1, G = 2, R = 0.5, S = 0.5;
 
-  // Строим начальный симплекс
   const simplex = [x0.slice()];
   for (let i = 0; i < n; i++) {
     const p = x0.slice();
@@ -196,24 +62,19 @@ function nelderMead(fn, x0, { maxIter = 2000, tol = 1e-10 } = {}) {
   let fvals = simplex.map(fn);
 
   for (let iter = 0; iter < maxIter; iter++) {
-    // Сортировка вершин по значению функции
-    const idx = Array.from({ length: n + 1 }, (_, i) => i)
-      .sort((a, b) => fvals[a] - fvals[b]);
+    const idx = Array.from({ length: n + 1 }, (_, i) => i).sort((a, b) => fvals[a] - fvals[b]);
     const s = idx.map(i => simplex[i].slice());
     const f = idx.map(i => fvals[i]);
 
     if (f[n] - f[0] < tol) break;
 
-    // Центроид (без худшей точки)
     const c = new Array(n).fill(0);
     for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) c[j] += s[i][j] / n;
 
-    // Отражение
     const xr = c.map((v, j) => v + A * (v - s[n][j]));
     const fr = fn(xr);
 
     if (fr < f[0]) {
-      // Растяжение
       const xe = c.map((v, j) => v + G * (xr[j] - v));
       const fe = fn(xe);
       s[n] = fe < fr ? xe : xr;
@@ -221,20 +82,17 @@ function nelderMead(fn, x0, { maxIter = 2000, tol = 1e-10 } = {}) {
     } else if (fr < f[n - 1]) {
       s[n] = xr; f[n] = fr;
     } else {
-      // Сжатие
       const xc = c.map((v, j) => v + R * (s[n][j] - v));
       const fc = fn(xc);
       if (fc < f[n]) {
         s[n] = xc; f[n] = fc;
       } else {
-        // Усадка
         for (let i = 1; i <= n; i++) {
           s[i] = s[0].map((v, j) => v + S * (s[i][j] - v));
           f[i] = fn(s[i]);
         }
       }
     }
-
     for (let i = 0; i <= n; i++) { simplex[i] = s[i]; fvals[i] = f[i]; }
   }
 
@@ -243,21 +101,318 @@ function nelderMead(fn, x0, { maxIter = 2000, tol = 1e-10 } = {}) {
   return { params: simplex[best], value: fvals[best] };
 }
 
+// ─── ADF-тест (Augmented Dickey-Fuller) ──────────────────────────────────────
+
 /**
- * Оценка параметров GARCH(1,1) методом максимального правдоподобия.
- * Работает с доходностями в процентах (r * 100) для численной стабильности.
- * Модель: h_t = omega + alpha * r_{t-1}^2 + beta * h_{t-1}
+ * Simplified ADF test: regression Δy_t = α + β·y_{t-1} + ε_t
+ * H0: unit root (non-stationary). Critical value at 5%: -2.86.
  */
+function adfTest(series) {
+  const n = series.length;
+  if (n < 5) return { stationary: false, tStat: 0, pValue: 0.99 };
+
+  const yLag = series.slice(0, n - 1);
+  const dy   = series.slice(1).map((v, i) => v - series[i]);
+  const m    = dy.length;
+
+  let sx = 0, sy = 0, sxx = 0, sxy = 0;
+  for (let i = 0; i < m; i++) { sx += yLag[i]; sy += dy[i]; sxx += yLag[i] ** 2; sxy += yLag[i] * dy[i]; }
+  const mx = sx / m, my = sy / m;
+  const Sxx = sxx - m * mx * mx;
+  const Sxy = sxy - m * mx * my;
+
+  const beta  = Math.abs(Sxx) > 1e-14 ? Sxy / Sxx : 0;
+  const alpha = my - beta * mx;
+
+  let rss = 0;
+  for (let i = 0; i < m; i++) rss += (dy[i] - alpha - beta * yLag[i]) ** 2;
+
+  const s2     = rss / Math.max(1, m - 2);
+  const seBeta = Math.sqrt(Math.max(0, s2 / Math.max(1e-14, Sxx)));
+  const tStat  = seBeta > 1e-10 ? beta / seBeta : 0;
+
+  // ADF critical values (Mackinnon 5%)
+  const CRIT_5 = -2.86;
+  const stationary = tStat < CRIT_5;
+  const pValue = tStat < -4.0 ? 0.001 : tStat < -3.5 ? 0.01 : tStat < CRIT_5 ? 0.05 : tStat < -2.57 ? 0.10 : 0.25;
+
+  return { stationary, tStat: round4(tStat), pValue };
+}
+
+// ─── Разностное преобразование и обратное ─────────────────────────────────────
+
+function diff(series, d = 1) {
+  let s = series.slice();
+  for (let i = 0; i < d; i++) {
+    const nd = [];
+    for (let j = 1; j < s.length; j++) nd.push(s[j] - s[j - 1]);
+    s = nd;
+  }
+  return s;
+}
+
+/**
+ * Обратное разностное преобразование.
+ * originalSeries — исходный (недифференцированный) ряд для начальных значений.
+ * diffForecast — прогноз на уровне d-й разности.
+ */
+function inverseDiff(originalSeries, diffForecast, d) {
+  if (d === 0) return diffForecast.map(v => round2(v));
+
+  // Строим уровни дифференцирования
+  const levels = [originalSeries.slice()];
+  for (let i = 0; i < d; i++) {
+    const prev = levels[i];
+    const nd = [];
+    for (let j = 1; j < prev.length; j++) nd.push(prev[j] - prev[j - 1]);
+    levels.push(nd);
+  }
+
+  // Восстанавливаем уровни обратно
+  let fc = diffForecast.slice();
+  for (let lv = d; lv >= 1; lv--) {
+    const lastVal = levels[lv - 1][levels[lv - 1].length - 1];
+    const undiffed = [];
+    let prev = lastVal;
+    for (const v of fc) { prev += v; undiffed.push(prev); }
+    fc = undiffed;
+  }
+
+  return fc.map(v => round2(v));
+}
+
+// ─── ARMA(p,q) — оценка и прогноз ───────────────────────────────────────────
+
+/**
+ * Fit ARMA(p,q) via Conditional Sum of Squares (CSS) + Nelder-Mead.
+ * Returns: { phi, theta, mu, rss, aic, logLik }
+ */
+function fitARMA(series, p, q) {
+  const n  = series.length;
+  const k  = p + q + 1;
+  if (n < k + 2) return { phi: [], theta: [], mu: mean(series), rss: Infinity, aic: Infinity, logLik: -Infinity };
+
+  const mu0 = mean(series);
+
+  function css(params) {
+    const phi_   = params.slice(0, p);
+    const theta_ = params.slice(p, p + q);
+    const mu_    = params[p + q];
+    const resids = new Array(n).fill(0);
+    let rss = 0;
+    for (let t = 0; t < n; t++) {
+      let pred = mu_;
+      for (let i = 0; i < p; i++) if (t - i - 1 >= 0) pred += phi_[i] * (series[t - i - 1] - mu_);
+      for (let j = 0; j < q; j++) if (t - j - 1 >= 0) pred -= theta_[j] * resids[t - j - 1];
+      resids[t] = series[t] - pred;
+      rss += resids[t] ** 2;
+    }
+    return isFinite(rss) ? rss : 1e15;
+  }
+
+  const x0 = [...new Array(p).fill(0.1), ...new Array(q).fill(0.05), mu0];
+  const { params, value: rss } = nelderMead(css, x0, { maxIter: 600, tol: 1e-8 });
+
+  const phi_   = params.slice(0, p);
+  const theta_ = params.slice(p, p + q);
+  const mu_    = params[p + q];
+
+  const sigma2 = rss / Math.max(1, n);
+  const logLik = sigma2 > 0 ? -n / 2 * Math.log(2 * Math.PI * sigma2) - n / 2 : -1e15;
+  const aic    = 2 * k - 2 * logLik;
+
+  return { phi: phi_, theta: theta_, mu: mu_, rss, aic, logLik };
+}
+
+/** Прогноз ARMA на periods шагов вперёд */
+function forecastARMA(series, model, periods) {
+  const { phi, theta, mu } = model;
+  const p = phi.length, q = theta.length, n = series.length;
+
+  // Вычисляем исторические остатки
+  const resids = new Array(n).fill(0);
+  for (let t = 0; t < n; t++) {
+    let pred = mu;
+    for (let i = 0; i < p; i++) if (t - i - 1 >= 0) pred += phi[i] * (series[t - i - 1] - mu);
+    for (let j = 0; j < q; j++) if (t - j - 1 >= 0) pred -= theta[j] * resids[t - j - 1];
+    resids[t] = series[t] - pred;
+  }
+
+  const extS = series.slice();
+  const extR = resids.slice();
+  const fc   = [];
+
+  for (let h = 0; h < periods; h++) {
+    let pred = mu;
+    for (let i = 0; i < p; i++) {
+      const idx = extS.length - 1 - i;
+      if (idx >= 0) pred += phi[i] * (extS[idx] - mu);
+    }
+    for (let j = 0; j < q; j++) {
+      const idx = extR.length - 1 - j;
+      if (idx >= 0) pred -= theta[j] * extR[idx]; // будущие шоки = 0
+    }
+    fc.push(pred);
+    extS.push(pred);
+    extR.push(0);
+  }
+
+  return fc;
+}
+
+// ─── Auto-ARIMA с перебором по AIC ──────────────────────────────────────────
+
+/**
+ * Auto-ARIMA: ADF-тест для d, перебор p=0..3, q=0..3, выбор по min AIC.
+ * @returns {{ forecast, bestP, bestD, bestQ, aic, method, adfResults }}
+ */
+function autoArima(data, periods) {
+  const nums = validateData(data);
+
+  // 1. Определяем d через ADF-тест (d = 0, 1 или 2)
+  let d = 0;
+  let diffSeries = nums.slice();
+  const adfResults = [];
+
+  const adf0 = adfTest(diffSeries);
+  adfResults.push({ d: 0, ...adf0 });
+
+  if (!adf0.stationary) {
+    d = 1;
+    diffSeries = diff(diffSeries, 1);
+    if (diffSeries.length >= 5) {
+      const adf1 = adfTest(diffSeries);
+      adfResults.push({ d: 1, ...adf1 });
+      if (!adf1.stationary && diffSeries.length >= 6) {
+        d = 2;
+        diffSeries = diff(diffSeries, 1);
+      }
+    }
+  }
+
+  // 2. Перебор p=0..3, q=0..3
+  let bestAIC = Infinity, bestP = 0, bestQ = 0, bestModel = null;
+
+  for (let p = 0; p <= 3; p++) {
+    for (let q = 0; q <= 3; q++) {
+      if (diffSeries.length < p + q + 3) continue;
+      try {
+        const model = fitARMA(diffSeries, p, q);
+        if (isFinite(model.aic) && model.aic < bestAIC) {
+          bestAIC = model.aic; bestP = p; bestQ = q; bestModel = model;
+        }
+      } catch (_) {}
+    }
+  }
+
+  // 3. Прогноз + обратное разностное преобразование
+  const diffFc  = bestModel ? forecastARMA(diffSeries, bestModel, periods) : new Array(periods).fill(0);
+  const forecast = inverseDiff(nums, diffFc, d);
+
+  return { forecast, bestP, bestD: d, bestQ, aic: round4(bestAIC), method: 'auto-arima', adfResults };
+}
+
+// ─── Backtesting ARIMA (Walk-Forward Validation) ─────────────────────────────
+
+/**
+ * Walk-forward validation для autoArima.
+ * Начальное окно: 60% данных. Прогнозирует 1 шаг вперёд, сдвигает окно.
+ * Ограничение: MAX_STEPS = 30 (для скорости).
+ */
+function backtestArima(data) {
+  const nums = validateData(data);
+  const n    = nums.length;
+  const initW = Math.floor(n * 0.6);
+
+  if (initW < 4 || n - initW < 2) {
+    return { rmse: null, mae: null, mape: null, steps: 0, method: 'auto-arima' };
+  }
+
+  const MAX_STEPS = 30;
+  const steps = Math.min(n - initW, MAX_STEPS);
+  const errors = [];
+
+  for (let step = 0; step < steps; step++) {
+    const trainData = nums.slice(0, initW + step);
+    const actual    = nums[initW + step];
+    try {
+      const result = autoArima(trainData, 1);
+      errors.push({ actual, predicted: result.forecast[0] });
+    } catch (_) {}
+  }
+
+  if (errors.length === 0) return { rmse: null, mae: null, mape: null, steps: 0, method: 'auto-arima' };
+
+  let sse = 0, sae = 0, sape = 0;
+  for (const { actual, predicted } of errors) {
+    const err = predicted - actual;
+    sse  += err ** 2;
+    sae  += Math.abs(err);
+    sape += actual !== 0 ? Math.abs(err / actual) * 100 : 0;
+  }
+  const m = errors.length;
+
+  return { rmse: round4(Math.sqrt(sse / m)), mae: round4(sae / m), mape: round4(sape / m), steps: m, method: 'auto-arima' };
+}
+
+// ─── Prophet-подобная модель ──────────────────────────────────────────────────
+
+function prophet(data, periods) {
+  const nums = validateData(data);
+  const n    = nums.length;
+
+  const xs  = Array.from({ length: n }, (_, i) => i);
+  const reg = linearRegression(xs, nums);
+
+  const residuals = nums.map((v, i) => v - reg.predict(i));
+  const period    = Math.min(12, Math.max(3, Math.floor(n / 2)));
+  const sSum  = new Array(period).fill(0);
+  const sCnt  = new Array(period).fill(0);
+  residuals.forEach((r, i) => { sSum[i % period] += r; sCnt[i % period]++; });
+  const seasonal = sSum.map((s, i) => sCnt[i] > 0 ? s / sCnt[i] : 0);
+  const sMean = mean(seasonal);
+  const sAdj  = seasonal.map(s => s - sMean);
+
+  const forecast = [];
+  for (let i = 0; i < periods; i++) {
+    const t = n + i;
+    forecast.push(round2(reg.predict(t) + sAdj[t % period]));
+  }
+  return forecast;
+}
+
+// ─── Обнаружение аномалий ────────────────────────────────────────────────────
+
+function detectAnomalies(data) {
+  const nums = validateData(data);
+  const m    = mean(nums), s = stdDev(nums);
+  const q1 = quantile(nums, 0.25), q3 = quantile(nums, 0.75);
+  const iqr = q3 - q1;
+  const lo  = q1 - 1.5 * iqr, hi = q3 + 1.5 * iqr;
+  const anomalies = [];
+  nums.forEach((v, i) => {
+    const z = s !== 0 ? Math.abs(v - m) / s : 0;
+    const isZ = z > 2, isI = v < lo || v > hi;
+    if (isZ || isI) anomalies.push({
+      index: i, value: v, zscore: round2(z),
+      direction: v > m ? 'high' : 'low',
+      method: isZ && isI ? 'Z-score + IQR' : isZ ? 'Z-score' : 'IQR',
+    });
+  });
+  return anomalies;
+}
+
+// ─── GARCH/EGARCH — моделирование волатильности ───────────────────────────────
+
+/** Оценка GARCH(1,1) через MLE + Nelder-Mead */
 function estimateGARCH(retsPct) {
-  const n       = retsPct.length;
+  const n = retsPct.length;
   const initVar = variance(retsPct);
 
   function negLogLik([omega, alpha, beta]) {
     if (omega <= 1e-8 || alpha <= 0 || beta <= 0) return 1e15;
     if (alpha + beta >= 0.9999) return 1e15;
-
-    let h  = initVar;
-    let ll = 0;
+    let h = initVar, ll = 0;
     for (let t = 0; t < n; t++) {
       if (t > 0) h = omega + alpha * retsPct[t - 1] ** 2 + beta * h;
       if (h <= 0) return 1e15;
@@ -266,7 +421,6 @@ function estimateGARCH(retsPct) {
     return 0.5 * ll;
   }
 
-  // Несколько стартовых точек — берём лучшую
   const starts = [
     [initVar * 0.05, 0.10, 0.85],
     [initVar * 0.02, 0.05, 0.90],
@@ -281,70 +435,196 @@ function estimateGARCH(retsPct) {
   }
 
   let [omega, alpha, beta] = best.params;
-  omega = Math.max(1e-8,  omega);
+  omega = Math.max(1e-8, omega);
   alpha = Math.max(0.001, Math.min(0.4999, alpha));
   beta  = Math.max(0.001, Math.min(0.9979 - alpha, beta));
-
-  return { omega, alpha, beta };
+  return { omega, alpha, beta, negLogLik: best.value };
 }
 
 /**
- * GARCH(1,1) — прогноз волатильности курса валюты.
- *
- * @param {number[]} data    — временной ряд курсов (минимум 10 значений)
- * @param {number}   periods — горизонт прогноза в периодах
- * @returns {{
- *   omega, alpha, beta, persistence,
- *   returns, historicalVol, forecastVol,
- *   ci1Lower, ci1Upper, ci2Lower, ci2Upper,
- *   currentDailyVol, annualizedVol,
- *   riskLevel, signal
- * }}
+ * EGARCH(1,1): log(h_t) = ω + α(|z_{t-1}| − √(2/π)) + γ·z_{t-1} + β·log(h_{t-1})
+ * γ < 0 означает, что плохие новости усиливают волатильность.
+ */
+function estimateEGARCH(retsPct) {
+  const n        = retsPct.length;
+  const initVar  = variance(retsPct);
+  const initLogH = Math.log(Math.max(1e-8, initVar));
+  const SQRT2PI  = Math.sqrt(2 / Math.PI);
+
+  function negLogLik([omega, alpha, gamma, beta]) {
+    let logH = initLogH, ll = 0;
+    for (let t = 0; t < n; t++) {
+      const h = Math.exp(logH);
+      if (!isFinite(h) || h <= 0) return 1e15;
+      ll += logH + retsPct[t] ** 2 / h;
+      if (t < n - 1) {
+        const z = retsPct[t] / Math.sqrt(Math.max(h, 1e-10));
+        logH = omega + alpha * (Math.abs(z) - SQRT2PI) + gamma * z + beta * logH;
+        if (!isFinite(logH) || logH > 50) return 1e15;
+      }
+    }
+    return 0.5 * ll;
+  }
+
+  const starts = [
+    [-0.10, 0.10, -0.05, 0.85],
+    [-0.20, 0.15, -0.10, 0.80],
+    [-0.05, 0.08, -0.03, 0.90],
+    [-0.30, 0.20, -0.15, 0.75],
+  ];
+
+  let best = { value: Infinity, params: starts[0] };
+  for (const init of starts) {
+    try {
+      const res = nelderMead(negLogLik, init, { maxIter: 1000, tol: 1e-8 });
+      if (res.value < best.value) best = res;
+    } catch (_) {}
+  }
+
+  const [omega, alpha, gamma, beta] = best.params;
+  return {
+    omega: round4(omega), alpha: round4(alpha),
+    gamma: round4(gamma), beta: round4(beta),
+    negLogLik: best.value,
+  };
+}
+
+/** Backtesting GARCH: обучение на 80%, прогноз на 20% */
+function backtestGARCH(nums) {
+  const null_result = { rmse: null, directionalAccuracy: null, outOfSampleR2: null, dataPoints: nums.length };
+  if (nums.length < 20) return null_result;
+
+  const splitIdx  = Math.floor(nums.length * 0.8);
+  const trainData = nums.slice(0, splitIdx);
+  const testData  = nums.slice(splitIdx);
+
+  // Доходности тренировочной выборки
+  const trainPct = [];
+  for (let i = 1; i < trainData.length; i++) {
+    if (trainData[i - 1] > 0 && trainData[i] > 0)
+      trainPct.push(Math.log(trainData[i] / trainData[i - 1]) * 100);
+  }
+  if (trainPct.length < 8) return null_result;
+
+  const { omega, alpha, beta } = estimateGARCH(trainPct);
+  const persistence = alpha + beta;
+  const initVar  = variance(trainPct);
+  const longRunV = persistence < 1 ? omega / (1 - persistence) : initVar;
+
+  // Последняя условная дисперсия на трейне
+  let lastH = initVar;
+  for (let t = 1; t < trainPct.length; t++) {
+    lastH = omega + alpha * trainPct[t - 1] ** 2 + beta * lastH;
+    if (!isFinite(lastH) || lastH <= 0) lastH = initVar;
+  }
+
+  // Фактические |доходности| теста
+  const actualAbs = [];
+  for (let i = 1; i < testData.length; i++) {
+    if (testData[i - 1] > 0 && testData[i] > 0)
+      actualAbs.push(Math.abs(Math.log(testData[i] / testData[i - 1]) * 100));
+  }
+  if (actualAbs.length < 2) return null_result;
+
+  // Прогноз волатильности
+  const forecastVol = [];
+  for (let k = 1; k <= actualAbs.length; k++) {
+    const fv = longRunV + Math.pow(persistence, k) * (lastH - longRunV);
+    forecastVol.push(Math.sqrt(Math.max(0, fv)));
+  }
+
+  const nn = Math.min(forecastVol.length, actualAbs.length);
+  let sse = 0, dirOk = 0;
+  for (let i = 0; i < nn; i++) {
+    sse += (forecastVol[i] - actualAbs[i]) ** 2;
+    if (i > 0) {
+      const fd = forecastVol[i] > forecastVol[i - 1];
+      const ad = actualAbs[i]   > actualAbs[i - 1];
+      if (fd === ad) dirOk++;
+    }
+  }
+
+  const rmse = round4(Math.sqrt(sse / nn));
+  const directionalAccuracy = nn > 1 ? round2((dirOk / (nn - 1)) * 100) : null;
+  const mA = mean(actualAbs.slice(0, nn));
+  const tss = actualAbs.slice(0, nn).reduce((s, v) => s + (v - mA) ** 2, 0);
+  const outOfSampleR2 = tss > 0 ? round4(1 - sse / tss) : null;
+
+  return { rmse, directionalAccuracy, outOfSampleR2, dataPoints: nums.length };
+}
+
+/**
+ * GARCH(1,1) + EGARCH(1,1) — прогноз волатильности курса валюты.
+ * Включает backtesting и поле validation.
  */
 function garch(data, periods) {
   const nums = validateData(data);
   if (nums.length < 10) throw new Error('Для GARCH необходимо минимум 10 точек данных');
 
-  // 1. Логарифмические доходности r_t = ln(P_t / P_{t-1}) в процентах
-  const rets    = [];
-  const retsPct = [];
+  // 1. Логарифмические доходности в %
+  const rets = [], retsPct = [];
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i - 1] <= 0 || nums[i] <= 0) {
-      throw new Error('Все значения курса должны быть положительными');
-    }
+    if (nums[i - 1] <= 0 || nums[i] <= 0) throw new Error('Все значения курса должны быть положительными');
     const r = Math.log(nums[i] / nums[i - 1]);
     rets.push(r);
     retsPct.push(r * 100);
   }
 
-  // 2. Оценка параметров (работаем с % доходностями для стабильности)
-  // omega, h_t теперь в единицах (%)^2; volатильность = sqrt(h) в %
-  const { omega, alpha, beta } = estimateGARCH(retsPct);
+  // 2. Оценка GARCH(1,1)
+  const garchParams = estimateGARCH(retsPct);
+  const { omega, alpha, beta } = garchParams;
   const persistence = alpha + beta;
 
-  // 3. Исторические условные дисперсии (единицы: (%)^2)
+  // 3. Оценка EGARCH(1,1)
+  let egarchParams = null;
+  try { egarchParams = estimateEGARCH(retsPct); } catch (_) {}
+
+  // Выбираем лучшую модель по log-likelihood
+  const garchWins = !egarchParams || garchParams.negLogLik <= egarchParams.negLogLik;
+
+  // 4. Исторические условные дисперсии (GARCH)
   const initVar = variance(retsPct);
   const condVar = new Array(retsPct.length);
-  condVar[0]    = initVar;
+  condVar[0] = initVar;
   for (let t = 1; t < retsPct.length; t++) {
     condVar[t] = omega + alpha * retsPct[t - 1] ** 2 + beta * condVar[t - 1];
   }
-  const historicalVol = condVar.map(h => round4(Math.sqrt(Math.max(0, h)))); // дневная vol %
+  const historicalVol = condVar.map(h => round4(Math.sqrt(Math.max(0, h))));
 
-  // 4. Долгосрочная (безусловная) дисперсия
+  // 5. Прогноз дисперсии
   const longRunVar = persistence < 1 ? omega / (1 - persistence) : initVar;
   const lastH      = condVar[condVar.length - 1];
 
-  // 5. Прогноз дисперсии на N периодов вперёд
-  // E[h_{t+k}] = longRunVar + persistence^k * (h_t - longRunVar)
   const fwdVar = [];
   for (let k = 1; k <= periods; k++) {
     const v = longRunVar + Math.pow(persistence, k) * (lastH - longRunVar);
     fwdVar.push(Math.max(0, v));
   }
-  const forecastVol = fwdVar.map(v => round4(Math.sqrt(v))); // дневная vol %
+  const forecastVol = fwdVar.map(v => round4(Math.sqrt(v)));
 
-  // 6. Доверительные интервалы (неопределённость растёт с горизонтом)
+  // 5b. EGARCH прогноз (log-space)
+  let egarchForecastVol = null;
+  if (egarchParams) {
+    const { omega: ow, alpha: aw, gamma: gw, beta: bw } = egarchParams;
+    // Вычисляем последний log(h)
+    const SQRT2PI = Math.sqrt(2 / Math.PI);
+    let logH = Math.log(Math.max(1e-8, initVar));
+    for (let t = 0; t < retsPct.length - 1; t++) {
+      const h = Math.exp(logH);
+      const z = retsPct[t] / Math.sqrt(Math.max(h, 1e-10));
+      logH = ow + aw * (Math.abs(z) - SQRT2PI) + gw * z + bw * logH;
+      if (!isFinite(logH) || logH > 50) logH = Math.log(Math.max(1e-8, initVar));
+    }
+    const egarchFv = [];
+    const longLogH = Math.abs(bw) < 1 ? ow / (1 - bw) : logH;
+    for (let k = 1; k <= periods; k++) {
+      const eLH = longLogH + Math.pow(bw, k) * (logH - longLogH);
+      egarchFv.push(round4(Math.sqrt(Math.exp(eLH))));
+    }
+    egarchForecastVol = egarchFv;
+  }
+
+  // 6. Доверительные интервалы
   const histVolArr = condVar.map(h => Math.sqrt(Math.max(0, h)));
   const histVolStd = stdDev(histVolArr);
   const ci1Lower = fwdVar.map((v, i) => round4(Math.max(0, Math.sqrt(v) - histVolStd * 0.5 * Math.sqrt(i + 1))));
@@ -352,65 +632,135 @@ function garch(data, periods) {
   const ci2Lower = fwdVar.map((v, i) => round4(Math.max(0, Math.sqrt(v) - histVolStd * 1.0 * Math.sqrt(i + 1))));
   const ci2Upper = fwdVar.map((v, i) => round4(Math.sqrt(v) + histVolStd * 1.0 * Math.sqrt(i + 1)));
 
-  // 7. Текущая и годовая волатильность
-  // annualized = daily_vol_pct * sqrt(252)
-  const currentDailyVol = round4(Math.sqrt(Math.max(0, lastH)));         // %
-  const annualizedVol   = round4(Math.sqrt(Math.max(0, lastH)) * Math.sqrt(252)); // %
+  // 7. Уровень риска
+  const currentDailyVol = round4(Math.sqrt(Math.max(0, lastH)));
+  const annualizedVol   = round4(Math.sqrt(Math.max(0, lastH)) * Math.sqrt(252));
 
-  // 8. Уровень риска и сигнал для руководства
   let riskLevel, signal;
   if (annualizedVol < 5) {
     riskLevel = 'низкий';
-    signal =
-      `Волатильность курса находится на низком уровне — ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). ` +
-      `Устойчивость α+β = ${round4(persistence)}. ` +
-      `Валютный риск минимален. Рекомендуется сохранить текущую структуру валютных позиций и продолжить плановый мониторинг.`;
+    signal = `Волатильность курса низкая — ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). α+β = ${round4(persistence)}. Валютный риск минимален.`;
   } else if (annualizedVol < 15) {
     riskLevel = 'умеренный';
-    signal =
-      `Волатильность курса — умеренная: ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). ` +
-      `Коэффициент устойчивости α+β = ${round4(persistence)}. ` +
-      `Рекомендуется усилить мониторинг валютных рисков, рассмотреть частичное хеджирование ` +
-      `экспортно-импортных операций и ограничить краткосрочные спекулятивные позиции.`;
+    signal = `Волатильность умеренная: ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). α+β = ${round4(persistence)}. Рекомендуется усилить мониторинг валютных рисков и рассмотреть частичное хеджирование.`;
   } else if (annualizedVol < 25) {
     riskLevel = 'высокий';
-    signal =
-      `ВНИМАНИЕ: Высокая волатильность курса — ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). ` +
-      `Коэффициент устойчивости α+β = ${round4(persistence)} указывает на ${persistence > 0.95 ? 'высокую персистентность шоков' : 'умеренное затухание'}. ` +
-      `Необходимо незамедлительно принять меры: активировать хеджирование ключевых валютных позиций, ` +
-      `ограничить открытые позиции в иностранной валюте, проинформировать ключевых партнёров.`;
+    signal = `ВНИМАНИЕ: Высокая волатильность — ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). α+β = ${round4(persistence)}. Активировать хеджирование ключевых позиций.`;
   } else {
     riskLevel = 'критический';
-    signal =
-      `КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ: Экстремальная волатильность — ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). ` +
-      `Коэффициент устойчивости α+β = ${round4(persistence)}: шоки крайне медленно затухают. ` +
-      `ТРЕБУЕТСЯ НЕМЕДЛЕННОЕ ВМЕШАТЕЛЬСТВО РУКОВОДСТВА: приостановить крупные валютные операции, ` +
-      `задействовать инструменты стабилизации курса, оценить валютную экспозицию всех подразделений ` +
-      `и провести экстренное совещание по управлению рисками.`;
+    signal = `КРИТИЧЕСКОЕ ПРЕДУПРЕЖДЕНИЕ: Экстремальная волатильность — ${annualizedVol}% годовых (дневная: ${currentDailyVol}%). Требуется немедленное вмешательство руководства.`;
   }
 
+  // 8. Интерпретация асимметрии EGARCH
+  let egarchSignal = null;
+  if (egarchParams && egarchParams.gamma < -0.05) {
+    egarchSignal = `EGARCH(γ=${egarchParams.gamma}): плохие новости усиливают волатильность на ${Math.abs(round2(egarchParams.gamma * 100))}% сильнее, чем хорошие (эффект левереджа).`;
+  } else if (egarchParams && egarchParams.gamma > 0.05) {
+    egarchSignal = `EGARCH(γ=${egarchParams.gamma}): хорошие новости усиливают волатильность (нестандартный эффект).`;
+  }
+
+  // 9. Backtesting
+  const validation = backtestGARCH(nums);
+
   return {
-    omega:            round4(omega),
-    alpha:            round4(alpha),
-    beta:             round4(beta),
-    persistence:      round4(persistence),
-    returns:          rets.map(r => round4(r * 100)),
+    // GARCH(1,1)
+    omega: round4(omega), alpha: round4(alpha), beta: round4(beta), persistence: round4(persistence),
+    // EGARCH(1,1)
+    egarch: egarchParams,
+    egarchForecastVol,
+    bestModel: garchWins ? 'GARCH(1,1)' : 'EGARCH(1,1)',
+    egarchSignal,
+    // Ряды
+    returns:       rets.map(r => round4(r * 100)),
     historicalVol,
     forecastVol,
-    ci1Lower,
-    ci1Upper,
-    ci2Lower,
-    ci2Upper,
-    currentDailyVol,
-    annualizedVol,
-    riskLevel,
-    signal,
+    ci1Lower, ci1Upper, ci2Lower, ci2Upper,
+    // Итоговые метрики
+    currentDailyVol, annualizedVol, riskLevel, signal,
+    // Валидация
+    validation: { ...validation, dataSource: 'provided', accuracy: validation.directionalAccuracy },
   };
 }
 
-// ─── VAR(1) — векторная авторегрессия ─────────────────────────────────────────
+// ─── Ensemble (ARIMA + Prophet) ───────────────────────────────────────────────
 
-// ── Матричные утилиты ─────────────────────────────────────────────────────────
+/**
+ * Взвешенный ансамблевый прогноз.
+ * Веса = обратная MAPE по последним 20% данных (мин. 5 точек).
+ */
+function ensembleForecast(data, periods) {
+  const nums = validateData(data);
+  const n    = nums.length;
+
+  // Быстрый бэктест для весов
+  const testSize  = Math.min(5, Math.max(1, Math.floor(n * 0.2)));
+  const trainData = nums.slice(0, n - testSize);
+  const testData  = nums.slice(n - testSize);
+
+  let arimaMape = null, prophetMape = null;
+
+  if (trainData.length >= 4) {
+    // ARIMA MAPE
+    try {
+      const arimaTest = autoArima(trainData, testSize);
+      let s = 0;
+      for (let i = 0; i < testSize; i++) s += testData[i] !== 0 ? Math.abs((arimaTest.forecast[i] - testData[i]) / testData[i]) : 0;
+      arimaMape = s / testSize;
+    } catch (_) {}
+
+    // Prophet MAPE
+    try {
+      const prophetTest = prophet(trainData, testSize);
+      let s = 0;
+      for (let i = 0; i < testSize; i++) s += testData[i] !== 0 ? Math.abs((prophetTest[i] - testData[i]) / testData[i]) : 0;
+      prophetMape = s / testSize;
+    } catch (_) {}
+  }
+
+  // Прогнозы на полных данных
+  const arimaResult  = autoArima(nums, periods);
+  const prophetResult = prophet(nums, periods);
+  const arimaFc  = arimaResult.forecast;
+  const propFc   = prophetResult;
+
+  // Веса по обратной MAPE
+  let wArima = 0.5, wProphet = 0.5;
+  if (arimaMape != null && prophetMape != null) {
+    const eps  = 1e-6;
+    const invA = 1 / (arimaMape + eps);
+    const invP = 1 / (prophetMape + eps);
+    const tot  = invA + invP;
+    wArima   = invA / tot;
+    wProphet = invP / tot;
+  }
+
+  // Взвешенный прогноз
+  const ensemble = arimaFc.map((a, i) => round2(wArima * a + wProphet * propFc[i]));
+
+  // Доверительные интервалы через разброс моделей
+  const confidence_80 = { lower: [], upper: [] };
+  const confidence_95 = { lower: [], upper: [] };
+  for (let i = 0; i < periods; i++) {
+    const spread = Math.abs(arimaFc[i] - propFc[i]);
+    confidence_80.lower.push(round2(ensemble[i] - 0.84 * spread));
+    confidence_80.upper.push(round2(ensemble[i] + 0.84 * spread));
+    confidence_95.lower.push(round2(ensemble[i] - 1.64 * spread));
+    confidence_95.upper.push(round2(ensemble[i] + 1.64 * spread));
+  }
+
+  return {
+    ensemble,
+    arima:   arimaFc,
+    prophet: propFc,
+    weights: { arima: round4(wArima), prophet: round4(wProphet) },
+    arimaMape:   arimaMape   != null ? round4(arimaMape * 100)   : null,
+    prophetMape: prophetMape != null ? round4(prophetMape * 100) : null,
+    confidence_80,
+    confidence_95,
+  };
+}
+
+// ─── Матричные утилиты для VAR ────────────────────────────────────────────────
 
 function matCreate(r, c, fill = 0) {
   return Array.from({ length: r }, () => new Array(c).fill(fill));
@@ -425,16 +775,14 @@ function matTranspose(A) {
 
 function matMul(A, B) {
   const rA = A.length, cA = A[0].length, cB = B[0].length;
-  const C = matCreate(rA, cB);
+  const C  = matCreate(rA, cB);
   for (let i = 0; i < rA; i++)
     for (let m = 0; m < cA; m++)
       if (A[i][m] !== 0)
-        for (let j = 0; j < cB; j++)
-          C[i][j] += A[i][m] * B[m][j];
+        for (let j = 0; j < cB; j++) C[i][j] += A[i][m] * B[m][j];
   return C;
 }
 
-// Гаусс-Жордан: инверсия квадратной матрицы
 function matInverse(A) {
   const n = A.length;
   const aug = A.map((row, i) => {
@@ -443,12 +791,10 @@ function matInverse(A) {
   });
   for (let col = 0; col < n; col++) {
     let pr = col;
-    for (let r = col + 1; r < n; r++)
-      if (Math.abs(aug[r][col]) > Math.abs(aug[pr][col])) pr = r;
+    for (let r = col + 1; r < n; r++) if (Math.abs(aug[r][col]) > Math.abs(aug[pr][col])) pr = r;
     [aug[col], aug[pr]] = [aug[pr], aug[col]];
     const piv = aug[col][col];
-    if (Math.abs(piv) < 1e-14)
-      throw new Error('Матрица вырождена — проверьте данные на мультиколлинеарность или добавьте наблюдений');
+    if (Math.abs(piv) < 1e-14) throw new Error('Матрица вырождена — проверьте данные на мультиколлинеарность');
     for (let j = 0; j < 2 * n; j++) aug[col][j] /= piv;
     for (let r = 0; r < n; r++) {
       if (r === col) continue;
@@ -459,26 +805,34 @@ function matInverse(A) {
   return aug.map(row => row.slice(n));
 }
 
-function matVecMul(A, v) {
-  return A.map(row => row.reduce((s, a, j) => s + a * v[j], 0));
-}
-
+function matVecMul(A, v) { return A.map(row => row.reduce((s, a, j) => s + a * v[j], 0)); }
 function vecAdd(a, b) { return a.map((v, i) => v + b[i]); }
 
-// ── OLS-оценка VAR(1) ─────────────────────────────────────────────────────────
-// series — массив нормализованных рядов [k × T]
-function estimateVAR(series) {
+// ─── VAR(p) — обобщённая оценка ──────────────────────────────────────────────
+
+/**
+ * Оценка VAR(p) методом МНК.
+ * Возвращает Afull (k × k*lag), A1 (lag-1, для IRF), constants, rss, seMatrix.
+ */
+function estimateVARp(series, lag) {
   const k = series.length;
   const T = series[0].length;
-  const n = T - 1; // число строк после лагирования
+  const n = T - lag;
+  const nPar = k * lag + 1; // столбцов в design matrix
 
-  // Design matrix X: n × (k+1), строки = [1, y1_{t-1}, ..., yk_{t-1}]
+  if (n < nPar + 1) throw new Error(`Недостаточно наблюдений для VAR(${lag}). Нужно минимум ${nPar + lag + 1}.`);
+
+  // Design matrix X: n × (k*lag + 1)
   const X = [];
-  for (let t = 1; t < T; t++) X.push([1, ...series.map(s => s[t - 1])]);
+  for (let t = lag; t < T; t++) {
+    const row = [1];
+    for (let l = 1; l <= lag; l++)
+      for (let j = 0; j < k; j++) row.push(series[j][t - l]);
+    X.push(row);
+  }
 
-  // Целевая матрица Ymat: n × k
   const Ymat = [];
-  for (let t = 1; t < T; t++) Ymat.push(series.map(s => s[t]));
+  for (let t = lag; t < T; t++) Ymat.push(series.map(s => s[t]));
 
   const Xt       = matTranspose(X);
   const XtX      = matMul(Xt, X);
@@ -486,57 +840,66 @@ function estimateVAR(series) {
   const XtXinvXt = matMul(XtXinv, Xt);
 
   const constants = [];
-  const A         = matCreate(k, k); // A[i][j]: коэф. y_j,t-1 в уравнении i
-  const rss       = new Array(k).fill(0);
+  const Afull  = matCreate(k, k * lag);
+  const rss    = new Array(k).fill(0);
   const residuals = Array.from({ length: k }, () => []);
+  const seMatrix  = matCreate(k, nPar);
+  const df = Math.max(1, n - nPar);
 
   for (let i = 0; i < k; i++) {
     const yi   = Ymat.map(row => row[i]);
     const beta = matVecMul(XtXinvXt, yi);
     constants[i] = beta[0];
-    for (let j = 0; j < k; j++) A[i][j] = beta[j + 1];
+    for (let j = 0; j < k * lag; j++) Afull[i][j] = beta[j + 1];
 
     for (let t = 0; t < n; t++) {
       let fit = beta[0];
-      for (let j = 0; j < k; j++) fit += A[i][j] * series[j][t];
-      const res = series[i][t + 1] - fit;
+      for (let j = 0; j < k * lag; j++) fit += Afull[i][j] * X[t][j + 1];
+      const res = Ymat[t][i] - fit;
       residuals[i].push(res);
       rss[i] += res * res;
     }
+
+    const s2 = rss[i] / df;
+    for (let j = 0; j < nPar; j++) seMatrix[i][j] = Math.sqrt(Math.max(0, XtXinv[j][j] * s2));
   }
 
-  const df = Math.max(1, n - k - 1);
-  // Стандартные ошибки коэффициентов: SE(β_{i,p}) = sqrt(XtXinv[p][p] * σ²_i)
-  const seMatrix = A.map((_, i) => {
-    const s2 = rss[i] / df;
-    return Array.from({ length: k + 1 }, (_, p) =>
-      Math.sqrt(Math.max(0, XtXinv[p][p] * s2))
-    );
-  });
+  // A1 — коэффициенты лага 1 (k×k) для IRF
+  const A1 = matCreate(k, k);
+  for (let i = 0; i < k; i++) for (let j = 0; j < k; j++) A1[i][j] = Afull[i][j];
 
-  return { A, constants, residuals, seMatrix, rss, df };
+  return { Afull, A1, constants, residuals, seMatrix, rss, df, n, lag, k, nPar };
 }
 
-// ── Прогноз VAR на periods шагов ──────────────────────────────────────────────
-function forecastVAR(A, constants, lastZ, periods) {
+/** Прогноз VAR(p) на periods шагов вперёд */
+function forecastVARp(Afull, constants, zSeries, lag, periods) {
+  const k = constants.length;
+  // История последних lag наблюдений (oldest first)
+  const history = [];
+  for (let l = lag - 1; l >= 0; l--) history.push(zSeries.map(s => s[s.length - 1 - l]));
+
   const out = [];
-  let prev = lastZ.slice();
   for (let h = 0; h < periods; h++) {
-    const next = vecAdd(constants, matVecMul(A, prev));
+    const next = new Array(k).fill(0);
+    for (let i = 0; i < k; i++) {
+      next[i] = constants[i];
+      for (let l = 0; l < lag; l++) {
+        const lagVals = history[history.length - 1 - l];
+        for (let j = 0; j < k; j++) next[i] += Afull[i][l * k + j] * lagVals[j];
+      }
+    }
     out.push(next.slice());
-    prev = next;
+    history.push(next.slice());
   }
   return out;
 }
 
-// ── Импульсные функции отклика (IRF) ─────────────────────────────────────────
-// irf[j][h][i] = отклик переменной i на горизонте h при единичном шоке в j
+/** Impulse Response Functions (использует только lag-1 матрицу A1) */
 function computeIRF(A, maxH) {
-  const k   = A.length;
+  const k = A.length;
   const irf = Array.from({ length: k }, () => []);
   for (let j = 0; j < k; j++) {
-    let resp = new Array(k).fill(0);
-    resp[j] = 1;
+    let resp = new Array(k).fill(0); resp[j] = 1;
     for (let h = 0; h <= maxH; h++) {
       irf[j].push(resp.map(v => round4(v)));
       if (h < maxH) resp = matVecMul(A, resp);
@@ -545,45 +908,118 @@ function computeIRF(A, maxH) {
   return irf;
 }
 
-// ── Тест причинности Грейнджера (t-тест на a_ij) ─────────────────────────────
-// granger[j][i] = { coefficient, tStat, significant }: влияет ли j на i
-function grangerCausality(A, seMatrix) {
-  const k = A.length;
-  const g = Array.from({ length: k }, () => new Array(k).fill(null));
-  for (let i = 0; i < k; i++)
+/**
+ * Тест причинности Грейнджера (F-тест).
+ * Для каждой пары (j→i): сравниваем ограниченную (без лагов j) и неограниченную модели.
+ * result[j][i] = { fStat, pValue, significant }
+ */
+function grangerCausalityF(normalizedSeries, lag, rssUnrestricted, n) {
+  const k = normalizedSeries.length;
+  const T = normalizedSeries[0].length;
+  const result = Array.from({ length: k }, () => new Array(k).fill(null));
+
+  for (let i = 0; i < k; i++) {
     for (let j = 0; j < k; j++) {
       if (i === j) continue;
-      const se = seMatrix[i][j + 1]; // +1: beta[0] — константа
-      const t  = se > 1e-10 ? A[i][j] / se : 0;
-      g[j][i]  = { coefficient: round4(A[i][j]), tStat: round4(t), significant: Math.abs(t) > 1.96 };
+
+      // Ограниченная модель: убираем лаги переменной j
+      const Xr = [];
+      for (let t = lag; t < T; t++) {
+        const row = [1];
+        for (let l = 1; l <= lag; l++)
+          for (let jj = 0; jj < k; jj++)
+            if (jj !== j) row.push(normalizedSeries[jj][t - l]);
+        Xr.push(row);
+      }
+
+      const yi = [];
+      for (let t = lag; t < T; t++) yi.push(normalizedSeries[i][t]);
+
+      try {
+        const XrT    = matTranspose(Xr);
+        const XrTXr  = matMul(XrT, Xr);
+        const XrTXrI = matInverse(XrTXr);
+        const betaR  = matVecMul(matMul(XrTXrI, XrT), yi);
+
+        let rssR = 0;
+        for (let t = 0; t < n; t++) {
+          let fit = betaR[0];
+          for (let c = 1; c < betaR.length; c++) fit += betaR[c] * Xr[t][c];
+          rssR += (yi[t] - fit) ** 2;
+        }
+
+        const rssU = rssUnrestricted[i];
+        const df1  = lag;
+        const df2  = Math.max(1, n - 2 * lag * k - 1);
+        const fStat = rssU > 1e-14
+          ? Math.max(0, ((rssR - rssU) / df1) / (rssU / df2))
+          : 0;
+
+        const pValue = fStat > 10 ? 0.001 : fStat > 4.0 ? 0.01 : fStat > 2.5 ? 0.05 : fStat > 1.5 ? 0.15 : 0.30;
+        result[j][i] = { fStat: round4(fStat), pValue, significant: pValue < 0.05 };
+      } catch (_) {
+        result[j][i] = { fStat: null, pValue: null, significant: false };
+      }
     }
-  return g;
+  }
+  return result;
 }
 
-// ── Текстовая интерпретация для руководства ───────────────────────────────────
-function buildVARInterpretation(keys, labels, A, granger, forecasts, series, periods) {
+/** Выбор оптимального лага VAR по AIC */
+function selectVARLags(normalizedSeries, maxLag = 4) {
+  const k = normalizedSeries.length;
+  const T = normalizedSeries[0].length;
+  let bestAIC = Infinity, bestLag = 1;
+
+  for (let lag = 1; lag <= maxLag; lag++) {
+    const n = T - lag;
+    if (n < k * lag + 2) break;
+    try {
+      const { rss } = estimateVARp(normalizedSeries, lag);
+      // AIC = n·log|Σ| + 2·k·(k·p+1) (приближение через сумму log RSS)
+      const logDetSigma = rss.reduce((s, r) => s + Math.log(Math.max(r / n, 1e-10)), 0);
+      const aic = n * logDetSigma + 2 * k * (k * lag + 1);
+      if (aic < bestAIC) { bestAIC = aic; bestLag = lag; }
+    } catch (_) { break; }
+  }
+
+  return bestLag;
+}
+
+// ─── Интерпретация VAR ────────────────────────────────────────────────────────
+
+function buildVARInterpretation(keys, labels, A1, granger, forecasts, series, periods, adfResults, lagOrder) {
   const k       = keys.length;
   const lastObs = keys.map((_, i) => series[i][series[i].length - 1]);
   const lines   = [];
 
-  lines.push(`Анализ VAR(1) макроэкономических показателей Таджикистана. Горизонт прогноза: ${periods} периодов.`);
+  lines.push(`Анализ VAR(${lagOrder}) макроэкономических показателей Таджикистана. Горизонт прогноза: ${periods} периодов.`);
   lines.push('');
 
-  // Причинность Грейнджера
+  // ADF тесты
+  if (adfResults && adfResults.length > 0) {
+    lines.push('ТЕСТ ДИКИ-ФУЛЛЕРА (стационарность рядов):');
+    for (const r of adfResults) {
+      const status = r.stationary ? '✓ стационарен' : '✗ нестационарен';
+      lines.push(`  • ${labels[keys[r.variable]] || keys[r.variable]}: ${status} (t=${r.tStat}, p≈${r.pValue})`);
+    }
+    lines.push('');
+  }
+
+  // Причинность Грейнджера (F-тест)
   const sigLinks = [];
   for (let j = 0; j < k; j++)
     for (let i = 0; i < k; i++)
       if (i !== j && granger[j][i]?.significant)
-        sigLinks.push({ cause: j, effect: i, coef: granger[j][i].coefficient });
+        sigLinks.push({ cause: j, effect: i, fStat: granger[j][i].fStat, pValue: granger[j][i].pValue });
 
   if (sigLinks.length > 0) {
-    lines.push('ПРИЧИННОСТЬ ГРЕЙНДЖЕРА (α = 5%):');
+    lines.push(`ПРИЧИННОСТЬ ГРЕЙНДЖЕРА — F-тест (p < 5%), лаг=${lagOrder}:`);
     for (const s of sigLinks) {
-      const sign = s.coef > 0 ? 'положительно влияет на' : 'отрицательно влияет на';
-      lines.push(`  • ${labels[keys[s.cause]]} ${sign} ${labels[keys[s.effect]]} (коэф. ${s.coef > 0 ? '+' : ''}${s.coef})`);
+      lines.push(`  • ${labels[keys[s.cause]]} → ${labels[keys[s.effect]]} (F=${s.fStat}, p≈${s.pValue})`);
     }
   } else {
-    lines.push('ПРИЧИННОСТЬ ГРЕЙНДЖЕРА: при текущем объёме данных статистически значимых связей не выявлено. Рекомендуется расширить временной ряд для более точных выводов.');
+    lines.push('ПРИЧИННОСТЬ ГРЕЙНДЖЕРА: статистически значимых связей не выявлено. Рекомендуется расширить временной ряд.');
   }
   lines.push('');
 
@@ -598,32 +1034,28 @@ function buildVARInterpretation(keys, labels, A, granger, forecasts, series, per
   }
   lines.push('');
 
-  // Сильнейшие межпеременные взаимодействия
+  // Сильнейшие взаимодействия
   const cross = [];
   for (let i = 0; i < k; i++)
     for (let j = 0; j < k; j++)
-      if (i !== j) cross.push({ from: j, to: i, coef: A[i][j] });
+      if (i !== j) cross.push({ from: j, to: i, coef: A1[i][j] });
   cross.sort((a, b) => Math.abs(b.coef) - Math.abs(a.coef));
 
-  if (cross.length > 0) {
-    lines.push('СИЛЬНЕЙШИЕ ВЗАИМОДЕЙСТВИЯ (стандартизованные β):');
-    for (const cc of cross.slice(0, 4)) {
-      const eff = cc.coef > 0 ? 'усиливает' : 'сдерживает';
-      lines.push(`  • ${labels[keys[cc.from]]} ${eff} ${labels[keys[cc.to]]} (A = ${cc.coef > 0 ? '+' : ''}${round4(cc.coef)})`);
-    }
-    lines.push('');
+  lines.push('СИЛЬНЕЙШИЕ ВЗАИМОДЕЙСТВИЯ (стандартизованные β):');
+  for (const cc of cross.slice(0, 4)) {
+    const eff = cc.coef > 0 ? 'усиливает' : 'сдерживает';
+    lines.push(`  • ${labels[keys[cc.from]]} ${eff} ${labels[keys[cc.to]]} (A=${cc.coef > 0 ? '+' : ''}${round4(cc.coef)})`);
   }
-
-  lines.push('РЕКОМЕНДАЦИИ: При формировании монетарной и фискальной политики учитывайте выявленные взаимозависимости. Динамика денежных переводов традиционно поддерживает внутренний спрос и может усиливать инфляционное давление. Курс USD/TJS влияет на импортную инфляцию через ценовой канал. Прогноз основан на исторических данных — при структурных шоках в экономике рекомендуется переоценка модели.');
+  lines.push('');
+  lines.push('РЕКОМЕНДАЦИИ: При формировании монетарной и фискальной политики учитывайте выявленные взаимозависимости. Динамика переводов мигрантов поддерживает внутренний спрос и может усиливать инфляционное давление. Курс USD/TJS влияет на импортную инфляцию. При структурных шоках рекомендуется переоценка модели.');
 
   return lines.join('\n');
 }
 
+// ─── VAR(p) — векторная авторегрессия ────────────────────────────────────────
+
 /**
- * VAR(1) — Векторная авторегрессия для макроэкономических показателей.
- *
- * @param {{ gdp, inflation, exchange_rate, remittances }: Record<string,number[]>} data
- * @param {number} periods  горизонт прогноза
+ * VAR(p) с автовыбором лага, ADF-тестами, F-тестом Грейнджера.
  */
 function var_model(data, periods) {
   const KEYS   = ['gdp', 'inflation', 'exchange_rate', 'remittances'];
@@ -649,35 +1081,48 @@ function var_model(data, periods) {
 
   const series = raw.map(s => s.slice(0, T));
 
-  // 2. Z-нормализация для численной стабильности OLS
+  // 2. ADF-тест для каждого ряда
+  const adfResults = [];
+  for (let i = 0; i < k; i++) {
+    const res = adfTest(series[i]);
+    adfResults.push({ variable: i, ...res });
+  }
+
+  // 3. Z-нормализация
   const mu  = series.map(mean);
   const sig = series.map(s => { const sd = stdDev(s); return sd > 1e-10 ? sd : 1; });
   const zS  = series.map((s, i) => s.map(v => (v - mu[i]) / sig[i]));
 
-  // 3. Оценка VAR(1) методом МНК
-  const { A, constants, rss, seMatrix } = estimateVAR(zS);
+  // 4. Выбор оптимального лага (1..4)
+  const maxPossibleLag = Math.min(4, Math.floor((T - k - 1) / k));
+  const lagOrder = maxPossibleLag >= 1 ? selectVARLags(zS, maxPossibleLag) : 1;
 
-  // 4. Прогноз в нормализованных единицах, затем денормализация
-  const lastZ      = zS.map(s => s[s.length - 1]);
-  const zForecasts = forecastVAR(A, constants, lastZ, periods);
+  // 5. Оценка VAR(lagOrder)
+  const { Afull, A1, constants, rss, seMatrix, n: nObs } = estimateVARp(zS, lagOrder);
+
+  // 6. Прогноз (денормализация)
+  const zForecasts = forecastVARp(Afull, constants, zS, lagOrder, periods);
   const forecasts  = zForecasts.map(zv => zv.map((z, i) => round4(z * sig[i] + mu[i])));
 
-  // 5. R² каждого уравнения (инвариантен к нормализации)
+  // 7. R² каждого уравнения
   const r2 = zS.map((s, i) => {
-    const resp = s.slice(1);
+    const resp = s.slice(lagOrder);
     const mR   = mean(resp);
     const tss  = resp.reduce((a, v) => a + (v - mR) ** 2, 0);
     return tss > 0 ? round4(1 - rss[i] / tss) : 0;
   });
 
-  // 6. IRF (до 8 горизонтов)
-  const irf = computeIRF(A, Math.min(periods, 8));
+  // 8. IRF (использует A1 для совместимости)
+  const irf = computeIRF(A1, Math.min(periods, 8));
 
-  // 7. Тест Грейнджера
-  const granger = grangerCausality(A, seMatrix);
+  // 9. Тест Грейнджера (F-тест)
+  const granger = grangerCausalityF(zS, lagOrder, rss, nObs);
 
-  // 8. Интерпретация
-  const interpretation = buildVARInterpretation(KEYS, LABELS, A, granger, forecasts, series, periods);
+  // 10. Интерпретация
+  const interpretation = buildVARInterpretation(KEYS, LABELS, A1, granger, forecasts, series, periods, adfResults, lagOrder);
+
+  // Определяем источник данных
+  const dataSource = data._source || 'user-provided';
 
   return {
     keys:         KEYS,
@@ -687,11 +1132,27 @@ function var_model(data, periods) {
     irf,
     granger,
     r2,
-    coefficients: A.map(row => row.map(round4)),
+    coefficients: A1.map(row => row.map(round4)),
     constants:    constants.map(round4),
     interpretation,
     periods,
+    lagOrder,
+    adfTests:   adfResults,
+    dataSource,
+    validation: { lagOrder, dataPoints: T, dataSource },
   };
 }
 
-module.exports = { arima, prophet, detectAnomalies, garch, var_model };
+// ─── Экспорт ──────────────────────────────────────────────────────────────────
+
+module.exports = {
+  arima: autoArima,   // обратная совместимость — теперь autoArima
+  autoArima,
+  prophet,
+  detectAnomalies,
+  garch,
+  var_model,
+  backtestArima,
+  ensembleForecast,
+  adfTest,
+};

@@ -3,6 +3,8 @@ const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 
+const MODEL_VERSION = '2.0';
+
 const PORT         = 3000;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_URL     = 'https://api.groq.com/openai/v1/chat/completions';
@@ -330,6 +332,32 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/rates-history?currency=usd&days=365
+  if (req.method === 'GET' && req.url.startsWith('/api/rates-history')) {
+    try {
+      const qs       = new URL('http://x' + req.url).searchParams;
+      const currency = (qs.get('currency') || 'usd').toLowerCase();
+      const days     = Math.min(3650, Math.max(1, parseInt(qs.get('days') || '365')));
+
+      const { getRatesHistory: getNBTHistory, loadTimeseries } = require('./nbtParser');
+      const data = await getNBTHistory(currency, days);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        currency,
+        days,
+        count: data.length,
+        data,
+        meta: { dataSource: 'nbt.tj', collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+      }));
+    } catch (err) {
+      console.error('[/api/rates-history]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/report
   if (req.method === 'POST' && req.url === '/api/report') {
     try {
@@ -381,11 +409,40 @@ const server = http.createServer(async (req, res) => {
       const { data, periods } = JSON.parse(body.toString('utf8'));
 
       const { var_model } = require('./forecasting');
-      const n      = Math.max(1, Math.min(24, parseInt(periods) || 6));
-      const result = var_model(data, n);
+      const hdb = require('./historicalDB');
+      const n   = Math.max(1, Math.min(24, parseInt(periods) || 6));
+
+      // Авто-подтягиваем данные если не переданы
+      const varData = { ...data };
+      let dataSource = 'user-provided';
+
+      // Если есть ministry_gdp_model.json — используем для ВВП и инфляции
+      try {
+        const gdpH = hdb.getGDPHistory();
+        const infH = hdb.getInflationHistory();
+        const exH  = hdb.getExchangeRateHistory();
+        const remH = hdb.getRemittancesHistory();
+
+        if (!varData.gdp || varData.gdp.length < 6)
+          varData.gdp = gdpH.map(r => r.gdp_growth || r.gdp_bln_somoni).filter(v => v != null);
+        if (!varData.inflation || varData.inflation.length < 6)
+          varData.inflation = infH.map(r => r.cpi || r.inflation).filter(v => v != null);
+        if (!varData.exchange_rate || varData.exchange_rate.length < 6)
+          varData.exchange_rate = exH.map(r => r.usd_tjs || r.USD).filter(v => v != null);
+        if (!varData.remittances || varData.remittances.length < 6)
+          varData.remittances = remH.map(r => r.amount_mln_usd || r.total_mln_usd || r.remittances).filter(v => v != null);
+
+        dataSource = 'МЭРиТ/НБТ (auto)';
+      } catch (_) {}
+
+      varData._source = dataSource;
+      const result = var_model(varData, n);
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify(result));
+      res.end(JSON.stringify({
+        ...result,
+        meta: { dataSource, dataPoints: Math.min(...['gdp','inflation','exchange_rate','remittances'].map(k => (varData[k]||[]).length)), collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+      }));
     } catch (err) {
       console.error('[/api/var]', err.message);
       const code = /необходимо|Недостаточно/i.test(err.message) ? 400 : 500;
@@ -424,11 +481,41 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && req.url === '/api/garch') {
     try {
       const body = await readBody(req);
-      const { data, periods } = JSON.parse(body.toString('utf8'));
+      const { data, periods, currency } = JSON.parse(body.toString('utf8'));
 
       const { garch } = require('./forecasting');
 
-      const numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      let numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      let dataSource = 'user-provided';
+      let collectedAt = new Date().toISOString();
+
+      // Авто-загрузка из rates_timeseries.json если данных мало
+      if (numData.length < 10) {
+        const cur = (currency || 'usd').toLowerCase();
+        try {
+          const { loadTimeseries } = require('./nbtParser');
+          const ts = loadTimeseries();
+          const tsVals = ts.map(r => r[cur]).filter(v => v != null);
+          if (tsVals.length >= numData.length) {
+            numData = tsVals;
+            dataSource = 'nbt.tj (rates_timeseries)';
+          }
+        } catch (_) {}
+
+        // Fallback: rates-history.json
+        if (numData.length < 10) {
+          try {
+            const histPath = path.join(__dirname, 'rates-history.json');
+            if (fs.existsSync(histPath)) {
+              const hist = JSON.parse(fs.readFileSync(histPath, 'utf8'));
+              const key  = cur.toUpperCase();
+              const hVals = hist.map(r => r[key] || r[cur]).filter(v => v != null);
+              if (hVals.length > numData.length) { numData = hVals; dataSource = 'rates-history.json'; }
+            }
+          } catch (_) {}
+        }
+      }
+
       if (numData.length < 10) {
         res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
         return res.end(JSON.stringify({ error: 'Для GARCH необходимо минимум 10 точек данных' }));
@@ -438,9 +525,64 @@ const server = http.createServer(async (req, res) => {
       const result = garch(numData, n);
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify(result));
+      res.end(JSON.stringify({
+        ...result,
+        meta: { dataSource, dataPoints: numData.length, collectedAt, modelVersion: MODEL_VERSION },
+      }));
     } catch (err) {
       console.error('[/api/garch]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // POST /api/backtest
+  if (req.method === 'POST' && req.url === '/api/backtest') {
+    try {
+      const body = await readBody(req);
+      const { indicator, method, data, currency } = JSON.parse(body.toString('utf8'));
+
+      const { backtestArima } = require('./forecasting');
+
+      let numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      let dataSource = 'user-provided';
+
+      // Авто-загрузка данных
+      if (numData.length < 6 && currency) {
+        try {
+          const { loadTimeseries } = require('./nbtParser');
+          const cur = currency.toLowerCase();
+          const ts  = loadTimeseries();
+          numData   = ts.map(r => r[cur]).filter(v => v != null);
+          dataSource = 'nbt.tj';
+        } catch (_) {}
+      }
+
+      if (numData.length < 6 && indicator) {
+        try {
+          const hdb = require('./historicalDB');
+          numData = hdb.getDataForForecasting(indicator);
+          dataSource = 'МЭРиТ/НБТ';
+        } catch (_) {}
+      }
+
+      if (numData.length < 6) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Необходимо минимум 6 точек данных для бэктестинга' }));
+      }
+
+      const validation = backtestArima(numData);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        validation,
+        historical: numData,
+        forecasts:  null,
+        meta: { dataSource, dataPoints: numData.length, method: method || 'arima', collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+      }));
+    } catch (err) {
+      console.error('[/api/backtest]', err.message);
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: err.message }));
     }
@@ -470,42 +612,65 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && req.url === '/forecast') {
     try {
       const body = await readBody(req);
-      const { data, periods, method } = JSON.parse(body.toString('utf8'));
+      const { data, periods, method, currency, indicator } = JSON.parse(body.toString('utf8'));
 
-      const { arima, prophet, detectAnomalies } = require('./forecasting');
+      const { autoArima, prophet, detectAnomalies, ensembleForecast } = require('./forecasting');
 
-      const numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      // Авто-загрузка данных НБТ или исторических макро-данных, если data не передан
+      let numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
+      let dataSource = 'user-provided';
+
+      if (numData.length < 4 && currency) {
+        try {
+          const { getRatesHistory } = require('./nbtParser');
+          const hist = await getRatesHistory(currency, 365);
+          numData = hist.map(r => r[currency.toLowerCase()]).filter(v => v != null);
+          dataSource = 'nbt.tj';
+        } catch (_) {}
+      }
+
+      if (numData.length < 4 && indicator) {
+        try {
+          const hdb = require('./historicalDB');
+          numData = hdb.getDataForForecasting(indicator);
+          dataSource = 'МЭРиТ/НБТ';
+        } catch (_) {}
+      }
+
       if (numData.length < 4) {
         res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
         return res.end(JSON.stringify({ error: 'Необходимо минимум 4 точки данных' }));
       }
 
       const n = Math.max(1, Math.min(24, parseInt(periods) || 6));
+      const collectedAt = new Date().toISOString();
 
-      let forecast;
+      let result;
       if (method === 'prophet') {
-        forecast = prophet(numData, n);
+        const forecast = prophet(numData, n);
+        result = { forecast, method: 'prophet' };
+      } else if (method === 'ensemble') {
+        result = ensembleForecast(numData, n);
+        result.method = 'ensemble';
       } else {
-        forecast = arima(numData, n);
+        // auto-arima (default)
+        const ar = autoArima(numData, n);
+        result = { forecast: ar.forecast, bestP: ar.bestP, bestD: ar.bestD, bestQ: ar.bestQ, aic: ar.aic, method: 'auto-arima', adfResults: ar.adfResults };
       }
 
       const anomalies = detectAnomalies(numData);
-
-      // Метки для исторических данных
-      const histLabels = numData.map((_, i) => `T${i + 1}`);
-
-      // Метки для прогноза
+      const histLabels    = numData.map((_, i) => `T${i + 1}`);
       const forecastLabels = Array.from({ length: n }, (_, i) => `T${numData.length + i + 1}`);
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         historical: numData,
-        forecast,
         histLabels,
         forecastLabels,
         anomalies,
-        method: method || 'arima',
         periods: n,
+        ...result,
+        meta: { dataSource, dataPoints: numData.length, collectedAt, modelVersion: MODEL_VERSION },
       }));
     } catch (err) {
       console.error('Error handling /forecast:', err);
@@ -1087,6 +1252,21 @@ const server = http.createServer(async (req, res) => {
     console.log('[pipeline] Планировщик ETL активирован (02:00 ежедневно)');
   } catch (e) {
     console.warn('[pipeline] Не удалось запустить планировщик:', e.message);
+  }
+})();
+
+// Инициализация NBT-парсера: загружаем курсы в фоне + авто-обновление каждые 24ч
+(function initNBTParser() {
+  try {
+    const nbtParser = require('./nbtParser');
+    // Фоновая загрузка курсов при старте
+    nbtParser.saveRatesToDB()
+      .then(r => console.log(`[nbtParser] Инициализация завершена: ${r.entries} записей, последняя: ${r.latest?.date}`))
+      .catch(e => console.warn('[nbtParser] Ошибка инициализации:', e.message));
+    // Авто-обновление каждые 24 ч
+    nbtParser.startAutoRefresh();
+  } catch (e) {
+    console.warn('[nbtParser] Не удалось инициализировать:', e.message);
   }
 })();
 
