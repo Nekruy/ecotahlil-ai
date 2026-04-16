@@ -6,6 +6,12 @@
  * Чистый JavaScript без внешних зависимостей
  */
 
+const fs   = require('fs');
+const path = require('path');
+
+const MODEL_VERSION    = '2.0-professional';
+const TIMESERIES_FILE  = path.join(__dirname, 'data', 'rates_timeseries.json');
+
 // ─── Математические вспомогательные функции ───────────────────────────────────
 
 function round2(v) { return Math.round(v * 100) / 100; }
@@ -131,12 +137,12 @@ function adfTest(series) {
   const seBeta = Math.sqrt(Math.max(0, s2 / Math.max(1e-14, Sxx)));
   const tStat  = seBeta > 1e-10 ? beta / seBeta : 0;
 
-  // ADF critical values (Mackinnon 5%)
-  const CRIT_5 = -2.86;
-  const stationary = tStat < CRIT_5;
-  const pValue = tStat < -4.0 ? 0.001 : tStat < -3.5 ? 0.01 : tStat < CRIT_5 ? 0.05 : tStat < -2.57 ? 0.10 : 0.25;
+  // ADF critical values (MacKinnon)
+  const critValues = { '1%': -3.43, '5%': -2.86, '10%': -2.57 };
+  const stationary = tStat < critValues['5%'];
+  const pValue = tStat < -4.0 ? 0.001 : tStat < -3.5 ? 0.01 : tStat < critValues['5%'] ? 0.05 : tStat < critValues['10%'] ? 0.10 : 0.25;
 
-  return { stationary, tStat: round4(tStat), pValue };
+  return { stationary, tStat: round4(tStat), pValue, critValues };
 }
 
 // ─── Разностное преобразование и обратное ─────────────────────────────────────
@@ -581,9 +587,35 @@ function backtestGARCH(nums) {
 /**
  * GARCH(1,1) + EGARCH(1,1) — прогноз волатильности курса валюты.
  * Включает backtesting и поле validation.
+ * Если data не передан или длина < 30 — автозагрузка из data/rates_timeseries.json.
  */
 function garch(data, periods) {
-  const nums = validateData(data);
+  let nums = Array.isArray(data) ? data.map(Number).filter(v => !isNaN(v)) : [];
+  let dataSource = 'user-provided';
+
+  // Автозагрузка: rates_timeseries.json → historicalDB (в порядке приоритета)
+  if (nums.length < 30) {
+    try {
+      const ratesRaw = JSON.parse(fs.readFileSync(TIMESERIES_FILE, 'utf8'));
+      const usdData  = ratesRaw.map(r => r.usd).filter(Boolean);
+      if (usdData.length > nums.length) {
+        nums = usdData;
+        dataSource = 'НБТ РТ (авто)';
+      }
+    } catch (_) {}
+  }
+  // Второй фолбэк: годовые курсы из historicalDB (если NBT мало)
+  if (nums.length < 10) {
+    try {
+      const hdb      = require('./historicalDB');
+      const histData = hdb.getDataForForecasting('usd_tjs').filter(v => v != null);
+      if (histData.length > nums.length) {
+        nums = histData;
+        dataSource = 'МЭРиТ/НБТ исторические (авто)';
+      }
+    } catch (_) {}
+  }
+
   if (nums.length < 10) throw new Error('Для GARCH необходимо минимум 10 точек данных');
 
   // 1. Логарифмические доходности в %
@@ -687,23 +719,38 @@ function garch(data, periods) {
   // 9. Backtesting
   const validation = backtestGARCH(nums);
 
+  const selectedModel = garchWins ? 'GARCH' : 'EGARCH';
+  const leverageEffect = egarchParams
+    ? (egarchParams.gamma < 0
+        ? 'есть — плохие новости опаснее'
+        : egarchParams.gamma > 0.05
+          ? 'нет — хорошие новости усиливают волатильность'
+          : 'нейтральный')
+    : 'не определён';
+
   return {
-    // GARCH(1,1)
+    // Выбранная модель
+    selectedModel,
+    leverage_effect: leverageEffect,
+    // GARCH(1,1) параметры
     omega: round4(omega), alpha: round4(alpha), beta: round4(beta), persistence: round4(persistence),
     // EGARCH(1,1)
-    egarch: egarchParams,
+    egarch: egarchParams
+      ? { omega: egarchParams.omega, alpha: egarchParams.alpha, gamma: egarchParams.gamma, beta: egarchParams.beta, persistence: round4(Math.abs(egarchParams.beta)) }
+      : null,
     egarchForecastVol,
-    bestModel: garchWins ? 'GARCH(1,1)' : 'EGARCH(1,1)',
     egarchSignal,
     // Ряды
     returns:       rets.map(r => round4(r * 100)),
     historicalVol,
-    forecastVol,
+    forecastVol: garchWins ? forecastVol : (egarchForecastVol || forecastVol),
     ci1Lower, ci1Upper, ci2Lower, ci2Upper,
     // Итоговые метрики
     currentDailyVol, annualizedVol, riskLevel, signal,
-    // Валидация
-    validation: { ...validation, dataSource: 'provided', accuracy: validation.directionalAccuracy },
+    // Валидация (backtesting)
+    validation: { rmse: validation.rmse, directionalAccuracy: validation.directionalAccuracy, outOfSampleR2: validation.outOfSampleR2, dataPoints: validation.dataPoints },
+    // Мета
+    meta: { dataSource, dataPoints: nums.length, collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
   };
 }
 
@@ -996,25 +1043,27 @@ function grangerCausalityF(normalizedSeries, lag, rssUnrestricted, n) {
   return result;
 }
 
-/** Выбор оптимального лага VAR по AIC */
+/** Выбор оптимального лага VAR по AIC. Возвращает { optimalLag, aicByLag }. */
 function selectVARLags(normalizedSeries, maxLag = 4) {
   const k = normalizedSeries.length;
   const T = normalizedSeries[0].length;
   let bestAIC = Infinity, bestLag = 1;
+  const aicByLag = {};
 
   for (let lag = 1; lag <= maxLag; lag++) {
     const n = T - lag;
     if (n < k * lag + 2) break;
     try {
       const { rss } = estimateVARp(normalizedSeries, lag);
-      // AIC = n·log|Σ| + 2·k·(k·p+1) (приближение через сумму log RSS)
+      // AIC = T·ln(det(Σ)) + 2·p·k² , Σ приближается через сумму log(RSS_i/T)
       const logDetSigma = rss.reduce((s, r) => s + Math.log(Math.max(r / n, 1e-10)), 0);
       const aic = n * logDetSigma + 2 * k * (k * lag + 1);
+      aicByLag[lag] = round4(aic);
       if (aic < bestAIC) { bestAIC = aic; bestLag = lag; }
     } catch (_) { break; }
   }
 
-  return bestLag;
+  return { optimalLag: bestLag, aicByLag };
 }
 
 // ─── Интерпретация VAR ────────────────────────────────────────────────────────
@@ -1097,10 +1146,32 @@ function var_model(data, periods) {
     remittances:   'Переводы мигрантов',
   };
 
-  // 1. Валидация входных данных
+  // 1. Автозагрузка из historicalDB если data не передан или неполный
+  const inp = (data && typeof data === 'object') ? data : {};
+  let dataSource = inp._source || 'user-provided';
+  const missing = KEYS.some(k => !Array.isArray(inp[k]) || inp[k].length < 6);
+  if (missing) {
+    try {
+      const hdb = require('./historicalDB');
+      const gdpRaw   = hdb.getDataForForecasting('gdp').filter(v => v != null);
+      const infRaw   = hdb.getDataForForecasting('inflation').filter(v => v != null);
+      const exRaw    = hdb.getDataForForecasting('usd_tjs').filter(v => v != null);
+      const remHist  = hdb.getRemittancesHistory();
+      const remRaw   = remHist.map(r => r.amount_mln_usd ?? r.total_mln_usd).filter(v => v != null);
+      if (gdpRaw.length >= 6 && infRaw.length >= 6) {
+        inp.gdp           = gdpRaw;
+        inp.inflation     = infRaw;
+        inp.exchange_rate = exRaw.length >= 6 ? exRaw : new Array(gdpRaw.length).fill(10.5);
+        inp.remittances   = remRaw.length >= 6 ? remRaw : new Array(gdpRaw.length).fill(2000);
+        dataSource        = 'МЭРиТ РТ (авто)';
+      }
+    } catch (_) {}
+  }
+
+  // 2. Валидация входных данных
   const raw = [];
   for (const key of KEYS) {
-    const arr = (Array.isArray(data[key]) ? data[key] : []).map(Number);
+    const arr = (Array.isArray(inp[key]) ? inp[key] : []).map(Number);
     if (arr.length < 6)  throw new Error(`${LABELS[key]}: необходимо минимум 6 наблюдений`);
     if (arr.some(isNaN)) throw new Error(`${LABELS[key]}: все значения должны быть числами`);
     raw.push(arr);
@@ -1126,7 +1197,10 @@ function var_model(data, periods) {
 
   // 4. Выбор оптимального лага (1..4)
   const maxPossibleLag = Math.min(4, Math.floor((T - k - 1) / k));
-  const lagOrder = maxPossibleLag >= 1 ? selectVARLags(zS, maxPossibleLag) : 1;
+  const { optimalLag, aicByLag } = maxPossibleLag >= 1
+    ? selectVARLags(zS, maxPossibleLag)
+    : { optimalLag: 1, aicByLag: {} };
+  const lagOrder = optimalLag;
 
   // 5. Оценка VAR(lagOrder)
   const { Afull, A1, constants, rss, seMatrix, n: nObs } = estimateVARp(zS, lagOrder);
@@ -1152,8 +1226,9 @@ function var_model(data, periods) {
   // 10. Интерпретация
   const interpretation = buildVARInterpretation(KEYS, LABELS, A1, granger, forecasts, series, periods, adfResults, lagOrder);
 
-  // Определяем источник данных
-  const dataSource = data._source || 'user-provided';
+  // ADF tests keyed by variable name
+  const adfTestsNamed = {};
+  for (let i = 0; i < k; i++) adfTestsNamed[KEYS[i]] = { ...adfResults[i], label: LABELS[KEYS[i]] };
 
   return {
     keys:         KEYS,
@@ -1168,9 +1243,12 @@ function var_model(data, periods) {
     interpretation,
     periods,
     lagOrder,
-    adfTests:   adfResults,
+    optimalLag:   lagOrder,
+    aicByLag,
+    adfTests:     adfTestsNamed,
     dataSource,
     validation: { lagOrder, dataPoints: T, dataSource },
+    meta: { dataSource, dataPoints: T, collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
   };
 }
 
