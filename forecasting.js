@@ -763,15 +763,15 @@ function ensembleForecast(data, periods, officialForecast) {
   // Взвешенный прогноз
   const ensemble = arimaFc.map((a, i) => round2(wArima * a + wProphet * propFc[i]));
 
-  // Доверительные интервалы через разброс моделей
-  const confidence_80 = { lower: [], upper: [] };
-  const confidence_95 = { lower: [], upper: [] };
+  // Доверительные интервалы через разброс моделей (z=1.28 → 80%, z=1.96 → 95%)
+  const ci80 = { lower: [], upper: [] };
+  const ci95 = { lower: [], upper: [] };
   for (let i = 0; i < periods; i++) {
     const spread = Math.abs(arimaFc[i] - propFc[i]);
-    confidence_80.lower.push(round2(ensemble[i] - 0.84 * spread));
-    confidence_80.upper.push(round2(ensemble[i] + 0.84 * spread));
-    confidence_95.lower.push(round2(ensemble[i] - 1.64 * spread));
-    confidence_95.upper.push(round2(ensemble[i] + 1.64 * spread));
+    ci80.lower.push(round2(ensemble[i] - 1.28 * spread));
+    ci80.upper.push(round2(ensemble[i] + 1.28 * spread));
+    ci95.lower.push(round2(ensemble[i] - 1.96 * spread));
+    ci95.upper.push(round2(ensemble[i] + 1.96 * spread));
   }
 
   const result = {
@@ -779,10 +779,13 @@ function ensembleForecast(data, periods, officialForecast) {
     arima:   arimaFc,
     prophet: propFc,
     weights: { arima: round4(wArima), prophet: round4(wProphet) },
-    arimaMape:   arimaMape   != null ? round4(arimaMape * 100)   : null,
-    prophetMape: prophetMape != null ? round4(prophetMape * 100) : null,
-    confidence_80,
-    confidence_95,
+    mape: {
+      arima:   arimaMape   != null ? round4(arimaMape * 100)   : null,
+      prophet: prophetMape != null ? round4(prophetMape * 100) : null,
+    },
+    ci80,
+    ci95,
+    method: 'ensemble',
   };
   if (officialForecast) result.comparison = compareWithOfficial(ensemble, officialForecast);
   return result;

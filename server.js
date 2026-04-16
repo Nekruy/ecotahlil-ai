@@ -3,7 +3,7 @@ const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 
-const MODEL_VERSION = '2.0';
+const MODEL_VERSION = '2.0-professional';
 
 const PORT         = 3000;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
