@@ -338,7 +338,10 @@ function autoArima(data, periods, officialForecast) {
   const diffFc  = bestModel ? forecastARMA(diffSeries, bestModel, periods) : new Array(periods).fill(0);
   const forecast = inverseDiff(nums, diffFc, d);
 
-  const result = { forecast, bestP, bestD: d, bestQ, aic: round4(bestAIC), method: 'auto-arima', adfResults };
+  const result = {
+    forecast, bestP, bestD: d, bestQ, aic: round4(bestAIC), method: 'auto-arima', adfResults,
+    meta: { dataPoints: nums.length, collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+  };
   if (officialForecast) result.comparison = compareWithOfficial(forecast, officialForecast);
   return result;
 }

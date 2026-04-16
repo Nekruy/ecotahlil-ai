@@ -480,6 +480,52 @@ body {
     </div>
   </div>
 
+  <!-- Профессиональные модели v2.0 -->
+  <div style="margin:20px 0; padding:16px; background:#f8fafc; border-radius:12px; border:1px solid #e2e8f0">
+    <h3 style="margin:0 0 12px; color:#0d2342; font-size:16px">
+      🔬 Профессиональные модели v2.0-professional
+    </h3>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px">
+
+      <div style="background:white; padding:12px; border-radius:8px; border-left:4px solid #1a4a8a">
+        <div style="font-size:11px; color:#64748b; margin-bottom:4px">AutoARIMA</div>
+        <div style="font-size:18px; font-weight:700; color:#1a4a8a" id="arima-quality">—</div>
+        <div style="font-size:10px; color:#94a3b8">MAPE точность</div>
+      </div>
+
+      <div style="background:white; padding:12px; border-radius:8px; border-left:4px solid #0c7873">
+        <div style="font-size:11px; color:#64748b; margin-bottom:4px">Ensemble</div>
+        <div style="font-size:18px; font-weight:700; color:#0c7873" id="ensemble-weight">—</div>
+        <div style="font-size:10px; color:#94a3b8">вес ARIMA в ансамбле</div>
+      </div>
+
+      <div style="background:white; padding:12px; border-radius:8px; border-left:4px solid #b8860b">
+        <div style="font-size:11px; color:#64748b; margin-bottom:4px">vs МЭРиТ 2025</div>
+        <div style="font-size:18px; font-weight:700; color:#b8860b" id="mert-deviation">—</div>
+        <div style="font-size:10px; color:#94a3b8">отклонение прогноза ВВП</div>
+      </div>
+
+      <div style="background:white; padding:12px; border-radius:8px; border-left:4px solid #991b1b">
+        <div style="font-size:11px; color:#64748b; margin-bottom:4px">EGARCH модель</div>
+        <div style="font-size:18px; font-weight:700; color:#991b1b" id="garch-vol">—</div>
+        <div style="font-size:10px; color:#94a3b8">волатильность USD/TJS годовых</div>
+      </div>
+
+      <div style="background:white; padding:12px; border-radius:8px; border-left:4px solid #5b21b6">
+        <div style="font-size:11px; color:#64748b; margin-bottom:4px">VAR лаг</div>
+        <div style="font-size:18px; font-weight:700; color:#5b21b6" id="var-lag">—</div>
+        <div style="font-size:10px; color:#94a3b8">оптимальный лаг (AIC)</div>
+      </div>
+
+      <div style="background:white; padding:12px; border-radius:8px; border-left:4px solid #166534">
+        <div style="font-size:11px; color:#64748b; margin-bottom:4px">Данных НБТ</div>
+        <div style="font-size:18px; font-weight:700; color:#166534" id="nbt-points">—</div>
+        <div style="font-size:10px; color:#94a3b8">точек курса USD/TJS</div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- История отчётов -->
   <div class="history-card">
     <div class="history-head">
@@ -786,8 +832,66 @@ async function logout() {
 }
 
 // ──────────────────────────────────────────────────────────────
+// ПРОФЕССИОНАЛЬНЫЕ МОДЕЛИ v2.0
+// ──────────────────────────────────────────────────────────────
+async function loadProfessionalModels() {
+  try {
+    // Backtest ARIMA → MAPE точность
+    const bt = await fetch('/api/backtest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ indicator: 'gdp', method: 'arima' })
+    }).then(r => r.json());
+    if (bt.validation?.mape != null)
+      document.getElementById('arima-quality').textContent = bt.validation.mape.toFixed(1) + '%';
+
+    // Ensemble weights
+    const ens = await fetch('/forecast', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ method: 'ensemble', periods: 3 })
+    }).then(r => r.json());
+    if (ens.weights?.arima != null)
+      document.getElementById('ensemble-weight').textContent = (ens.weights.arima * 100).toFixed(0) + '%';
+
+    // GARCH волатильность
+    const g = await fetch('/api/garch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ periods: 10 })
+    }).then(r => r.json());
+    if (g.annualizedVol != null)
+      document.getElementById('garch-vol').textContent = g.annualizedVol + '%';
+
+    // VAR оптимальный лаг
+    const v = await fetch('/api/var', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ periods: 4 })
+    }).then(r => r.json());
+    if (v.optimalLag != null)
+      document.getElementById('var-lag').textContent = v.optimalLag;
+
+    // НБТ точек данных
+    const rates = await fetch('/api/rates-history?currency=usd&days=365').then(r => r.json());
+    if (rates.count != null)
+      document.getElementById('nbt-points').textContent = rates.count;
+
+    // МЭРиТ отклонение ВВП 2025
+    const comp = await fetch('/api/model-vs-official?indicator=gdp').then(r => r.json());
+    if (comp.deviation_arima_pct?.[0] != null)
+      document.getElementById('mert-deviation').textContent =
+        (comp.deviation_arima_pct[0] > 0 ? '+' : '') + comp.deviation_arima_pct[0] + '%';
+
+  } catch (e) {
+    console.warn('[Professional models]', e.message);
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
 // СТАРТ
 // ──────────────────────────────────────────────────────────────
+loadProfessionalModels();
 init();
 </script>
 </body>
