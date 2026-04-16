@@ -234,6 +234,59 @@ async function getRatesHistory(currency, days) {
   return series.filter(e => e.date >= cutStr && e[cur] != null);
 }
 
+// ─── Обогащение историческими данными ────────────────────────────────────────
+
+/**
+ * Если rates_timeseries.json содержит < 100 записей — дополняет синтетическими
+ * месячными точками из historicalDB.getExchangeRateHistory().
+ * Реальные НБТ-данные имеют приоритет при дедупликации.
+ */
+async function loadHistoricalRates() {
+  const existing = loadTimeseries();
+  if (existing.length >= 100) {
+    console.log(`[nbtParser] Достаточно данных (${existing.length} записей), обогащение не нужно`);
+    return;
+  }
+
+  const byDate = new Map(existing.map(e => [e.date, e]));
+
+  try {
+    const hdb  = require('./historicalDB');
+    const hist = hdb.getExchangeRateHistory(); // [{year, usd_tjs, eur_tjs, rub_tjs}]
+
+    let added = 0;
+    for (const row of hist) {
+      const { year, usd_tjs, eur_tjs, rub_tjs } = row;
+      if (!year || !usd_tjs) continue;
+
+      for (let month = 1; month <= 12; month++) {
+        const mm   = String(month).padStart(2, '0');
+        const date = `${year}-${mm}-15`;
+
+        // Не перезаписываем реальные данные
+        if (byDate.has(date)) continue;
+
+        const noise = () => 1 + (Math.random() - 0.5) * 0.01; // ±0.5%
+        byDate.set(date, {
+          date,
+          usd: usd_tjs  ? Math.round(usd_tjs  * noise() * 10000) / 10000 : null,
+          eur: eur_tjs  ? Math.round(eur_tjs  * noise() * 10000) / 10000 : null,
+          rub: rub_tjs  ? Math.round(rub_tjs  * noise() * 10000) / 10000 : null,
+          cny: null,
+          synthetic: true,
+        });
+        added++;
+      }
+    }
+
+    const sorted = [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
+    fs.writeFileSync(TIMESERIES_FILE, JSON.stringify(sorted, null, 2), 'utf8');
+    console.log(`[nbtParser] Обогащение: добавлено ${added} синтетических точек. Итого: ${sorted.length}`);
+  } catch (e) {
+    console.error('[nbtParser] loadHistoricalRates:', e.message);
+  }
+}
+
 // ─── Авто-обновление каждые 24 ч ─────────────────────────────────────────────
 
 let _timer = null;
@@ -248,4 +301,4 @@ function startAutoRefresh() {
   console.log('[nbtParser] Авто-обновление курсов НБТ запущено (каждые 24 ч)');
 }
 
-module.exports = { fetchNBTRates, saveRatesToDB, getRatesHistory, startAutoRefresh, loadTimeseries };
+module.exports = { fetchNBTRates, saveRatesToDB, getRatesHistory, startAutoRefresh, loadTimeseries, loadHistoricalRates };

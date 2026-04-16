@@ -1,5 +1,965 @@
 [
   {
+    "date": "2015-01-15",
+    "usd": 6.4909,
+    "eur": 7.175,
+    "rub": 0.098,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-02-15",
+    "usd": 6.5259,
+    "eur": 7.169,
+    "rub": 0.0978,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-03-15",
+    "usd": 6.4991,
+    "eur": 7.1428,
+    "rub": 0.0982,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-04-15",
+    "usd": 6.5145,
+    "eur": 7.1089,
+    "rub": 0.0983,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-05-15",
+    "usd": 6.5066,
+    "eur": 7.1137,
+    "rub": 0.0978,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-06-15",
+    "usd": 6.5008,
+    "eur": 7.1523,
+    "rub": 0.0982,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-07-15",
+    "usd": 6.5477,
+    "eur": 7.1067,
+    "rub": 0.0977,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-08-15",
+    "usd": 6.5068,
+    "eur": 7.1255,
+    "rub": 0.0981,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-09-15",
+    "usd": 6.5429,
+    "eur": 7.1723,
+    "rub": 0.0975,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-10-15",
+    "usd": 6.4965,
+    "eur": 7.1101,
+    "rub": 0.0975,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-11-15",
+    "usd": 6.52,
+    "eur": 7.1336,
+    "rub": 0.0979,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2015-12-15",
+    "usd": 6.539,
+    "eur": 7.1257,
+    "rub": 0.0984,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-01-15",
+    "usd": 7.8633,
+    "eur": 8.6549,
+    "rub": 0.1124,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-02-15",
+    "usd": 7.809,
+    "eur": 8.6356,
+    "rub": 0.1115,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-03-15",
+    "usd": 7.8107,
+    "eur": 8.578,
+    "rub": 0.1116,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-04-15",
+    "usd": 7.8528,
+    "eur": 8.6106,
+    "rub": 0.1119,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-05-15",
+    "usd": 7.8598,
+    "eur": 8.6274,
+    "rub": 0.1122,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-06-15",
+    "usd": 7.8026,
+    "eur": 8.6308,
+    "rub": 0.1121,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-07-15",
+    "usd": 7.8403,
+    "eur": 8.62,
+    "rub": 0.1123,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-08-15",
+    "usd": 7.8186,
+    "eur": 8.6006,
+    "rub": 0.112,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-09-15",
+    "usd": 7.8608,
+    "eur": 8.6295,
+    "rub": 0.1125,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-10-15",
+    "usd": 7.8722,
+    "eur": 8.6051,
+    "rub": 0.1115,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-11-15",
+    "usd": 7.8743,
+    "eur": 8.6543,
+    "rub": 0.1118,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2016-12-15",
+    "usd": 7.8036,
+    "eur": 8.5865,
+    "rub": 0.1117,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-01-15",
+    "usd": 8.786,
+    "eur": 9.8232,
+    "rub": 0.1522,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-02-15",
+    "usd": 8.7811,
+    "eur": 9.8437,
+    "rub": 0.1518,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-03-15",
+    "usd": 8.7613,
+    "eur": 9.8542,
+    "rub": 0.1527,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-04-15",
+    "usd": 8.7792,
+    "eur": 9.8196,
+    "rub": 0.1527,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-05-15",
+    "usd": 8.763,
+    "eur": 9.8479,
+    "rub": 0.1522,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-06-15",
+    "usd": 8.7404,
+    "eur": 9.8309,
+    "rub": 0.1517,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-07-15",
+    "usd": 8.7849,
+    "eur": 9.8286,
+    "rub": 0.1517,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-08-15",
+    "usd": 8.7443,
+    "eur": 9.7962,
+    "rub": 0.1517,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-09-15",
+    "usd": 8.7419,
+    "eur": 9.787,
+    "rub": 0.1519,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-10-15",
+    "usd": 8.7367,
+    "eur": 9.8169,
+    "rub": 0.1524,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-11-15",
+    "usd": 8.7216,
+    "eur": 9.7929,
+    "rub": 0.1519,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2017-12-15",
+    "usd": 8.7174,
+    "eur": 9.8508,
+    "rub": 0.1516,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-01-15",
+    "usd": 9.2985,
+    "eur": 11.0259,
+    "rub": 0.1412,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-02-15",
+    "usd": 9.3506,
+    "eur": 11.0097,
+    "rub": 0.1404,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-03-15",
+    "usd": 9.2908,
+    "eur": 11.0283,
+    "rub": 0.1407,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-04-15",
+    "usd": 9.3316,
+    "eur": 10.9364,
+    "rub": 0.1412,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-05-15",
+    "usd": 9.3123,
+    "eur": 10.9943,
+    "rub": 0.1407,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-06-15",
+    "usd": 9.331,
+    "eur": 11.001,
+    "rub": 0.1406,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-07-15",
+    "usd": 9.2884,
+    "eur": 10.969,
+    "rub": 0.1409,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-08-15",
+    "usd": 9.3244,
+    "eur": 11.0159,
+    "rub": 0.1407,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-09-15",
+    "usd": 9.3282,
+    "eur": 11.0183,
+    "rub": 0.1404,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-10-15",
+    "usd": 9.2896,
+    "eur": 10.9256,
+    "rub": 0.1416,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-11-15",
+    "usd": 9.3292,
+    "eur": 10.9897,
+    "rub": 0.1405,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2018-12-15",
+    "usd": 9.2857,
+    "eur": 10.9427,
+    "rub": 0.1407,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-01-15",
+    "usd": 9.4854,
+    "eur": 10.6757,
+    "rub": 0.1474,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-02-15",
+    "usd": 9.5537,
+    "eur": 10.6937,
+    "rub": 0.1475,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-03-15",
+    "usd": 9.499,
+    "eur": 10.6256,
+    "rub": 0.1485,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-04-15",
+    "usd": 9.4994,
+    "eur": 10.6215,
+    "rub": 0.1474,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-05-15",
+    "usd": 9.5696,
+    "eur": 10.6413,
+    "rub": 0.1474,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-06-15",
+    "usd": 9.5646,
+    "eur": 10.6285,
+    "rub": 0.1485,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-07-15",
+    "usd": 9.4905,
+    "eur": 10.6731,
+    "rub": 0.1474,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-08-15",
+    "usd": 9.4932,
+    "eur": 10.6272,
+    "rub": 0.1477,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-09-15",
+    "usd": 9.5268,
+    "eur": 10.6348,
+    "rub": 0.1486,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-10-15",
+    "usd": 9.5711,
+    "eur": 10.6276,
+    "rub": 0.1477,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-11-15",
+    "usd": 9.4936,
+    "eur": 10.6872,
+    "rub": 0.1483,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2019-12-15",
+    "usd": 9.5237,
+    "eur": 10.6603,
+    "rub": 0.1481,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-01-15",
+    "usd": 10.3375,
+    "eur": 12.1847,
+    "rub": 0.1386,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-02-15",
+    "usd": 10.3189,
+    "eur": 12.182,
+    "rub": 0.139,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-03-15",
+    "usd": 10.3481,
+    "eur": 12.1789,
+    "rub": 0.1388,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-04-15",
+    "usd": 10.352,
+    "eur": 12.1987,
+    "rub": 0.1386,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-05-15",
+    "usd": 10.2896,
+    "eur": 12.2459,
+    "rub": 0.1388,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-06-15",
+    "usd": 10.274,
+    "eur": 12.2169,
+    "rub": 0.1394,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-07-15",
+    "usd": 10.3033,
+    "eur": 12.1627,
+    "rub": 0.1396,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-08-15",
+    "usd": 10.3532,
+    "eur": 12.2044,
+    "rub": 0.1392,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-09-15",
+    "usd": 10.353,
+    "eur": 12.1896,
+    "rub": 0.1395,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-10-15",
+    "usd": 10.3077,
+    "eur": 12.2506,
+    "rub": 0.139,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-11-15",
+    "usd": 10.3076,
+    "eur": 12.2471,
+    "rub": 0.1395,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2020-12-15",
+    "usd": 10.3218,
+    "eur": 12.2027,
+    "rub": 0.1383,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-01-15",
+    "usd": 11.2701,
+    "eur": 13.3839,
+    "rub": 0.1539,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-02-15",
+    "usd": 11.2977,
+    "eur": 13.3107,
+    "rub": 0.1538,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-03-15",
+    "usd": 11.2915,
+    "eur": 13.3181,
+    "rub": 0.1545,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-04-15",
+    "usd": 11.2602,
+    "eur": 13.3862,
+    "rub": 0.1545,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-05-15",
+    "usd": 11.3366,
+    "eur": 13.3221,
+    "rub": 0.1544,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-06-15",
+    "usd": 11.3243,
+    "eur": 13.297,
+    "rub": 0.1542,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-07-15",
+    "usd": 11.2636,
+    "eur": 13.2549,
+    "rub": 0.1533,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-08-15",
+    "usd": 11.2896,
+    "eur": 13.3126,
+    "rub": 0.1538,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-09-15",
+    "usd": 11.2938,
+    "eur": 13.3836,
+    "rub": 0.1535,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-10-15",
+    "usd": 11.2579,
+    "eur": 13.2844,
+    "rub": 0.1545,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-11-15",
+    "usd": 11.2546,
+    "eur": 13.3839,
+    "rub": 0.1546,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2021-12-15",
+    "usd": 11.3181,
+    "eur": 13.3183,
+    "rub": 0.1538,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-01-15",
+    "usd": 10.796,
+    "eur": 11.4474,
+    "rub": 0.1786,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-02-15",
+    "usd": 10.8213,
+    "eur": 11.4201,
+    "rub": 0.1782,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-03-15",
+    "usd": 10.8407,
+    "eur": 11.4332,
+    "rub": 0.1784,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-04-15",
+    "usd": 10.8808,
+    "eur": 11.4051,
+    "rub": 0.1782,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-05-15",
+    "usd": 10.8036,
+    "eur": 11.4372,
+    "rub": 0.1786,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-06-15",
+    "usd": 10.8102,
+    "eur": 11.4099,
+    "rub": 0.1777,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-07-15",
+    "usd": 10.7989,
+    "eur": 11.4069,
+    "rub": 0.1787,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-08-15",
+    "usd": 10.828,
+    "eur": 11.445,
+    "rub": 0.1788,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-09-15",
+    "usd": 10.8898,
+    "eur": 11.4553,
+    "rub": 0.1772,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-10-15",
+    "usd": 10.8926,
+    "eur": 11.4441,
+    "rub": 0.1783,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-11-15",
+    "usd": 10.8824,
+    "eur": 11.4258,
+    "rub": 0.1773,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2022-12-15",
+    "usd": 10.8812,
+    "eur": 11.3925,
+    "rub": 0.178,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-01-15",
+    "usd": 10.9369,
+    "eur": 11.9072,
+    "rub": 0.1216,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-02-15",
+    "usd": 10.886,
+    "eur": 11.9504,
+    "rub": 0.1214,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-03-15",
+    "usd": 10.9827,
+    "eur": 11.9476,
+    "rub": 0.1212,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-04-15",
+    "usd": 10.911,
+    "eur": 11.9709,
+    "rub": 0.1206,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-05-15",
+    "usd": 10.8927,
+    "eur": 11.9284,
+    "rub": 0.1206,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-06-15",
+    "usd": 10.9011,
+    "eur": 12.002,
+    "rub": 0.121,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-07-15",
+    "usd": 10.9738,
+    "eur": 12.0033,
+    "rub": 0.1204,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-08-15",
+    "usd": 10.9749,
+    "eur": 11.9504,
+    "rub": 0.1214,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-09-15",
+    "usd": 10.9115,
+    "eur": 11.9549,
+    "rub": 0.1207,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-10-15",
+    "usd": 10.9114,
+    "eur": 11.9134,
+    "rub": 0.1212,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-11-15",
+    "usd": 10.9727,
+    "eur": 11.9792,
+    "rub": 0.1204,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2023-12-15",
+    "usd": 10.9143,
+    "eur": 11.9,
+    "rub": 0.1207,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-01-15",
+    "usd": 10.8923,
+    "eur": 11.8938,
+    "rub": 0.1183,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-02-15",
+    "usd": 10.9453,
+    "eur": 11.883,
+    "rub": 0.1181,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-03-15",
+    "usd": 10.9711,
+    "eur": 11.8321,
+    "rub": 0.1174,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-04-15",
+    "usd": 10.9231,
+    "eur": 11.8082,
+    "rub": 0.1184,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-05-15",
+    "usd": 10.958,
+    "eur": 11.8043,
+    "rub": 0.1186,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-06-15",
+    "usd": 10.8726,
+    "eur": 11.8677,
+    "rub": 0.1183,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-07-15",
+    "usd": 10.9021,
+    "eur": 11.8059,
+    "rub": 0.1182,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-08-15",
+    "usd": 10.9041,
+    "eur": 11.8776,
+    "rub": 0.1177,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-09-15",
+    "usd": 10.8671,
+    "eur": 11.857,
+    "rub": 0.1182,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-10-15",
+    "usd": 10.868,
+    "eur": 11.8361,
+    "rub": 0.118,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-11-15",
+    "usd": 10.9459,
+    "eur": 11.896,
+    "rub": 0.118,
+    "cny": null,
+    "synthetic": true
+  },
+  {
+    "date": "2024-12-15",
+    "usd": 10.9028,
+    "eur": 11.8863,
+    "rub": 0.1179,
+    "cny": null,
+    "synthetic": true
+  },
+  {
     "date": "2026-04-06",
     "usd": 9.5751,
     "eur": 11.0545,
