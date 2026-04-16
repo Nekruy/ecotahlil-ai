@@ -328,6 +328,120 @@ body {
   .metrics-grid { grid-template-columns: 1fr; }
   .main { padding: 16px 16px 40px; }
 }
+
+/* ═══════════════════════════════════
+   ПРОГНОЗИРОВАНИЕ
+═══════════════════════════════════ */
+.fc-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: var(--shadow2);
+  overflow: hidden; margin-bottom: 22px;
+}
+.fc-head {
+  background: linear-gradient(135deg, #0d5c3e 0%, #0e7c55 100%);
+  padding: 16px 22px; color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.fc-head-title { font-size: 15px; font-weight: 800; }
+.fc-head-sub   { font-size: 12px; opacity: .7; margin-top: 2px; }
+.fc-body { padding: 22px; }
+
+.method-btns {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; margin-bottom: 18px;
+}
+.method-btn {
+  padding: 10px 6px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  border: 2px solid var(--border); background: var(--white); color: var(--text2);
+  cursor: pointer; transition: all .2s; text-align: center;
+}
+.method-btn:hover { border-color: var(--navy2); color: var(--navy); }
+.method-btn.active {
+  background: var(--navy); border-color: var(--navy); color: #fff;
+}
+
+.indicator-btns {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+}
+.ind-btn {
+  padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  border: 1px solid var(--border); background: var(--navy-pale); color: var(--navy2);
+  cursor: pointer; transition: all .15s;
+}
+.ind-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+.fc-textarea {
+  width: 100%; padding: 10px 13px;
+  border: 2px solid var(--border); border-radius: 8px;
+  font-size: 12px; font-family: 'Courier New', monospace;
+  color: var(--text); resize: vertical; min-height: 80px;
+  background: #fafbff; outline: none; transition: border-color .2s;
+  margin-bottom: 14px;
+}
+.fc-textarea:focus { border-color: var(--navy2); background: #fff; }
+.fc-textarea::placeholder { color: #a0aec0; font-family: inherit; }
+
+.fc-controls {
+  display: flex; gap: 10px; align-items: center; margin-bottom: 18px;
+}
+.fc-periods-label { font-size: 12px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.fc-periods-input {
+  width: 70px; padding: 8px 10px;
+  border: 2px solid var(--border); border-radius: 8px;
+  font-size: 13px; font-weight: 700; text-align: center;
+  outline: none; transition: border-color .2s;
+}
+.fc-periods-input:focus { border-color: var(--navy2); }
+.btn-run {
+  flex: 1; padding: 10px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  color: #fff; border: none; border-radius: 8px;
+  font-size: 13px; font-weight: 800; cursor: pointer; transition: all .2s;
+}
+.btn-run:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,53,128,.3); }
+.btn-run:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+.fc-result {
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; font-size: 13px;
+  display: none; margin-top: 14px;
+}
+.fc-result-title { font-size: 12px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+.fc-table {
+  width: 100%; border-collapse: collapse; font-size: 12px;
+}
+.fc-table th {
+  background: var(--navy-pale); color: var(--navy);
+  padding: 7px 10px; text-align: left; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .4px;
+}
+.fc-table td {
+  padding: 7px 10px; border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.fc-table tr:last-child td { border-bottom: none; }
+.fc-meta { font-size: 11px; color: var(--text3); margin-top: 10px; line-height: 1.6; }
+.fc-ci { font-size: 10px; color: var(--text3); }
+
+/* МЭРиТ сравнение */
+.mert-block {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: var(--shadow2);
+  overflow: hidden; margin-bottom: 22px;
+}
+.mert-head {
+  background: linear-gradient(135deg, #7c3d00 0%, #b45309 100%);
+  padding: 14px 22px; color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.mert-head-title { font-size: 15px; font-weight: 800; }
+.mert-head-sub { font-size: 12px; opacity: .7; margin-top: 2px; }
+.btn-mert-load {
+  background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.3);
+  color: #fff; padding: 7px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 700; cursor: pointer; transition: all .2s;
+}
+.btn-mert-load:hover { background: rgba(255,255,255,.3); }
 </style>
 </head>
 <body>
@@ -478,6 +592,92 @@ body {
       </button>
 
     </div>
+  </div>
+
+  <!-- ── Прогнозирование ──────────────────────────────────────── -->
+  <div class="fc-card">
+    <div class="fc-head">
+      <div>
+        <div class="fc-head-title">📈 Экономическое прогнозирование</div>
+        <div class="fc-head-sub">AutoARIMA · Ensemble · Prophet · Авто-данные МЭРиТ / НБТ</div>
+      </div>
+    </div>
+    <div class="fc-body">
+
+      <!-- Метод -->
+      <div class="section-title">🤖 Модель прогнозирования</div>
+      <div class="method-btns">
+        <button class="method-btn active" id="btn-auto-arima" onclick="selectMethod('auto-arima')">
+          ⚙️ AutoARIMA<br><small style="font-weight:400;opacity:.8">авто p,d,q</small>
+        </button>
+        <button class="method-btn" id="btn-ensemble" onclick="selectMethod('ensemble')">
+          🎯 Ensemble<br><small style="font-weight:400;opacity:.8">ARIMA+Prophet</small>
+        </button>
+        <button class="method-btn" id="btn-arima" onclick="selectMethod('arima')">
+          📉 ARIMA<br><small style="font-weight:400;opacity:.8">фиксированный</small>
+        </button>
+        <button class="method-btn" id="btn-prophet" onclick="selectMethod('prophet')">
+          🔮 Prophet<br><small style="font-weight:400;opacity:.8">тренд+сезон</small>
+        </button>
+      </div>
+
+      <!-- Быстрая загрузка данных -->
+      <div class="section-title">⚡ Быстрая загрузка данных (МЭРиТ / НБТ)</div>
+      <div class="indicator-btns">
+        <button class="ind-btn" onclick="autoLoadIndicator('gdp')">ВВП (млрд TJS)</button>
+        <button class="ind-btn" onclick="autoLoadIndicator('inflation')">Инфляция (%)</button>
+        <button class="ind-btn" onclick="autoLoadIndicator('usd_tjs')">Курс USD/TJS</button>
+        <button class="ind-btn" onclick="autoLoadIndicator('remittances')">Переводы (млн $)</button>
+        <button class="ind-btn" onclick="autoLoadIndicator('gdp_growth')">Рост ВВП (%)</button>
+        <button class="ind-btn" onclick="autoLoadIndicator('trade_balance')">Торг. баланс (млн $)</button>
+      </div>
+
+      <!-- Ввод данных -->
+      <div class="section-title">📋 Данные временного ряда</div>
+      <textarea class="fc-textarea" id="fcData" rows="3"
+        placeholder="Данные через запятую или пробел (или нажмите кнопку выше для авто-загрузки из МЭРиТ/НБТ)&#10;Пример: 100, 108, 115, 122, 130, 139..."></textarea>
+
+      <!-- Параметры и запуск -->
+      <div class="fc-controls">
+        <span class="fc-periods-label">Горизонт (лет):</span>
+        <input class="fc-periods-input" type="number" id="fcPeriods" value="3" min="1" max="10">
+        <button class="btn-run" id="fcRunBtn" onclick="runForecast()">
+          ▶ Построить прогноз
+        </button>
+      </div>
+
+      <!-- Результат -->
+      <div class="fc-result" id="fcResult"></div>
+
+    </div>
+  </div>
+
+  <!-- ── МЭРиТ vs Модели ──────────────────────────────────────── -->
+  <div class="mert-block">
+    <div class="mert-head">
+      <div>
+        <div class="mert-head-title">🏛️ Прогноз МЭРиТ 2025–2027 vs Модели</div>
+        <div class="mert-head-sub">Сравнение AutoARIMA и Ensemble с официальным прогнозом ВВП</div>
+      </div>
+      <button class="btn-mert-load" onclick="loadOfficialComparison()">↺ Загрузить</button>
+    </div>
+    <div style="padding:16px 22px" id="mertCompBody">
+      <div class="no-reports"><span class="no-reports-icon">📊</span>Нажмите «Загрузить» для сравнения</div>
+    </div>
+  </div>
+
+  <!-- GARCH авто-загрузка -->
+  <div style="margin-bottom:22px; padding:16px 20px; background:var(--white); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow)">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px">
+      <div>
+        <div style="font-size:14px; font-weight:800; color:#7c1d1d">⚡ EGARCH — Волатильность USD/TJS</div>
+        <div style="font-size:11px; color:var(--text3); margin-top:2px">Авто-загрузка курсов НБТ (124 точки)</div>
+      </div>
+      <button onclick="autoLoadGARCH()" style="padding:8px 16px; background:#7c1d1d; color:#fff; border:none; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer;">
+        📡 Загрузить курсы НБТ и рассчитать
+      </button>
+    </div>
+    <div id="garchResult" style="font-size:13px; color:var(--text3)">Нажмите кнопку для расчёта волатильности</div>
   </div>
 
   <!-- Профессиональные модели v2.0 -->
@@ -829,6 +1029,263 @@ async function logout() {
   localStorage.removeItem('medt_token');
   localStorage.removeItem('medt_user');
   window.location.href = '/login';
+}
+
+// ──────────────────────────────────────────────────────────────
+// ПРОГНОЗИРОВАНИЕ
+// ──────────────────────────────────────────────────────────────
+let selectedFcMethod = 'auto-arima';
+
+function selectMethod(m) {
+  selectedFcMethod = m;
+  ['auto-arima','ensemble','arima','prophet'].forEach(id => {
+    const btn = document.getElementById('btn-' + id);
+    if (btn) btn.classList.toggle('active', id === m);
+  });
+}
+
+async function autoLoadIndicator(indicator) {
+  const fcData = document.getElementById('fcData');
+  fcData.value = '';
+  fcData.placeholder = `Загрузка ${indicator}...`;
+  try {
+    let values = [];
+    if (indicator === 'usd_tjs') {
+      const r = await fetch('/api/rates-history?currency=usd&days=3650').then(r => r.json());
+      if (r.data && r.data.length) {
+        // Годовые средние из ряда
+        const byYear = {};
+        r.data.forEach(pt => {
+          const yr = (pt.date || '').slice(0,4);
+          if (yr) { byYear[yr] = byYear[yr] || []; byYear[yr].push(pt.usd || pt.rate || pt.value); }
+        });
+        values = Object.keys(byYear).sort().map(yr => {
+          const arr = byYear[yr].filter(v => v != null);
+          return arr.length ? +(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(4) : null;
+        }).filter(v => v != null);
+      }
+    } else {
+      const r = await fetch(`/api/history?indicator=${indicator}`).then(r => r.json());
+      if (r.values) values = r.values.filter(v => v != null);
+      else if (r.data)   values = r.data.map(d => d.value ?? d.v).filter(v => v != null);
+    }
+    if (values.length) {
+      fcData.value = values.join(', ');
+      fcData.placeholder = '';
+    } else {
+      fcData.placeholder = `Нет данных для ${indicator}`;
+    }
+  } catch (e) {
+    fcData.placeholder = `Ошибка загрузки: ${e.message}`;
+  }
+}
+
+async function runForecast() {
+  const btn = document.getElementById('fcRunBtn');
+  const resultEl = document.getElementById('fcResult');
+  const raw = document.getElementById('fcData').value.trim();
+  const periods = parseInt(document.getElementById('fcPeriods').value) || 3;
+  const method = selectedFcMethod;
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Расчёт...';
+  resultEl.style.display = 'none';
+
+  try {
+    let data = null;
+    if (raw) {
+      data = raw.split(/[\s,;]+/).map(Number).filter(v => !isNaN(v));
+      if (data.length < 4) { alert('Нужно минимум 4 значения'); return; }
+    }
+    const body = { method, periods };
+    if (data) body.data = data;
+
+    const resp = await fetch('/forecast', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!resp.ok) { const e = await resp.json(); throw new Error(e.error || resp.statusText); }
+    const result = await resp.json();
+    displayForecastResult(result, method);
+  } catch (e) {
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `<div style="color:var(--red); font-weight:700;">❌ Ошибка: ${e.message}</div>`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '▶ Построить прогноз';
+  }
+}
+
+function displayForecastResult(r, method) {
+  const el = document.getElementById('fcResult');
+  const curYear = new Date().getFullYear();
+  const forecast = r.forecast || r.ensemble || [];
+  const ci95 = r.ci95 || [];
+  const ci80 = r.ci80 || [];
+
+  let metaHtml = '';
+  if (r.meta) {
+    const m = r.meta;
+    metaHtml = `<div class="fc-meta">`;
+    if (m.modelVersion) metaHtml += `Версия: <b>${m.modelVersion}</b> &nbsp;|&nbsp; `;
+    if (m.dataPoints)   metaHtml += `Данных: <b>${m.dataPoints}</b> точек &nbsp;|&nbsp; `;
+    if (m.collectedAt)  metaHtml += `Обновлено: <b>${m.collectedAt}</b>`;
+    metaHtml += `</div>`;
+  }
+
+  let extraHtml = '';
+  if (method === 'auto-arima' && r.order) {
+    extraHtml = `<div style="margin:10px 0; padding:10px; background:#e6f0ff; border-radius:8px; font-size:12px;">
+      <b>AutoARIMA:</b> p=${r.order[0]} d=${r.order[1]} q=${r.order[2]}
+      &nbsp;|&nbsp; AIC = ${r.aic != null ? r.aic.toFixed(1) : '—'}
+      &nbsp;|&nbsp; MAPE = ${r.mape != null ? r.mape.toFixed(2) : '—'}%
+    </div>`;
+  }
+  if (method === 'ensemble' && r.weights) {
+    const wa = r.weights.arima != null ? (r.weights.arima*100).toFixed(0) : '—';
+    const wp = r.weights.prophet != null ? (r.weights.prophet*100).toFixed(0) : '—';
+    const ma = r.mape?.arima != null ? r.mape.arima.toFixed(2) : '—';
+    const mp = r.mape?.prophet != null ? r.mape.prophet.toFixed(2) : '—';
+    extraHtml = `<div style="margin:10px 0; padding:10px; background:#f0fdf4; border-radius:8px; font-size:12px;">
+      <b>Ensemble:</b> ARIMA <b>${wa}%</b> + Prophet <b>${wp}%</b>
+      &nbsp;|&nbsp; MAPE ARIMA=${ma}% &nbsp; Prophet=${mp}%
+    </div>`;
+  }
+
+  const rows = forecast.map((v, i) => {
+    const yr = curYear + 1 + i;
+    const ci95r = ci95[i];
+    const ci80r = ci80[i];
+    const ciStr = ci95r
+      ? `<span class="fc-ci">[${ci95r[0].toFixed(1)} – ${ci95r[1].toFixed(1)}]</span>`
+      : '—';
+    const ci80Str = ci80r
+      ? `<span class="fc-ci">[${ci80r[0].toFixed(1)} – ${ci80r[1].toFixed(1)}]</span>`
+      : '';
+    return `<tr>
+      <td><b>${yr}</b></td>
+      <td><b>${v.toFixed(2)}</b></td>
+      <td>${ci80Str}</td>
+      <td>${ciStr}</td>
+    </tr>`;
+  }).join('');
+
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div class="fc-result-title">📊 Результат — ${method.toUpperCase()}</div>
+    ${extraHtml}
+    <table class="fc-table">
+      <thead><tr>
+        <th>Год</th><th>Прогноз</th><th>CI 80%</th><th>CI 95%</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${metaHtml}
+  `;
+}
+
+// ──────────────────────────────────────────────────────────────
+// GARCH АВТО-ЗАГРУЗКА
+// ──────────────────────────────────────────────────────────────
+async function autoLoadGARCH() {
+  const el = document.getElementById('garchResult');
+  el.textContent = '⏳ Расчёт EGARCH...';
+  try {
+    const r = await fetch('/api/garch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ periods: 12 })
+    }).then(r => r.json());
+
+    const vol    = r.annualizedVol ?? '—';
+    const risk   = r.riskLevel    ?? '—';
+    const lev    = r.leverage_effect ? 'есть (плохие новости опаснее)' : 'нет';
+    const model  = r.selectedModel ?? 'EGARCH(1,1)';
+    const src    = r.meta?.dataSource ?? '—';
+    const pts    = r.validation?.dataPoints ?? r.meta?.dataPoints ?? '—';
+    const da     = r.validation?.directionalAccuracy != null
+                   ? r.validation.directionalAccuracy.toFixed(1) + '%' : '—';
+
+    const riskColor = risk === 'критический' ? '#c0392b' : risk === 'высокий' ? '#d97706' : '#1a7a3c';
+    el.innerHTML = `
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; font-size:12px;">
+        <div style="background:#fff; padding:10px; border-radius:8px; border-left:3px solid #7c1d1d">
+          <div style="color:#64748b; font-size:10px">Волатильность годовых</div>
+          <div style="font-size:20px; font-weight:800; color:#7c1d1d">${vol}%</div>
+        </div>
+        <div style="background:#fff; padding:10px; border-radius:8px; border-left:3px solid ${riskColor}">
+          <div style="color:#64748b; font-size:10px">Уровень риска</div>
+          <div style="font-size:16px; font-weight:800; color:${riskColor}">${risk}</div>
+        </div>
+        <div style="background:#fff; padding:10px; border-radius:8px; border-left:3px solid #5b21b6">
+          <div style="color:#64748b; font-size:10px">Leverage-эффект</div>
+          <div style="font-size:13px; font-weight:700; color:#5b21b6">${lev}</div>
+        </div>
+      </div>
+      <div style="font-size:11px; color:#64748b; margin-top:8px">
+        Модель: <b>${model}</b> &nbsp;|&nbsp; Источник: <b>${src}</b> &nbsp;|&nbsp;
+        Данных: <b>${pts}</b> &nbsp;|&nbsp; Направл. точность: <b>${da}</b>
+      </div>`;
+
+    // Обновляем карточку в профмоделях
+    const garchVol = document.getElementById('garch-vol');
+    if (garchVol) garchVol.textContent = vol + '%';
+  } catch (e) {
+    el.textContent = '❌ Ошибка: ' + e.message;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// МЭРиТ vs МОДЕЛИ
+// ──────────────────────────────────────────────────────────────
+async function loadOfficialComparison() {
+  const el = document.getElementById('mertCompBody');
+  el.innerHTML = '<div style="padding:20px; text-align:center; color:var(--text3)">⏳ Загрузка...</div>';
+  try {
+    const r = await fetch('/api/model-vs-official?indicator=gdp').then(r => r.json());
+
+    const years   = r.years            || [2025, 2026, 2027];
+    const arima   = r.model_arima      || [];
+    const ens     = r.model_ensemble   || [];
+    const offl    = r.official_mert    || [];
+    const devA    = r.deviation_arima_pct || [];
+    const verdict = r.verdict          || '—';
+
+    const rows = years.map((yr, i) => {
+      const a = arima[i]  != null ? arima[i].toFixed(1)  : '—';
+      const e = ens[i]    != null ? ens[i].toFixed(1)    : '—';
+      const o = offl[i]   != null ? offl[i].toFixed(1)   : '—';
+      const d = devA[i]   != null ? devA[i] : null;
+      const dStr = d != null
+        ? `<span style="color:${Math.abs(d)<10?'#1a7a3c':'#c0392b'}; font-weight:700">${d>0?'+':''}${d}%</span>`
+        : '—';
+      return `<tr>
+        <td><b>${yr}</b></td>
+        <td>${o}</td>
+        <td>${a}</td>
+        <td>${e}</td>
+        <td>${dStr}</td>
+      </tr>`;
+    }).join('');
+
+    el.innerHTML = `
+      <table class="fc-table">
+        <thead><tr>
+          <th>Год</th>
+          <th>МЭРиТ (млрд TJS)</th>
+          <th>AutoARIMA</th>
+          <th>Ensemble</th>
+          <th>Откл. ARIMA</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div style="margin-top:12px; padding:10px; background:var(--green-light); border-radius:8px; font-size:12px; font-weight:700; color:var(--green)">
+        Вердикт: ${verdict}
+      </div>`;
+  } catch (e) {
+    el.innerHTML = `<div style="padding:16px; color:var(--red); font-weight:700;">❌ ${e.message}</div>`;
+  }
 }
 
 // ──────────────────────────────────────────────────────────────
