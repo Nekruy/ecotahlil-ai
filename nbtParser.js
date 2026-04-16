@@ -237,51 +237,85 @@ async function getRatesHistory(currency, days) {
 // ─── Обогащение историческими данными ────────────────────────────────────────
 
 /**
- * Если rates_timeseries.json содержит < 100 записей — дополняет синтетическими
- * месячными точками из historicalDB.getExchangeRateHistory().
- * Реальные НБТ-данные имеют приоритет при дедупликации.
+ * Дополняет rates_timeseries.json историческими данными если < 100 записей.
+ * Использует линейную интерполяцию между годовыми значениями + шум ±0.1%.
+ * Реальные НБТ-данные всегда имеют приоритет (не перезаписываются).
  */
 async function loadHistoricalRates() {
   const existing = loadTimeseries();
-  if (existing.length >= 100) {
-    console.log(`[nbtParser] Достаточно данных (${existing.length} записей), обогащение не нужно`);
+
+  // Разделяем реальные и синтетические, чтобы пересчитать синтетику
+  const realEntries = existing.filter(e => !e.synthetic);
+  if (realEntries.length >= 100) {
+    console.log(`[nbtParser] Достаточно реальных данных (${realEntries.length}), обогащение не нужно`);
     return;
   }
 
-  const byDate = new Map(existing.map(e => [e.date, e]));
+  // Реальные данные имеют приоритет — индексируем по дате
+  const byDate = new Map(realEntries.map(e => [e.date, e]));
 
   try {
     const hdb  = require('./historicalDB');
     const hist = hdb.getExchangeRateHistory(); // [{year, usd_tjs, eur_tjs, rub_tjs}]
 
+    // Сортируем по году для интерполяции
+    const sorted = [...hist].sort((a, b) => a.year - b.year);
     let added = 0;
-    for (const row of hist) {
-      const { year, usd_tjs, eur_tjs, rub_tjs } = row;
-      if (!year || !usd_tjs) continue;
+    const noise = () => 1 + (Math.random() - 0.5) * 0.002; // ±0.1%
+
+    for (let i = 0; i < sorted.length; i++) {
+      const cur  = sorted[i];
+      const next = sorted[i + 1]; // undefined для последнего года
 
       for (let month = 1; month <= 12; month++) {
         const mm   = String(month).padStart(2, '0');
-        const date = `${year}-${mm}-15`;
+        const date = `${cur.year}-${mm}-15`;
 
-        // Не перезаписываем реальные данные
+        // Не перезаписываем реальные данные НБТ
         if (byDate.has(date)) continue;
 
-        const noise = () => 1 + (Math.random() - 0.5) * 0.01; // ±0.5%
-        byDate.set(date, {
-          date,
-          usd: usd_tjs  ? Math.round(usd_tjs  * noise() * 10000) / 10000 : null,
-          eur: eur_tjs  ? Math.round(eur_tjs  * noise() * 10000) / 10000 : null,
-          rub: rub_tjs  ? Math.round(rub_tjs  * noise() * 10000) / 10000 : null,
-          cny: null,
-          synthetic: true,
-        });
+        // Линейная интерполяция: t = month/12 (0 = начало года, 1 = начало следующего)
+        const t = month / 12;
+        const lerp = (a, b) => (a != null && b != null) ? a + (b - a) * t : a;
+
+        const usd = cur.usd_tjs
+          ? Math.round(lerp(cur.usd_tjs, next?.usd_tjs ?? cur.usd_tjs) * noise() * 10000) / 10000
+          : null;
+        const eur = cur.eur_tjs
+          ? Math.round(lerp(cur.eur_tjs, next?.eur_tjs ?? cur.eur_tjs) * noise() * 10000) / 10000
+          : null;
+        const rub = cur.rub_tjs
+          ? Math.round(lerp(cur.rub_tjs, next?.rub_tjs ?? cur.rub_tjs) * noise() * 10000) / 10000
+          : null;
+
+        byDate.set(date, { date, usd, eur, rub, cny: null, synthetic: true });
         added++;
       }
     }
 
-    const sorted = [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
-    fs.writeFileSync(TIMESERIES_FILE, JSON.stringify(sorted, null, 2), 'utf8');
-    console.log(`[nbtParser] Обогащение: добавлено ${added} синтетических точек. Итого: ${sorted.length}`);
+    // Добавляем дневные срезы из rates-history.json если есть
+    const legacyPath = path.join(__dirname, 'rates-history.json');
+    if (fs.existsSync(legacyPath)) {
+      try {
+        const legacy = JSON.parse(fs.readFileSync(legacyPath, 'utf8'));
+        for (const entry of legacy) {
+          const date = entry.date || (entry.fetchedAt || '').slice(0, 10);
+          if (!date || byDate.has(date)) continue;
+          byDate.set(date, {
+            date,
+            usd: entry.USD ?? entry.usd ?? null,
+            eur: entry.EUR ?? entry.eur ?? null,
+            rub: entry.RUB ?? entry.rub ?? null,
+            cny: entry.CNY ?? entry.cny ?? null,
+          });
+          added++;
+        }
+      } catch (_) {}
+    }
+
+    const result = [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date));
+    fs.writeFileSync(TIMESERIES_FILE, JSON.stringify(result, null, 2), 'utf8');
+    console.log(`[nbtParser] Обогащение завершено: +${added} точек, итого ${result.length}`);
   } catch (e) {
     console.error('[nbtParser] loadHistoricalRates:', e.message);
   }
