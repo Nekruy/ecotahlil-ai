@@ -236,59 +236,92 @@ async function getRatesHistory(currency, days) {
 
 // ─── Обогащение историческими данными ────────────────────────────────────────
 
+/** Детерминированный PRNG на основе sin — воспроизводимый по seed. */
+function seededRandom(seed) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+/** Box-Muller: два U[0,1) → N(0,1). */
+function boxMuller(u1, u2) {
+  return Math.sqrt(-2 * Math.log(Math.max(u1, 1e-10))) * Math.cos(2 * Math.PI * u2);
+}
+
 /**
- * Дополняет rates_timeseries.json историческими данными если < 100 записей.
- * Использует линейную интерполяцию между годовыми значениями + шум ±0.1%.
- * Реальные НБТ-данные всегда имеют приоритет (не перезаписываются).
+ * Дополняет rates_timeseries.json историческими данными если < 100 реальных записей.
+ * Алгоритм: mean-reverting random walk вокруг линейного тренда между годовыми якорями.
+ *   currentRate = currentRate*(1 + vol*z)*(1-λ) + targetRate*λ
+ *   vol = 0.6%/мес, λ = 0.15 (возврат к тренду), z ~ N(0,1) детерминирован по (year, month).
+ * Реальные НБТ-данные никогда не перезаписываются.
  */
 async function loadHistoricalRates() {
-  const existing = loadTimeseries();
-
-  // Разделяем реальные и синтетические, чтобы пересчитать синтетику
+  const existing   = loadTimeseries();
   const realEntries = existing.filter(e => !e.synthetic);
+
   if (realEntries.length >= 100) {
     console.log(`[nbtParser] Достаточно реальных данных (${realEntries.length}), обогащение не нужно`);
     return;
   }
 
-  // Реальные данные имеют приоритет — индексируем по дате
+  // Реальные точки имеют приоритет
   const byDate = new Map(realEntries.map(e => [e.date, e]));
 
   try {
-    const hdb  = require('./historicalDB');
-    const hist = hdb.getExchangeRateHistory(); // [{year, usd_tjs, eur_tjs, rub_tjs}]
+    const hdb     = require('./historicalDB');
+    const hist    = hdb.getExchangeRateHistory();
+    const anchors = [...hist].sort((a, b) => a.year - b.year);
 
-    // Сортируем по году для интерполяции
-    const sorted = [...hist].sort((a, b) => a.year - b.year);
+    const MONTHLY_VOL = 0.006;  // 0.6% σ/мес ≈ 2.1% годовых
+    const MEAN_REVERT = 0.15;   // возврат к линейному тренду
     let added = 0;
-    const noise = () => 1 + (Math.random() - 0.5) * 0.002; // ±0.1%
 
-    for (let i = 0; i < sorted.length; i++) {
-      const cur  = sorted[i];
-      const next = sorted[i + 1]; // undefined для последнего года
+    for (let i = 0; i < anchors.length; i++) {
+      const cur  = anchors[i];
+      const next = anchors[i + 1];
+
+      // Стартуем с годового значения
+      let curUsd = cur.usd_tjs;
+      let curEur = cur.eur_tjs;
+      let curRub = cur.rub_tjs;
 
       for (let month = 1; month <= 12; month++) {
         const mm   = String(month).padStart(2, '0');
         const date = `${cur.year}-${mm}-15`;
 
-        // Не перезаписываем реальные данные НБТ
-        if (byDate.has(date)) continue;
+        if (byDate.has(date)) {
+          // Обновляем текущее значение из реальной точки для непрерывности
+          const real = byDate.get(date);
+          if (real.usd) curUsd = real.usd;
+          if (real.eur) curEur = real.eur;
+          if (real.rub) curRub = real.rub;
+          continue;
+        }
 
-        // Линейная интерполяция: t = month/12 (0 = начало года, 1 = начало следующего)
-        const t = month / 12;
-        const lerp = (a, b) => (a != null && b != null) ? a + (b - a) * t : a;
+        // Линейный якорь: начало года → начало следующего
+        const t      = month / 12;
+        const tgtUsd = cur.usd_tjs + ((next?.usd_tjs ?? cur.usd_tjs) - cur.usd_tjs) * t;
+        const tgtEur = cur.eur_tjs + ((next?.eur_tjs ?? cur.eur_tjs) - cur.eur_tjs) * t;
+        const tgtRub = cur.rub_tjs + ((next?.rub_tjs ?? cur.rub_tjs) - cur.rub_tjs) * t;
 
-        const usd = cur.usd_tjs
-          ? Math.round(lerp(cur.usd_tjs, next?.usd_tjs ?? cur.usd_tjs) * noise() * 10000) / 10000
-          : null;
-        const eur = cur.eur_tjs
-          ? Math.round(lerp(cur.eur_tjs, next?.eur_tjs ?? cur.eur_tjs) * noise() * 10000) / 10000
-          : null;
-        const rub = cur.rub_tjs
-          ? Math.round(lerp(cur.rub_tjs, next?.rub_tjs ?? cur.rub_tjs) * noise() * 10000) / 10000
-          : null;
+        // Детерминированные шоки через Box-Muller + seededRandom
+        const seed = cur.year * 100 + month;
+        const zUsd = boxMuller(seededRandom(seed * 7 + 1), seededRandom(seed * 7 + 2));
+        const zEur = boxMuller(seededRandom(seed * 7 + 3), seededRandom(seed * 7 + 4));
+        const zRub = boxMuller(seededRandom(seed * 7 + 5), seededRandom(seed * 7 + 6));
 
-        byDate.set(date, { date, usd, eur, rub, cny: null, synthetic: true });
+        // Mean-reverting step: стохастика + дрейф к тренду
+        curUsd = curUsd * (1 + MONTHLY_VOL * zUsd) * (1 - MEAN_REVERT) + tgtUsd * MEAN_REVERT;
+        curEur = curEur * (1 + MONTHLY_VOL * zEur) * (1 - MEAN_REVERT) + tgtEur * MEAN_REVERT;
+        curRub = curRub * (1 + MONTHLY_VOL * zRub) * (1 - MEAN_REVERT) + tgtRub * MEAN_REVERT;
+
+        byDate.set(date, {
+          date,
+          usd: Math.round(curUsd * 10000) / 10000,
+          eur: Math.round(curEur * 10000) / 10000,
+          rub: Math.round(curRub * 10000) / 10000,
+          cny: null,
+          synthetic: true,
+        });
         added++;
       }
     }
