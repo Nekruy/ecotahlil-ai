@@ -537,6 +537,96 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/official-forecast — официальный прогноз МЭРиТ + сравнение с моделями
+  if (req.method === 'GET' && req.url === '/api/official-forecast') {
+    try {
+      const hdb = require('./historicalDB');
+      const fc  = hdb.getOfficialForecast();
+
+      // Сравнение с ARIMA для ВВП
+      const { autoArima } = require('./forecasting');
+      const gdpData = hdb.getDataForForecasting('gdp');
+      let arimaComparison = null;
+      if (gdpData.length >= 4) {
+        try {
+          // autoArima('gdp') works in billions somoni; official forecast is millions → divide by 1000
+          const official = [
+            fc.official_forecast.gdp_mln_somoni?.[2025],
+            fc.official_forecast.gdp_mln_somoni?.[2026],
+            fc.official_forecast.gdp_mln_somoni?.[2027],
+          ].filter(v => v != null).map(v => v / 1000);
+          const ar = autoArima(gdpData, 3, official);
+          arimaComparison = ar.comparison;
+        } catch (_) {}
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        ...fc,
+        arima_comparison_gdp: arimaComparison,
+        meta: { dataSource: 'МЭРиТ РТ', collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+      }));
+    } catch (err) {
+      console.error('[/api/official-forecast]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/model-vs-official?indicator=gdp
+  if (req.method === 'GET' && req.url.startsWith('/api/model-vs-official')) {
+    try {
+      const qs        = new URL('http://x' + req.url).searchParams;
+      const indicator = qs.get('indicator') || 'gdp';
+
+      const hdb = require('./historicalDB');
+      const { autoArima, ensembleForecast } = require('./forecasting');
+
+      const ext = hdb.getDataForForecastingExtended(indicator);
+      const historical = ext.historical.filter(v => v != null);
+
+      if (historical.length < 4) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: `Недостаточно данных для ${indicator}` }));
+      }
+
+      const official = [ext.official_2025, ext.official_2026, ext.official_2027].filter(v => v != null);
+      const years    = [2025, 2026, 2027].slice(0, official.length);
+      const n        = official.length || 3;
+
+      let arimaFc = [], ensembleFc = [];
+      try { arimaFc = autoArima(historical, n).forecast; } catch (_) {}
+      try { ensembleFc = ensembleForecast(historical, n).ensemble; } catch (_) {}
+
+      const devArima    = arimaFc.map((v, i) => official[i] ? Math.round((v - official[i]) / Math.abs(official[i]) * 10000) / 100 : null);
+      const devEnsemble = ensembleFc.map((v, i) => official[i] ? Math.round((v - official[i]) / Math.abs(official[i]) * 10000) / 100 : null);
+
+      const maxDev = Math.max(...[...devArima, ...devEnsemble].filter(d => d != null).map(Math.abs));
+      const verdict = maxDev < 5 ? 'Модели согласны с МЭРиТ' : maxDev < 15 ? 'Умеренное расхождение — проверьте допущения' : 'Расхождение — проверьте допущения';
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        indicator,
+        years,
+        model_arima:             arimaFc,
+        model_ensemble:          ensembleFc,
+        official_mert:           official,
+        deviation_arima_pct:     devArima,
+        deviation_ensemble_pct:  devEnsemble,
+        verdict,
+        historical_years:        ext.years,
+        historical_values:       historical,
+        meta: { dataSource: ext.source, collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+      }));
+    } catch (err) {
+      console.error('[/api/model-vs-official]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/backtest
   if (req.method === 'POST' && req.url === '/api/backtest') {
     try {

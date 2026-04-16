@@ -260,13 +260,36 @@ function forecastARMA(series, model, periods) {
   return fc;
 }
 
+// ─── Сравнение с официальным прогнозом МЭРиТ ─────────────────────────────────
+
+/**
+ * Сравнивает модельный прогноз с официальными данными МЭРиТ.
+ * @param {number[]} modelForecast — прогноз модели на periods шагов
+ * @param {number[]} officialForecast — официальный прогноз (массив)
+ * @returns {{ model_forecast, official_forecast, deviation_pct, agreement }}
+ */
+function compareWithOfficial(modelForecast, officialForecast) {
+  if (!Array.isArray(officialForecast) || officialForecast.length === 0) return null;
+  const n = Math.min(modelForecast.length, officialForecast.length);
+  const model_fc  = modelForecast.slice(0, n);
+  const official  = officialForecast.slice(0, n);
+  const deviation_pct = model_fc.map((v, i) => {
+    if (official[i] == null || official[i] === 0) return null;
+    return round2((v - official[i]) / Math.abs(official[i]) * 100);
+  });
+  const maxDev = Math.max(...deviation_pct.filter(d => d != null).map(Math.abs));
+  const agreement = maxDev < 5 ? 'хорошее' : maxDev < 15 ? 'умеренное' : 'расхождение';
+  return { model_forecast: model_fc, official_forecast: official, deviation_pct, agreement };
+}
+
 // ─── Auto-ARIMA с перебором по AIC ──────────────────────────────────────────
 
 /**
  * Auto-ARIMA: ADF-тест для d, перебор p=0..3, q=0..3, выбор по min AIC.
- * @returns {{ forecast, bestP, bestD, bestQ, aic, method, adfResults }}
+ * @param {number[]} officialForecast — опциональный официальный прогноз для сравнения
+ * @returns {{ forecast, bestP, bestD, bestQ, aic, method, adfResults, comparison? }}
  */
-function autoArima(data, periods) {
+function autoArima(data, periods, officialForecast) {
   const nums = validateData(data);
 
   // 1. Определяем d через ADF-тест (d = 0, 1 или 2)
@@ -309,7 +332,9 @@ function autoArima(data, periods) {
   const diffFc  = bestModel ? forecastARMA(diffSeries, bestModel, periods) : new Array(periods).fill(0);
   const forecast = inverseDiff(nums, diffFc, d);
 
-  return { forecast, bestP, bestD: d, bestQ, aic: round4(bestAIC), method: 'auto-arima', adfResults };
+  const result = { forecast, bestP, bestD: d, bestQ, aic: round4(bestAIC), method: 'auto-arima', adfResults };
+  if (officialForecast) result.comparison = compareWithOfficial(forecast, officialForecast);
+  return result;
 }
 
 // ─── Backtesting ARIMA (Walk-Forward Validation) ─────────────────────────────
@@ -687,8 +712,9 @@ function garch(data, periods) {
 /**
  * Взвешенный ансамблевый прогноз.
  * Веса = обратная MAPE по последним 20% данных (мин. 5 точек).
+ * @param {number[]} officialForecast — опциональный официальный прогноз для сравнения
  */
-function ensembleForecast(data, periods) {
+function ensembleForecast(data, periods, officialForecast) {
   const nums = validateData(data);
   const n    = nums.length;
 
@@ -748,7 +774,7 @@ function ensembleForecast(data, periods) {
     confidence_95.upper.push(round2(ensemble[i] + 1.64 * spread));
   }
 
-  return {
+  const result = {
     ensemble,
     arima:   arimaFc,
     prophet: propFc,
@@ -758,6 +784,8 @@ function ensembleForecast(data, periods) {
     confidence_80,
     confidence_95,
   };
+  if (officialForecast) result.comparison = compareWithOfficial(ensemble, officialForecast);
+  return result;
 }
 
 // ─── Матричные утилиты для VAR ────────────────────────────────────────────────
@@ -1155,4 +1183,5 @@ module.exports = {
   backtestArima,
   ensembleForecast,
   adfTest,
+  compareWithOfficial,
 };

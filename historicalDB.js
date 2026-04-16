@@ -12,8 +12,9 @@
 const fs   = require('fs');
 const path = require('path');
 
-const DATA_DIR      = path.join(__dirname, 'data');
-const MINISTRY_FILE = path.join(DATA_DIR, 'ministry_gdp_model.json');
+const DATA_DIR        = path.join(__dirname, 'data');
+const MINISTRY_FILE   = path.join(DATA_DIR, 'ministry_gdp_model.json');
+const FORECAST_FILE   = path.join(DATA_DIR, 'ministry_forecast_2025_2027.json');
 
 // ─── Чтение JSON файлов ──────────────────────────────────────────────────────
 
@@ -379,6 +380,100 @@ function getCGECalibration() {
   };
 }
 
+// ─── Официальный прогноз МЭРиТ 2025–2027 ────────────────────────────────────
+
+/**
+ * getOfficialForecast() — официальный прогноз МЭРиТ РТ на 2025–2027.
+ * Читает data/ministry_forecast_2025_2027.json.
+ */
+function getOfficialForecast() {
+  try {
+    if (fs.existsSync(FORECAST_FILE)) {
+      return JSON.parse(fs.readFileSync(FORECAST_FILE, 'utf8'));
+    }
+  } catch (e) {
+    console.error('[historicalDB] getOfficialForecast:', e.message);
+  }
+  // Fallback: жёстко заданные значения из файла
+  return {
+    meta: { source: 'МЭРиТ РТ — Прогноз 2025-2027 (fallback)', imported_at: null },
+    official_forecast: {
+      gdp_mln_somoni:   { 2023: 130791.5, 2024: 146475, 2025: 166065, 2026: 187536, 2027: 211197 },
+      population_thou:  { 2023: 10163,    2024: 10375,  2025: 10593,  2026: 10837,  2027: 11097  },
+      industry_mln:     { 2023: 46815.5,  2024: 57807,  2025: 71495,  2026: 87116,  2027: 106434 },
+      agriculture_mln:  { 2023: 63028.4,  2024: 69238,  2025: 75429,  2026: 82454,  2027: 90861  },
+      export_mln_usd:   { 2023: 2448.8,   2024: 2615,   2025: 2954,   2026: 3189,   2027: 3505   },
+      import_mln_usd:   { 2023: 5880.1,   2024: 5895,   2025: 5949,   2026: 6082,   2027: 6210   },
+      electricity_gwh:  { 2023: 3606.6,   2024: 4012,   2025: 4420,   2026: 4976,   2027: 5560   },
+      aluminum_thou_t:  { 2023: 59.1,     2024: 72.2,   2025: 89.6,   2026: 107.6,  2027: 128.1  },
+      wheat_thou_t:     { 2023: 1023.6,   2024: 1078,   2025: 1138,   2026: 1207,   2027: 1285   },
+    },
+    shares: {
+      industry_share_2024:    39.5,
+      agriculture_share_2024: 47.3,
+      export_gdp_ratio_2024:  18.7,
+    },
+  };
+}
+
+/**
+ * getDataForForecastingExtended(indicator) — расширенная версия с прогнозом МЭРиТ.
+ * Возвращает { historical, years, official_2025, official_2026, official_2027, source }
+ */
+function getDataForForecastingExtended(indicator) {
+  const historical = getDataForForecasting(indicator);
+  const years      = getGDPHistory().map(r => r.year);
+  const fc         = getOfficialForecast().official_forecast;
+  const ind        = (indicator || '').toLowerCase();
+
+  let o2025 = null, o2026 = null, o2027 = null;
+
+  // Сопоставление indicator → поле прогноза
+  if (ind === 'gdp' || ind === 'gdp_bln') {
+    // getDataForForecasting('gdp') returns billions somoni; official forecast is millions → divide by 1000
+    o2025 = fc.gdp_mln_somoni?.[2025] != null ? fc.gdp_mln_somoni[2025] / 1000 : null;
+    o2026 = fc.gdp_mln_somoni?.[2026] != null ? fc.gdp_mln_somoni[2026] / 1000 : null;
+    o2027 = fc.gdp_mln_somoni?.[2027] != null ? fc.gdp_mln_somoni[2027] / 1000 : null;
+  } else if (ind === 'export') {
+    o2025 = fc.export_mln_usd?.[2025];
+    o2026 = fc.export_mln_usd?.[2026];
+    o2027 = fc.export_mln_usd?.[2027];
+  } else if (ind === 'import') {
+    o2025 = fc.import_mln_usd?.[2025];
+    o2026 = fc.import_mln_usd?.[2026];
+    o2027 = fc.import_mln_usd?.[2027];
+  } else if (ind === 'electricity' || ind === 'electricity_gwh') {
+    o2025 = fc.electricity_gwh?.[2025];
+    o2026 = fc.electricity_gwh?.[2026];
+    o2027 = fc.electricity_gwh?.[2027];
+  } else if (ind === 'aluminum' || ind === 'aluminum_thou_t') {
+    o2025 = fc.aluminum_thou_t?.[2025];
+    o2026 = fc.aluminum_thou_t?.[2026];
+    o2027 = fc.aluminum_thou_t?.[2027];
+  } else if (ind === 'wheat' || ind === 'wheat_thou_t') {
+    o2025 = fc.wheat_thou_t?.[2025];
+    o2026 = fc.wheat_thou_t?.[2026];
+    o2027 = fc.wheat_thou_t?.[2027];
+  } else if (ind === 'industry' || ind === 'industry_mln') {
+    o2025 = fc.industry_mln?.[2025];
+    o2026 = fc.industry_mln?.[2026];
+    o2027 = fc.industry_mln?.[2027];
+  } else if (ind === 'agriculture' || ind === 'agriculture_mln') {
+    o2025 = fc.agriculture_mln?.[2025];
+    o2026 = fc.agriculture_mln?.[2026];
+    o2027 = fc.agriculture_mln?.[2027];
+  }
+
+  return {
+    historical,
+    years,
+    official_2025: o2025,
+    official_2026: o2026,
+    official_2027: o2027,
+    source: 'МЭРиТ РТ',
+  };
+}
+
 // ─── Экспорт ─────────────────────────────────────────────────────────────────
 
 module.exports = {
@@ -389,6 +484,8 @@ module.exports = {
   getTradeHistory,
   getAllHistory,
   getDataForForecasting,
+  getDataForForecastingExtended,
+  getOfficialForecast,
   getLastYear,
   getCrisisContext,
   getVARData,

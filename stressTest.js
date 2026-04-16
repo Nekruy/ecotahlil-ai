@@ -23,6 +23,29 @@ const BASE_REMIT     = _last.remittances_mln;       // переводы мигр
 const BASE_INFLATION = _last.inflation;             // ИПЦ, 100-base (105.0 = 5%)
 const BASE_RATE      = _last.usd_tjs;               // курс USD/TJS
 
+// ─── Официальный прогноз МЭРиТ 2025 — базовые линии ────────────────────────
+const _officialFc = hdb.getOfficialForecast().official_forecast;
+const BASE_GDP_2025        = _officialFc.gdp_mln_somoni?.[2025]  ?? 166065;  // млн сомони
+const BASE_EXPORT_2025     = _officialFc.export_mln_usd?.[2025]  ?? 2954;    // млн USD
+const BASE_ELECTRICITY_2025 = _officialFc.electricity_gwh?.[2025] ?? 4420;   // млн кВт/с
+const BASE_ALUMINUM_2025   = _officialFc.aluminum_thou_t?.[2025] ?? 89.6;    // тыс. тонн
+
+/** Добавляет поле baseline к результату стресс-теста */
+function addBaseline(result, gdpChange) {
+  return {
+    ...result,
+    baseline: {
+      baseline_source:           'МЭРиТ РТ — Прогноз 2025-2027',
+      baseline_gdp_2025:         BASE_GDP_2025,
+      baseline_export_2025:      BASE_EXPORT_2025,
+      baseline_electricity_2025: BASE_ELECTRICITY_2025,
+      baseline_aluminum_2025:    BASE_ALUMINUM_2025,
+      deviation_from_baseline_pct: round2(gdpChange),
+      gdp_after_shock_mln_somoni:  round2(BASE_GDP_2025 * (1 + gdpChange / 100)),
+    },
+  };
+}
+
 // ─── Вспомогательные функции ────────────────────────────────────────────────
 
 function riskLevel(gdpChange) {
@@ -399,18 +422,24 @@ function scenarioHydropower(waterDropPct) {
  * @returns {object}        — результат теста
  */
 function runStressTest(scenario, params) {
+  let result;
   switch (scenario) {
     case 'oil':
-      return scenarioOilPrice(Number(params.oilPrice));
+      result = scenarioOilPrice(Number(params.oilPrice));
+      break;
     case 'remittances':
-      return scenarioRemittances(Number(params.restrictionPct));
+      result = scenarioRemittances(Number(params.restrictionPct));
+      break;
     case 'crop':
-      return scenarioCropFailure(Number(params.cropFailurePct));
+      result = scenarioCropFailure(Number(params.cropFailurePct));
+      break;
     case 'hydro':
-      return scenarioHydropower(Number(params.waterDropPct));
+      result = scenarioHydropower(Number(params.waterDropPct));
+      break;
     default:
       throw new Error(`Неизвестный сценарий: ${scenario}`);
   }
+  return addBaseline(result, result.gdpChange);
 }
 
 module.exports = { runStressTest, scenarioOilPrice, scenarioRemittances, scenarioCropFailure, scenarioHydropower };

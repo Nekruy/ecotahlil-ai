@@ -3,7 +3,11 @@
 // ═══════════════════════════════════════════════════════════════════════════════
 //  CGE — Модель общего равновесия Таджикистана
 //  Базируется на матрице социальных счетов (SAM) 2019 года
+//  Перекалибрована с учётом прогноза МЭРиТ РТ 2025–2027
 // ═══════════════════════════════════════════════════════════════════════════════
+
+const fs   = require('fs');
+const path = require('path');
 
 // ─── SAM 2019: секторальные данные ──────────────────────────────────────────
 //
@@ -425,4 +429,83 @@ function cgeSimulate(shock) {
   };
 }
 
-module.exports = { cgeSimulate, cobbDouglas, SECTORS, MACRO };
+// ─── Перекалибровка CGE из прогноза МЭРиТ ───────────────────────────────────
+
+/**
+ * calibrateFromForecast() — пересчитывает доли секторов из реальных данных МЭРиТ.
+ * Обновляет SECTORS[Сельское хозяйство] и SECTORS[Алюминий], MACRO.export_gdp.
+ * Источник: ministry_forecast_2025_2027.json
+ */
+function calibrateFromForecast() {
+  const FORECAST_FILE = path.join(__dirname, 'data', 'ministry_forecast_2025_2027.json');
+  try {
+    if (!fs.existsSync(FORECAST_FILE)) return { calibrated: false, reason: 'файл не найден' };
+
+    const fc = JSON.parse(fs.readFileSync(FORECAST_FILE, 'utf8')).official_forecast;
+    const gdp24  = fc.gdp_mln_somoni?.[2024];
+    const agr24  = fc.agriculture_mln?.[2024];
+    const ind24  = fc.industry_mln?.[2024];
+    const exp24u = fc.export_mln_usd?.[2024];
+    const gdp25  = fc.gdp_mln_somoni?.[2025];
+
+    if (!gdp24) return { calibrated: false, reason: 'нет данных ВВП 2024' };
+
+    // Доля сельского хозяйства в ВВП
+    if (agr24) {
+      const agrShare = Math.round(agr24 / gdp24 * 1000) / 10; // в %
+      const agIdx = SECTORS.findIndex(s => s.name === 'Сельское хозяйство');
+      if (agIdx >= 0) SECTORS[agIdx].gdp_share = agrShare;
+    }
+
+    // Доля алюминия: алюминий = ~7% экспорта; экспорт/ВВП (в сомони, курс ~10.5)
+    if (exp24u) {
+      const exportGdpShare = Math.round(exp24u * 10.5 / gdp24 * 1000) / 10;
+      MACRO.export_gdp = Math.round(exportGdpShare) / 100;
+      // Алюминий ≈ 6% экспорта страны (ТАЛКО данные 2024: $161 млн / $2615 млн)
+      const alShare = exp24u > 0 ? Math.round(161 / exp24u * gdp24 / gdp24 * 100 * 10) / 10 : 7.0;
+      const alIdx = SECTORS.findIndex(s => s.name === 'Алюминий');
+      if (alIdx >= 0) SECTORS[alIdx].gdp_share = Math.max(3, Math.min(15, alShare));
+    }
+
+    // Нормализуем gdp_share чтобы сумма = 100
+    const total = SECTORS.reduce((s, sec) => s + sec.gdp_share, 0);
+    if (Math.abs(total - 100) > 1) {
+      const factor = 100 / total;
+      SECTORS.forEach(s => { s.gdp_share = Math.round(s.gdp_share * factor * 10) / 10; });
+    }
+
+    return {
+      calibrated:            true,
+      base_year_gdp:         gdp24,
+      forecast_gdp_2025:     gdp25,
+      agriculture_share:     agr24 ? Math.round(agr24 / gdp24 * 1000) / 10 : null,
+      export_gdp_ratio:      MACRO.export_gdp,
+      sectors_recalibrated:  true,
+      source:                'SAM 2019 + МЭРиТ 1997–2024 + Прогноз 2025–2027',
+    };
+  } catch (e) {
+    return { calibrated: false, reason: e.message };
+  }
+}
+
+// Перекалибровка при загрузке модуля
+const _calibration = calibrateFromForecast();
+
+// ─── Обёртка cgeSimulate с полем calibration ────────────────────────────────
+
+const _cgeSimulateBase = cgeSimulate;
+function cgeSimulateWithCalibration(shock) {
+  const result = _cgeSimulateBase(shock);
+  return {
+    ...result,
+    calibration: {
+      source:                'SAM 2019 + МЭРиТ 1997–2024 + Прогноз 2025–2027',
+      base_year_gdp:         _calibration.base_year_gdp         ?? 146475,
+      forecast_gdp_2025:     _calibration.forecast_gdp_2025     ?? 166065,
+      sectors_recalibrated:  _calibration.calibrated             ?? false,
+      calibrated_at:         new Date().toISOString(),
+    },
+  };
+}
+
+module.exports = { cgeSimulate: cgeSimulateWithCalibration, cobbDouglas, SECTORS, MACRO, calibrateFromForecast };
