@@ -5,14 +5,28 @@ const path  = require('path');
 
 const MODEL_VERSION = '3.0';
 
-// ── Master dataset loader (primary data source) ───────────────────────────────
-const masterLoader = require('./masterDataLoader');
+// ── Master dataset loader (primary data source, lazy-safe) ───────────────────
+let masterLoader;
+try {
+  masterLoader = require('./masterDataLoader');
+} catch (e) {
+  console.warn('[server] masterDataLoader unavailable:', e.message);
+  masterLoader = {
+    ready: false,
+    getDataForForecasting: () => [],
+    getVARInputs: () => ({}),
+    getSummary: () => ({ ready: false, error: 'masterDataLoader not found' }),
+    getHistory: () => [],
+    resolve: () => null,
+    getYearValuePairs: () => [],
+  };
+}
 
 // ── Tajik language module ─────────────────────────────────────────────────────
 const tajik = require('./tajik');
 
-// ── Live data cache (НБТ/МВФ/ВБ/сырьё) ──────────────────────────────────────
-const liveData = require('./liveData');
+// ── Live data cache — загружается лениво внутри endpoint'а ───────────────────
+// (не на верхнем уровне, чтобы не падать при старте если модуль недоступен)
 
 const PORT         = process.env.PORT || 3000;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
@@ -824,9 +838,10 @@ const server = http.createServer(async (req, res) => {
   // GET /api/live-data — живые данные (НБТ, МВФ, сырьё)
   if (req.method === 'GET' && req.url === '/api/live-data') {
     try {
-      let data = liveData.getLiveCache();
+      const liveDataModule = require('./liveData');
+      let data = liveDataModule.getLiveCache();
       if (!data) {
-        data = await liveData.refreshLiveData();
+        data = await liveDataModule.refreshLiveData();
       }
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify(data));
