@@ -11,7 +11,10 @@ const masterLoader = require('./masterDataLoader');
 // ── Tajik language module ─────────────────────────────────────────────────────
 const tajik = require('./tajik');
 
-const PORT         = 3000;
+// ── Live data cache (НБТ/МВФ/ВБ/сырьё) ──────────────────────────────────────
+const liveData = require('./liveData');
+
+const PORT         = process.env.PORT || 3000;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_URL     = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL   = 'llama-3.3-70b-versatile';
@@ -818,6 +821,23 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/live-data — живые данные (НБТ, МВФ, сырьё)
+  if (req.method === 'GET' && req.url === '/api/live-data') {
+    try {
+      let data = liveData.getLiveCache();
+      if (!data) {
+        data = await liveData.refreshLiveData();
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(data));
+    } catch (err) {
+      console.error('[/api/live-data]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/detect-language — определить язык документа
   if (req.method === 'POST' && req.url === '/api/detect-language') {
     try {
@@ -1060,7 +1080,11 @@ const server = http.createServer(async (req, res) => {
       }
       const country = urlObj.searchParams.get('country') || 'TJK';
       const { fetchIMF } = require('./dataCollector');
-      const series = await fetchIMF(indicator, country);
+      const rawSeries = await fetchIMF(indicator, country);
+      const currentYear = new Date().getFullYear();
+      const series = rawSeries.filter(r =>
+        r.year >= currentYear - 3 && r.year <= currentYear + 2
+      );
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ indicator, country, series, source: 'imf.org/external/datamapper' }));
     } catch (err) {
