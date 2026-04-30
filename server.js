@@ -3,7 +3,13 @@ const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 
-const MODEL_VERSION = '2.0-professional';
+const MODEL_VERSION = '3.0';
+
+// ── Master dataset loader (primary data source) ───────────────────────────────
+const masterLoader = require('./masterDataLoader');
+
+// ── Tajik language module ─────────────────────────────────────────────────────
+const tajik = require('./tajik');
 
 const PORT         = 3000;
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
@@ -416,7 +422,21 @@ const server = http.createServer(async (req, res) => {
       const varData = { ...data };
       let dataSource = 'user-provided';
 
-      // Если есть ministry_gdp_model.json — используем для ВВП и инфляции
+      // ── 1. Master dataset (primary) ──────────────────────────────────────────
+      if (masterLoader.ready) {
+        try {
+          const masterInputs = masterLoader.getVARInputs();
+          if (!varData.gdp || varData.gdp.length < 6)
+            varData.gdp = masterInputs.gdp || varData.gdp;
+          if (!varData.inflation || varData.inflation.length < 6)
+            varData.inflation = masterInputs.inflation || varData.inflation;
+          // exchange_rate and remittances not in master_dataset — filled below
+          if (varData.gdp?.length >= 6 || varData.inflation?.length >= 6)
+            dataSource = 'master_dataset.csv';
+        } catch (_) {}
+      }
+
+      // ── 2. historicalDB fallback (exchange_rate, remittances, any gaps) ──────
       try {
         const gdpH = hdb.getGDPHistory();
         const infH = hdb.getInflationHistory();
@@ -432,7 +452,8 @@ const server = http.createServer(async (req, res) => {
         if (!varData.remittances || varData.remittances.length < 6)
           varData.remittances = remH.map(r => r.amount_mln_usd || r.total_mln_usd || r.remittances).filter(v => v != null);
 
-        dataSource = 'МЭРиТ/НБТ (auto)';
+        if (dataSource === 'user-provided') dataSource = 'МЭРиТ/НБТ (auto)';
+        else dataSource += ' + МЭРиТ/НБТ';
       } catch (_) {}
 
       varData._source = dataSource;
@@ -489,7 +510,22 @@ const server = http.createServer(async (req, res) => {
       let dataSource = 'user-provided';
       let collectedAt = new Date().toISOString();
 
-      // Авто-загрузка из rates_timeseries.json если данных мало
+      // ── Master dataset: macro indicators for GARCH (not FX rates) ────────────
+      // Use when indicator= is passed instead of currency= (e.g. gdp, inflation)
+      if (numData.length < 10 && !currency && masterLoader.ready) {
+        const macroAlias = data?.indicator;   // caller may pass { indicator: 'gdp' }
+        if (macroAlias) {
+          try {
+            const masterSeries = masterLoader.getDataForForecasting(macroAlias);
+            if (masterSeries.length >= 10) {
+              numData = masterSeries;
+              dataSource = 'master_dataset.csv';
+            }
+          } catch (_) {}
+        }
+      }
+
+      // Авто-загрузка из rates_timeseries.json если данных мало (FX rates)
       if (numData.length < 10) {
         const cur = (currency || 'usd').toLowerCase();
         try {
@@ -719,6 +755,18 @@ const server = http.createServer(async (req, res) => {
         } catch (_) {}
       }
 
+      // ── Master dataset (primary) ─────────────────────────────────────────────
+      if (numData.length < 4 && indicator && masterLoader.ready) {
+        try {
+          const masterSeries = masterLoader.getDataForForecasting(indicator);
+          if (masterSeries.length >= 4) {
+            numData = masterSeries;
+            dataSource = 'master_dataset.csv';
+          }
+        } catch (_) {}
+      }
+
+      // ── historicalDB fallback ─────────────────────────────────────────────────
       if (numData.length < 4 && indicator) {
         try {
           const hdb = require('./historicalDB');
@@ -770,6 +818,21 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/detect-language — определить язык документа
+  if (req.method === 'POST' && req.url === '/api/detect-language') {
+    try {
+      const body = await readBody(req);
+      const { text } = JSON.parse(body.toString('utf8'));
+      const result = tajik.analyzeTajikDocument(text || '');
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // Webhook endpoint
   if (req.method === 'POST' && req.url === '/webhook') {
     try {
@@ -796,7 +859,17 @@ const server = http.createServer(async (req, res) => {
       const trimmedText = fileText.trim();
       console.log(`[webhook] question="${question.slice(0, 80)}" fileFormat="${fileFormat}" extractedBytes=${trimmedText.length}`);
 
-      const systemPrompt = `Ты — профессиональный макроэкономический аналитик Таджикистана. При анализе используй следующие методы и формулы:
+      // Определяем язык документа и вопроса
+      const docLang      = tajik.detectLanguage(trimmedText || question);
+      const questionLang = tajik.detectLanguage(question);
+      const useTajik     = docLang === 'tj' || questionLang === 'tj' ||
+        question.toLowerCase().includes('тоҷик') ||
+        question.toLowerCase().includes('тољик');
+
+      const systemPrompt = useTajik
+        ? tajik.getTajikSystemPrompt() +
+          (trimmedText ? `\n\nМАЪЛУМОТИ ИЛОВА: ${tajik.normalizeTajik(trimmedText.slice(0, 500))}` : '')
+        : `Ты — профессиональный макроэкономический аналитик Таджикистана. При анализе используй следующие методы и формулы:
 
 1. ИНФЛЯЦИЯ: ИПЦ = (Стоимость корзины текущий / Стоимость корзины базовый) × 100. Уравнение Фишера: номинальная ставка = реальная ставка + инфляция.
 
@@ -817,9 +890,14 @@ const server = http.createServer(async (req, res) => {
 - Форматируй ответ в красивый HTML с таблицами и цветными блоками
 - Отвечай на русском языке профессионально`;
 
-      const userContent = trimmedText
-        ? `Вопрос: ${question}\n\nСодержимое документа:\n${trimmedText}`
-        : `Вопрос: ${question}`;
+      // Нормализуем таджикский текст если документ на таджикском
+      const normalizedContent = trimmedText && docLang === 'tj'
+        ? tajik.normalizeTajik(trimmedText)
+        : trimmedText;
+
+      const userContent = normalizedContent
+        ? `Вопрос/Савол: ${question}\n\nМундариҷа/Содержимое:\n${normalizedContent}`
+        : `Вопрос/Савол: ${question}`;
 
       const answer = await groqChat(systemPrompt, userContent, 4000);
 
@@ -1326,6 +1404,30 @@ const server = http.createServer(async (req, res) => {
       console.error('[/api/history]', err.message);
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // GET /api/master-info — status and available indicators from master_dataset
+  if (req.method === 'GET' && req.url === '/api/master-info') {
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify(masterLoader.getSummary()));
+    return;
+  }
+
+  // GET /api/master-series?alias=gdp[&startYear=2000&endYear=2024]
+  if (req.method === 'GET' && req.url.startsWith('/api/master-series')) {
+    try {
+      const qs        = new URL('http://x' + req.url).searchParams;
+      const alias     = qs.get('alias') || 'gdp';
+      const startYear = qs.get('startYear') ? parseInt(qs.get('startYear')) : undefined;
+      const endYear   = qs.get('endYear')   ? parseInt(qs.get('endYear'))   : undefined;
+      const pairs     = masterLoader.getHistory(alias, { startYear, endYear });
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ alias, column: masterLoader.resolve(alias), data: pairs }));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: e.message }));
     }
     return;
   }

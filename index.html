@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcotahlilAI — Главное управление макроэкономического анализа · МЭРиТ РТ</title>
+<title>EcotahlilAI v3.0 — Макроэкономический анализ · МЭРиТ РТ · Master Dataset 1997–2035</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 /* ============================================================
@@ -2323,10 +2323,50 @@ footer b { color:#fff; }
         <!-- Вопрос -->
         <div class="form-group">
           <label class="form-label" for="question" data-i18n="ai.q.label">Вопрос / Задание</label>
+
+          <!-- Индикатор языка документа -->
+          <div id="doc-language-indicator" style="
+            display:none; padding:8px 12px; border-radius:6px;
+            border:1px solid #bfdbfe; font-size:12px;
+            margin-bottom:8px; color:#1e40af; background:#eff6ff">
+          </div>
+
+          <!-- Быстрые вопросы на таджикском -->
+          <div style="margin-bottom:8px">
+            <div style="font-size:11px;color:#64748b;margin-bottom:5px" data-i18n="ai.q.examples">Намунаи саволҳо / Примеры вопросов:</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px">
+              <button type="button" onclick="setQuestion(this.textContent)" style="
+                background:#f1f5f9;border:1px solid #e2e8f0;
+                padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;
+                transition:background .15s" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                ММД-и Тоҷикистон дар соли 2024 чӣ қадар буд?
+              </button>
+              <button type="button" onclick="setQuestion(this.textContent)" style="
+                background:#f1f5f9;border:1px solid #e2e8f0;
+                padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;
+                transition:background .15s" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                Сатҳи таваррум дар Тоҷикистон тавзеҳ диҳед
+              </button>
+              <button type="button" onclick="setQuestion(this.textContent)" style="
+                background:#f1f5f9;border:1px solid #e2e8f0;
+                padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;
+                transition:background .15s" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                Ҳаҷми содирот ва воридоти Тоҷикистон
+              </button>
+              <button type="button" onclick="setQuestion(this.textContent)" style="
+                background:#f1f5f9;border:1px solid #e2e8f0;
+                padding:4px 8px;border-radius:4px;font-size:11px;cursor:pointer;
+                transition:background .15s" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                Дурнамои иқтисодии Тоҷикистон барои 2025-2027
+              </button>
+            </div>
+          </div>
+
           <textarea
             id="question"
             class="q-field"
             placeholder="Проанализируй динамику ВВП Таджикистана за 2024 год и выяви ключевые тренды..."
+            data-i18n-placeholder="ai.q.placeholder"
           ></textarea>
         </div>
 
@@ -2470,25 +2510,60 @@ footer b { color:#fff; }
           </div>
           <!-- База данных МЭРиТ 10 лет -->
           <div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px">
-            <div style="font-size:11px;font-weight:700;color:#1e40af;margin-bottom:8px">📚 База данных МЭРиТ 2015–2024</div>
+            <div style="font-size:11px;font-weight:700;color:#1e40af;margin-bottom:8px">📚 Master Dataset 1997–2035 · 65 показателей</div>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <select id="fcHistIndicator" style="flex:1;min-width:160px;padding:5px 8px;border:1px solid #bfdbfe;border-radius:6px;font-size:12px;color:#1e40af">
-                <option value="gdp_growth">Рост ВВП (%)</option>
-                <option value="inflation">Инфляция ИПЦ (%)</option>
-                <option value="food_inflation">Прод. инфляция (%)</option>
-                <option value="usd_tjs">Курс USD/TJS</option>
-                <option value="eur_tjs">Курс EUR/TJS</option>
-                <option value="remittances">Переводы (млн $)</option>
-                <option value="remittances_pct_gdp">Переводы % ВВП</option>
-                <option value="export">Экспорт (млн $)</option>
-                <option value="import">Импорт (млн $)</option>
-                <option value="trade_balance">Торг. баланс (млн $)</option>
+                <optgroup label="── ВВП ──">
+                  <option value="gdp">ВВП (млн сомони)</option>
+                  <option value="gdp_growth">Рост ВВП (%)</option>
+                  <option value="gdp_real">ВВП реальный (2009 цены)</option>
+                  <option value="gdp_deflator">Дефлятор ВВП</option>
+                  <option value="gdp_per_capita">ВВП на душу (USD)</option>
+                </optgroup>
+                <optgroup label="── Инфляция ──">
+                  <option value="inflation">Инфляция ИПЦ (%)</option>
+                  <option value="food_inflation">Прод. инфляция (%)</option>
+                </optgroup>
+                <optgroup label="── Секторы ──">
+                  <option value="industry">Промышленность</option>
+                  <option value="agriculture">Сельское хозяйство</option>
+                  <option value="construction">Строительство</option>
+                  <option value="transport">Транспорт и связь</option>
+                  <option value="trade">Розничная торговля</option>
+                  <option value="services">Услуги</option>
+                </optgroup>
+                <optgroup label="── Спрос ──">
+                  <option value="consumption">Конечное потребление</option>
+                  <option value="consumption_hh">Потребление домохозяйств</option>
+                  <option value="consumption_gov">Потребление государства</option>
+                  <option value="investment">Инвестиции в ОК</option>
+                  <option value="domestic_demand">Внутренний спрос</option>
+                </optgroup>
+                <optgroup label="── Внешний сектор ──">
+                  <option value="exports">Экспорт (млн сом.)</option>
+                  <option value="imports">Импорт (млн сом.)</option>
+                  <option value="net_exports">Чистый экспорт</option>
+                  <option value="export">Экспорт (млн USD)</option>
+                  <option value="import">Импорт (млн USD)</option>
+                  <option value="trade_balance">Торг. баланс (млн USD)</option>
+                </optgroup>
+                <optgroup label="── Валютный рынок ──">
+                  <option value="usd_tjs">Курс USD/TJS</option>
+                  <option value="eur_tjs">Курс EUR/TJS</option>
+                  <option value="remittances">Переводы (млн $)</option>
+                  <option value="remittances_pct_gdp">Переводы % ВВП</option>
+                </optgroup>
+                <optgroup label="── Доходы и труд ──">
+                  <option value="wages">Оплата труда</option>
+                  <option value="gross_profit">Валовая прибыль</option>
+                  <option value="taxes">Налоги на производство</option>
+                </optgroup>
               </select>
               <button type="button" class="load-data-btn load-merit-btn" id="fcHistBtn" onclick="loadHistoricalToForecast()">
                 📥 10 лет
               </button>
             </div>
-            <div style="font-size:10px;color:#3b82f6;margin-top:5px">10 значений за 2015–2024 · МЭРиТ / НБТ / Агентство по статистике</div>
+            <div style="font-size:10px;color:#3b82f6;margin-top:5px">39 значений 1997–2035 · Master Dataset (65 показателей) · МЭРиТ / НБТ / CGE</div>
           </div>
         </div>
 
@@ -2518,13 +2593,19 @@ footer b { color:#fff; }
         <!-- Быстрая загрузка данных -->
         <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:10px;margin-bottom:10px">
           <div style="font-size:11px;font-weight:600;color:#0369a1;margin-bottom:8px">📥 Быстрая загрузка данных</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
-            <button onclick="autoLoadIndicator('gdp')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">ВВП (МЭРиТ)</button>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">
+            <button onclick="autoLoadIndicator('gdp')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">ВВП</button>
             <button onclick="autoLoadIndicator('gdp_growth')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Рост ВВП %</button>
             <button onclick="autoLoadIndicator('inflation')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Инфляция</button>
-            <button onclick="autoLoadIndicator('usd_tjs')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">USD/TJS (НБТ)</button>
-            <button onclick="autoLoadIndicator('remittances')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Переводы</button>
-            <button onclick="autoLoadIndicator('trade_balance')" style="background:#166534;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Торг. баланс</button>
+            <button onclick="autoLoadIndicator('industry')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Промышленность</button>
+            <button onclick="autoLoadIndicator('agriculture')" style="background:#166534;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">С/Х</button>
+            <button onclick="autoLoadIndicator('investment')" style="background:#166534;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Инвестиции</button>
+            <button onclick="autoLoadIndicator('exports')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Экспорт</button>
+            <button onclick="autoLoadIndicator('usd_tjs')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">USD/TJS</button>
+            <button onclick="autoLoadIndicator('remittances')" style="background:#7c3aed;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Переводы</button>
+            <button onclick="autoLoadIndicator('consumption')" style="background:#7c3aed;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Потребление</button>
+            <button onclick="autoLoadIndicator('trade_balance')" style="background:#b45309;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Торг. баланс</button>
+            <button onclick="autoLoadIndicator('wages')" style="background:#b45309;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Зарплаты</button>
           </div>
         </div>
 
@@ -4267,6 +4348,14 @@ function handleFile(file) {
   const drop = document.getElementById('fileDrop');
   drop.classList.add('has-file');
   document.getElementById('fileName').textContent = '✅ ' + file.name + ' (' + (file.size/1024).toFixed(0) + ' КБ)';
+
+  // Для текстовых форматов — автоопределение языка
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (['txt','csv','json'].includes(ext) && file.size < 100000) {
+    const reader = new FileReader();
+    reader.onload = e => detectDocumentLanguage(e.target.result || '');
+    reader.readAsText(file, 'utf-8');
+  }
 }
 
 function handleDrop(e) {
@@ -5245,6 +5334,14 @@ function selectMethod(method) {
   }
 }
 
+// Master dataset aliases — fetched from /api/master-series
+const MASTER_ALIASES = new Set([
+  'gdp','gdp_growth','gdp_real','gdp_deflator','gdp_per_capita','gdp_income','gdp_expenditure','gdp_basic',
+  'inflation','cpi','industry','agriculture','construction','transport','trade','services',
+  'consumption','consumption_hh','consumption_gov','investment','domestic_demand',
+  'exports','imports','net_exports','wages','gross_profit','taxes','subsidies',
+]);
+
 async function autoLoadIndicator(indicator) {
   const btn = event.target;
   const orig = btn.textContent;
@@ -5252,29 +5349,74 @@ async function autoLoadIndicator(indicator) {
   btn.disabled = true;
   try {
     let values = [];
-    if (indicator === 'usd_tjs') {
-      const res = await fetch('/api/rates-history?currency=usd&days=3650');
+
+    if (indicator === 'usd_tjs' || indicator === 'eur_tjs' || indicator === 'rub_tjs') {
+      const cur = indicator.split('_')[0];
+      const res = await fetch('/api/rates-history?currency=' + cur + '&days=3650');
       const json = await res.json();
-      values = (json.data || []).map(r => r.usd).filter(Boolean);
+      values = (json.data || []).map(r => r[cur]).filter(v => v != null);
+    } else if (MASTER_ALIASES.has(indicator)) {
+      // Primary: master_dataset (1997–2035, 39 years)
+      const res = await fetch('/api/master-series?alias=' + indicator);
+      const json = await res.json();
+      values = (json.data || []).map(r => r.value).filter(v => v != null);
+      // Fallback to /api/history if master returned nothing
+      if (!values.length) {
+        const res2 = await fetch('/api/history?indicator=' + indicator);
+        const json2 = await res2.json();
+        values = json2.values || [];
+      }
     } else {
       const res = await fetch('/api/history?indicator=' + indicator);
       const json = await res.json();
       values = json.values || [];
     }
+
     if (values.length > 0) {
       const field = document.getElementById('fcData') || document.querySelector('textarea');
-      if (field) field.value = values.join(', ');
-      btn.textContent = '✅ ' + values.length;
+      if (field) field.value = values.map(v => +v.toFixed(4)).join(', ');
+      btn.textContent = '✅ ' + values.length + 'y';
       btn.style.background = '#166534';
     } else {
       btn.textContent = '—';
     }
-  } catch(e) { btn.textContent = '❌'; }
+  } catch(e) { btn.textContent = '❌'; console.error(e); }
   setTimeout(() => {
     btn.textContent = orig;
     btn.disabled = false;
     btn.style.background = '';
-  }, 2000);
+  }, 2500);
+}
+
+async function loadHistoricalToForecast() {
+  const btn = document.getElementById('fcHistBtn');
+  const indicator = document.getElementById('fcHistIndicator')?.value;
+  if (!indicator) return;
+  if (btn) { btn.disabled = true; btn.textContent = '⏳'; }
+  try {
+    let values = [];
+    if (MASTER_ALIASES.has(indicator)) {
+      const res = await fetch('/api/master-series?alias=' + indicator);
+      const json = await res.json();
+      values = (json.data || []).map(r => r.value).filter(v => v != null);
+    }
+    if (!values.length) {
+      const res = await fetch('/api/history?indicator=' + indicator);
+      const json = await res.json();
+      values = json.values || [];
+    }
+    if (values.length) {
+      const ta = document.getElementById('fcData');
+      if (ta) ta.value = values.map(v => +v.toFixed(4)).join(', ');
+      showToast('Загружено ' + values.length + ' значений (1997–2035) · Master Dataset', 'success');
+    } else {
+      showToast('Данные не найдены для: ' + indicator, 'error');
+    }
+  } catch(e) {
+    showToast('Ошибка: ' + e.message, 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '📥 Загрузить'; }
+  }
 }
 
 async function loadMERTComparison() {
@@ -6470,7 +6612,9 @@ const i18n = {
     'ai.sc.forecast':'Дурнамо',
     'ai.sc.whatif':  'Агар чӣ мешавад',
     'ai.sc.report':  'Тайёр кардани ҳисобот',
-    'ai.q.label':    'Савол / Супориш',
+    'ai.q.label':       'Савол / Супориш',
+    'ai.q.placeholder': 'Динамикаи ММД-и Тоҷикистонро барои соли 2024 таҳлил кунед...',
+    'ai.q.examples':    'Намунаи саволҳо / Примеры вопросов:',
     'ai.file.label': 'Санад барои таҳлил',
     'ai.file.text':  'Файлро кашед ё барои интихоб пахш кунед',
     'ai.role.label': 'Нақши Шумо',
@@ -6728,6 +6872,11 @@ function applyTranslations(lang) {
     const key = el.dataset.i18n;
     if (t[key] !== undefined) el.textContent = t[key];
   });
+  // Placeholder для поля вопроса
+  const qField = document.getElementById('question');
+  if (qField && t['ai.q.placeholder']) {
+    qField.placeholder = t['ai.q.placeholder'];
+  }
 }
 
 // Обновить активную кнопку языка
@@ -6935,6 +7084,43 @@ function setLanguage(lang) {
   localStorage.setItem('lang', lang);
   applyTranslations(lang);
   updateLangButtons(lang);
+}
+
+// ── Авто-определение языка документа ────────────
+async function detectDocumentLanguage(text) {
+  try {
+    const res = await fetch('/api/detect-language', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text.slice(0, 1000) }),
+    });
+    const data = await res.json();
+    const langEl = document.getElementById('doc-language-indicator');
+    if (!langEl) return data.language;
+    if (data.language === 'tj') {
+      langEl.innerHTML = '🇹🇯 Забони ҳуҷҷат: <b>Тоҷикӣ</b> — таҳлил бо тоҷикӣ анҷом дода мешавад';
+      langEl.style.background = '#f0fdf4';
+      langEl.style.borderColor = '#86efac';
+      langEl.style.color = '#166534';
+    } else {
+      langEl.innerHTML = '🇷🇺 Язык документа: <b>Русский</b> — анализ будет на русском языке';
+      langEl.style.background = '#eff6ff';
+      langEl.style.borderColor = '#bfdbfe';
+      langEl.style.color = '#1e40af';
+    }
+    langEl.style.display = 'block';
+    return data.language;
+  } catch (e) { return 'ru'; }
+}
+
+// ── Вставить вопрос из быстрых подсказок ────────
+function setQuestion(text) {
+  const field = document.getElementById('question');
+  if (!field) return;
+  field.value = text.trim();
+  field.focus();
+  // Автоопределение языка вопроса
+  detectDocumentLanguage(text);
 }
 
 // Инициализация: применить язык из localStorage при загрузке
