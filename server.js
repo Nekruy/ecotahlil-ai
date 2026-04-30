@@ -230,6 +230,12 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
+  // Health check — Railway / uptime monitors
+  if (req.method === 'GET' && (req.url === '/health' || req.url === '/ping')) {
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    return res.end(JSON.stringify({ status: 'ok', uptime: process.uptime(), port: PORT }));
+  }
+
   // Serve index.html
   if (req.method === 'GET' && (req.url === '/' || req.url === '/index.html')) {
     const filePath = path.join(__dirname, 'index.html');
@@ -1501,9 +1507,16 @@ const server = http.createServer(async (req, res) => {
   }
 })();
 
-server.listen(PORT, () => {
-  console.log(`EcotahlilAI server running at http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  const addr = server.address();
+  console.log(`[server] EcotahlilAI running — port=${addr.port} address=${addr.address} family=${addr.family}`);
+  console.log(`[server] PORT env=${process.env.PORT || '(not set, using 3000)'} NODE_ENV=${process.env.NODE_ENV || 'development'}`);
   if (!GROQ_API_KEY) {
-    console.warn('WARNING: GROQ_API_KEY environment variable is not set');
+    console.warn('[server] WARNING: GROQ_API_KEY not set');
   }
+});
+
+server.on('error', (err) => {
+  console.error('[server] FATAL listen error:', err.message, err.code);
+  process.exit(1);
 });
