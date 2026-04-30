@@ -1,0 +1,1526 @@
+{
+  "meta": {
+    "name": "EcotahlilAI Unified Dataset",
+    "version": "1.0",
+    "built_at": "2026-04-30T17:10:14.921Z",
+    "quality": {
+      "annual_records": 30,
+      "annual_period": "1995—2024",
+      "daily_rates_count": 126,
+      "real_nbt_count": 0,
+      "gdp_completeness": "93%",
+      "inflation_completeness": "93%",
+      "sources": [
+        "МЭРиТ РТ",
+        "МВФ",
+        "Мировой банк",
+        "НБТ РТ"
+      ]
+    }
+  },
+  "annual": [
+    {
+      "year": 1995,
+      "gdp_mln_somoni": null,
+      "gdp_bln_somoni": null,
+      "gdp_growth_mert": null,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.23156186039946,
+      "gdp_per_capita_usd": null,
+      "inflation_mert": null,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": null,
+      "import_mln_usd": null,
+      "trade_balance": null,
+      "remittances_mln_usd": null,
+      "population_thou": 5948.584,
+      "gdp_deflator": null
+    },
+    {
+      "year": 1996,
+      "gdp_mln_somoni": null,
+      "gdp_bln_somoni": null,
+      "gdp_growth_mert": null,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.04365482233503,
+      "gdp_per_capita_usd": null,
+      "inflation_mert": null,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": null,
+      "import_mln_usd": null,
+      "trade_balance": null,
+      "remittances_mln_usd": null,
+      "population_thou": 6066.523,
+      "gdp_deflator": null
+    },
+    {
+      "year": 1997,
+      "gdp_mln_somoni": 518.4,
+      "gdp_bln_somoni": 0.52,
+      "gdp_growth_mert": 1.7,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 0.921518032909326,
+      "gdp_per_capita_usd": 158.7,
+      "inflation_mert": -100,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": null,
+      "import_mln_usd": null,
+      "trade_balance": null,
+      "remittances_mln_usd": null,
+      "population_thou": 5814.4,
+      "gdp_deflator": 165.2
+    },
+    {
+      "year": 1998,
+      "gdp_mln_somoni": 1025.2,
+      "gdp_bln_somoni": 1.03,
+      "gdp_growth_mert": 5.3,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.32019958152261,
+      "gdp_per_capita_usd": 221.8,
+      "inflation_mert": -100,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": null,
+      "import_mln_usd": null,
+      "trade_balance": null,
+      "remittances_mln_usd": null,
+      "population_thou": 5930.5,
+      "gdp_deflator": 187.8
+    },
+    {
+      "year": 1999,
+      "gdp_mln_somoni": 1345,
+      "gdp_bln_somoni": 1.35,
+      "gdp_growth_mert": 3.7,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.08661229027171,
+      "gdp_per_capita_usd": 178.2,
+      "inflation_mert": -100,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": null,
+      "import_mln_usd": null,
+      "trade_balance": null,
+      "remittances_mln_usd": null,
+      "population_thou": 6056,
+      "gdp_deflator": 123.5
+    },
+    {
+      "year": 2000,
+      "gdp_mln_somoni": 1786.8,
+      "gdp_bln_somoni": 1.79,
+      "gdp_growth_mert": 8.3,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 0.860541842263697,
+      "gdp_per_capita_usd": 158,
+      "inflation_mert": 60.63,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 901.53,
+      "import_mln_usd": 977.48,
+      "trade_balance": -75.95,
+      "remittances_mln_usd": null,
+      "population_thou": 6196.5,
+      "gdp_deflator": 124.3
+    },
+    {
+      "year": 2001,
+      "gdp_mln_somoni": 2563.8,
+      "gdp_bln_somoni": 2.56,
+      "gdp_growth_mert": 9.6,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.0807725512943298,
+      "gdp_per_capita_usd": 171.2,
+      "inflation_mert": 12.48,
+      "inflation_imf": null,
+      "inflation_wb": 38.59188944886,
+      "export_mln_usd": 713.77,
+      "import_mln_usd": 835.28,
+      "trade_balance": -121.51,
+      "remittances_mln_usd": null,
+      "population_thou": 6317.9,
+      "gdp_deflator": 130.9
+    },
+    {
+      "year": 2002,
+      "gdp_mln_somoni": 3375.3,
+      "gdp_bln_somoni": 3.38,
+      "gdp_growth_mert": 10.8,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.2211062202868,
+      "gdp_per_capita_usd": 190,
+      "inflation_mert": 14.51,
+      "inflation_imf": null,
+      "inflation_wb": 12.2499847845885,
+      "export_mln_usd": 768.14,
+      "import_mln_usd": 927.78,
+      "trade_balance": -159.64,
+      "remittances_mln_usd": null,
+      "population_thou": 6429.2,
+      "gdp_deflator": 118.8
+    },
+    {
+      "year": 2003,
+      "gdp_mln_somoni": 4761.5,
+      "gdp_bln_somoni": 4.76,
+      "gdp_growth_mert": 11.1,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 1.5553182614172,
+      "gdp_per_capita_usd": 236.7,
+      "inflation_mert": 13.65,
+      "inflation_imf": null,
+      "inflation_wb": 16.3034912049491,
+      "export_mln_usd": 994.72,
+      "import_mln_usd": 1147.26,
+      "trade_balance": -152.54,
+      "remittances_mln_usd": null,
+      "population_thou": 6543,
+      "gdp_deflator": 127.1
+    },
+    {
+      "year": 2004,
+      "gdp_mln_somoni": 6167.2,
+      "gdp_bln_somoni": 6.17,
+      "gdp_growth_mert": 10.3,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 2.07617686941089,
+      "gdp_per_capita_usd": 309.7,
+      "inflation_mert": 5.62,
+      "inflation_imf": null,
+      "inflation_wb": 7.14196508692253,
+      "export_mln_usd": 1219.84,
+      "import_mln_usd": 1444.96,
+      "trade_balance": -225.12,
+      "remittances_mln_usd": null,
+      "population_thou": 6658.9,
+      "gdp_deflator": 117.5
+    },
+    {
+      "year": 2005,
+      "gdp_mln_somoni": 7206.6,
+      "gdp_bln_somoni": 7.21,
+      "gdp_growth_mert": 6.7,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 2.3123520206689,
+      "gdp_per_capita_usd": 337.5,
+      "inflation_mert": 6.89,
+      "inflation_imf": null,
+      "inflation_wb": 7.09193244083773,
+      "export_mln_usd": 1254.43,
+      "import_mln_usd": 1682.44,
+      "trade_balance": -428.01,
+      "remittances_mln_usd": null,
+      "population_thou": 6780.6,
+      "gdp_deflator": 109.52
+    },
+    {
+      "year": 2006,
+      "gdp_mln_somoni": 9335.3,
+      "gdp_bln_somoni": 9.34,
+      "gdp_growth_mert": 7,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 2.8302138486203,
+      "gdp_per_capita_usd": 410,
+      "inflation_mert": 11.9,
+      "inflation_imf": null,
+      "inflation_wb": 10.0108651886461,
+      "export_mln_usd": 1589.63,
+      "import_mln_usd": 2370.78,
+      "trade_balance": -781.15,
+      "remittances_mln_usd": null,
+      "population_thou": 6903.9,
+      "gdp_deflator": 121.06
+    },
+    {
+      "year": 2007,
+      "gdp_mln_somoni": 12804.3,
+      "gdp_bln_somoni": 12.8,
+      "gdp_growth_mert": 7.8,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 3.7195245408619297,
+      "gdp_per_capita_usd": 529,
+      "inflation_mert": 21.5,
+      "inflation_imf": null,
+      "inflation_wb": 13.1491247062982,
+      "export_mln_usd": 1705.57,
+      "import_mln_usd": 3707.08,
+      "trade_balance": -2001.52,
+      "remittances_mln_usd": null,
+      "population_thou": 7031.2,
+      "gdp_deflator": 127.24
+    },
+    {
+      "year": 2008,
+      "gdp_mln_somoni": 17706.9,
+      "gdp_bln_somoni": 17.71,
+      "gdp_growth_mert": 7.9,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 5.16129972527673,
+      "gdp_per_capita_usd": 719.8,
+      "inflation_mert": 20.4,
+      "inflation_imf": null,
+      "inflation_wb": 20.4705219109964,
+      "export_mln_usd": 1686.31,
+      "import_mln_usd": 4084.52,
+      "trade_balance": -2398.21,
+      "remittances_mln_usd": null,
+      "population_thou": 7173.8,
+      "gdp_deflator": 128.16
+    },
+    {
+      "year": 2009,
+      "gdp_mln_somoni": 20629,
+      "gdp_bln_somoni": 20.63,
+      "gdp_growth_mert": 3.9,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 4.979472364453399,
+      "gdp_per_capita_usd": 678.8,
+      "inflation_mert": 6.4,
+      "inflation_imf": null,
+      "inflation_wb": 6.44823481066697,
+      "export_mln_usd": 600.15,
+      "import_mln_usd": 2833.9,
+      "trade_balance": -2233.75,
+      "remittances_mln_usd": null,
+      "population_thou": 7334.1,
+      "gdp_deflator": 112.13
+    },
+    {
+      "year": 2010,
+      "gdp_mln_somoni": 24707.1,
+      "gdp_bln_somoni": 24.71,
+      "gdp_growth_mert": 6.5,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 5.64222109917704,
+      "gdp_per_capita_usd": 750.4,
+      "inflation_mert": 6.5,
+      "inflation_imf": null,
+      "inflation_wb": 6.44531440780658,
+      "export_mln_usd": 791.25,
+      "import_mln_usd": 3460.29,
+      "trade_balance": -2669.04,
+      "remittances_mln_usd": null,
+      "population_thou": 7519.3,
+      "gdp_deflator": 112.45
+    },
+    {
+      "year": 2011,
+      "gdp_mln_somoni": 30071.1,
+      "gdp_bln_somoni": 30.07,
+      "gdp_growth_mert": 7.4,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 6.522756255012,
+      "gdp_per_capita_usd": 845.65,
+      "inflation_mert": 12.5,
+      "inflation_imf": null,
+      "inflation_wb": 12.4315490430406,
+      "export_mln_usd": 1821.8,
+      "import_mln_usd": 3646.76,
+      "trade_balance": -1824.96,
+      "remittances_mln_usd": null,
+      "population_thou": 7714.2,
+      "gdp_deflator": 113.32
+    },
+    {
+      "year": 2012,
+      "gdp_mln_somoni": 36163.1,
+      "gdp_bln_somoni": 36.16,
+      "gdp_growth_mert": 7.5,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 7.63303690307634,
+      "gdp_per_capita_usd": 961.47,
+      "inflation_mert": 5.8,
+      "inflation_imf": null,
+      "inflation_wb": 5.83116601031462,
+      "export_mln_usd": 1847.3,
+      "import_mln_usd": 4358.9,
+      "trade_balance": -2511.6,
+      "remittances_mln_usd": null,
+      "population_thou": 7897.3,
+      "gdp_deflator": 111.87
+    },
+    {
+      "year": 2013,
+      "gdp_mln_somoni": 40525.2,
+      "gdp_bln_somoni": 40.53,
+      "gdp_growth_mert": 7.4,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 8.44841131825417,
+      "gdp_per_capita_usd": 1053.5,
+      "inflation_mert": 3.7,
+      "inflation_imf": null,
+      "inflation_wb": 5.00964645344951,
+      "export_mln_usd": 1306.77,
+      "import_mln_usd": 4836.09,
+      "trade_balance": -3529.32,
+      "remittances_mln_usd": null,
+      "population_thou": 8074.3,
+      "gdp_deflator": 104.34
+    },
+    {
+      "year": 2014,
+      "gdp_mln_somoni": 45606.6,
+      "gdp_bln_somoni": 45.61,
+      "gdp_growth_mert": 6.7,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 9.11260545932845,
+      "gdp_per_capita_usd": 1119.31,
+      "inflation_mert": 7.4,
+      "inflation_imf": null,
+      "inflation_wb": 6.10442765129667,
+      "export_mln_usd": 1229.7,
+      "import_mln_usd": 4759.9,
+      "trade_balance": -3530.2,
+      "remittances_mln_usd": null,
+      "population_thou": 8256.6,
+      "gdp_deflator": 105.47
+    },
+    {
+      "year": 2015,
+      "gdp_mln_somoni": 50977.4,
+      "gdp_bln_somoni": 50.98,
+      "gdp_growth_mert": 6,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 8.271431485074839,
+      "gdp_per_capita_usd": 978.46,
+      "inflation_mert": 5.1,
+      "inflation_imf": null,
+      "inflation_wb": 5.7145594964971,
+      "export_mln_usd": 1143,
+      "import_mln_usd": 3898.14,
+      "trade_balance": -2755.14,
+      "remittances_mln_usd": null,
+      "population_thou": 8451.6,
+      "gdp_deflator": 105.45
+    },
+    {
+      "year": 2016,
+      "gdp_mln_somoni": 54790.3,
+      "gdp_bln_somoni": 54.79,
+      "gdp_growth_mert": 6.9,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 6.99241609689018,
+      "gdp_per_capita_usd": 808.66,
+      "inflation_mert": 6.1,
+      "inflation_imf": null,
+      "inflation_wb": 6.00458082322139,
+      "export_mln_usd": 1130.5,
+      "import_mln_usd": 3405.3,
+      "trade_balance": -2274.8,
+      "remittances_mln_usd": null,
+      "population_thou": 8647,
+      "gdp_deflator": 100.54
+    },
+    {
+      "year": 2017,
+      "gdp_mln_somoni": 64434.3,
+      "gdp_bln_somoni": 64.43,
+      "gdp_growth_mert": 7.1,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 7.53640285285802,
+      "gdp_per_capita_usd": 852.83,
+      "inflation_mert": 6.74,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 1450,
+      "import_mln_usd": 3149.08,
+      "trade_balance": -1699.08,
+      "remittances_mln_usd": null,
+      "population_thou": 8837,
+      "gdp_deflator": 109.81
+    },
+    {
+      "year": 2018,
+      "gdp_mln_somoni": 71059.2,
+      "gdp_bln_somoni": 71.06,
+      "gdp_growth_mert": 7.57,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 7.76499999945362,
+      "gdp_per_capita_usd": 860.02,
+      "inflation_mert": 5.38,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 1315.5,
+      "import_mln_usd": 3608.8,
+      "trade_balance": -2293.3,
+      "remittances_mln_usd": null,
+      "population_thou": 9028.9,
+      "gdp_deflator": 102.52
+    },
+    {
+      "year": 2019,
+      "gdp_mln_somoni": 79109.8,
+      "gdp_bln_somoni": 79.11,
+      "gdp_growth_mert": 7.42,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 8.3008135993084,
+      "gdp_per_capita_usd": 900.32,
+      "inflation_mert": 8,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 1416.75,
+      "import_mln_usd": 3837.1,
+      "trade_balance": -2420.35,
+      "remittances_mln_usd": null,
+      "population_thou": 9220.2,
+      "gdp_deflator": 103.64
+    },
+    {
+      "year": 2020,
+      "gdp_mln_somoni": 83958.3,
+      "gdp_bln_somoni": 83.96,
+      "gdp_growth_mert": 4.45,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 8.13396355065742,
+      "gdp_per_capita_usd": 864.4,
+      "inflation_mert": 9.4,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 1545.4,
+      "import_mln_usd": 3560,
+      "trade_balance": -2014.6,
+      "remittances_mln_usd": null,
+      "population_thou": 9410,
+      "gdp_deflator": 101.61
+    },
+    {
+      "year": 2021,
+      "gdp_mln_somoni": 101076.3,
+      "gdp_bln_somoni": 101.08,
+      "gdp_growth_mert": 9.42,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 8.93780534713963,
+      "gdp_per_capita_usd": 911.85,
+      "inflation_mert": 8,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 2296.4,
+      "import_mln_usd": 4741.1,
+      "trade_balance": -2444.7,
+      "remittances_mln_usd": null,
+      "population_thou": 9801.81,
+      "gdp_deflator": 110.03
+    },
+    {
+      "year": 2022,
+      "gdp_mln_somoni": 118181.7,
+      "gdp_bln_somoni": 118.18,
+      "gdp_growth_mert": 8.04,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 10.713525200399799,
+      "gdp_per_capita_usd": 1073.74,
+      "inflation_mert": 4.2,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 2279.4,
+      "import_mln_usd": 5852.82,
+      "trade_balance": -3573.42,
+      "remittances_mln_usd": null,
+      "population_thou": 9982.6,
+      "gdp_deflator": 108.23
+    },
+    {
+      "year": 2023,
+      "gdp_mln_somoni": 132781.9,
+      "gdp_bln_somoni": 132.78,
+      "gdp_growth_mert": 8.32,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 12.244169292799802,
+      "gdp_per_capita_usd": 1202.41,
+      "inflation_mert": 3.8,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 2692.3,
+      "import_mln_usd": 6628.38,
+      "trade_balance": -3936.08,
+      "remittances_mln_usd": null,
+      "population_thou": 10183.3,
+      "gdp_deflator": 103.72
+    },
+    {
+      "year": 2024,
+      "gdp_mln_somoni": 153402.2,
+      "gdp_bln_somoni": 153.4,
+      "gdp_growth_mert": 8.35,
+      "gdp_growth_imf": null,
+      "gdp_usd_bln": 14.204575548553601,
+      "gdp_per_capita_usd": 1368.31,
+      "inflation_mert": 3.6,
+      "inflation_imf": null,
+      "inflation_wb": null,
+      "export_mln_usd": 2108.41,
+      "import_mln_usd": 7685.7,
+      "trade_balance": -5577.3,
+      "remittances_mln_usd": null,
+      "population_thou": 10382.1,
+      "gdp_deflator": 106.62
+    }
+  ],
+  "daily_rates": [
+    {
+      "date": "2015-01-15",
+      "usd_tjs": 6.5638,
+      "eur_tjs": 7.0904,
+      "rub_tjs": 0.0986,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-02-15",
+      "usd_tjs": 6.5562,
+      "eur_tjs": 7.0813,
+      "rub_tjs": 0.0991,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-03-15",
+      "usd_tjs": 6.5648,
+      "eur_tjs": 7.1652,
+      "rub_tjs": 0.0994,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-04-15",
+      "usd_tjs": 6.6391,
+      "eur_tjs": 7.2417,
+      "rub_tjs": 0.0997,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-05-15",
+      "usd_tjs": 6.7659,
+      "eur_tjs": 7.352,
+      "rub_tjs": 0.1003,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-06-15",
+      "usd_tjs": 6.8204,
+      "eur_tjs": 7.4435,
+      "rub_tjs": 0.1005,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-07-15",
+      "usd_tjs": 6.8641,
+      "eur_tjs": 7.527,
+      "rub_tjs": 0.1003,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-08-15",
+      "usd_tjs": 6.9558,
+      "eur_tjs": 7.5476,
+      "rub_tjs": 0.1011,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-09-15",
+      "usd_tjs": 7.0912,
+      "eur_tjs": 7.6402,
+      "rub_tjs": 0.1015,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-10-15",
+      "usd_tjs": 7.1637,
+      "eur_tjs": 7.7935,
+      "rub_tjs": 0.1026,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-11-15",
+      "usd_tjs": 7.2492,
+      "eur_tjs": 7.8648,
+      "rub_tjs": 0.1045,
+      "source": "synthetic"
+    },
+    {
+      "date": "2015-12-15",
+      "usd_tjs": 7.3948,
+      "eur_tjs": 7.9675,
+      "rub_tjs": 0.1057,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-01-15",
+      "usd_tjs": 7.8721,
+      "eur_tjs": 8.6788,
+      "rub_tjs": 0.1127,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-02-15",
+      "usd_tjs": 7.8453,
+      "eur_tjs": 8.7555,
+      "rub_tjs": 0.1132,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-03-15",
+      "usd_tjs": 7.9202,
+      "eur_tjs": 8.8141,
+      "rub_tjs": 0.1149,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-04-15",
+      "usd_tjs": 7.9425,
+      "eur_tjs": 8.8109,
+      "rub_tjs": 0.1161,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-05-15",
+      "usd_tjs": 8.0432,
+      "eur_tjs": 8.8712,
+      "rub_tjs": 0.1184,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-06-15",
+      "usd_tjs": 8.0761,
+      "eur_tjs": 8.9194,
+      "rub_tjs": 0.1199,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-07-15",
+      "usd_tjs": 8.0968,
+      "eur_tjs": 8.9508,
+      "rub_tjs": 0.1214,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-08-15",
+      "usd_tjs": 8.1354,
+      "eur_tjs": 9.0685,
+      "rub_tjs": 0.1236,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-09-15",
+      "usd_tjs": 8.2468,
+      "eur_tjs": 9.1514,
+      "rub_tjs": 0.1258,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-10-15",
+      "usd_tjs": 8.3611,
+      "eur_tjs": 9.1489,
+      "rub_tjs": 0.1278,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-11-15",
+      "usd_tjs": 8.4228,
+      "eur_tjs": 9.2429,
+      "rub_tjs": 0.1308,
+      "source": "synthetic"
+    },
+    {
+      "date": "2016-12-15",
+      "usd_tjs": 8.4269,
+      "eur_tjs": 9.2273,
+      "rub_tjs": 0.134,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-01-15",
+      "usd_tjs": 8.7161,
+      "eur_tjs": 9.7866,
+      "rub_tjs": 0.1526,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-02-15",
+      "usd_tjs": 8.7105,
+      "eur_tjs": 9.8853,
+      "rub_tjs": 0.1526,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-03-15",
+      "usd_tjs": 8.7872,
+      "eur_tjs": 10.0279,
+      "rub_tjs": 0.1523,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-04-15",
+      "usd_tjs": 8.7256,
+      "eur_tjs": 10.0037,
+      "rub_tjs": 0.1524,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-05-15",
+      "usd_tjs": 8.7408,
+      "eur_tjs": 10.0857,
+      "rub_tjs": 0.1529,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-06-15",
+      "usd_tjs": 8.8545,
+      "eur_tjs": 10.1324,
+      "rub_tjs": 0.1512,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-07-15",
+      "usd_tjs": 8.8272,
+      "eur_tjs": 10.215,
+      "rub_tjs": 0.1503,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-08-15",
+      "usd_tjs": 8.7862,
+      "eur_tjs": 10.3047,
+      "rub_tjs": 0.1502,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-09-15",
+      "usd_tjs": 8.8874,
+      "eur_tjs": 10.3909,
+      "rub_tjs": 0.1509,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-10-15",
+      "usd_tjs": 8.931,
+      "eur_tjs": 10.3891,
+      "rub_tjs": 0.1494,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-11-15",
+      "usd_tjs": 9.0764,
+      "eur_tjs": 10.5015,
+      "rub_tjs": 0.149,
+      "source": "synthetic"
+    },
+    {
+      "date": "2017-12-15",
+      "usd_tjs": 9.0882,
+      "eur_tjs": 10.4748,
+      "rub_tjs": 0.146,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-01-15",
+      "usd_tjs": 9.342,
+      "eur_tjs": 10.968,
+      "rub_tjs": 0.1425,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-02-15",
+      "usd_tjs": 9.306,
+      "eur_tjs": 11.011,
+      "rub_tjs": 0.1428,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-03-15",
+      "usd_tjs": 9.2983,
+      "eur_tjs": 10.989,
+      "rub_tjs": 0.1426,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-04-15",
+      "usd_tjs": 9.3072,
+      "eur_tjs": 10.9674,
+      "rub_tjs": 0.1421,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-05-15",
+      "usd_tjs": 9.3758,
+      "eur_tjs": 10.9535,
+      "rub_tjs": 0.1425,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-06-15",
+      "usd_tjs": 9.3401,
+      "eur_tjs": 10.9175,
+      "rub_tjs": 0.1431,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-07-15",
+      "usd_tjs": 9.3202,
+      "eur_tjs": 10.8451,
+      "rub_tjs": 0.1433,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-08-15",
+      "usd_tjs": 9.3367,
+      "eur_tjs": 10.9049,
+      "rub_tjs": 0.1435,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-09-15",
+      "usd_tjs": 9.3934,
+      "eur_tjs": 10.8493,
+      "rub_tjs": 0.143,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-10-15",
+      "usd_tjs": 9.3569,
+      "eur_tjs": 10.824,
+      "rub_tjs": 0.1441,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-11-15",
+      "usd_tjs": 9.3196,
+      "eur_tjs": 10.7468,
+      "rub_tjs": 0.1458,
+      "source": "synthetic"
+    },
+    {
+      "date": "2018-12-15",
+      "usd_tjs": 9.3539,
+      "eur_tjs": 10.7139,
+      "rub_tjs": 0.1454,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-01-15",
+      "usd_tjs": 9.5692,
+      "eur_tjs": 10.6359,
+      "rub_tjs": 0.1452,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-02-15",
+      "usd_tjs": 9.5595,
+      "eur_tjs": 10.703,
+      "rub_tjs": 0.1449,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-03-15",
+      "usd_tjs": 9.5664,
+      "eur_tjs": 10.776,
+      "rub_tjs": 0.1449,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-04-15",
+      "usd_tjs": 9.61,
+      "eur_tjs": 10.8677,
+      "rub_tjs": 0.1445,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-05-15",
+      "usd_tjs": 9.6437,
+      "eur_tjs": 10.9152,
+      "rub_tjs": 0.1453,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-06-15",
+      "usd_tjs": 9.6853,
+      "eur_tjs": 10.8981,
+      "rub_tjs": 0.1449,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-07-15",
+      "usd_tjs": 9.7362,
+      "eur_tjs": 10.9267,
+      "rub_tjs": 0.1444,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-08-15",
+      "usd_tjs": 9.745,
+      "eur_tjs": 11.0053,
+      "rub_tjs": 0.1443,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-09-15",
+      "usd_tjs": 9.8837,
+      "eur_tjs": 11.0694,
+      "rub_tjs": 0.1438,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-10-15",
+      "usd_tjs": 9.8452,
+      "eur_tjs": 11.2384,
+      "rub_tjs": 0.1431,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-11-15",
+      "usd_tjs": 9.9738,
+      "eur_tjs": 11.3199,
+      "rub_tjs": 0.1425,
+      "source": "synthetic"
+    },
+    {
+      "date": "2019-12-15",
+      "usd_tjs": 9.9431,
+      "eur_tjs": 11.454,
+      "rub_tjs": 0.1425,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-01-15",
+      "usd_tjs": 10.3789,
+      "eur_tjs": 12.2343,
+      "rub_tjs": 0.1392,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-02-15",
+      "usd_tjs": 10.5328,
+      "eur_tjs": 12.3825,
+      "rub_tjs": 0.1412,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-03-15",
+      "usd_tjs": 10.7246,
+      "eur_tjs": 12.4025,
+      "rub_tjs": 0.1412,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-04-15",
+      "usd_tjs": 10.7335,
+      "eur_tjs": 12.3879,
+      "rub_tjs": 0.1416,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-05-15",
+      "usd_tjs": 10.7459,
+      "eur_tjs": 12.4527,
+      "rub_tjs": 0.1429,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-06-15",
+      "usd_tjs": 10.678,
+      "eur_tjs": 12.5132,
+      "rub_tjs": 0.1424,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-07-15",
+      "usd_tjs": 10.6703,
+      "eur_tjs": 12.6064,
+      "rub_tjs": 0.1434,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-08-15",
+      "usd_tjs": 10.6819,
+      "eur_tjs": 12.6652,
+      "rub_tjs": 0.1449,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-09-15",
+      "usd_tjs": 10.7934,
+      "eur_tjs": 12.7672,
+      "rub_tjs": 0.1468,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-10-15",
+      "usd_tjs": 10.8537,
+      "eur_tjs": 12.8627,
+      "rub_tjs": 0.1474,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-11-15",
+      "usd_tjs": 10.9576,
+      "eur_tjs": 12.8305,
+      "rub_tjs": 0.1485,
+      "source": "synthetic"
+    },
+    {
+      "date": "2020-12-15",
+      "usd_tjs": 11.1462,
+      "eur_tjs": 12.8743,
+      "rub_tjs": 0.1497,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-01-15",
+      "usd_tjs": 11.3964,
+      "eur_tjs": 13.3,
+      "rub_tjs": 0.1558,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-02-15",
+      "usd_tjs": 11.3633,
+      "eur_tjs": 13.318,
+      "rub_tjs": 0.1567,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-03-15",
+      "usd_tjs": 11.2593,
+      "eur_tjs": 13.1912,
+      "rub_tjs": 0.1569,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-04-15",
+      "usd_tjs": 11.236,
+      "eur_tjs": 13.2048,
+      "rub_tjs": 0.1568,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-05-15",
+      "usd_tjs": 11.2905,
+      "eur_tjs": 13.0658,
+      "rub_tjs": 0.1588,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-06-15",
+      "usd_tjs": 11.3586,
+      "eur_tjs": 13.0061,
+      "rub_tjs": 0.1593,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-07-15",
+      "usd_tjs": 11.3401,
+      "eur_tjs": 12.9383,
+      "rub_tjs": 0.1605,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-08-15",
+      "usd_tjs": 11.3626,
+      "eur_tjs": 12.837,
+      "rub_tjs": 0.1634,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-09-15",
+      "usd_tjs": 11.2474,
+      "eur_tjs": 12.7954,
+      "rub_tjs": 0.1632,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-10-15",
+      "usd_tjs": 11.1926,
+      "eur_tjs": 12.6619,
+      "rub_tjs": 0.1643,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-11-15",
+      "usd_tjs": 11.1684,
+      "eur_tjs": 12.5105,
+      "rub_tjs": 0.1667,
+      "source": "synthetic"
+    },
+    {
+      "date": "2021-12-15",
+      "usd_tjs": 11.0613,
+      "eur_tjs": 12.2685,
+      "rub_tjs": 0.1686,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-01-15",
+      "usd_tjs": 10.825,
+      "eur_tjs": 11.3867,
+      "rub_tjs": 0.1767,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-02-15",
+      "usd_tjs": 10.8076,
+      "eur_tjs": 11.4041,
+      "rub_tjs": 0.1749,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-03-15",
+      "usd_tjs": 10.8567,
+      "eur_tjs": 11.3387,
+      "rub_tjs": 0.1736,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-04-15",
+      "usd_tjs": 10.8271,
+      "eur_tjs": 11.3664,
+      "rub_tjs": 0.1722,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-05-15",
+      "usd_tjs": 10.8112,
+      "eur_tjs": 11.4301,
+      "rub_tjs": 0.1699,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-06-15",
+      "usd_tjs": 10.9564,
+      "eur_tjs": 11.4885,
+      "rub_tjs": 0.1666,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-07-15",
+      "usd_tjs": 10.9311,
+      "eur_tjs": 11.4849,
+      "rub_tjs": 0.1625,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-08-15",
+      "usd_tjs": 10.8679,
+      "eur_tjs": 11.485,
+      "rub_tjs": 0.1594,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-09-15",
+      "usd_tjs": 10.8843,
+      "eur_tjs": 11.5861,
+      "rub_tjs": 0.1555,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-10-15",
+      "usd_tjs": 10.865,
+      "eur_tjs": 11.6264,
+      "rub_tjs": 0.1516,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-11-15",
+      "usd_tjs": 10.8868,
+      "eur_tjs": 11.5895,
+      "rub_tjs": 0.1477,
+      "source": "synthetic"
+    },
+    {
+      "date": "2022-12-15",
+      "usd_tjs": 10.8837,
+      "eur_tjs": 11.6384,
+      "rub_tjs": 0.1447,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-01-15",
+      "usd_tjs": 10.8801,
+      "eur_tjs": 11.8292,
+      "rub_tjs": 0.1216,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-02-15",
+      "usd_tjs": 10.867,
+      "eur_tjs": 11.7546,
+      "rub_tjs": 0.1213,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-03-15",
+      "usd_tjs": 10.8827,
+      "eur_tjs": 11.7983,
+      "rub_tjs": 0.1215,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-04-15",
+      "usd_tjs": 10.8807,
+      "eur_tjs": 11.8599,
+      "rub_tjs": 0.1211,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-05-15",
+      "usd_tjs": 10.8962,
+      "eur_tjs": 11.8671,
+      "rub_tjs": 0.1204,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-06-15",
+      "usd_tjs": 10.8881,
+      "eur_tjs": 11.837,
+      "rub_tjs": 0.1201,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-07-15",
+      "usd_tjs": 10.8291,
+      "eur_tjs": 11.6526,
+      "rub_tjs": 0.1206,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-08-15",
+      "usd_tjs": 10.8638,
+      "eur_tjs": 11.6749,
+      "rub_tjs": 0.1197,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-09-15",
+      "usd_tjs": 10.9106,
+      "eur_tjs": 11.786,
+      "rub_tjs": 0.1202,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-10-15",
+      "usd_tjs": 10.8659,
+      "eur_tjs": 11.7625,
+      "rub_tjs": 0.1203,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-11-15",
+      "usd_tjs": 10.9004,
+      "eur_tjs": 11.6926,
+      "rub_tjs": 0.1196,
+      "source": "synthetic"
+    },
+    {
+      "date": "2023-12-15",
+      "usd_tjs": 10.933,
+      "eur_tjs": 11.7631,
+      "rub_tjs": 0.119,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-01-15",
+      "usd_tjs": 10.8829,
+      "eur_tjs": 11.875,
+      "rub_tjs": 0.1185,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-02-15",
+      "usd_tjs": 10.9223,
+      "eur_tjs": 11.8189,
+      "rub_tjs": 0.1182,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-03-15",
+      "usd_tjs": 10.808,
+      "eur_tjs": 11.8152,
+      "rub_tjs": 0.118,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-04-15",
+      "usd_tjs": 10.881,
+      "eur_tjs": 11.8243,
+      "rub_tjs": 0.1182,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-05-15",
+      "usd_tjs": 10.9513,
+      "eur_tjs": 11.7937,
+      "rub_tjs": 0.1182,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-06-15",
+      "usd_tjs": 10.9725,
+      "eur_tjs": 11.8499,
+      "rub_tjs": 0.118,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-07-15",
+      "usd_tjs": 10.9702,
+      "eur_tjs": 11.8951,
+      "rub_tjs": 0.1175,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-08-15",
+      "usd_tjs": 10.9871,
+      "eur_tjs": 11.9061,
+      "rub_tjs": 0.1178,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-09-15",
+      "usd_tjs": 11.0655,
+      "eur_tjs": 11.8492,
+      "rub_tjs": 0.1177,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-10-15",
+      "usd_tjs": 11.0713,
+      "eur_tjs": 11.9349,
+      "rub_tjs": 0.1191,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-11-15",
+      "usd_tjs": 10.9447,
+      "eur_tjs": 11.9357,
+      "rub_tjs": 0.1187,
+      "source": "synthetic"
+    },
+    {
+      "date": "2024-12-15",
+      "usd_tjs": 10.8556,
+      "eur_tjs": 11.927,
+      "rub_tjs": 0.1182,
+      "source": "synthetic"
+    },
+    {
+      "date": "2026-04-06",
+      "usd_tjs": 9.5751,
+      "eur_tjs": 11.0545,
+      "rub_tjs": 0.1214,
+      "source": "synthetic"
+    },
+    {
+      "date": "2026-04-09",
+      "usd_tjs": 9.5466,
+      "eur_tjs": 11.1657,
+      "rub_tjs": 0.122,
+      "source": "synthetic"
+    },
+    {
+      "date": "2026-04-13",
+      "usd_tjs": 9.5243,
+      "eur_tjs": 11.1558,
+      "rub_tjs": 0.1237,
+      "source": "synthetic"
+    },
+    {
+      "date": "2026-04-16",
+      "usd_tjs": 9.4825,
+      "eur_tjs": 11.1704,
+      "rub_tjs": 0.1252,
+      "source": "synthetic"
+    },
+    {
+      "date": "2026-04-29",
+      "usd_tjs": 9.4025,
+      "eur_tjs": 11.0056,
+      "rub_tjs": 0.1254,
+      "source": "synthetic"
+    },
+    {
+      "date": "2026-04-30",
+      "usd_tjs": 9.4025,
+      "eur_tjs": 11.0056,
+      "rub_tjs": 0.1254,
+      "source": "synthetic"
+    }
+  ],
+  "official_forecast": {
+    "population_thou": {
+      "2023": 10163,
+      "2024": 10375.3,
+      "2025": 10593.2,
+      "2026": 10837,
+      "2027": 11097.1
+    },
+    "gdp_mln_somoni": {
+      "2023": 130791.5,
+      "2024": 146475,
+      "2025": 166065,
+      "2026": 187536,
+      "2027": 211197
+    },
+    "gdp_per_cap_som": {
+      "2023": 12869,
+      "2024": 14118,
+      "2025": 15677,
+      "2026": 17305,
+      "2027": 19032
+    },
+    "industry_mln": {
+      "2023": 46815.5,
+      "2024": 57807,
+      "2025": 71495,
+      "2026": 87116,
+      "2027": 106434
+    },
+    "agriculture_mln": {
+      "2023": 63028.4,
+      "2024": 69238,
+      "2025": 75429,
+      "2026": 82454,
+      "2027": 90861
+    },
+    "export_mln_usd": {
+      "2023": 2448.8,
+      "2024": 2615,
+      "2025": 2954,
+      "2026": 3189,
+      "2027": 3505
+    },
+    "import_mln_usd": {
+      "2023": 5880.1,
+      "2024": 5895,
+      "2025": 5949,
+      "2026": 6082,
+      "2027": 6210
+    },
+    "trade_balance_usd": {
+      "2023": -3431.3,
+      "2024": -3280,
+      "2025": -2995,
+      "2026": -2893,
+      "2027": -2705
+    },
+    "electricity_gwh": {
+      "2023": 3606.6,
+      "2024": 4012,
+      "2025": 4420,
+      "2026": 4976,
+      "2027": 5560
+    },
+    "aluminum_thou_t": {
+      "2023": 59.1,
+      "2024": 72.2,
+      "2025": 89.6,
+      "2026": 107.6,
+      "2027": 128.1
+    },
+    "wheat_thou_t": {
+      "2023": 1023.6,
+      "2024": 1078,
+      "2025": 1138,
+      "2026": 1207,
+      "2027": 1285
+    }
+  }
+}
