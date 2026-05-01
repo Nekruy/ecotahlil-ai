@@ -90,7 +90,6 @@ function groqChat(systemPrompt, userContent, maxTokens = 4000) {
 // ─── Инициализация базы данных ───────────────────────────────────────────────
 const { initDB, saveReport: dbSaveReport, getReports: dbGetReports } = require('./database');
 const authModule = require('./auth');
-initDB();
 
 // ─── File text extraction ────────────────────────────────────────────────────
 
@@ -1486,39 +1485,43 @@ const server = http.createServer(async (req, res) => {
   res.end('Not found');
 });
 
-// Запускаем планировщик ночного ETL при старте сервера
-(function initPipeline() {
-  try {
-    const { schedulePipeline } = require('./dataPipeline');
-    schedulePipeline({ runNow: false }); // Не запускаем сразу, ждём 02:00
-    console.log('[pipeline] Планировщик ETL активирован (02:00 ежедневно)');
-  } catch (e) {
-    console.warn('[pipeline] Не удалось запустить планировщик:', e.message);
-  }
-})();
-
-// Инициализация NBT-парсера: загружаем курсы в фоне + авто-обновление каждые 24ч
-(function initNBTParser() {
-  try {
-    const nbtParser = require('./nbtParser');
-    // Фоновая загрузка курсов при старте
-    nbtParser.saveRatesToDB()
-      .then(r => console.log(`[nbtParser] Инициализация завершена: ${r.entries} записей, последняя: ${r.latest?.date}`))
-      .catch(e => console.warn('[nbtParser] Ошибка инициализации:', e.message));
-    // Авто-обновление каждые 24 ч
-    nbtParser.startAutoRefresh();
-  } catch (e) {
-    console.warn('[nbtParser] Не удалось инициализировать:', e.message);
-  }
-})();
-
+// СНАЧАЛА слушаем порт — Railway должен увидеть ответ немедленно
 server.listen(PORT, '0.0.0.0', () => {
   const addr = server.address();
-  console.log(`[server] EcotahlilAI running — port=${addr.port} address=${addr.address} family=${addr.family}`);
+  console.log(`[server] EcotahlilAI running — port=${addr.port} address=${addr.address}`);
   console.log(`[server] PORT env=${process.env.PORT || '(not set, using 3000)'} NODE_ENV=${process.env.NODE_ENV || 'development'}`);
-  if (!GROQ_API_KEY) {
-    console.warn('[server] WARNING: GROQ_API_KEY not set');
-  }
+
+  // ПОТОМ тяжёлая инициализация — через 100ms после старта
+  setTimeout(() => {
+    // База данных
+    try { initDB(); } catch (e) { console.warn('[init] DB:', e.message); }
+
+    // ETL pipeline
+    try {
+      const { schedulePipeline } = require('./dataPipeline');
+      schedulePipeline({ runNow: false });
+      console.log('[pipeline] Планировщик ETL активирован (02:00 ежедневно)');
+    } catch (e) { console.warn('[pipeline] Не удалось запустить:', e.message); }
+
+    // NBT parser
+    try {
+      const nbtParser = require('./nbtParser');
+      nbtParser.saveRatesToDB()
+        .then(r => console.log(`[nbtParser] Инициализация завершена: ${r.entries} записей, последняя: ${r.latest?.date}`))
+        .catch(e => console.warn('[nbtParser] Ошибка инициализации:', e.message));
+      nbtParser.startAutoRefresh();
+    } catch (e) { console.warn('[nbtParser]', e.message); }
+
+    // Live data scheduler
+    try {
+      const liveDataModule = require('./liveData');
+      liveDataModule.startLiveDataScheduler();
+    } catch (e) { console.warn('[liveData]', e.message); }
+
+    if (!GROQ_API_KEY) {
+      console.warn('[server] WARNING: GROQ_API_KEY not set');
+    }
+  }, 100);
 });
 
 server.on('error', (err) => {
