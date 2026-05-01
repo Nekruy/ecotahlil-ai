@@ -5,22 +5,16 @@ const path  = require('path');
 
 const MODEL_VERSION = '3.0';
 
-// ── Master dataset loader (primary data source, lazy-safe) ───────────────────
-let masterLoader;
-try {
-  masterLoader = require('./masterDataLoader');
-} catch (e) {
-  console.warn('[server] masterDataLoader unavailable:', e.message);
-  masterLoader = {
-    ready: false,
-    getDataForForecasting: () => [],
-    getVARInputs: () => ({}),
-    getSummary: () => ({ ready: false, error: 'masterDataLoader not found' }),
-    getHistory: () => [],
-    resolve: () => null,
-    getYearValuePairs: () => [],
-  };
-}
+// ── Master dataset loader — инициализируется в setTimeout после server.listen ──
+let masterLoader = {
+  ready: false,
+  getDataForForecasting: () => [],
+  getVARInputs: () => ({}),
+  getSummary: () => ({ ready: false, error: 'masterDataLoader not loaded yet' }),
+  getHistory: () => [],
+  resolve: () => null,
+  getYearValuePairs: () => [],
+};
 
 // ── Tajik language module ─────────────────────────────────────────────────────
 const tajik = require('./tajik');
@@ -1517,6 +1511,12 @@ server.listen(PORT, '0.0.0.0', () => {
       const liveDataModule = require('./liveData');
       liveDataModule.startLiveDataScheduler();
     } catch (e) { console.warn('[liveData]', e.message); }
+
+    // Master dataset loader (тяжёлый readFileSync — грузим после старта)
+    try {
+      masterLoader = require('./masterDataLoader');
+      console.log('[MasterDataLoader] Ready');
+    } catch (e) { console.warn('[masterDataLoader]', e.message); }
 
     if (!GROQ_API_KEY) {
       console.warn('[server] WARNING: GROQ_API_KEY not set');
