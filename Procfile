@@ -1,1 +1,1 @@
-web: node startup_test.js
+web: node server.js
