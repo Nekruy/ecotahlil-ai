@@ -1,3 +1,4 @@
+process.stdout.write('[BOOT] server.js start ' + new Date().toISOString() + ' node=' + process.version + ' port=' + (process.env.PORT||'?') + '\n');
 const http  = require('http');
 const https = require('https');
 const fs    = require('fs');
