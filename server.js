@@ -1481,6 +1481,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 // СНАЧАЛА слушаем порт — Railway должен увидеть ответ немедленно
+process.stdout.write('[PRE-LISTEN] PORT=' + PORT + ' process.env.PORT=' + (process.env.PORT||'UNSET') + '\n');
 server.listen(PORT, '0.0.0.0', () => {
   const addr = server.address();
   console.log(`[server] EcotahlilAI running — port=${addr.port} address=${addr.address}`);
