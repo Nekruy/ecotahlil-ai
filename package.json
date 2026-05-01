@@ -1,10 +1,13 @@
 {
   "name": "ecotahlil-ai",
-  "version": "1.0.0",
-  "description": "Macroeconomic analysis backend",
+  "version": "3.0.0",
+  "description": "EcotahlilAI — Macroeconomic analysis platform with master dataset (1997–2035)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "mammoth": "^1.12.0",
