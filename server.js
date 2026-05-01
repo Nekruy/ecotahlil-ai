@@ -231,9 +231,14 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Health check — Railway / uptime monitors
-  if (req.method === 'GET' && (req.url === '/health' || req.url === '/ping')) {
+  if (req.method === 'GET' && (req.url === '/health' || req.url === '/healthz' || req.url === '/ping')) {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    return res.end(JSON.stringify({ status: 'ok', uptime: process.uptime(), port: PORT }));
+    return res.end(JSON.stringify({
+      status: 'ok',
+      uptime: Math.round(process.uptime()),
+      port: process.env.PORT || 3000,
+      env: process.env.NODE_ENV || 'development',
+    }));
   }
 
   // Serve index.html
@@ -1519,4 +1524,12 @@ server.listen(PORT, '0.0.0.0', () => {
 server.on('error', (err) => {
   console.error('[server] FATAL listen error:', err.message, err.code);
   process.exit(1);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('[uncaughtException]', err.message, err.stack);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[unhandledRejection]', reason);
 });
