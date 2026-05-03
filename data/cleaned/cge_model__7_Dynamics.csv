@@ -1,0 +1,388 @@
+﻿year,block,equation,description,value
+2024,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.337665
+2025,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.345474
+2026,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.345777
+2027,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.3483
+2028,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.346625
+2029,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.350384
+2030,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.349538
+2031,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.353535
+2032,Source: pinv_grp,Agriculture (pinv_a),1.337665,1.357053
+2024,Source: pinv_grp,Mining (pinv_mi),1.225397,1.225397
+2025,Source: pinv_grp,Mining (pinv_mi),1.225397,1.228645
+2026,Source: pinv_grp,Mining (pinv_mi),1.225397,1.228997
+2027,Source: pinv_grp,Mining (pinv_mi),1.225397,1.230463
+2028,Source: pinv_grp,Mining (pinv_mi),1.225397,1.232013
+2029,Source: pinv_grp,Mining (pinv_mi),1.225397,1.233426
+2030,Source: pinv_grp,Mining (pinv_mi),1.225397,1.234309
+2031,Source: pinv_grp,Mining (pinv_mi),1.225397,1.235575
+2032,Source: pinv_grp,Mining (pinv_mi),1.225397,1.235287
+2024,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.22811
+2025,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.231728
+2026,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.233321
+2027,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.235181
+2028,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.237348
+2029,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.236782
+2030,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.237047
+2031,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.23894
+2032,Source: pinv_grp,Manufacturing (pinv_m),1.22811,1.2398
+2024,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001183
+2025,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001185
+2026,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001186
+2027,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001188
+2028,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.00119
+2029,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001191
+2030,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001193
+2031,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001187
+2032,Source: pinv_grp,Energy and Water (pinv_e),1.001183,1.001191
+2024,Source: pinv_grp,Construction (pinv_c),1.464234,1.464234
+2025,Source: pinv_grp,Construction (pinv_c),1.464234,1.493732
+2026,Source: pinv_grp,Construction (pinv_c),1.464234,1.493753
+2027,Source: pinv_grp,Construction (pinv_c),1.464234,1.502199
+2028,Source: pinv_grp,Construction (pinv_c),1.464234,1.487327
+2029,Source: pinv_grp,Construction (pinv_c),1.464234,1.477163
+2030,Source: pinv_grp,Construction (pinv_c),1.464234,1.483823
+2031,Source: pinv_grp,Construction (pinv_c),1.464234,1.489229
+2032,Source: pinv_grp,Construction (pinv_c),1.464234,1.493848
+2024,Source: pinv_grp,Transport (pinv_t),1.27014,1.27014
+2025,Source: pinv_grp,Transport (pinv_t),1.27014,1.274185
+2026,Source: pinv_grp,Transport (pinv_t),1.27014,1.276463
+2027,Source: pinv_grp,Transport (pinv_t),1.27014,1.280864
+2028,Source: pinv_grp,Transport (pinv_t),1.27014,1.283393
+2029,Source: pinv_grp,Transport (pinv_t),1.27014,1.287641
+2030,Source: pinv_grp,Transport (pinv_t),1.27014,1.28201
+2031,Source: pinv_grp,Transport (pinv_t),1.27014,1.285242
+2032,Source: pinv_grp,Transport (pinv_t),1.27014,1.287084
+2024,Source: pinv_grp,Trade (pinv_tr),1.450717,1.450717
+2025,Source: pinv_grp,Trade (pinv_tr),1.450717,1.455346
+2026,Source: pinv_grp,Trade (pinv_tr),1.450717,1.459957
+2027,Source: pinv_grp,Trade (pinv_tr),1.450717,1.471265
+2028,Source: pinv_grp,Trade (pinv_tr),1.450717,1.475756
+2029,Source: pinv_grp,Trade (pinv_tr),1.450717,1.473099
+2030,Source: pinv_grp,Trade (pinv_tr),1.450717,1.477565
+2031,Source: pinv_grp,Trade (pinv_tr),1.450717,1.482022
+2032,Source: pinv_grp,Trade (pinv_tr),1.450717,1.486875
+2024,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010497
+2025,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010585
+2026,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010631
+2027,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010653
+2028,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.01069
+2029,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010727
+2030,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010748
+2031,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010815
+2032,Source: pinv_grp,Financial services (pinv_fs),1.010497,1.010819
+2024,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001176
+2025,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001178
+2026,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001182
+2027,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001181
+2028,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001183
+2029,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001185
+2030,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001186
+2031,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.001188
+2032,Source: pinv_grp,Public Services (pinv_ps),1.001176,1.00119
+2024,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001166
+2025,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.00117
+2026,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001173
+2027,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001178
+2028,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001182
+2029,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001183
+2030,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001186
+2031,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.00119
+2032,Source: pinv_grp,Market Services (pinv_ms),1.001166,1.001192
+2024,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.164759
+2025,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.171559
+2026,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.171822
+2027,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.17402
+2028,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.172561
+2029,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.175834
+2030,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.175097
+2031,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.178578
+2032,2. Capital Users costs in sector j,Agriculture (u_a),1.164759,1.181641
+2024,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9693503
+2025,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9719199
+2026,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9721986
+2027,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9733583
+2028,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9745843
+2029,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9757016
+2030,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9764004
+2031,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9774023
+2032,2. Capital Users costs in sector j,Mining (u_mi),0.9693503,0.9771738
+2024,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,0.8259001
+2025,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,0.8797165
+2026,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,0.9609208
+2027,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,0.9506305
+2028,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,1.092556
+2029,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,1.073182
+2030,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,1.058141
+2031,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,1.059761
+2032,2. Capital Users costs in sector j,Manufacturing (u_m),0.8259001,1.075801
+2024,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450792
+2025,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450805
+2026,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450816
+2027,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450834
+2028,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450846
+2029,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450857
+2030,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450873
+2031,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450827
+2032,2. Capital Users costs in sector j,Energy and Water (u_e),0.8450792,0.8450856
+2024,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.084634
+2025,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.106485
+2026,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.106501
+2027,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.112757
+2028,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.101741
+2029,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.094211
+2030,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.099145
+2031,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.10315
+2032,2. Capital Users costs in sector j,Construction (u_c),1.084634,1.106571
+2024,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.130597
+2025,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.134198
+2026,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.136226
+2027,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.140144
+2028,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.142394
+2029,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.146176
+2030,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.141163
+2031,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.144041
+2032,2. Capital Users costs in sector j,Transport (u_t),1.130597,1.14568
+2024,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.343332
+2025,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.347618
+2026,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.351888
+2027,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.362359
+2028,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.366518
+2029,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.364058
+2030,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.368193
+2031,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.37232
+2032,2. Capital Users costs in sector j,Trade (u_tr),1.343332,1.376814
+2024,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.006997
+2025,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007085
+2026,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007131
+2027,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007152
+2028,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.00719
+2029,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007226
+2030,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007247
+2031,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007314
+2032,2. Capital Users costs in sector j,Financial services (u_fs),1.006997,1.007318
+2024,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255913
+2025,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255925
+2026,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255953
+2027,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255948
+2028,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255962
+2029,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255973
+2030,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255984
+2031,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7255996
+2032,2. Capital Users costs in sector j,Public Services (u_ps),0.7255913,0.7256012
+2024,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769378
+2025,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769414
+2026,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769449
+2027,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769492
+2028,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769528
+2029,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769545
+2030,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769568
+2031,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769609
+2032,2. Capital Users costs in sector j,Market Services (u_ms),0.9769378,0.9769634
+2024,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.7470408
+2025,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.8550347
+2026,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.8382493
+2027,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.8646763
+2028,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.7605485
+2029,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.6901091
+2030,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.6466531
+2031,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.5872066
+2032,3. Demand for capital in activity j (satisfied by capital supply),Agriculture (ind_a),0.7470408,0.6332232
+2024,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,0.9636618
+2025,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,1.449303
+2026,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,1.51388
+2027,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,1.606995
+2028,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,0.7442531
+2029,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,0.7286625
+2030,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,0.6817515
+2031,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,0.6607484
+2032,3. Demand for capital in activity j (satisfied by capital supply),Mining (ind_mi),0.9636618,0.6665318
+2024,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.497279
+2025,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.282699
+2026,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.237364
+2027,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.081205
+2028,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,0.948878
+2029,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,0.973036
+2030,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.095947
+2031,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.042182
+2032,3. Demand for capital in activity j (satisfied by capital supply),Manufacturing (ind_m),1.497279,1.005437
+2024,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,1.360106
+2025,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,1.439547
+2026,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.8981904
+2027,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.852216
+2028,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.4121382
+2029,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.3617989
+2030,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.3459413
+2031,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.3165663
+2032,3. Demand for capital in activity j (satisfied by capital supply),Energy and Water (ind_e),1.360106,0.3693385
+2024,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,0.7807971
+2025,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.010267
+2026,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.186718
+2027,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.27098
+2028,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.306803
+2029,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.300024
+2030,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.368368
+2031,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.466491
+2032,3. Demand for capital in activity j (satisfied by capital supply),Construction (ind_c),0.7807971,1.538895
+2024,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,0.7606035
+2025,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,0.900216
+2026,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,1.0287
+2027,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,1.744421
+2028,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,1.729509
+2029,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,1.760956
+2030,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,1.698166
+2031,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,2.093896
+2032,3. Demand for capital in activity j (satisfied by capital supply),Transport (ind_t),0.7606035,2.398542
+2024,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.564609
+2025,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.5446542
+2026,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.4765999
+2027,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.5487004
+2028,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.4364622
+2029,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.4014518
+2030,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.3838024
+2031,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.4202223
+2032,3. Demand for capital in activity j (satisfied by capital supply),Trade (ind_tr),0.564609,0.3934936
+2024,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,1.755356
+2025,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,2.09015
+2026,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,1.821389
+2027,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,1.714319
+2028,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,1.738079
+2029,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,1.667025
+2030,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,0.8341419
+2031,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,0.7462787
+2032,3. Demand for capital in activity j (satisfied by capital supply),Financial services (ind_fs),1.755356,0.6471132
+2024,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.913161
+2025,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.148261
+2026,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.19934
+2027,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.18484
+2028,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.239277
+2029,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.400996
+2030,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.52126
+2031,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.701378
+2032,3. Demand for capital in activity j (satisfied by capital supply),Public Services (ind_ps),1.913161,1.86249
+2024,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2562458
+2025,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2608907
+2026,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2542156
+2027,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2802019
+2028,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2412236
+2029,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2202156
+2030,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2099784
+2031,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2217286
+2032,3. Demand for capital in activity j (satisfied by capital supply),Market Services (ind_ms),0.2562458,0.2376215
+2024,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,35214
+2025,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,36585
+2026,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,38089
+2027,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,39039
+2028,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,41977
+2029,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,46800
+2030,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,48621
+2031,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,53214
+2032,4. Endogenized capital stock supply,Agriculture (ks_a_d),35214,54639
+2024,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,5577
+2025,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,5660
+2026,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,5919
+2027,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,6152
+2028,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,9540
+2029,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,10284
+2030,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,11313
+2031,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,12198
+2032,4. Endogenized capital stock supply,Mining (ks_mi_d),5577,12644
+2024,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,16673
+2025,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,17913
+2026,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,18100
+2027,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,21273
+2028,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,22041
+2029,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,23011
+2030,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,23341
+2031,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,24467
+2032,4. Endogenized capital stock supply,Manufacturing (ks_m_d),16673,25158
+2024,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,3993
+2025,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,4446
+2026,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,6139
+2027,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,8546
+2028,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,12668
+2029,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,13964
+2030,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,15000
+2031,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,17250
+2032,4. Endogenized capital stock supply,Energy and Water (ks_e_d),3993,18682
+2024,4. Endogenized capital stock supply,Construction (ks_c_d),15258,15258
+2025,4. Endogenized capital stock supply,Construction (ks_c_d),15258,15824
+2026,4. Endogenized capital stock supply,Construction (ks_c_d),15258,16001
+2027,4. Endogenized capital stock supply,Construction (ks_c_d),15258,16294
+2028,4. Endogenized capital stock supply,Construction (ks_c_d),15258,16782
+2029,4. Endogenized capital stock supply,Construction (ks_c_d),15258,16968
+2030,4. Endogenized capital stock supply,Construction (ks_c_d),15258,17548
+2031,4. Endogenized capital stock supply,Construction (ks_c_d),15258,17709
+2032,4. Endogenized capital stock supply,Construction (ks_c_d),15258,18049
+2024,4. Endogenized capital stock supply,Transport (ks_t_d),6603,6603
+2025,4. Endogenized capital stock supply,Transport (ks_t_d),6603,6661
+2026,4. Endogenized capital stock supply,Transport (ks_t_d),6603,7177
+2027,4. Endogenized capital stock supply,Transport (ks_t_d),6603,7251
+2028,4. Endogenized capital stock supply,Transport (ks_t_d),6603,7737
+2029,4. Endogenized capital stock supply,Transport (ks_t_d),6603,8442
+2030,4. Endogenized capital stock supply,Transport (ks_t_d),6603,8888
+2031,4. Endogenized capital stock supply,Transport (ks_t_d),6603,8962
+2032,4. Endogenized capital stock supply,Transport (ks_t_d),6603,9449
+2024,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,18528
+2025,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,19467
+2026,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,21145
+2027,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,22070
+2028,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,26386
+2029,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,28054
+2030,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,30181
+2031,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,31538
+2032,4. Endogenized capital stock supply,Trade (ks_tr_d),18528,33603
+2024,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,3335
+2025,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,3493
+2026,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,3741
+2027,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,4098
+2028,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,4320
+2029,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,4670
+2030,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,7099
+2031,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,8079
+2032,4. Endogenized capital stock supply,Financial services (ks_fs_d),3335,8920
+2024,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,5460
+2025,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,7100
+2026,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,7615
+2027,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,8506
+2028,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,8736
+2029,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,9403
+2030,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,10093
+2031,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,10403
+2032,4. Endogenized capital stock supply,Public Services (ks_ps_d),5460,11047
+2024,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,1406
+2025,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,1688
+2026,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,2010
+2027,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,2378
+2028,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,2768
+2029,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,3399
+2030,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,3572
+2031,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,3879
+2032,4. Endogenized capital stock supply,Market Services (ks_ms_d),1406,4203
+2024,4. Endogenized capital stock supply,112047.30500148803,112047,112047
+2025,4. Endogenized capital stock supply,112047.30500148803,112047,118837
+2026,4. Endogenized capital stock supply,112047.30500148803,112047,125936
+2027,4. Endogenized capital stock supply,112047.30500148803,112047,135607
+2028,4. Endogenized capital stock supply,112047.30500148803,112047,152955
+2029,4. Endogenized capital stock supply,112047.30500148803,112047,164995
+2030,4. Endogenized capital stock supply,112047.30500148803,112047,175656
+2031,4. Endogenized capital stock supply,112047.30500148803,112047,187699
+2032,4. Endogenized capital stock supply,112047.30500148803,112047,196394
+2024,5. Labor supply using demographic model and data,Labor supply (lsd),23498,23498
+2025,5. Labor supply using demographic model and data,Labor supply (lsd),23498,25216.46
+2026,5. Labor supply using demographic model and data,Labor supply (lsd),23498,27152.24
+2027,5. Labor supply using demographic model and data,Labor supply (lsd),23498,30520.21
+2028,5. Labor supply using demographic model and data,Labor supply (lsd),23498,32286.86
+2029,5. Labor supply using demographic model and data,Labor supply (lsd),23498,35152.05
+2030,5. Labor supply using demographic model and data,Labor supply (lsd),23498,38072.82
+2031,5. Labor supply using demographic model and data,Labor supply (lsd),23498,41208.99
+2032,5. Labor supply using demographic model and data,Labor supply (lsd),23498,44720.1
+2024,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,149651.5
+2025,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,162416.7
+2026,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,161256.9
+2027,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,181010.6
+2028,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,189574.2
+2029,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,205656
+2030,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,215910.9
+2031,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,223102.1
+2032,6. Impact of demographic changes on the private consumption,Budget of households (cth),149651.5,232117.2

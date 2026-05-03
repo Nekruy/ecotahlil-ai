@@ -1,0 +1,567 @@
+﻿year,block,equation,description,value
+2024,,Labor Income (ld_hh),,23680.68
+2025,,Labor Income (ld_hh),,25401.47
+2026,,Labor Income (ld_hh),,27317.93
+2027,,Labor Income (ld_hh),,30652.71
+2028,,Labor Income (ld_hh),,32391.55
+2029,,Labor Income (ld_hh),,35240.68
+2030,,Labor Income (ld_hh),,38140.19
+2031,,Labor Income (ld_hh),,41212.87
+2032,,Labor Income (ld_hh),,44698.88
+2022,,Labor Income (ld_hh),,178198.9
+2023,,Labor Income (ld_hh),,181254.7
+2024,,Labor Income (ld_hh),,184455.1
+2025,,Labor Income (ld_hh),,190405.9
+2026,,Labor Income (ld_hh),,188270.8
+2027,,Labor Income (ld_hh),,197807.9
+2028,,Labor Income (ld_hh),,210908.4
+2029,,Labor Income (ld_hh),,217576.1
+2030,,Labor Income (ld_hh),,225813.1
+2022,,Доход домохозяйств,,75206.33
+2023,,Доход домохозяйств,,77968.46
+2024,,Доход домохозяйств,,82697.53
+2025,,Доход домохозяйств,,88077.81
+2026,,Доход домохозяйств,,105031.3
+2027,,Доход домохозяйств,,105712.3
+2028,,Доход домохозяйств,,105665.1
+2029,,Доход домохозяйств,,114942.5
+2030,,Доход домохозяйств,,120227.9
+2022,,Households Income,,-52160.38397598655
+2023,,Households Income,,-52505.95967074277
+2024,,Households Income,,-53379.3745542376
+2025,,Households Income,,-54582.93330284121
+2026,,Households Income,,-56534.52493687543
+2027,,Households Income,,-57766.38810740733
+2028,,Households Income,,-58487.93403952676
+2029,,Households Income,,-60478.71802548079
+2030,,Households Income,,-61602.98457467544
+2022,,Source: yh_1,,15708.052297690112
+2023,,Source: yh_1,,17506.423548080118
+2024,,Source: yh_1,,19566.12979922511
+2025,,Source: yh_1,,22519.253750002896
+2026,,Source: yh_1,,24521.2385918506
+2027,,Source: yh_1,,26472.6169832053
+2028,,Source: yh_1,,28444.478623736497
+2029,,Source: yh_1,,31427.918224772
+2030,,Source: yh_1,,33548.7775255795
+2024,,1,Households Income (yh),178198.9
+2025,,1,Households Income (yh),181254.7
+2026,,1,Households Income (yh),184455.1
+2027,,1,Households Income (yh),190405.9
+2028,,1,Households Income (yh),188270.8
+2029,,1,Households Income (yh),197807.9
+2030,,1,Households Income (yh),210908.4
+2031,,1,Households Income (yh),217576.1
+2032,,1,Households Income (yh),225813.1
+2024,Source: ydh_1,Households Income (ydh),,165220
+2025,Source: ydh_1,Households Income (ydh),,168053.2
+2026,Source: ydh_1,Households Income (ydh),,171020.6
+2027,Source: ydh_1,Households Income (ydh),,176537.9
+2028,Source: ydh_1,Households Income (ydh),,174558.3
+2029,Source: ydh_1,Households Income (ydh),,183400.8
+2030,Source: ydh_1,Households Income (ydh),,195547.1
+2031,Source: ydh_1,Households Income (ydh),,201729.2
+2032,Source: ydh_1,Households Income (ydh),,209366.3
+2024,Source: ydh_1,Сбережения домохозяйств,,212972.59999999998
+2024,Source: sh_1,Savings of Households (sh),,15568.47
+2025,Source: sh_1,Savings of Households (sh),,15835.44
+2026,Source: sh_1,Savings of Households (sh),,16115.05
+2027,Source: sh_1,Savings of Households (sh),,16634.94
+2028,Source: sh_1,Savings of Households (sh),,16448.4
+2029,Source: sh_1,Savings of Households (sh),,17281.62
+2030,Source: sh_1,Savings of Households (sh),,18426.15
+2031,Source: sh_1,Savings of Households (sh),,19008.68
+2032,Source: sh_1,Savings of Households (sh),,19728.31
+2024,Source: sh_1,Доход фирм,,15565.063387119968
+2024,Source: sf_1,Savings of Firms (sf),,30478.01
+2025,Source: sf_1,Savings of Firms (sf),,32299.64
+2026,Source: sf_1,Savings of Firms (sf),,34204.16
+2027,Source: sf_1,Savings of Firms (sf),,36798.7
+2028,Source: sf_1,Savings of Firms (sf),,41452.82
+2029,Source: sf_1,Savings of Firms (sf),,44682.92
+2030,Source: sf_1,Savings of Firms (sf),,47543.05
+2031,Source: sf_1,Savings of Firms (sf),,50773.95
+2032,Source: sf_1,Savings of Firms (sf),,53106.65
+2024,Source: sf_1,Сбережения правительства,,44182.98596928803
+2024,Source: sg_1,Savings of Government (sg),,15805.01
+2025,Source: sg_1,Savings of Government (sg),,15691.87
+2026,Source: sg_1,Savings of Government (sg),,16221.05
+2027,Source: sg_1,Savings of Government (sg),,15666.08
+2028,Source: sg_1,Savings of Government (sg),,24673.69
+2029,Source: sg_1,Savings of Government (sg),,18994.42
+2030,Source: sg_1,Savings of Government (sg),,13420.02
+2031,Source: sg_1,Savings of Government (sg),,15218.02
+2032,Source: sg_1,Savings of Government (sg),,15398.33
+2024,Source: sg_1,Доходы правительства,,16354.199999999993
+2024,Source: yg_1,Government's revenues (yg),,59317.95
+2025,Source: yg_1,Government's revenues (yg),,63914.72
+2026,Source: yg_1,Government's revenues (yg),,67197.62
+2027,Source: yg_1,Government's revenues (yg),,72636.77
+2028,Source: yg_1,Government's revenues (yg),,77828.42
+2029,Source: yg_1,Government's revenues (yg),,82925.37
+2030,Source: yg_1,Government's revenues (yg),,88058.96
+2031,Source: yg_1,Government's revenues (yg),,93957.1799999999
+2032,Source: yg_1,Government's revenues (yg),,98974.21
+2024,Source: tp_grp,Agriculture (tp_a),,154.3
+2025,Source: tp_grp,Agriculture (tp_a),,172.1956
+2026,Source: tp_grp,Agriculture (tp_a),,180.0704
+2027,Source: tp_grp,Agriculture (tp_a),,188.9284
+2028,Source: tp_grp,Agriculture (tp_a),,192.8
+2029,Source: tp_grp,Agriculture (tp_a),,203.2548
+2030,Source: tp_grp,Agriculture (tp_a),,205.2955
+2031,Source: tp_grp,Agriculture (tp_a),,214.1201
+2032,Source: tp_grp,Agriculture (tp_a),,227.6379
+2024,Source: tp_grp,Mining (tp_mi),,114.5565
+2025,Source: tp_grp,Mining (tp_mi),,145.4979
+2026,Source: tp_grp,Mining (tp_mi),,156.2666
+2027,Source: tp_grp,Mining (tp_mi),,168.1922
+2028,Source: tp_grp,Mining (tp_mi),,177.676
+2029,Source: tp_grp,Mining (tp_mi),,186.96
+2030,Source: tp_grp,Mining (tp_mi),,197.3191
+2031,Source: tp_grp,Mining (tp_mi),,210.2786
+2032,Source: tp_grp,Mining (tp_mi),,220.2655
+2024,Source: tp_grp,Manufacturing (tp_m),,1618.273
+2025,Source: tp_grp,Manufacturing (tp_m),,1735.143
+2026,Source: tp_grp,Manufacturing (tp_m),,1895.258
+2027,Source: tp_grp,Manufacturing (tp_m),,2078.124
+2028,Source: tp_grp,Manufacturing (tp_m),,2309.077
+2029,Source: tp_grp,Manufacturing (tp_m),,2521.12
+2030,Source: tp_grp,Manufacturing (tp_m),,2629.12
+2031,Source: tp_grp,Manufacturing (tp_m),,2729.41
+2032,Source: tp_grp,Manufacturing (tp_m),,2807.371
+2024,Source: tp_grp,Energy and Water (tp_e),,624.9335
+2025,Source: tp_grp,Energy and Water (tp_e),,730.1422
+2026,Source: tp_grp,Energy and Water (tp_e),,793.6334
+2027,Source: tp_grp,Energy and Water (tp_e),,1076.379
+2028,Source: tp_grp,Energy and Water (tp_e),,1106.161
+2029,Source: tp_grp,Energy and Water (tp_e),,1135.615
+2030,Source: tp_grp,Energy and Water (tp_e),,1183.638
+2031,Source: tp_grp,Energy and Water (tp_e),,1346.645
+2032,Source: tp_grp,Energy and Water (tp_e),,1559.578
+2024,Source: tp_grp,Construction (tp_c),,513.4607
+2025,Source: tp_grp,Construction (tp_c),,608.1064
+2026,Source: tp_grp,Construction (tp_c),,674.3637
+2027,Source: tp_grp,Construction (tp_c),,720.5002
+2028,Source: tp_grp,Construction (tp_c),,770.242
+2029,Source: tp_grp,Construction (tp_c),,786.5593
+2030,Source: tp_grp,Construction (tp_c),,829.9439
+2031,Source: tp_grp,Construction (tp_c),,876.6807
+2032,Source: tp_grp,Construction (tp_c),,917.7856
+2024,Source: tp_grp,Transport (tp_t),,406.7043
+2025,Source: tp_grp,Transport (tp_t),,456.4143
+2026,Source: tp_grp,Transport (tp_t),,522.891
+2027,Source: tp_grp,Transport (tp_t),,676.7949
+2028,Source: tp_grp,Transport (tp_t),,717.275
+2029,Source: tp_grp,Transport (tp_t),,771.7601
+2030,Source: tp_grp,Transport (tp_t),,843.1607
+2031,Source: tp_grp,Transport (tp_t),,950.3595
+2032,Source: tp_grp,Transport (tp_t),,1067.133
+2024,Source: tp_grp,Trade (tp_tr),,1036.504
+2025,Source: tp_grp,Trade (tp_tr),,1092.013
+2026,Source: tp_grp,Trade (tp_tr),,1117.694
+2027,Source: tp_grp,Trade (tp_tr),,1257.383
+2028,Source: tp_grp,Trade (tp_tr),,1349.95
+2029,Source: tp_grp,Trade (tp_tr),,1386.382
+2030,Source: tp_grp,Trade (tp_tr),,1453.688
+2031,Source: tp_grp,Trade (tp_tr),,1606.177
+2032,Source: tp_grp,Trade (tp_tr),,1660.462
+2024,Source: tp_grp,Financial services (tp_fs),,559.6082
+2025,Source: tp_grp,Financial services (tp_fs),,629.9252
+2026,Source: tp_grp,Financial services (tp_fs),,637.4798
+2027,Source: tp_grp,Financial services (tp_fs),,674.5428
+2028,Source: tp_grp,Financial services (tp_fs),,707.4529
+2029,Source: tp_grp,Financial services (tp_fs),,738.38
+2030,Source: tp_grp,Financial services (tp_fs),,789.0963
+2031,Source: tp_grp,Financial services (tp_fs),,836.5656
+2032,Source: tp_grp,Financial services (tp_fs),,864.6461
+2024,Source: tp_grp,Public Services (tp_ps),,394.7391
+2025,Source: tp_grp,Public Services (tp_ps),,400.5366
+2026,Source: tp_grp,Public Services (tp_ps),,437.6743
+2027,Source: tp_grp,Public Services (tp_ps),,489.2191
+2028,Source: tp_grp,Public Services (tp_ps),,514.5554
+2029,Source: tp_grp,Public Services (tp_ps),,588.007
+2030,Source: tp_grp,Public Services (tp_ps),,656.8075
+2031,Source: tp_grp,Public Services (tp_ps),,717.8194
+2032,Source: tp_grp,Public Services (tp_ps),,795.5911
+2024,Source: tp_grp,Market Services (tp_ms),,52.95066
+2025,Source: tp_grp,Market Services (tp_ms),,57.3555
+2026,Source: tp_grp,Market Services (tp_ms),,71.1259
+2027,Source: tp_grp,Market Services (tp_ms),,78.77188
+2028,Source: tp_grp,Market Services (tp_ms),,91.7547699999999
+2029,Source: tp_grp,Market Services (tp_ms),,97.13412
+2030,Source: tp_grp,Market Services (tp_ms),,97.90147
+2031,Source: tp_grp,Market Services (tp_ms),,112.4224
+2032,Source: tp_grp,Market Services (tp_ms),,119.8403
+2024,Source: tp_grp,Total (tp_tot),,5476.03
+2025,Source: tp_grp,Total (tp_tot),,6027.33
+2026,Source: tp_grp,Total (tp_tot),,6486.457
+2027,Source: tp_grp,Total (tp_tot),,7408.836
+2028,Source: tp_grp,Total (tp_tot),,7936.945
+2029,Source: tp_grp,Total (tp_tot),,8415.172
+2030,Source: tp_grp,Total (tp_tot),,8885.96999999999
+2031,Source: tp_grp,Total (tp_tot),,9600.47899999999
+2032,Source: tp_grp,Total (tp_tot),,10240.31
+2024,Source: tp_grp,Косвенные налоги,,5476.02996
+2025,Source: tp_grp,Косвенные налоги,,6027.329699999999
+2026,Source: tp_grp,Косвенные налоги,,6486.4571000000005
+2027,Source: tp_grp,Косвенные налоги,,7408.83548
+2028,Source: tp_grp,Косвенные налоги,,7936.94407
+2029,Source: tp_grp,Косвенные налоги,,8415.17232
+2030,Source: tp_grp,Косвенные налоги,,8885.970470000002
+2031,Source: tp_grp,Косвенные налоги,,9600.478299999999
+2032,Source: tp_grp,Косвенные налоги,,10240.3105
+2024,Source: ti_grp,Agriculture (ti_a),,3027.754
+2025,Source: ti_grp,Agriculture (ti_a),,3388.052
+2026,Source: ti_grp,Agriculture (ti_a),,3515.187
+2027,Source: ti_grp,Agriculture (ti_a),,3684.048
+2028,Source: ti_grp,Agriculture (ti_a),,3746.837
+2029,Source: ti_grp,Agriculture (ti_a),,3944.798
+2030,Source: ti_grp,Agriculture (ti_a),,3981.974
+2031,Source: ti_grp,Agriculture (ti_a),,4150.13
+2032,Source: ti_grp,Agriculture (ti_a),,4409.252
+2024,Source: ti_grp,Mining (ti_mi),,955.2161
+2025,Source: ti_grp,Mining (ti_mi),,1192.187
+2026,Source: ti_grp,Mining (ti_mi),,1264.267
+2027,Source: ti_grp,Mining (ti_mi),,1340.48
+2028,Source: ti_grp,Mining (ti_mi),,1384.092
+2029,Source: ti_grp,Mining (ti_mi),,1437.073
+2030,Source: ti_grp,Mining (ti_mi),,1506.07
+2031,Source: ti_grp,Mining (ti_mi),,1592.127
+2032,Source: ti_grp,Mining (ti_mi),,1642.896
+2024,Source: ti_grp,Manufacturing (ti_m),,3496.872
+2025,Source: ti_grp,Manufacturing (ti_m),,3721.094
+2026,Source: ti_grp,Manufacturing (ti_m),,4005.228
+2027,Source: ti_grp,Manufacturing (ti_m),,4329.774
+2028,Source: ti_grp,Manufacturing (ti_m),,4744.819
+2029,Source: ti_grp,Manufacturing (ti_m),,5096.263
+2030,Source: ti_grp,Manufacturing (ti_m),,5340.4
+2031,Source: ti_grp,Manufacturing (ti_m),,5528.497
+2032,Source: ti_grp,Manufacturing (ti_m),,5656.67
+2024,Source: ti_grp,Energy and Water (ti_e),,778.8238
+2025,Source: ti_grp,Energy and Water (ti_e),,899.645
+2026,Source: ti_grp,Energy and Water (ti_e),,967.9236
+2027,Source: ti_grp,Energy and Water (ti_e),,1301.704
+2028,Source: ti_grp,Energy and Water (ti_e),,1316.17
+2029,Source: ti_grp,Energy and Water (ti_e),,1342.251
+2030,Source: ti_grp,Energy and Water (ti_e),,1399.7
+2031,Source: ti_grp,Energy and Water (ti_e),,1524.872
+2032,Source: ti_grp,Energy and Water (ti_e),,1799.87
+2024,Source: ti_grp,Construction (ti_c),,1648.966
+2025,Source: ti_grp,Construction (ti_c),,1950.165
+2026,Source: ti_grp,Construction (ti_c),,2160.906
+2027,Source: ti_grp,Construction (ti_c),,2267.521
+2028,Source: ti_grp,Construction (ti_c),,2467.761
+2029,Source: ti_grp,Construction (ti_c),,2521.509
+2030,Source: ti_grp,Construction (ti_c),,2661.29
+2031,Source: ti_grp,Construction (ti_c),,2812.225
+2032,Source: ti_grp,Construction (ti_c),,2943.853
+2024,Source: ti_grp,Transport (ti_t),,752.0322
+2025,Source: ti_grp,Transport (ti_t),,834.4763
+2026,Source: ti_grp,Transport (ti_t),,952.0027
+2027,Source: ti_grp,Transport (ti_t),,1232.515
+2028,Source: ti_grp,Transport (ti_t),,1288.496
+2029,Source: ti_grp,Transport (ti_t),,1390.595
+2030,Source: ti_grp,Transport (ti_t),,1482.961
+2031,Source: ti_grp,Transport (ti_t),,1777.742
+2032,Source: ti_grp,Transport (ti_t),,1989.964
+2024,Source: ti_grp,Trade (ti_tr),,809.1038
+2025,Source: ti_grp,Trade (ti_tr),,852.386
+2026,Source: ti_grp,Trade (ti_tr),,872.0864
+2027,Source: ti_grp,Trade (ti_tr),,981.1529
+2028,Source: ti_grp,Trade (ti_tr),,1053.199
+2029,Source: ti_grp,Trade (ti_tr),,1081.268
+2030,Source: ti_grp,Trade (ti_tr),,1133.81
+2031,Source: ti_grp,Trade (ti_tr),,1252.223
+2032,Source: ti_grp,Trade (ti_tr),,1294.737
+2024,Source: ti_grp,Financial services (ti_fs),,1401.933
+2025,Source: ti_grp,Financial services (ti_fs),,1597.263
+2026,Source: ti_grp,Financial services (ti_fs),,1561.774
+2027,Source: ti_grp,Financial services (ti_fs),,1670.133
+2028,Source: ti_grp,Financial services (ti_fs),,1743.847
+2029,Source: ti_grp,Financial services (ti_fs),,1810.496
+2030,Source: ti_grp,Financial services (ti_fs),,1944.581
+2031,Source: ti_grp,Financial services (ti_fs),,2060.015
+2032,Source: ti_grp,Financial services (ti_fs),,2122.187
+2024,Source: ti_grp,Public Services (ti_ps),,784.8014
+2025,Source: ti_grp,Public Services (ti_ps),,794.4836
+2026,Source: ti_grp,Public Services (ti_ps),,868.2275
+2027,Source: ti_grp,Public Services (ti_ps),,965.2054
+2028,Source: ti_grp,Public Services (ti_ps),,1010
+2029,Source: ti_grp,Public Services (ti_ps),,1151.167
+2030,Source: ti_grp,Public Services (ti_ps),,1283.894
+2031,Source: ti_grp,Public Services (ti_ps),,1398.454
+2032,Source: ti_grp,Public Services (ti_ps),,1551.769
+2024,Source: ti_grp,Market Services (ti_ms),,180.1587
+2025,Source: ti_grp,Market Services (ti_ms),,191.5379
+2026,Source: ti_grp,Market Services (ti_ms),,229.1533
+2027,Source: ti_grp,Market Services (ti_ms),,252.3556
+2028,Source: ti_grp,Market Services (ti_ms),,285.7418
+2029,Source: ti_grp,Market Services (ti_ms),,301.1568
+2030,Source: ti_grp,Market Services (ti_ms),,296.7056
+2031,Source: ti_grp,Market Services (ti_ms),,332.9321
+2032,Source: ti_grp,Market Services (ti_ms),,353.1474
+2024,Source: ti_grp,Total (ti_tot),,13835.66
+2025,Source: ti_grp,Total (ti_tot),,15421.29
+2026,Source: ti_grp,Total (ti_tot),,16396.76
+2027,Source: ti_grp,Total (ti_tot),,18024.89
+2028,Source: ti_grp,Total (ti_tot),,19040.96
+2029,Source: ti_grp,Total (ti_tot),,20076.58
+2030,Source: ti_grp,Total (ti_tot),,21031.39
+2031,Source: ti_grp,Total (ti_tot),,22429.22
+2032,Source: ti_grp,Total (ti_tot),,23764.35
+2024,Source: ti_grp,14524.8,,13835.661
+2025,Source: ti_grp,14524.8,,15421.289799999999
+2026,Source: ti_grp,14524.8,,16396.755500000003
+2027,Source: ti_grp,14524.8,,18024.888899999998
+2028,Source: ti_grp,14524.8,,19040.9628
+2029,Source: ti_grp,14524.8,,20076.5768
+2030,Source: ti_grp,14524.8,,21031.3856
+2031,Source: ti_grp,14524.8,,22429.2171
+2032,Source: ti_grp,14524.8,,23764.3454
+2024,Source: ti_grp,Налоги на капитал,,14524.9
+2024,Source: tax_c_1,tax_c,,11818.91
+2025,Source: tax_c_1,tax_c,,12525.3
+2026,Source: tax_c_1,tax_c,,13263.85
+2027,Source: tax_c_1,tax_c,,14269.97
+2028,Source: tax_c_1,tax_c,,16074.77
+2029,Source: tax_c_1,tax_c,,17327.35
+2030,Source: tax_c_1,tax_c,,18436.47
+2031,Source: tax_c_1,tax_c,,19689.36
+2032,Source: tax_c_1,tax_c,,20593.95
+2024,Source: tax_c_1,Налог на доходы домохозяйств,,11818.5
+2024,Source: dth_1,dth,,12978.88
+2025,Source: dth_1,dth,,13201.47
+2026,Source: dth_1,dth,,13434.57
+2027,Source: dth_1,dth,,13867.99
+2028,Source: dth_1,dth,,13712.48
+2029,Source: dth_1,dth,,14407.11
+2030,Source: dth_1,dth,,15361.27
+2031,Source: dth_1,dth,,15846.9
+2032,Source: dth_1,dth,,16446.83
+2024,Source: dth_1,Налог на доход фирм,,12976
+2024,Source: dtf_1,dtf,,9229.674
+2025,Source: dtf_1,dtf,,9781.31799999999
+2026,Source: dtf_1,dtf,,10358.07
+2027,Source: dtf_1,dtf,,11143.77
+2028,Source: dtf_1,dtf,,12553.18
+2029,Source: dtf_1,dtf,,13531.35
+2030,Source: dtf_1,dtf,,14397.49
+2031,Source: dtf_1,dtf,,15375.91
+2032,Source: dtf_1,dtf,,16082.32
+2024,Source: dtf_1,Таможенная пошлина,,15577.699999999999
+2024,Source: tim_grp,Agriculture (tim_a),,223.0015
+2025,Source: tim_grp,Agriculture (tim_a),,252.3769
+2026,Source: tim_grp,Agriculture (tim_a),,238.7786
+2027,Source: tim_grp,Agriculture (tim_a),,253.8722
+2028,Source: tim_grp,Agriculture (tim_a),,258.669
+2029,Source: tim_grp,Agriculture (tim_a),,273.2917
+2030,Source: tim_grp,Agriculture (tim_a),,276.2416
+2031,Source: tim_grp,Agriculture (tim_a),,288.0786
+2032,Source: tim_grp,Agriculture (tim_a),,305.7044
+2024,Source: tim_grp,Mining (tim_mi),,12.86548
+2025,Source: tim_grp,Mining (tim_mi),,15.47927
+2026,Source: tim_grp,Mining (tim_mi),,16.32992
+2027,Source: tim_grp,Mining (tim_mi),,17.19542
+2028,Source: tim_grp,Mining (tim_mi),,17.64266
+2029,Source: tim_grp,Mining (tim_mi),,18.131
+2030,Source: tim_grp,Mining (tim_mi),,19.00821
+2031,Source: tim_grp,Mining (tim_mi),,21.44519
+2032,Source: tim_grp,Mining (tim_mi),,22.09296
+2024,Source: tim_grp,Manufacturing (tim_m),,1768.13
+2025,Source: tim_grp,Manufacturing (tim_m),,1866.209
+2026,Source: tim_grp,Manufacturing (tim_m),,1989.446
+2027,Source: tim_grp,Manufacturing (tim_m),,2133.088
+2028,Source: tim_grp,Manufacturing (tim_m),,2314.212
+2029,Source: tim_grp,Manufacturing (tim_m),,2454.225
+2030,Source: tim_grp,Manufacturing (tim_m),,2590.775
+2031,Source: tim_grp,Manufacturing (tim_m),,2692.724
+2032,Source: tim_grp,Manufacturing (tim_m),,2752.17
+2024,Source: tim_grp,Energy and Water (tim_e),,24.65885
+2025,Source: tim_grp,Energy and Water (tim_e),,27.63584
+2026,Source: tim_grp,Energy and Water (tim_e),,29.33033
+2027,Source: tim_grp,Energy and Water (tim_e),,38.50929
+2028,Source: tim_grp,Energy and Water (tim_e),,37.88051
+2029,Source: tim_grp,Energy and Water (tim_e),,38.26773
+2030,Source: tim_grp,Energy and Water (tim_e),,39.58512
+2031,Source: tim_grp,Energy and Water (tim_e),,40.23046
+2032,Source: tim_grp,Energy and Water (tim_e),,47.95065
+2024,Source: tim_grp,Construction (tim_c),,51.46191
+2025,Source: tim_grp,Construction (tim_c),,58.54437
+2026,Source: tim_grp,Construction (tim_c),,63.40248
+2027,Source: tim_grp,Construction (tim_c),,31.755
+2028,Source: tim_grp,Construction (tim_c),,72.09045
+2029,Source: tim_grp,Construction (tim_c),,74.90025
+2030,Source: tim_grp,Construction (tim_c),,79.64359
+2031,Source: tim_grp,Construction (tim_c),,85.06172
+2032,Source: tim_grp,Construction (tim_c),,88.85065
+2024,Source: tim_grp,Transport (tim_t),,146.8808
+2025,Source: tim_grp,Transport (tim_t),,158.0347
+2026,Source: tim_grp,Transport (tim_t),,181.5918
+2027,Source: tim_grp,Transport (tim_t),,236.0371
+2028,Source: tim_grp,Transport (tim_t),,240.7881
+2029,Source: tim_grp,Transport (tim_t),,259.9879
+2030,Source: tim_grp,Transport (tim_t),,275.6107
+2031,Source: tim_grp,Transport (tim_t),,402.7462
+2032,Source: tim_grp,Transport (tim_t),,450.7444
+2024,Source: tim_grp,Trade (tim_tr),,2.659408
+2025,Source: tim_grp,Trade (tim_tr),,2.740337
+2026,Source: tim_grp,Trade (tim_tr),,2.697873
+2027,Source: tim_grp,Trade (tim_tr),,3.060487
+2028,Source: tim_grp,Trade (tim_tr),,3.221679
+2029,Source: tim_grp,Trade (tim_tr),,3.210088
+2030,Source: tim_grp,Trade (tim_tr),,3.353619
+2031,Source: tim_grp,Trade (tim_tr),,3.601489
+2032,Source: tim_grp,Trade (tim_tr),,3.685531
+2024,Source: tim_grp,Financial services (tim_fs),,1096.731
+2025,Source: tim_grp,Financial services (tim_fs),,1277.871
+2026,Source: tim_grp,Financial services (tim_fs),,1179.474
+2027,Source: tim_grp,Financial services (tim_fs),,1283.87
+2028,Source: tim_grp,Financial services (tim_fs),,1328.744
+2029,Source: tim_grp,Financial services (tim_fs),,1367.297
+2030,Source: tim_grp,Financial services (tim_fs),,1480.719
+2031,Source: tim_grp,Financial services (tim_fs),,1567.56
+2032,Source: tim_grp,Financial services (tim_fs),,1608.058
+2024,Source: tim_grp,Public Services (tim_ps),,165.8664
+2025,Source: tim_grp,Public Services (tim_ps),,166.2085
+2026,Source: tim_grp,Public Services (tim_ps),,181.6385
+2027,Source: tim_grp,Public Services (tim_ps),,196.9164
+2028,Source: tim_grp,Public Services (tim_ps),,201.0874
+2029,Source: tim_grp,Public Services (tim_ps),,226.3768
+2030,Source: tim_grp,Public Services (tim_ps),,250.6687
+2031,Source: tim_grp,Public Services (tim_ps),,268.8053
+2032,Source: tim_grp,Public Services (tim_ps),,300.1681
+2024,Source: tim_grp,Market Services (tim_ms),,0
+2025,Source: tim_grp,Market Services (tim_ms),,0
+2026,Source: tim_grp,Market Services (tim_ms),,0
+2027,Source: tim_grp,Market Services (tim_ms),,0
+2028,Source: tim_grp,Market Services (tim_ms),,0
+2029,Source: tim_grp,Market Services (tim_ms),,0
+2030,Source: tim_grp,Market Services (tim_ms),,0
+2031,Source: tim_grp,Market Services (tim_ms),,0
+2032,Source: tim_grp,Market Services (tim_ms),,0
+2024,Source: tim_grp,Total (tim_tot),,3492.255
+2025,Source: tim_grp,Total (tim_tot),,3825.1
+2026,Source: tim_grp,Total (tim_tot),,3882.69
+2027,Source: tim_grp,Total (tim_tot),,4194.304
+2028,Source: tim_grp,Total (tim_tot),,4474.336
+2029,Source: tim_grp,Total (tim_tot),,4715.688
+2030,Source: tim_grp,Total (tim_tot),,5015.606
+2031,Source: tim_grp,Total (tim_tot),,5370.252
+2032,Source: tim_grp,Total (tim_tot),,5579.425
+2024,Source: tim_grp,2487.1354464423202,2487.1354713136743,3492.2553479999997
+2025,Source: tim_grp,2487.1354464423202,2487.1354713136743,3825.0999170000005
+2026,Source: tim_grp,2487.1354464423202,2487.1354713136743,3882.6895029999996
+2027,Source: tim_grp,2487.1354464423202,2487.1354713136743,4194.303897
+2028,Source: tim_grp,2487.1354464423202,2487.1354713136743,4474.335799
+2029,Source: tim_grp,2487.1354464423202,2487.1354713136743,4715.687468
+2030,Source: tim_grp,2487.1354464423202,2487.1354713136743,5015.605539
+2031,Source: tim_grp,2487.1354464423202,2487.1354713136743,5370.252959000001
+2032,Source: tim_grp,2487.1354464423202,2487.1354713136743,5579.424691
+2024,Source: tie_grp,Agriculture (tie_a),,109.2274
+2025,Source: tie_grp,Agriculture (tie_a),,111.6147
+2026,Source: tie_grp,Agriculture (tie_a),,129.7539
+2027,Source: tie_grp,Agriculture (tie_a),,146.6879
+2028,Source: tie_grp,Agriculture (tie_a),,168.7723
+2029,Source: tie_grp,Agriculture (tie_a),,186.5017
+2030,Source: tie_grp,Agriculture (tie_a),,192.2557
+2031,Source: tie_grp,Agriculture (tie_a),,204.9602
+2032,Source: tie_grp,Agriculture (tie_a),,221.5249
+2024,Source: tie_grp,Mining (tie_mi),,500.6276
+2025,Source: tie_grp,Mining (tie_mi),,641.3109
+2026,Source: tie_grp,Mining (tie_mi),,707.4625
+2027,Source: tie_grp,Mining (tie_mi),,784.25
+2028,Source: tie_grp,Mining (tie_mi),,866.9778
+2029,Source: tie_grp,Mining (tie_mi),,930.8156
+2030,Source: tie_grp,Mining (tie_mi),,996.7217
+2031,Source: tie_grp,Mining (tie_mi),,1129.545
+2032,Source: tie_grp,Mining (tie_mi),,1213.033
+2024,Source: tie_grp,Manufacturing (tie_m),,237.7794
+2025,Source: tie_grp,Manufacturing (tie_m),,256.4533
+2026,Source: tie_grp,Manufacturing (tie_m),,299.3433
+2027,Source: tie_grp,Manufacturing (tie_m),,351.4338
+2028,Source: tie_grp,Manufacturing (tie_m),,409.7234
+2029,Source: tie_grp,Manufacturing (tie_m),,470.078
+2030,Source: tie_grp,Manufacturing (tie_m),,494.1198
+2031,Source: tie_grp,Manufacturing (tie_m),,536.4589
+2032,Source: tie_grp,Manufacturing (tie_m),,569.0038
+2024,Source: tie_grp,Energy and Water (tie_e),,93.26333
+2025,Source: tie_grp,Energy and Water (tie_e),,116.8826
+2026,Source: tie_grp,Energy and Water (tie_e),,135.2361
+2027,Source: tie_grp,Energy and Water (tie_e),,191.6235
+2028,Source: tie_grp,Energy and Water (tie_e),,213.8614
+2029,Source: tie_grp,Energy and Water (tie_e),,226.6195
+2030,Source: tie_grp,Energy and Water (tie_e),,235.1301
+2031,Source: tie_grp,Energy and Water (tie_e),,319.099
+2032,Source: tie_grp,Energy and Water (tie_e),,342.4778
+2024,Source: tie_grp,Construction (tie_c),,0
+2025,Source: tie_grp,Construction (tie_c),,0
+2026,Source: tie_grp,Construction (tie_c),,0
+2027,Source: tie_grp,Construction (tie_c),,0
+2028,Source: tie_grp,Construction (tie_c),,0
+2029,Source: tie_grp,Construction (tie_c),,0
+2030,Source: tie_grp,Construction (tie_c),,0
+2031,Source: tie_grp,Construction (tie_c),,0
+2032,Source: tie_grp,Construction (tie_c),,0
+2024,Source: tie_grp,Transport (tie_t),,139.4749
+2025,Source: tie_grp,Transport (tie_t),,157.3654
+2026,Source: tie_grp,Transport (tie_t),,188.0882
+2027,Source: tie_grp,Transport (tie_t),,245.1004
+2028,Source: tie_grp,Transport (tie_t),,268.5321
+2029,Source: tie_grp,Transport (tie_t),,284.0138
+2030,Source: tie_grp,Transport (tie_t),,350.5743
+2031,Source: tie_grp,Transport (tie_t),,418.9134
+2032,Source: tie_grp,Transport (tie_t),,476.9543
+2024,Source: tie_grp,Trade (tie_tr),,4.201042
+2025,Source: tie_grp,Trade (tie_tr),,4.452306
+2026,Source: tie_grp,Trade (tie_tr),,5.146241
+2027,Source: tie_grp,Trade (tie_tr),,5.669755
+2028,Source: tie_grp,Trade (tie_tr),,6.391395
+2029,Source: tie_grp,Trade (tie_tr),,7.159015
+2030,Source: tie_grp,Trade (tie_tr),,7.396129
+2031,Source: tie_grp,Trade (tie_tr),,9.08547
+2032,Source: tie_grp,Trade (tie_tr),,8.972367
+2024,Source: tie_grp,Financial services (tie_fs),,11.76295
+2025,Source: tie_grp,Financial services (tie_fs),,14.28762
+2026,Source: tie_grp,Financial services (tie_fs),,16.04498
+2027,Source: tie_grp,Financial services (tie_fs),,16.14309
+2028,Source: tie_grp,Financial services (tie_fs),,16.42122
+2029,Source: tie_grp,Financial services (tie_fs),,17.6095
+2030,Source: tie_grp,Financial services (tie_fs),,18.19306
+2031,Source: tie_grp,Financial services (tie_fs),,19.78659
+2032,Source: tie_grp,Financial services (tie_fs),,21.74989
+2024,Source: tie_grp,Public Services (tie_ps),,3.360846
+2025,Source: tie_grp,Public Services (tie_ps),,3.603911
+2026,Source: tie_grp,Public Services (tie_ps),,3.842434
+2027,Source: tie_grp,Public Services (tie_ps),,4.688031
+2028,Source: tie_grp,Public Services (tie_ps),,5.302416
+2029,Source: tie_grp,Public Services (tie_ps),,6.361491
+2030,Source: tie_grp,Public Services (tie_ps),,7.344777
+2031,Source: tie_grp,Public Services (tie_ps),,8.708245
+2032,Source: tie_grp,Public Services (tie_ps),,9.700136
+2024,Source: tie_grp,Market Services (tie_ms),,0.8402095
+2025,Source: tie_grp,Market Services (tie_ms),,0.9384413
+2026,Source: tie_grp,Market Services (tie_ms),,1.309526
+2027,Source: tie_grp,Market Services (tie_ms),,1.406562
+2028,Source: tie_grp,Market Services (tie_ms),,1.76123
+2029,Source: tie_grp,Market Services (tie_ms),,2802508
+2030,Source: tie_grp,Market Services (tie_ms),,2.038276
+2031,Source: tie_grp,Market Services (tie_ms),,2.509355
+2032,Source: tie_grp,Market Services (tie_ms),,2.621597
+2024,Source: tie_grp,Total (tie_tot),,1100.538
+2025,Source: tie_grp,Total (tie_tot),,1306.909
+2026,Source: tie_grp,Total (tie_tot),,1486.227
+2027,Source: tie_grp,Total (tie_tot),,1747.003
+2028,Source: tie_grp,Total (tie_tot),,1957.743
+2029,Source: tie_grp,Total (tie_tot),,2131.116
+2030,Source: tie_grp,Total (tie_tot),,2303.774
+2031,Source: tie_grp,Total (tie_tot),,2649.066
+2032,Source: tie_grp,Total (tie_tot),,2866.038
+2024,Source: tie_grp,1315.5896628904927,,1100.5376775
+2025,Source: tie_grp,1315.5896628904927,,1306.9091782999997
+2026,Source: tie_grp,1315.5896628904927,,1486.2271809999997
+2027,Source: tie_grp,1315.5896628904927,,1747.0030379999998
+2028,Source: tie_grp,1315.5896628904927,,1957.7432610000003
+2029,Source: tie_grp,1315.5896628904927,,2804637.158606
+2030,Source: tie_grp,1315.5896628904927,,2303.773842
+2031,Source: tie_grp,1315.5896628904927,,2649.0661600000003
+2032,Source: tie_grp,1315.5896628904927,,2866.0377899999994

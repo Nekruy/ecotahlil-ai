@@ -488,7 +488,100 @@ function calibrateFromForecast() {
   }
 }
 
+/**
+ * loadRealCalibration() — обновляет MACRO из реальных данных МЭРиТ.
+ * Читает unified_dataset.json и new_ministry_data.json.
+ * Вычисляет средние доли переводов, экспорта и импорта к ВВП за 2015–2024.
+ */
+function loadRealCalibration() {
+  const UNIFIED_FILE   = path.join(__dirname, 'data', 'unified_dataset.json');
+  const NEW_MERT_FILE  = path.join(__dirname, 'data', 'new_ministry_data.json');
+
+  try {
+    // ── 1. unified_dataset.json ──────────────────────────────────────────────
+    let rows = [];
+    if (fs.existsSync(UNIFIED_FILE)) {
+      const ud = JSON.parse(fs.readFileSync(UNIFIED_FILE, 'utf8'));
+      rows = (ud.annual || []).filter(r => r.year >= 2015 && r.year <= 2024);
+    }
+
+    // ── 2. new_ministry_data.json (дополнение: данные CGE 2022-2024) ─────────
+    let cgeRows = [];
+    if (fs.existsSync(NEW_MERT_FILE)) {
+      const nm = JSON.parse(fs.readFileSync(NEW_MERT_FILE, 'utf8'));
+      cgeRows = (nm.cge_forecast || []).filter(r => r.year >= 2015 && r.year <= 2024);
+    }
+
+    if (rows.length < 3 && cgeRows.length < 3) {
+      return { calibrated: false, reason: 'недостаточно данных (нужно ≥ 3 лет 2015–2024)' };
+    }
+
+    // ── 3. Вычисляем доли (используем млн сомони) ───────────────────────────
+    const remitRatios  = [];
+    const exportRatios = [];
+    const importRatios = [];
+
+    for (const r of rows) {
+      const gdpMln = r.gdp_mln_somoni;
+      if (!gdpMln || gdpMln <= 0) continue;
+
+      // Переводы в млн сомони (remittances_mln_usd × средний курс ~10)
+      const usdRate = r.usd_tjs_rate || 10.0;
+      if (r.remittances_mln_usd && r.remittances_mln_usd > 0)
+        remitRatios.push((r.remittances_mln_usd * usdRate) / gdpMln);
+      if (r.export_mln_usd && r.export_mln_usd > 0)
+        exportRatios.push((r.export_mln_usd * usdRate) / gdpMln);
+      if (r.import_mln_usd && r.import_mln_usd > 0)
+        importRatios.push((r.import_mln_usd * usdRate) / gdpMln);
+    }
+
+    // Fallback: CGE данные если unified пустой
+    for (const r of cgeRows) {
+      const gdpMln = r.gdp_mln_somoni;
+      if (!gdpMln || gdpMln <= 0) continue;
+      const usdRate = r.usd_tjs_rate || 10.5;
+      if (r.export_mln_usd && exportRatios.length < 3)
+        exportRatios.push((r.export_mln_usd * usdRate) / gdpMln);
+      if (r.import_mln_usd && importRatios.length < 3)
+        importRatios.push((r.import_mln_usd * usdRate) / gdpMln);
+    }
+
+    const avg = arr => arr.length ? arr.reduce((s, v) => s + v, 0) / arr.length : null;
+
+    const remitAvg  = avg(remitRatios);
+    const exportAvg = avg(exportRatios);
+    const importAvg = avg(importRatios);
+
+    // Обновляем MACRO только если данные реалистичны
+    if (remitAvg  && remitAvg  > 0.05 && remitAvg  < 0.80) MACRO.remit_gdp  = Math.round(remitAvg  * 100) / 100;
+    if (exportAvg && exportAvg > 0.05 && exportAvg < 0.90) MACRO.export_gdp = Math.round(exportAvg * 100) / 100;
+    if (importAvg && importAvg > 0.05 && importAvg < 0.90) MACRO.import_gdp = Math.round(importAvg * 100) / 100;
+
+    MACRO.calibration.source     = 'SAM 2019 + МЭРиТ РТ 1997–2024 (auto)';
+    MACRO.calibration.updated_at = new Date().toISOString().slice(0, 7);
+
+    console.log(
+      `[cgeModel] Реальная калибровка: remit/GDP=${MACRO.remit_gdp} ` +
+      `exp/GDP=${MACRO.export_gdp} imp/GDP=${MACRO.import_gdp} ` +
+      `(n=${rows.length} лет)`
+    );
+
+    return {
+      calibrated:  true,
+      remit_gdp:   MACRO.remit_gdp,
+      export_gdp:  MACRO.export_gdp,
+      import_gdp:  MACRO.import_gdp,
+      data_years:  rows.length,
+      source:      'unified_dataset.json + new_ministry_data.json',
+    };
+  } catch (e) {
+    console.warn('[cgeModel] loadRealCalibration не удалась:', e.message);
+    return { calibrated: false, reason: e.message };
+  }
+}
+
 // Перекалибровка при загрузке модуля
+const _realCal   = loadRealCalibration();
 const _calibration = calibrateFromForecast();
 
 // ─── Обёртка cgeSimulate с полем calibration ────────────────────────────────
@@ -508,4 +601,4 @@ function cgeSimulateWithCalibration(shock) {
   };
 }
 
-module.exports = { cgeSimulate: cgeSimulateWithCalibration, cobbDouglas, SECTORS, MACRO, calibrateFromForecast };
+module.exports = { cgeSimulate: cgeSimulateWithCalibration, cobbDouglas, SECTORS, MACRO, calibrateFromForecast, loadRealCalibration };

@@ -1,0 +1,680 @@
+﻿year,block,equation,description,value
+2024,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,35915.753245129155
+2025,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,38771.31917098321
+2026,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,44884.82568122416
+2027,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,51040.39137211078
+2028,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,64274.18344700884
+2029,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,67157.09712731898
+2030,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,69302.96833551828
+2031,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,87150.44591601931
+2032,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,87774.05238267881
+2024,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,23.157335403287433
+2025,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,22.406109021791355
+2026,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,22.705273980611473
+2027,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,22.88932461357304
+2028,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,25.501431831556832
+2029,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,23.212781359818024
+2030,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,21.321287175238194
+2031,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,23.660913791541375
+2032,Source: gdp_va_grp,Agriculture (gdp_va_a),35915.753245129155,21.202981073208708
+2024,Source: gdp_va_grp,Industry,32666.614523809792,32666.614523809792
+2025,Source: gdp_va_grp,Industry,32666.614523809792,36764.9706101932
+2026,Source: gdp_va_grp,Industry,32666.614523809792,45302.80113561167
+2027,Source: gdp_va_grp,Industry,32666.614523809792,51435.26927261184
+2028,Source: gdp_va_grp,Industry,32666.614523809792,59554.868813808294
+2029,Source: gdp_va_grp,Industry,32666.614523809792,70610.73067292944
+2030,Source: gdp_va_grp,Industry,32666.614523809792,86152.79708355489
+2031,Source: gdp_va_grp,Industry,32666.614523809792,96405.53086158235
+2032,Source: gdp_va_grp,Industry,32666.614523809792,126812.60864336637
+2024,Source: gdp_va_grp,Industry,32666.614523809792,21.06239409361004
+2025,Source: gdp_va_grp,Industry,32666.614523809792,21.24663171872297
+2026,Source: gdp_va_grp,Industry,32666.614523809792,22.91670951734363
+2027,Source: gdp_va_grp,Industry,32666.614523809792,23.06640962809418
+2028,Source: gdp_va_grp,Industry,32666.614523809792,23.628996057877103
+2029,Source: gdp_va_grp,Industry,32666.614523809792,24.406526232965266
+2030,Source: gdp_va_grp,Industry,32666.614523809792,26.505192658927974
+2031,Source: gdp_va_grp,Industry,32666.614523809792,26.17362344814346
+2032,Source: gdp_va_grp,Industry,32666.614523809792,30.633259692589107
+2024,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,6456.57661474797
+2025,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,7267.405581357865
+2026,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,10332.600158532001
+2027,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,15639.194367323415
+2028,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,16012.494864829026
+2029,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,20529.95767797714
+2030,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,26660.05305041723
+2031,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,28033.36657577011
+2032,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,38997.934654348435
+2024,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,4.162995251812467
+2025,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,4.199864364773688
+2026,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,5.226811377140235
+2027,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,7.0134767180494055
+2028,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,6.35311915841374
+2029,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,7.096158697891974
+2030,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,8.20205340185563
+2031,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,7.610919977106535
+2032,Source: gdp_va_grp,Mining (gdp_va_mi),6456.57661474797,9.420465934116464
+2024,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,20620.313210104505
+2025,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,23208.038028701667
+2026,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,27329.804349502112
+2027,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,27092.557400062862
+2028,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,33007.04998408256
+2029,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,37119.087759819275
+2030,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,45964.24434404091
+2031,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,53049.581715165536
+2032,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,68102.22752903114
+2024,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,13.295322135335919
+2025,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,13.412023149373342
+2026,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,13.824955008158307
+2027,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,12.149795961022894
+2028,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,13.095880647380548
+2029,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,12.830174401538791
+2030,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,14.141051631548201
+2031,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,14.402698304600875
+2032,Source: gdp_va_grp,Manufacturing (gdp_va_m),20620.313210104505,16.450992088709246
+2024,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,5589.724698957318
+2025,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,6289.5270001336685
+2026,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,7640.396627577555
+2027,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,8703.517505225562
+2028,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,10535.32396489671
+2029,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,12961.685235133016
+2030,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,13528.499689096747
+2031,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,15322.582570646693
+2032,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,19712.446459986786
+2024,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,3.6040767064616523
+2025,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,3.634744204575941
+2026,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,3.864943132045088
+2027,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,3.903136949021883
+2028,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,4.179996252082818
+2029,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,4.480193133534503
+2030,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,4.162087625524146
+2031,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,4.16000516643605
+2032,Source: gdp_va_grp,Energy and Water (gdp_va_e),5589.724698957318,4.761801669763396
+2024,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,17873.272982555973
+2025,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,20116.857026815396
+2026,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,24902.383261513063
+2027,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,27462.81579829011
+2028,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,29230.19254840845
+2029,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,35086.560390164894
+2030,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,38920.75987513363
+2031,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,43544.13797831012
+2032,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,47937.1176652341
+2024,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,11.524117965358178
+2025,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,11.625616598982099
+2026,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,12.597028642563426
+2027,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,12.315840233805565
+2028,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,11.597374291204755
+2029,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,12.127633412457826
+2030,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,11.974100364051976
+2031,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,11.822017477966778
+2032,Source: gdp_va_grp,Construction (gdp_va_c),17873.272982555973,11.579843598069012
+2024,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,8765.553611077406
+2025,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,9868.050251851304
+2026,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,11619.869144307808
+2027,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,13048.294790480548
+2028,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,12873.923264902807
+2029,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,16838.973198083262
+2030,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,19384.192993227014
+2031,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,20733.76423000927
+2032,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,22913.833099932213
+2024,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.651750182762647
+2025,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.702787898456975
+2026,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.877984564630409
+2027,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.8515745487817545
+2028,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.107859158028571
+2029,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.820373719100729
+2030,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.963611016889387
+2031,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.629114146967538
+2032,Source: gdp_va_grp,Transport (gdp_va_t),8765.553611077406,5.535138874690957
+2024,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,20962.62110950764
+2025,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,23576.396381790095
+2026,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,24355.060087519603
+2027,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,27976.161976334985
+2028,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,31383.817546703453
+2029,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,37043.38925063453
+2030,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,43686.671427836
+2031,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,47704.08706254541
+2032,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,50808.3249606025
+2024,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,13.516031381876592
+2025,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,13.624898996645618
+2026,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,12.320161740824345
+2027,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,12.546052953428767
+2028,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,12.451846773613436
+2029,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,12.804009289910478
+2030,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,13.440348799111776
+2031,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,12.951423020586041
+2032,Source: gdp_va_grp,Trade (gdp_va_tr),20962.62110950764,12.273421623560386
+2024,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,6623.73092186058
+2025,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,7770.488105852639
+2026,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,8108.573084001595
+2027,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,9509.365047132062
+2028,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,9136.954501617109
+2029,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,14238.893573613916
+2030,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,14451.427389129132
+2031,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,17091.025455980835
+2032,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,18457.9894701628
+2024,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.270771032748811
+2025,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.4905978794389325
+2026,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.101773164312013
+2027,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.264523401591809
+2028,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,3.6251790357341127
+2029,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.921658878486024
+2030,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.446029381656508
+2031,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.64012863815617
+2032,Source: gdp_va_grp,Financial services (gdp_va_fs),6623.73092186058,4.4587710235716385
+2024,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,16011.24111630019
+2025,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,18004.172906197175
+2026,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,18731.12106428494
+2027,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,20337.837699754098
+2028,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,22581.196143649217
+2029,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,23058.588255095096
+2030,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,26175.339077938235
+2031,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,27225.513483142466
+2032,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,28926.56486521809
+2024,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,10.323539039330996
+2025,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,10.404687526994094
+2026,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,9.475256487550496
+2027,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,9.120607356906001
+2028,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,8.95931777347353
+2029,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,7.970177248978398
+2030,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,8.052929546798783
+2031,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,7.391591869487763
+2032,Source: gdp_va_grp,Public Services (gdp_va_ps),16011.24111630019,6.987593607688967
+2024,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,2440.0501427887984
+2025,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,2745.5101099088843
+2026,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,3383.1918114159553
+2027,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,4152.731373736172
+2028,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,3965.3701014194744
+2029,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,5200.049634961591
+2030,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,5935.661245988234
+2031,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,6047.132265022104
+2032,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,6575.501361131713
+2024,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.573266727047211
+2025,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.5866418826700146
+2026,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.7114090528660253
+2027,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.8623136283072237
+2028,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.5733006614018417
+2029,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.7973917932712735
+2030,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.8261257928801649
+2031,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.6417664155914131
+2032,Source: gdp_va_grp,Market Services (gdp_va_ms),2440.0501427887984,1.5883991580915862
+2024,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,141258.83765302954
+2025,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,157617.7645635919
+2026,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,181287.82526987878
+2027,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,204962.8673304506
+2028,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,233000.50636751766
+2029,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,269234.2821028017
+2030,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,304009.8174283254
+2031,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,345901.6372526118
+2032,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,390205.99244832655
+2024,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,91.0792058260219
+2025,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,91.08797152370205
+2026,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,91.7055971507018
+2027,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,91.91664636448834
+2028,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,92.44530558289019
+2029,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,93.06055193498804
+2030,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,93.52962473555476
+2031,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,93.91057880844052
+2032,Source: gdp_va_grp,Nominal GDP (gdp_va_tot),141258.83765302954,94.25940865147035
+2024,Source: gdp_va_grp,Taxes of production,13835.661,13835.661
+2025,Source: gdp_va_grp,Taxes of production,13835.661,15421.289799999999
+2026,Source: gdp_va_grp,Taxes of production,13835.661,16396.755500000003
+2027,Source: gdp_va_grp,Taxes of production,13835.661,18024.888899999998
+2028,Source: gdp_va_grp,Taxes of production,13835.661,19040.9628
+2029,Source: gdp_va_grp,Taxes of production,13835.661,20076.5768
+2030,Source: gdp_va_grp,Taxes of production,13835.661,21031.3856
+2031,Source: gdp_va_grp,Taxes of production,13835.661,22429.2171
+2032,Source: gdp_va_grp,Taxes of production,13835.661,23764.3454
+2024,Source: gdp_va_grp,Taxes of production,13835.661,8.9207941739781
+2025,Source: gdp_va_grp,Taxes of production,13835.661,8.91202847629795
+2026,Source: gdp_va_grp,Taxes of production,13835.661,8.294402849298187
+2027,Source: gdp_va_grp,Taxes of production,13835.661,8.083353635511656
+2028,Source: gdp_va_grp,Taxes of production,13835.661,7.55469441710981
+2029,Source: gdp_va_grp,Taxes of production,13835.661,6.939448065011976
+2030,Source: gdp_va_grp,Taxes of production,13835.661,6.4703752644452415
+2031,Source: gdp_va_grp,Taxes of production,13835.661,6.089421191559473
+2032,Source: gdp_va_grp,Taxes of production,13835.661,5.740591348529651
+2024,Source: gdp_va_grp,GDP,155094.49865302953,155094.49865302953
+2025,Source: gdp_va_grp,GDP,155094.49865302953,173039.0543635919
+2026,Source: gdp_va_grp,GDP,155094.49865302953,197684.58076987878
+2027,Source: gdp_va_grp,GDP,155094.49865302953,222987.75623045058
+2028,Source: gdp_va_grp,GDP,155094.49865302953,252041.46916751767
+2029,Source: gdp_va_grp,GDP,155094.49865302953,289310.8589028017
+2030,Source: gdp_va_grp,GDP,155094.49865302953,325041.2030283254
+2031,Source: gdp_va_grp,GDP,155094.49865302953,368330.8543526118
+2032,Source: gdp_va_grp,GDP,155094.49865302953,413970.33784832654
+2024,Source: gdp_va_grp,GDP,155094.49865302953,100
+2025,Source: gdp_va_grp,GDP,155094.49865302953,100
+2026,Source: gdp_va_grp,GDP,155094.49865302953,100
+2027,Source: gdp_va_grp,GDP,155094.49865302953,100
+2028,Source: gdp_va_grp,GDP,155094.49865302953,100
+2029,Source: gdp_va_grp,GDP,155094.49865302953,100.00000000000001
+2030,Source: gdp_va_grp,GDP,155094.49865302953,100
+2031,Source: gdp_va_grp,GDP,155094.49865302953,99.99999999999999
+2032,Source: gdp_va_grp,GDP,155094.49865302953,100
+2026,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,24645.526406286896
+2027,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,25303.1754605718
+2028,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,29053.71293706709
+2029,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,37269.38973528403
+2030,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,35730.3441255237
+2031,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,43289.65132428642
+2032,Source: gdp_va_grp,ВВ разница по сравнению с прошлым годом,,45639.483495714725
+2026,Source: gdp_va_grp,GDP deflator,,104.12160776545542
+2027,Source: gdp_va_grp,GDP deflator,,104.07121513480601
+2028,Source: gdp_va_grp,GDP deflator,,103.96429553886924
+2029,Source: gdp_va_grp,GDP deflator,,105.06575320666383
+2030,Source: gdp_va_grp,GDP deflator,,103.85382375573234
+2031,Source: gdp_va_grp,GDP deflator,,104.10114621650719
+2032,Source: gdp_va_grp,GDP deflator,,103.96034017752895
+2026,Source: gdp_va_grp,GDP growth rate,,108.51599957200115
+2027,Source: gdp_va_grp,GDP growth rate,,108.37388918991087
+2028,Source: gdp_va_grp,GDP growth rate,,108.62520475951297
+2029,Source: gdp_va_grp,GDP growth rate,,108.76495168739831
+2030,Source: gdp_va_grp,GDP growth rate,,107.88215008830171
+2031,Source: gdp_va_grp,GDP growth rate,,108.53791833540478
+2032,Source: gdp_va_grp,GDP growth rate,,108.10939364078631
+2024,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,79304.26472735623
+2025,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,84653.5353078236
+2026,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,95155.44982239592
+2027,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,104590.96592645653
+2028,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,114715.95317271228
+2029,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,125434.6797080495
+2030,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,136949.66739357862
+2031,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,148095.66964185712
+2032,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,159589.1861503251
+2025,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,9435.516104060604
+2026,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,10124.987246255754
+2027,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,10718.72653533722
+2028,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,11514.987685529122
+2029,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,11146.002248278499
+2030,Gross Output (current prices),Agriculture (XP_a),79304.26472735623,11493.51650846799
+2024,Gross Output (current prices),Industry,82558.51431788076,82558.51431788076
+2025,Gross Output (current prices),Industry,82558.51431788076,91735.72763217703
+2026,Gross Output (current prices),Industry,82558.51431788076,99935.2166218734
+2027,Gross Output (current prices),Industry,82558.51431788076,104885.60973515622
+2028,Gross Output (current prices),Industry,82558.51431788076,131605.53347201648
+2029,Gross Output (current prices),Industry,82558.51431788076,164803.1608958661
+2030,Gross Output (current prices),Industry,82558.51431788076,167868.3449500881
+2031,Gross Output (current prices),Industry,82558.51431788076,171881.64341150748
+2032,Gross Output (current prices),Industry,82558.51431788076,172763.326415097
+2025,Gross Output (current prices),Industry,82558.51431788076,4950.393113282815
+2026,Gross Output (current prices),Industry,82558.51431788076,26719.923736860263
+2027,Gross Output (current prices),Industry,82558.51431788076,33197.627423849626
+2028,Gross Output (current prices),Industry,82558.51431788076,3065.184054221987
+2029,Gross Output (current prices),Industry,82558.51431788076,4013.2984614193847
+2030,Gross Output (current prices),Industry,82558.51431788076,881.6830035895109
+2024,Gross Output (current prices),Industry - ННЭ,53818.99999999999,53818.99999999999
+2025,Gross Output (current prices),Industry - ННЭ,53818.99999999999,66726.1
+2026,Gross Output (current prices),Industry - ННЭ,53818.99999999999,83491.032625
+2027,Gross Output (current prices),Industry - ННЭ,53818.99999999999,104885.60973515626
+2028,Gross Output (current prices),Industry - ННЭ,53818.99999999999,131605.53347201648
+2029,Gross Output (current prices),Industry - ННЭ,53818.99999999999,164803.16089586608
+2030,Gross Output (current prices),Industry - ННЭ,53818.99999999999,167868.3449500881
+2031,Gross Output (current prices),Industry - ННЭ,53818.99999999999,171881.64341150748
+2032,Gross Output (current prices),Industry - ННЭ,53818.99999999999,172763.326415097
+2025,Gross Output (current prices),Industry - ННЭ,53818.99999999999,21394.577110156257
+2026,Gross Output (current prices),Industry - ННЭ,53818.99999999999,26719.92373686022
+2027,Gross Output (current prices),Industry - ННЭ,53818.99999999999,33197.6274238496
+2028,Gross Output (current prices),Industry - ННЭ,53818.99999999999,3065.184054222016
+2029,Gross Output (current prices),Industry - ННЭ,53818.99999999999,4013.2984614193847
+2030,Gross Output (current prices),Industry - ННЭ,53818.99999999999,881.6830035895109
+2024,Gross Output (current prices),Mining (XP_mi),13541.15241148648,13541.15241148648
+2025,Gross Output (current prices),Mining (XP_mi),13541.15241148648,15046.38836720055
+2026,Gross Output (current prices),Mining (XP_mi),13541.15241148648,26754.5317414086
+2027,Gross Output (current prices),Mining (XP_mi),13541.15241148648,29788.9416520446
+2028,Gross Output (current prices),Mining (XP_mi),13541.15241148648,40744.2617425675
+2029,Gross Output (current prices),Mining (XP_mi),13541.15241148648,48047.334517555704
+2030,Gross Output (current prices),Mining (XP_mi),13541.15241148648,49097.7035919286
+2031,Gross Output (current prices),Mining (XP_mi),13541.15241148648,50969.757410491104
+2032,Gross Output (current prices),Mining (XP_mi),13541.15241148648,50646.6683822707
+2024,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,58669.41912950704
+2025,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,65191.118058150765
+2026,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,60065.5040648398
+2027,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,60339.7714923449
+2028,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,73035.0044453598
+2029,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,95177.1481021007
+2030,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,96446.3844454586
+2031,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,97338.6820461753
+2032,Gross Output (current prices),Manufacturing (XP_m),58669.41912950704,97988.816588534
+2024,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,10347.942776887236
+2025,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,11498.221206825718
+2026,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,13115.180815625006
+2027,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,14756.89659076672
+2028,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,17826.26728408919
+2029,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,21578.6782762097
+2030,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,22324.2569127009
+2031,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,23573.203954841065
+2032,Gross Output (current prices),Energy and Water (XP_e),10347.942776887236,24127.841444292273
+2024,Gross Output (current prices),Construction (XP_c),34159.194306709374,34159.194306709374
+2025,Gross Output (current prices),Construction (XP_c),34159.194306709374,37956.33401285924
+2026,Gross Output (current prices),Construction (XP_c),34159.194306709374,42970.896127707216
+2027,Gross Output (current prices),Construction (XP_c),34159.194306709374,47069.925399269516
+2028,Gross Output (current prices),Construction (XP_c),34159.194306709374,49542.69923459059
+2029,Gross Output (current prices),Construction (XP_c),34159.194306709374,53161.45513661348
+2030,Gross Output (current prices),Construction (XP_c),34159.194306709374,61161.194089495715
+2031,Gross Output (current prices),Construction (XP_c),34159.194306709374,65704.46059827316
+2032,Gross Output (current prices),Construction (XP_c),34159.194306709374,76936.11477136337
+2025,Gross Output (current prices),Construction (XP_c),34159.194306709374,4099.0292715623
+2026,Gross Output (current prices),Construction (XP_c),34159.194306709374,2472.7738353210734
+2027,Gross Output (current prices),Construction (XP_c),34159.194306709374,3618.7559020228873
+2028,Gross Output (current prices),Construction (XP_c),34159.194306709374,7999.738952882239
+2029,Gross Output (current prices),Construction (XP_c),34159.194306709374,4543.266508777444
+2030,Gross Output (current prices),Construction (XP_c),34159.194306709374,11231.65417309021
+2024,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,22542.999999999985
+2025,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,28736.000000000004
+2026,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,32767.971999999987
+2027,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,38923.92156000001
+2028,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,44524.43081040002
+2029,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,51375.48391236
+2030,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,55564.06176577921
+2031,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,63254.94883659063
+2032,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,73256.89332081945
+2025,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,6155.949560000023
+2026,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,5600.509250400013
+2027,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,6851.05310195998
+2028,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,4188.577853419207
+2029,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,7690.887070811419
+2030,Gross Output (current prices),Construction (XP_c) - ННЭ,22542.999999999985,10001.944484228821
+2024,Gross Output (current prices),Transport (XP_t),19057.625774844215,19057.625774844215
+2025,Gross Output (current prices),Transport (XP_t),19057.625774844215,21176.07350182683
+2026,Gross Output (current prices),Transport (XP_t),19057.625774844215,23239.738288615616
+2027,Gross Output (current prices),Transport (XP_t),19057.625774844215,24685.35856479796
+2028,Gross Output (current prices),Transport (XP_t),19057.625774844215,23922.206712844894
+2029,Gross Output (current prices),Transport (XP_t),19057.625774844215,24763.195879534207
+2030,Gross Output (current prices),Transport (XP_t),19057.625774844215,27771.050133563058
+2031,Gross Output (current prices),Transport (XP_t),19057.625774844215,28480.44537089185
+2032,Gross Output (current prices),Transport (XP_t),19057.625774844215,26957.450705802603
+2025,Gross Output (current prices),Transport (XP_t),19057.625774844215,1445.6202761823442
+2026,Gross Output (current prices),Transport (XP_t),19057.625774844215,-763.1518519530655
+2027,Gross Output (current prices),Transport (XP_t),19057.625774844215,840.9891666893127
+2028,Gross Output (current prices),Transport (XP_t),19057.625774844215,3007.854254028851
+2029,Gross Output (current prices),Transport (XP_t),19057.625774844215,709.3952373287939
+2030,Gross Output (current prices),Transport (XP_t),19057.625774844215,-1522.9946650892489
+2024,Gross Output (current prices),Trade (XP_tr),33894.282922536164,33894.282922536164
+2025,Gross Output (current prices),Trade (XP_tr),33894.282922536164,37661.975050782894
+2026,Gross Output (current prices),Trade (XP_tr),33894.282922536164,37276.91308326434
+2027,Gross Output (current prices),Trade (XP_tr),33894.282922536164,42283.05771142062
+2028,Gross Output (current prices),Trade (XP_tr),33894.282922536164,47203.22340032926
+2029,Gross Output (current prices),Trade (XP_tr),33894.282922536164,48741.301645571744
+2030,Gross Output (current prices),Trade (XP_tr),33894.282922536164,52069.93018812396
+2031,Gross Output (current prices),Trade (XP_tr),33894.282922536164,55534.443611810726
+2032,Gross Output (current prices),Trade (XP_tr),33894.282922536164,55226.440174567935
+2025,Gross Output (current prices),Trade (XP_tr),33894.282922536164,5006.144628156275
+2026,Gross Output (current prices),Trade (XP_tr),33894.282922536164,4920.165688908644
+2027,Gross Output (current prices),Trade (XP_tr),33894.282922536164,1538.0782452424828
+2028,Gross Output (current prices),Trade (XP_tr),33894.282922536164,3328.6285425522146
+2029,Gross Output (current prices),Trade (XP_tr),33894.282922536164,3464.513423686767
+2030,Gross Output (current prices),Trade (XP_tr),33894.282922536164,-308.0034372427908
+2024,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,15006.71871643901
+2025,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,16674.867179941284
+2026,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,17400.371424896126
+2027,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,20406.362762085966
+2028,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,19035.321878368977
+2029,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,22601.41837081574
+2030,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,21569.294610640496
+2031,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,23903.532106266903
+2032,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,23971.414896315327
+2025,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,3005.99133718984
+2026,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,-1371.040883716989
+2027,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,3566.0964924467626
+2028,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,-1032.1237601752437
+2029,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,2334.2374956264066
+2030,Gross Output (current prices),Financial services (XP_fs),15006.71871643901,67.8827900484248
+2024,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,20128.00138670831
+2025,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,22365.432181611395
+2026,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,22757.07143090494
+2027,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,24760.11234654293
+2028,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,27371.14684078693
+2029,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,27450.700303684636
+2030,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,29116.061265782242
+2031,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,30250.570536824962
+2032,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,32176.379160420565
+2025,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,2003.04091563799
+2026,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,2611.034494243999
+2027,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,79.5534628977075
+2028,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,1665.3609620976058
+2029,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,1134.5092710427198
+2030,Gross Output (current prices),Public Services (XP_ps),20128.00138670831,1925.8086235956034
+2024,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,3915.76884752583
+2025,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,4351.046132977629
+2026,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,5361.635200342243
+2027,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,6581.190766618339
+2028,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,6100.569386799191
+2029,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,7428.642335659416
+2030,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,8360.086261955259
+2031,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,7568.375801028916
+2032,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,8018.904098941113
+2025,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,1219.5555662760962
+2026,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,-480.6213798191475
+2027,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,1328.0729488602246
+2028,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,931.4439262958431
+2029,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,-791.7104609263433
+2030,Gross Output (current prices),Market Services (XP_ms),3915.76884752583,450.52829791219756
+2024,Gross Output (current prices),Gross Output,288024.37099999987,288024.37099999987
+2025,Gross Output (current prices),Gross Output,288024.37099999987,316574.99099999986
+2026,Gross Output (current prices),Gross Output,288024.37099999987,344097.29199999984
+2027,Gross Output (current prices),Gross Output,288024.37099999987,375262.58321234817
+2028,Gross Output (current prices),Gross Output,288024.37099999987,419496.6540984485
+2029,Gross Output (current prices),Gross Output,288024.37099999987,474384.5542757947
+2030,Gross Output (current prices),Gross Output,288024.37099999987,504865.6288932274
+2031,Gross Output (current prices),Gross Output,288024.37099999987,531419.1410784611
+2032,Gross Output (current prices),Gross Output,288024.37099999987,555639.216372833
+2025,Gross Output (current prices),Gross Output,288024.37099999987,31165.291212348326
+2026,Gross Output (current prices),Gross Output,288024.37099999987,44234.07088610035
+2027,Gross Output (current prices),Gross Output,288024.37099999987,54887.90017734619
+2028,Gross Output (current prices),Gross Output,288024.37099999987,30481.074617432663
+2029,Gross Output (current prices),Gross Output,288024.37099999987,26553.512185233703
+2030,Gross Output (current prices),Gross Output,288024.37099999987,24220.075294371927
+2027,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,,11008.757292327566
+2028,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,,11998.307877021265
+2029,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,,13128.66854201682
+2030,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,,13787.88252862893
+2024,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,9830.499999999995
+2025,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,13280.5
+2026,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,14210.134999999995
+2027,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,15631.148500000003
+2028,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,16881.640380000008
+2029,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,18063.355206600005
+2030,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,18785.889414864007
+2031,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,19725.183885607203
+2032,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,21697.702274167925
+2025,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,1421.0135000000082
+2026,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,1250.491880000005
+2027,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,1181.7148265999967
+2028,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,722.5342082640018
+2029,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,939.2944707431961
+2030,Gross Output (current prices),Инвестиции в ОК-за счет бюджета,9830.499999999995,1972.518388560722
+2024,Gross Output (current prices),Инвестиции в ОК,22543,22543
+2025,Gross Output (current prices),Инвестиции в ОК,22543,28736
+2026,Gross Output (current prices),Инвестиции в ОК,22543,32767.971999999998
+2027,Gross Output (current prices),Инвестиции в ОК,22543,38923.92156
+2028,Gross Output (current prices),Инвестиции в ОК,22543,44524.43081040001
+2029,Gross Output (current prices),Инвестиции в ОК,22543,51375.48391236
+2030,Gross Output (current prices),Инвестиции в ОК,22543,55564.0617657792
+2031,Gross Output (current prices),Инвестиции в ОК,22543,63254.94883659063
+2032,Gross Output (current prices),Инвестиции в ОК,22543,73256.89332081945
+2024,Gross Output (current prices),22543,,22543
+2025,Gross Output (current prices),22543,,28736
+2026,Gross Output (current prices),22543,,32767.971999999998
+2027,Gross Output (current prices),22543,,38923.92156
+2028,Gross Output (current prices),22543,,44524.43081040001
+2029,Gross Output (current prices),22543,,51375.48391236
+2030,Gross Output (current prices),22543,,55564.0617657792
+2031,Gross Output (current prices),22543,,63254.94883659063
+2032,Gross Output (current prices),22543,,73256.89332081945
+2024,Gross Output (current prices),за счет бюджета,9830.5,9830.5
+2025,Gross Output (current prices),за счет бюджета,9830.5,13280.5
+2026,Gross Output (current prices),за счет бюджета,9830.5,14210.135
+2027,Gross Output (current prices),за счет бюджета,9830.5,15631.148500000001
+2028,Gross Output (current prices),за счет бюджета,9830.5,16881.64038
+2029,Gross Output (current prices),за счет бюджета,9830.5,18063.3552066
+2030,Gross Output (current prices),за счет бюджета,9830.5,18785.889414864003
+2031,Gross Output (current prices),за счет бюджета,9830.5,19725.183885607203
+2032,Gross Output (current prices),за счет бюджета,9830.5,21697.702274167925
+2024,в. том числе цент.кап.влож.,частные,8295,8295
+2025,в. том числе цент.кап.влож.,частные,8295,11306.3
+2026,в. том числе цент.кап.влож.,частные,8295,13906.749
+2027,в. том числе цент.кап.влож.,частные,8295,18078.7737
+2028,в. том числе цент.кап.влож.,частные,8295,21694.528440000002
+2029,в. том числе цент.кап.влож.,частные,8295,26467.324696800002
+2030,в. том числе цент.кап.влож.,частные,8295,29114.057166480005
+2031,в. том числе цент.кап.влож.,частные,8295,34936.868599776004
+2032,в. том числе цент.кап.влож.,частные,8295,41924.2423197312
+2024,в. том числе цент.кап.влож.,совместные,98.8,98.8
+2025,в. том числе цент.кап.влож.,совместные,98.8,49.8
+2026,в. том числе цент.кап.влож.,совместные,98.8,59.75999999999999
+2027,в. том числе цент.кап.влож.,совместные,98.8,71.71199999999999
+2028,в. том числе цент.кап.влож.,совместные,98.8,86.05439999999999
+2029,в. том числе цент.кап.влож.,совместные,98.8,103.26527999999998
+2030,в. том числе цент.кап.влож.,совместные,98.8,113.59180799999999
+2031,в. том числе цент.кап.влож.,совместные,98.8,136.31016959999997
+2032,в. том числе цент.кап.влож.,совместные,98.8,163.57220351999996
+2024,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,4318.7
+2025,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,4099.4
+2026,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,4591.328
+2027,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,5142.287360000001
+2028,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,5862.207590400001
+2029,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,6741.538728960001
+2030,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,7550.523376435202
+2031,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,8456.586181607427
+2032,в. том числе цент.кап.влож.,иностранные инвестиции,4318.7,9471.376523400319
+2026,в. том числе цент.кап.влож.,Инвестиции в ОК,,76.25619885285923
+2027,в. том числе цент.кап.влож.,Инвестиции в ОК,,82.69382462332109
+2028,в. том числе цент.кап.влож.,Инвестиции в ОК,,89.87082153027536
+2029,в. том числе цент.кап.влож.,Инвестиции в ОК,,96.64047716590166
+2030,в. том числе цент.кап.влож.,Инвестиции в ОК,,90.84855616859547
+2031,в. том числе цент.кап.влож.,Инвестиции в ОК,,96.27192470742708
+2032,в. том числе цент.кап.влож.,Инвестиции в ОК,,95.217822655228
+2024,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,43.60777181386683
+2025,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,46.21554844097995
+2026,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,43.365927558775994
+2027,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,40.15820573449948
+2028,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,37.915454667770376
+2029,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,35.159484312427644
+2030,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,33.80942432547985
+2031,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,31.18362159546467
+2032,в. том числе цент.кап.влож.,за счет бюджета,43.60777181386683,29.618649236387267
+2024,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2025,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2026,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2027,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2028,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2029,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2030,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2031,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2032,в. том числе цент.кап.влож.,в. том числе цент.кап.влож.,0,0
+2024,в. том числе цент.кап.влож.,частные,36.79634476334117,36.79634476334117
+2025,в. том числе цент.кап.влож.,частные,36.79634476334117,39.34542037861915
+2026,в. том числе цент.кап.влож.,частные,36.79634476334117,42.44006617193155
+2027,в. том числе цент.кап.влож.,частные,36.79634476334117,46.4464344172828
+2028,в. том числе цент.кап.влож.,частные,36.79634476334117,48.72499893908267
+2029,в. том числе цент.кап.влож.,частные,36.79634476334117,51.517421698547636
+2030,в. том числе цент.кап.влож.,частные,36.79634476334117,52.39728025860552
+2031,в. том числе цент.кап.влож.,частные,36.79634476334117,55.23183441350968
+2032,в. том числе цент.кап.влож.,частные,36.79634476334117,57.22907486143208
+2024,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.4382735217140576
+2025,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.17330178173719377
+2026,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.18237320271147692
+2027,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.1842363182482993
+2028,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.19327456507293386
+2029,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.20100108482901555
+2030,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.20443395315271734
+2031,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.21549328883679314
+2032,в. том числе цент.кап.влож.,совместные,0.4382735217140576,0.22328574978419552
+2024,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,19.15760990107794
+2025,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,14.265729398663696
+2026,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,14.011633066580991
+2027,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,13.21112352996942
+2028,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,13.166271828074011
+2029,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,13.122092904195712
+2030,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,13.588861462761923
+2031,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,13.369050702188865
+2032,в. том числе цент.кап.влож.,иностранные инвестиции,19.15760990107794,12.92899015239645
+2024,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,11616.194306709389
+2025,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,9220.334012859235
+2026,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,10202.924127707227
+2027,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,8146.003839269509
+2028,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,5018.268424190564
+2029,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,1785.9712242534745
+2030,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,5597.132323716508
+2031,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,2449.5117616825314
+2032,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,11616.194306709389,3679.221450543916
+2024,в. том числе цент.кап.влож.,65.99394528334123,,65.99394528334123
+2025,в. том числе цент.кап.влож.,65.99394528334123,,75.70804912367069
+2026,в. том числе цент.кап.влож.,65.99394528334123,,76.25619885285923
+2027,в. том числе цент.кап.влож.,65.99394528334123,,82.69382462332109
+2028,в. том числе цент.кап.влож.,65.99394528334123,,89.87082153027536
+2029,в. том числе цент.кап.влож.,65.99394528334123,,96.64047716590166
+2030,в. том числе цент.кап.влож.,65.99394528334123,,90.84855616859547
+2031,в. том числе цент.кап.влож.,65.99394528334123,,96.27192470742708
+2032,в. том числе цент.кап.влож.,65.99394528334123,,95.217822655228
+2025,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,6193.000000000018
+2026,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,4031.9719999999834
+2027,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,6155.949560000023
+2028,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,5600.509250400013
+2029,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,6851.05310195998
+2030,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,4188.577853419207
+2031,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,7690.887070811419
+2032,в. том числе цент.кап.влож.,Construction (XP_c) - ННЭ,,10001.944484228821
+2024,в. том числе цент.кап.влож.,28739.510466008927,,28739.510466008927
+2025,в. том числе цент.кап.влож.,28739.510466008927,,25009.627043604778
+2026,в. том числе цент.кап.влож.,28739.510466008927,,20232.933924872807
+2027,в. том числе цент.кап.влож.,28739.510466008927,,16389.18414031311
+2028,в. том числе цент.кап.влож.,28739.510466008927,,12538.822485973156
+2029,в. том числе цент.кап.влож.,28739.510466008927,,12669.5561198754
+2030,в. том числе цент.кап.влож.,28739.510466008927,,8763.415866608906
+2031,в. том числе цент.кап.влож.,28739.510466008927,,5423.690881521441
+2032,в. том числе цент.кап.влож.,28739.510466008927,,1123.9290963260573
+2024,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,53819.003851871836
+2025,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,66726.10058857226
+2026,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,79702.2826970006
+2027,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,88496.42559484311
+2028,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,119066.71098604333
+2029,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,152133.6047759907
+2030,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,159104.9290834792
+2031,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,166457.95252998604
+2032,в. том числе цент.кап.влож.,Industry - ННЭ,53819.003851871836,171639.39731877093
+2024,в. том числе цент.кап.влож.,Industry,53818.99999999999,53818.99999999999
+2025,в. том числе цент.кап.влож.,Industry,53818.99999999999,66726.09999999999
+2026,в. том числе цент.кап.влож.,Industry,53818.99999999999,83491.032625
+2027,в. том числе цент.кап.влож.,Industry,53818.99999999999,104885.60973515622
+2028,в. том числе цент.кап.влож.,Industry,53818.99999999999,131605.53347201648
+2029,в. том числе цент.кап.влож.,Industry,53818.99999999999,164803.1608958661
+2030,в. том числе цент.кап.влож.,Industry,53818.99999999999,167868.3449500881
+2031,в. том числе цент.кап.влож.,Industry,53818.99999999999,171881.64341150748
+2032,в. том числе цент.кап.влож.,Industry,53818.99999999999,172763.326415097
+2024,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,13363.1
+2025,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,15046.38836720055
+2026,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,26754.5317414086
+2027,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,29788.9416520446
+2028,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,40744.2617425675
+2029,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,48047.334517555704
+2030,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,49097.7035919286
+2031,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,50969.757410491104
+2032,в. том числе цент.кап.влож.,Mining (gdp_va_mi),13363.1,50646.6683822707
+2024,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,30275.6
+2025,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,40181.49042597374
+2026,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,43621.3200679664
+2027,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,60339.7714923449
+2028,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,73035.0044453598
+2029,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,95177.1481021007
+2030,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,96446.3844454586
+2031,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,97338.6820461753
+2032,в. том числе цент.кап.влож.,Manufacturing (gdp_va_m),30275.6,97988.816588534
+2024,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,9872.2
+2025,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,11151.33429851708
+2026,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,12719.512264532928
+2027,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,14343.703486225253
+2028,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,17398.43686927105
+2029,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,21086.543980834205
+2030,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,21815.118572303745
+2031,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,23035.581493930255
+2032,в. том числе цент.кап.влож.,ОEnergy and Water (gdp_va_e),9872.2,23577.569639127563
+2024,в. том числе цент.кап.влож.,Water,308.1,308.1
+2025,в. том числе цент.кап.влож.,Water,308.1,346.88690830863794
+2026,в. том числе цент.кап.влож.,Water,308.1,395.6685510920764
+2027,в. том числе цент.кап.влож.,Water,308.1,413.1931045414678
+2028,в. том числе цент.кап.влож.,Water,308.1,427.8304148181416
+2029,в. том числе цент.кап.влож.,Water,308.1,492.13429537549723
+2030,в. том числе цент.кап.влож.,Water,308.1,509.1383403971589
+2031,в. том числе цент.кап.влож.,Water,308.1,537.6224609108145
+2032,в. том числе цент.кап.влож.,Water,308.1,550.2718051647133

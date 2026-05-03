@@ -1,0 +1,46 @@
+﻿year,var_name,description,value
+2024,Demand for money (MD),,65075.15
+2025,Demand for money (MD),,79648.52
+2026,Demand for money (MD),,88630.23
+2027,Demand for money (MD),,95674.34
+2028,Demand for money (MD),,97697.02
+2029,Demand for money (MD),,104014.1
+2030,Demand for money (MD),,105729.4
+2031,Demand for money (MD),,112441.9
+2032,Demand for money (MD),,120353.5
+2024,Supply of money (MS),,65075.15
+2025,Supply of money (MS),,79648.52
+2026,Supply of money (MS),,88630.23
+2027,Supply of money (MS),,95674.34
+2028,Supply of money (MS),,97697.02
+2029,Supply of money (MS),,104014.1
+2030,Supply of money (MS),,105729.4
+2031,Supply of money (MS),,112441.9
+2032,Supply of money (MS),,120353.5
+2024,Velocity of money (v),,3.97
+2025,Velocity of money (v),,3.97
+2026,Velocity of money (v),,3.97
+2027,Velocity of money (v),,3.97
+2028,Velocity of money (v),,3.97
+2029,Velocity of money (v),,3.97
+2030,Velocity of money (v),,3.97
+2031,Velocity of money (v),,3.98
+2032,Velocity of money (v),,3.99
+2024,Coefficient phi_m,,1.672647
+2025,Coefficient phi_m,,1.775393
+2026,Coefficient phi_m,,1.878952
+2027,Coefficient phi_m,,1.763124
+2028,Coefficient phi_m,,1.840516
+2029,Coefficient phi_m,,1.877663
+2030,Coefficient phi_m,,1.890088
+2031,Coefficient phi_m,,1.851252
+2032,Coefficient phi_m,,1.823384
+2024,Interest rate (r_tot),,1.00185449
+2025,Interest rate (r_tot),,1.04560415
+2026,Interest rate (r_tot),,1.06114422
+2027,Interest rate (r_tot),,1.09403763
+2028,Interest rate (r_tot),,1.02365156
+2029,Interest rate (r_tot),,1.00248246
+2030,Interest rate (r_tot),,0.97883413
+2031,Interest rate (r_tot),,1.00279303
+2032,Interest rate (r_tot),,1.02160111

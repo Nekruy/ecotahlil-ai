@@ -16,6 +16,13 @@ const DATA_DIR        = path.join(__dirname, 'data');
 const MINISTRY_FILE   = path.join(DATA_DIR, 'ministry_gdp_model.json');
 const FORECAST_FILE   = path.join(DATA_DIR, 'ministry_forecast_2025_2027.json');
 
+// ─── Master dataset (primary: 1997–2035, 65 indicators) ─────────────────────
+let _masterLoader = null;
+function getMaster() {
+  if (!_masterLoader) _masterLoader = require('./masterDataLoader');
+  return _masterLoader;
+}
+
 // ─── Чтение JSON файлов ──────────────────────────────────────────────────────
 
 function readData(filename) {
@@ -37,6 +44,24 @@ function getMinistryData() {
 
 /** ВВП Таджикистана — приоритет МЭРиТ 1997–2024, fallback → gdp_history.json */
 function getGDPHistory() {
+  const ml = getMaster();
+  if (ml.ready) {
+    const gdpPairs    = ml.getYearValuePairs('gdp',        { historical: true });
+    const growthPairs = ml.getYearValuePairs('gdp_growth', { historical: true });
+    const pcPairs     = ml.getYearValuePairs('gdp_per_capita', { historical: true });
+    if (gdpPairs.length >= 4) {
+      const growthMap = new Map(growthPairs.map(p => [p.year, p.value]));
+      const pcMap     = new Map(pcPairs.map(p    => [p.year, p.value]));
+      return gdpPairs.map(p => ({
+        year:               p.year,
+        gdp_bln_somoni:     Math.round(p.value / 10) / 100, // млн → млрд сомони
+        gdp_growth:         growthMap.get(p.year) ?? null,
+        gdp_per_capita_usd: pcMap.get(p.year)    ?? null,
+        population_thou:    null,
+        source:             'master_dataset.csv',
+      }));
+    }
+  }
   const m = getMinistryData();
   if (m && m.gdp && m.gdp.length) {
     return m.gdp.map(r => ({
@@ -53,12 +78,24 @@ function getGDPHistory() {
 
 /** Инфляция (ИПЦ) — приоритет МЭРиТ 1997–2024, fallback → inflation_history.json */
 function getInflationHistory() {
+  const ml = getMaster();
+  if (ml.ready) {
+    const cpiPairs = ml.getYearValuePairs('inflation', { historical: true });
+    if (cpiPairs.length >= 4) {
+      return cpiPairs.map(p => ({
+        year:           p.year,
+        cpi:            p.value,
+        food_inflation: null,
+        source:         'master_dataset.csv',
+      }));
+    }
+  }
   const m = getMinistryData();
   if (m && m.monetary && m.monetary.length) {
     return m.monetary.map(r => ({
       year:           r.year,
-      cpi:            r.cpi_avg_annual,                                         // 100-based (105.8 = 5.8%)
-      food_inflation: r.cpi_food != null ? Math.round((r.cpi_food - 100) * 10) / 10 : null, // % (6.8)
+      cpi:            r.cpi_avg_annual,
+      food_inflation: r.cpi_food != null ? Math.round((r.cpi_food - 100) * 10) / 10 : null,
       source:         'МЭРиТ РТ',
     }));
   }
@@ -87,6 +124,24 @@ function getRemittancesHistory() {
 
 /** Внешняя торговля — приоритет МЭРиТ 1997–2024, fallback → trade_history.json */
 function getTradeHistory() {
+  const ml = getMaster();
+  if (ml.ready) {
+    const expPairs = ml.getYearValuePairs('exports', { historical: true });
+    const impPairs = ml.getYearValuePairs('imports', { historical: true });
+    if (expPairs.length >= 4) {
+      const impMap = new Map(impPairs.map(p => [p.year, p.value]));
+      return expPairs.map(p => {
+        const imp = impMap.get(p.year) ?? 0;
+        return {
+          year:            p.year,
+          export_mln_usd:  Math.round(p.value),
+          import_mln_usd:  Math.round(imp),
+          balance_mln_usd: Math.round(p.value - imp),
+          source:          'master_dataset.csv',
+        };
+      });
+    }
+  }
   const m = getMinistryData();
   if (m && m.trade && m.trade.length) {
     return m.trade.map(r => ({
@@ -109,8 +164,8 @@ function getAllHistory() {
     remittances:   getRemittancesHistory(),
     trade:         getTradeHistory(),
     meta: {
-      period:      '2015–2024',
-      years:       10,
+      period:      '1997–2035',
+      years:       39,
       sources:     ['МЭРиТ РТ', 'Агентство по статистике РТ', 'НБТ'],
       generated_at: new Date().toISOString(),
     },
@@ -138,53 +193,47 @@ function getAllHistory() {
  *   'trade_balance' — торговый баланс, млн USD
  */
 function getDataForForecasting(indicator) {
-  const ind = (indicator || '').toLowerCase();
+  // ── 1. Master dataset (primary: 1997–2035, 65 indicators) ──────────────────
+  const ml = getMaster();
+  if (ml.ready) {
+    const series = ml.getDataForForecasting(indicator);
+    if (series.length >= 4) return series;
+  }
 
+  // ── 2. Legacy switch (fallback for FX rates and unmapped indicators) ────────
+  const ind = (indicator || '').toLowerCase();
   switch (ind) {
     case 'gdp_growth':
-      return getGDPHistory().map(r => r.gdp_growth);
-
+      return getGDPHistory().map(r => r.gdp_growth).filter(v => v != null);
     case 'gdp_bln':
     case 'gdp':
-      return getGDPHistory().map(r => r.gdp_bln_somoni);
-
+      return getGDPHistory().map(r => r.gdp_bln_somoni).filter(v => v != null);
     case 'gdp_per_capita':
-      return getGDPHistory().map(r => r.gdp_per_capita_usd);
-
+      return getGDPHistory().map(r => r.gdp_per_capita_usd).filter(v => v != null);
     case 'inflation':
     case 'cpi':
-      return getInflationHistory().map(r => r.cpi);
-
+      return getInflationHistory().map(r => r.cpi).filter(v => v != null);
     case 'food_inflation':
-      return getInflationHistory().map(r => r.food_inflation);
-
+      return getInflationHistory().map(r => r.food_inflation).filter(v => v != null);
     case 'usd_tjs':
     case 'usd':
-      return readData('exchange_rates_history.json').map(r => r.usd_tjs);
-
+      return readData('exchange_rates_history.json').map(r => r.usd_tjs).filter(v => v != null);
     case 'eur_tjs':
     case 'eur':
-      return readData('exchange_rates_history.json').map(r => r.eur_tjs);
-
+      return readData('exchange_rates_history.json').map(r => r.eur_tjs).filter(v => v != null);
     case 'rub_tjs':
     case 'rub':
-      return readData('exchange_rates_history.json').map(r => r.rub_tjs);
-
+      return readData('exchange_rates_history.json').map(r => r.rub_tjs).filter(v => v != null);
     case 'remittances':
-      return getRemittancesHistory().map(r => r.amount_mln_usd);
-
+      return getRemittancesHistory().map(r => r.amount_mln_usd).filter(v => v != null);
     case 'remittances_pct_gdp':
-      return getRemittancesHistory().map(r => r.pct_gdp);
-
+      return getRemittancesHistory().map(r => r.pct_gdp).filter(v => v != null);
     case 'export':
-      return getTradeHistory().map(r => r.export_mln_usd);
-
+      return getTradeHistory().map(r => r.export_mln_usd).filter(v => v != null);
     case 'import':
-      return getTradeHistory().map(r => r.import_mln_usd);
-
+      return getTradeHistory().map(r => r.import_mln_usd).filter(v => v != null);
     case 'trade_balance':
-      return getTradeHistory().map(r => r.balance_mln_usd);
-
+      return getTradeHistory().map(r => r.balance_mln_usd).filter(v => v != null);
     default:
       return [];
   }
@@ -332,6 +381,36 @@ function getVARData() {
  * Возвращает именованные числовые ряды
  */
 function getCorrelationData() {
+  const ml = getMaster();
+  if (ml.ready && ml.hasSeries('gdp_growth', 10)) {
+    const pairs    = ml.getYearValuePairs('gdp_growth', { historical: true });
+    const years    = pairs.map(p => p.year);
+    return {
+      years,
+      series: {
+        gdp_growth:    ml.getTimeSeries('gdp_growth',  { historical: true }),
+        inflation:     ml.getTimeSeries('inflation',   { historical: true }),
+        exports:       ml.getTimeSeries('exports',     { historical: true }),
+        imports:       ml.getTimeSeries('imports',     { historical: true }),
+        investment:    ml.getTimeSeries('investment',  { historical: true }),
+        industry:      ml.getTimeSeries('industry',    { historical: true }),
+        agriculture:   ml.getTimeSeries('agriculture', { historical: true }),
+        consumption:   ml.getTimeSeries('consumption', { historical: true }),
+      },
+      labels: {
+        gdp_growth:  'Рост ВВП (%)',
+        inflation:   'Инфляция ИПЦ (%)',
+        exports:     'Экспорт (млн сом.)',
+        imports:     'Импорт (млн сом.)',
+        investment:  'Инвестиции (млн сом.)',
+        industry:    'Промышленность',
+        agriculture: 'Сельское хозяйство',
+        consumption: 'Конечное потребление',
+      },
+      source: 'master_dataset.csv',
+    };
+  }
+  // fallback to legacy
   const years = getGDPHistory().map(r => r.year);
   return {
     years,
@@ -351,6 +430,7 @@ function getCorrelationData() {
       export:        'Экспорт (млрд $)',
       trade_balance: 'Торг. баланс (млрд $)',
     },
+    source: 'МЭРиТ/НБТ',
   };
 }
 
@@ -474,6 +554,78 @@ function getDataForForecastingExtended(indicator) {
   };
 }
 
+/**
+ * getModelData(modelName) — готовый пакет данных для конкретной модели.
+ *
+ * modelName: 'garch' | 'arima_gdp' | 'arima_inflation' | 'var' | 'cge'
+ */
+function getModelData(modelName) {
+  const name = (modelName || '').toLowerCase();
+
+  switch (name) {
+    case 'garch': {
+      // Дневной ряд курсов для GARCH-моделирования волатильности
+      const ratesFile = path.join(DATA_DIR, 'rates_timeseries.json');
+      try {
+        const rates = JSON.parse(fs.readFileSync(ratesFile, 'utf8'));
+        return {
+          model:  'garch',
+          usd:    rates.map(r => r.usd   ?? r.USD   ?? null).filter(v => v != null),
+          eur:    rates.map(r => r.eur   ?? r.EUR   ?? null).filter(v => v != null),
+          rub:    rates.map(r => r.rub   ?? r.RUB   ?? null).filter(v => v != null),
+          dates:  rates.map(r => r.date),
+          count:  rates.length,
+          source: 'rates_timeseries.json (НБТ)',
+          sufficient: rates.length >= 100,
+        };
+      } catch {
+        return { model: 'garch', usd: [], eur: [], rub: [], dates: [], count: 0, source: 'empty', sufficient: false };
+      }
+    }
+
+    case 'arima_gdp': {
+      const values = getDataForForecasting('gdp_growth');
+      const years  = getGDPHistory().map(r => r.year);
+      return {
+        model:      'arima_gdp',
+        values,
+        years:      years.slice(-values.length),
+        count:      values.length,
+        source:     'МЭРиТ РТ (master_dataset.csv)',
+        minRequired: 10,
+        sufficient: values.length >= 10,
+      };
+    }
+
+    case 'arima_inflation': {
+      const values = getDataForForecasting('inflation');
+      const years  = getInflationHistory().map(r => r.year);
+      return {
+        model:      'arima_inflation',
+        values,
+        years:      years.slice(-values.length),
+        count:      values.length,
+        source:     'МЭРиТ РТ (master_dataset.csv)',
+        minRequired: 10,
+        sufficient: values.length >= 10,
+      };
+    }
+
+    case 'var':
+      return { model: 'var', ...getVARData() };
+
+    case 'cge':
+      return { model: 'cge', ...getCGECalibration() };
+
+    default:
+      return {
+        model:     modelName,
+        error:     'Неизвестная модель. Допустимые: garch, arima_gdp, arima_inflation, var, cge',
+        available: ['garch', 'arima_gdp', 'arima_inflation', 'var', 'cge'],
+      };
+  }
+}
+
 // ─── Экспорт ─────────────────────────────────────────────────────────────────
 
 module.exports = {
@@ -491,5 +643,6 @@ module.exports = {
   getVARData,
   getCorrelationData,
   getCGECalibration,
+  getModelData,
   getYearRange,
 };

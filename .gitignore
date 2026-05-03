@@ -1,2 +1,8 @@
 node_modules
 imf_cache.json
+server_err.txt
+server_out.txt
+.claude/
+live_cache.json
+cache.json
+*.log

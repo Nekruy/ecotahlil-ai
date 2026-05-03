@@ -1,0 +1,647 @@
+﻿year,var_name,description,value
+2024,Agriculture (gdp_va_a),,39515.54
+2025,Agriculture (gdp_va_a),,44173.07
+2026,Agriculture (gdp_va_a),,45563.21
+2027,Agriculture (gdp_va_a),,47554.3
+2028,Agriculture (gdp_va_a),,47958.82
+2029,Agriculture (gdp_va_a),,51032.08
+2030,Agriculture (gdp_va_a),,51313.92
+2031,Agriculture (gdp_va_a),,53663.34
+2032,Agriculture (gdp_va_a),,57338.93
+2024,Agriculture (gdp_va_a),,35915.753245129155
+2025,Agriculture (gdp_va_a),,38771.31917098321
+2026,Agriculture (gdp_va_a),,44884.82568122416
+2027,Agriculture (gdp_va_a),,51040.39137211078
+2028,Agriculture (gdp_va_a),,64274.18344700884
+2029,Agriculture (gdp_va_a),,67157.09712731898
+2030,Agriculture (gdp_va_a),,69302.96833551828
+2031,Agriculture (gdp_va_a),,87150.44591601931
+2032,Agriculture (gdp_va_a),,87774.05238267881
+2024,Mining (gdp_va_mi),,7611.364
+2025,Mining (gdp_va_mi),,9516.991
+2026,Mining (gdp_va_mi),,10186.73
+2027,Mining (gdp_va_mi),,10932.61
+2028,Mining (gdp_va_mi),,11557.36
+2029,Mining (gdp_va_mi),,12302.22
+2030,Mining (gdp_va_mi),,13079.02
+2031,Mining (gdp_va_mi),,13961.61
+2032,Mining (gdp_va_mi),,14556.14
+2024,Mining (gdp_va_mi),,6456.57661474797
+2025,Mining (gdp_va_mi),,7267.405581357865
+2026,Mining (gdp_va_mi),,10332.600158532001
+2027,Mining (gdp_va_mi),,15639.194367323415
+2028,Mining (gdp_va_mi),,16012.494864829026
+2029,Mining (gdp_va_mi),,20529.95767797714
+2030,Mining (gdp_va_mi),,26660.05305041723
+2031,Mining (gdp_va_mi),,28033.36657577011
+2032,Mining (gdp_va_mi),,38997.934654348435
+2024,Manufacturing (gdp_va_m),,26297.31
+2025,Manufacturing (gdp_va_m),,27890.52
+2026,Manufacturing (gdp_va_m),,30207.69
+2027,Manufacturing (gdp_va_m),,32823.68
+2028,Manufacturing (gdp_va_m),,36474.15
+2029,Manufacturing (gdp_va_m),,38264.97
+2030,Manufacturing (gdp_va_m),,40480.27
+2031,Manufacturing (gdp_va_m),,41612.4
+2032,Manufacturing (gdp_va_m),,42670.86
+2024,Manufacturing (gdp_va_m),,20620.313210104505
+2025,Manufacturing (gdp_va_m),,23208.038028701667
+2026,Manufacturing (gdp_va_m),,27329.804349502112
+2027,Manufacturing (gdp_va_m),,27092.557400062862
+2028,Manufacturing (gdp_va_m),,33007.04998408256
+2029,Manufacturing (gdp_va_m),,37119.087759819275
+2030,Manufacturing (gdp_va_m),,45964.24434404091
+2031,Manufacturing (gdp_va_m),,53049.581715165536
+2032,Manufacturing (gdp_va_m),,68102.22752903114
+2024,Energy and Water (gdp_va_e),,6400.015
+2025,Energy and Water (gdp_va_e),,7362.468
+2026,Energy and Water (gdp_va_e),,8021.058
+2027,Energy and Water (gdp_va_e),,10872.89
+2028,Energy and Water (gdp_va_e),,11193.65
+2029,Energy and Water (gdp_va_e),,11541.74
+2030,Energy and Water (gdp_va_e),,12100.41
+2031,Energy and Water (gdp_va_e),,13398.23
+2032,Energy and Water (gdp_va_e),,15643.79
+2024,Energy and Water (gdp_va_e),,5589.724698957318
+2025,Energy and Water (gdp_va_e),,6289.5270001336685
+2026,Energy and Water (gdp_va_e),,7640.396627577555
+2027,Energy and Water (gdp_va_e),,8703.517505225562
+2028,Energy and Water (gdp_va_e),,10535.32396489671
+2029,Energy and Water (gdp_va_e),,12961.685235133016
+2030,Energy and Water (gdp_va_e),,13528.499689096747
+2031,Energy and Water (gdp_va_e),,15322.582570646693
+2032,Energy and Water (gdp_va_e),,19712.446459986786
+2024,Construction (gdp_va_c),,18820.43
+2025,Construction (gdp_va_c),,22602.04
+2026,Construction (gdp_va_c),,24801.57
+2027,Construction (gdp_va_c),,26232.53
+2028,Construction (gdp_va_c),,27312.64
+2029,Construction (gdp_va_c),,27423.09
+2030,Construction (gdp_va_c),,29192.89
+2031,Construction (gdp_va_c),,30639.62
+2032,Construction (gdp_va_c),,32086.74
+2024,Construction (gdp_va_c),,17873.272982555973
+2025,Construction (gdp_va_c),,20116.857026815396
+2026,Construction (gdp_va_c),,24902.383261513063
+2027,Construction (gdp_va_c),,27462.81579829011
+2028,Construction (gdp_va_c),,29230.19254840845
+2029,Construction (gdp_va_c),,35086.560390164894
+2030,Construction (gdp_va_c),,38920.75987513363
+2031,Construction (gdp_va_c),,43544.13797831012
+2032,Construction (gdp_va_c),,47937.1176652341
+2024,Transport (gdp_va_t),,9677.397
+2025,Transport (gdp_va_t),,10669.76
+2026,Transport (gdp_va_t),,12302.49
+2027,Transport (gdp_va_t),,16196.72
+2028,Transport (gdp_va_t),,17212.58
+2029,Transport (gdp_va_t),,18941.79
+2030,Transport (gdp_va_t),,19664.56
+2031,Transport (gdp_va_t),,22309.08
+2032,Transport (gdp_va_t),,25183.82
+2024,Transport (gdp_va_t),,8765.553611077406
+2025,Transport (gdp_va_t),,9868.050251851304
+2026,Transport (gdp_va_t),,11619.869144307808
+2027,Transport (gdp_va_t),,13048.294790480548
+2028,Transport (gdp_va_t),,12873.923264902807
+2029,Transport (gdp_va_t),,16838.973198083262
+2030,Transport (gdp_va_t),,19384.192993227014
+2031,Transport (gdp_va_t),,20733.76423000927
+2032,Transport (gdp_va_t),,22913.833099932213
+2024,Trade (gdp_va_tr),,21963.24
+2025,Trade (gdp_va_tr),,22771.05
+2026,Trade (gdp_va_tr),,23218.76
+2027,Trade (gdp_va_tr),,26197.22
+2028,Trade (gdp_va_tr),,28028.4
+2029,Trade (gdp_va_tr),,28550.8
+2030,Trade (gdp_va_tr),,30107.44
+2031,Trade (gdp_va_tr),,33040.86
+2032,Trade (gdp_va_tr),,34175.81
+2024,Trade (gdp_va_tr),,20962.62110950764
+2025,Trade (gdp_va_tr),,23576.396381790095
+2026,Trade (gdp_va_tr),,24355.060087519603
+2027,Trade (gdp_va_tr),,27976.161976334985
+2028,Trade (gdp_va_tr),,31383.817546703453
+2029,Trade (gdp_va_tr),,37043.38925063453
+2030,Trade (gdp_va_tr),,43686.671427836
+2031,Trade (gdp_va_tr),,47704.08706254541
+2032,Trade (gdp_va_tr),,50808.3249606025
+2024,Financial services (gdp_va_fs),,11160.44
+2025,Financial services (gdp_va_fs),,12766.69
+2026,Financial services (gdp_va_fs),,12640.44
+2027,Financial services (gdp_va_fs),,13470.68
+2028,Financial services (gdp_va_fs),,14226.67
+2029,Financial services (gdp_va_fs),,14976.56
+2030,Financial services (gdp_va_fs),,16107.12
+2031,Financial services (gdp_va_fs),,17267.03
+2032,Financial services (gdp_va_fs),,17759.35
+2024,Financial services (gdp_va_fs),,6623.73092186058
+2025,Financial services (gdp_va_fs),,7770.488105852639
+2026,Financial services (gdp_va_fs),,8108.573084001595
+2027,Financial services (gdp_va_fs),,9509.365047132062
+2028,Financial services (gdp_va_fs),,9136.954501617109
+2029,Financial services (gdp_va_fs),,14238.893573613916
+2030,Financial services (gdp_va_fs),,14451.427389129132
+2031,Financial services (gdp_va_fs),,17091.025455980835
+2032,Financial services (gdp_va_fs),,18457.9894701628
+2024,Public Services (gdp_va_ps),,17021.25
+2025,Public Services (gdp_va_ps),,17153.61
+2026,Public Services (gdp_va_ps),,18798.02
+2027,Public Services (gdp_va_ps),,20870.42
+2028,Public Services (gdp_va_ps),,21913.17
+2029,Public Services (gdp_va_ps),,25069.03
+2030,Public Services (gdp_va_ps),,28032.94
+2031,Public Services (gdp_va_ps),,30553.82
+2032,Public Services (gdp_va_ps),,33944.42
+2024,Public Services (gdp_va_ps),,16011.24111630019
+2025,Public Services (gdp_va_ps),,18004.172906197175
+2026,Public Services (gdp_va_ps),,18731.12106428494
+2027,Public Services (gdp_va_ps),,20337.837699754098
+2028,Public Services (gdp_va_ps),,22581.196143649217
+2029,Public Services (gdp_va_ps),,23058.588255095096
+2030,Public Services (gdp_va_ps),,26175.339077938235
+2031,Public Services (gdp_va_ps),,27225.513483142466
+2032,Public Services (gdp_va_ps),,28926.56486521809
+2024,Market Services (gdp_va_ms),,702.5184
+2025,Market Services (gdp_va_ms),,667.5607
+2026,Market Services (gdp_va_ms),,706.9994
+2027,Market Services (gdp_va_ms),,828.227
+2028,Market Services (gdp_va_ms),,855.8513
+2029,Market Services (gdp_va_ms),,934.6827
+2030,Market Services (gdp_va_ms),,893.4069
+2031,Market Services (gdp_va_ms),,978.8786
+2032,Market Services (gdp_va_ms),,1066.15
+2024,Market Services (gdp_va_ms),,2440.0501427887984
+2025,Market Services (gdp_va_ms),,2745.5101099088843
+2026,Market Services (gdp_va_ms),,3383.1918114159553
+2027,Market Services (gdp_va_ms),,4152.731373736172
+2028,Market Services (gdp_va_ms),,3965.3701014194744
+2029,Market Services (gdp_va_ms),,5200.049634961591
+2030,Market Services (gdp_va_ms),,5935.661245988234
+2031,Market Services (gdp_va_ms),,6047.132265022104
+2032,Market Services (gdp_va_ms),,6575.501361131713
+2024,Nominal GDP (gdp_va_tot),,158568.1
+2025,Nominal GDP (gdp_va_tot),,174972.4
+2026,Nominal GDP (gdp_va_tot),,185845.6
+2027,Nominal GDP (gdp_va_tot),,205377.9
+2028,Nominal GDP (gdp_va_tot),,216131.9
+2029,Nominal GDP (gdp_va_tot),,228435.6
+2030,Nominal GDP (gdp_va_tot),,240370.6
+2031,Nominal GDP (gdp_va_tot),,256823.5
+2032,Nominal GDP (gdp_va_tot),,273824.6
+2024,Nominal GDP (gdp_va_tot),,141258.83765302954
+2025,Nominal GDP (gdp_va_tot),,157617.76456359192
+2026,Nominal GDP (gdp_va_tot),,181287.8252698788
+2027,Nominal GDP (gdp_va_tot),,204962.86733045062
+2028,Nominal GDP (gdp_va_tot),,233000.50636751766
+2029,Nominal GDP (gdp_va_tot),,269234.2821028017
+2030,Nominal GDP (gdp_va_tot),,304009.8174283254
+2031,Nominal GDP (gdp_va_tot),,345901.63725261186
+2032,Nominal GDP (gdp_va_tot),,390205.9924483266
+2024,2. Real GDP,,143278.43765302945
+2025,2. Real GDP,,157617.7645635919
+2026,2. Real GDP,,181287.82526987884
+2027,2. Real GDP,,204962.86733045068
+2028,2. Real GDP,,233000.50636751752
+2029,2. Real GDP,,269234.28210280155
+2030,2. Real GDP,,304009.8174283254
+2031,2. Real GDP,,345901.6372526118
+2032,2. Real GDP,,390205.99244832667
+2024,2. Real GDP,,155783.69865302954
+2025,2. Real GDP,,176918.8543635919
+2026,2. Real GDP,,199898.14276237882
+2027,2. Real GDP,,225457.16600975062
+2028,2. Real GDP,,254611.99914551765
+2029,2. Real GDP,,290957.13820040174
+2030,2. Real GDP,,325987.6153803254
+2031,2. Real GDP,,368330.8543526119
+2032,2. Real GDP,,413970.3378483266
+2024,Source: gdp_r_grp,,40308.689
+2025,Source: gdp_r_grp,,44769.979
+2026,Source: gdp_r_grp,,48415.477999999996
+2027,Source: gdp_r_grp,,54629.18
+2028,Source: gdp_r_grp,,59225.16
+2029,Source: gdp_r_grp,,62108.93
+2030,Source: gdp_r_grp,,65659.7
+2031,Source: gdp_r_grp,,68972.24
+2032,Source: gdp_r_grp,,72870.79000000001
+2024,Agriculture (gdp_r_a),,46034.76
+2025,Agriculture (gdp_r_a),,47200.61
+2026,Agriculture (gdp_r_a),,48583.05
+2027,Agriculture (gdp_r_a),,53633.24
+2028,Agriculture (gdp_r_a),,58780.61
+2029,Agriculture (gdp_r_a),,61535.96
+2030,Agriculture (gdp_r_a),,64374.36
+2031,Agriculture (gdp_r_a),,66089.8
+2032,Agriculture (gdp_r_a),,67560.57
+2024,Agriculture (gdp_r_a),,29809.8
+2025,Agriculture (gdp_r_a),,39502.51015502721
+2026,Agriculture (gdp_r_a),,46658.68607433501
+2027,Agriculture (gdp_r_a),,55528.64910924131
+2028,Agriculture (gdp_r_a),,68336.48018916478
+2029,Agriculture (gdp_r_a),,72753.27569671921
+2030,Agriculture (gdp_r_a),,76222.84481452448
+2031,Agriculture (gdp_r_a),,94515.67646602873
+2032,Agriculture (gdp_r_a),,97849.87142329951
+2024,Mining (gdp_r_mi),,5758.955
+2025,Mining (gdp_r_mi),,6304.044
+2026,Mining (gdp_r_mi),,6783.924
+2027,Mining (gdp_r_mi),,7407.545
+2028,Mining (gdp_r_mi),,8897.807
+2029,Mining (gdp_r_mi),,9165.029
+2030,Mining (gdp_r_mi),,9252.199
+2031,Mining (gdp_r_mi),,10030.19
+2032,Mining (gdp_r_mi),,10723.74
+2024,Mining (gdp_r_mi),,6469.8
+2025,Mining (gdp_r_mi),,7591.38270829206
+2026,Mining (gdp_r_mi),,11099.395271927226
+2027,Mining (gdp_r_mi),,20542.105586620753
+2028,Mining (gdp_r_mi),,22339.945834147813
+2029,Mining (gdp_r_mi),,17985.63324186577
+2030,Mining (gdp_r_mi),,33315.20611905579
+2031,Mining (gdp_r_mi),,36999.982054111526
+2032,Mining (gdp_r_mi),,46459.40720554872
+2024,Manufacturing (gdp_r_m),,14995.81
+2025,Manufacturing (gdp_r_m),,17098.45
+2026,Manufacturing (gdp_r_m),,15225.02
+2027,Manufacturing (gdp_r_m),,19543.02
+2028,Manufacturing (gdp_r_m),,20437.08
+2029,Manufacturing (gdp_r_m),,24604.74
+2030,Manufacturing (gdp_r_m),,24458.9
+2031,Manufacturing (gdp_r_m),,26101.73
+2032,Manufacturing (gdp_r_m),,28270.14
+2024,Manufacturing (gdp_r_m),,20560.9
+2025,Manufacturing (gdp_r_m),,25057.481336219673
+2026,Manufacturing (gdp_r_m),,15616.756755152972
+2027,Manufacturing (gdp_r_m),,12629.743580333743
+2028,Manufacturing (gdp_r_m),,14838.628256985889
+2029,Manufacturing (gdp_r_m),,24053.68955999572
+2030,Manufacturing (gdp_r_m),,24947.974569142418
+2031,Manufacturing (gdp_r_m),,31554.847476507377
+2032,Manufacturing (gdp_r_m),,47751.9922074223
+2024,Energy and Water (gdp_r_e),,5451.646
+2025,Energy and Water (gdp_r_e),,6013.477
+2026,Energy and Water (gdp_r_e),,6081.913
+2027,Energy and Water (gdp_r_e),,7084.966
+2028,Energy and Water (gdp_r_e),,7482.443
+2029,Energy and Water (gdp_r_e),,7991.808
+2030,Energy and Water (gdp_r_e),,8256.267
+2031,Energy and Water (gdp_r_e),,9539.299
+2032,Energy and Water (gdp_r_e),,9816.608
+2024,Energy and Water (gdp_r_e),,4684.7
+2025,Energy and Water (gdp_r_e),,6592.603397884559
+2026,Energy and Water (gdp_r_e),,7797.3686828143245
+2027,Energy and Water (gdp_r_e),,8708.254997362223
+2028,Energy and Water (gdp_r_e),,10633.640413883819
+2029,Energy and Water (gdp_r_e),,12455.999038983198
+2030,Energy and Water (gdp_r_e),,14357.38849884658
+2031,Energy and Water (gdp_r_e),,14894.474225888265
+2032,Energy and Water (gdp_r_e),,20405.093497475602
+2024,Construction (gdp_r_c),,23079.82
+2025,Construction (gdp_r_c),,22486.95
+2026,Construction (gdp_r_c),,23798.08
+2027,Construction (gdp_r_c),,25716.52
+2028,Construction (gdp_r_c),,30841.37
+2029,Construction (gdp_r_c),,31790.81
+2030,Construction (gdp_r_c),,31268.04
+2031,Construction (gdp_r_c),,33712.72
+2032,Construction (gdp_r_c),,34924.92
+2024,Construction (gdp_r_c),,17070.9
+2025,Construction (gdp_r_c),,19752.071279449592
+2026,Construction (gdp_r_c),,24482.847305438154
+2027,Construction (gdp_r_c),,26852.266699658456
+2028,Construction (gdp_r_c),,29892.837294560788
+2029,Construction (gdp_r_c),,36420.37923957803
+2030,Construction (gdp_r_c),,39331.030360430916
+2031,Construction (gdp_r_c),,43427.977070168505
+2032,Construction (gdp_r_c),,46636.37384624616
+2024,Transport (gdp_r_t),,9257.641
+2025,Transport (gdp_r_t),,9753.122
+2026,Transport (gdp_r_t),,9607.10399999999
+2027,Transport (gdp_r_t),,9310.672
+2028,Transport (gdp_r_t),,11119.83
+2029,Transport (gdp_r_t),,10885.26
+2030,Transport (gdp_r_t),,12640.09
+2031,Transport (gdp_r_t),,10454.48
+2032,Transport (gdp_r_t),,10368.79
+2024,Transport (gdp_r_t),,8768.7
+2025,Transport (gdp_r_t),,10461.931100693431
+2026,Transport (gdp_r_t),,11842.721846701716
+2027,Transport (gdp_r_t),,12557.254294502187
+2028,Transport (gdp_r_t),,12408.098271925925
+2029,Transport (gdp_r_t),,14870.679936939083
+2030,Transport (gdp_r_t),,18364.776331411013
+2031,Transport (gdp_r_t),,19269.045863511477
+2032,Transport (gdp_r_t),,20662.688540362164
+2024,Trade (gdp_r_tr),,31186.14
+2025,Trade (gdp_r_tr),,32386.35
+2026,Trade (gdp_r_tr),,33463.96
+2027,Trade (gdp_r_tr),,35247.74
+2028,Trade (gdp_r_tr),,40344.32
+2029,Trade (gdp_r_tr),,41581.05
+2030,Trade (gdp_r_tr),,41677.96
+2031,Trade (gdp_r_tr),,44356.82
+2032,Trade (gdp_r_tr),,45859.47
+2024,Trade (gdp_r_tr),,19991.5
+2025,Trade (gdp_r_tr),,24649.38147243305
+2026,Trade (gdp_r_tr),,25119.298665676873
+2027,Trade (gdp_r_tr),,28033.142782796665
+2028,Trade (gdp_r_tr),,31229.368545729398
+2029,Trade (gdp_r_tr),,36522.91805909697
+2030,Trade (gdp_r_tr),,42039.65929258743
+2031,Trade (gdp_r_tr),,45413.23172260323
+2032,Trade (gdp_r_tr),,47469.75187277398
+2024,Financial services (gdp_r_fs),,2820.36
+2025,Financial services (gdp_r_fs),,2140.249
+2026,Financial services (gdp_r_fs),,3144.252
+2027,Financial services (gdp_r_fs),,3551.046
+2028,Financial services (gdp_r_fs),,3819.053
+2029,Financial services (gdp_r_fs),,4556.354
+2030,Financial services (gdp_r_fs),,4380.049
+2031,Financial services (gdp_r_fs),,4173.969
+2032,Financial services (gdp_r_fs),,4536.087
+2024,Financial services (gdp_r_fs),,6273.700000000001
+2025,Financial services (gdp_r_fs),,7654.274227167109
+2026,Financial services (gdp_r_fs),,8142.702837198279
+2027,Financial services (gdp_r_fs),,9273.091130979139
+2028,Financial services (gdp_r_fs),,8616.632990489896
+2029,Financial services (gdp_r_fs),,12741.62079863434
+2030,Financial services (gdp_r_fs),,12631.958783656712
+2031,Financial services (gdp_r_fs),,14191.58528260967
+2032,Financial services (gdp_r_fs),,15367.396899024485
+2024,Public Services (gdp_r_ps),,18813.23
+2025,Public Services (gdp_r_ps),,22057.55
+2026,Public Services (gdp_r_ps),,22380.64
+2027,Public Services (gdp_r_ps),,25717.16
+2028,Public Services (gdp_r_ps),,25553.59
+2029,Public Services (gdp_r_ps),,28720.84
+2030,Public Services (gdp_r_ps),,28531.33
+2031,Public Services (gdp_r_ps),,28431.85
+2032,Public Services (gdp_r_ps),,27437.78
+2024,Public Services (gdp_r_ps),,14892.9
+2025,Public Services (gdp_r_ps),,18237.973690328105
+2026,Public Services (gdp_r_ps),,18332.506930533717
+2027,Public Services (gdp_r_ps),,20196.275055545124
+2028,Public Services (gdp_r_ps),,22229.067467691842
+2029,Public Services (gdp_r_ps),,22389.71126438972
+2030,Public Services (gdp_r_ps),,24956.83537472908
+2031,Public Services (gdp_r_ps),,25731.35273187784
+2032,Public Services (gdp_r_ps),,26813.554336783018
+2024,Market Services (gdp_r_ms),,1555.771
+2025,Market Services (gdp_r_ms),,2264.438
+2026,Market Services (gdp_r_ms),,-1701.839
+2027,Market Services (gdp_r_ms),,-1253.747
+2028,Market Services (gdp_r_ms),,-3093.55
+2029,Market Services (gdp_r_ms),,-2377.375
+2030,Market Services (gdp_r_ms),,-278.6426
+2031,Market Services (gdp_r_ms),,-2399.652
+2032,Market Services (gdp_r_ms),,-2981.344
+2024,Market Services (gdp_r_ms),,2319.3
+2025,Market Services (gdp_r_ms),,2858.4173315910984
+2026,Market Services (gdp_r_ms),,3591.889074206469
+2027,Market Services (gdp_r_ms),,4264.600525225621
+2028,Market Services (gdp_r_ms),,4089.253265999499
+2029,Market Services (gdp_r_ms),,5231.275710629272
+2030,Market Services (gdp_r_ms),,6000.286284000415
+2031,Market Services (gdp_r_ms),,5954.089909484509
+2032,Market Services (gdp_r_ms),,6354.9063036004745
+2024,Real GDP (gdp_r_tot),,158169.6
+2025,Real GDP (gdp_r_tot),,166920.7
+2026,Real GDP (gdp_r_tot),,166581.6
+2027,Real GDP (gdp_r_tot),,185173.6
+2028,Real GDP (gdp_r_tot),,203398
+2029,Real GDP (gdp_r_tot),,217669.9
+2030,Real GDP (gdp_r_tot),,223776
+2031,Real GDP (gdp_r_tot),,229706.7
+2032,Real GDP (gdp_r_tot),,235732.2
+2024,Real GDP (gdp_r_tot),,130842.2
+2025,Real GDP (gdp_r_tot),,162358.0266990859
+2026,Real GDP (gdp_r_tot),,172684.17344398474
+2027,Real GDP (gdp_r_tot),,198585.38376226524
+2028,Real GDP (gdp_r_tot),,224613.95253057967
+2029,Real GDP (gdp_r_tot),,255425.1825468313
+2030,Real GDP (gdp_r_tot),,292167.96042838483
+2031,Real GDP (gdp_r_tot),,331952.2628027911
+2032,Real GDP (gdp_r_tot),,375771.0361325364
+2025,3. GDP deflator,,105.36267021259884
+2026,3. GDP deflator,,95.3252378293748
+2027,3. GDP deflator,,99.73783140223928
+2028,3. GDP deflator,,99.12771613427887
+2029,3. GDP deflator,,100.7941487390682
+2030,3. GDP deflator,,98.04555114282434
+2031,3. GDP deflator,,95.65062666836594
+2032,3. GDP deflator,,91.87797678067844
+2024,3. GDP deflator,,GDP growth rate
+2025,3. GDP deflator,,108.4
+2026,3. GDP deflator,,108.51599957200115
+2027,3. GDP deflator,,108.37388918991087
+2028,3. GDP deflator,,108.62520475951297
+2029,3. GDP deflator,,108.76495168739831
+2030,3. GDP deflator,,107.88215008830171
+2031,3. GDP deflator,,108.53791833540478
+2032,3. GDP deflator,,108.10939364078631
+2025,Source: gdp_dfl_grp,,117.04848457806594
+2026,Source: gdp_dfl_grp,,106.18479742013795
+2027,Source: gdp_dfl_grp,,102.57619987617402
+2028,Source: gdp_dfl_grp,,99.61928990328154
+2029,Source: gdp_dfl_grp,,93.7570820792236
+2030,Source: gdp_dfl_grp,,83.4071168968951
+2031,Source: gdp_dfl_grp,,75.81702720976817
+2032,Source: gdp_dfl_grp,,68.37688392532006
+2024,Agriculture (gdp_dfl_a),,0.8583848
+2025,Agriculture (gdp_dfl_a),,0.935858
+2026,Agriculture (gdp_dfl_a),,0.9378415
+2027,Agriculture (gdp_dfl_a),,0.8866573
+2028,Agriculture (gdp_dfl_a),,0.8158953
+2029,Agriculture (gdp_dfl_a),,0.829305
+2030,Agriculture (gdp_dfl_a),,0.7971173
+2031,Agriculture (gdp_dfl_a),,0.8119762
+2032,Agriculture (gdp_dfl_a),,0.8487041
+2024,Agriculture (gdp_dfl_a),,120.48319680105199
+2025,Agriculture (gdp_dfl_a),,98.14900121239272
+2026,Agriculture (gdp_dfl_a),,96.19822043362987
+2027,Agriculture (gdp_dfl_a),,91.91722145391869
+2028,Agriculture (gdp_dfl_a),,94.05544925505244
+2029,Agriculture (gdp_dfl_a),,92.30800466946866
+2030,Agriculture (gdp_dfl_a),,90.92151900674324
+2031,Agriculture (gdp_dfl_a),,92.207397941381
+2032,Agriculture (gdp_dfl_a),,89.70277743438966
+2024,Mining (gdp_dfl_mi),,1.321657
+2025,Mining (gdp_dfl_mi),,1.509664
+2026,Mining (gdp_dfl_mi),,1.501598
+2027,Mining (gdp_dfl_mi),,1.475875
+2028,Mining (gdp_dfl_mi),,1.2989
+2029,Mining (gdp_dfl_mi),,1.3423
+2030,Mining (gdp_dfl_mi),,1.413612
+2031,Mining (gdp_dfl_mi),,1.391959
+2032,Mining (gdp_dfl_mi),,1.357376
+2024,Mining (gdp_dfl_mi),,99.79597514606326
+2025,Mining (gdp_dfl_mi),,95.73230412187868
+2026,Mining (gdp_dfl_mi),,93.09155954347698
+2027,Mining (gdp_dfl_mi),,76.13238234696522
+2028,Mining (gdp_dfl_mi),,71.67651606546451
+2029,Mining (gdp_dfl_mi),,114.14642677239111
+2030,Mining (gdp_dfl_mi),,80.02367734164517
+2031,Mining (gdp_dfl_mi),,75.76589235846663
+2032,Mining (gdp_dfl_mi),,83.93980250718923
+2024,Manufacturing (gdp_dfl_m),,1.753644
+2025,Manufacturing (gdp_dfl_m),,1.631173
+2026,Manufacturing (gdp_dfl_m),,1.984082
+2027,Manufacturing (gdp_dfl_m),,1.679561
+2028,Manufacturing (gdp_dfl_m),,1.784705
+2029,Manufacturing (gdp_dfl_m),,1.555187
+2030,Manufacturing (gdp_dfl_m),,1.655032
+2031,Manufacturing (gdp_dfl_m),,1.594239
+2032,Manufacturing (gdp_dfl_m),,1.509397
+2024,Manufacturing (gdp_dfl_m),,100.28889785952946
+2025,Manufacturing (gdp_dfl_m),,92.61919710643582
+2026,Manufacturing (gdp_dfl_m),,175.00307380073812
+2027,Manufacturing (gdp_dfl_m),,214.51391493212674
+2028,Manufacturing (gdp_dfl_m),,222.44003564509507
+2029,Manufacturing (gdp_dfl_m),,154.31764705882352
+2030,Manufacturing (gdp_dfl_m),,184.24038479217083
+2031,Manufacturing (gdp_dfl_m),,168.1186440677966
+2032,Manufacturing (gdp_dfl_m),,142.6165158371041
+2024,Energy and Water (gdp_dfl_e),,1.17396
+2025,Energy and Water (gdp_dfl_e),,1.224328
+2026,Energy and Water (gdp_dfl_e),,1.318838
+2027,Energy and Water (gdp_dfl_e),,1.534643
+2028,Energy and Water (gdp_dfl_e),,1.495989
+2029,Energy and Water (gdp_dfl_e),,1.444197
+2030,Energy and Water (gdp_dfl_e),,1.465603
+2031,Energy and Water (gdp_dfl_e),,1.40453
+2032,Energy and Water (gdp_dfl_e),,1.593605
+2024,Energy and Water (gdp_dfl_e),,119.31820607509553
+2025,Energy and Water (gdp_dfl_e),,95.40278127684518
+2026,Energy and Water (gdp_dfl_e),,97.98685862343868
+2027,Energy and Water (gdp_dfl_e),,99.94559768704411
+2028,Energy and Water (gdp_dfl_e),,99.07542059764648
+2029,Energy and Water (gdp_dfl_e),,104.0597803080041
+2030,Energy and Water (gdp_dfl_e),,94.22674388300892
+2031,Energy and Water (gdp_dfl_e),,102.87427631392538
+2032,Energy and Water (gdp_dfl_e),,96.60551892313306
+2024,Construction (gdp_dfl_c),,0.8154497
+2025,Construction (gdp_dfl_c),,1.005118
+2026,Construction (gdp_dfl_c),,1.042167
+2027,Construction (gdp_dfl_c),,1.020066
+2028,Construction (gdp_dfl_c),,0.8855847
+2029,Construction (gdp_dfl_c),,0.8626108
+2030,Construction (gdp_dfl_c),,0.9336335
+2031,Construction (gdp_dfl_c),,0.9088446
+2032,Construction (gdp_dfl_c),,0.9187347
+2024,Construction (gdp_dfl_c),,104.70039658131674
+2025,Construction (gdp_dfl_c),,101.84682275699022
+2026,Construction (gdp_dfl_c),,101.71359135986494
+2027,Construction (gdp_dfl_c),,102.27373392891043
+2028,Construction (gdp_dfl_c),,97.78326580503982
+2029,Construction (gdp_dfl_c),,96.33771290342942
+2030,Construction (gdp_dfl_c),,98.95687836922261
+2031,Construction (gdp_dfl_c),,100.2674794360187
+2032,Construction (gdp_dfl_c),,102.78911868936534
+2024,Transport (gdp_dfl_t),,1.045342
+2025,Transport (gdp_dfl_t),,1.093984
+2026,Transport (gdp_dfl_t),,1.280561
+2027,Transport (gdp_dfl_t),,1.739586
+2028,Transport (gdp_dfl_t),,1.547917
+2029,Transport (gdp_dfl_t),,1.740133
+2030,Transport (gdp_dfl_t),,1.555729
+2031,Transport (gdp_dfl_t),,2.133925
+2032,Transport (gdp_dfl_t),,2.42881
+2024,Transport (gdp_dfl_t),,99.96464698301912
+2025,Transport (gdp_dfl_t),,94.32341082037173
+2026,Transport (gdp_dfl_t),,98.11823071352491
+2027,Transport (gdp_dfl_t),,103.91041293313098
+2028,Transport (gdp_dfl_t),,103.75420135115176
+2029,Transport (gdp_dfl_t),,113.23606768144406
+2030,Transport (gdp_dfl_t),,105.55093426361199
+2031,Transport (gdp_dfl_t),,107.60140578248057
+2032,Transport (gdp_dfl_t),,110.8947320924511
+2024,Trade (gdp_dfl_tr),,0.7042629
+2025,Trade (gdp_dfl_tr),,0.7031063
+2026,Trade (gdp_dfl_tr),,0.6938437
+2027,Trade (gdp_dfl_tr),,0.7432313
+2028,Trade (gdp_dfl_tr),,0.6947297
+2029,Trade (gdp_dfl_tr),,0.68663
+2030,Trade (gdp_dfl_tr),,0.7223828
+2031,Trade (gdp_dfl_tr),,0.744888
+2032,Trade (gdp_dfl_tr),,0.745229
+2024,Trade (gdp_dfl_tr),,104.8575644648976
+2025,Trade (gdp_dfl_tr),,95.64701008078866
+2026,Trade (gdp_dfl_tr),,96.95756402943873
+2027,Trade (gdp_dfl_tr),,99.7967377154136
+2028,Trade (gdp_dfl_tr),,100.49456331705169
+2029,Trade (gdp_dfl_tr),,101.4250536901115
+2030,Trade (gdp_dfl_tr),,103.91775804790831
+2031,Trade (gdp_dfl_tr),,105.04446667424017
+2032,Trade (gdp_dfl_tr),,107.03305358910742
+2024,Financial services (gdp_dfl_fs),,3.957097
+2025,Financial services (gdp_dfl_fs),,5.965048
+2026,Financial services (gdp_dfl_fs),,4.020174
+2027,Financial services (gdp_dfl_fs),,3.793439
+2028,Financial services (gdp_dfl_fs),,3.725184
+2029,Financial services (gdp_dfl_fs),,3.286961
+2030,Financial services (gdp_dfl_fs),,3.677384
+2031,Financial services (gdp_dfl_fs),,4.136838
+2032,Financial services (gdp_dfl_fs),,3.915125
+2024,Financial services (gdp_dfl_fs),,105.57884501968535
+2025,Financial services (gdp_dfl_fs),,101.51828736776972
+2026,Financial services (gdp_dfl_fs),,99.58085473731438
+2027,Financial services (gdp_dfl_fs),,102.54795205628456
+2028,Financial services (gdp_dfl_fs),,106.0385711182255
+2029,Financial services (gdp_dfl_fs),,111.75103857383712
+2030,Financial services (gdp_dfl_fs),,114.40369333556137
+2031,Financial services (gdp_dfl_fs),,120.43069971135733
+2032,Financial services (gdp_dfl_fs),,120.1113603783768
+2024,Public Services (gdp_dfl_ps),,0.9047487
+2025,Public Services (gdp_dfl_ps),,0.7776755
+2026,Public Services (gdp_dfl_ps),,0.8399233
+2027,Public Services (gdp_dfl_ps),,0.8115369
+2028,Public Services (gdp_dfl_ps),,0.8575377
+2029,Public Services (gdp_dfl_ps),,0.8728514
+2030,Public Services (gdp_dfl_ps),,0.9825319
+2031,Public Services (gdp_dfl_ps),,1.074633
+2032,Public Services (gdp_dfl_ps),,1.237141
+2024,Public Services (gdp_dfl_ps),,107.50894721645885
+2025,Public Services (gdp_dfl_ps),,98.71805504218422
+2026,Public Services (gdp_dfl_ps),,102.17435692380572
+2027,Public Services (gdp_dfl_ps),,100.70093442389569
+2028,Public Services (gdp_dfl_ps),,101.58409108465376
+2029,Public Services (gdp_dfl_ps),,102.98743017632927
+2030,Public Services (gdp_dfl_ps),,104.88244476879065
+2031,Public Services (gdp_dfl_ps),,105.8067710890829
+2032,Public Services (gdp_dfl_ps),,107.88038207055762
+2024,Market Services (gdp_dfl_ms),,0.4515564
+2025,Market Services (gdp_dfl_ms),,0.2948019
+2026,Market Services (gdp_dfl_ms),,-0.4154325
+2027,Market Services (gdp_dfl_ms),,-0.6606013
+2028,Market Services (gdp_dfl_ms),,-0.2766567
+2029,Market Services (gdp_dfl_ms),,-0.3931575
+2030,Market Services (gdp_dfl_ms),,-3.206282
+2031,Market Services (gdp_dfl_ms),,-0.4079252
+2032,Market Services (gdp_dfl_ms),,-0.357607
+2024,Market Services (gdp_dfl_ms),,105.20846807226319
+2025,Market Services (gdp_dfl_ms),,96.0500091979443
+2026,Market Services (gdp_dfl_ms),,94.1897631447146
+2027,Market Services (gdp_dfl_ms),,97.37679647067223
+2028,Market Services (gdp_dfl_ms),,96.9705186614372
+2029,Market Services (gdp_dfl_ms),,99.40308870350242
+2030,Market Services (gdp_dfl_ms),,98.9229674226628
+2031,Market Services (gdp_dfl_ms),,101.56266292501535
+2032,Market Services (gdp_dfl_ms),,103.47125586110147
+2024,GDP Deflator (gdp_dfl_tot),,1.00252
+2025,GDP Deflator (gdp_dfl_tot),,1.048237
+2026,GDP Deflator (gdp_dfl_tot),,1.115643
+2027,GDP Deflator (gdp_dfl_tot),,1.10911
+2028,GDP Deflator (gdp_dfl_tot),,1.062606
+2029,GDP Deflator (gdp_dfl_tot),,1.049459
+2030,GDP Deflator (gdp_dfl_tot),,1.074157
+2031,GDP Deflator (gdp_dfl_tot),,1.11805
+2032,GDP Deflator (gdp_dfl_tot),,1.161592
+2024,GDP Deflator (gdp_dfl_tot),,107.96126937639386
+2025,GDP Deflator (gdp_dfl_tot),,97.0803647766183
+2026,GDP Deflator (gdp_dfl_tot),,104.98230477889447
+2027,GDP Deflator (gdp_dfl_tot),,103.21145667790945
+2028,GDP Deflator (gdp_dfl_tot),,103.73376352735532
+2029,GDP Deflator (gdp_dfl_tot),,105.40631875772021
+2030,GDP Deflator (gdp_dfl_tot),,104.05309910866944
+2031,GDP Deflator (gdp_dfl_tot),,104.20222303413185
+2032,GDP Deflator (gdp_dfl_tot),,103.84142334767358

@@ -1,0 +1,936 @@
+﻿year,block,equation,description,value
+2024,1,1,Agriculture (p_a),1.000879
+2025,1,1,Agriculture (p_a),1.040396
+2026,1,1,Agriculture (p_a),1.036174
+2027,1,1,Agriculture (p_a),1.047091
+2028,1,1,Agriculture (p_a),1.039209
+2029,1,1,Agriculture (p_a),1.060155
+2030,1,1,Agriculture (p_a),1.054533
+2031,1,1,Agriculture (p_a),1.075063
+2032,1,1,Agriculture (p_a),1.09542
+2024,1,2,Mining (p_mi),1.009833
+2025,1,2,Mining (p_mi),1.031612
+2026,1,2,Mining (p_mi),1.041602
+2027,1,2,Mining (p_mi),0.905
+2028,1,2,Mining (p_mi),0.935
+2029,1,2,Mining (p_mi),0.935
+2030,1,2,Mining (p_mi),0.935
+2031,1,2,Mining (p_mi),0.905
+2032,1,2,Mining (p_mi),0.901
+2024,1,3,Manufacturing (p_m),1.003147
+2025,1,3,Manufacturing (p_m),1.033837
+2026,1,3,Manufacturing (p_m),1.042326
+2027,1,3,Manufacturing (p_m),1.055848
+2028,1,3,Manufacturing (p_m),1.009
+2029,1,3,Manufacturing (p_m),1.009
+2030,1,3,Manufacturing (p_m),1.009
+2031,1,3,Manufacturing (p_m),0.91
+2032,1,3,Manufacturing (p_m),0.907
+2024,1,4,Energy and Water (p_e),1.004254
+2025,1,4,Energy and Water (p_e),1.020014
+2026,1,4,Energy and Water (p_e),1.035124
+2027,1,4,Energy and Water (p_e),1.053312
+2028,1,4,Energy and Water (p_e),1.052226
+2029,1,4,Energy and Water (p_e),1.085796
+2030,1,4,Energy and Water (p_e),1.02
+2031,1,4,Energy and Water (p_e),1.076408
+2032,1,4,Energy and Water (p_e),1
+2024,1,5,Construction (p_c),1
+2025,1,5,Construction (p_c),1.06
+2026,1,5,Construction (p_c),1.06
+2027,1,5,Construction (p_c),1.07
+2028,1,5,Construction (p_c),1.045
+2029,1,5,Construction (p_c),1.021
+2030,1,5,Construction (p_c),1.035
+2031,1,5,Construction (p_c),1.045
+2032,1,5,Construction (p_c),1.055
+2024,1,6,Transport (p_t),1.004766
+2025,1,6,Transport (p_t),1.025735
+2026,1,6,Transport (p_t),1.049202
+2027,1,6,Transport (p_t),1.088025
+2028,1,6,Transport (p_t),1.094247
+2029,1,6,Transport (p_t),1.146252
+2030,1,6,Transport (p_t),1.088428
+2031,1,6,Transport (p_t),1.1057
+2032,1,6,Transport (p_t),1.12234
+2024,1,7,Trade (p_tr),1.000093
+2025,1,7,Trade (p_tr),1.010111
+2026,1,7,Trade (p_tr),1.020294
+2027,1,7,Trade (p_tr),1.045241
+2028,1,7,Trade (p_tr),1.054977
+2029,1,7,Trade (p_tr),1.049495
+2030,1,7,Trade (p_tr),1.059468
+2031,1,7,Trade (p_tr),1.069699
+2032,1,7,Trade (p_tr),1.080588
+2024,1,8,Financial services (p_fs),1.000483
+2025,1,8,Financial services (p_fs),1.07119
+2026,1,8,Financial services (p_fs),1.067118
+2027,1,8,Financial services (p_fs),1.091531
+2028,1,8,Financial services (p_fs),1.109512
+2029,1,8,Financial services (p_fs),1.131571
+2030,1,8,Financial services (p_fs),1.151267
+2031,1,8,Financial services (p_fs),1.199551
+2032,1,8,Financial services (p_fs),1.20014
+2024,1,9,Public Services (p_ps),1.000129
+2025,1,9,Public Services (p_ps),1.010253
+2026,1,9,Public Services (p_ps),1.040199
+2027,1,9,Public Services (p_ps),1.030356
+2028,1,9,Public Services (p_ps),1.040031
+2029,1,9,Public Services (p_ps),1.05068
+2030,1,9,Public Services (p_ps),1.060781
+2031,1,9,Public Services (p_ps),1.07104
+2032,1,9,Public Services (p_ps),1.091057
+2024,1,10,Market Services (p_ms),1.000181
+2025,1,10,Market Services (p_ms),1.010285
+2026,1,10,Market Services (p_ms),1.002134
+2027,1,10,Market Services (p_ms),1.030502
+2028,1,10,Market Services (p_ms),1.030043
+2029,1,10,Market Services (p_ms),1.040947
+2030,1,10,Market Services (p_ms),1.036071
+2031,1,10,Market Services (p_ms),1.046373
+2032,1,10,Market Services (p_ms),1.061275
+2024,Source: pva_grp,11,Agriculture (pva_a),0.9958141
+2025,Source: pva_grp,11,Agriculture (pva_a),1.070785
+2026,Source: pva_grp,11,Agriculture (pva_a),1.06048
+2027,Source: pva_grp,11,Agriculture (pva_a),1.080147
+2028,Source: pva_grp,11,Agriculture (pva_a),1.013892
+2029,Source: pva_grp,11,Agriculture (pva_a),0.9705722
+2030,Source: pva_grp,11,Agriculture (pva_a),0.939447
+2031,Source: pva_grp,11,Agriculture (pva_a),0.8989173
+2032,Source: pva_grp,11,Agriculture (pva_a),0.9359334
+2024,Source: pva_grp,12,Mining (pva_mi),1.020986
+2025,Source: pva_grp,12,Mining (pva_mi),1.224783
+2026,Source: pva_grp,12,Mining (pva_mi),1.251685
+2027,Source: pva_grp,12,Mining (pva_mi),1.285737
+2028,Source: pva_grp,12,Mining (pva_mi),0.9245005
+2029,Source: pva_grp,12,Mining (pva_mi),0.918577
+2030,Source: pva_grp,12,Mining (pva_mi),0.8939355
+2031,Source: pva_grp,12,Mining (pva_mi),0.8895337
+2032,Source: pva_grp,12,Mining (pva_mi),0.8938999
+2024,Source: pva_grp,13,Manufacturing (pva_m),0.9954861
+2025,Source: pva_grp,13,Manufacturing (pva_m),0.9831472
+2026,Source: pva_grp,13,Manufacturing (pva_m),1.049954
+2027,Source: pva_grp,13,Manufacturing (pva_m),0.9841733
+2028,Source: pva_grp,13,Manufacturing (pva_m),1.053318
+2029,Source: pva_grp,13,Manufacturing (pva_m),1.050349
+2030,Source: pva_grp,13,Manufacturing (pva_m),1.093903
+2031,Source: pva_grp,13,Manufacturing (pva_m),1.074273
+2032,Source: pva_grp,13,Manufacturing (pva_m),1.073668
+2024,Source: pva_grp,14,Energy and Water (pva_e),1.005361
+2025,Source: pva_grp,14,Energy and Water (pva_e),1.03293
+2026,Source: pva_grp,14,Energy and Water (pva_e),0.8565347
+2027,Source: pva_grp,14,Energy and Water (pva_e),0.8391973
+2028,Source: pva_grp,14,Energy and Water (pva_e),0.6327221
+2029,Source: pva_grp,14,Energy and Water (pva_e),0.6008687
+2030,Source: pva_grp,14,Energy and Water (pva_e),0.5893384
+2031,Source: pva_grp,14,Energy and Water (pva_e),0.5732561
+2032,Source: pva_grp,14,Energy and Water (pva_e),0.6060239
+2024,Source: pva_grp,15,Construction (pva_c),0.9369689
+2025,Source: pva_grp,15,Construction (pva_c),1.068781
+2026,Source: pva_grp,15,Construction (pva_c),1.147408
+2027,Source: pva_grp,15,Construction (pva_c),1.190035
+2028,Source: pva_grp,15,Construction (pva_c),1.191113
+2029,Source: pva_grp,15,Construction (pva_c),1.180669
+2030,Source: pva_grp,15,Construction (pva_c),1.21292
+2031,Source: pva_grp,15,Construction (pva_c),1.254364
+2032,Source: pva_grp,15,Construction (pva_c),1.285813
+2024,Source: pva_grp,16,Transport (pva_t),1.001906
+2025,Source: pva_grp,16,Transport (pva_t),1.074133
+2026,Source: pva_grp,16,Transport (pva_t),1.137099
+2027,Source: pva_grp,16,Transport (pva_t),1.404508
+2028,Source: pva_grp,16,Transport (pva_t),1.405637
+2029,Source: pva_grp,16,Transport (pva_t),1.418685
+2030,Source: pva_grp,16,Transport (pva_t),1.402125
+2031,Source: pva_grp,16,Transport (pva_t),1.531533
+2032,Source: pva_grp,16,Transport (pva_t),1.618333
+2024,Source: pva_grp,17,Trade (pva_tr),0.9921399
+2025,Source: pva_grp,17,Trade (pva_tr),0.9773986
+2026,Source: pva_grp,17,Trade (pva_tr),0.9218877
+2027,Source: pva_grp,17,Trade (pva_tr),0.9924737
+2028,Source: pva_grp,17,Trade (pva_tr),0.8944123
+2029,Source: pva_grp,17,Trade (pva_tr),0.8589714
+2030,Source: pva_grp,17,Trade (pva_tr),0.8436901
+2031,Source: pva_grp,17,Trade (pva_tr),0.8823803
+2032,Source: pva_grp,17,Trade (pva_tr),0.8588048
+2024,Source: pva_grp,18,Financial services (pva_fs),1.163395
+2025,Source: pva_grp,18,Financial services (pva_fs),1.221282
+2026,Source: pva_grp,18,Financial services (pva_fs),1.176507
+2027,Source: pva_grp,18,Financial services (pva_fs),1.157249
+2028,Source: pva_grp,18,Financial services (pva_fs),1.161612
+2029,Source: pva_grp,18,Financial services (pva_fs),1.148914
+2030,Source: pva_grp,18,Financial services (pva_fs),0.9496975
+2031,Source: pva_grp,18,Financial services (pva_fs),0.9214652
+2032,Source: pva_grp,18,Financial services (pva_fs),0.8862919
+2024,Source: pva_grp,19,Public Services (pva_ps),0.9988407
+2025,Source: pva_grp,19,Public Services (pva_ps),0.913445
+2026,Source: pva_grp,19,Public Services (pva_ps),0.9205453
+2027,Source: pva_grp,19,Public Services (pva_ps),0.9186769
+2028,Source: pva_grp,19,Public Services (pva_ps),0.9258954
+2029,Source: pva_grp,19,Public Services (pva_ps),0.9460649
+2030,Source: pva_grp,19,Public Services (pva_ps),0.959806
+2031,Source: pva_grp,19,Public Services (pva_ps),0.9788029
+2032,Source: pva_grp,19,Public Services (pva_ps),0.9945043
+2024,Source: pva_grp,20,Market Services (pva_ms),0.3277719
+2025,Source: pva_grp,20,Market Services (pva_ms),0.2614986
+2026,Source: pva_grp,20,Market Services (pva_ms),0.216421
+2027,Source: pva_grp,20,Market Services (pva_ms),0.2325555
+2028,Source: pva_grp,20,Market Services (pva_ms),0.1930372
+2029,Source: pva_grp,20,Market Services (pva_ms),0.1889256
+2030,Source: pva_grp,20,Market Services (pva_ms),0.1700383
+2031,Source: pva_grp,20,Market Services (pva_ms),0.1637706
+2032,Source: pva_grp,20,Market Services (pva_ms),0.171378
+2024,Source: pc_grp,21,Agriculture (pc_a),1.041787
+2025,Source: pc_grp,21,Agriculture (pc_a),1.08291
+2026,Source: pc_grp,21,Agriculture (pc_a),1.084011
+2027,Source: pc_grp,21,Agriculture (pc_a),1.09741
+2028,Source: pc_grp,21,Agriculture (pc_a),1.088556
+2029,Source: pc_grp,21,Agriculture (pc_a),1.108769
+2030,Source: pc_grp,21,Agriculture (pc_a),1.104173
+2031,Source: pc_grp,21,Agriculture (pc_a),1.125941
+2032,Source: pc_grp,21,Agriculture (pc_a),1.145297
+2024,Source: pc_grp,22,Mining (pc_mi),1.085293
+2025,Source: pc_grp,22,Mining (pc_mi),1.122346
+2026,Source: pc_grp,22,Mining (pc_mi),1.126317
+2027,Source: pc_grp,22,Mining (pc_mi),1.141462
+2028,Source: pc_grp,22,Mining (pc_mi),1.160984
+2029,Source: pc_grp,22,Mining (pc_mi),1.177234
+2030,Source: pc_grp,22,Mining (pc_mi),1.188016
+2031,Source: pc_grp,22,Mining (pc_mi),1.203188
+2032,Source: pc_grp,22,Mining (pc_mi),1.1988
+2024,Source: pc_grp,23,Manufacturing (pc_m),1.068337
+2025,Source: pc_grp,23,Manufacturing (pc_m),1.108502
+2026,Source: pc_grp,23,Manufacturing (pc_m),1.124811
+2027,Source: pc_grp,23,Manufacturing (pc_m),1.142457
+2028,Source: pc_grp,23,Manufacturing (pc_m),1.16831
+2029,Source: pc_grp,23,Manufacturing (pc_m),1.160557
+2030,Source: pc_grp,23,Manufacturing (pc_m),1.16397
+2031,Source: pc_grp,23,Manufacturing (pc_m),1.185302
+2032,Source: pc_grp,23,Manufacturing (pc_m),1.194204
+2024,Source: pc_grp,24,Energy and Water (pc_e),1.088096
+2025,Source: pc_grp,24,Energy and Water (pc_e),1.100802
+2026,Source: pc_grp,24,Energy and Water (pc_e),1.112357
+2027,Source: pc_grp,24,Energy and Water (pc_e),1.129743
+2028,Source: pc_grp,24,Energy and Water (pc_e),1.142269
+2029,Source: pc_grp,24,Energy and Water (pc_e),1.153639
+2030,Source: pc_grp,24,Energy and Water (pc_e),1.170466
+2031,Source: pc_grp,24,Energy and Water (pc_e),1.122482
+2032,Source: pc_grp,24,Energy and Water (pc_e),1.151509
+2024,Source: pc_grp,25,Construction (pc_c),1.049556
+2025,Source: pc_grp,25,Construction (pc_c),1.114042
+2026,Source: pc_grp,25,Construction (pc_c),1.114077
+2027,Source: pc_grp,25,Construction (pc_c),1.133341
+2028,Source: pc_grp,25,Construction (pc_c),1.099701
+2029,Source: pc_grp,25,Construction (pc_c),1.077389
+2030,Source: pc_grp,25,Construction (pc_c),1.092021
+2031,Source: pc_grp,25,Construction (pc_c),1.103971
+2032,Source: pc_grp,25,Construction (pc_c),1.114146
+2024,Source: pc_grp,26,Transport (pc_t),1.049271
+2025,Source: pc_grp,26,Transport (pc_t),1.081324
+2026,Source: pc_grp,26,Transport (pc_t),1.099591
+2027,Source: pc_grp,26,Transport (pc_t),1.135001
+2028,Source: pc_grp,26,Transport (pc_t),1.157018
+2029,Source: pc_grp,26,Transport (pc_t),1.193628
+2030,Source: pc_grp,26,Transport (pc_t),1.144873
+2031,Source: pc_grp,26,Transport (pc_t),1.173816
+2032,Source: pc_grp,26,Transport (pc_t),1.189199
+2024,Source: pc_grp,27,Trade (pc_tr),1.024319
+2025,Source: pc_grp,27,Trade (pc_tr),1.034606
+2026,Source: pc_grp,27,Trade (pc_tr),1.044913
+2027,Source: pc_grp,27,Trade (pc_tr),1.070499
+2028,Source: pc_grp,27,Trade (pc_tr),1.080781
+2029,Source: pc_grp,27,Trade (pc_tr),1.074683
+2030,Source: pc_grp,27,Trade (pc_tr),1.084934
+2031,Source: pc_grp,27,Trade (pc_tr),1.095225
+2032,Source: pc_grp,27,Trade (pc_tr),1.106508
+2024,Source: pc_grp,28,Financial services (pc_fs),1.122912
+2025,Source: pc_grp,28,Financial services (pc_fs),1.187823
+2026,Source: pc_grp,28,Financial services (pc_fs),1.218403
+2027,Source: pc_grp,28,Financial services (pc_fs),1.233254
+2028,Source: pc_grp,28,Financial services (pc_fs),1.262584
+2029,Source: pc_grp,28,Financial services (pc_fs),1.290641
+2030,Source: pc_grp,28,Financial services (pc_fs),1.307805
+2031,Source: pc_grp,28,Financial services (pc_fs),1.362435
+2032,Source: pc_grp,28,Financial services (pc_fs),1.364337
+2024,Source: pc_grp,29,Public Services (pc_ps),1.044415
+2025,Source: pc_grp,29,Public Services (pc_ps),1.057326
+2026,Source: pc_grp,29,Public Services (pc_ps),1.088405
+2027,Source: pc_grp,29,Public Services (pc_ps),1.082075
+2028,Source: pc_grp,29,Public Services (pc_ps),1.097818
+2029,Source: pc_grp,29,Public Services (pc_ps),1.110595
+2030,Source: pc_grp,29,Public Services (pc_ps),1.122551
+2031,Source: pc_grp,29,Public Services (pc_ps),1.136072
+2032,Source: pc_grp,29,Public Services (pc_ps),1.155637
+2024,Source: pc_grp,30,Market Services (pc_ms),1.031891
+2025,Source: pc_grp,30,Market Services (pc_ms),1.063449
+2026,Source: pc_grp,30,Market Services (pc_ms),1.089969
+2027,Source: pc_grp,30,Market Services (pc_ms),1.122195
+2028,Source: pc_grp,30,Market Services (pc_ms),1.155365
+2029,Source: pc_grp,30,Market Services (pc_ms),1.170013
+2030,Source: pc_grp,30,Market Services (pc_ms),1.190202
+2031,Source: pc_grp,30,Market Services (pc_ms),1.227756
+2032,Source: pc_grp,30,Market Services (pc_ms),1.249274
+2024,Source: pe_grp,31,Agriculture (pe_a),1.029226
+2025,Source: pe_grp,31,Agriculture (pe_a),1.053384
+2026,Source: pe_grp,31,Agriculture (pe_a),1.07359
+2027,Source: pe_grp,31,Agriculture (pe_a),1.111289
+2028,Source: pe_grp,31,Agriculture (pe_a),1.158822
+2029,Source: pe_grp,31,Agriculture (pe_a),1.202739
+2030,Source: pe_grp,31,Agriculture (pe_a),1.205697
+2031,Source: pe_grp,31,Agriculture (pe_a),1.238696
+2032,Source: pe_grp,31,Agriculture (pe_a),1.267527
+2024,Source: pe_grp,32,Mining (pe_mi),1.029226
+2025,Source: pe_grp,32,Mining (pe_mi),1.054429
+2026,Source: pe_grp,32,Mining (pe_mi),1.07359
+2027,Source: pe_grp,32,Mining (pe_mi),1.09611
+2028,Source: pe_grp,32,Mining (pe_mi),1.138688
+2029,Source: pe_grp,32,Mining (pe_mi),1.161736
+2030,Source: pe_grp,32,Mining (pe_mi),1.182622
+2031,Source: pe_grp,32,Mining (pe_mi),1.226843
+2032,Source: pe_grp,32,Mining (pe_mi),1.237491
+2024,Source: pe_grp,33,Manufacturing (pe_m),1.029226
+2025,Source: pe_grp,33,Manufacturing (pe_m),1.065396
+2026,Source: pe_grp,33,Manufacturing (pe_m),1.100164
+2027,Source: pe_grp,33,Manufacturing (pe_m),1.138393
+2028,Source: pe_grp,33,Manufacturing (pe_m),1.180075
+2029,Source: pe_grp,33,Manufacturing (pe_m),1.178821
+2030,Source: pe_grp,33,Manufacturing (pe_m),1.194159
+2031,Source: pe_grp,33,Manufacturing (pe_m),1.226843
+2032,Source: pe_grp,33,Manufacturing (pe_m),1.249505
+2024,Source: pe_grp,34,Energy and Water (pe_e),1.029226
+2025,Source: pe_grp,34,Energy and Water (pe_e),1.075841
+2026,Source: pe_grp,34,Energy and Water (pe_e),1.116108
+2027,Source: pe_grp,34,Energy and Water (pe_e),1.149235
+2028,Source: pe_grp,34,Energy and Water (pe_e),1.202446
+2029,Source: pe_grp,34,Energy and Water (pe_e),1.230074
+2030,Source: pe_grp,34,Energy and Water (pe_e),1.246079
+2031,Source: pe_grp,34,Energy and Water (pe_e),1.303891
+2032,Source: pe_grp,34,Energy and Water (pe_e),1.285548
+2024,Source: pe_grp,35,Construction (pe_c),1.029226
+2025,Source: pe_grp,35,Construction (pe_c),1.049728
+2026,Source: pe_grp,35,Construction (pe_c),1.068275
+2027,Source: pe_grp,35,Construction (pe_c),1.089605
+2028,Source: pe_grp,35,Construction (pe_c),1.124147
+2029,Source: pe_grp,35,Construction (pe_c),1.144652
+2030,Source: pe_grp,35,Construction (pe_c),1.159546
+2031,Source: pe_grp,35,Construction (pe_c),1.191282
+2032,Source: pe_grp,35,Construction (pe_c),1.213462
+2024,Source: pe_grp,36,Transport (pe_t),1.029226
+2025,Source: pe_grp,36,Transport (pe_t),1.054951
+2026,Source: pe_grp,36,Transport (pe_t),1.094849
+2027,Source: pe_grp,36,Transport (pe_t),1.132972
+2028,Source: pe_grp,36,Transport (pe_t),1.174482
+2029,Source: pe_grp,36,Transport (pe_t),1.2016
+2030,Source: pe_grp,36,Transport (pe_t),1.194159
+2031,Source: pe_grp,36,Transport (pe_t),1.238696
+2032,Source: pe_grp,36,Transport (pe_t),1.26152
+2024,Source: pe_grp,37,Trade (pe_tr),1.029226
+2025,Source: pe_grp,37,Trade (pe_tr),1.044506
+2026,Source: pe_grp,37,Trade (pe_tr),1.105479
+2027,Source: pe_grp,37,Trade (pe_tr),1.11671
+2028,Source: pe_grp,37,Trade (pe_tr),1.152111
+2029,Source: pe_grp,37,Trade (pe_tr),1.184516
+2030,Source: pe_grp,37,Trade (pe_tr),1.18839
+2031,Source: pe_grp,37,Trade (pe_tr),1.25055
+2032,Source: pe_grp,37,Trade (pe_tr),1.237491
+2024,Source: pe_grp,38,Financial services (pe_fs),1.029226
+2025,Source: pe_grp,38,Financial services (pe_fs),1.138511
+2026,Source: pe_grp,38,Financial services (pe_fs),1.179886
+2027,Source: pe_grp,38,Financial services (pe_fs),1.17634
+2028,Source: pe_grp,38,Financial services (pe_fs),1.185667
+2029,Source: pe_grp,38,Financial services (pe_fs),1.218684
+2030,Source: pe_grp,38,Financial services (pe_fs),1.223004
+2031,Source: pe_grp,38,Financial services (pe_fs),1.28611
+2032,Source: pe_grp,38,Financial services (pe_fs),1.315585
+2024,Source: pe_grp,39,Public Services (pe_ps),1.029226
+2025,Source: pe_grp,39,Public Services (pe_ps),1.065396
+2026,Source: pe_grp,39,Public Services (pe_ps),1.084219
+2027,Source: pe_grp,39,Public Services (pe_ps),1.105868
+2028,Source: pe_grp,39,Public Services (pe_ps),1.152111
+2029,Source: pe_grp,39,Public Services (pe_ps),1.184516
+2030,Source: pe_grp,39,Public Services (pe_ps),1.211466
+2031,Source: pe_grp,39,Public Services (pe_ps),1.262403
+2032,Source: pe_grp,39,Public Services (pe_ps),1.285548
+2024,Source: pe_grp,40,Market Services,1.029226
+2025,Source: pe_grp,40,Market Services,1.054951
+2026,Source: pe_grp,40,Market Services,1.094849
+2027,Source: pe_grp,40,Market Services,1.105868
+2028,Source: pe_grp,40,Market Services,1.140925
+2029,Source: pe_grp,40,Market Services,1.173126
+2030,Source: pe_grp,40,Market Services,1.182622
+2031,Source: pe_grp,40,Market Services,1.226843
+2032,Source: pe_grp,40,Market Services,1.231483
+2024,Source: pm_grp,41,Agriculture (pm_a),1.121496
+2025,Source: pm_grp,41,Agriculture (pm_a),1.155218
+2026,Source: pm_grp,41,Agriculture (pm_a),1.285662
+2027,Source: pm_grp,41,Agriculture (pm_a),1.358588
+2028,Source: pm_grp,41,Agriculture (pm_a),1.383374
+2029,Source: pm_grp,41,Agriculture (pm_a),1.389992
+2030,Source: pm_grp,41,Agriculture (pm_a),1.421908
+2031,Source: pm_grp,41,Agriculture (pm_a),1.465991
+2032,Source: pm_grp,41,Agriculture (pm_a),1.453164
+2024,Source: pm_grp,42,Mining (pm_mi),1.111393
+2025,Source: pm_grp,42,Mining (pm_mi),1.195567
+2026,Source: pm_grp,42,Mining (pm_mi),1.193733
+2027,Source: pm_grp,42,Mining (pm_mi),1.223422
+2028,Source: pm_grp,42,Mining (pm_mi),1.268245
+2029,Source: pm_grp,42,Mining (pm_mi),1.303678
+2030,Source: pm_grp,42,Mining (pm_mi),1.314412
+2031,Source: pm_grp,42,Mining (pm_mi),1.375986
+2032,Source: pm_grp,42,Mining (pm_mi),1.375205
+2024,Source: pm_grp,43,Manufacturing (pm_m),1.109806
+2025,Source: pm_grp,43,Manufacturing (pm_m),1.162323
+2026,Source: pm_grp,43,Manufacturing (pm_m),1.194321
+2027,Source: pm_grp,43,Manufacturing (pm_m),1.222844
+2028,Source: pm_grp,43,Manufacturing (pm_m),1.266434
+2029,Source: pm_grp,43,Manufacturing (pm_m),1.283394
+2030,Source: pm_grp,43,Manufacturing (pm_m),1.275211
+2031,Source: pm_grp,43,Manufacturing (pm_m),1.316504
+2032,Source: pm_grp,43,Manufacturing (pm_m),1.327899
+2024,Source: pm_grp,44,Energy and Water (pm_e),1.173299
+2025,Source: pm_grp,44,Energy and Water (pm_e),1.22644
+2026,Source: pm_grp,44,Energy and Water (pm_e),1.254167
+2027,Source: pm_grp,44,Energy and Water (pm_e),1.297748
+2028,Source: pm_grp,44,Energy and Water (pm_e),1.35164
+2029,Source: pm_grp,44,Energy and Water (pm_e),1.376295
+2030,Source: pm_grp,44,Energy and Water (pm_e),1.407355
+2031,Source: pm_grp,44,Energy and Water (pm_e),1.445874
+2032,Source: pm_grp,44,Energy and Water (pm_e),1.465502
+2024,Source: pm_grp,45,Construction (pm_c),1.123951
+2025,Source: pm_grp,45,Construction (pm_c),1.243294
+2026,Source: pm_grp,45,Construction (pm_c),1.242045
+2027,Source: pm_grp,45,Construction (pm_c),1.219486
+2028,Source: pm_grp,45,Construction (pm_c),1.27036
+2029,Source: pm_grp,45,Construction (pm_c),1.343284
+2030,Source: pm_grp,45,Construction (pm_c),1.354462
+2031,Source: pm_grp,45,Construction (pm_c),1.417422
+2032,Source: pm_grp,45,Construction (pm_c),1.416984
+2024,Source: pm_grp,46,Transport (pm_t),1.094648
+2025,Source: pm_grp,46,Transport (pm_t),1.166444
+2026,Source: pm_grp,46,Transport (pm_t),1.175748
+2027,Source: pm_grp,46,Transport (pm_t),1.193458
+2028,Source: pm_grp,46,Transport (pm_t),1.219396
+2029,Source: pm_grp,46,Transport (pm_t),1.253752
+2030,Source: pm_grp,46,Transport (pm_t),1.286018
+2031,Source: pm_grp,46,Transport (pm_t),1.333822
+2032,Source: pm_grp,46,Transport (pm_t),1.348096
+2024,Source: pm_grp,47,Trade (pm_tr),1.099998
+2025,Source: pm_grp,47,Trade (pm_tr),1.138655
+2026,Source: pm_grp,47,Trade (pm_tr),1.192854
+2027,Source: pm_grp,47,Trade (pm_tr),1.205084
+2028,Source: pm_grp,47,Trade (pm_tr),1.243287
+2029,Source: pm_grp,47,Trade (pm_tr),1.272052
+2030,Source: pm_grp,47,Trade (pm_tr),1.288603
+2031,Source: pm_grp,47,Trade (pm_tr),1.33654
+2032,Source: pm_grp,47,Trade (pm_tr),1.361105
+2024,Source: pm_grp,48,Financial services (pm_fs),1.256466
+2025,Source: pm_grp,48,Financial services (pm_fs),1.300622
+2026,Source: pm_grp,48,Financial services (pm_fs),1.414437
+2027,Source: pm_grp,48,Financial services (pm_fs),1.400325
+2028,Source: pm_grp,48,Financial services (pm_fs),1.448813
+2029,Source: pm_grp,48,Financial services (pm_fs),1.493316
+2030,Source: pm_grp,48,Financial services (pm_fs),1.50007
+2031,Source: pm_grp,48,Financial services (pm_fs),1.562832
+2032,Source: pm_grp,48,Financial services (pm_fs),1.569382
+2024,Source: pm_grp,49,Public Services (pm_ps),1.107247
+2025,Source: pm_grp,49,Public Services (pm_ps),1.134922
+2026,Source: pm_grp,49,Public Services (pm_ps),1.166409
+2027,Source: pm_grp,49,Public Services (pm_ps),1.183866
+2028,Source: pm_grp,49,Public Services (pm_ps),1.23343
+2029,Source: pm_grp,49,Public Services (pm_ps),1.262055
+2030,Source: pm_grp,49,Public Services (pm_ps),1.284683
+2031,Source: pm_grp,49,Public Services (pm_ps),1.319844
+2032,Source: pm_grp,49,Public Services (pm_ps),1.331299
+2024,Source: pm_grp,50,Market Services (pm_ms),1.037126
+2025,Source: pm_grp,50,Market Services (pm_ms),1.073574
+2026,Source: pm_grp,50,Market Services (pm_ms),1.108608
+2027,Source: pm_grp,50,Market Services (pm_ms),1.141669
+2028,Source: pm_grp,50,Market Services (pm_ms),1.183497
+2029,Source: pm_grp,50,Market Services (pm_ms),1.199346
+2030,Source: pm_grp,50,Market Services (pm_ms),1.226578
+2031,Source: pm_grp,50,Market Services (pm_ms),1.272093
+2032,Source: pm_grp,50,Market Services (pm_ms),1.295416
+2024,Source: pd_grp,51,Agriculture (pd_a),1.037499
+2025,Source: pd_grp,51,Agriculture (pd_a),1.078999
+2026,Source: pd_grp,51,Agriculture (pd_a),1.073811
+2027,Source: pd_grp,51,Agriculture (pd_a),1.084186
+2028,Source: pd_grp,51,Agriculture (pd_a),1.073811
+2029,Source: pd_grp,51,Agriculture (pd_a),1.094561
+2030,Source: pd_grp,51,Agriculture (pd_a),1.088336
+2031,Source: pd_grp,51,Agriculture (pd_a),1.109086
+2032,Source: pd_grp,51,Agriculture (pd_a),1.129836
+2024,Source: pd_grp,52,Mining (pd_mi),1.075938
+2025,Source: pd_grp,52,Mining (pd_mi),1.097457
+2026,Source: pd_grp,52,Mining (pd_mi),1.102837
+2027,Source: pd_grp,52,Mining (pd_mi),1.113596
+2028,Source: pd_grp,52,Mining (pd_mi),1.124355
+2029,Source: pd_grp,52,Mining (pd_mi),1.135115
+2030,Source: pd_grp,52,Mining (pd_mi),1.145874
+2031,Source: pd_grp,52,Mining (pd_mi),1.145874
+2032,Source: pd_grp,52,Mining (pd_mi),1.140494
+2024,Source: pd_grp,53,Manufacturing (pd_m),1.036027
+2025,Source: pd_grp,53,Manufacturing (pd_m),1.067108
+2026,Source: pd_grp,53,Manufacturing (pd_m),1.072288
+2027,Source: pd_grp,53,Manufacturing (pd_m),1.082648
+2028,Source: pd_grp,53,Manufacturing (pd_m),1.096117
+2029,Source: pd_grp,53,Manufacturing (pd_m),1.072288
+2030,Source: pd_grp,53,Manufacturing (pd_m),1.082648
+2031,Source: pd_grp,53,Manufacturing (pd_m),1.090936
+2032,Source: pd_grp,53,Manufacturing (pd_m),1.098189
+2024,Source: pd_grp,54,Energy and Water (pd_e),1.083838
+2025,Source: pd_grp,54,Energy and Water (pd_e),1.094676
+2026,Source: pd_grp,54,Energy and Water (pd_e),1.105514
+2027,Source: pd_grp,54,Energy and Water (pd_e),1.121772
+2028,Source: pd_grp,54,Energy and Water (pd_e),1.13261
+2029,Source: pd_grp,54,Energy and Water (pd_e),1.143449
+2030,Source: pd_grp,54,Energy and Water (pd_e),1.159706
+2031,Source: pd_grp,54,Energy and Water (pd_e),1.108766
+2032,Source: pd_grp,54,Energy and Water (pd_e),1.138029
+2024,Source: pd_grp,55,Construction (pd_c),1.047118
+2025,Source: pd_grp,55,Construction (pd_c),1.109946
+2026,Source: pd_grp,55,Construction (pd_c),1.109946
+2027,Source: pd_grp,55,Construction (pd_c),1.120417
+2028,Source: pd_grp,55,Construction (pd_c),1.094239
+2029,Source: pd_grp,55,Construction (pd_c),1.069108
+2030,Source: pd_grp,55,Construction (pd_c),1.083768
+2031,Source: pd_grp,55,Construction (pd_c),1.094239
+2032,Source: pd_grp,55,Construction (pd_c),1.10471
+2024,Source: pd_grp,56,Transport (pd_t),1.035189
+2025,Source: pd_grp,56,Transport (pd_t),1.055893
+2026,Source: pd_grp,56,Transport (pd_t),1.076596
+2027,Source: pd_grp,56,Transport (pd_t),1.116969
+2028,Source: pd_grp,56,Transport (pd_t),1.137672
+2029,Source: pd_grp,56,Transport (pd_t),1.174939
+2030,Source: pd_grp,56,Transport (pd_t),1.102476
+2031,Source: pd_grp,56,Transport (pd_t),1.112828
+2032,Source: pd_grp,56,Transport (pd_t),1.128356
+2024,Source: pd_grp,57,Trade (pd_tr),1.024192
+2025,Source: pd_grp,57,Trade (pd_tr),1.034433
+2026,Source: pd_grp,57,Trade (pd_tr),1.044675
+2027,Source: pd_grp,57,Trade (pd_tr),1.07028
+2028,Source: pd_grp,57,Trade (pd_tr),1.080522
+2029,Source: pd_grp,57,Trade (pd_tr),1.074377
+2030,Source: pd_grp,57,Trade (pd_tr),1.084619
+2031,Source: pd_grp,57,Trade (pd_tr),1.094861
+2032,Source: pd_grp,57,Trade (pd_tr),1.106127
+2024,Source: pd_grp,58,Financial services (pd_fs),1.061031
+2025,Source: pd_grp,58,Financial services (pd_fs),1.135303
+2026,Source: pd_grp,58,Financial services (pd_fs),1.129998
+2027,Source: pd_grp,58,Financial services (pd_fs),1.156524
+2028,Source: pd_grp,58,Financial services (pd_fs),1.177745
+2029,Source: pd_grp,58,Financial services (pd_fs),1.198965
+2030,Source: pd_grp,58,Financial services (pd_fs),1.220186
+2031,Source: pd_grp,58,Financial services (pd_fs),1.271115
+2032,Source: pd_grp,58,Financial services (pd_fs),1.271115
+2024,Source: pd_grp,59,Public Services (pd_ps),1.032773
+2025,Source: pd_grp,59,Public Services (pd_ps),1.043101
+2026,Source: pd_grp,59,Public Services (pd_ps),1.074084
+2027,Source: pd_grp,59,Public Services (pd_ps),1.063756
+2028,Source: pd_grp,59,Public Services (pd_ps),1.074084
+2029,Source: pd_grp,59,Public Services (pd_ps),1.084412
+2030,Source: pd_grp,59,Public Services (pd_ps),1.094739
+2031,Source: pd_grp,59,Public Services (pd_ps),1.105067
+2032,Source: pd_grp,59,Public Services (pd_ps),1.125722
+2024,Source: pd_grp,60,Market Services (pd_ms),1.007676
+2025,Source: pd_grp,60,Market Services (pd_ms),1.017752
+2026,Source: pd_grp,60,Market Services (pd_ms),1.009187
+2027,Source: pd_grp,60,Market Services (pd_ms),1.037906
+2028,Source: pd_grp,60,Market Services (pd_ms),1.037906
+2029,Source: pd_grp,60,Market Services (pd_ms),1.047983
+2030,Source: pd_grp,60,Market Services (pd_ms),1.042944
+2031,Source: pd_grp,60,Market Services (pd_ms),1.053021
+2032,Source: pd_grp,60,Market Services (pd_ms),1.068136
+2024,Source: pci_grp,61,Agriculture (pci_a),1.055415
+2025,Source: pci_grp,61,Agriculture (pci_a),1.095979
+2026,Source: pci_grp,61,Agriculture (pci_a),1.103728
+2027,Source: pci_grp,61,Agriculture (pci_a),1.119787
+2028,Source: pci_grp,61,Agriculture (pci_a),1.123242
+2029,Source: pci_grp,61,Agriculture (pci_a),1.135647
+2030,Source: pci_grp,61,Agriculture (pci_a),1.134252
+2031,Source: pci_grp,61,Agriculture (pci_a),1.153322
+2032,Source: pci_grp,61,Agriculture (pci_a),1.169232
+2024,Source: pci_grp,62,Mining (pci_mi),1.072211
+2025,Source: pci_grp,62,Mining (pci_mi),1.112247
+2026,Source: pci_grp,62,Mining (pci_mi),1.125827
+2027,Source: pci_grp,62,Mining (pci_mi),1.14352
+2028,Source: pci_grp,62,Mining (pci_mi),1.164571
+2029,Source: pci_grp,62,Mining (pci_mi),1.163799
+2030,Source: pci_grp,62,Mining (pci_mi),1.168889
+2031,Source: pci_grp,62,Mining (pci_mi),1.187172
+2032,Source: pci_grp,62,Mining (pci_mi),1.194471
+2024,Source: pci_grp,63,Manufacturing (pci_m),1.06514
+2025,Source: pci_grp,63,Manufacturing (pci_m),1.104819
+2026,Source: pci_grp,63,Manufacturing (pci_m),1.116384
+2027,Source: pci_grp,63,Manufacturing (pci_m),1.133398
+2028,Source: pci_grp,63,Manufacturing (pci_m),1.148621
+2029,Source: pci_grp,63,Manufacturing (pci_m),1.153631
+2030,Source: pci_grp,63,Manufacturing (pci_m),1.15565
+2031,Source: pci_grp,63,Manufacturing (pci_m),1.174864
+2032,Source: pci_grp,63,Manufacturing (pci_m),1.185737
+2024,Source: pci_grp,64,Energy and Water (pci_e),1.074888
+2025,Source: pci_grp,64,Energy and Water (pci_e),1.112967
+2026,Source: pci_grp,64,Energy and Water (pci_e),1.123543
+2027,Source: pci_grp,64,Energy and Water (pci_e),1.141772
+2028,Source: pci_grp,64,Energy and Water (pci_e),1.155854
+2029,Source: pci_grp,64,Energy and Water (pci_e),1.161695
+2030,Source: pci_grp,64,Energy and Water (pci_e),1.168229
+2031,Source: pci_grp,64,Energy and Water (pci_e),1.177751
+2032,Source: pci_grp,64,Energy and Water (pci_e),1.186058
+2024,Source: pci_grp,65,Construction (pci_c),1.06742
+2025,Source: pci_grp,65,Construction (pci_c),1.111093
+2026,Source: pci_grp,65,Construction (pci_c),1.125362
+2027,Source: pci_grp,65,Construction (pci_c),1.144051
+2028,Source: pci_grp,65,Construction (pci_c),1.159625
+2029,Source: pci_grp,65,Construction (pci_c),1.155119
+2030,Source: pci_grp,65,Construction (pci_c),1.159175
+2031,Source: pci_grp,65,Construction (pci_c),1.178863
+2032,Source: pci_grp,65,Construction (pci_c),1.188643
+2024,Source: pci_grp,66,Transport (pci_t),1.07065
+2025,Source: pci_grp,66,Transport (pci_t),1.110497
+2026,Source: pci_grp,66,Transport (pci_t),1.127355
+2027,Source: pci_grp,66,Transport (pci_t),1.148662
+2028,Source: pci_grp,66,Transport (pci_t),1.168673
+2029,Source: pci_grp,66,Transport (pci_t),1.176933
+2030,Source: pci_grp,66,Transport (pci_t),1.172979
+2031,Source: pci_grp,66,Transport (pci_t),1.193855
+2032,Source: pci_grp,66,Transport (pci_t),1.204791
+2024,Source: pci_grp,67,Trade (pci_tr),1.072534
+2025,Source: pci_grp,67,Trade (pci_tr),1.114753
+2026,Source: pci_grp,67,Trade (pci_tr),1.131891
+2027,Source: pci_grp,67,Trade (pci_tr),1.151944
+2028,Source: pci_grp,67,Trade (pci_tr),1.170594
+2029,Source: pci_grp,67,Trade (pci_tr),1.17926
+2030,Source: pci_grp,67,Trade (pci_tr),1.179481
+2031,Source: pci_grp,67,Trade (pci_tr),1.204166
+2032,Source: pci_grp,67,Trade (pci_tr),1.21443
+2024,Source: pci_grp,68,Financial services (pci_fs),1.072667
+2025,Source: pci_grp,68,Financial services (pci_fs),1.12537
+2026,Source: pci_grp,68,Financial services (pci_fs),1.138248
+2027,Source: pci_grp,68,Financial services (pci_fs),1.156538
+2028,Source: pci_grp,68,Financial services (pci_fs),1.15908
+2029,Source: pci_grp,68,Financial services (pci_fs),1.156344
+2030,Source: pci_grp,68,Financial services (pci_fs),1.166231
+2031,Source: pci_grp,68,Financial services (pci_fs),1.187783
+2032,Source: pci_grp,68,Financial services (pci_fs),1.196892
+2024,Source: pci_grp,69,Public Services (pci_ps),1.07453
+2025,Source: pci_grp,69,Public Services (pci_ps),1.118136
+2026,Source: pci_grp,69,Public Services (pci_ps),1.135636
+2027,Source: pci_grp,69,Public Services (pci_ps),1.153327
+2028,Source: pci_grp,69,Public Services (pci_ps),1.17155
+2029,Source: pci_grp,69,Public Services (pci_ps),1.175338
+2030,Source: pci_grp,69,Public Services (pci_ps),1.180575
+2031,Source: pci_grp,69,Public Services (pci_ps),1.20388
+2032,Source: pci_grp,69,Public Services (pci_ps),1.213767
+2024,Source: pci_grp,70,Market Services (pci_ms),1.070244
+2025,Source: pci_grp,70,Market Services (pci_ms),1.10854
+2026,Source: pci_grp,70,Market Services (pci_ms),1.125184
+2027,Source: pci_grp,70,Market Services (pci_ms),1.144532
+2028,Source: pci_grp,70,Market Services (pci_ms),1.164623
+2029,Source: pci_grp,70,Market Services (pci_ms),1.169772
+2030,Source: pci_grp,70,Market Services (pci_ms),1.171932
+2031,Source: pci_grp,70,Market Services (pci_ms),1.18952
+2032,Source: pci_grp,70,Market Services (pci_ms),1.201825
+2024,Source: pci_grp,71,e_1,0.9327285
+2025,Source: pci_grp,71,e_1,0.9444087
+2026,Source: pci_grp,71,e_1,0.9629152
+2027,Source: pci_grp,71,e_1,0.98782
+2028,Source: pci_grp,71,e_1,1.016994
+2029,Source: pci_grp,71,e_1,1.036995
+2030,Source: pci_grp,71,e_1,1.050798
+2031,Source: pci_grp,71,e_1,1.080614
+2032,Source: pci_grp,71,e_1,1.097892
+2024,Source: pci_grp,e_TJS/USD,,9.346694
+2025,Source: pci_grp,e_TJS/USD,,9.000309
+2026,Source: pci_grp,e_TJS/USD,,9.176678
+2027,Source: pci_grp,e_TJS/USD,,9.414024
+2028,Source: pci_grp,e_TJS/USD,,9.692052
+2029,Source: pci_grp,e_TJS/USD,,9.882669
+2030,Source: pci_grp,e_TJS/USD,,10.01421
+2031,Source: pci_grp,e_TJS/USD,,10.29836
+2032,Source: pci_grp,e_TJS/USD,,10.46302
+2025,Source: pci_grp,Source: w_1,,10.8445
+2026,Source: pci_grp,Source: w_1,,84.62057264050901
+2027,Source: pci_grp,Source: w_1,,102.58640436114244
+2028,Source: pci_grp,Source: w_1,,102.95333855108082
+2029,Source: pci_grp,Source: w_1,,101.96673521768145
+2030,Source: pci_grp,Source: w_1,,101.33102707375912
+2031,Source: pci_grp,Source: w_1,,102.83746795803164
+2032,Source: pci_grp,Source: w_1,,101.59889535809586
+2022,Source: pci_grp,72,Total economy,1.007774
+2023,Source: pci_grp,72,Total economy,1.007337
+2024,Source: pci_grp,72,Total economy,1.006102
+2025,Source: pci_grp,72,Total economy,1.004341
+2026,Source: pci_grp,72,Total economy,1.003243
+2027,Source: pci_grp,72,Total economy,1.002521
+2028,Source: pci_grp,72,Total economy,1.001769
+2029,Source: pci_grp,72,Total economy,1.000094
+2030,Source: pci_grp,72,Total economy,0.9995255
+2024,Source: pl_grp,73,Agriculture (pl_a),1
+2025,Source: pl_grp,73,Agriculture (pl_a),1.04
+2026,Source: pl_grp,73,Agriculture (pl_a),1.035
+2027,Source: pl_grp,73,Agriculture (pl_a),1.045
+2028,Source: pl_grp,73,Agriculture (pl_a),1.035
+2029,Source: pl_grp,73,Agriculture (pl_a),1.055
+2030,Source: pl_grp,73,Agriculture (pl_a),1.049
+2031,Source: pl_grp,73,Agriculture (pl_a),1.069
+2032,Source: pl_grp,73,Agriculture (pl_a),1.089
+2024,Source: pl_grp,74,Mining (pl_mi),1
+2025,Source: pl_grp,74,Mining (pl_mi),1.02
+2026,Source: pl_grp,74,Mining (pl_mi),1.025
+2027,Source: pl_grp,74,Mining (pl_mi),1.035
+2028,Source: pl_grp,74,Mining (pl_mi),1.045
+2029,Source: pl_grp,74,Mining (pl_mi),1.055
+2030,Source: pl_grp,74,Mining (pl_mi),1.065
+2031,Source: pl_grp,74,Mining (pl_mi),1.065
+2032,Source: pl_grp,74,Mining (pl_mi),1.06
+2024,Source: pl_grp,75,Manufacturing (pl_m),1
+2025,Source: pl_grp,75,Manufacturing (pl_m),1.03
+2026,Source: pl_grp,75,Manufacturing (pl_m),1.035
+2027,Source: pl_grp,75,Manufacturing (pl_m),1.045
+2028,Source: pl_grp,75,Manufacturing (pl_m),1.058
+2029,Source: pl_grp,75,Manufacturing (pl_m),1.035
+2030,Source: pl_grp,75,Manufacturing (pl_m),1.045
+2031,Source: pl_grp,75,Manufacturing (pl_m),1.053
+2032,Source: pl_grp,75,Manufacturing (pl_m),1.06
+2024,Source: pl_grp,76,Energy and Water (pl_e),1
+2025,Source: pl_grp,76,Energy and Water (pl_e),1.01
+2026,Source: pl_grp,76,Energy and Water (pl_e),1.02
+2027,Source: pl_grp,76,Energy and Water (pl_e),1.035
+2028,Source: pl_grp,76,Energy and Water (pl_e),1.045
+2029,Source: pl_grp,76,Energy and Water (pl_e),1.055
+2030,Source: pl_grp,76,Energy and Water (pl_e),1.07
+2031,Source: pl_grp,76,Energy and Water (pl_e),1.023
+2032,Source: pl_grp,76,Energy and Water (pl_e),1.05
+2024,Source: pl_grp,77,Construction (pl_c),1
+2025,Source: pl_grp,77,Construction (pl_c),1.06
+2026,Source: pl_grp,77,Construction (pl_c),1.06
+2027,Source: pl_grp,77,Construction (pl_c),1.07
+2028,Source: pl_grp,77,Construction (pl_c),1.045
+2029,Source: pl_grp,77,Construction (pl_c),1.021
+2030,Source: pl_grp,77,Construction (pl_c),1.035
+2031,Source: pl_grp,77,Construction (pl_c),1.045
+2032,Source: pl_grp,77,Construction (pl_c),1.055
+2024,Source: pl_grp,78,Transport (pl_t),1
+2025,Source: pl_grp,78,Transport (pl_t),1.02
+2026,Source: pl_grp,78,Transport (pl_t),1.04
+2027,Source: pl_grp,78,Transport (pl_t),1.079
+2028,Source: pl_grp,78,Transport (pl_t),1.099
+2029,Source: pl_grp,78,Transport (pl_t),1.135
+2030,Source: pl_grp,78,Transport (pl_t),1.065
+2031,Source: pl_grp,78,Transport (pl_t),1.075
+2032,Source: pl_grp,78,Transport (pl_t),1.09
+2024,Source: pl_grp,79,Trade (pl_tr),1
+2025,Source: pl_grp,79,Trade (pl_tr),1.01
+2026,Source: pl_grp,79,Trade (pl_tr),1.02
+2027,Source: pl_grp,79,Trade (pl_tr),1.045
+2028,Source: pl_grp,79,Trade (pl_tr),1.055
+2029,Source: pl_grp,79,Trade (pl_tr),1.049
+2030,Source: pl_grp,79,Trade (pl_tr),1.059
+2031,Source: pl_grp,79,Trade (pl_tr),1.069
+2032,Source: pl_grp,79,Trade (pl_tr),1.08
+2024,Source: pl_grp,80,Financial services (pl_fs),1
+2025,Source: pl_grp,80,Financial services (pl_fs),1.07
+2026,Source: pl_grp,80,Financial services (pl_fs),1.065
+2027,Source: pl_grp,80,Financial services (pl_fs),1.09
+2028,Source: pl_grp,80,Financial services (pl_fs),1.11
+2029,Source: pl_grp,80,Financial services (pl_fs),1.13
+2030,Source: pl_grp,80,Financial services (pl_fs),1.15
+2031,Source: pl_grp,80,Financial services (pl_fs),1.198
+2032,Source: pl_grp,80,Financial services (pl_fs),1.198
+2024,Source: pl_grp,81,Public Services (pl_ps),1
+2025,Source: pl_grp,81,Public Services (pl_ps),1.01
+2026,Source: pl_grp,81,Public Services (pl_ps),1.04
+2027,Source: pl_grp,81,Public Services (pl_ps),1.03
+2028,Source: pl_grp,81,Public Services (pl_ps),1.04
+2029,Source: pl_grp,81,Public Services (pl_ps),1.05
+2030,Source: pl_grp,81,Public Services (pl_ps),1.06
+2031,Source: pl_grp,81,Public Services (pl_ps),1.07
+2032,Source: pl_grp,81,Public Services (pl_ps),1.09
+2024,Source: pl_grp,82,Market Services,1
+2025,Source: pl_grp,82,Market Services,1.01
+2026,Source: pl_grp,82,Market Services,1.0015
+2027,Source: pl_grp,82,Market Services,1.03
+2028,Source: pl_grp,82,Market Services,1.03
+2029,Source: pl_grp,82,Market Services,1.04
+2030,Source: pl_grp,82,Market Services,1.035
+2031,Source: pl_grp,82,Market Services,1.045
+2032,Source: pl_grp,82,Market Services,1.06
+2024,Source: pwe_grp,83,Agriculture (pwe_a),1
+2025,Source: pwe_grp,83,Agriculture (pwe_a),1.0085
+2026,Source: pwe_grp,83,Agriculture (pwe_a),1.01
+2027,Source: pwe_grp,83,Agriculture (pwe_a),1.025
+2028,Source: pwe_grp,83,Agriculture (pwe_a),1.036
+2029,Source: pwe_grp,83,Agriculture (pwe_a),1.056
+2030,Source: pwe_grp,83,Agriculture (pwe_a),1.045
+2031,Source: pwe_grp,83,Agriculture (pwe_a),1.045
+2032,Source: pwe_grp,83,Agriculture (pwe_a),1.055
+2024,Source: pwe_grp,84,Mining (pwe_mi),1
+2025,Source: pwe_grp,84,Mining (pwe_mi),1.0095
+2026,Source: pwe_grp,84,Mining (pwe_mi),1.01
+2027,Source: pwe_grp,84,Mining (pwe_mi),1.011
+2028,Source: pwe_grp,84,Mining (pwe_mi),1.018
+2029,Source: pwe_grp,84,Mining (pwe_mi),1.02
+2030,Source: pwe_grp,84,Mining (pwe_mi),1.025
+2031,Source: pwe_grp,84,Mining (pwe_mi),1.035
+2032,Source: pwe_grp,84,Mining (pwe_mi),1.03
+2024,Source: pwe_grp,85,Manufacturing (pwe_m),1
+2025,Source: pwe_grp,85,Manufacturing (pwe_m),1.02
+2026,Source: pwe_grp,85,Manufacturing (pwe_m),1.035
+2027,Source: pwe_grp,85,Manufacturing (pwe_m),1.05
+2028,Source: pwe_grp,85,Manufacturing (pwe_m),1.055
+2029,Source: pwe_grp,85,Manufacturing (pwe_m),1.035
+2030,Source: pwe_grp,85,Manufacturing (pwe_m),1.035
+2031,Source: pwe_grp,85,Manufacturing (pwe_m),1.035
+2032,Source: pwe_grp,85,Manufacturing (pwe_m),1.04
+2024,Source: pwe_grp,86,Energy and Water (pwe_e),1
+2025,Source: pwe_grp,86,Energy and Water (pwe_e),1.03
+2026,Source: pwe_grp,86,Energy and Water (pwe_e),1.05
+2027,Source: pwe_grp,86,Energy and Water (pwe_e),1.06
+2028,Source: pwe_grp,86,Energy and Water (pwe_e),1.075
+2029,Source: pwe_grp,86,Energy and Water (pwe_e),1.08
+2030,Source: pwe_grp,86,Energy and Water (pwe_e),1.08
+2031,Source: pwe_grp,86,Energy and Water (pwe_e),1.1
+2032,Source: pwe_grp,86,Energy and Water (pwe_e),1.07
+2024,Source: pwe_grp,87,Construction (pwe_c),1
+2025,Source: pwe_grp,87,Construction (pwe_c),1.005
+2026,Source: pwe_grp,87,Construction (pwe_c),1.005
+2027,Source: pwe_grp,87,Construction (pwe_c),1.005
+2028,Source: pwe_grp,87,Construction (pwe_c),1.005
+2029,Source: pwe_grp,87,Construction (pwe_c),1.005
+2030,Source: pwe_grp,87,Construction (pwe_c),1.005
+2031,Source: pwe_grp,87,Construction (pwe_c),1.005
+2032,Source: pwe_grp,87,Construction (pwe_c),1.01
+2024,Source: pwe_grp,88,Transport (pwe_t),1
+2025,Source: pwe_grp,88,Transport (pwe_t),1.01
+2026,Source: pwe_grp,88,Transport (pwe_t),1.03
+2027,Source: pwe_grp,88,Transport (pwe_t),1.045
+2028,Source: pwe_grp,88,Transport (pwe_t),1.05
+2029,Source: pwe_grp,88,Transport (pwe_t),1.055
+2030,Source: pwe_grp,88,Transport (pwe_t),1.035
+2031,Source: pwe_grp,88,Transport (pwe_t),1.045
+2032,Source: pwe_grp,88,Transport (pwe_t),1.05
+2024,Source: pwe_grp,89,Trade (pwe_tr),1
+2025,Source: pwe_grp,89,Trade (pwe_tr),1
+2026,Source: pwe_grp,89,Trade (pwe_tr),1.04
+2027,Source: pwe_grp,89,Trade (pwe_tr),1.03
+2028,Source: pwe_grp,89,Trade (pwe_tr),1.03
+2029,Source: pwe_grp,89,Trade (pwe_tr),1.04
+2030,Source: pwe_grp,89,Trade (pwe_tr),1.03
+2031,Source: pwe_grp,89,Trade (pwe_tr),1.055
+2032,Source: pwe_grp,89,Trade (pwe_tr),1.03
+2024,Source: pwe_grp,90,Financial services (pwe_fs),1
+2025,Source: pwe_grp,90,Financial services (pwe_fs),1.09
+2026,Source: pwe_grp,90,Financial services (pwe_fs),1.11
+2027,Source: pwe_grp,90,Financial services (pwe_fs),1.085
+2028,Source: pwe_grp,90,Financial services (pwe_fs),1.06
+2029,Source: pwe_grp,90,Financial services (pwe_fs),1.07
+2030,Source: pwe_grp,90,Financial services (pwe_fs),1.06
+2031,Source: pwe_grp,90,Financial services (pwe_fs),1.085
+2032,Source: pwe_grp,90,Financial services (pwe_fs),1.095
+2024,Source: pwe_grp,91,Public Services (pwe_ps),1
+2025,Source: pwe_grp,91,Public Services (pwe_ps),1.02
+2026,Source: pwe_grp,91,Public Services (pwe_ps),1.02
+2027,Source: pwe_grp,91,Public Services (pwe_ps),1.02
+2028,Source: pwe_grp,91,Public Services (pwe_ps),1.03
+2029,Source: pwe_grp,91,Public Services (pwe_ps),1.04
+2030,Source: pwe_grp,91,Public Services (pwe_ps),1.05
+2031,Source: pwe_grp,91,Public Services (pwe_ps),1.065
+2032,Source: pwe_grp,91,Public Services (pwe_ps),1.07
+2024,Source: pwe_grp,92,Market Services (pwe_ms),1
+2025,Source: pwe_grp,92,Market Services (pwe_ms),1.01
+2026,Source: pwe_grp,92,Market Services (pwe_ms),1.03
+2027,Source: pwe_grp,92,Market Services (pwe_ms),1.02
+2028,Source: pwe_grp,92,Market Services (pwe_ms),1.02
+2029,Source: pwe_grp,92,Market Services (pwe_ms),1.03
+2030,Source: pwe_grp,92,Market Services (pwe_ms),1.025
+2031,Source: pwe_grp,92,Market Services (pwe_ms),1.035
+2032,Source: pwe_grp,92,Market Services (pwe_ms),1.025
+2024,Source: pwm_grp,93,Agriculture (pwm_a),1
+2025,Source: pwm_grp,93,Agriculture (pwm_a),1.015
+2026,Source: pwm_grp,93,Agriculture (pwm_a),1.11
+2027,Source: pwm_grp,93,Agriculture (pwm_a),1.15
+2028,Source: pwm_grp,93,Agriculture (pwm_a),1.135
+2029,Source: pwm_grp,93,Agriculture (pwm_a),1.12
+2030,Source: pwm_grp,93,Agriculture (pwm_a),1.131
+2031,Source: pwm_grp,93,Agriculture (pwm_a),1.135
+2032,Source: pwm_grp,93,Agriculture (pwm_a),1.11
+2024,Source: pwm_grp,94,Mining (pwm_mi),1
+2025,Source: pwm_grp,94,Mining (pwm_mi),1.06
+2026,Source: pwm_grp,94,Mining (pwm_mi),1.04
+2027,Source: pwm_grp,94,Mining (pwm_mi),1.045
+2028,Source: pwm_grp,94,Mining (pwm_mi),1.05
+2029,Source: pwm_grp,94,Mining (pwm_mi),1.06
+2030,Source: pwm_grp,94,Mining (pwm_mi),1.055
+2031,Source: pwm_grp,94,Mining (pwm_mi),1.075
+2032,Source: pwm_grp,94,Mining (pwm_mi),1.06
+2024,Source: pwm_grp,95,Manufacturing (pwm_m),1
+2025,Source: pwm_grp,95,Manufacturing (pwm_m),1.032
+2026,Source: pwm_grp,95,Manufacturing (pwm_m),1.042
+2027,Source: pwm_grp,95,Manufacturing (pwm_m),1.046
+2028,Source: pwm_grp,95,Manufacturing (pwm_m),1.05
+2029,Source: pwm_grp,95,Manufacturing (pwm_m),1.045
+2030,Source: pwm_grp,95,Manufacturing (pwm_m),1.025
+2031,Source: pwm_grp,95,Manufacturing (pwm_m),1.03
+2032,Source: pwm_grp,95,Manufacturing (pwm_m),1.025
+2024,Source: pwm_grp,96,Energy and Water (pwm_e),1
+2025,Source: pwm_grp,96,Energy and Water (pwm_e),1.03
+2026,Source: pwm_grp,96,Energy and Water (pwm_e),1.035
+2027,Source: pwm_grp,96,Energy and Water (pwm_e),1.05
+2028,Source: pwm_grp,96,Energy and Water (pwm_e),1.06
+2029,Source: pwm_grp,96,Energy and Water (pwm_e),1.06
+2030,Source: pwm_grp,96,Energy and Water (pwm_e),1.07
+2031,Source: pwm_grp,96,Energy and Water (pwm_e),1.07
+2032,Source: pwm_grp,96,Energy and Water (pwm_e),1.07
+2024,Source: pwm_grp,97,Construction (pwm_c),1
+2025,Source: pwm_grp,97,Construction (pwm_c),1.09
+2026,Source: pwm_grp,97,Construction (pwm_c),1.07
+2027,Source: pwm_grp,97,Construction (pwm_c),1.03
+2028,Source: pwm_grp,97,Construction (pwm_c),1.04
+2029,Source: pwm_grp,97,Construction (pwm_c),1.08
+2030,Source: pwm_grp,97,Construction (pwm_c),1.075
+2031,Source: pwm_grp,97,Construction (pwm_c),1.095
+2032,Source: pwm_grp,97,Construction (pwm_c),1.08
+2024,Source: pwm_grp,98,Transport (pwm_t),1
+2025,Source: pwm_grp,98,Transport (pwm_t),1.05
+2026,Source: pwm_grp,98,Transport (pwm_t),1.04
+2027,Source: pwm_grp,98,Transport (pwm_t),1.035
+2028,Source: pwm_grp,98,Transport (pwm_t),1.025
+2029,Source: pwm_grp,98,Transport (pwm_t),1.035
+2030,Source: pwm_grp,98,Transport (pwm_t),1.048
+2031,Source: pwm_grp,98,Transport (pwm_t),1.058
+2032,Source: pwm_grp,98,Transport (pwm_t),1.055
+2024,Source: pwm_grp,99,Trade (pwm_tr),1
+2025,Source: pwm_grp,99,Trade (pwm_tr),1.02
+2026,Source: pwm_grp,99,Trade (pwm_tr),1.05
+2027,Source: pwm_grp,99,Trade (pwm_tr),1.04
+2028,Source: pwm_grp,99,Trade (pwm_tr),1.04
+2029,Source: pwm_grp,99,Trade (pwm_tr),1.045
+2030,Source: pwm_grp,99,Trade (pwm_tr),1.045
+2031,Source: pwm_grp,99,Trade (pwm_tr),1.055
+2032,Source: pwm_grp,99,Trade (pwm_tr),1.06
+2024,Source: pwm_grp,100,Financial services (pwm_fs),1
+2025,Source: pwm_grp,100,Financial services (pwm_fs),1.02
+2026,Source: pwm_grp,100,Financial services (pwm_fs),1.09
+2027,Source: pwm_grp,100,Financial services (pwm_fs),1.058
+2028,Source: pwm_grp,100,Financial services (pwm_fs),1.061
+2029,Source: pwm_grp,100,Financial services (pwm_fs),1.074
+2030,Source: pwm_grp,100,Financial services (pwm_fs),1.065
+2031,Source: pwm_grp,100,Financial services (pwm_fs),1.08
+2032,Source: pwm_grp,100,Financial services (pwm_fs),1.07
+2024,Source: pwm_grp,101,Public Services (pwm_ps),1
+2025,Source: pwm_grp,101,Public Services (pwm_ps),1.01
+2026,Source: pwm_grp,101,Public Services (pwm_ps),1.02
+2027,Source: pwm_grp,101,Public Services (pwm_ps),1.015
+2028,Source: pwm_grp,101,Public Services (pwm_ps),1.025
+2029,Source: pwm_grp,101,Public Services (pwm_ps),1.03
+2030,Source: pwm_grp,101,Public Services (pwm_ps),1.035
+2031,Source: pwm_grp,101,Public Services (pwm_ps),1.035
+2032,Source: pwm_grp,101,Public Services (pwm_ps),1.03
+2024,Source: pwm_grp,102,Market Services (pwm_ms),1
+2025,Source: pwm_grp,102,Market Services (pwm_ms),1.02
+2026,Source: pwm_grp,102,Market Services (pwm_ms),1.035
+2027,Source: pwm_grp,102,Market Services (pwm_ms),1.045
+2028,Source: pwm_grp,102,Market Services (pwm_ms),1.05
+2029,Source: pwm_grp,102,Market Services (pwm_ms),1.045
+2030,Source: pwm_grp,102,Market Services (pwm_ms),1.055
+2031,Source: pwm_grp,102,Market Services (pwm_ms),1.065
+2032,Source: pwm_grp,102,Market Services (pwm_ms),1.07

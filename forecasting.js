@@ -9,7 +9,7 @@
 const fs   = require('fs');
 const path = require('path');
 
-const MODEL_VERSION    = '2.0-professional';
+const MODEL_VERSION    = '3.0';
 const TIMESERIES_FILE  = path.join(__dirname, 'data', 'rates_timeseries.json');
 
 // ─── Математические вспомогательные функции ───────────────────────────────────

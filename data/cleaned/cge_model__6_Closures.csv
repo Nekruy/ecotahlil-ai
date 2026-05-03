@@ -1,0 +1,294 @@
+﻿year,block,equation,description,value
+2024,,Agriculture (cpi_a),,1.049153
+2025,,Agriculture (cpi_a),,1.122593
+2026,,Agriculture (cpi_a),,1.133316
+2027,,Agriculture (cpi_a),,1.102377
+2028,,Agriculture (cpi_a),,1.045955
+2029,,Agriculture (cpi_a),,1.048622
+2030,,Agriculture (cpi_a),,1.023468
+2031,,Agriculture (cpi_a),,1.039816
+2032,,Agriculture (cpi_a),,1.073907
+2024,,Mining (cpi_mi),,1.119678
+2025,,Mining (cpi_mi),,1.322435
+2026,,Mining (cpi_mi),,1.314598
+2027,,Mining (cpi_mi),,1.272576
+2028,,Mining (cpi_mi),,1.192673
+2029,,Mining (cpi_mi),,1.194113
+2030,,Mining (cpi_mi),,1.229455
+2031,,Mining (cpi_mi),,1.222554
+2032,,Mining (cpi_mi),,1.20034
+2024,,Manufacturing (cpi_m),,0.9327325
+2025,,Manufacturing (cpi_m),,0.9348737
+2026,,Manufacturing (cpi_m),,0.9741618
+2027,,Manufacturing (cpi_m),,0.9643719
+2028,,Manufacturing (cpi_m),,1.00127
+2029,,Manufacturing (cpi_m),,1.002415
+2030,,Manufacturing (cpi_m),,1.006946
+2031,,Manufacturing (cpi_m),,1.004892
+2032,,Manufacturing (cpi_m),,0.9901915
+2024,,Energy and Water (cpi_e),,0.8429796
+2025,,Energy and Water (cpi_e),,0.9045491
+2026,,Energy and Water (cpi_e),,0.9359612
+2027,,Energy and Water (cpi_e),,1.137622
+2028,,Energy and Water (cpi_e),,1.098005
+2029,,Energy and Water (cpi_e),,1.057072
+2030,,Energy and Water (cpi_e),,1.059071
+2031,,Energy and Water (cpi_e),,1.080633
+2032,,Energy and Water (cpi_e),,1.222564
+2024,,Construction (cpi_c),,1.089342
+2025,,Construction (cpi_c),,1.279573
+2026,,Construction (cpi_c),,1.335747
+2027,,Construction (cpi_c),,1.32104
+2028,,Construction (cpi_c),,1.226792
+2029,,Construction (cpi_c),,1.213901
+2030,,Construction (cpi_c),,1.276268
+2031,,Construction (cpi_c),,1.261033
+2032,,Construction (cpi_c),,1.268631
+2024,,Transport (cpi_t),,1.068475
+2025,,Transport (cpi_t),,1.133725
+2026,,Transport (cpi_t),,1.240622
+2027,,Transport (cpi_t),,1.483129
+2028,,Transport (cpi_t),,1.424108
+2029,,Transport (cpi_t),,1.501673
+2030,,Transport (cpi_t),,1.507791
+2031,,Transport (cpi_t),,1.71484
+2032,,Transport (cpi_t),,1.838817
+2024,,Trade (cpi_tr),,1.034146
+2025,,Trade (cpi_tr),,1.047488
+2026,,Trade (cpi_tr),,1.035645
+2027,,Trade (cpi_tr),,1.101907
+2028,,Trade (cpi_tr),,1.038365
+2029,,Trade (cpi_tr),,1.03341
+2030,,Trade (cpi_tr),,1.077372
+2031,,Trade (cpi_tr),,1.11709
+2032,,Trade (cpi_tr),,1.115811
+2024,,Financial services (cpi_fs),,1.236232
+2025,,Financial services (cpi_fs),,1.346228
+2026,,Financial services (cpi_fs),,1.29091
+2027,,Financial services (cpi_fs),,1.253063
+2028,,Financial services (cpi_fs),,1.254598
+2029,,Financial services (cpi_fs),,1.233683
+2030,,Financial services (cpi_fs),,1.266712
+2031,,Financial services (cpi_fs),,1.297633
+2032,,Financial services (cpi_fs),,1.277532
+2024,,Public Services (cpi_ps),,1.062317
+2025,,Public Services (cpi_ps),,0.9471396
+2026,,Public Services (cpi_ps),,1.011402
+2027,,Public Services (cpi_ps),,0.9914942
+2028,,Public Services (cpi_ps),,1.044387
+2029,,Public Services (cpi_ps),,1.06388
+2030,,Public Services (cpi_ps),,1.176648
+2031,,Public Services (cpi_ps),,1.275019
+2032,,Public Services (cpi_ps),,1.429254
+2024,,Market Services (cpi_ms),,1.014113
+2025,,Market Services (cpi_ms),,1.021109
+2026,,Market Services (cpi_ms),,1.256577
+2027,,Market Services (cpi_ms),,1.274612
+2028,,Market Services (cpi_ms),,1.413028
+2029,,Market Services (cpi_ms),,1.39192
+2030,,Market Services (cpi_ms),,1.32937
+2031,,Market Services (cpi_ms),,1.486949
+2032,,Market Services (cpi_ms),,1.543945
+2024,,Total (cpi_tot),,1.039082
+2025,,Total (cpi_tot),,1.085286
+2026,,Total (cpi_tot),,1.128077
+2027,,Total (cpi_tot),,1.168917
+2028,,Total (cpi_tot),,1.163462
+2029,,Total (cpi_tot),,1.164548
+2030,,Total (cpi_tot),,1.179926
+2031,,Total (cpi_tot),,1.238133
+2032,,Total (cpi_tot),,1.284474
+2026,,2. Equilibrium on labor market established by wage rate,,3.9289400000000008
+2027,,2. Equilibrium on labor market established by wage rate,,4.0021921
+2028,,2. Equilibrium on labor market established by wage rate,,3.8391810000000017
+2029,,2. Equilibrium on labor market established by wage rate,,3.940689
+2030,,2. Equilibrium on labor market established by wage rate,,4.053101
+2031,,2. Equilibrium on labor market established by wage rate,,4.400459
+2032,,2. Equilibrium on labor market established by wage rate,,4.3609925
+2026,,Source: w_1,,103.92894
+2027,,Source: w_1,,104.0021921
+2028,,Source: w_1,,103.839181
+2029,,Source: w_1,,103.940689
+2030,,Source: w_1,,104.053101
+2031,,Source: w_1,,104.400459
+2032,,Source: w_1,,104.3609925
+2024,,Wage rate (w),,1.007774
+2025,,Wage rate (w),,1.007349
+2026,,Wage rate (w),,1.006114
+2027,,Wage rate (w),,1.004354
+2028,,Wage rate (w),,1.003255
+2029,,Wage rate (w),,1.002533
+2030,,Wage rate (w),,1.00178
+2031,,Wage rate (w),,1.000102
+2032,,Wage rate (w),,0.9995325
+2024,Source: r_grp,Agriculture (r_a),,1.006719
+2025,Source: r_grp,Agriculture (r_a),,1.083318
+2026,Source: r_grp,Agriculture (r_a),,1.072873
+2027,Source: r_grp,Agriculture (r_a),,1.091697
+2028,Source: r_grp,Agriculture (r_a),,1.022583
+2029,Source: r_grp,Agriculture (r_a),,0.976798
+2030,Source: r_grp,Agriculture (r_a),,0.9449515
+2031,Source: r_grp,Agriculture (r_a),,0.903137
+2032,Source: r_grp,Agriculture (r_a),,0.9402948
+2024,Source: r_grp,Mining (r_mi),,0.9515751
+2025,Source: r_grp,Mining (r_mi),,1.170065
+2026,Source: r_grp,Mining (r_mi),,1.196191
+2027,Source: r_grp,Mining (r_mi),,1.2339
+2028,Source: r_grp,Mining (r_mi),,0.8407749
+2029,Source: r_grp,Mining (r_mi),,0.8328757
+2030,Source: r_grp,Mining (r_mi),,0.8061967
+2031,Source: r_grp,Mining (r_mi),,0.7944954
+2032,Source: r_grp,Mining (r_mi),,0.7977784
+2024,Source: r_grp,Manufacturing (r_m),,1.010599
+2025,Source: r_grp,Manufacturing (r_m),,0.9963345
+2026,Source: r_grp,Manufacturing (r_m),,1.068898
+2027,Source: r_grp,Manufacturing (r_m),,0.9884749
+2028,Source: r_grp,Manufacturing (r_m),,1.064263
+2029,Source: r_grp,Manufacturing (r_m),,1.058615
+2030,Source: r_grp,Manufacturing (r_m),,1.107742
+2031,Source: r_grp,Manufacturing (r_m),,1.081881
+2032,Source: r_grp,Manufacturing (r_m),,1.078722
+2024,Source: r_grp,Energy and Water (r_e),,0.9855618
+2025,Source: r_grp,Energy and Water (r_e),,1.013937
+2026,Source: r_grp,Energy and Water (r_e),,0.8009084
+2027,Source: r_grp,Energy and Water (r_e),,0.7801433
+2028,Source: r_grp,Energy and Water (r_e),,0.5425273
+2029,Source: r_grp,Energy and Water (r_e),,0.5083167
+2030,Source: r_grp,Energy and Water (r_e),,0.4970532
+2031,Source: r_grp,Energy and Water (r_e),,0.4754793
+2032,Source: r_grp,Energy and Water (r_e),,0.5135858
+2024,Source: r_grp,Construction (r_c),,0.9584125
+2025,Source: r_grp,Construction (r_c),,1.112151
+2026,Source: r_grp,Construction (r_c),,1.205384
+2027,Source: r_grp,Construction (r_c),,1.254498
+2028,Source: r_grp,Construction (r_c),,1.25946
+2029,Source: r_grp,Construction (r_c),,1.247604
+2030,Source: r_grp,Construction (r_c),,1.28575
+2031,Source: r_grp,Construction (r_c),,1.335901
+2032,Source: r_grp,Construction (r_c),,1.372726
+2024,Source: r_grp,Transport (r_t),,0.9860229
+2025,Source: r_grp,Transport (r_t),,1.076123
+2026,Source: r_grp,Transport (r_t),,1.152415
+2027,Source: r_grp,Transport (r_t),,1.505862
+2028,Source: r_grp,Transport (r_t),,1.502372
+2029,Source: r_grp,Transport (r_t),,1.520987
+2030,Source: r_grp,Transport (r_t),,1.487092
+2031,Source: r_grp,Transport (r_t),,1.655461
+2032,Source: r_grp,Transport (r_t),,1.77434
+2024,Source: r_grp,Trade (r_tr),,1.009386
+2025,Source: r_grp,Trade (r_tr),,0.9945516
+2026,Source: r_grp,Trade (r_tr),,0.9332926
+2027,Source: r_grp,Trade (r_tr),,1.009158
+2028,Source: r_grp,Trade (r_tr),,0.9027938
+2029,Source: r_grp,Trade (r_tr),,0.86427
+2030,Source: r_grp,Trade (r_tr),,0.84762
+2031,Source: r_grp,Trade (r_tr),,0.8896002
+2032,Source: r_grp,Trade (r_tr),,0.8636626
+2024,Source: r_grp,Financial services (r_fs),,1.334169
+2025,Source: r_grp,Financial services (r_fs),,1.455979
+2026,Source: r_grp,Financial services (r_fs),,1.359212
+2027,Source: r_grp,Financial services (r_fs),,1.318685
+2028,Source: r_grp,Financial services (r_fs),,1.327841
+2029,Source: r_grp,Financial services (r_fs),,1.300463
+2030,Source: r_grp,Financial services (r_fs),,0.9199327
+2031,Source: r_grp,Financial services (r_fs),,0.8701925
+2032,Source: r_grp,Financial services (r_fs),,0.81032
+2024,Source: r_grp,Public Services (r_ps),,1.003617
+2025,Source: r_grp,Public Services (r_ps),,0.7775227
+2026,Source: r_grp,Public Services (r_ps),,0.7946313
+2027,Source: r_grp,Public Services (r_ps),,0.7898127
+2028,Source: r_grp,Public Services (r_ps),,0.8077542
+2029,Source: r_grp,Public Services (r_ps),,0.8588437
+2030,Source: r_grp,Public Services (r_ps),,0.8949484
+2031,Source: r_grp,Public Services (r_ps),,0.9464493
+2032,Source: r_grp,Public Services (r_ps),,0.9902504
+2024,Source: r_grp,Market Services (r_ms),,0.494533
+2025,Source: r_grp,Market Services (r_ms),,0.4989969
+2026,Source: r_grp,Market Services (r_ms),,0.4925736
+2027,Source: r_grp,Market Services (r_ms),,0.5171393
+2028,Source: r_grp,Market Services (r_ms),,0.4798257
+2029,Source: r_grp,Market Services (r_ms),,0.4584568
+2030,Source: r_grp,Market Services (r_ms),,0.4476748
+2031,Source: r_grp,Market Services (r_ms),,0.460032
+2032,Source: r_grp,Market Services (r_ms),,0.4762349
+2024,Source: r_grp,Total (r_tot),,1.001855
+2025,Source: r_grp,Total (r_tot),,1.045604
+2026,Source: r_grp,Total (r_tot),,1.061144
+2027,Source: r_grp,Total (r_tot),,1.094038
+2028,Source: r_grp,Total (r_tot),,1.023652
+2029,Source: r_grp,Total (r_tot),,1.002482
+2030,Source: r_grp,Total (r_tot),,0.9788342
+2031,Source: r_grp,Total (r_tot),,1.002793
+2032,Source: r_grp,Total (r_tot),,1.021601
+2024,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,0.9327285
+2025,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,0.944295
+2026,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,0.9627946
+2027,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,0.9876596
+2028,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,1.016812
+2029,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,1.036793
+2030,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,1.050571
+2031,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,1.080349
+2032,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (e),,1.097606
+2024,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,9.346694
+2025,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,9.000309
+2026,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,9.17552899999999
+2027,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,9.412495
+2028,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,9.69031599999999
+2029,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,9.88074
+2030,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,10.01204
+2031,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,10.29584
+2032,4. Equilibrium on current account balance of the BOP established by exchange rate,Exchange rate (TJS/USD),,10.46029
+2024,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),75206.33
+2025,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),77968.46
+2026,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),82697.53
+2027,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),88077.81
+2028,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),105031.3
+2029,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),105712.3
+2030,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),105665.1
+2031,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),114942.5
+2032,5. Investment - Saving Balance,78369.3437714214,Investment (inv_tot),120227.9
+2024,5. Investment - Saving Balance,101049.73240951996,Savings,48496.649999999994
+2025,5. Investment - Saving Balance,101049.73240951996,Savings,49685.48
+2026,5. Investment - Saving Balance,101049.73240951996,Savings,50383.03
+2027,5. Investment - Saving Balance,101049.73240951996,Savings,50121.69
+2028,5. Investment - Saving Balance,101049.73240951996,Savings,60118.58
+2029,5. Investment - Saving Balance,101049.73240951996,Savings,56205.63999999999
+2030,5. Investment - Saving Balance,101049.73240951996,Savings,53113.40000000001
+2031,5. Investment - Saving Balance,101049.73240951996,Savings,55058.850000000006
+2032,5. Investment - Saving Balance,101049.73240951996,Savings,56238.70000000001
+2024,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),15568.47
+2025,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),15835.46
+2026,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),16115.07
+2027,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),16634.97
+2028,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),16448.43
+2029,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),17281.65
+2030,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),18426.19
+2031,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),19008.71
+2032,5. Investment - Saving Balance,15565.063387119968,Households (sh_1),19728.34
+2024,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),30478.01
+2025,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),32299.64
+2026,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),34204.16
+2027,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),36798.7
+2028,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),41452.82
+2029,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),44682.92
+2030,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),47543.05
+2031,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),50773.95
+2032,5. Investment - Saving Balance,28605.099999999988,Firms (sf_1),53106.65
+2024,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),15805.01
+2025,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),15691.87
+2026,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),16221.05
+2027,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),15666.08
+2028,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),24673.69
+2029,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),18994.42
+2030,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),13420.02
+2031,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),15218.02
+2032,5. Investment - Saving Balance,16354.199999999993,Government (sg_1),15398.33
+2024,5. Investment - Saving Balance,21072.5690224,Foreign,-13354.84
+2025,5. Investment - Saving Balance,21072.5690224,Foreign,-14141.49
+2026,5. Investment - Saving Balance,21072.5690224,Foreign,-16157.25
+2027,5. Investment - Saving Balance,21072.5690224,Foreign,-18978.06
+2028,5. Investment - Saving Balance,21072.5690224,Foreign,-22456.36
+2029,5. Investment - Saving Balance,21072.5690224,Foreign,-24753.35
+2030,5. Investment - Saving Balance,21072.5690224,Foreign,-26275.86
+2031,5. Investment - Saving Balance,21072.5690224,Foreign,-29941.83
+2032,5. Investment - Saving Balance,21072.5690224,Foreign,-31994.62

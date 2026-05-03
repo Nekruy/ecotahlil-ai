@@ -1,0 +1,1634 @@
+﻿year,block,equation,description,value
+2024,,Agriculture (DIT_a),,42982.91148222708
+2025,,Agriculture (DIT_a),,45882.21613684038
+2026,,Agriculture (DIT_a),,50270.624141171764
+2027,,Agriculture (DIT_a),,53550.574554345745
+2028,,Agriculture (DIT_a),,50441.76972570344
+2029,,Agriculture (DIT_a),,58277.58258073052
+2030,,Agriculture (DIT_a),,67646.69905806035
+2031,,Agriculture (DIT_a),,60945.223725837815
+2032,,Agriculture (DIT_a),,71815.1337676463
+2024,,Agriculture (DIT_a),,40340.11
+2025,,Agriculture (DIT_a),,43300.3
+2026,,Agriculture (DIT_a),,45478.42
+2027,,Agriculture (DIT_a),,47224.45
+2028,,Agriculture (DIT_a),,48590.42
+2029,,Agriculture (DIT_a),,50222.95
+2030,,Agriculture (DIT_a),,51002.89
+2031,,Agriculture (DIT_a),,52183.59
+2032,,Agriculture (DIT_a),,54445.85
+2024,,Agriculture (DIT_a),,54.2
+2025,,Agriculture (DIT_a),,54.2
+2026,,Agriculture (DIT_a),,52.83
+2027,,Agriculture (DIT_a),,51.2
+2028,,Agriculture (DIT_a),,43.9710156526879
+2029,,Agriculture (DIT_a),,46.46050256306485
+2030,,Agriculture (DIT_a),,49.3953
+2031,,Agriculture (DIT_a),,41.15260349828117
+2032,,Agriculture (DIT_a),,45
+2024,,Agriculture (DIT_a),,31573.43
+2025,,Agriculture (DIT_a),,33601.08
+2026,,Agriculture (DIT_a),,35597.88
+2027,,Agriculture (DIT_a),,37445.48
+2028,,Agriculture (DIT_a),,39259.39
+2029,,Agriculture (DIT_a),,41468.39
+2030,,Agriculture (DIT_a),,42359.66
+2031,,Agriculture (DIT_a),,43511.28
+2032,,Agriculture (DIT_a),,45085.48
+2024,,Mining (DIT_mi),,7000.7757967385105
+2025,,Mining (DIT_mi),,7778.982785842685
+2026,,Mining (DIT_mi),,16421.931582876598
+2027,,Mining (DIT_mi),,14149.747284721185
+2028,,Mining (DIT_mi),,24731.76687773847
+2029,,Mining (DIT_mi),,27517.376839578563
+2030,,Mining (DIT_mi),,22437.650541511368
+2031,,Mining (DIT_mi),,22936.390834720994
+2032,,Mining (DIT_mi),,11648.733727922261
+2024,,Mining (DIT_mi),,6308.727
+2025,,Mining (DIT_mi),,7852.628
+2026,,Mining (DIT_mi),,8358.133
+2027,,Mining (DIT_mi),,8866.251
+2028,,Mining (DIT_mi),,9201.972
+2029,,Mining (DIT_mi),,9554.302
+2030,,Mining (DIT_mi),,9960.441
+2031,,Mining (DIT_mi),,10474.69
+2032,,Mining (DIT_mi),,10958.89
+2024,,Mining (DIT_mi),,51.7
+2025,,Mining (DIT_mi),,51.7
+2026,,Mining (DIT_mi),,61.38
+2027,,Mining (DIT_mi),,47.5
+2028,,Mining (DIT_mi),,60.7
+2029,,Mining (DIT_mi),,57.27139104776804
+2030,,Mining (DIT_mi),,45.7
+2031,,Mining (DIT_mi),,45
+2032,,Mining (DIT_mi),,23
+2024,,Mining (DIT_mi),,7123.571
+2025,,Mining (DIT_mi),,7834.645
+2026,,Mining (DIT_mi),,8442.124
+2027,,Mining (DIT_mi),,9543.081
+2028,,Mining (DIT_mi),,10126.64
+2029,,Mining (DIT_mi),,10846.91
+2030,,Mining (DIT_mi),,11252.34
+2031,,Mining (DIT_mi),,11980.82
+2032,,Mining (DIT_mi),,12645.92
+2024,,Manufacturing (DIT_m),,37783.10591940254
+2025,,Manufacturing (DIT_m),,41983.0800294491
+2026,,Manufacturing (DIT_m),,32735.699715337687
+2027,,Manufacturing (DIT_m),,33247.21409228204
+2028,,Manufacturing (DIT_m),,40027.95446127724
+2029,,Manufacturing (DIT_m),,58058.06034228143
+2030,,Manufacturing (DIT_m),,50482.140101417695
+2031,,Manufacturing (DIT_m),,44289.10033100976
+2032,,Manufacturing (DIT_m),,29886.58905950287
+2024,,Manufacturing (DIT_m),,35041.3
+2025,,Manufacturing (DIT_m),,36470.69
+2026,,Manufacturing (DIT_m),,39545.21
+2027,,Manufacturing (DIT_m),,42822.28
+2028,,Manufacturing (DIT_m),,46891.24
+2029,,Manufacturing (DIT_m),,52203.28
+2030,,Manufacturing (DIT_m),,53895.93
+2031,,Manufacturing (DIT_m),,55388.15
+2032,,Manufacturing (DIT_m),,56490.54
+2024,,Manufacturing (DIT_m),,64.4
+2025,,Manufacturing (DIT_m),,64.4
+2026,,Manufacturing (DIT_m),,54.5
+2027,,Manufacturing (DIT_m),,55.1
+2028,,Manufacturing (DIT_m),,54.80653388776562
+2029,,Manufacturing (DIT_m),,61
+2030,,Manufacturing (DIT_m),,52.342179949696146
+2031,,Manufacturing (DIT_m),,45.5
+2032,,Manufacturing (DIT_m),,30.5
+2024,,Manufacturing (DIT_m),,55650.79
+2025,,Manufacturing (DIT_m),,60177.2
+2026,,Manufacturing (DIT_m),,65000.41
+2027,,Manufacturing (DIT_m),,70756.95
+2028,,Manufacturing (DIT_m),,75654.78
+2029,,Manufacturing (DIT_m),,80534.28
+2030,,Manufacturing (DIT_m),,84153.63
+2031,,Manufacturing (DIT_m),,88649.81
+2032,,Manufacturing (DIT_m),,92534.59
+2024,,Energy and Water (DIT_e),,4687.6180779299175
+2025,,Energy and Water (DIT_e),,5208.694206692049
+2026,,Energy and Water (DIT_e),,5474.784188047452
+2027,,Energy and Water (DIT_e),,6053.379085541159
+2028,,Energy and Water (DIT_e),,7290.943319192479
+2029,,Energy and Water (DIT_e),,8616.993041076683
+2030,,Energy and Water (DIT_e),,8795.757223604154
+2031,,Energy and Water (DIT_e),,8250.621384194372
+2032,,Energy and Water (DIT_e),,4415.394984305486
+2024,,Energy and Water (DIT_e),,4288.803
+2025,,Energy and Water (DIT_e),,4943.003
+2026,,Energy and Water (DIT_e),,5300.403
+2027,,Energy and Water (DIT_e),,7064.331
+2028,,Energy and Water (DIT_e),,7152.759
+2029,,Energy and Water (DIT_e),,7255.685
+2030,,Energy and Water (DIT_e),,7457.89
+2031,,Energy and Water (DIT_e),,8717.681
+2032,,Energy and Water (DIT_e),,9916.134
+2024,,Energy and Water (DIT_e),,45.3
+2025,,Energy and Water (DIT_e),,45.3
+2026,,Energy and Water (DIT_e),,41.74387120553435
+2027,,Energy and Water (DIT_e),,41.02067835407014
+2028,,Energy and Water (DIT_e),,40.9
+2029,,Energy and Water (DIT_e),,39.932904744109564
+2030,,Energy and Water (DIT_e),,39.4
+2031,,Energy and Water (DIT_e),,35
+2032,,Energy and Water (DIT_e),,18.3
+2024,,Energy and Water (DIT_e),,7463.39
+2025,,Energy and Water (DIT_e),,8060.131
+2026,,Energy and Water (DIT_e),,8676.688
+2027,,Energy and Water (DIT_e),,9615.347
+2028,,Energy and Water (DIT_e),,10151.41
+2029,,Energy and Water (DIT_e),,10678.61
+2030,,Energy and Water (DIT_e),,11150.31
+2031,,Energy and Water (DIT_e),,11896.43
+2032,,Energy and Water (DIT_e),,12581.55
+2024,,Construction (DIT_c),,16054.821324153405
+2025,,Construction (DIT_c),,17839.476986043843
+2026,,Construction (DIT_c),,18068.512866194153
+2027,,Construction (DIT_c),,19607.109600979406
+2028,,Construction (DIT_c),,20312.50668618214
+2029,,Construction (DIT_c),,18074.894746448583
+2030,,Construction (DIT_c),,16680.32566077156
+2031,,Construction (DIT_c),,16187.189838301842
+2032,,Construction (DIT_c),,11244.509081968492
+2024,,Construction (DIT_c),,14118.33
+2025,,Construction (DIT_c),,15774.29
+2026,,Construction (DIT_c),,17493
+2027,,Construction (DIT_c),,18515.11
+2028,,Construction (DIT_c),,20266.88
+2029,,Construction (DIT_c),,21182.72
+2030,,Construction (DIT_c),,22048.77
+2031,,Construction (DIT_c),,23067.54
+2032,,Construction (DIT_c),,23920.2
+2024,,Construction (DIT_c),,47
+2025,,Construction (DIT_c),,47
+2026,,Construction (DIT_c),,42.048257063328386
+2027,,Construction (DIT_c),,41.655280807569945
+2028,,Construction (DIT_c),,41
+2029,,Construction (DIT_c),,34
+2030,,Construction (DIT_c),,30
+2031,,Construction (DIT_c),,27.1
+2032,,Construction (DIT_c),,19
+2024,,Construction (DIT_c),,9375.018
+2025,,Construction (DIT_c),,10154.97
+2026,,Construction (DIT_c),,10820.56
+2027,,Construction (DIT_c),,11752.68
+2028,,Construction (DIT_c),,12398.64
+2029,,Construction (DIT_c),,12944.09
+2030,,Construction (DIT_c),,13561.97
+2031,,Construction (DIT_c),,14315.71
+2032,,Construction (DIT_c),,15046.98
+2024,,Transport (DIT_t),,10176.77216376681
+2025,,Transport (DIT_t),,11308.023249975528
+2026,,Transport (DIT_t),,11619.869144307808
+2027,,Transport (DIT_t),,11637.063774317412
+2028,,Transport (DIT_t),,11048.283447942087
+2029,,Transport (DIT_t),,7924.222681450946
+2030,,Transport (DIT_t),,8386.857140336044
+2031,,Transport (DIT_t),,7746.681140882583
+2032,,Transport (DIT_t),,4043.6176058703904
+2024,,Transport (DIT_t),,9370.634
+2025,,Transport (DIT_t),,10306.88
+2026,,Transport (DIT_t),,11551.87
+2027,,Transport (DIT_t),,14405.58
+2028,,Transport (DIT_t),,14957.28
+2029,,Transport (DIT_t),,15600.6
+2030,,Transport (DIT_t),,18004.49
+2031,,Transport (DIT_t),,20005.12
+2032,,Transport (DIT_t),,22126.24
+2024,,Transport (DIT_t),,53.4
+2025,,Transport (DIT_t),,53.4
+2026,,Transport (DIT_t),,50
+2027,,Transport (DIT_t),,47.14156265452107
+2028,,Transport (DIT_t),,46.18421527981268
+2029,,Transport (DIT_t),,32
+2030,,Transport (DIT_t),,30.2
+2031,,Transport (DIT_t),,27.2
+2032,,Transport (DIT_t),,15
+2024,,Transport (DIT_t),,8819.60299999999
+2025,,Transport (DIT_t),,9490.592
+2026,,Transport (DIT_t),,10225.34
+2027,,Transport (DIT_t),,11483.15
+2028,,Transport (DIT_t),,12135.79
+2029,,Transport (DIT_t),,12740.41
+2030,,Transport (DIT_t),,13568.97
+2031,,Transport (DIT_t),,14596.29
+2032,,Transport (DIT_t),,15477.17
+2024,,Trade (DIT_tr),,12676.461813028525
+2025,,Trade (DIT_tr),,14085.5786689928
+2026,,Trade (DIT_tr),,12921.852995744739
+2027,,Trade (DIT_tr),,14306.895735085633
+2028,,Trade (DIT_tr),,15819.405853625809
+2029,,Trade (DIT_tr),,11697.912394937219
+2030,,Trade (DIT_tr),,8383.258760287958
+2031,,Trade (DIT_tr),,7830.356549265312
+2032,,Trade (DIT_tr),,4418.115213965435
+2024,,Trade (DIT_tr),,11835.09
+2025,,Trade (DIT_tr),,12345.39
+2026,,Trade (DIT_tr),,12510.27
+2027,,Trade (DIT_tr),,13737.44
+2028,,Trade (DIT_tr),,14608.16
+2029,,Trade (DIT_tr),,15086.54
+2030,,Trade (DIT_tr),,15669.9
+2031,,Trade (DIT_tr),,17149.06
+2032,,Trade (DIT_tr),,17549.31
+2024,,Trade (DIT_tr),,37.4
+2025,,Trade (DIT_tr),,37.4
+2026,,Trade (DIT_tr),,34.66449318612187
+2027,,Trade (DIT_tr),,33.83600077536813
+2028,,Trade (DIT_tr),,33.51340165789496
+2029,,Trade (DIT_tr),,24
+2030,,Trade (DIT_tr),,16.1
+2031,,Trade (DIT_tr),,14.1
+2032,,Trade (DIT_tr),,8
+2024,,Trade (DIT_tr),,1972.165
+2025,,Trade (DIT_tr),,2104.14
+2026,,Trade (DIT_tr),,2239.252
+2027,,Trade (DIT_tr),,2504.341
+2028,,Trade (DIT_tr),,2662.862
+2029,,Trade (DIT_tr),,2795.668
+2030,,Trade (DIT_tr),,2957.747
+2031,,Trade (DIT_tr),,3204.712
+2032,,Trade (DIT_tr),,3368.733
+2024,,Financial services (DIT_fs),,8013.587794578431
+2025,,Financial services (DIT_fs),,8904.379074088645
+2026,,Financial services (DIT_fs),,9291.798340894531
+2027,,Financial services (DIT_fs),,10896.997714953905
+2028,,Financial services (DIT_fs),,9898.367376751869
+2029,,Financial services (DIT_fs),,8362.524797201824
+2030,,Financial services (DIT_fs),,7117.867221511364
+2031,,Financial services (DIT_fs),,6812.506650286068
+2032,,Financial services (DIT_fs),,5513.425426152526
+2024,,Financial services (DIT_fs),,5856.509
+2025,,Financial services (DIT_fs),,6158.721
+2026,,Financial services (DIT_fs),,6257.932
+2027,,Financial services (DIT_fs),,6471.943
+2028,,Financial services (DIT_fs),,6666.596
+2029,,Financial services (DIT_fs),,6833.803
+2030,,Financial services (DIT_fs),,7177.593
+2031,,Financial services (DIT_fs),,7303.416
+2032,,Financial services (DIT_fs),,7545.684
+2024,,Financial services (DIT_fs),,53.4
+2025,,Financial services (DIT_fs),,53.4
+2026,,Financial services (DIT_fs),,53.4
+2027,,Financial services (DIT_fs),,53.4
+2028,,Financial services (DIT_fs),,52
+2029,,Financial services (DIT_fs),,37
+2030,,Financial services (DIT_fs),,33
+2031,,Financial services (DIT_fs),,28.5
+2032,,Financial services (DIT_fs),,23
+2024,,Financial services (DIT_fs),,10607.68
+2025,,Financial services (DIT_fs),,11310.79
+2026,,Financial services (DIT_fs),,12028.48
+2027,,Financial services (DIT_fs),,13228.64
+2028,,Financial services (DIT_fs),,13987.59
+2029,,Financial services (DIT_fs),,14708.05
+2030,,Financial services (DIT_fs),,15521.88
+2031,,Financial services (DIT_fs),,16572.58
+2032,,Financial services (DIT_fs),,17416.56
+2024,,Public Services (DIT_ps),,3924.960270408121
+2025,,Public Services (DIT_ps),,4361.2592754142215
+2026,,Public Services (DIT_ps),,4025.950366620001
+2027,,Public Services (DIT_ps),,4422.27464678883
+2028,,Public Services (DIT_ps),,4789.950697137712
+2029,,Public Services (DIT_ps),,4392.112048589542
+2030,,Public Services (DIT_ps),,2940.722187844006
+2031,,Public Services (DIT_ps),,3025.057053682496
+2032,,Public Services (DIT_ps),,3249.814295202477
+2024,,Public Services (DIT_ps),,3656.114
+2025,,Public Services (DIT_ps),,3672.812
+2026,,Public Services (DIT_ps),,3897.717
+2027,,Public Services (DIT_ps),,4398.493
+2028,,Public Services (DIT_ps),,4581.257
+2029,,Public Services (DIT_ps),,5184.905
+2030,,Public Services (DIT_ps),,5736.568
+2031,,Public Services (DIT_ps),,6209.787
+2032,,Public Services (DIT_ps),,6756.221
+2024,,Public Services (DIT_ps),,19.5
+2025,,Public Services (DIT_ps),,19.5
+2026,,Public Services (DIT_ps),,17.690986201118182
+2027,,Public Services (DIT_ps),,17.860478922286795
+2028,,Public Services (DIT_ps),,17.5
+2029,,Public Services (DIT_ps),,16
+2030,,Public Services (DIT_ps),,10.1
+2031,,Public Services (DIT_ps),,10
+2032,,Public Services (DIT_ps),,10.1
+2024,,Public Services (DIT_ps),,562.4446
+2025,,Public Services (DIT_ps),,595.4913
+2026,,Public Services (DIT_ps),,645.077
+2027,,Public Services (DIT_ps),,709.778
+2028,,Public Services (DIT_ps),,752.9944
+2029,,Public Services (DIT_ps),,807.0677
+2030,,Public Services (DIT_ps),,854.8023
+2031,,Public Services (DIT_ps),,911.7216
+2032,,Public Services (DIT_ps),,966.6239
+2024,,Market Services,,1444.9187047370315
+2025,,Market Services,,1605.536023068745
+2026,,Market Services,,1978.4433889262873
+2027,,Market Services,,2428.459392882167
+2028,,Market Services,,2135.199285379717
+2029,,Market Services,,2228.592700697825
+2030,,Market Services,,2424.425015967025
+2031,,Market Services,,1521.243536006812
+2032,,Market Services,,1443.4027378094004
+2024,,Market Services,,3227.287
+2025,,Market Services,,3460.954
+2026,,Market Services,,4327.249
+2027,,Market Services,,4660.14
+2028,,Market Services,,5427.298
+2029,,Market Services,,5689.536
+2030,,Market Services,,5761.674
+2031,,Market Services,,6551.6
+2032,,Market Services,,6885.488
+2024,,Market Services,,36.9
+2025,,Market Services,,36.9
+2026,,Market Services,,36.9
+2027,,Market Services,,36.9
+2028,,Market Services,,35
+2029,,Market Services,,30
+2030,,Market Services,,29
+2031,,Market Services,,20.1
+2032,,Market Services,,18
+2024,,Market Services,,894.8115
+2025,,Market Services,,956.627
+2026,,Market Services,,1044.398
+2027,,Market Services,,1126.558
+2028,,Market Services,,1213.77
+2029,,Market Services,,1290.827
+2030,,Market Services,,1334.832
+2031,,Market Services,,1411.279
+2032,,Market Services,,1470.94
+2024,,1,Gross Output (current prices),143278.43765302945
+2025,,1,Gross Output (current prices),157617.7645635919
+2026,,1,Gross Output (current prices),181287.82526987884
+2027,,1,Gross Output (current prices),204962.86733045068
+2028,,1,Gross Output (current prices),233000.50636751752
+2029,,1,Gross Output (current prices),269234.28210280155
+2030,,1,Gross Output (current prices),304009.8174283254
+2031,,1,Gross Output (current prices),345901.6372526118
+2032,,1,Gross Output (current prices),390205.99244832667
+2028,,1,Gross Output (current prices),Gross Output (current prices)
+2024,,Source: xp_grp,,14524.861
+2025,,Source: xp_grp,,19301.089799999998
+2026,,Source: xp_grp,,18610.317492500002
+2027,,Source: xp_grp,,20494.2986793
+2028,,Source: xp_grp,,21611.492778
+2029,,Source: xp_grp,,21722.856097599997
+2030,,Source: xp_grp,,21977.797952
+2031,,Source: xp_grp,,22429.2171
+2032,,Source: xp_grp,,23764.3454
+2026,,Source: xp_grp,,Темп роста ВВ метод дефлятирование
+2030,,Source: xp_grp,, 
+2028,,Source: xp_grp,,Source: xp_grp
+2024,,Agriculture (XP_a),,79304.26472735623
+2025,,Agriculture (XP_a),,84653.5353078236
+2026,,Agriculture (XP_a),,95155.44982239592
+2027,,Agriculture (XP_a),,104590.96592645653
+2028,,Agriculture (XP_a),,114715.95317271228
+2029,,Agriculture (XP_a),,125434.6797080495
+2030,,Agriculture (XP_a),,136949.66739357862
+2031,,Agriculture (XP_a),,148095.66964185712
+2032,,Agriculture (XP_a),,159589.1861503251
+2024,,Agriculture (XP_a),,112.40576010958605
+2025,,Agriculture (XP_a),,109.91589669500974
+2026,,Agriculture (XP_a),,109.68055620919992
+2027,,Agriculture (XP_a),,109.34371047695475
+2028,,Agriculture (XP_a),,109.18006703754526
+2029,,Agriculture (XP_a),,108.1387581732828
+2030,,Agriculture (XP_a),,107.76087277653899
+2026,,Agriculture (XP_a),,108.92031018370741
+2027,,Agriculture (XP_a),,108.61254614131397
+2028,,Agriculture (XP_a),,108.27300711668305
+2029,,Agriculture (XP_a),,108.15401629768029
+2030,,Agriculture (XP_a),,108.31355856899332
+2031,,Agriculture (XP_a),,107.60075440127642
+2032,,Agriculture (XP_a),,107.54578121411076
+2025,,Agriculture (XP_a),,5349.270580467361
+2026,,Agriculture (XP_a),,10501.91451457233
+2027,,Agriculture (XP_a),,9435.516104060604
+2028,,Agriculture (XP_a),,10124.987246255754
+2029,,Agriculture (XP_a),,10718.72653533722
+2030,,Agriculture (XP_a),,11514.987685529122
+2031,,Agriculture (XP_a),,11146.002248278499
+2024,,Agriculture (XP_a),,77989.1799999999
+2025,,Agriculture (XP_a),,87034.98
+2026,,Agriculture (XP_a),,91015.24
+2027,,Agriculture (XP_a),,95492.76
+2028,,Agriculture (XP_a),,97449.91
+2029,,Agriculture (XP_a),,102734.4
+2030,,Agriculture (XP_a),,103766.2
+2031,,Agriculture (XP_a),,108226.8
+2032,,Agriculture (XP_a),,115059.6
+2024,,Industry,,82558.51431788076
+2025,,Industry,,91735.72763217703
+2026,,Industry,,99935.2166218734
+2027,,Industry,,104885.60973515622
+2028,,Industry,,131605.53347201648
+2029,,Industry,,164803.1608958661
+2030,,Industry,,167868.3449500881
+2031,,Industry,,171881.64341150748
+2032,,Industry,,172763.326415097
+2024,,Industry,,108.93816313592997
+2025,,Industry,,104.95360222414256
+2026,,Industry,,125.4753
+2027,,Industry,,125.2251
+2028,,Industry,,101.85990610711573
+2029,,Industry,,102.39074166282668
+2030,,Industry,,100.5129593748872
+2026,,Industry,,118.02617891216681
+2027,,Industry,,112.37002379458517
+2028,,Industry,,139.24680945511042
+2029,,Industry,,139.13745402828857
+2030,,Industry,,115.7498933035406
+2031,,Industry,,110.0857345047056
+2032,,Industry,,118.25054044104377
+2025,,Industry,,9177.21331429627
+2026,,Industry,,8199.488989696372
+2027,,Industry,,4950.393113282815
+2028,,Industry,,26719.923736860263
+2029,,Industry,,33197.627423849626
+2030,,Industry,,3065.184054221987
+2031,,Industry,,4013.2984614193847
+2024,,Industry,,79678.93699999999
+2025,,Industry,,88903.85
+2026,,Industry,,96752.11000000002
+2027,,Industry,,109039.15000000001
+2028,,Industry,,118703.06
+2029,,Industry,,127673.28
+2030,,Industry,,133393.61
+2031,,Industry,,140971.1799999999
+2032,,Industry,,148230.6999999999
+2024,,Mining (XP_mi),,13541.15241148648
+2025,,Mining (XP_mi),,15046.38836720055
+2026,,Mining (XP_mi),,26754.5317414086
+2027,,Mining (XP_mi),,29788.9416520446
+2028,,Mining (XP_mi),,40744.2617425675
+2029,,Mining (XP_mi),,48047.334517555704
+2030,,Mining (XP_mi),,49097.7035919286
+2031,,Mining (XP_mi),,50969.757410491104
+2032,,Mining (XP_mi),,50646.6683822707
+2024,,Mining (XP_mi),,177.8136459625786
+2025,,Mining (XP_mi),,111.34166704902397
+2026,,Mining (XP_mi),,136.77646630917138
+2027,,Mining (XP_mi),,117.92417499458172
+2028,,Mining (XP_mi),,102.18611310059065
+2029,,Mining (XP_mi),,103.81291523147786
+2030,,Mining (XP_mi),,99.36611621354528
+2026,,Mining (XP_mi),,170.71169790628147
+2027,,Mining (XP_mi),,123.02946635251267
+2028,,Mining (XP_mi),,146.28499070499612
+2029,,Mining (XP_mi),,126.12211229367028
+2030,,Mining (XP_mi),,109.28996053539106
+2031,,Mining (XP_mi),,114.71040357069377
+2032,,Mining (XP_mi),,110.2842577286851
+2025,,Mining (XP_mi),,1505.2359557140699
+2026,,Mining (XP_mi),,11708.143374208048
+2027,,Mining (XP_mi),,3034.409910636001
+2028,,Mining (XP_mi),,10955.320090522899
+2029,,Mining (XP_mi),,7303.072774988206
+2030,,Mining (XP_mi),,1050.3690743728948
+2031,,Mining (XP_mi),,1872.0538185625046
+2024,,Mining (XP_mi),,12664.64
+2025,,Mining (XP_mi),,16086.69
+2026,,Mining (XP_mi),,17277.43
+2027,,Mining (XP_mi),,18596.55
+2028,,Mining (XP_mi),,19645.56
+2029,,Mining (XP_mi),,20672.43
+2030,,Mining (XP_mi),,21818.3
+2031,,Mining (XP_mi),,23252.22
+2032,,Mining (XP_mi),,24357.06
+2024,,Manufacturing (XP_m),,58669.41912950704
+2025,,Manufacturing (XP_m),,65191.118058150765
+2026,,Manufacturing (XP_m),,60065.5040648398
+2027,,Manufacturing (XP_m),,60339.7714923449
+2028,,Manufacturing (XP_m),,73035.0044453598
+2029,,Manufacturing (XP_m),,95177.1481021007
+2030,,Manufacturing (XP_m),,96446.3844454586
+2031,,Manufacturing (XP_m),,97338.6820461753
+2032,,Manufacturing (XP_m),,97988.816588534
+2024,,Manufacturing (XP_m),,92.13755777475868
+2025,,Manufacturing (XP_m),,100.45661387809055
+2026,,Manufacturing (XP_m),,121.03957744458063
+2027,,Manufacturing (XP_m),,130.31716616558336
+2028,,Manufacturing (XP_m),,101.33355156008281
+2029,,Manufacturing (XP_m),,100.92517475470663
+2030,,Manufacturing (XP_m),,100.6679097442991
+2026,,Manufacturing (XP_m),,88.39610426561237
+2027,,Manufacturing (XP_m),,95.14306403771239
+2028,,Manufacturing (XP_m),,119.95993800255762
+2029,,Manufacturing (XP_m),,129.15477320672287
+2030,,Manufacturing (XP_m),,100.42968440047851
+2031,,Manufacturing (XP_m),,110.90678544473256
+2032,,Manufacturing (XP_m),,110.98997766736395
+2025,,Manufacturing (XP_m),,6521.698928643724
+2026,,Manufacturing (XP_m),,-5125.613993310966
+2027,,Manufacturing (XP_m),,274.2674275051031
+2028,,Manufacturing (XP_m),,12695.232953014893
+2029,,Manufacturing (XP_m),,22142.14365674091
+2030,,Manufacturing (XP_m),,1269.2363433579012
+2031,,Manufacturing (XP_m),,892.2976007166872
+2024,,Manufacturing (XP_m),,57016.34
+2025,,Manufacturing (XP_m),,61135.58
+2026,,Manufacturing (XP_m),,66777.24
+2027,,Manufacturing (XP_m),,73221.21
+2028,,Manufacturing (XP_m),,81359.23
+2029,,Manufacturing (XP_m),,88831.16
+2030,,Manufacturing (XP_m),,92637.12
+2031,,Manufacturing (XP_m),,96172.0399999999
+2032,,Manufacturing (XP_m),,98919.7899999999
+2024,,Energy and Water (XP_e),,10347.942776887236
+2025,,Energy and Water (XP_e),,11498.221206825718
+2026,,Energy and Water (XP_e),,13115.180815625006
+2027,,Energy and Water (XP_e),,14756.89659076672
+2028,,Energy and Water (XP_e),,17826.26728408919
+2029,,Energy and Water (XP_e),,21578.6782762097
+2030,,Energy and Water (XP_e),,22324.2569127009
+2031,,Energy and Water (XP_e),,23573.203954841065
+2032,,Energy and Water (XP_e),,24127.841444292273
+2024,,Energy and Water (XP_e),,114.06269352201545
+2025,,Energy and Water (XP_e),,112.51767549545202
+2026,,Energy and Water (XP_e),,120.7995676763294
+2027,,Energy and Water (XP_e),,121.04989750417194
+2028,,Energy and Water (XP_e),,103.45516359689739
+2029,,Energy and Water (XP_e),,105.59457386207379
+2030,,Energy and Water (XP_e),,102.35283031748132
+2026,,Energy and Water (XP_e),,110.1922992047479
+2027,,Energy and Water (XP_e),,106.82274150057346
+2028,,Energy and Water (XP_e),,114.80382320559404
+2029,,Energy and Water (XP_e),,111.48493594024286
+2030,,Energy and Water (XP_e),,101.42663097735038
+2031,,Energy and Water (XP_e),,98.09902366210004
+2032,,Energy and Water (XP_e),,102.35283031748132
+2025,,Energy and Water (XP_e),,1150.278429938482
+2026,,Energy and Water (XP_e),,1616.9596087992886
+2027,,Energy and Water (XP_e),,1641.7157751417144
+2028,,Energy and Water (XP_e),,3069.3706933224694
+2029,,Energy and Water (XP_e),,3752.410992120509
+2030,,Energy and Water (XP_e),,745.5786364912019
+2031,,Energy and Water (XP_e),,1248.9470421401638
+2024,,Energy and Water (XP_e),,9997.957
+2025,,Energy and Water (XP_e),,11681.58
+2026,,Energy and Water (XP_e),,12697.44
+2027,,Energy and Water (XP_e),,17221.39
+2028,,Energy and Water (XP_e),,17698.27
+2029,,Energy and Water (XP_e),,18169.69
+2030,,Energy and Water (XP_e),,18938.19
+2031,,Energy and Water (XP_e),,21546.92
+2032,,Energy and Water (XP_e),,24953.85
+2024,,Construction (XP_c),,34159.194306709374
+2025,,Construction (XP_c),,37956.33401285924
+2026,,Construction (XP_c),,42970.896127707216
+2027,,Construction (XP_c),,47069.925399269516
+2028,,Construction (XP_c),,49542.69923459059
+2029,,Construction (XP_c),,53161.45513661348
+2030,,Construction (XP_c),,55601.08553590519
+2031,,Construction (XP_c),,59731.32781661196
+2032,,Construction (XP_c),,59181.626747202594
+2024,,Construction (XP_c),,113.21139737349
+2025,,Construction (XP_c),,109.53908259064508
+2026,,Construction (XP_c),,105.25340504440112
+2027,,Construction (XP_c),,107.30431720098181
+2028,,Construction (XP_c),,104.58909635378188
+2029,,Construction (XP_c),,107.4283482793508
+2030,,Construction (XP_c),,99.07971061501082
+2026,,Construction (XP_c),,106.80320506933019
+2027,,Construction (XP_c),,102.37297438378044
+2028,,Construction (XP_c),,100.72096176497716
+2029,,Construction (XP_c),,105.09727443778827
+2030,,Construction (XP_c),,101.05226700848492
+2031,,Construction (XP_c),,102.8022471572735
+2032,,Construction (XP_c),,93.91441764456003
+2025,,Construction (XP_c),,3797.1397061498647
+2026,,Construction (XP_c),,5014.562114847977
+2027,,Construction (XP_c),,4099.0292715623
+2028,,Construction (XP_c),,2472.7738353210734
+2029,,Construction (XP_c),,3618.7559020228873
+2030,,Construction (XP_c),,2439.6303992917165
+2031,,Construction (XP_c),,4130.2422807067705
+2024,,Construction (XP_c),,31675.93
+2025,,Construction (XP_c),,37514.72
+2026,,Construction (XP_c),,41602.2
+2027,,Construction (XP_c),,44448.41
+2028,,Construction (XP_c),,47517.03
+2029,,Construction (XP_c),,48523.66
+2030,,Construction (XP_c),,51200.11
+2031,,Construction (XP_c),,54083.35
+2032,,Construction (XP_c),,56619.15
+2024,,Transport (XP_t),,19057.625774844215
+2025,,Transport (XP_t),,21176.07350182683
+2026,,Transport (XP_t),,23239.738288615616
+2027,,Transport (XP_t),,24685.35856479796
+2028,,Transport (XP_t),,23922.206712844894
+2029,,Transport (XP_t),,24763.195879534207
+2030,,Transport (XP_t),,27771.050133563058
+2031,,Transport (XP_t),,28480.44537089185
+2032,,Transport (XP_t),,26957.450705802603
+2024,,Transport (XP_t),,109.74526645183185
+2025,,Transport (XP_t),,106.22046710780089
+2026,,Transport (XP_t),,96.90848382878528
+2027,,Transport (XP_t),,103.51551667780609
+2028,,Transport (XP_t),,112.14647038557217
+2029,,Transport (XP_t),,102.55444152783926
+2030,,Transport (XP_t),,94.65248999706371
+2026,,Transport (XP_t),,104.5987964680127
+2027,,Transport (XP_t),,97.62686253330658
+2028,,Transport (XP_t),,88.56179987588294
+2029,,Transport (XP_t),,90.30781772054145
+2030,,Transport (XP_t),,103.03526773068332
+2031,,Transport (XP_t),,92.75069325118864
+2032,,Transport (XP_t),,84.33495197272103
+2025,,Transport (XP_t),,2118.4477269826166
+2026,,Transport (XP_t),,2063.664786788784
+2027,,Transport (XP_t),,1445.6202761823442
+2028,,Transport (XP_t),,-763.1518519530655
+2029,,Transport (XP_t),,840.9891666893127
+2030,,Transport (XP_t),,3007.854254028851
+2031,,Transport (XP_t),,709.3952373287939
+2024,,Transport (XP_t),,18362.16
+2025,,Transport (XP_t),,20607.32
+2026,,Transport (XP_t),,23608.86
+2027,,Transport (XP_t),,30558.13
+2028,,Transport (XP_t),,32386.13
+2029,,Transport (XP_t),,34846.37
+2030,,Transport (XP_t),,38071.02
+2031,,Transport (XP_t),,42912.17
+2032,,Transport (XP_t),,48185.32
+2024,,Trade (XP_tr),,33894.282922536164
+2025,,Trade (XP_tr),,37661.975050782894
+2026,,Trade (XP_tr),,37276.91308326434
+2027,,Trade (XP_tr),,42283.05771142062
+2028,,Trade (XP_tr),,47203.22340032926
+2029,,Trade (XP_tr),,48741.301645571744
+2030,,Trade (XP_tr),,52069.93018812396
+2031,,Trade (XP_tr),,55534.443611810726
+2032,,Trade (XP_tr),,55226.440174567935
+2024,,Trade (XP_tr),,98.9775842424638
+2025,,Trade (XP_tr),,113.42961155869907
+2026,,Trade (XP_tr),,111.63625800784911
+2027,,Trade (XP_tr),,103.25841782498217
+2028,,Trade (XP_tr),,106.82917449918907
+2029,,Trade (XP_tr),,106.65357800782485
+2030,,Trade (XP_tr),,99.44538305020978
+2026,,Trade (XP_tr),,97.00888591177034
+2027,,Trade (XP_tr),,108.5200557179627
+2028,,Trade (XP_tr),,105.81866524848324
+2029,,Trade (XP_tr),,98.38867057487856
+2030,,Trade (XP_tr),,100.83284676761266
+2031,,Trade (XP_tr),,99.70428878387739
+2032,,Trade (XP_tr),,92.02895372723904
+2025,,Trade (XP_tr),,3767.69212824673
+2026,,Trade (XP_tr),,-385.0619675185517
+2027,,Trade (XP_tr),,5006.144628156275
+2028,,Trade (XP_tr),,4920.165688908644
+2029,,Trade (XP_tr),,1538.0782452424828
+2030,,Trade (XP_tr),,3328.6285425522146
+2031,,Trade (XP_tr),,3464.513423686767
+2024,,Trade (XP_tr),,33468
+2025,,Trade (XP_tr),,35260.35
+2026,,Trade (XP_tr),,36089.58
+2027,,Trade (XP_tr),,40600.07
+2028,,Trade (XP_tr),,43589.01
+2029,,Trade (XP_tr),,44765.36
+2030,,Trade (XP_tr),,46938.64
+2031,,Trade (XP_tr),,51862.46
+2032,,Trade (XP_tr),,53615.28
+2024,,Financial services (XP_fs),,15006.71871643901
+2025,,Financial services (XP_fs),,16674.867179941284
+2026,,Financial services (XP_fs),,17400.371424896126
+2027,,Financial services (XP_fs),,20406.362762085966
+2028,,Financial services (XP_fs),,19035.321878368977
+2029,,Financial services (XP_fs),,22601.41837081574
+2030,,Financial services (XP_fs),,21569.294610640496
+2031,,Financial services (XP_fs),,23903.532106266903
+2032,,Financial services (XP_fs),,23971.414896315327
+2024,,Financial services (XP_fs),,104.35088470046449
+2025,,Financial services (XP_fs),,117.27544351661898
+2026,,Financial services (XP_fs),,93.28130691538858
+2027,,Financial services (XP_fs),,118.73410134713372
+2028,,Financial services (XP_fs),,95.43336730800938
+2029,,Financial services (XP_fs),,110.82203909660953
+2030,,Financial services (XP_fs),,100.28398644077636
+2026,,Financial services (XP_fs),,97.78757803772824
+2027,,Financial services (XP_fs),,107.44123943032216
+2028,,Financial services (XP_fs),,84.07417577762888
+2029,,Financial services (XP_fs),,104.92854743284664
+2030,,Financial services (XP_fs),,82.89420899583622
+2031,,Financial services (XP_fs),,92.38626710878448
+2032,,Financial services (XP_fs),,83.56024000597961
+2025,,Financial services (XP_fs),,1668.1484635022734
+2026,,Financial services (XP_fs),,725.5042449548419
+2027,,Financial services (XP_fs),,3005.99133718984
+2028,,Financial services (XP_fs),,-1371.040883716989
+2029,,Financial services (XP_fs),,3566.0964924467626
+2030,,Financial services (XP_fs),,-1032.1237601752437
+2031,,Financial services (XP_fs),,2334.2374956264066
+2024,,Financial services (XP_fs),,14788.22
+2025,,Financial services (XP_fs),,16646.49
+2026,,Financial services (XP_fs),,16846.14
+2027,,Financial services (XP_fs),,17825.59
+2028,,Financial services (XP_fs),,18695.29
+2029,,Financial services (XP_fs),,19512.59
+2030,,Financial services (XP_fs),,20852.84
+2031,,Financial services (XP_fs),,22107.3
+2032,,Financial services (XP_fs),,22849.4
+2024,,Public Services (XP_ps),,20128.00138670831
+2025,,Public Services (XP_ps),,22365.432181611395
+2026,,Public Services (XP_ps),,22757.07143090494
+2027,,Public Services (XP_ps),,24760.11234654293
+2028,,Public Services (XP_ps),,27371.14684078693
+2029,,Public Services (XP_ps),,27450.700303684636
+2030,,Public Services (XP_ps),,29116.061265782242
+2031,,Public Services (XP_ps),,30250.570536824962
+2032,,Public Services (XP_ps),,32176.379160420565
+2024,,Public Services (XP_ps),,101.75109180146111
+2025,,Public Services (XP_ps),,108.80183955883615
+2026,,Public Services (XP_ps),,110.54532571460062
+2027,,Public Services (XP_ps),,100.29064716710796
+2028,,Public Services (XP_ps),,106.06673397645186
+2029,,Public Services (XP_ps),,103.89650667611426
+2030,,Public Services (XP_ps),,106.36618942856386
+2026,,Public Services (XP_ps),,97.81887100589513
+2027,,Public Services (XP_ps),,105.59635655912727
+2028,,Public Services (XP_ps),,106.2904141459251
+2029,,Public Services (XP_ps),,95.45308482802372
+2030,,Public Services (XP_ps),,99.98928523083639
+2031,,Public Services (XP_ps),,97.00525346963163
+2032,,Public Services (XP_ps),,97.48912240933687
+2025,,Public Services (XP_ps),,2237.4307949030845
+2026,,Public Services (XP_ps),,391.6392492935447
+2027,,Public Services (XP_ps),,2003.04091563799
+2028,,Public Services (XP_ps),,2611.034494243999
+2029,,Public Services (XP_ps),,79.5534628977075
+2030,,Public Services (XP_ps),,1665.3609620976058
+2031,,Public Services (XP_ps),,1134.5092710427198
+2024,,Public Services (XP_ps),,19870.87
+2025,,Public Services (XP_ps),,20162.73
+2026,,Public Services (XP_ps),,22032.22
+2027,,Public Services (XP_ps),,24626.96
+2028,,Public Services (XP_ps),,25902.38
+2029,,Public Services (XP_ps),,29599.89
+2030,,Public Services (XP_ps),,33063.28
+2031,,Public Services (XP_ps),,36134.6
+2032,,Public Services (XP_ps),,40049.59
+2024,,Market Services (XP_ms),,3915.76884752583
+2025,,Market Services (XP_ms),,4351.046132977629
+2026,,Market Services (XP_ms),,5361.635200342243
+2027,,Market Services (XP_ms),,6581.190766618339
+2028,,Market Services (XP_ms),,6100.569386799191
+2029,,Market Services (XP_ms),,7428.642335659416
+2030,,Market Services (XP_ms),,8360.086261955259
+2031,,Market Services (XP_ms),,7568.375801028916
+2032,,Market Services (XP_ms),,8018.904098941113
+2024,,Market Services (XP_ms),,123.2263468710459
+2025,,Market Services (XP_ms),,122.74596313822785
+2026,,Market Services (XP_ms),,92.69704530892807
+2027,,Market Services (XP_ms),,121.7696556608961
+2028,,Market Services (XP_ms),,112.53854855583327
+2029,,Market Services (XP_ms),,90.52987689218918
+2030,,Market Services (XP_ms),,105.95277388116679
+2026,,Market Services (XP_ms),,122.96394181920371
+2027,,Market Services (XP_ms),,119.11278497104115
+2028,,Market Services (XP_ms),,89.99337436294219
+2029,,Market Services (XP_ms),,116.97968836155549
+2030,,Market Services (XP_ms),,108.62049855254445
+2031,,Market Services (XP_ms),,86.5177875310135
+2032,,Market Services (XP_ms),,99.83536207030863
+2025,,Market Services (XP_ms),,435.2772854517989
+2026,,Market Services (XP_ms),,1010.5890673646136
+2027,,Market Services (XP_ms),,1219.5555662760962
+2028,,Market Services (XP_ms),,-480.6213798191475
+2029,,Market Services (XP_ms),,1328.0729488602246
+2030,,Market Services (XP_ms),,931.4439262958431
+2031,,Market Services (XP_ms),,-791.7104609263433
+2024,,Market Services (XP_ms),,3864.399
+2025,,Market Services (XP_ms),,4185.875
+2026,,Market Services (XP_ms),,5190.858
+2027,,Market Services (XP_ms),,5748.874
+2028,,Market Services (XP_ms),,6696.385
+2029,,Market Services (XP_ms),,7088.98
+2030,,Market Services (XP_ms),,7144.986
+2031,,Market Services (XP_ms),,8204.751
+2032,,Market Services (XP_ms),,8746.123
+2024,,284532.8,,288024.37099999987
+2025,,284532.8,,316574.99099999986
+2026,,284532.8,,344097.29199999984
+2027,,284532.8,,375262.58321234817
+2028,,284532.8,,419496.6540984485
+2029,,284532.8,,474384.5542757947
+2030,,284532.8,,499305.5203396369
+2031,,284532.8,,525446.0082967998
+2032,,284532.8,,537884.7283486723
+2024,,284532.8,,108.69376981203168
+2025,,284532.8,,109.05711609388322
+2026,,284532.8,,111.78749837179205
+2027,,284532.8,,113.0842283582231
+2028,,284532.8,,105.25332577530628
+2029,,284532.8,,105.23536930642821
+2030,,284532.8,,102.36726892115743
+2026,,284532.8,,104.53925680794005
+2027,,284532.8,,105.68778782348109
+2028,,284532.8,,109.13871416591057
+2029,,284532.8,,110.37275695268201
+2030,,284532.8,,102.97158428876978
+2031,,284532.8,,104.70174831550172
+2032,,284532.8,,101.98766835521963
+2025,,284532.8,,28550.619999999995
+2026,,284532.8,,27522.300999999978
+2027,,284532.8,,31165.291212348326
+2028,,284532.8,,44234.07088610035
+2029,,284532.8,,54887.90017734619
+2030,,284532.8,,24920.966063842177
+2031,,284532.8,,26140.487957162957
+2024,,284532.8,,279697.6959999999
+2025,,284532.8,,310316.31499999994
+2026,,284532.8,,333137.2080000001
+2027,,284532.8,,368339.9440000001
+2028,,284532.8,,390939.195
+2029,,284532.8,,414744.52999999997
+2030,,284532.8,,434430.68600000005
+2031,,284532.8,,464502.61099999986
+2032,,284532.8,,493355.16299999994
+2024,,Gross Output (in real terms),,288024.371
+2025,,Gross Output (in real terms),,320041.191
+2026,,Gross Output (in real terms),,344097.29199999996
+2027,,Gross Output (in real terms),,381368.511
+2028,,Gross Output (in real terms),,403984.94700000004
+2029,,Gross Output (in real terms),,429911.71
+2030,,Gross Output (in real terms),,453180.71599999996
+2031,,Gross Output (in real terms),,484260.01599999995
+2032,,Gross Output (in real terms),,493355.16299999994
+2026,,Gross Output (in real terms),,0.923
+2027,,Gross Output (in real terms),,0.934
+2028,,Gross Output (in real terms),,0.9011
+2029,,Gross Output (in real terms),,0.90001
+2030,,Gross Output (in real terms),,0.849
+2031,,Gross Output (in real terms),,0.853
+2032,,Gross Output (in real terms),,0.837
+2025,,Gross Output (in real terms),,32016.820000000007
+2026,,Gross Output (in real terms),,24056.100999999966
+2027,,Gross Output (in real terms),,37271.21900000004
+2028,,Gross Output (in real terms),,22616.436000000045
+2029,,Gross Output (in real terms),,25926.762999999977
+2030,,Gross Output (in real terms),,23269.005999999936
+2031,,Gross Output (in real terms),,31079.29999999999
+2024,,Gross Output (in real terms),,279697.6959999999
+2025,,Gross Output (in real terms),,310316.31499999994
+2026,,Gross Output (in real terms),,333137.2080000001
+2027,,Gross Output (in real terms),,368339.9440000001
+2028,,Gross Output (in real terms),,390939.195
+2029,,Gross Output (in real terms),,414744.52999999997
+2030,,Gross Output (in real terms),,434430.68600000005
+2031,,Gross Output (in real terms),,464502.61099999986
+2032,,Gross Output (in real terms),,493355.16299999994
+2024,,Source: xs_grp,,80392.72
+2025,,Source: xs_grp,,87435.34
+2026,,Source: xs_grp,,94346.15
+2027,,Source: xs_grp,,104901.35
+2028,,Source: xs_grp,,112460.17
+2029,,Source: xs_grp,,122122.67
+2030,,Source: xs_grp,,126202.10999999991
+2031,,Source: xs_grp,,132661.74
+2032,,Source: xs_grp,,138277.18000000002
+2026,,Source: xs_grp,,118.02617891216681
+2027,,Source: xs_grp,,112.37002379458517
+2028,,Source: xs_grp,,139.24680945511042
+2029,,Source: xs_grp,,139.13745402828857
+2030,,Source: xs_grp,,119.97633228164398
+2031,,Source: xs_grp,,120.03603946404067
+2032,,Source: xs_grp,,120.08716771193215
+2024,,Source: xs_grp,,80392.72
+2025,,Source: xs_grp,,87435.34
+2026,,Source: xs_grp,,94346.15
+2027,,Source: xs_grp,,104901.35
+2028,,Source: xs_grp,,112460.17
+2029,,Source: xs_grp,,122122.67
+2030,,Source: xs_grp,,126202.10999999991
+2031,,Source: xs_grp,,132661.74
+2032,,Source: xs_grp,,138277.18000000002
+2024,,Agriculture (xs_a),,78126.15
+2025,,Agriculture (xs_a),,83859.11
+2026,,Agriculture (xs_a),,88077.45
+2027,,Agriculture (xs_a),,91458.96
+2028,,Agriculture (xs_a),,94104.42
+2029,,Agriculture (xs_a),,97266.12
+2030,,Agriculture (xs_a),,98776.62
+2031,,Agriculture (xs_a),,101063.3
+2032,,Agriculture (xs_a),,105444.6
+2023,,Agriculture (xs_a),,105.74350608798035
+2024,,Agriculture (xs_a),,104.04462103056429
+2025,,Agriculture (xs_a),,96.11531464640724
+2026,,Agriculture (xs_a),,89.97375554038751
+2027,,Agriculture (xs_a),,84.7886604346647
+2028,,Agriculture (xs_a),,78.7474566283452
+2024,,Agriculture (xs_a),,78126.15
+2025,,Agriculture (xs_a),,83859.11
+2026,,Agriculture (xs_a),,88077.45
+2027,,Agriculture (xs_a),,91458.96
+2028,,Agriculture (xs_a),,94104.42
+2029,,Agriculture (xs_a),,97266.12
+2030,,Agriculture (xs_a),,98776.62
+2031,,Agriculture (xs_a),,101063.3
+2032,,Agriculture (xs_a),,105444.6
+2025,,Agriculture (xs_a),,107.52659535592002
+2026,,Agriculture (xs_a),,101.19775979726772
+2027,,Agriculture (xs_a),,100.48752274893744
+2028,,Agriculture (xs_a),,98.54613061765102
+2029,,Agriculture (xs_a),,99.81140054413595
+2030,,Agriculture (xs_a),,96.14756108956688
+2031,,Agriculture (xs_a),,97.3952019058229
+2032,,Agriculture (xs_a),,97.4292873853796
+2024,,Mining (xs_mi),,12927.48
+2025,,Mining (xs_mi),,16091.15
+2026,,Mining (xs_mi),,17127
+2027,,Mining (xs_mi),,18168.2
+2028,,Mining (xs_mi),,18856.14
+2029,,Mining (xs_mi),,19578.12
+2030,,Mining (xs_mi),,20410.35
+2031,,Mining (xs_mi),,21464.13
+2032,,Mining (xs_mi),,22456.32
+2023,,Mining (xs_mi),,19.490600252377522
+2024,,Mining (xs_mi),,18.66993421436881
+2025,,Mining (xs_mi),,18.179977603634292
+2026,,Mining (xs_mi),,17.977814161173416
+2027,,Mining (xs_mi),,14.876365365110525
+2028,,Mining (xs_mi),,12.384683575879137
+2024,,Mining (xs_mi),,12927.48
+2025,,Mining (xs_mi),,16091.15
+2026,,Mining (xs_mi),,17127
+2027,,Mining (xs_mi),,18168.2
+2028,,Mining (xs_mi),,18856.14
+2029,,Mining (xs_mi),,19578.12
+2030,,Mining (xs_mi),,20410.35
+2031,,Mining (xs_mi),,21464.13
+2032,,Mining (xs_mi),,22456.32
+2025,,Mining (xs_mi),,127.05572365262651
+2026,,Mining (xs_mi),,106.46689903267857
+2027,,Mining (xs_mi),,105.15568577039525
+2028,,Mining (xs_mi),,101.3959040789824
+2029,,Mining (xs_mi),,99.65671632674253
+2030,,Mining (xs_mi),,98.73222451351872
+2031,,Mining (xs_mi),,98.37672962604786
+2032,,Mining (xs_mi),,96.57710102519242
+2024,,Manufacturing (xs_m),,57380.35
+2025,,Manufacturing (xs_m),,59720.98
+2026,,Manufacturing (xs_m),,64755.53
+2027,,Manufacturing (xs_m),,70121.75
+2028,,Manufacturing (xs_m),,76784.7
+2029,,Manufacturing (xs_m),,85483.19
+2030,,Manufacturing (xs_m),,88254.9299999999
+2031,,Manufacturing (xs_m),,90698.45
+2032,,Manufacturing (xs_m),,92503.6
+2023,,Manufacturing (xs_m),,441.0332162670351
+2024,,Manufacturing (xs_m),,430.3725812445453
+2025,,Manufacturing (xs_m),,262.09298177127494
+2026,,Manufacturing (xs_m),,257.76243042434436
+2027,,Manufacturing (xs_m),,209.80424320878436
+2028,,Manufacturing (xs_m),,183.68330082442557
+2024,,Manufacturing (xs_m),,57380.35
+2025,,Manufacturing (xs_m),,59720.98
+2026,,Manufacturing (xs_m),,64755.53
+2027,,Manufacturing (xs_m),,70121.75
+2028,,Manufacturing (xs_m),,76784.7
+2029,,Manufacturing (xs_m),,85483.19
+2030,,Manufacturing (xs_m),,88254.9299999999
+2031,,Manufacturing (xs_m),,90698.45
+2032,,Manufacturing (xs_m),,92503.6
+2025,,Manufacturing (xs_m),,104.74362261765664
+2026,,Manufacturing (xs_m),,105.92118370349965
+2027,,Manufacturing (xs_m),,105.0084579716083
+2028,,Manufacturing (xs_m),,104.86674557822792
+2029,,Manufacturing (xs_m),,105.06882869958332
+2030,,Manufacturing (xs_m),,99.351319964751
+2031,,Manufacturing (xs_m),,97.90724279856714
+2032,,Manufacturing (xs_m),,96.18554415607706
+2024,,Energy and Water (xs_e),,10084.89
+2025,,Energy and Water (xs_e),,11623.21
+2026,,Energy and Water (xs_e),,12463.62
+2027,,Energy and Water (xs_e),,16611.4
+2028,,Energy and Water (xs_e),,16819.33
+2029,,Energy and Water (xs_e),,17061.36
+2030,,Energy and Water (xs_e),,17536.83
+2031,,Energy and Water (xs_e),,20499.16
+2032,,Energy and Water (xs_e),,23317.26
+2023,,Energy and Water (xs_e),,19.811360283528447
+2024,,Energy and Water (xs_e),,19.11858604554442
+2025,,Energy and Water (xs_e),,27.65547423371033
+2026,,Energy and Water (xs_e),,27.874368072696154
+2027,,Energy and Water (xs_e),,23.360524353447857
+2028,,Energy and Water (xs_e),,18.425462781451987
+2024,,Energy and Water (xs_e),,10084.89
+2025,,Energy and Water (xs_e),,11623.21
+2026,,Energy and Water (xs_e),,12463.62
+2027,,Energy and Water (xs_e),,16611.4
+2028,,Energy and Water (xs_e),,16819.33
+2029,,Energy and Water (xs_e),,17061.36
+2030,,Energy and Water (xs_e),,17536.83
+2031,,Energy and Water (xs_e),,20499.16
+2032,,Energy and Water (xs_e),,23317.26
+2025,,Energy and Water (xs_e),,116.25585107037367
+2026,,Energy and Water (xs_e),,106.69464233434176
+2027,,Energy and Water (xs_e),,130.82479617938733
+2028,,Energy and Water (xs_e),,97.66534524797362
+2029,,Energy and Water (xs_e),,96.4012866794325
+2030,,Energy and Water (xs_e),,96.51694662924906
+2031,,Energy and Water (xs_e),,108.24244555577908
+2032,,Energy and Water (xs_e),,108.21620909160103
+2024,,Construction (xs_c),,31675.93
+2025,,Construction (xs_c),,35391.24
+2026,,Construction (xs_c),,39247.36
+2027,,Construction (xs_c),,41540.57
+2028,,Construction (xs_c),,45470.84
+2029,,Construction (xs_c),,47525.62
+2030,,Construction (xs_c),,49468.7
+2031,,Construction (xs_c),,51754.4
+2032,,Construction (xs_c),,53667.44
+2023,,Construction (xs_c),,342.0123280836893
+2024,,Construction (xs_c),,341.3341880803397
+2025,,Construction (xs_c),,316.7365405325552
+2026,,Construction (xs_c),,308.132809092467
+2027,,Construction (xs_c),,266.60443963172776
+2028,,Construction (xs_c),,229.24805387426716
+2024,,Construction (xs_c),,31675.93
+2025,,Construction (xs_c),,35391.24
+2026,,Construction (xs_c),,39247.36
+2027,,Construction (xs_c),,41540.57
+2028,,Construction (xs_c),,45470.84
+2029,,Construction (xs_c),,47525.62
+2030,,Construction (xs_c),,49468.7
+2031,,Construction (xs_c),,51754.4
+2032,,Construction (xs_c),,53667.44
+2025,,Construction (xs_c),,111.72912681648177
+2026,,Construction (xs_c),,104.6185603944265
+2027,,Construction (xs_c),,99.85185879592908
+2028,,Construction (xs_c),,102.30026225909992
+2029,,Construction (xs_c),,100.01807772918467
+2030,,Construction (xs_c),,101.94758598176641
+2031,,Construction (xs_c),,101.08259533036158
+2032,,Construction (xs_c),,99.23098328783259
+2024,,Transport (xs_t),,18541.68
+2025,,Transport (xs_t),,20394.23
+2026,,Transport (xs_t),,22857.68
+2027,,Transport (xs_t),,28504.31
+2028,,Transport (xs_t),,29595.96
+2029,,Transport (xs_t),,30868.91
+2030,,Transport (xs_t),,35625.48
+2031,,Transport (xs_t),,39584.12
+2032,,Transport (xs_t),,43781.2
+2023,,Transport (xs_t),,59.70348661295641
+2024,,Transport (xs_t),,60.22098970953317
+2025,,Transport (xs_t),,66.33399013901574
+2026,,Transport (xs_t),,62.876581487973425
+2027,,Transport (xs_t),,62.307687059665504
+2028,,Transport (xs_t),,67.01374126883887
+2024,,Transport (xs_t),,18541.68
+2025,,Transport (xs_t),,20394.23
+2026,,Transport (xs_t),,22857.68
+2027,,Transport (xs_t),,28504.31
+2028,,Transport (xs_t),,29595.96
+2029,,Transport (xs_t),,30868.91
+2030,,Transport (xs_t),,35625.48
+2031,,Transport (xs_t),,39584.12
+2032,,Transport (xs_t),,43781.2
+2025,,Transport (xs_t),,111.06661743498587
+2026,,Transport (xs_t),,110.92019728911862
+2027,,Transport (xs_t),,120.73564754926753
+2028,,Transport (xs_t),,96.8513452884715
+2029,,Transport (xs_t),,95.3152167301249
+2030,,Transport (xs_t),,102.235842643007
+2031,,Transport (xs_t),,103.97441413442563
+2032,,Transport (xs_t),,102.02513645895792
+2024,,Trade (xs_tr),,33474.18
+2025,,Trade (xs_tr),,34917.49
+2026,,Trade (xs_tr),,35383.85
+2027,,Trade (xs_tr),,38854.74
+2028,,Trade (xs_tr),,41317.48
+2029,,Trade (xs_tr),,42670.51
+2030,,Trade (xs_tr),,44320.48
+2031,,Trade (xs_tr),,48504.11
+2032,,Trade (xs_tr),,49636.16
+2023,,Trade (xs_tr),,183.22056699261339
+2024,,Trade (xs_tr),,167.09353599923745
+2025,,Trade (xs_tr),,167.19095334663757
+2026,,Trade (xs_tr),,167.3764628192192
+2027,,Trade (xs_tr),,178.3719642263952
+2028,,Trade (xs_tr),,178.97722174313176
+2024,,Trade (xs_tr),,33474.18
+2025,,Trade (xs_tr),,34917.49
+2026,,Trade (xs_tr),,35383.85
+2027,,Trade (xs_tr),,38854.74
+2028,,Trade (xs_tr),,41317.48
+2029,,Trade (xs_tr),,42670.51
+2030,,Trade (xs_tr),,44320.48
+2031,,Trade (xs_tr),,48504.11
+2032,,Trade (xs_tr),,49636.16
+2025,,Trade (xs_tr),,104.33097286960677
+2026,,Trade (xs_tr),,100.35025177004766
+2027,,Trade (xs_tr),,107.6619345528543
+2028,,Trade (xs_tr),,101.76701665785306
+2029,,Trade (xs_tr),,97.89281747853416
+2030,,Trade (xs_tr),,99.00619586215771
+2031,,Trade (xs_tr),,103.33514136753857
+2032,,Trade (xs_tr),,95.70729965373799
+2024,,Financial services (xs_fs),,14802.46
+2025,,Financial services (xs_fs),,15566.31
+2026,,Financial services (xs_fs),,15817.07
+2027,,Financial services (xs_fs),,16357.98
+2028,,Financial services (xs_fs),,16849.97
+2029,,Financial services (xs_fs),,17272.59
+2030,,Financial services (xs_fs),,18141.53
+2031,,Financial services (xs_fs),,18459.55
+2032,,Financial services (xs_fs),,19071.89
+2023,,Financial services (xs_fs),,45.92606380130859
+2024,,Financial services (xs_fs),,41.997452280907936
+2025,,Financial services (xs_fs),,43.88233533034686
+2026,,Financial services (xs_fs),,39.85040560453327
+2027,,Financial services (xs_fs),,36.59197138617342
+2028,,Financial services (xs_fs),,37.220035960299796
+2024,,Financial services (xs_fs),,14802.46
+2025,,Financial services (xs_fs),,15566.31
+2026,,Financial services (xs_fs),,15817.07
+2027,,Financial services (xs_fs),,16357.98
+2028,,Financial services (xs_fs),,16849.97
+2029,,Financial services (xs_fs),,17272.59
+2030,,Financial services (xs_fs),,18141.53
+2031,,Financial services (xs_fs),,18459.55
+2032,,Financial services (xs_fs),,19071.89
+2025,,Financial services (xs_fs),,105.26155277646667
+2026,,Financial services (xs_fs),,95.01744812269732
+2027,,Financial services (xs_fs),,97.10224419362537
+2028,,Financial services (xs_fs),,94.52685717555492
+2029,,Financial services (xs_fs),,92.39006188189646
+2030,,Financial services (xs_fs),,92.97345969960932
+2031,,Financial services (xs_fs),,88.52295418753512
+2032,,Financial services (xs_fs),,86.2696484871513
+2024,,Public Services,,19875.96
+2025,,Public Services,,19966.73
+2026,,Public Services,,21189.39
+2027,,Public Services,,23911.8
+2028,,Public Services,,24905.37
+2029,,Public Services,,28187.01
+2030,,Public Services,,31186.05
+2031,,Public Services,,33758.64
+2032,,Public Services,,36729.25
+2023,,Public Services,,133.0519374507072
+2024,,Public Services,,127.07381576921568
+2025,,Public Services,,137.4212045024938
+2026,,Public Services,,122.04708056191656
+2027,,Public Services,,148.0774014755729
+2028,,Public Services,,137.98271191806808
+2024,,Public Services,,19875.96
+2025,,Public Services,,19966.73
+2026,,Public Services,,21189.39
+2027,,Public Services,,23911.8
+2028,,Public Services,,24905.37
+2029,,Public Services,,28187.01
+2030,,Public Services,,31186.05
+2031,,Public Services,,33758.64
+2032,,Public Services,,36729.25
+2025,,Public Services,,100.48241471057887
+2026,,Public Services,,105.09186999974706
+2027,,Public Services,,108.5310513420799
+2028,,Public Services,,101.13050900314127
+2029,,Public Services,,108.82015475025845
+2030,,Public Services,,105.35866856261966
+2031,,Public Services,,102.10311862585925
+2032,,Public Services,,101.64565264317302
+2024,,Market Services,,3865.793
+2025,,Market Services,,4145.689
+2026,,Market Services,,5183.378
+2027,,Market Services,,5582.13
+2028,,Market Services,,6501.067
+2029,,Market Services,,6815.188
+2030,,Market Services,,6901.598
+2031,,Market Services,,7847.808
+2032,,Market Services,,8247.754
+2023,,Market Services,,20.596625170831118
+2024,,Market Services,,23.17584546504634
+2025,,Market Services,,24.529210698083332
+2026,,Market Services,,26.25620962058234
+2027,,Market Services,,24.899168601311196
+2028,,Market Services,,25.14179209873788
+2024,,Market Services,,3865.793
+2025,,Market Services,,4145.689
+2026,,Market Services,,5183.378
+2027,,Market Services,,5582.13
+2028,,Market Services,,6501.067
+2029,,Market Services,,6815.188
+2030,,Market Services,,6901.598
+2031,,Market Services,,7847.808
+2032,,Market Services,,8247.754
+2025,,Market Services,,107.27901026783209
+2026,,Market Services,,123.83021471018603
+2027,,Market Services,,107.53771341847533
+2028,,Market Services,,113.08417961499939
+2029,,Market Services,,101.77413634371382
+2030,,Market Services,,97.35671422404917
+2031,,Market Services,,109.83657630679753
+2032,,Market Services,,100.5241231574243
+2024,,Value Added (in real terms),,134042.904
+2025,,Value Added (in real terms),,144285.668
+2026,,Value Added (in real terms),,154720.20400000003
+2027,,Value Added (in real terms),,168166.018
+2028,,Value Added (in real terms),,178343.86200000002
+2029,,Value Added (in real terms),,188814.321
+2030,,Value Added (in real terms),,196716.14599999998
+2031,,Value Added (in real terms),,207050.634
+2032,,Value Added (in real terms),,216594.557
+2023,,Value Added (in real terms),,104.7397961334321
+2024,,Value Added (in real terms),,101.74598030707995
+2025,,Value Added (in real terms),,102.03853624050029
+2026,,Value Added (in real terms),,98.91880875049769
+2027,,Value Added (in real terms),,93.61901082239228
+2028,,Value Added (in real terms),,86.55900878283545
+2025,,Value Added (in real terms),,20921.266000000003
+2026,,Value Added (in real terms),,20426.189000000013
+2027,,Value Added (in real terms),,29009.511999999988
+2028,,Value Added (in real terms),,20093.436999999976
+2029,,Value Added (in real terms),,21523.341000000073
+2030,,Value Added (in real terms),,17893.949999999895
+2031,,Value Added (in real terms),,23011.100000000093
+2032,,Value Added (in real terms),,21221.8060000001
+2025,,Source: va_grp,,109.84937690425194
+2026,,Source: va_grp,,106.19496124909737
+2027,,Source: va_grp,,100.91456595480304
+2028,,Source: va_grp,,94.09578306155318
+2029,,Source: va_grp,,87.5166754695206
+2030,,Source: va_grp,,79.44992009536296
+2031,,Source: va_grp,,74.5314858305259
+2032,,Source: va_grp,,68.88111860135496
+2024,,Agriculture (va_a),,35764.63
+2025,,Agriculture (va_a),,37198.76
+2026,,Agriculture (va_a),,38722.26
+2027,,Agriculture (va_a),,39698.61
+2028,,Agriculture (va_a),,42643.57
+2029,,Agriculture (va_a),,47509.86
+2030,,Agriculture (va_a),,49333.46
+2031,,Agriculture (va_a),,53956.4
+2032,,Agriculture (va_a),,55435.45
+2023,,Agriculture (va_a),,94.1370407692771
+2024,,Agriculture (va_a),,87.6603324152023
+2025,,Agriculture (va_a),,87.12865050552847
+2026,,Agriculture (va_a),,89.6734259572741
+2027,,Agriculture (va_a),,99.063863539595
+2028,,Agriculture (va_a),,96.67146626200616
+2029,,Agriculture (va_a),,105.14963581032204
+2030,,Agriculture (va_a),,103.30227302288677
+2024,,Mining (va_mi),,6297.357
+2025,,Mining (va_mi),,6551.141
+2026,,Mining (va_mi),,6869.049
+2027,,Mining (va_mi),,7166.033
+2028,,Mining (va_mi),,10614.05
+2029,,Mining (va_mi),,11428.92
+2030,,Mining (va_mi),,12523.64
+2031,,Mining (va_mi),,13479.83
+2032,,Mining (va_mi),,13979.64
+2023,,Mining (va_mi),,86.07052559830275
+2024,,Mining (va_mi),,72.17668903963448
+2025,,Mining (va_mi),,70.34674522638767
+2026,,Mining (va_mi),,97.08614868727594
+2027,,Mining (va_mi),,98.88867353790138
+2028,,Mining (va_mi),,101.79983775286085
+2029,,Mining (va_mi),,103.06452624126273
+2030,,Mining (va_mi),,100.12913983415952
+2024,,Manufacturing (va_m),,18999.43
+2025,,Manufacturing (va_m),,20377.21
+2026,,Manufacturing (va_m),,20766.31
+2027,,Manufacturing (va_m),,24176.2
+2028,,Manufacturing (va_m),,25274.54
+2029,,Manufacturing (va_m),,26369.82
+2030,,Manufacturing (va_m),,26895.6
+2031,,Manufacturing (va_m),,28112.41
+2032,,Manufacturing (va_m),,28896.13
+2023,,Manufacturing (va_m),,77.4878114909852
+2024,,Manufacturing (va_m),,74.45651784190471
+2025,,Manufacturing (va_m),,80.03326305321593
+2026,,Manufacturing (va_m),,77.0009334724199
+2027,,Manufacturing (va_m),,72.29728451519775
+2028,,Manufacturing (va_m),,70.28778540790702
+2029,,Manufacturing (va_m),,69.4471899520433
+2030,,Manufacturing (va_m),,69.44115215656872
+2024,,Energy and Water (va_e),,4935.905
+2025,,Energy and Water (va_e),,5526.138
+2026,,Energy and Water (va_e),,7290.392
+2027,,Energy and Water (va_e),,10097.46
+2028,,Energy and Water (va_e),,13952.93
+2029,,Energy and Water (va_e),,15187.98
+2030,,Energy and Water (va_e),,16244.29
+2031,,Energy and Water (va_e),,18521.52
+2032,,Energy and Water (va_e),,20360.2
+2023,,Energy and Water (va_e),,86.34570387725653
+2024,,Energy and Water (va_e),,99.02103479431082
+2025,,Energy and Water (va_e),,125.88688424893573
+2026,,Energy and Water (va_e),,128.327703122169
+2027,,Energy and Water (va_e),,135.68389220674223
+2028,,Energy and Water (va_e),,140.7438566455318
+2029,,Energy and Water (va_e),,153.0652267154584
+2030,,Energy and Water (va_e),,151.96186361929898
+2024,,Construction (va_c),,17239.47
+2025,,Construction (va_c),,18199.37
+2026,,Construction (va_c),,18580.7
+2027,,Construction (va_c),,19011.36
+2028,,Construction (va_c),,19589.96
+2029,,Construction (va_c),,19784.71
+2030,,Construction (va_c),,20534.69
+2031,,Construction (va_c),,20817.97
+2032,,Construction (va_c),,21286.66
+2023,,Construction (va_c),,96.70007539678954
+2024,,Construction (va_c),,82.20806617455769
+2025,,Construction (va_c),,76.65385699373064
+2026,,Construction (va_c),,74.67811911393983
+2027,,Construction (va_c),,72.43792617630518
+2028,,Construction (va_c),,74.88102179586618
+2029,,Construction (va_c),,71.31178173863569
+2030,,Construction (va_c),,69.47429504674014
+2024,,Transport (va_t),,8324.458
+2025,,Transport (va_t),,8552.57
+2026,,Transport (va_t),,9348.06
+2027,,Transport (va_t),,9987.864
+2028,,Transport (va_t),,10652.15
+2029,,Transport (va_t),,11652.76
+2030,,Transport (va_t),,12210.75
+2031,,Transport (va_t),,12591.75
+2032,,Transport (va_t),,13469.96
+2023,,Transport (va_t),,88.37676081698415
+2024,,Transport (va_t),,87.61265483009927
+2025,,Transport (va_t),,81.18571118529664
+2026,,Transport (va_t),,65.76732819978366
+2027,,Transport (va_t),,67.69908985172472
+2028,,Transport (va_t),,64.46460445396131
+2029,,Transport (va_t),,64.03270655432921
+2030,,Transport (va_t),,60.37882333112794
+2024,,Trade (va_tr),,19936.82
+2025,,Trade (va_tr),,20925.47
+2026,,Trade (va_tr),,22628.18
+2027,,Trade (va_tr),,23747.71
+2028,,Trade (va_tr),,28171.13
+2029,,Trade (va_tr),,29860.61
+2030,,Trade (va_tr),,32080.82
+2031,,Trade (va_tr),,33636.95
+2032,,Trade (va_tr),,35765.16
+2023,,Trade (va_tr),,95.27496853833951
+2024,,Trade (va_tr),,99.37258053537276
+2025,,Trade (va_tr),,102.27811476581867
+2026,,Trade (va_tr),,107.53480712838996
+2027,,Trade (va_tr),,106.53697678069388
+2028,,Trade (va_tr),,112.36399680569372
+2029,,Trade (va_tr),,111.72304918651336
+2030,,Trade (va_tr),,108.24524543247362
+2024,,Financial services (va_fs),,6904.117
+2025,,Financial services (va_fs),,7521.144
+2026,,Financial services (va_fs),,7809.649
+2027,,Financial services (va_fs),,8439.147
+2028,,Financial services (va_fs),,8924.058
+2029,,Financial services (va_fs),,9557.043
+2030,,Financial services (va_fs),,12432.1
+2031,,Financial services (va_fs),,13798.77
+2032,,Financial services (va_fs),,14754.18
+2023,,Financial services (va_fs),,67.39110644383196
+2024,,Financial services (va_fs),,61.17207357584464
+2025,,Financial services (va_fs),,66.763079449766
+2026,,Financial services (va_fs),,66.24801420566743
+2027,,Financial services (va_fs),,67.17695005226099
+2028,,Financial services (va_fs),,83.01038422708554
+2029,,Financial services (va_fs),,85.66876015079046
+2030,,Financial services (va_fs),,85.44712090035172
+2024,,Public Services (va_ps),,15652.7
+2025,,Public Services (va_ps),,17240.79
+2026,,Public Services (va_ps),,18754.97
+2027,,Public Services (va_ps),,20866.66
+2028,,Public Services (va_ps),,21746.25
+2029,,Public Services (va_ps),,24359.04
+2030,,Public Services (va_ps),,26856.2
+2031,,Public Services (va_ps),,28706.85
+2032,,Public Services (va_ps),,31394.18
+2023,,Public Services (va_ps),,101.28979951531174
+2024,,Public Services (va_ps),,109.33541103009804
+2025,,Public Services (va_ps),,111.00456324655468
+2026,,Public Services (va_ps),,104.19651353446649
+2027,,Public Services (va_ps),,111.16164388812757
+2028,,Public Services (va_ps),,107.12899541785224
+2029,,Public Services (va_ps),,102.40399330216523
+2030,,Public Services (va_ps),,102.75042531506699
+2024,,Market Services (va_ms),,1223.318
+2025,,Market Services (va_ms),,1299.781
+2026,,Market Services (va_ms),,1423.178
+2027,,Market Services (va_ms),,1706.571
+2028,,Market Services (va_ms),,1836.584
+2029,,Market Services (va_ms),,2172.833
+2030,,Market Services (va_ms),,2171.223
+2031,,Market Services (va_ms),,2342.437
+2032,,Market Services (va_ms),,2565.305
+2023,,Market Services (va_ms),,185.01736039938598
+2024,,Market Services (va_ms),,213.1908004770203
+2025,,Market Services (va_ms),,241.3822416256647
+2026,,Market Services (va_ms),,221.74886836579824
+2027,,Market Services (va_ms),,253.8797335471711
+2028,,Market Services (va_ms),,232.29519493620668
+2029,,Market Services (va_ms),,262.19150534879464
+2030,,Market Services (va_ms),,262.06569435678745
+2025,,Labor demand,,32454.488999999998
+2026,,Labor demand,,34925.751000000004
+2027,,Labor demand,,41439.693
+2028,,Labor demand,,49841.52
+2029,,Labor demand,,52986.72
+2030,,Labor demand,,55663.53
+2031,,Labor demand,,60113.759999999995
+2032,,Labor demand,,63235.97
+2023,,Labor demand,,90.08784348517452
+2024,,Labor demand,,86.68308308715906
+2025,,Labor demand,,88.44210088235526
+2026,,Labor demand,,89.04061839191715
+2027,,Labor demand,,91.30280577250664
+2028,,Labor demand,,92.24832992425986
+2029,,Labor demand,,93.77226759183384
+2030,,Labor demand,,92.41798055248185
+2024,,Source: ld_grp,,146711.96899999995
+2025,,Source: ld_grp,,157390.47099999996
+2026,,Source: ld_grp,,167382.12399999995
+2027,,Source: ld_grp,,182945.82199999996
+2028,,Source: ld_grp,,192861.41499999992
+2029,,Source: ld_grp,,203914.29700000002
+2030,,Source: ld_grp,,213906.42199999993
+2031,,Source: ld_grp,,226583.034
+2032,,Source: ld_grp,,238260.9170000001
+2022,,Agriculture (ld_a),,550.6608
+2023,,Agriculture (ld_a),,615.6207
+2024,,Agriculture (ld_a),,634.7485
+2025,,Agriculture (ld_a),,661.9926
+2026,,Agriculture (ld_a),,666.7493
+2027,,Agriculture (ld_a),,710.0737
+2028,,Agriculture (ld_a),,713.6502
+2029,,Agriculture (ld_a),,746.5018
+2030,,Agriculture (ld_a),,798.028
+2022,,Mining (ld_mi),,721.1644
+2023,,Mining (ld_mi),,900.0107
+2024,,Mining (ld_mi),,962.2185
+2025,,Mining (ld_mi),,1031.655
+2026,,Mining (ld_mi),,1090.126
+2027,,Mining (ld_mi),,1164.124
+2028,,Mining (ld_mi),,1239.61
+2029,,Mining (ld_mi),,1317.248
+2030,,Mining (ld_mi),,1371.088
+2022,,Manufacturing (ld_m),,2326.538
+2023,,Manufacturing (ld_m),,2464.22
+2024,,Manufacturing (ld_m),,2671.299
+2025,,Manufacturing (ld_m),,2903.366
+2026,,Manufacturing (ld_m),,3238.838
+2027,,Manufacturing (ld_m),,3363.436
+2028,,Manufacturing (ld_m),,3569.997
+2029,,Manufacturing (ld_m),,3654.872
+2030,,Manufacturing (ld_m),,3747.139
+2022,,Energy and Water (ld_e),,942.9877
+2023,,Energy and Water (ld_e),,1080.222
+2024,,Energy and Water (ld_e),,1178.191
+2025,,Energy and Water (ld_e),,1597.638
+2026,,Energy and Water (ld_e),,1646.952
+2027,,Energy and Water (ld_e),,1700.982
+2028,,Energy and Water (ld_e),,1786.702
+2029,,Energy and Water (ld_e),,1965.6
+2030,,Energy and Water (ld_e),,2299.357
+2022,,Construction (ld_c),,1983.085
+2023,,Construction (ld_c),,2386.468
+2024,,Construction (ld_c),,2615.454
+2025,,Construction (ld_c),,2771.833
+2026,,Construction (ld_c),,2866.116
+2027,,Construction (ld_c),,2870.582
+2028,,Construction (ld_c),,3059.453
+2029,,Construction (ld_c),,3207.919
+2030,,Construction (ld_c),,3359.618
+2022,,Transport (ld_t),,1721.596
+2023,,Transport (ld_t),,1895.435
+2024,,Transport (ld_t),,2187.063
+2025,,Transport (ld_t),,2887.324
+2026,,Transport (ld_t),,3073.729
+2027,,Transport (ld_t),,3395.375
+2028,,Transport (ld_t),,3495.159
+2029,,Transport (ld_t),,3923.348
+2030,,Transport (ld_t),,4433.63
+2022,,Trade (ld_tr),,1408.874
+2023,,Trade (ld_tr),,1458.488
+2024,,Trade (ld_tr),,1486.626
+2025,,Trade (ld_tr),,1677.78
+2026,,Trade (ld_tr),,1794.462
+2027,,Trade (ld_tr),,1826.48
+2028,,Trade (ld_tr),,1927.098
+2029,,Trade (ld_tr),,2113.467
+2030,,Trade (ld_tr),,2186.187
+2022,,Financial services (ld_fs),,3640.948
+2023,,Financial services (ld_fs),,4161.544
+2024,,Financial services (ld_fs),,4160.79
+2025,,Financial services (ld_fs),,4421.928
+2026,,Financial services (ld_fs),,4693.834
+2027,,Financial services (ld_fs),,4969.5
+2028,,Financial services (ld_fs),,5343.796
+2029,,Financial services (ld_fs),,5752.661
+2030,,Financial services (ld_fs),,5914.484
+2022,,Public Services (ld_ps),,10192.73
+2023,,Public Services (ld_ps),,10268.28
+2024,,Public Services (ld_ps),,11255.42
+2025,,Public Services (ld_ps),,12496.1
+2026,,Public Services (ld_ps),,13125.51
+2027,,Public Services (ld_ps),,15021.2
+2028,,Public Services (ld_ps),,16801.26
+2029,,Public Services (ld_ps),,18313.81
+2030,,Public Services (ld_ps),,20347.53
+2022,,Market Services (ld_ms),,192.0916
+2023,,Market Services (ld_ms),,171.189
+2024,,Market Services (ld_ms),,166.1208
+2025,,Market Services (ld_ms),,203.0992
+2026,,Market Services (ld_ms),,195.2363
+2027,,Market Services (ld_ms),,218.9293
+2028,,Market Services (ld_ms),,203.4636
+2029,,Market Services (ld_ms),,217.4482
+2030,,Market Services (ld_ms),,241.8202
+2022,Source: r_grp,Agriculture (r_a),,1.006719
+2023,Source: r_grp,Agriculture (r_a),,1.083302
+2024,Source: r_grp,Agriculture (r_a),,1.072856
+2025,Source: r_grp,Agriculture (r_a),,1.091676
+2026,Source: r_grp,Agriculture (r_a),,1.022564
+2027,Source: r_grp,Agriculture (r_a),,0.9767804
+2028,Source: r_grp,Agriculture (r_a),,0.9449327
+2029,Source: r_grp,Agriculture (r_a),,0.9031176
+2030,Source: r_grp,Agriculture (r_a),,0.9402747
+2022,Source: r_grp,Mining (r_mi),,0.9515751
+2023,Source: r_grp,Mining (r_mi),,1.170148
+2024,Source: r_grp,Mining (r_mi),,1.196285
+2025,Source: r_grp,Mining (r_mi),,1.234035
+2026,Source: r_grp,Mining (r_mi),,0.8408871
+2027,Source: r_grp,Mining (r_mi),,0.8330031
+2028,Source: r_grp,Mining (r_mi),,0.8063373
+2029,Source: r_grp,Mining (r_mi),,0.7946728
+2030,Source: r_grp,Mining (r_mi),,0.7979769
+2022,Source: r_grp,Manufacturing (r_m),,1.010599
+2023,Source: r_grp,Manufacturing (r_m),,0.9963079
+2024,Source: r_grp,Manufacturing (r_m),,1.068874
+2025,Source: r_grp,Manufacturing (r_m),,0.9884517
+2026,Source: r_grp,Manufacturing (r_m),,1.064242
+2027,Source: r_grp,Manufacturing (r_m),,1.058596
+2028,Source: r_grp,Manufacturing (r_m),,1.107722
+2029,Source: r_grp,Manufacturing (r_m),,1.081867
+2030,Source: r_grp,Manufacturing (r_m),,1.078714
+2022,Source: r_grp,Energy and Water (r_e),,0.9855618
+2023,Source: r_grp,Energy and Water (r_e),,1.01396
+2024,Source: r_grp,Energy and Water (r_e),,0.8009312
+2025,Source: r_grp,Energy and Water (r_e),,0.7801758
+2026,Source: r_grp,Energy and Water (r_e),,0.5425627
+2027,Source: r_grp,Energy and Water (r_e),,0.5083549
+2028,Source: r_grp,Energy and Water (r_e),,0.4970934
+2029,Source: r_grp,Energy and Water (r_e),,0.4755358
+2030,Source: r_grp,Energy and Water (r_e),,0.5136417
+2022,Source: r_grp,Construction (r_c),,0.9584125
+2023,Source: r_grp,Construction (r_c),,1.112111
+2024,Source: r_grp,Construction (r_c),,1.205338
+2025,Source: r_grp,Construction (r_c),,1.254435
+2026,Source: r_grp,Construction (r_c),,1.259386
+2027,Source: r_grp,Construction (r_c),,1.247522
+2028,Source: r_grp,Construction (r_c),,1.285656
+2029,Source: r_grp,Construction (r_c),,1.335789
+2030,Source: r_grp,Construction (r_c),,1.372605
+2022,Source: r_grp,Transport (r_t),,0.9860229
+2023,Source: r_grp,Transport (r_t),,1.076134
+2024,Source: r_grp,Transport (r_t),,1.152433
+2025,Source: r_grp,Transport (r_t),,1.505896
+2026,Source: r_grp,Transport (r_t),,1.502416
+2027,Source: r_grp,Transport (r_t),,1.521036
+2028,Source: r_grp,Transport (r_t),,1.487168
+2029,Source: r_grp,Transport (r_t),,1.655576
+2030,Source: r_grp,Transport (r_t),,1.774478
+2022,Source: r_grp,Trade (r_tr),,1.009386
+2023,Source: r_grp,Trade (r_tr),,0.9945287
+2024,Source: r_grp,Trade (r_tr),,0.9332707
+2025,Source: r_grp,Trade (r_tr),,1.009128
+2026,Source: r_grp,Trade (r_tr),,0.9027636
+2027,Source: r_grp,Trade (r_tr),,0.8642384
+2028,Source: r_grp,Trade (r_tr),,0.8475859
+2029,Source: r_grp,Trade (r_tr),,0.889559
+2030,Source: r_grp,Trade (r_tr),,0.8636201
+2022,Source: r_grp,Financial services (r_fs),,1.334169
+2023,Source: r_grp,Financial services (r_fs),,1.455956
+2024,Source: r_grp,Financial services (r_fs),,1.359191
+2025,Source: r_grp,Financial services (r_fs),,1.318657
+2026,Source: r_grp,Financial services (r_fs),,1.327811
+2027,Source: r_grp,Financial services (r_fs),,1.300433
+2028,Source: r_grp,Financial services (r_fs),,0.9199093
+2029,Source: r_grp,Financial services (r_fs),,0.8701687
+2030,Source: r_grp,Financial services (r_fs),,0.810297
+2022,Source: r_grp,Public Services (r_ps),,1.003617
+2023,Source: r_grp,Public Services (r_ps),,0.7775157
+2024,Source: r_grp,Public Services (r_ps),,0.7946241
+2025,Source: r_grp,Public Services (r_ps),,0.7898033
+2026,Source: r_grp,Public Services (r_ps),,0.8077437
+2027,Source: r_grp,Public Services (r_ps),,0.858832
+2028,Source: r_grp,Public Services (r_ps),,0.8949349
+2029,Source: r_grp,Public Services (r_ps),,0.9464333
+2030,Source: r_grp,Public Services (r_ps),,0.9902329
+2022,Source: r_grp,Market Services (r_ms),,0.494533
+2023,Source: r_grp,Market Services (r_ms),,0.4989086
+2024,Source: r_grp,Market Services (r_ms),,0.4924613
+2025,Source: r_grp,Market Services (r_ms),,0.5169995
+2026,Source: r_grp,Market Services (r_ms),,0.4796547
+2027,Source: r_grp,Market Services (r_ms),,0.4582892
+2028,Source: r_grp,Market Services (r_ms),,0.4474788
+2029,Source: r_grp,Market Services (r_ms),,0.4597873
+2030,Source: r_grp,Market Services (r_ms),,0.4759768

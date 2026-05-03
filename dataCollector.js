@@ -646,8 +646,13 @@ async function fetchIMFRealtime() {
     IMF_INDICATORS_RT.map(async ({ code, label, unit, icon }) => {
       try {
         const series = await fetchIMF(code);
-        const latest = series[series.length - 1];
-        if (!latest) throw new Error('пустой ряд');
+        if (!series.length) throw new Error('пустой ряд');
+
+        // Limit to actual + near-term forecast only (not 2030+)
+        const currentYear = new Date().getFullYear();
+        const capped = series.filter(d => d.year <= currentYear + 2);
+        const displaySeries = capped.length > 0 ? capped : series;
+        const latest = displaySeries[displaySeries.length - 1];
 
         indicators[code] = {
           label,
@@ -655,7 +660,7 @@ async function fetchIMFRealtime() {
           icon,
           value:   latest.value,
           year:    latest.year,
-          history: series.slice(-5),
+          history: displaySeries.slice(-5),
         };
         console.log(`[IMF-RT] ${code} OK — ${latest.value} (${latest.year})`);
       } catch (err) {

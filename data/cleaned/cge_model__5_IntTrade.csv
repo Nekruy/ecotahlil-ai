@@ -1,0 +1,1388 @@
+﻿year,block,equation,description,value
+2024,Source: xp_grp,Agriculture (XP_a),77989.1799999999,77989.1799999999
+2025,Source: xp_grp,Agriculture (XP_a),77989.1799999999,87034.32
+2026,Source: xp_grp,Agriculture (XP_a),77989.1799999999,91014.56
+2027,Source: xp_grp,Agriculture (XP_a),77989.1799999999,95491.75
+2028,Source: xp_grp,Agriculture (XP_a),77989.1799999999,97448.59
+2029,Source: xp_grp,Agriculture (XP_a),77989.1799999999,102732.8
+2030,Source: xp_grp,Agriculture (XP_a),77989.1799999999,103764.3
+2031,Source: xp_grp,Agriculture (XP_a),77989.1799999999,108224.6
+2032,Source: xp_grp,Agriculture (XP_a),77989.1799999999,115057
+2024,Source: xp_grp,Mining (XP_mi),12664.64,12664.64
+2025,Source: xp_grp,Mining (XP_mi),12664.64,16085.33
+2026,Source: xp_grp,Mining (XP_mi),12664.64,17275.85
+2027,Source: xp_grp,Mining (XP_mi),12664.64,18594.27
+2028,Source: xp_grp,Mining (XP_mi),12664.64,19642.75
+2029,Source: xp_grp,Mining (XP_mi),12664.64,20669.12
+2030,Source: xp_grp,Mining (XP_mi),12664.64,21814.36
+2031,Source: xp_grp,Mining (XP_mi),12664.64,23247.08
+2032,Source: xp_grp,Mining (XP_mi),12664.64,24351.17
+2024,Source: xp_grp,Manufacturing (XP_m),57016.34,57016.34
+2025,Source: xp_grp,Manufacturing (XP_m),57016.34,61134
+2026,Source: xp_grp,Manufacturing (XP_m),57016.34,66775.3
+2027,Source: xp_grp,Manufacturing (XP_m),57016.34,73218.19
+2028,Source: xp_grp,Manufacturing (XP_m),57016.34,81355.31
+2029,Source: xp_grp,Manufacturing (XP_m),57016.34,88826.2
+2030,Source: xp_grp,Manufacturing (XP_m),57016.34,92631.33
+2031,Source: xp_grp,Manufacturing (XP_m),57016.34,96164.84
+2032,Source: xp_grp,Manufacturing (XP_m),57016.34,98911.63
+2024,Source: xp_grp,Energy and Water (XP_e),9997.957,9997.957
+2025,Source: xp_grp,Energy and Water (XP_e),9997.957,11681.13
+2026,Source: xp_grp,Energy and Water (XP_e),9997.957,12696.89
+2027,Source: xp_grp,Energy and Water (XP_e),9997.957,17220.38
+2028,Source: xp_grp,Energy and Water (XP_e),9997.957,17696.85
+2029,Source: xp_grp,Energy and Water (XP_e),9997.957,18168.07
+2030,Source: xp_grp,Energy and Water (XP_e),9997.957,18936.36
+2031,Source: xp_grp,Energy and Water (XP_e),9997.957,21544.21
+2032,Source: xp_grp,Energy and Water (XP_e),9997.957,24950.81
+2024,Source: xp_grp,Construction (XP_c),31675.93,31675.93
+2025,Source: xp_grp,Construction (XP_c),31675.93,37514.72
+2026,Source: xp_grp,Construction (XP_c),31675.93,41602.2
+2027,Source: xp_grp,Construction (XP_c),31675.93,44448.41
+2028,Source: xp_grp,Construction (XP_c),31675.93,47517.03
+2029,Source: xp_grp,Construction (XP_c),31675.93,48523.66
+2030,Source: xp_grp,Construction (XP_c),31675.93,51200.11
+2031,Source: xp_grp,Construction (XP_c),31675.93,54083.35
+2032,Source: xp_grp,Construction (XP_c),31675.93,56619.15
+2024,Source: xp_grp,Transport (XP_t),18362.16,18362.16
+2025,Source: xp_grp,Transport (XP_t),18362.16,20606.51
+2026,Source: xp_grp,Transport (XP_t),18362.16,23607.84
+2027,Source: xp_grp,Transport (XP_t),18362.16,30556.4
+2028,Source: xp_grp,Transport (XP_t),18362.16,32384.02
+2029,Source: xp_grp,Transport (XP_t),18362.16,34843.95
+2030,Source: xp_grp,Transport (XP_t),18362.16,38067.6
+2031,Source: xp_grp,Transport (XP_t),18362.16,42907.48
+2032,Source: xp_grp,Transport (XP_t),18362.16,48179.63
+2024,Source: xp_grp,Trade (XP_tr),33468,33468
+2025,Source: xp_grp,Trade (XP_tr),33468,35260.33
+2026,Source: xp_grp,Trade (XP_tr),33468,36089.55
+2027,Source: xp_grp,Trade (XP_tr),33468,40600.02
+2028,Source: xp_grp,Trade (XP_tr),33468,43588.95
+2029,Source: xp_grp,Trade (XP_tr),33468,44765.28
+2030,Source: xp_grp,Trade (XP_tr),33468,46938.55
+2031,Source: xp_grp,Trade (XP_tr),33468,51862.34
+2032,Source: xp_grp,Trade (XP_tr),33468,53615.16
+2024,Source: xp_grp,Financial services (XP_fs),14788.22,14788.22
+2025,Source: xp_grp,Financial services (XP_fs),14788.22,16646.42
+2026,Source: xp_grp,Financial services (XP_fs),14788.22,16846.06
+2027,Source: xp_grp,Financial services (XP_fs),14788.22,17825.49
+2028,Source: xp_grp,Financial services (XP_fs),14788.22,18695.17
+2029,Source: xp_grp,Financial services (XP_fs),14788.22,19512.45
+2030,Source: xp_grp,Financial services (XP_fs),14788.22,20852.68
+2031,Source: xp_grp,Financial services (XP_fs),14788.22,22107.1
+2032,Source: xp_grp,Financial services (XP_fs),14788.22,22849.16
+2024,Source: xp_grp,Public Services (XP_ps),19870.87,19870.87
+2025,Source: xp_grp,Public Services (XP_ps),19870.87,20162.71
+2026,Source: xp_grp,Public Services (XP_ps),19870.87,22032.19
+2027,Source: xp_grp,Public Services (XP_ps),19870.87,24626.92
+2028,Source: xp_grp,Public Services (XP_ps),19870.87,25902.33
+2029,Source: xp_grp,Public Services (XP_ps),19870.87,29599.82
+2030,Source: xp_grp,Public Services (XP_ps),19870.87,33063.19
+2031,Source: xp_grp,Public Services (XP_ps),19870.87,36134.48
+2032,Source: xp_grp,Public Services (XP_ps),19870.87,40049.45
+2024,Source: xp_grp,Market Services (XP_ms),3864.399,3864.399
+2025,Source: xp_grp,Market Services (XP_ms),3864.399,4185.869
+2026,Source: xp_grp,Market Services (XP_ms),3864.399,5190.849
+2027,Source: xp_grp,Market Services (XP_ms),3864.399,5748.861
+2028,Source: xp_grp,Market Services (XP_ms),3864.399,6696.367
+2029,Source: xp_grp,Market Services (XP_ms),3864.399,7088.958
+2030,Source: xp_grp,Market Services (XP_ms),3864.399,7144.96
+2031,Source: xp_grp,Market Services (XP_ms),3864.399,8204.714
+2032,Source: xp_grp,Market Services (XP_ms),3864.399,8746.082
+2024,Source: xp_grp,284532.8,279697.6959999999,279697.6959999999
+2025,Source: xp_grp,284532.8,279697.6959999999,310311.33900000004
+2026,Source: xp_grp,284532.8,279697.6959999999,333131.28900000005
+2027,Source: xp_grp,284532.8,279697.6959999999,368330.691
+2028,Source: xp_grp,284532.8,279697.6959999999,390927.3670000001
+2029,Source: xp_grp,284532.8,279697.6959999999,414730.30799999996
+2030,Source: xp_grp,284532.8,279697.6959999999,434413.43999999994
+2031,Source: xp_grp,284532.8,279697.6959999999,464480.19399999984
+2032,Source: xp_grp,284532.8,279697.6959999999,493329.242
+2024,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2035.83
+2025,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2037.524
+2026,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2319.693
+2027,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2519
+2028,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2785.262
+2029,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2961.366
+2030,Export by commodity (in real terms),Agriculture (ex_a),2035.83,3044.408
+2031,Export by commodity (in real terms),Agriculture (ex_a),2035.83,3156.124
+2032,Export by commodity (in real terms),Agriculture (ex_a),2035.83,3325.744
+2024,Export by commodity (in real terms),Agriculture (ex_a),2035.83,0.9327285
+2025,Export by commodity (in real terms),Agriculture (ex_a),2035.83,0.9523215
+2026,Export by commodity (in real terms),Agriculture (ex_a),2035.83,0.9724226
+2027,Export by commodity (in real terms),Agriculture (ex_a),2035.83,1.012351
+2028,Export by commodity (in real terms),Agriculture (ex_a),2035.83,1.053417
+2029,Export by commodity (in real terms),Agriculture (ex_a),2035.83,1.094853
+2030,Export by commodity (in real terms),Agriculture (ex_a),2035.83,1.097846
+2031,Export by commodity (in real terms),Agriculture (ex_a),2035.83,1.128965
+2032,Export by commodity (in real terms),Agriculture (ex_a),2035.83,1.157974
+2024,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2182.66087076786
+2025,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2139.5337603949924
+2026,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2385.4782889661346
+2027,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2488.2674092286175
+2028,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2644.0260599553644
+2029,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2704.8069466859934
+2030,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2773.073819096667
+2031,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2795.590651614532
+2032,Export by commodity (in real terms),Agriculture (ex_a),2035.83,2872.03685056832
+2024,Export by commodity (in real terms),Mining (ex_mi),3903.85,3903.85
+2025,Export by commodity (in real terms),Mining (ex_mi),3903.85,4893.145
+2026,Export by commodity (in real terms),Mining (ex_mi),3903.85,5291.537
+2027,Export by commodity (in real terms),Mining (ex_mi),3903.85,5712.544
+2028,Export by commodity (in real terms),Mining (ex_mi),3903.85,6091.906
+2029,Export by commodity (in real terms),Mining (ex_mi),3903.85,6401.842
+2030,Export by commodity (in real terms),Mining (ex_mi),3903.85,6732.22
+2031,Export by commodity (in real terms),Mining (ex_mi),3903.85,7347.381
+2032,Export by commodity (in real terms),Mining (ex_mi),3903.85,7804.096
+2024,Export by commodity (in real terms),Mining (ex_mi),3903.85,0.9327285
+2025,Export by commodity (in real terms),Mining (ex_mi),3903.85,0.9532658
+2026,Export by commodity (in real terms),Mining (ex_mi),3903.85,0.9724226
+2027,Export by commodity (in real terms),Mining (ex_mi),3903.85,0.9985239
+2028,Export by commodity (in real terms),Mining (ex_mi),3903.85,1.035114
+2029,Export by commodity (in real terms),Mining (ex_mi),3903.85,1.057529
+2030,Export by commodity (in real terms),Mining (ex_mi),3903.85,1.076835
+2031,Export by commodity (in real terms),Mining (ex_mi),3903.85,1.118162
+2032,Export by commodity (in real terms),Mining (ex_mi),3903.85,1.130534
+2024,Export by commodity (in real terms),Mining (ex_mi),3903.85,4185.408722902753
+2025,Export by commodity (in real terms),Mining (ex_mi),3903.85,5133.033200184042
+2026,Export by commodity (in real terms),Mining (ex_mi),3903.85,5441.60224165913
+2027,Export by commodity (in real terms),Mining (ex_mi),3903.85,5720.988751496083
+2028,Export by commodity (in real terms),Mining (ex_mi),3903.85,5885.251286331746
+2029,Export by commodity (in real terms),Mining (ex_mi),3903.85,6053.585291750865
+2030,Export by commodity (in real terms),Mining (ex_mi),3903.85,6251.858455566545
+2031,Export by commodity (in real terms),Mining (ex_mi),3903.85,6570.944997236536
+2032,Export by commodity (in real terms),Mining (ex_mi),3903.85,6903.017512078363
+2024,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,5409.357
+2025,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,5649.721
+2026,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,6374.148
+2027,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,7190.738
+2028,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,8104.466
+2029,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,9295.314
+2030,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,9642.579
+2031,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,10180.25
+2032,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,10576.99
+2024,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,0.9327285
+2025,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,0.9631809
+2026,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,0.9964924
+2027,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,1.037043
+2028,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,1.072736
+2029,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,1.073081
+2030,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,1.087341
+2031,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,1.118162
+2032,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,1.14151
+2024,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,5799.497924637234
+2025,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,5865.690442989473
+2026,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,6396.584660354661
+2027,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,6933.886058726592
+2028,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,7554.949213972497
+2029,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,8662.266874541625
+2030,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,8868.03587834911
+2031,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,9104.449981308611
+2032,Export by commodity (in real terms),Manufacturing (ex_m),5409.357,9265.788297956215
+2024,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1291.76
+2025,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1552.499
+2026,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1728.207
+2027,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2364.622
+2028,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2527.607
+2029,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2614.615
+2030,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2677.228
+2031,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,3468.924
+2032,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,3767.285
+2024,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,0.9327285
+2025,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,0.9726239
+2026,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.010934
+2027,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.046919
+2028,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.093072
+2029,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.119736
+2030,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.134616
+2031,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.188384
+2032,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1.174438
+2024,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1384.9260529725425
+2025,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1596.1966388035498
+2026,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,1709.5151612271425
+2027,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2258.6484723268945
+2028,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2312.3883879561454
+2029,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2335.028078046968
+2030,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2359.589499883661
+2031,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,2919.026173358106
+2032,Export by commodity (in real terms),Energy and Water (ex_e),1291.76,3207.7342524679884
+2024,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.00000769011
+2025,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.00000808012
+2026,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.00000922511
+2027,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.0000100029
+2028,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.0000118506
+2029,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.0000132053
+2030,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.0000137365
+2031,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000014772
+2032,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.0000155795
+2024,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.9327285
+2025,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.9490165
+2026,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.9676086
+2027,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.9925979
+2028,Export by commodity (in real terms),Construction (ex_c),0.00000769011,1.021896
+2029,Export by commodity (in real terms),Construction (ex_c),0.00000769011,1.041977
+2030,Export by commodity (in real terms),Construction (ex_c),0.00000769011,1.055824
+2031,Export by commodity (in real terms),Construction (ex_c),0.00000769011,1.085751
+2032,Export by commodity (in real terms),Construction (ex_c),0.00000769011,1.108582
+2024,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000008244746461590913
+2025,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000008514203915316541
+2026,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000009533927251163332
+2027,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000010077494622948528
+2028,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.00001159667911411729
+2029,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.00001267331236677969
+2030,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000013010217612026246
+2031,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.000013605329398729545
+2032,Export by commodity (in real terms),Construction (ex_c),0.00000769011,0.00001405353866470861
+2024,Export by commodity (in real terms),Transport (ex_t),2667.296,2667.296
+2025,Export by commodity (in real terms),Transport (ex_t),2667.296,2943.138
+2026,Export by commodity (in real terms),Transport (ex_t),2667.296,3383.148
+2027,Export by commodity (in real terms),Transport (ex_t),2667.296,4235.95
+2028,Export by commodity (in real terms),Transport (ex_t),2667.296,4486.386
+2029,Export by commodity (in real terms),Transport (ex_t),2667.296,4631.539
+2030,Export by commodity (in real terms),Transport (ex_t),2667.296,5751.019
+2031,Export by commodity (in real terms),Transport (ex_t),2667.296,6618.721
+2032,Export by commodity (in real terms),Transport (ex_t),2667.296,7381.954
+2024,Export by commodity (in real terms),Transport (ex_t),2667.296,0.9327285
+2025,Export by commodity (in real terms),Transport (ex_t),2667.296,0.953738
+2026,Export by commodity (in real terms),Transport (ex_t),2667.296,0.9916785
+2027,Export by commodity (in real terms),Transport (ex_t),2667.296,1.032104
+2028,Export by commodity (in real terms),Transport (ex_t),2667.296,1.067652
+2029,Export by commodity (in real terms),Transport (ex_t),2667.296,1.093817
+2030,Export by commodity (in real terms),Transport (ex_t),2667.296,1.087341
+2031,Export by commodity (in real terms),Transport (ex_t),2667.296,1.128965
+2032,Export by commodity (in real terms),Transport (ex_t),2667.296,1.152486
+2024,Export by commodity (in real terms),Transport (ex_t),2667.296,2859.6703113499802
+2025,Export by commodity (in real terms),Transport (ex_t),2667.296,3085.8978042187687
+2026,Export by commodity (in real terms),Transport (ex_t),2667.296,3411.5371060278103
+2027,Export by commodity (in real terms),Transport (ex_t),2667.296,4104.189112725075
+2028,Export by commodity (in real terms),Transport (ex_t),2667.296,4202.105180339661
+2029,Export by commodity (in real terms),Transport (ex_t),2667.296,4234.290562315268
+2030,Export by commodity (in real terms),Transport (ex_t),2667.296,5289.066631351159
+2031,Export by commodity (in real terms),Transport (ex_t),2667.296,5862.644988994344
+2032,Export by commodity (in real terms),Transport (ex_t),2667.296,6405.243968256447
+2024,Export by commodity (in real terms),Trade (ex_tr),91.88233,91.88233
+2025,Export by commodity (in real terms),Trade (ex_tr),91.88233,96.18503
+2026,Export by commodity (in real terms),Trade (ex_tr),91.88233,104.8463
+2027,Export by commodity (in real terms),Trade (ex_tr),91.88233,113.6972
+2028,Export by commodity (in real terms),Trade (ex_tr),91.88233,124.4939
+2029,Export by commodity (in real terms),Trade (ex_tr),91.88233,135.4435
+2030,Export by commodity (in real terms),Trade (ex_tr),91.88233,139.4351
+2031,Export by commodity (in real terms),Trade (ex_tr),91.88233,162.6151
+2032,Export by commodity (in real terms),Trade (ex_tr),91.88233,161.9025
+2024,Export by commodity (in real terms),Trade (ex_tr),91.88233,0.9327285
+2025,Export by commodity (in real terms),Trade (ex_tr),91.88233,0.944295
+2026,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.001306
+2027,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.017289
+2028,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.047316
+2029,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.078265
+2030,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.082088
+2031,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.139769
+2032,Export by commodity (in real terms),Trade (ex_tr),91.88233,1.130534
+2024,Export by commodity (in real terms),Trade (ex_tr),91.88233,98.5091910454114
+2025,Export by commodity (in real terms),Trade (ex_tr),91.88233,101.85909064434313
+2026,Export by commodity (in real terms),Trade (ex_tr),91.88233,104.70954932857687
+2027,Export by commodity (in real terms),Trade (ex_tr),91.88233,111.76489670093747
+2028,Export by commodity (in real terms),Trade (ex_tr),91.88233,118.86947206000863
+2029,Export by commodity (in real terms),Trade (ex_tr),91.88233,125.61244221040282
+2030,Export by commodity (in real terms),Trade (ex_tr),91.88233,128.8574496713761
+2031,Export by commodity (in real terms),Trade (ex_tr),91.88233,142.67373476555338
+2032,Export by commodity (in real terms),Trade (ex_tr),91.88233,143.20887297507196
+2024,Export by commodity (in real terms),Financial services (ex_fs),211.6903,211.6903
+2025,Export by commodity (in real terms),Financial services (ex_fs),211.6903,233.0052
+2026,Export by commodity (in real terms),Financial services (ex_fs),211.6903,252.0127
+2027,Export by commodity (in real terms),Financial services (ex_fs),211.6903,252.8654
+2028,Export by commodity (in real terms),Financial services (ex_fs),211.6903,255.7402
+2029,Export by commodity (in real terms),Financial services (ex_fs),211.6903,266.4471
+2030,Export by commodity (in real terms),Financial services (ex_fs),211.6903,274.2297
+2031,Export by commodity (in real terms),Financial services (ex_fs),211.6903,283.3459
+2032,Export by commodity (in real terms),Financial services (ex_fs),211.6903,303.764
+2024,Export by commodity (in real terms),Financial services (ex_fs),211.6903,0.9327285
+2025,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.029282
+2026,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.068702
+2027,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.071611
+2028,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.07782
+2029,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.109368
+2030,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.113605
+2031,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.172179
+2032,Export by commodity (in real terms),Financial services (ex_fs),211.6903,1.201878
+2024,Export by commodity (in real terms),Financial services (ex_fs),211.6903,226.95811267694728
+2025,Export by commodity (in real terms),Financial services (ex_fs),211.6903,226.37644493928778
+2026,Export by commodity (in real terms),Financial services (ex_fs),211.6903,235.81194757752863
+2027,Export by commodity (in real terms),Financial services (ex_fs),211.6903,235.96752926201762
+2028,Export by commodity (in real terms),Financial services (ex_fs),211.6903,237.27542632350483
+2029,Export by commodity (in real terms),Financial services (ex_fs),211.6903,240.17918310245113
+2030,Export by commodity (in real terms),Financial services (ex_fs),211.6903,246.2540128681175
+2031,Export by commodity (in real terms),Financial services (ex_fs),211.6903,241.72579443924516
+2032,Export by commodity (in real terms),Financial services (ex_fs),211.6903,252.74112680321963
+2024,Export by commodity (in real terms),Public Services (ex_ps),75.66807,75.66807
+2025,Export by commodity (in real terms),Public Services (ex_ps),75.66807,78.5752
+2026,Export by commodity (in real terms),Public Services (ex_ps),75.66807,82.16595
+2027,Export by commodity (in real terms),Public Services (ex_ps),75.66807,97.72425
+2028,Export by commodity (in real terms),Public Services (ex_ps),75.66807,106.3201
+2029,Export by commodity (in real terms),Public Services (ex_ps),75.66807,123.8947
+2030,Export by commodity (in real terms),Public Services (ex_ps),75.66807,139.8245
+2031,Export by commodity (in real terms),Public Services (ex_ps),75.66807,158.9411
+2032,Export by commodity (in real terms),Public Services (ex_ps),75.66807,173.4471
+2024,Export by commodity (in real terms),Public Services (ex_ps),75.66807,0.9327285
+2025,Export by commodity (in real terms),Public Services (ex_ps),75.66807,0.9631809
+2026,Export by commodity (in real terms),Public Services (ex_ps),75.66807,0.9820505
+2027,Export by commodity (in real terms),Public Services (ex_ps),75.66807,1.007413
+2028,Export by commodity (in real terms),Public Services (ex_ps),75.66807,1.047316
+2029,Export by commodity (in real terms),Public Services (ex_ps),75.66807,1.078265
+2030,Export by commodity (in real terms),Public Services (ex_ps),75.66807,1.103099
+2031,Export by commodity (in real terms),Public Services (ex_ps),75.66807,1.150572
+2032,Export by commodity (in real terms),Public Services (ex_ps),75.66807,1.174438
+2024,Export by commodity (in real terms),Public Services (ex_ps),75.66807,81.12550436702642
+2025,Export by commodity (in real terms),Public Services (ex_ps),75.66807,81.57886021203285
+2026,Export by commodity (in real terms),Public Services (ex_ps),75.66807,83.66774417405215
+2027,Export by commodity (in real terms),Public Services (ex_ps),75.66807,97.00515081699363
+2028,Export by commodity (in real terms),Public Services (ex_ps),75.66807,101.51673420438532
+2029,Export by commodity (in real terms),Public Services (ex_ps),75.66807,114.90190259351829
+2030,Export by commodity (in real terms),Public Services (ex_ps),75.66807,126.75607538398638
+2031,Export by commodity (in real terms),Public Services (ex_ps),75.66807,138.14094207055274
+2032,Export by commodity (in real terms),Public Services (ex_ps),75.66807,147.68519070397926
+2024,Export by commodity (in real terms),Market Services (ex_ms),20.71859,20.71859
+2025,Export by commodity (in real terms),Market Services (ex_ms),20.71859,22.63111
+2026,Export by commodity (in real terms),Market Services (ex_ms),20.71859,30.37184
+2027,Export by commodity (in real terms),Market Services (ex_ms),20.71859,32.11289
+2028,Export by commodity (in real terms),Market Services (ex_ms),20.71859,39.05738
+2029,Export by commodity (in real terms),Market Services (ex_ms),20.71859,42.15567
+2030,Export by commodity (in real terms),Market Services (ex_ms),20.71859,43.53531
+2031,Export by commodity (in real terms),Market Services (ex_ms),20.71859,51.61611
+2032,Export by commodity (in real terms),Market Services (ex_ms),20.71859,53.59491
+2024,Export by commodity (in real terms),Market Services (ex_ms),20.71859,0.9327285
+2025,Export by commodity (in real terms),Market Services (ex_ms),20.71859,0.953738
+2026,Export by commodity (in real terms),Market Services (ex_ms),20.71859,0.9916785
+2027,Export by commodity (in real terms),Market Services (ex_ms),20.71859,1.007413
+2028,Export by commodity (in real terms),Market Services (ex_ms),20.71859,1.037148
+2029,Export by commodity (in real terms),Market Services (ex_ms),20.71859,1.067897
+2030,Export by commodity (in real terms),Market Services (ex_ms),20.71859,1.076835
+2031,Export by commodity (in real terms),Market Services (ex_ms),20.71859,1.118162
+2032,Export by commodity (in real terms),Market Services (ex_ms),20.71859,1.125046
+2024,Export by commodity (in real terms),Market Services (ex_ms),20.71859,22.21288402788164
+2025,Export by commodity (in real terms),Market Services (ex_ms),20.71859,23.728854255571235
+2026,Export by commodity (in real terms),Market Services (ex_ms),20.71859,30.62670008475529
+2027,Export by commodity (in real terms),Market Services (ex_ms),20.71859,31.876588846878096
+2028,Export by commodity (in real terms),Market Services (ex_ms),20.71859,37.65844411790796
+2029,Export by commodity (in real terms),Market Services (ex_ms),20.71859,39.47540820884411
+2030,Export by commodity (in real terms),Market Services (ex_ms),20.71859,40.42895151067712
+2031,Export by commodity (in real terms),Market Services (ex_ms),20.71859,46.161566928584584
+2032,Export by commodity (in real terms),Market Services (ex_ms),20.71859,47.637972136250426
+2024,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,15708.052297690112
+2025,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,17506.423548080118
+2026,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,19566.12979922511
+2027,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,22519.253750002896
+2028,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,24521.2385918506
+2029,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,26472.6169832053
+2030,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,28444.478623736497
+2031,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,31427.918224772
+2032,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,33548.7775255795
+2024,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,16840.969582992384
+2025,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,18253.895105156265
+2026,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,19799.53340893372
+2027,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,21982.59398020758
+2028,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,23094.0402168579
+2029,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,24510.146702129252
+2030,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,26083.92078669151
+2031,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,27821.358844321396
+2032,Export by commodity (in real terms),Total (ex_tot),15708.052297690112,29245.094057999388
+2024,Export by commodity (in real terms),17467.5,1680.5998246749186,1680.5998246749186
+2025,Export by commodity (in real terms),17467.5,1680.5998246749186,1945.091390537827
+2026,Export by commodity (in real terms),17467.5,1680.5998246749186,2132.1582602359053
+2027,Export by commodity (in real terms),17467.5,1680.5998246749186,2392.0964881758214
+2028,Export by commodity (in real terms),17467.5,1680.5998246749186,2530.0358058180664
+2029,Export by commodity (in real terms),17467.5,1680.5998246749186,2678.691048258856
+2030,Export by commodity (in real terms),17467.5,1680.5998246749186,2840.411637436852
+2031,Export by commodity (in real terms),17467.5,1680.5998246749186,3051.740104712983
+2032,Export by commodity (in real terms),17467.5,1680.5998246749186,3206.4143550886356
+2025,Export by commodity (in real terms),17467.5,1680.5998246749186,116.2072468261423
+2026,Export by commodity (in real terms),17467.5,1680.5998246749186,113.09867692025011
+2027,Export by commodity (in real terms),17467.5,1680.5998246749186,112.35024098162822
+2028,Export by commodity (in real terms),17467.5,1680.5998246749186,102.55242235482571
+2029,Export by commodity (in real terms),17467.5,1680.5998246749186,99.95476619307054
+2030,Export by commodity (in real terms),17467.5,1680.5998246749186,98.53170467898816
+2031,Export by commodity (in real terms),17467.5,1680.5998246749186,97.80934715781672
+2032,Export by commodity (in real terms),17467.5,1680.5998246749186,93.05450602498999
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,80847.49
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,87049.31
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,90181.73
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,93349.28
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,95724.77
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,98940.23
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,100287.6
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,102496.9
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,107041.7
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,79512.25540966654
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,85374.13022985891
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,89351.11320322163
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,92716.7275017855
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,95349.77440366872
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,98583.17923347479
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,100053.95759297562
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,102340.45229382065
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Agriculture (qq_a),80847.49,106829.53404230118
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,12810.96
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,15455.53
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,16329.85
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,17051.63
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,17324.56
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,17725.42
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,18406.72
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,19204.3
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,19876.16
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,14015.024850242435
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,17321.79189652122
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,18429.292687709873
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,19503.196916946334
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,20182.072713077094
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,20898.15506559684
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,21782.167655877987
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,22937.451608096126
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Mining (qq_mi),12810.96,23963.532904864594
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,98444.56
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,101025.6
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,107020.6
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,113563.7
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,121788.6
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,131549.2
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,137487.6
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,139672.1
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,141693.3
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,70920.58238877263
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,73405.5616523407
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,78943.28880470869
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,84883.1776669681
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,92235.68313520613
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,101491.05627909607
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,105332.00059755595
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,107811.92452378615
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Manufacturing (qq_m),98444.56,109770.98349876599
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,9300.321
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,10618.72
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,11304.17
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,14962.7
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,14962.67
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,15107.21
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,15526.6
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,17632.38
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,20286.41
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,10230.371460290153
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,11782.469165453043
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,12629.673522511368
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,16819.26620334909
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,17009.424456964174
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,17245.4189328662
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,17722.02965925581
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,20625.147805865825
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Energy and Water (qq_e),9300.321,23495.087456181063
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,35032.31
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,39031.01
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,43247.05
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,44621.56
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,50029.42
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,52178.8
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,54335.08
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,56795.22
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,58905.25
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,34120.704413725245
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,38091.22772898973
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,42230.18077533742
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,44105.804739153944
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,48903.05249933546
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,51073.59261254686
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,53169.89923947541
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,55607.17740960898
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Construction (qq_c),35032.31,57666.833474465064
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,21606.36
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,23259.89
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,26088.09
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,32685.73
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,33534.59
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,35070.37
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,38994.09
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,45637.42
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,50393.52
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,20201.982155367125
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,22081.87629611129
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,24782.10760451741
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,30951.38753278238
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,32047.40991423426
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,33437.44782670041
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,38272.60200546502
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,43145.59340386
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Transport (qq_t),21606.36,47710.91748230548
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,33447.59
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,34886.49
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,35340.37
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,38809.55
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,41263
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,42602.82
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,44250.88
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,48412.86
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,49545.84
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,33493.036749190105
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,34936.33916937146
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,35401.753295198745
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,38874.72157500394
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,41337.87699334196
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,42690.00988928701
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,44340.56507962682
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,48524.0131103233
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Trade (qq_tr),33447.59,49656.15208516371
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,22473.63
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,24245.57
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,23049.53
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,24319.95
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,24813.82
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,25183.15
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,26698
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,27139.57
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,27893.92
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,17150.515199803784
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,18233.517770812585
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,18011.1783723081
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,18789.388057428743
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,19272.033245763465
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,19669.648782495296
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,20742.703765712486
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,21098.89365678882
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Financial services (qq_fs),22473.63,21752.597186718645
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,24070.53
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,24075.05
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,25550.84
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,28534.08
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,29428.83
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,33143.24
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,36565.55
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,39339.96
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,42902.79
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,21121.362493791163
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,21189.321059178197
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,22486.90536411831
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,25290.56867458092
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,26253.29670347329
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,29661.338466289057
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,32784.047797802756
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,35409.76381864768
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Public Services (qq_ps),24070.53,38559.97093071512
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,24870.28
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,25699.23
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,29933.46
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,31865.84
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,35089.16
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,36475.75
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,35305.3
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,38359.55
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,39909.02
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,9977.812796177448
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,10424.204907026122
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,12400.833815110567
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,13246.83493008124
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,14834.27904935393
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,15459.972317222677
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,15169.48275001124
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,16711.090480099407
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),Market Services (qq_ms),24870.28,17439.319290942538
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,362904.0310000001
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,385346.39999999997
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,408045.69000000006
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,439764.02
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,463959.42000000004
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,487976.19
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,507857.42000000004
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,534690.26
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,558447.9099999999
+2024,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,310743.64791702665
+2025,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,332840.43987566326
+2026,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,354666.327444742
+2027,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,385181.0737980802
+2028,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,407424.9031144185
+2029,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,430209.81940557517
+2030,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,449369.45614375913
+2031,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,474211.5081108969
+2032,Composite Goods forecasts using Constant Elasticity of substitution (CES - Armington),372301.3999999999,362904.0310000001,496844.92835242336
+2024,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3371.0645903334594
+2025,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3712.70377014109
+2026,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3150.3097967783633
+2027,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3151.5524982144984
+2028,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3160.25759633129
+2029,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3318.416766525196
+2030,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3278.0504070243824
+2031,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3312.5717061793457
+2032,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3537.909957698816
+2024,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.016347
+2025,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.044385
+2026,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.164511
+2027,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.237633
+2028,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.257544
+2029,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.26531
+2030,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.294717
+2031,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.336125
+2032,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,1.327566
+2022,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3316.8441391901188
+2023,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,3554.9187034868273
+2024,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2705.2640952110914
+2025,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2546.4354119634
+2026,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2513.039381788065
+2027,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2622.611665540616
+2028,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2531.866351507227
+2029,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2479.237875333031
+2030,Import by commodity (in real terms),Agriculture (im_a),3371.0645903334594,2664.959751680004
+2024,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2699.785149757565
+2025,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3026.8831034787827
+2026,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3192.094312290129
+2027,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3260.977083053669
+2028,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3234.3932869229075
+2029,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3229.106934403161
+2030,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3356.7723441220155
+2031,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3614.229391903873
+2032,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,3716.723095135404
+2024,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.007192
+2025,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.080863
+2026,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.081245
+2027,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.114501
+2028,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.152887
+2029,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.186738
+2030,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.196836
+2031,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.254093
+2032,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,1.256346
+2022,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2680.5069438176283
+2023,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2800.4317878202723
+2024,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2952.2396055381796
+2025,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2925.952586003664
+2026,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2805.4729448097755
+2027,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2720.9939636239515
+2028,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2804.7053599006176
+2029,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2881.9468667027672
+2030,Import by commodity (in real terms),Mining (im_mi),2699.785149757565,2958.359476716927
+2024,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,32933.334611227365
+2025,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,33269.75934765932
+2026,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,34451.45919529132
+2027,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,35871.2603330319
+2028,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,37657.38286479387
+2029,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,39353.45772090394
+2030,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,41798.17840244406
+2031,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,42040.42547621385
+2032,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,42499.30650123401
+2024,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.005754
+2025,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.050809
+2026,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.081777
+2027,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.113975
+2028,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.151241
+2029,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.168274
+2030,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.161143
+2031,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.19988
+2032,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,1.213128
+2022,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,32744.920339593344
+2023,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,31661.09097624717
+2024,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,31847.098981852378
+2025,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,32201.135872018585
+2026,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,32710.251689084973
+2027,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,33685.126709063064
+2028,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,35997.44252210456
+2029,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,35037.19161600647
+2030,Import by commodity (in real terms),Manufacturing (im_m),32933.334611227365,35032.82959525624
+2024,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,361.7095397098466
+2025,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,388.74983454695627
+2026,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,402.70347748863196
+2027,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,508.0557966509109
+2028,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,480.85254303582826
+2029,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,476.40606713379907
+2030,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,481.798340744188
+2031,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,476.1561941341744
+2032,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,558.6075438189371
+2024,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.063294
+2025,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.108774
+2026,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.135984
+2027,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.18221
+2028,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.228696
+2029,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.252841
+2030,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.281466
+2031,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.31779
+2032,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,1.338839
+2022,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,340.1782947236104
+2023,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,350.61232906521644
+2024,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,354.49749071169305
+2025,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,429.75088744885505
+2026,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,391.3519235317998
+2027,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,380.26059742122027
+2028,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,375.9743455887148
+2029,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,361.3293424097727
+2030,Import by commodity (in real terms),Energy and Water (im_e),361.7095397098466,417.2327993275794
+2024,Import by commodity (in real terms),Construction (im_c),911.6055939648614,911.6055939648614
+2025,Import by commodity (in real terms),Construction (im_c),911.6055939648614,939.7822790903904
+2026,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1016.8692338876884
+2027,Import by commodity (in real terms),Construction (im_c),911.6055939648614,515.7552708489561
+2028,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1126.3675125151372
+2029,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1105.2074006584446
+2030,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1165.1807742610927
+2031,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1188.0426051630216
+2032,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1238.4165411144359
+2024,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.018572
+2025,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.124012
+2026,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.125004
+2027,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.110916
+2028,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.15481
+2029,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.222791
+2030,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.233305
+2031,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.291858
+2032,Import by commodity (in real terms),Construction (im_c),911.6055939648614,1.294514
+2022,Import by commodity (in real terms),Construction (im_c),911.6055939648614,894.9839520081657
+2023,Import by commodity (in real terms),Construction (im_c),911.6055939648614,836.096304212402
+2024,Import by commodity (in real terms),Construction (im_c),911.6055939648614,903.8805496582132
+2025,Import by commodity (in real terms),Construction (im_c),911.6055939648614,464.2612680427288
+2026,Import by commodity (in real terms),Construction (im_c),911.6055939648614,975.3704180905406
+2027,Import by commodity (in real terms),Construction (im_c),911.6055939648614,903.8399862760232
+2028,Import by commodity (in real terms),Construction (im_c),911.6055939648614,944.7628723317367
+2029,Import by commodity (in real terms),Construction (im_c),911.6055939648614,919.6386949363023
+2030,Import by commodity (in real terms),Construction (im_c),911.6055939648614,956.6652358448313
+2024,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,4071.6738446328764
+2025,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,4121.151703888708
+2026,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,4689.130395482593
+2027,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,5970.292467217619
+2028,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,5973.566085765738
+2029,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,6264.461173299593
+2030,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,6472.506994534974
+2031,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,9110.547596139992
+2032,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,10064.556517694518
+2024,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,0.9920167
+2025,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.054534
+2026,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.064954
+2027,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.087205
+2028,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.108481
+2029,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.14129
+2030,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.170982
+2031,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.215664
+2032,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,1.23158
+2022,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,4104.440827087767
+2023,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,3908.031134025747
+2024,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,4403.1295206014465
+2025,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,5491.413732660923
+2026,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,5388.965697892645
+2027,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,5488.930222204342
+2028,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,5527.418008590204
+2029,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,7494.297434274595
+2030,Import by commodity (in real terms),Transport (im_t),4071.6738446328764,8172.06882029143
+2024,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,46.435580809893025
+2025,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,46.335860628541404
+2026,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,43.463004801253
+2027,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,48.5256249960648
+2028,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,49.616906658037216
+2029,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,48.253610712990984
+2030,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,49.75002037318017
+2031,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,51.461989676703894
+2032,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,51.59041483627958
+2024,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,0.9968647
+2025,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.029411
+2026,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.080448
+2027,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.097796
+2028,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.130199
+2029,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.157949
+2030,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.173336
+2031,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.218141
+2032,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,1.243464
+2022,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,46.58162818875322
+2023,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,45.012012333792235
+2024,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,40.22683627648253
+2025,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,44.202770820867265
+2026,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,43.901035709673444
+2027,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,41.67162000484563
+2028,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,42.400489180575875
+2029,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,42.24633246619554
+2030,Import by commodity (in real terms),Trade (im_tr),46.435580809893025,41.48927096906672
+2024,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,5534.805100196215
+2025,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,6245.0574291874145
+2026,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,5290.3643276919
+2027,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,5783.4273425712545
+2028,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,5797.526954236535
+2029,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,5779.948317504708
+2030,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,6229.525934287513
+2031,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,6324.0222432111805
+2032,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,6445.086813281352
+2024,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.138663
+2025,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.175839
+2026,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.281151
+2027,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.275655
+2028,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.317031
+2029,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.359366
+2030,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.365888
+2031,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.424387
+2032,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,1.43374
+2022,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4860.792965255054
+2023,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,5311.150105743571
+2024,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4129.383911570065
+2025,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4533.692371817815
+2026,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4401.966965270016
+2027,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4251.944154484302
+2028,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4560.788244927486
+2029,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4439.820247735468
+2030,Import by commodity (in real terms),Financial services (im_fs),5534.805100196215,4495.29678552691
+2024,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3024.8355762088363
+2025,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,2964.3041408218032
+2026,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3146.100585881689
+2027,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3341.2355754190776
+2028,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3281.8533965267106
+2029,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3605.796233710943
+2030,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3921.3267021972515
+2031,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,4089.137281352311
+2032,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,4516.266169284879
+2024,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.003434
+2025,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.026036
+2026,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.056495
+2027,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.078467
+2028,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.121238
+2029,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.148849
+2030,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.169767
+2031,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.202924
+2032,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,1.216234
+2022,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3014.4838387067175
+2023,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,2889.0839510717005
+2024,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,2977.8660437405656
+2025,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3098.1342733890583
+2026,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,2926.9908766262924
+2027,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3138.6163313985935
+2028,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3352.228864549309
+2029,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3399.3313637040337
+2030,Import by commodity (in real terms),Public Services (im_ps),3024.8355762088363,3713.3201088646415
+2024,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,14913.185793822551
+2025,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,15297.656202973878
+2026,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,17562.99802488943
+2027,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,18651.11795991876
+2028,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,20293.938330646073
+2029,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,21057.933352777323
+2030,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,20179.35255998876
+2031,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,21700.075629900595
+2032,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,22523.29561905746
+2024,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,0.9398878
+2025,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,0.970574
+2026,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.004141
+2027,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.040026
+2028,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.075847
+2029,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.091765
+2030,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.116859
+2031,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.159404
+2032,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,1.183453
+2022,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,15866.985180382755
+2023,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,15761.45271043102
+2024,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,17490.569576274083
+2025,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,17933.31893617925
+2026,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,18863.21970563293
+2027,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,19287.97255158145
+2028,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,18067.949991886853
+2029,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,18716.578198712952
+2030,Import by commodity (in real terms),Market Services (im_ms),14913.185793822551,19031.84631671681
+2024,Import by commodity (in real terms),Total (im_tot),67868.43627367666,67868.43627367666
+2025,Import by commodity (in real terms),Total (im_tot),67868.43627367666,70012.38321882288
+2026,Import by commodity (in real terms),Total (im_tot),67868.43627367666,72945.5043534627
+2027,Import by commodity (in real terms),Total (im_tot),67868.43627367666,77102.1870528441
+2028,Import by commodity (in real terms),Total (im_tot),67868.43627367666,81055.76352872603
+2029,Import by commodity (in real terms),Total (im_tot),67868.43627367666,84239.00509061263
+2030,Import by commodity (in real terms),Total (im_tot),67868.43627367666,86932.41266326325
+2031,Import by commodity (in real terms),Total (im_tot),67868.43627367666,91906.63625025279
+2032,Import by commodity (in real terms),Total (im_tot),67868.43627367666,95151.76210025494
+2022,Import by commodity (in real terms),Total (im_tot),67868.43627367666,67870.71810895391
+2023,Import by commodity (in real terms),Total (im_tot),67868.43627367666,67117.88001443772
+2024,Import by commodity (in real terms),Total (im_tot),67868.43627367666,67804.15661143418
+2025,Import by commodity (in real terms),Total (im_tot),67868.43627367666,69668.29811034515
+2026,Import by commodity (in real terms),Total (im_tot),67868.43627367666,71020.53063843671
+2027,Import by commodity (in real terms),Total (im_tot),67868.43627367666,72521.9678015984
+2028,Import by commodity (in real terms),Total (im_tot),67868.43627367666,74205.53705056728
+2029,Import by commodity (in real terms),Total (im_tot),67868.43627367666,75771.61797228159
+2030,Import by commodity (in real terms),Total (im_tot),67868.43627367666,77484.06816119445
+2024,Import by commodity (in real terms),74585.1,67868.43538066346,67868.43538066346
+2025,Import by commodity (in real terms),74585.1,67868.43538066346,70012.38367241688
+2026,Import by commodity (in real terms),74585.1,67868.43538066346,72945.492354483
+2027,Import by commodity (in real terms),74585.1,67868.43538066346,77102.1999519227
+2028,Import by commodity (in real terms),74585.1,67868.43538066346,81055.75547743213
+2029,Import by commodity (in real terms),74585.1,67868.43538066346,84238.9875776301
+2030,Import by commodity (in real terms),74585.1,67868.43538066346,86932.44247997743
+2031,Import by commodity (in real terms),74585.1,67868.43538066346,91906.67011387504
+2032,Import by commodity (in real terms),74585.1,67868.43538066346,95151.7591731561
+2022,Import by commodity (in real terms),74585.1,67868.43538066346,100.00336214505967
+2023,Import by commodity (in real terms),74585.1,67868.43538066346,95.865726788162
+2024,Import by commodity (in real terms),74585.1,67868.43538066346,92.95179629286578
+2025,Import by commodity (in real terms),74585.1,67868.43538066346,90.3583941952205
+2026,Import by commodity (in real terms),74585.1,67868.43538066346,87.61934691203933
+2027,Import by commodity (in real terms),74585.1,67868.43538066346,86.0907221347039
+2028,Import by commodity (in real terms),74585.1,67868.43538066346,85.36003405082737
+2029,Import by commodity (in real terms),74585.1,67868.43538066346,82.44412053767573
+2030,Import by commodity (in real terms),74585.1,67868.43538066346,81.43208959131492
+2024,Import by commodity (in real terms),7261.2237304095615,,7261.2237304095615
+2025,Import by commodity (in real terms),7261.2237304095615,,7778.886615873176
+2026,Import by commodity (in real terms),7261.2237304095615,,7949.00990897389
+2027,Import by commodity (in real terms),7261.2237304095615,,8190.141330938195
+2028,Import by commodity (in real terms),7261.2237304095615,,8363.116864078529
+2029,Import by commodity (in real terms),7261.2237304095615,,8523.912425946131
+2030,Import by commodity (in real terms),7261.2237304095615,,8680.90569932758
+2031,Import by commodity (in real terms),7261.2237304095615,,8924.395364917596
+2032,Import by commodity (in real terms),7261.2237304095615,,9094.101139083643
+2024,Import by commodity (in real terms),e_TJS/USD,9.346694,9.346694
+2025,Import by commodity (in real terms),e_TJS/USD,9.346694,9.000309
+2026,Import by commodity (in real terms),e_TJS/USD,9.346694,9.176678
+2027,Import by commodity (in real terms),e_TJS/USD,9.346694,9.414024
+2028,Import by commodity (in real terms),e_TJS/USD,9.346694,9.692052
+2029,Import by commodity (in real terms),e_TJS/USD,9.346694,9.882669
+2030,Import by commodity (in real terms),e_TJS/USD,9.346694,10.01421
+2031,Import by commodity (in real terms),e_TJS/USD,9.346694,10.29836
+2032,Import by commodity (in real terms),e_TJS/USD,9.346694,10.46302
+2022,Import by commodity (in real terms),e_TJS/USD,9.346694,84711.6876919463
+2023,Import by commodity (in real terms),e_TJS/USD,9.346694,85371.77511959398
+2024,Import by commodity (in real terms),e_TJS/USD,9.346694,87603.69002036791
+2025,Import by commodity (in real terms),e_TJS/USD,9.346694,91650.89209055272
+2026,Import by commodity (in real terms),e_TJS/USD,9.346694,94114.57085529462
+2027,Import by commodity (in real terms),e_TJS/USD,9.346694,97032.11450372764
+2028,Import by commodity (in real terms),e_TJS/USD,9.346694,100289.45783725879
+2029,Import by commodity (in real terms),e_TJS/USD,9.346694,103592.97681660298
+2030,Import by commodity (in real terms),e_TJS/USD,9.346694,106729.16221919384
+2024,Import by commodity (in real terms),Export,1680.5998246749186,1680.5998246749186
+2025,Import by commodity (in real terms),Export,1680.5998246749186,1945.091390537827
+2026,Import by commodity (in real terms),Export,1680.5998246749186,2132.1582602359053
+2027,Import by commodity (in real terms),Export,1680.5998246749186,2392.0964881758214
+2028,Import by commodity (in real terms),Export,1680.5998246749186,2530.0358058180664
+2029,Import by commodity (in real terms),Export,1680.5998246749186,2678.691048258856
+2030,Import by commodity (in real terms),Export,1680.5998246749186,2840.411637436852
+2031,Import by commodity (in real terms),Export,1680.5998246749186,3051.740104712983
+2032,Import by commodity (in real terms),Export,1680.5998246749186,3206.4143550886356
+2022,Import by commodity (in real terms),Export,1680.5998246749186,9063.278170008165
+2023,Import by commodity (in real terms),Export,1680.5998246749186,9485.427124734715
+2024,Import by commodity (in real terms),Export,1680.5998246749186,9546.340191991907
+2025,Import by commodity (in real terms),Export,1680.5998246749186,9735.57026098008
+2026,Import by commodity (in real terms),Export,1680.5998246749186,9710.489672908752
+2027,Import by commodity (in real terms),Export,1680.5998246749186,9818.411858550322
+2028,Import by commodity (in real terms),Export,1680.5998246749186,10014.71487389008
+2029,Import by commodity (in real terms),Export,1680.5998246749186,10059.172219324531
+2030,Import by commodity (in real terms),Export,1680.5998246749186,10200.607684893446
+2024,Import by commodity (in real terms),Import,7261.2237304095615,7261.2237304095615
+2025,Import by commodity (in real terms),Import,7261.2237304095615,7778.886615873176
+2026,Import by commodity (in real terms),Import,7261.2237304095615,7949.00990897389
+2027,Import by commodity (in real terms),Import,7261.2237304095615,8190.141330938195
+2028,Import by commodity (in real terms),Import,7261.2237304095615,8363.116864078529
+2029,Import by commodity (in real terms),Import,7261.2237304095615,8523.912425946131
+2030,Import by commodity (in real terms),Import,7261.2237304095615,8680.90569932758
+2031,Import by commodity (in real terms),Import,7261.2237304095615,8924.395364917596
+2032,Import by commodity (in real terms),Import,7261.2237304095615,9094.101139083643
+2024,Import by commodity (in real terms),8941.82355508448,,8941.82355508448
+2025,Import by commodity (in real terms),8941.82355508448,,9723.978006411004
+2026,Import by commodity (in real terms),8941.82355508448,,10081.168169209795
+2027,Import by commodity (in real terms),8941.82355508448,,10582.237819114016
+2028,Import by commodity (in real terms),8941.82355508448,,10893.152669896595
+2029,Import by commodity (in real terms),8941.82355508448,,11202.603474204987
+2030,Import by commodity (in real terms),8941.82355508448,,11521.317336764432
+2031,Import by commodity (in real terms),8941.82355508448,,11976.135469630579
+2032,Import by commodity (in real terms),8941.82355508448,,12300.51549417228
+2023,Import by commodity (in real terms),8941.82355508448,,106.07933679636446
+2024,Import by commodity (in real terms),8941.82355508448,,98.1731981057343
+2025,Import by commodity (in real terms),8941.82355508448,,96.57184661113727
+2026,Import by commodity (in real terms),8941.82355508448,,91.76215691703052
+2027,Import by commodity (in real terms),8941.82355508448,,90.13379465142044
+2028,Import by commodity (in real terms),8941.82355508448,,89.39631664148312
+2029,Import by commodity (in real terms),8941.82355508448,,87.3092192958334
+2030,Import by commodity (in real terms),8941.82355508448,,85.17445139761848
+2025,Import by commodity (in real terms),Export,,115.73792654144002
+2026,Import by commodity (in real terms),Export,,109.61738202164133
+2027,Import by commodity (in real terms),Export,,112.19131960266195
+2028,Import by commodity (in real terms),Export,,105.76646127462172
+2029,Import by commodity (in real terms),Export,,105.8756181275752
+2030,Import by commodity (in real terms),Export,,106.0372990488438
+2031,Import by commodity (in real terms),Export,,107.44006483042124
+2032,Import by commodity (in real terms),Export,,105.0683952456102
+2025,Import by commodity (in real terms),Import,,107.12914110187342
+2026,Import by commodity (in real terms),Import,,102.18698769504584
+2027,Import by commodity (in real terms),Import,,103.03347743587645
+2028,Import by commodity (in real terms),Import,,102.1119969259495
+2029,Import by commodity (in real terms),Import,,101.92267505621327
+2030,Import by commodity (in real terms),Import,,101.84179829093006
+2031,Import by commodity (in real terms),Import,,102.80488780806449
+2032,Import by commodity (in real terms),Import,,101.90159408258816
+2025,Import by commodity (in real terms),Темп роста метод дефлятирование,,108.74714700539776
+2026,Import by commodity (in real terms),Темп роста метод дефлятирование,,103.67329258214382
+2027,Import by commodity (in real terms),Темп роста метод дефлятирование,,104.97035305327613
+2028,Import by commodity (in real terms),Темп роста метод дефлятирование,,102.93808224779255
+2029,Import by commodity (in real terms),Темп роста метод дефлятирование,,102.84078277139696
+2030,Import by commodity (in real terms),Темп роста метод дефлятирование,,102.84499815862726
+2031,Import by commodity (in real terms),Темп роста метод дефлятирование,,103.94762265088234
+2032,Import by commodity (in real terms),Темп роста метод дефлятирование,,102.70855340075495
+2024,Import by commodity (in real terms),8941.82355508448,,8941.82355508448
+2025,Import by commodity (in real terms),8941.82355508448,,10266.786615873176
+2026,Import by commodity (in real terms),8941.82355508448,,11021.795039843477
+2027,Import by commodity (in real terms),8941.82355508448,,11200.599971220476
+2028,Import by commodity (in real terms),8941.82355508448,,11336.583686236969
+2029,Import by commodity (in real terms),8941.82355508448,,11664.551983752193
+2030,Import by commodity (in real terms),8941.82355508448,,11979.380979436051
+2031,Import by commodity (in real terms),8941.82355508448,,11976.135469630579
+2032,Import by commodity (in real terms),8941.82355508448,,12300.51549417228
+2024,Import by commodity (in real terms),9.346694,,9.346694
+2025,Import by commodity (in real terms),9.346694,,9.000309
+2026,Import by commodity (in real terms),9.346694,,9.176678
+2027,Import by commodity (in real terms),9.346694,,9.414024
+2028,Import by commodity (in real terms),9.346694,,9.692052
+2029,Import by commodity (in real terms),9.346694,,9.882669
+2030,Import by commodity (in real terms),9.346694,,10.01421
+2031,Import by commodity (in real terms),9.346694,,10.29836
+2032,Import by commodity (in real terms),9.346694,,10.46302
+2024,Import by commodity (in real terms),1680.5998246749186,,1680.5998246749186
+2025,Import by commodity (in real terms),1680.5998246749186,,2487.9
+2026,Import by commodity (in real terms),1680.5998246749186,,2672.7851308695854
+2027,Import by commodity (in real terms),1680.5998246749186,,2840.4586402822806
+2028,Import by commodity (in real terms),1680.5998246749186,,2973.46682215844
+2029,Import by commodity (in real terms),1680.5998246749186,,3140.639557806061
+2030,Import by commodity (in real terms),1680.5998246749186,,3298.475280108471
+2031,Import by commodity (in real terms),1680.5998246749186,,3051.740104712983
+2032,Import by commodity (in real terms),1680.5998246749186,,3206.4143550886356
+2024,Import by commodity (in real terms),7261.2237304095615,,7261.2237304095615
+2025,Import by commodity (in real terms),7261.2237304095615,,7778.886615873176
+2026,Import by commodity (in real terms),7261.2237304095615,,8349.00990897389
+2027,Import by commodity (in real terms),7261.2237304095615,,8360.141330938195
+2028,Import by commodity (in real terms),7261.2237304095615,,8363.116864078529
+2029,Import by commodity (in real terms),7261.2237304095615,,8523.912425946131
+2030,Import by commodity (in real terms),7261.2237304095615,,8680.90569932758
+2031,Import by commodity (in real terms),7261.2237304095615,,8924.395364917596
+2032,Import by commodity (in real terms),7261.2237304095615,,9094.101139083643
+2024,Import by commodity (in real terms),8941.82355508448,,8941.82355508448
+2025,Import by commodity (in real terms),8941.82355508448,,10266.786615873176
+2026,Import by commodity (in real terms),8941.82355508448,,11021.795039843477
+2027,Import by commodity (in real terms),8941.82355508448,,11200.599971220476
+2028,Import by commodity (in real terms),8941.82355508448,,11336.583686236969
+2029,Import by commodity (in real terms),8941.82355508448,,11664.551983752193
+2030,Import by commodity (in real terms),8941.82355508448,,11979.380979436051
+2031,Import by commodity (in real terms),8941.82355508448,,11976.135469630579
+2032,Import by commodity (in real terms),8941.82355508448,,12300.51549417228
+2024,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,266.90017532508136
+2025,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,542.808609462173
+2026,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,540.62687063368
+2027,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,448.362152106459
+2028,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,443.431016340374
+2029,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,461.948509547205
+2030,Import by commodity (in real terms),Гардиши савдои хориљї,266.90017532508136,458.063642671619
+2024,Import by commodity (in real terms),аз он: - содирот,1947.5,1947.5
+2025,Import by commodity (in real terms),аз он: - содирот,1947.5,2487.9
+2026,Import by commodity (in real terms),аз он: - содирот,1947.5,2672.7851308695854
+2027,Import by commodity (in real terms),аз он: - содирот,1947.5,2840.45864028228
+2028,Import by commodity (in real terms),аз он: - содирот,1947.5,2973.46682215844
+2029,Import by commodity (in real terms),аз он: - содирот,1947.5,3140.6395578060606
+2030,Import by commodity (in real terms),аз он: - содирот,1947.5,3298.4752801084705
+2025,-воридот,Import by commodity (in real terms),,10.0409
+2024,-воридот,Agriculture (im_a),4756.415,4756.415
+2025,-воридот,Agriculture (im_a),4756.415,5238.452
+2026,-воридот,Agriculture (im_a),4756.415,4444.94
+2027,-воридот,Agriculture (im_a),4756.415,4446.694
+2028,-воридот,Agriculture (im_a),4756.415,4458.976
+2029,-воридот,Agriculture (im_a),4756.415,4682.131
+2030,-воридот,Agriculture (im_a),4756.415,4625.177
+2031,-воридот,Agriculture (im_a),4756.415,4673.885
+2032,-воридот,Agriculture (im_a),4756.415,4991.826
+2024,-воридот,Agriculture (im_a),4756.415,4.967057995471976
+2025,-воридот,Agriculture (im_a),4756.415,5.302924424865067
+2026,-воридот,Agriculture (im_a),4756.415,4.318716862266536
+2027,-воридот,Agriculture (im_a),4756.415,4.08750078133905
+2028,-воридот,Agriculture (im_a),4756.415,3.898868456419265
+2029,-воридот,Agriculture (im_a),4756.415,3.939287700460973
+2030,-воридот,Agriculture (im_a),4756.415,3.7708034398194643
+2031,-воридот,Agriculture (im_a),4756.415,3.6042791264382
+2032,-воридот,Agriculture (im_a),4756.415,3.718175974472402
+2024,-воридот,Agriculture (im_a),4756.415,3371.0645903334594
+2025,-воридот,Agriculture (im_a),4756.415,3712.70377014109
+2026,-воридот,Agriculture (im_a),4756.415,3150.3097967783633
+2027,-воридот,Agriculture (im_a),4756.415,3151.5524982144984
+2028,-воридот,Agriculture (im_a),4756.415,3160.25759633129
+2029,-воридот,Agriculture (im_a),4756.415,3318.416766525196
+2030,-воридот,Agriculture (im_a),4756.415,3278.0504070243824
+2031,-воридот,Agriculture (im_a),4756.415,3312.5717061793457
+2032,-воридот,Agriculture (im_a),4756.415,3537.909957698816
+2024,-воридот,Mining (im_mi),3809.271,3809.271
+2025,-воридот,Mining (im_mi),3809.271,4270.791
+2026,-воридот,Mining (im_mi),3809.271,4503.896
+2027,-воридот,Mining (im_mi),3809.271,4601.087
+2028,-воридот,Mining (im_mi),3809.271,4563.578
+2029,-воридот,Mining (im_mi),3809.271,4556.119
+2030,-воридот,Mining (im_mi),3809.271,4736.25
+2031,-воридот,Mining (im_mi),3809.271,5099.51
+2032,-воридот,Mining (im_mi),3809.271,5244.123
+2024,-воридот,Mining (im_mi),3809.271,3.9779686964803385
+2025,-воридот,Mining (im_mi),3809.271,4.323353904434727
+2026,-воридот,Mining (im_mi),3809.271,4.375998686392798
+2027,-воридот,Mining (im_mi),3809.271,4.229422287098897
+2028,-воридот,Mining (im_mi),3809.271,3.9903310339882787
+2029,-воридот,Mining (im_mi),3809.271,3.8332681290926174
+2030,-воридот,Mining (im_mi),3809.271,3.86135877434419
+2031,-воридот,Mining (im_mi),3809.271,3.932501002498535
+2032,-воридот,Mining (im_mi),3809.271,3.9061001216344744
+2024,-воридот,Mining (im_mi),3809.271,2699.785149757565
+2025,-воридот,Mining (im_mi),3809.271,3026.8831034787827
+2026,-воридот,Mining (im_mi),3809.271,3192.094312290129
+2027,-воридот,Mining (im_mi),3809.271,3260.977083053669
+2028,-воридот,Mining (im_mi),3809.271,3234.3932869229075
+2029,-воридот,Mining (im_mi),3809.271,3229.106934403161
+2030,-воридот,Mining (im_mi),3809.271,3356.7723441220155
+2031,-воридот,Mining (im_mi),3809.271,3614.229391903873
+2032,-воридот,Mining (im_mi),3809.271,3716.723095135404
+2024,-воридот,Manufacturing (im_m),46467.4,46467.4
+2025,-воридот,Manufacturing (im_m),46467.4,46942.08
+2026,-воридот,Manufacturing (im_m),46467.4,48609.4
+2027,-воридот,Manufacturing (im_m),46467.4,50612.68
+2028,-воридот,Manufacturing (im_m),46467.4,53132.81
+2029,-воридот,Manufacturing (im_m),46467.4,55525.89
+2030,-воридот,Manufacturing (im_m),46467.4,58975.29
+2031,-воридот,Manufacturing (im_m),46467.4,59317.09
+2032,-воридот,Manufacturing (im_m),46467.4,59964.54
+2024,-воридот,Manufacturing (im_m),46467.4,48.52525919180612
+2025,-воридот,Manufacturing (im_m),46467.4,47.519821234587994
+2026,-воридот,Manufacturing (im_m),46467.4,47.22903693742974
+2027,-воридот,Manufacturing (im_m),46467.4,46.524309755891295
+2028,-воридот,Manufacturing (im_m),46467.4,46.45861222619679
+2029,-воридот,Manufacturing (im_m),46467.4,46.716432225870854
+2030,-воридот,Manufacturing (im_m),46467.4,48.081235895696636
+2031,-воридот,Manufacturing (im_m),46467.4,45.74253524167926
+2032,-воридот,Manufacturing (im_m),46467.4,44.66476033986147
+2024,-воридот,Manufacturing (im_m),46467.4,32933.334611227365
+2025,-воридот,Manufacturing (im_m),46467.4,33269.75934765932
+2026,-воридот,Manufacturing (im_m),46467.4,34451.45919529132
+2027,-воридот,Manufacturing (im_m),46467.4,35871.2603330319
+2028,-воридот,Manufacturing (im_m),46467.4,37657.38286479387
+2029,-воридот,Manufacturing (im_m),46467.4,39353.45772090394
+2030,-воридот,Manufacturing (im_m),46467.4,41798.17840244406
+2031,-воридот,Manufacturing (im_m),46467.4,42040.42547621385
+2032,-воридот,Manufacturing (im_m),46467.4,42499.30650123401
+2024,-воридот,Energy and Water (im_e),510.3553,510.3553
+2025,-воридот,Energy and Water (im_e),510.3553,548.5079
+2026,-воридот,Energy and Water (im_e),510.3553,568.1958
+2027,-воридот,Energy and Water (im_e),510.3553,716.8431
+2028,-воридот,Energy and Water (im_e),510.3553,678.4605
+2029,-воридот,Energy and Water (im_e),510.3553,672.1867
+2030,-воридот,Energy and Water (im_e),510.3553,679.7951
+2031,-воридот,Energy and Water (im_e),510.3553,671.8343
+2032,-воридот,Energy and Water (im_e),510.3553,788.1692
+2024,-воридот,Energy and Water (im_e),510.3553,0.5329569378190294
+2025,-воридот,Energy and Water (im_e),510.3553,0.5552586794994868
+2026,-воридот,Energy and Water (im_e),510.3553,0.5520607212986056
+2027,-воридот,Energy and Water (im_e),510.3553,0.658938242961514
+2028,-воридот,Energy and Water (im_e),510.3553,0.5932367077948935
+2029,-воридот,Energy and Water (im_e),510.3553,0.5655409470011518
+2030,-воридот,Energy and Water (im_e),510.3553,0.5542217522599497
+2031,-воридот,Energy and Water (im_e),510.3553,0.5180868472192233
+2032,-воридот,Energy and Water (im_e),510.3553,0.5870700988494257
+2024,-воридот,Energy and Water (im_e),510.3553,361.7095397098466
+2025,-воридот,Energy and Water (im_e),510.3553,388.74983454695627
+2026,-воридот,Energy and Water (im_e),510.3553,402.70347748863196
+2027,-воридот,Energy and Water (im_e),510.3553,508.0557966509109
+2028,-воридот,Energy and Water (im_e),510.3553,480.85254303582826
+2029,-воридот,Energy and Water (im_e),510.3553,476.40606713379907
+2030,-воридот,Energy and Water (im_e),510.3553,481.798340744188
+2031,-воридот,Energy and Water (im_e),510.3553,476.1561941341744
+2032,-воридот,Energy and Water (im_e),510.3553,558.6075438189371
+2024,-воридот,Construction (im_c),1286.233,1286.233
+2025,-воридот,Construction (im_c),1286.233,1325.989
+2026,-воридот,Construction (im_c),1286.233,1434.755
+2027,-воридот,Construction (im_c),1286.233,727.7067
+2028,-воридот,Construction (im_c),1286.233,1589.252
+2029,-воридот,Construction (im_c),1286.233,1559.396
+2030,-воридот,Construction (im_c),1286.233,1644.016
+2031,-воридот,Construction (im_c),1286.233,1676.273
+2032,-воридот,Construction (im_c),1286.233,1747.348
+2024,-воридот,Construction (im_c),1286.233,1.3431952230177362
+2025,-воридот,Construction (im_c),1286.233,1.3423086543891984
+2026,-воридот,Construction (im_c),1286.233,1.3940122052763873
+2027,-воридот,Construction (im_c),1286.233,0.6689243075497574
+2028,-воридот,Construction (im_c),1286.233,1.3896205075114174
+2029,-воридот,Construction (im_c),1286.233,1.3119900923207912
+2030,-воридот,Construction (im_c),1286.233,1.3403295026154107
+2031,-воридот,Construction (im_c),1286.233,1.2926624818779109
+2032,-воридот,Construction (im_c),1286.233,1.3015171908320526
+2024,-воридот,Construction (im_c),1286.233,911.6055939648614
+2025,-воридот,Construction (im_c),1286.233,939.7822790903904
+2026,-воридот,Construction (im_c),1286.233,1016.8692338876884
+2027,-воридот,Construction (im_c),1286.233,515.7552708489561
+2028,-воридот,Construction (im_c),1286.233,1126.3675125151372
+2029,-воридот,Construction (im_c),1286.233,1105.2074006584446
+2030,-воридот,Construction (im_c),1286.233,1165.1807742610927
+2031,-воридот,Construction (im_c),1286.233,1188.0426051630216
+2032,-воридот,Construction (im_c),1286.233,1238.4165411144359
+2024,-воридот,Transport (im_t),5744.942,5744.942
+2025,-воридот,Transport (im_t),5744.942,5814.753
+2026,-воридот,Transport (im_t),5744.942,6616.144
+2027,-воридот,Transport (im_t),5744.942,8423.805
+2028,-воридот,Transport (im_t),5744.942,8428.423
+2029,-воридот,Transport (im_t),5744.942,8838.86199999999
+2030,-воридот,Transport (im_t),5744.942,9132.40699999999
+2031,-воридот,Transport (im_t),5744.942,12854.56
+2032,-воридот,Transport (im_t),5744.942,14200.62
+2024,-воридот,Transport (im_t),5744.942,5.999362985488601
+2025,-воридот,Transport (im_t),5744.942,5.88631826888123
+2026,-воридот,Transport (im_t),5744.942,6.428265096038095
+2027,-воридот,Transport (im_t),5744.942,7.7433503450760925
+2028,-воридот,Transport (im_t),5744.942,7.369699359686761
+2029,-воридот,Transport (im_t),5744.942,7.436532716122603
+2030,-воридот,Transport (im_t),5744.942,7.445447326541518
+2031,-воридот,Transport (im_t),5744.942,9.91282889663469
+2032,-воридот,Transport (im_t),5744.942,10.577372710229138
+2024,-воридот,Transport (im_t),5744.942,4071.6738446328764
+2025,-воридот,Transport (im_t),5744.942,4121.151703888708
+2026,-воридот,Transport (im_t),5744.942,4689.130395482593
+2027,-воридот,Transport (im_t),5744.942,5970.292467217619
+2028,-воридот,Transport (im_t),5744.942,5973.566085765738
+2029,-воридот,Transport (im_t),5744.942,6264.461173299593
+2030,-воридот,Transport (im_t),5744.942,6472.506994534974
+2031,-воридот,Transport (im_t),5744.942,9110.547596139992
+2032,-воридот,Transport (im_t),5744.942,10064.556517694518
+2024,-воридот,Trade (im_tr),65.51844,65.51844
+2025,-воридот,Trade (im_tr),65.51844,65.37774
+2026,-воридот,Trade (im_tr),65.51844,61.32427
+2027,-воридот,Trade (im_tr),65.51844,68.4674
+2028,-воридот,Trade (im_tr),65.51844,70.00714
+2029,-воридот,Trade (im_tr),65.51844,68.08359
+2030,-воридот,Trade (im_tr),65.51844,70.19497
+2031,-воридот,Trade (im_tr),65.51844,72.61048
+2032,-воридот,Trade (im_tr),65.51844,72.79167
+2024,-воридот,Trade (im_tr),65.51844,0.06841999515451257
+2025,-воридот,Trade (im_tr),65.51844,0.0661823787425136
+2026,-воридот,Trade (im_tr),65.51844,0.05958284226900382
+2027,-воридот,Trade (im_tr),65.51844,0.06293676852876615
+2028,-воридот,Trade (im_tr),65.51844,0.06121329871928609
+2029,-воридот,Trade (im_tr),65.51844,0.057281790853401515
+2030,-воридот,Trade (im_tr),65.51844,0.05722839025058374
+2031,-воридот,Trade (im_tr),65.51844,0.05599376908602979
+2032,-воридот,Trade (im_tr),65.51844,0.0542190850674129
+2024,-воридот,Trade (im_tr),65.51844,46.435580809893025
+2025,-воридот,Trade (im_tr),65.51844,46.335860628541404
+2026,-воридот,Trade (im_tr),65.51844,43.463004801253
+2027,-воридот,Trade (im_tr),65.51844,48.5256249960648
+2028,-воридот,Trade (im_tr),65.51844,49.616906658037216
+2029,-воридот,Trade (im_tr),65.51844,48.253610712990984
+2030,-воридот,Trade (im_tr),65.51844,49.75002037318017
+2031,-воридот,Trade (im_tr),65.51844,51.461989676703894
+2032,-воридот,Trade (im_tr),65.51844,51.59041483627958
+2024,-воридот,Financial services (im_fs),7809.352,7809.352
+2025,-воридот,Financial services (im_fs),7809.352,8811.485
+2026,-воридот,Financial services (im_fs),7809.352,7464.457
+2027,-воридот,Financial services (im_fs),7809.352,8160.147
+2028,-воридот,Financial services (im_fs),7809.352,8180.04
+2029,-воридот,Financial services (im_fs),7809.352,8155.237
+2030,-воридот,Financial services (im_fs),7809.352,8789.572
+2031,-воридот,Financial services (im_fs),7809.352,8922.902
+2032,-воридот,Financial services (im_fs),7809.352,9093.717
+2024,-воридот,Financial services (im_fs),7809.352,8.155197620698585
+2025,-воридот,Financial services (im_fs),7809.352,8.919932649155164
+2026,-воридот,Financial services (im_fs),7809.352,7.252488518082018
+2027,-воридот,Financial services (im_fs),7809.352,7.500990002537053
+2028,-воридот,Financial services (im_fs),7809.352,7.152516615529629
+2029,-воридот,Financial services (im_fs),7809.352,6.861368212133373
+2030,-воридот,Financial services (im_fs),7809.352,7.165941613075749
+2031,-воридот,Financial services (im_fs),7809.352,6.880920139424411
+2032,-воридот,Financial services (im_fs),7809.352,6.773481300840864
+2024,-воридот,Financial services (im_fs),7809.352,5534.805100196215
+2025,-воридот,Financial services (im_fs),7809.352,6245.0574291874145
+2026,-воридот,Financial services (im_fs),7809.352,5290.3643276919
+2027,-воридот,Financial services (im_fs),7809.352,5783.4273425712545
+2028,-воридот,Financial services (im_fs),7809.352,5797.526954236535
+2029,-воридот,Financial services (im_fs),7809.352,5779.948317504708
+2030,-воридот,Financial services (im_fs),7809.352,6229.525934287513
+2031,-воридот,Financial services (im_fs),7809.352,6324.0222432111805
+2032,-воридот,Financial services (im_fs),7809.352,6445.086813281352
+2024,-воридот,Public Services (im_ps),4267.902,4267.902
+2025,-воридот,Public Services (im_ps),4267.902,4182.495
+2026,-воридот,Public Services (im_ps),4267.902,4439.001
+2027,-воридот,Public Services (im_ps),4267.902,4714.328
+2028,-воридот,Public Services (im_ps),4267.902,4630.542
+2029,-воридот,Public Services (im_ps),4267.902,5087.61
+2030,-воридот,Public Services (im_ps),4267.902,5532.81
+2031,-воридот,Public Services (im_ps),4267.902,5769.583
+2032,-воридот,Public Services (im_ps),4267.902,6372.241
+2024,-воридот,Public Services (im_ps),4267.902,4.456910667591208
+2025,-воридот,Public Services (im_ps),4267.902,4.233971198433433
+2026,-воридот,Public Services (im_ps),4267.902,4.312946512285434
+2027,-воридот,Public Services (im_ps),4267.902,4.333515952185727
+2028,-воридот,Public Services (im_ps),4267.902,4.048883452147887
+2029,-воридот,Public Services (im_ps),4267.902,4.2804354465396734
+2030,-воридот,Public Services (im_ps),4267.902,4.510776339990348
+2031,-воридот,Public Services (im_ps),4267.902,4.449229618433635
+2032,-воридот,Public Services (im_ps),4267.902,4.746382063346758
+2024,-воридот,Public Services (im_ps),4267.902,3024.8355762088363
+2025,-воридот,Public Services (im_ps),4267.902,2964.3041408218032
+2026,-воридот,Public Services (im_ps),4267.902,3146.100585881689
+2027,-воридот,Public Services (im_ps),4267.902,3341.2355754190776
+2028,-воридот,Public Services (im_ps),4267.902,3281.8533965267106
+2029,-воридот,Public Services (im_ps),4267.902,3605.796233710943
+2030,-воридот,Public Services (im_ps),4267.902,3921.3267021972515
+2031,-воридот,Public Services (im_ps),4267.902,4089.137281352311
+2032,-воридот,Public Services (im_ps),4267.902,4516.266169284879
+2024,-воридот,Market Services (im_ms),21041.81,21041.81
+2025,-воридот,Market Services (im_ms),21041.81,21584.28
+2026,-воридот,Market Services (im_ms),21041.81,24780.57
+2027,-воридот,Market Services (im_ms),21041.81,26315.86
+2028,-воридот,Market Services (im_ms),21041.81,28633.8
+2029,-воридот,Market Services (im_ms),21041.81,29711.76
+2030,-воридот,Market Services (im_ms),21041.81,28472.13
+2031,-воридот,Market Services (im_ms),21041.81,30617.8
+2032,-воридот,Market Services (im_ms),21041.81,31779.32
+2024,-воридот,Market Services (im_ms),21041.81,21.973669370671438
+2025,-воридот,Market Services (im_ms),21041.81,21.849929254888
+2026,-воридот,Market Services (im_ms),21041.81,24.076875169423268
+2027,-воридот,Market Services (im_ms),21041.81,24.190128286679734
+2028,-воридот,Market Services (im_ms),21041.81,25.037008408975055
+2029,-воридот,Market Services (im_ms),21041.81,24.997841949968574
+2030,-воридот,Market Services (im_ms),21041.81,23.212691264136915
+2031,-воридот,Market Services (im_ms),21041.81,23.61099972238502
+2032,-воридот,Market Services (im_ms),21041.81,23.670918038623597
+2024,-воридот,Market Services (im_ms),21041.81,14913.185793822551
+2025,-воридот,Market Services (im_ms),21041.81,15297.656202973878
+2026,-воридот,Market Services (im_ms),21041.81,17562.99802488943
+2027,-воридот,Market Services (im_ms),21041.81,18651.11795991876
+2028,-воридот,Market Services (im_ms),21041.81,20293.938330646073
+2029,-воридот,Market Services (im_ms),21041.81,21057.933352777323
+2030,-воридот,Market Services (im_ms),21041.81,20179.35255998876
+2031,-воридот,Market Services (im_ms),21041.81,21700.075629900595
+2032,-воридот,Market Services (im_ms),21041.81,22523.29561905746
+2024,-воридот,Total (im_tot),95759.2,95759.2
+2025,-воридот,Total (im_tot),95759.2,98784.21
+2026,-воридот,Total (im_tot),95759.2,102922.7
+2027,-воридот,Total (im_tot),95759.2,108787.6
+2028,-воридот,Total (im_tot),95759.2,114365.9
+2029,-воридот,Total (im_tot),95759.2,118857.3
+2030,-воридот,Total (im_tot),95759.2,122657.6
+2031,-воридот,Total (im_tot),95759.2,129676
+2032,-воридот,Total (im_tot),95759.2,134254.7
+2024,-воридот,74585.1,95759.19874,95759.19874
+2025,-воридот,74585.1,95759.19874,98784.21064
+2026,-воридот,74585.1,95759.19874,102922.68307
+2027,-воридот,74585.1,95759.19874,108787.6182
+2028,-воридот,74585.1,95759.19874,114365.88864
+2029,-воридот,74585.1,95759.19874,118857.27528999998
+2030,-воридот,74585.1,95759.19874,122657.64207
+2031,-воридот,74585.1,95759.19874,129676.04778000001
+2032,-воридот,74585.1,95759.19874,134254.69587
+2024,-воридот,74585.1,95759.19874,99.99999868419954
+2025,-воридот,74585.1,95759.19874,100.00000064787682
+2026,-воридот,74585.1,95759.19874,99.9999835507619
+2027,-воридот,74585.1,95759.19874,100.00001672984789
+2028,-воридот,74585.1,95759.19874,99.99999006696927
+2029,-воридот,74585.1,95759.19874,99.99997921036402
+2030,-воридот,74585.1,95759.19874,100.00003429873075
+2031,-воридот,74585.1,95759.19874,100.00003684567692
+2032,-воридот,74585.1,95759.19874,99.99999692375759
+2024,-воридот,74585.1,95759.19874,67868.43538066346
+2025,-воридот,74585.1,95759.19874,70012.38367241688
+2026,-воридот,74585.1,95759.19874,72945.492354483
+2027,-воридот,74585.1,95759.19874,77102.1999519227
+2028,-воридот,74585.1,95759.19874,81055.75547743213
+2029,-воридот,74585.1,95759.19874,84238.9875776301
+2030,-воридот,74585.1,95759.19874,86932.44247997743
+2031,-воридот,74585.1,95759.19874,91906.67011387504
+2032,-воридот,74585.1,95759.19874,95151.7591731561
+2024,-воридот,105236.09999999992,27890.763726323326,27890.763726323326
+2025,-воридот,105236.09999999992,27890.763726323326,28771.826781177126
+2026,-воридот,105236.09999999992,27890.763726323326,29977.195646537297
+2027,-воридот,105236.09999999992,27890.763726323326,31685.412947155903
+2028,-воридот,105236.09999999992,27890.763726323326,33310.13647127395
+2029,-воридот,105236.09999999992,27890.763726323326,34618.29490938738
+2030,-воридот,105236.09999999992,27890.763726323326,35725.18733673675
+2031,-воридот,105236.09999999992,27890.763726323326,37769.36374974721
+2032,-воридот,105236.09999999992,27890.763726323326,39102.93789974506
+2024,-воридот,30650.999999999913,67868.43627367666,67868.43627367666
+2025,-воридот,30650.999999999913,67868.43627367666,70012.38321882288
+2026,-воридот,30650.999999999913,67868.43627367666,72945.5043534627
+2027,-воридот,30650.999999999913,67868.43627367666,77102.1870528441
+2028,-воридот,30650.999999999913,67868.43627367666,81055.76352872603
+2029,-воридот,30650.999999999913,67868.43627367666,84239.00509061263
+2030,-воридот,30650.999999999913,67868.43627367666,86932.41266326325
+2031,-воридот,30650.999999999913,67868.43627367666,91906.63625025279
+2032,-воридот,30650.999999999913,67868.43627367666,95151.76210025494

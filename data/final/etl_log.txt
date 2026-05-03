@@ -1,0 +1,52 @@
+22:19:24  INFO      ETL started — 2026-04-29T17:19:24.391Z
+22:19:24  INFO      Loading base: combined_wide.csv
+22:19:24  INFO        base shape: 23 years × 57 cols
+22:19:24  INFO        [C] cge_model__1_Prices.csv  → 11 years × 103 cols
+22:19:24  INFO        [A] cge_model__2025_2029.csv  → 5 years × 13 cols
+22:19:24  INFO        [C] cge_model__2_Production_1.csv  → 11 years × 120 cols
+22:19:24  INFO        [C] cge_model__2_Production_2.csv  → 11 years × 2 cols
+22:19:24  INFO        [C] cge_model__3_In___SA.csv  → 9 years × 14 cols
+22:19:24  INFO        [C] cge_model__4_Demand.csv  → 9 years × 3 cols
+22:19:24  INFO        [C] cge_model__5_IntTrade.csv  → 11 years × 67 cols
+22:19:24  INFO        [C] cge_model__6_Closures.csv  → 9 years × 8 cols
+22:19:24  INFO        [C] cge_model__7_Dynamics.csv  → 9 years × 43 cols
+22:19:24  INFO        [B] cge_model__GDP.csv  → 9 years × 37 cols
+22:19:24  INFO        [C] cge_model__GDP_total.csv  → 9 years × 49 cols
+22:19:24  INFO        [B] cge_model__Monetary.csv  → 9 years × 5 cols
+22:19:24  INFO        [A] cge_model__Итог_Модел_CGE.csv  → 11 years × 25 cols
+22:19:24  INFO        [A] cge_model__Лист1.csv  → 5 years × 18 cols
+22:19:24  INFO        [A] cge_model__Лист3.csv  → 5 years × 18 cols
+22:19:24  INFO        [A] cge_model__посл_вар_.csv  → 11 years × 20 cols
+22:19:24  INFO        [B] gdp_model__Agriculture.csv  → 31 years × 54 cols
+22:19:24  INFO        [B] gdp_model__BoP.csv  → 36 years × 68 cols
+22:19:24  INFO        [B] gdp_model__GDP.csv  → 39 years × 48 cols
+22:19:24  INFO        [B] gdp_model__Household.csv  → 36 years × 43 cols
+22:19:24  INFO        [B] gdp_model__Industry.csv  → 36 years × 93 cols
+22:19:24  INFO        [B] gdp_model__Industry_2.csv  → 21 years × 123 cols
+22:19:24  INFO        [B] gdp_model__Monetary.csv  → 38 years × 28 cols
+22:19:24  INFO        [B] gdp_model__OEA.csv  → 39 years × 23 cols
+22:19:24  INFO        [D] gdp_model__Results.csv  → 23 years × 39 cols
+22:19:24  INFO        [B] gdp_model__Revenue_Model.csv  → 36 years × 43 cols
+22:19:24  INFO        [A] gdp_model__S_1_реалистичный_сценарий.csv  → 14 years × 22 cols
+22:19:24  INFO        [B] gdp_model__Trade.csv  → 36 years × 60 cols
+22:19:24  INFO        [B] gdp_model__gateway.csv  → 36 years × 16 cols
+22:19:24  INFO      Supplementary combined: 39 years × 70 cols
+22:19:24  INFO      After merge: 39 years × 70 cols
+22:19:24  INFO      Dropped 5 cols (>40% missing)
+22:19:24  INFO        • организации_обслуживающие_домашние_хозяйства
+22:19:24  INFO        • construction_xp_c
+22:19:24  INFO        • в_том_числе_центкапвлож
+22:19:24  INFO        • сармоягузории_хориљї
+22:19:24  INFO        • қарз_грант_мустақим
+22:19:24  INFO      Clean shape: 39 years × 65 cols
+22:19:24  INFO      Remaining NaN: 0 cells
+22:19:24  INFO      Saved: C:\Users\user\macro-analysis\data\final\master_dataset.csv
+22:19:24  INFO      Feature dataset: 39 years × 325 cols  (+260 engineered)
+22:19:24  INFO      Saved: C:\Users\user\macro-analysis\data\final\features_dataset.csv
+22:19:24  INFO      ============================================================
+22:19:24  INFO      ETL SUMMARY  —  2026-04-29T17:19:24.652Z
+22:19:24  INFO        Master dataset : 39 years × 65 indicators
+22:19:24  INFO        Year range     : 1997 – 2035
+22:19:24  INFO        Features file  : 39 years × 325 columns
+22:19:24  INFO        Dropped cols   : 5
+22:19:24  INFO      ============================================================
