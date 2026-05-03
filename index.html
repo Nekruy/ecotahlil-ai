@@ -7149,16 +7149,16 @@ function setQuestion(text) {
 // GARCH авто-загрузка курсов НБТ
 // ============================================================
 async function autoLoadGarch(currency) {
-  const map = { usd: 'USD/TJS', eur: 'EUR/TJS', rub: 'RUB/TJS' };
+  const labelMap = { usd: 'USD/TJS', eur: 'EUR/TJS', rub: 'RUB/TJS' };
   try {
-    const r = await fetch('/api/rates/history?currency=' + currency + '&limit=60');
+    const r = await fetch('/api/rates-history?currency=' + currency + '&days=90');
     const d = await r.json();
-    const rates = (d.rates || d.data || []).map(x => typeof x === 'object' ? (x.rate || x.value || x.close) : x).filter(Boolean);
-    if (rates.length < 10) { alert('Недостаточно данных НБТ'); return; }
+    const rates = (d.data || []).map(x => x[currency]).filter(v => v != null);
+    if (rates.length < 10) { alert('Недостаточно данных НБТ (получено: ' + rates.length + ')'); return; }
     document.getElementById('garchData').value = rates.join(', ');
     const sel = document.getElementById('garchCurrency');
-    if (sel) { for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value === map[currency]) { sel.selectedIndex = i; break; } } }
-  } catch(e) { alert('Ошибка загрузки: ' + e.message); }
+    if (sel) { for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value === labelMap[currency]) { sel.selectedIndex = i; break; } } }
+  } catch(e) { alert('Ошибка загрузки GARCH: ' + e.message); }
 }
 
 // ============================================================
@@ -7166,16 +7166,14 @@ async function autoLoadGarch(currency) {
 // ============================================================
 async function autoLoadVAR() {
   try {
-    const r = await fetch('/api/data/macro?indicators=gdp_growth,inflation,usd_tjs,remittances');
+    const r = await fetch('/api/history?indicator=var');
     const d = await r.json();
-    const fill = (id, key) => {
-      const arr = (d[key] || (d.data && d.data[key]) || []).map(x => typeof x === 'object' ? (x.value != null ? x.value : x.val) : x).filter(v => v != null);
-      if (arr.length) document.getElementById(id).value = arr.join(', ');
-    };
-    fill('varGdp', 'gdp_growth');
-    fill('varInflation', 'inflation');
-    fill('varExchange', 'usd_tjs');
-    fill('varRemit', 'remittances');
+    // getVARData() → { gdp, inflation, exchange_rate, remittances, years }
+    const fmt = arr => (arr || []).map(v => Math.round(v * 100) / 100).join(', ');
+    if (d.gdp)           document.getElementById('varGdp').value        = fmt(d.gdp);
+    if (d.inflation)     document.getElementById('varInflation').value  = fmt(d.inflation);
+    if (d.exchange_rate) document.getElementById('varExchange').value   = fmt(d.exchange_rate);
+    if (d.remittances)   document.getElementById('varRemit').value      = fmt(d.remittances);
   } catch(e) { alert('Ошибка загрузки VAR данных: ' + e.message); }
 }
 
