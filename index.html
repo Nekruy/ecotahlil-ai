@@ -2612,15 +2612,23 @@ footer b { color:#fff; }
           </div>
         </div>
 
-        <!-- Исторические данные -->
+        <!-- Индикатор для прогноза — авто-загрузка из датасета -->
         <div class="form-group">
-          <label class="form-label" data-i18n="fc.data.label">Исторические данные</label>
-          <textarea id="fcData" class="data-textarea"
-            placeholder="Введите числа через запятую&#10;Пример: 108.3, 109.1, 107.8, 110.2, 111.5, 112.0, 113.4"></textarea>
-          <div class="data-hint">
-            📌 Минимум 4 значения · Разделитель: запятая или пробел<br>
-            💡 Порядок: от старого к новому (хронологически)
+          <label class="form-label">ИНДИКАТОР ДЛЯ ПРОГНОЗА</label>
+          <select id="forecast-indicator" onchange="autoLoadForecastData(this.value)"
+            style="width:100%;padding:9px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;background:white;cursor:pointer;margin-bottom:8px">
+            <option value="gdp_growth">📈 Рост ВВП % (МЭРиТ 1997–2035)</option>
+            <option value="gdp">💰 ВВП млрд сомони (МЭРиТ 1997–2035)</option>
+            <option value="inflation">📊 Инфляция % (МЭРиТ 1997–2035)</option>
+            <option value="usd_tjs">💱 Курс USD/TJS (НБТ 2015–2026)</option>
+            <option value="remittances">💸 Переводы мигрантов млн$ (МБ)</option>
+            <option value="gdp_per_capita">👤 ВВП на душу USD (МЭРиТ)</option>
+          </select>
+          <div id="forecast-data-info" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:11px;color:#166534">
+            ⏳ Данные загружаются автоматически...
           </div>
+          <textarea id="fcData" class="data-textarea" style="display:none"
+            placeholder="авто-загрузка"></textarea>
         </div>
 
         <!-- Периоды -->
@@ -2753,21 +2761,20 @@ footer b { color:#fff; }
             </select>
           </div>
 
-          <!-- Исторические курсы -->
+          <!-- Валютная пара — авто-загрузка из НБТ -->
           <div class="form-group" style="margin-top:14px">
-            <label class="form-label">Исторические курсы</label>
-            <textarea id="garchData" class="data-textarea" style="min-height:120px"
-              placeholder="Введите курсы через запятую&#10;Пример: 10.85, 10.90, 10.88, 10.95, 11.02, 10.97, ..."></textarea>
-            <div style="margin:6px 0 4px;font-size:11px;font-weight:600;color:#7c3aed">📥 Авто-загрузка курсов НБТ</div>
-            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">
-              <button onclick="autoLoadGarch('usd')" style="background:#1a4a8a;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer">🇺🇸 USD/TJS</button>
-              <button onclick="autoLoadGarch('eur')" style="background:#166534;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer">🇪🇺 EUR/TJS</button>
-              <button onclick="autoLoadGarch('rub')" style="background:#7c3aed;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer">🇷🇺 RUB/TJS</button>
+            <label class="form-label">ВАЛЮТНАЯ ПАРА</label>
+            <select id="garch-currency-sel" onchange="autoLoadGarchData(this.value)"
+              style="width:100%;padding:9px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;background:white;cursor:pointer;margin-bottom:8px">
+              <option value="usd">USD/TJS — Доллар США (НБТ РТ)</option>
+              <option value="eur">EUR/TJS — Евро (НБТ РТ)</option>
+              <option value="rub">RUB/TJS — Российский рубль (НБТ РТ)</option>
+            </select>
+            <div id="garch-data-info" style="background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;padding:8px 12px;font-size:11px;color:#5b21b6">
+              ⏳ Загружаются данные НБТ РТ...
             </div>
-            <div class="data-hint">
-              📌 Минимум 10 значений · Разделитель: запятая или пробел<br>
-              💡 Хронологический порядок: от старого к новому
-            </div>
+            <textarea id="garchData" class="data-textarea" style="display:none"
+              placeholder="авто-загрузка"></textarea>
           </div>
 
           <!-- Горизонт прогноза -->
@@ -2857,27 +2864,36 @@ footer b { color:#fff; }
 
           <div id="varAlertBox" class="alert-box"></div>
 
-          <div style="margin-bottom:10px">
-            <div style="font-size:11px;font-weight:600;color:#1d4ed8;margin-bottom:5px">📥 Авто-загрузка всех рядов</div>
-            <button onclick="autoLoadVAR()" style="background:#1d4ed8;color:white;border:none;padding:6px 12px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;width:100%">⚡ Загрузить ВВП + Инфляция + USD/TJS + Переводы</button>
+          <!-- Данные VAR — авто-загрузка из МЭРиТ + НБТ -->
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;margin-bottom:12px">
+            <div style="font-size:12px;font-weight:600;color:#1d4ed8;margin-bottom:8px">
+              📊 Данные загружаются автоматически из МЭРиТ + НБТ
+            </div>
+            <div id="var-data-status" style="font-size:11px;color:#475569;margin-bottom:8px">⏳ Загрузка...</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #1a4a8a;font-size:11px">
+                <b style="color:#1a4a8a">ВВП рост %</b><br>
+                <span id="var-gdp-info" style="color:#64748b">загрузка...</span>
+              </div>
+              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #dc2626;font-size:11px">
+                <b style="color:#dc2626">Инфляция %</b><br>
+                <span id="var-infl-info" style="color:#64748b">загрузка...</span>
+              </div>
+              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #059669;font-size:11px">
+                <b style="color:#059669">USD/TJS</b><br>
+                <span id="var-rate-info" style="color:#64748b">загрузка...</span>
+              </div>
+              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #d97706;font-size:11px">
+                <b style="color:#d97706">Переводы млн$</b><br>
+                <span id="var-remit-info" style="color:#64748b">загрузка...</span>
+              </div>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label class="var-var-label"><span class="var-var-dot" style="background:#0050b3"></span>ВВП (темп роста, %)</label>
-            <textarea id="varGdp" class="var-textarea" placeholder="7.5, 8.2, 7.9, 8.8, 7.4, 8.5, 7.8, 9.1"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="var-var-label"><span class="var-var-dot" style="background:#dc2626"></span>Инфляция (ИПЦ, %)</label>
-            <textarea id="varInflation" class="var-textarea" placeholder="5.2, 6.1, 4.8, 7.3, 6.5, 5.9, 6.8, 7.1"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="var-var-label"><span class="var-var-dot" style="background:#16a34a"></span>Курс USD/TJS (сомони)</label>
-            <textarea id="varExchange" class="var-textarea" placeholder="10.5, 10.8, 11.0, 11.2, 11.4, 11.3, 11.6, 11.8"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="var-var-label"><span class="var-var-dot" style="background:#d97706"></span>Переводы мигрантов (млрд $)</label>
-            <textarea id="varRemit" class="var-textarea" placeholder="2.5, 2.8, 3.1, 2.9, 3.4, 3.6, 3.2, 3.8"></textarea>
-          </div>
+          <!-- скрытые textarea для совместимости с runVAR -->
+          <textarea id="varGdp"       style="display:none"></textarea>
+          <textarea id="varInflation" style="display:none"></textarea>
+          <textarea id="varExchange"  style="display:none"></textarea>
+          <textarea id="varRemit"     style="display:none"></textarea>
 
           <div class="form-group">
             <label class="form-label">Горизонт прогноза</label>
@@ -4337,6 +4353,12 @@ function showPage(name, btn) {
     setTimeout(dsRefreshAll, 50);
   }
   if (name === 'sez') { loadSEZSection(); }
+  if (name === 'forecast') {
+    const sel = document.getElementById('forecast-indicator');
+    autoLoadForecastData(sel ? sel.value : 'gdp_growth');
+    autoLoadGarchData('usd');
+    setTimeout(autoLoadVARData, 200);
+  }
 }
 
 // ============================================================
@@ -5469,21 +5491,18 @@ function selectPeriod(p, btn) {
 }
 
 async function runForecast() {
-  const raw = document.getElementById('fcData').value.trim();
   const alertBox = document.getElementById('fcAlertBox');
   alertBox.style.display = 'none';
 
-  if (!raw) {
-    alertBox.textContent = '⚠️ Введите исторические данные';
-    alertBox.style.display = 'block';
-    return;
+  // Используем авто-загруженные данные; fallback — fcData textarea (скрытый)
+  let data = window._forecastData || [];
+  if (data.length < 4) {
+    const raw = (document.getElementById('fcData') || {}).value || '';
+    data = raw.split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
   }
 
-  // Парсим числа (запятая или пробел как разделитель)
-  const data = raw.split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
-
   if (data.length < 4) {
-    alertBox.textContent = '⚠️ Необходимо минимум 4 точки данных (сейчас: ' + data.length + ')';
+    alertBox.textContent = '⚠️ Выберите индикатор — данные загружаются автоматически';
     alertBox.style.display = 'block';
     return;
   }
@@ -5680,19 +5699,18 @@ async function runVAR() {
   const alertBox = document.getElementById('varAlertBox');
   alertBox.style.display = 'none';
 
-  const parse = id => document.getElementById(id).value.trim()
-    .split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
-
-  const data = {
+  // Авто-загруженные данные; fallback — скрытые textarea
+  const parse = id => { const el = document.getElementById(id); return el && el.value ? el.value.trim().split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v)) : []; };
+  const data = window._varData || {
     gdp:           parse('varGdp'),
     inflation:     parse('varInflation'),
     exchange_rate: parse('varExchange'),
     remittances:   parse('varRemit'),
   };
 
-  const minLen = Math.min(...Object.values(data).map(a => a.length));
+  const minLen = Math.min(...Object.values(data).map(a => (a||[]).length));
   if (minLen < 6) {
-    alertBox.textContent = `⚠️ Каждый ряд должен содержать минимум 6 наблюдений (сейчас: ${minLen})`;
+    alertBox.textContent = `⚠️ Ожидание загрузки данных (${minLen} точек). Дождитесь зелёной метки выше.`;
     alertBox.style.display = 'block';
     return;
   }
@@ -5869,19 +5887,18 @@ function selectGarchPeriod(p, btn) {
 }
 
 async function runGarch() {
-  const raw      = document.getElementById('garchData').value.trim();
   const alertBox = document.getElementById('garchAlertBox');
   alertBox.style.display = 'none';
 
-  if (!raw) {
-    alertBox.textContent = '⚠️ Введите исторические курсы валюты';
-    alertBox.style.display = 'block';
-    return;
+  // Авто-загруженные данные; fallback — garchData textarea
+  let data = window._garchData || [];
+  if (data.length < 10) {
+    const raw = (document.getElementById('garchData') || {}).value || '';
+    data = raw.split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
   }
 
-  const data = raw.split(/[\s,;]+/).map(s => parseFloat(s.replace(',', '.'))).filter(v => !isNaN(v));
   if (data.length < 10) {
-    alertBox.textContent = `⚠️ Необходимо минимум 10 точек данных (сейчас: ${data.length})`;
+    alertBox.textContent = '⚠️ Выберите валютную пару — данные НБТ загружаются автоматически';
     alertBox.style.display = 'block';
     return;
   }
@@ -7144,6 +7161,86 @@ function setQuestion(text) {
   applyTranslations(saved);
   updateLangButtons(saved);
 })();
+
+// Авто-загрузка данных при старте страницы (вкладка forecast открыта по умолчанию или в фоне)
+setTimeout(() => {
+  autoLoadForecastData('gdp_growth');
+  autoLoadGarchData('usd');
+  autoLoadVARData();
+}, 1200);
+
+// ============================================================
+// АВТО-ЗАГРУЗКА ДАННЫХ ДЛЯ МОДЕЛЕЙ
+// ============================================================
+
+async function autoLoadForecastData(indicator) {
+  const info = document.getElementById('forecast-data-info');
+  if (info) { info.textContent = '⏳ Загружаю ' + indicator + '...'; info.style.color = '#475569'; }
+  try {
+    const r = await fetch('/api/history?indicator=' + indicator);
+    const d = await r.json();
+    const vals = d.values || [];
+    if (vals.length > 0) {
+      window._forecastData      = vals;
+      window._forecastIndicator = indicator;
+      if (info) {
+        info.textContent = '✅ ' + vals.length + ' точек (' + (d.period || '') + ') | ' + (d.source || 'МЭРиТ');
+        info.style.background = '#f0fdf4'; info.style.borderColor = '#bbf7d0'; info.style.color = '#166534';
+      }
+    } else {
+      if (info) { info.textContent = '⚠️ Нет данных для ' + indicator; info.style.color = '#92400e'; }
+    }
+  } catch(e) {
+    if (info) { info.textContent = '❌ ' + e.message; info.style.color = '#991b1b'; }
+  }
+}
+
+async function autoLoadGarchData(currency) {
+  const info = document.getElementById('garch-data-info');
+  if (info) { info.textContent = '⏳ Загружаю ' + currency.toUpperCase() + '/TJS из НБТ...'; info.style.color = '#475569'; }
+  try {
+    const r = await fetch('/api/nbt-series?currency=' + currency + '&days=3650');
+    const d = await r.json();
+    const vals = d.values || [];
+    if (vals.length >= 10) {
+      window._garchData     = vals;
+      window._garchCurrency = currency;
+      if (info) {
+        info.textContent = '✅ ' + vals.length + ' точек (' + (d.period || '') + ') | ' + (d.source || 'НБТ');
+        info.style.background = '#f5f3ff'; info.style.borderColor = '#ddd6fe'; info.style.color = '#5b21b6';
+      }
+    } else {
+      if (info) { info.textContent = '⚠️ Мало данных (' + vals.length + ' точек)'; info.style.color = '#92400e'; }
+    }
+  } catch(e) {
+    if (info) { info.textContent = '❌ ' + e.message; info.style.color = '#991b1b'; }
+  }
+}
+
+async function autoLoadVARData() {
+  const status = document.getElementById('var-data-status');
+  try {
+    const [gdpR, inflR, rateR, remitR] = await Promise.all([
+      fetch('/api/history?indicator=gdp_growth'),
+      fetch('/api/history?indicator=inflation'),
+      fetch('/api/history?indicator=usd_tjs'),
+      fetch('/api/history?indicator=remittances'),
+    ]);
+    const [gdp, infl, rate, remit] = await Promise.all([gdpR.json(), inflR.json(), rateR.json(), remitR.json()]);
+    window._varData = {
+      gdp:           gdp.values   || [],
+      inflation:     infl.values  || [],
+      exchange_rate: rate.values  || [],
+      remittances:   remit.values || [],
+    };
+    const counts = [gdp.count||0, infl.count||0, rate.count||0, remit.count||0];
+    if (status) status.textContent = '✅ Данные готовы: ' + counts.join('/') + ' точек (ВВП/Инфл/USD/Перев)';
+    const upd = (id, d) => { const el = document.getElementById(id); if (el) el.textContent = (d.count||0) + ' точек | ' + (d.period||''); };
+    upd('var-gdp-info', gdp); upd('var-infl-info', infl); upd('var-rate-info', rate); upd('var-remit-info', remit);
+  } catch(e) {
+    if (status) status.textContent = '❌ ' + e.message;
+  }
+}
 
 // ============================================================
 // GARCH авто-загрузка курсов НБТ

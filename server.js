@@ -1432,14 +1432,18 @@ const server = http.createServer(async (req, res) => {
         case 'crisis':
           result = hdb.getCrisisContext(urlObj.searchParams.get('scenario') || 'oil');
           break;
-        default:
-          // Числовой ряд для прогнозирования
+        default: {
+          const values = hdb.getDataForForecasting(indicator);
+          const years  = hdb.getGDPHistory().map(r => r.year);
           result = {
             indicator,
-            values: hdb.getDataForForecasting(indicator),
-            years:  hdb.getGDPHistory().map(r => r.year),
+            values,
+            years,
+            count:  values.length,
+            period: years.length ? `${years[0]}–${years[Math.min(values.length - 1, years.length - 1)]}` : '',
             source: 'МЭРиТ / НБТ / Агентство по статистике РТ',
           };
+        }
       }
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -1472,6 +1476,32 @@ const server = http.createServer(async (req, res) => {
     } catch (e) {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
+  // GET /api/nbt-series?currency=usd&days=3650 — числовой ряд курсов для GARCH
+  if (req.method === 'GET' && req.url.startsWith('/api/nbt-series')) {
+    try {
+      const qs       = new URL('http://x' + req.url).searchParams;
+      const currency = (qs.get('currency') || 'usd').toLowerCase();
+      const days     = Math.min(3650, Math.max(30, parseInt(qs.get('days') || '3650')));
+      const { getRatesHistory } = require('./nbtParser');
+      const raw    = await getRatesHistory(currency, days);
+      const values = raw.map(e => e[currency]).filter(v => v != null);
+      const dates  = raw.map(e => e.date).filter((_, i) => raw[i][currency] != null);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        currency,
+        values,
+        dates,
+        count:  values.length,
+        period: dates.length ? `${dates[0]}–${dates[dates.length - 1]}` : '',
+        source: 'НБТ РТ (rates_timeseries)',
+      }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
     }
     return;
   }
