@@ -1476,6 +1476,28 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/nbt/load-history — загрузить исторические курсы с сайта НБТ
+  if (req.method === 'POST' && req.url === '/api/nbt/load-history') {
+    try {
+      const body = await readBody(req);
+      const { fromYear = 2015 } = JSON.parse(body.toString('utf8') || '{}');
+      const nbtP = require('./nbtParser');
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        status: 'started',
+        message: `Загрузка исторических курсов НБТ с ${fromYear} запущена в фоне`,
+        fromYear,
+      }));
+      nbtP.loadAndSaveHistoricalRates(fromYear)
+        .then(r => console.log('[api/nbt/load-history] завершено:', r))
+        .catch(e => console.error('[api/nbt/load-history] ошибка:', e.message));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });

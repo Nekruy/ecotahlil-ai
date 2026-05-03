@@ -369,4 +369,110 @@ function startAutoRefresh() {
   console.log('[nbtParser] Авто-обновление курсов НБТ запущено (каждые 24 ч)');
 }
 
-module.exports = { fetchNBTRates, saveRatesToDB, getRatesHistory, startAutoRefresh, loadTimeseries, loadHistoricalRates };
+// ─── Загрузка исторических курсов с сайта НБТ ────────────────────────────────
+
+function fetchURL(url) {
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith('https') ? require('https') : require('http');
+    const req = client.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Accept': 'text/html,application/xhtml+xml',
+        'Accept-Language': 'ru-RU,ru;q=0.9',
+      },
+      timeout: 15000,
+    }, res => {
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
+      res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('timeout')); });
+  });
+}
+
+// Парсит курс валюты из HTML страницы kurs.php НБТ
+// Структура: <td>Доллар США</td> <td style="...">10.9571</td>
+function parseNBTRate(html, label) {
+  const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const pattern = new RegExp(escaped + '<\\/td>\\s*<td[^>]*>([\\d.]+)<\\/td>', 'i');
+  const m = html.match(pattern);
+  if (m) {
+    const v = parseFloat(m[1]);
+    if (v > 0 && v < 10000) return v;
+  }
+  return null;
+}
+
+async function fetchHistoricalRatesFromNBT(fromYear = 2015, toYear = null) {
+  const endYear = toYear || new Date().getFullYear();
+  const results = [];
+  console.log(`[nbtParser] Загружаю исторические курсы НБТ ${fromYear}–${endYear}`);
+
+  for (let year = fromYear; year <= endYear; year++) {
+    for (let month = 1; month <= 12; month++) {
+      const now = new Date();
+      if (year === now.getFullYear() && month > now.getMonth() + 1) break;
+
+      const mm  = String(month).padStart(2, '0');
+      const url = `https://nbt.tj/ru/kurs/kurs.php?date=01.${mm}.${year}`;
+
+      try {
+        const html = await fetchURL(url);
+        const usd  = parseNBTRate(html, 'Доллар США');
+        const eur  = parseNBTRate(html, 'Евро');
+        const rub  = parseNBTRate(html, 'Российский рубль');
+        const cny  = parseNBTRate(html, 'Китайский юань') || parseNBTRate(html, 'юань');
+
+        if (usd) {
+          results.push({ date: `${year}-${mm}-01`, usd, eur, rub, cny, source: 'nbt' });
+          if (month === 1 || month === 6) {
+            console.log(`[nbtParser] ${year}-${mm}: USD=${usd} EUR=${eur} RUB=${rub}`);
+          }
+        } else {
+          console.warn(`[nbtParser] ${year}-${mm}: USD не найден`);
+        }
+
+        await new Promise(r => setTimeout(r, 300));
+      } catch (e) {
+        console.warn(`[nbtParser] ${year}-${mm} ошибка:`, e.message);
+      }
+    }
+  }
+
+  return results;
+}
+
+async function loadAndSaveHistoricalRates(fromYear = 2015) {
+  try {
+    const RATES_FILE = path.join(__dirname, 'data', 'rates_timeseries.json');
+    let existing = [];
+    try { existing = JSON.parse(fs.readFileSync(RATES_FILE, 'utf8')); } catch (e) {}
+
+    const existingNBT = new Set(existing.filter(r => r.source === 'nbt').map(r => r.date));
+    const newRates    = await fetchHistoricalRatesFromNBT(fromYear);
+
+    let added = 0;
+    for (const rate of newRates) {
+      if (!existingNBT.has(rate.date)) {
+        // Заменяем синтетическую запись за эту же дату если есть
+        const idx = existing.findIndex(r => r.date === rate.date);
+        if (idx >= 0) existing[idx] = rate;
+        else existing.push(rate);
+        added++;
+      }
+    }
+
+    existing.sort((a, b) => a.date.localeCompare(b.date));
+    fs.writeFileSync(RATES_FILE, JSON.stringify(existing, null, 2), 'utf8');
+
+    const realCount = existing.filter(r => r.source === 'nbt').length;
+    console.log(`[nbtParser] Добавлено/обновлено ${added} записей. Всего: ${existing.length} | Реальных НБТ: ${realCount}`);
+    return { added, total: existing.length, real: realCount };
+  } catch (e) {
+    console.error('[nbtParser] Ошибка загрузки истории:', e.message);
+    return { error: e.message };
+  }
+}
+
+module.exports = { fetchNBTRates, saveRatesToDB, getRatesHistory, startAutoRefresh, loadTimeseries, loadHistoricalRates, fetchHistoricalRatesFromNBT, loadAndSaveHistoricalRates };
