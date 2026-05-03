@@ -193,6 +193,7 @@ async function saveRatesToDB() {
           eur: entry.EUR ?? entry.eur ?? null,
           rub: entry.RUB ?? entry.rub ?? null,
           cny: entry.CNY ?? entry.cny ?? null,
+          source: 'rates-history',
         });
       }
     }
@@ -203,8 +204,8 @@ async function saveRatesToDB() {
   try {
     const rates = await fetchNBTRates();
     const { date, usd, eur, rub, cny } = rates;
-    byDate.set(date, { date, usd, eur, rub, cny });
-    latest = { date, usd, eur, rub, cny };
+    byDate.set(date, { date, usd, eur, rub, cny, source: 'nbt' });
+    latest = { date, usd, eur, rub, cny, source: 'nbt' };
     console.log(`[nbtParser] Курсы НБТ ${date}: USD=${usd} EUR=${eur} RUB=${rub} CNY=${cny}`);
   } catch (e) {
     console.warn('[nbtParser] fetchNBTRates:', e.message);

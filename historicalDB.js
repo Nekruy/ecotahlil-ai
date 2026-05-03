@@ -216,14 +216,65 @@ function getDataForForecasting(indicator) {
     case 'food_inflation':
       return getInflationHistory().map(r => r.food_inflation).filter(v => v != null);
     case 'usd_tjs':
-    case 'usd':
+    case 'usd': {
+      try {
+        const rates = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'rates_timeseries.json'), 'utf8'));
+        const byYear = {};
+        rates.forEach(r => {
+          const yr = r.date?.slice(0, 4);
+          if (yr && r.usd != null && parseInt(yr) >= 2010) {
+            if (!byYear[yr]) byYear[yr] = [];
+            byYear[yr].push(r.usd);
+          }
+        });
+        const annualAvg = Object.keys(byYear).sort().map(yr => {
+          const arr = byYear[yr];
+          return Math.round(arr.reduce((a, b) => a + b, 0) / arr.length * 100) / 100;
+        });
+        if (annualAvg.length >= 5) return annualAvg;
+      } catch (e) {}
       return readData('exchange_rates_history.json').map(r => r.usd_tjs).filter(v => v != null);
+    }
     case 'eur_tjs':
-    case 'eur':
+    case 'eur': {
+      try {
+        const rates = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'rates_timeseries.json'), 'utf8'));
+        const byYear = {};
+        rates.forEach(r => {
+          const yr = r.date?.slice(0, 4);
+          if (yr && r.eur != null && parseInt(yr) >= 2010) {
+            if (!byYear[yr]) byYear[yr] = [];
+            byYear[yr].push(r.eur);
+          }
+        });
+        const annualAvg = Object.keys(byYear).sort().map(yr => {
+          const arr = byYear[yr];
+          return Math.round(arr.reduce((a, b) => a + b, 0) / arr.length * 100) / 100;
+        });
+        if (annualAvg.length >= 5) return annualAvg;
+      } catch (e) {}
       return readData('exchange_rates_history.json').map(r => r.eur_tjs).filter(v => v != null);
+    }
     case 'rub_tjs':
-    case 'rub':
+    case 'rub': {
+      try {
+        const rates = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'rates_timeseries.json'), 'utf8'));
+        const byYear = {};
+        rates.forEach(r => {
+          const yr = r.date?.slice(0, 4);
+          if (yr && r.rub != null && parseInt(yr) >= 2010) {
+            if (!byYear[yr]) byYear[yr] = [];
+            byYear[yr].push(r.rub);
+          }
+        });
+        const annualAvg = Object.keys(byYear).sort().map(yr => {
+          const arr = byYear[yr];
+          return Math.round(arr.reduce((a, b) => a + b, 0) / arr.length * 100) / 100;
+        });
+        if (annualAvg.length >= 5) return annualAvg;
+      } catch (e) {}
       return readData('exchange_rates_history.json').map(r => r.rub_tjs).filter(v => v != null);
+    }
     case 'remittances':
       return getRemittancesHistory().map(r => r.amount_mln_usd).filter(v => v != null);
     case 'remittances_pct_gdp':
