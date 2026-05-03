@@ -2080,6 +2080,9 @@ footer b { color:#fff; }
   <button class="nav-tab" onclick="showPage('datascience',this)">
     🔬 Data Science
   </button>
+  <button class="nav-tab" onclick="showPage('sez',this)" id="tab-sez" style="display:flex;align-items:center;gap:5px">
+    🏭 СЭЗ
+  </button>
   <a class="nav-tab" href="/report" style="text-decoration:none">
     📝 <span data-i18n="nav.report">Отчёт по ценам</span>
   </a>
@@ -2755,6 +2758,12 @@ footer b { color:#fff; }
             <label class="form-label">Исторические курсы</label>
             <textarea id="garchData" class="data-textarea" style="min-height:120px"
               placeholder="Введите курсы через запятую&#10;Пример: 10.85, 10.90, 10.88, 10.95, 11.02, 10.97, ..."></textarea>
+            <div style="margin:6px 0 4px;font-size:11px;font-weight:600;color:#7c3aed">📥 Авто-загрузка курсов НБТ</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">
+              <button onclick="autoLoadGarch('usd')" style="background:#1a4a8a;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer">🇺🇸 USD/TJS</button>
+              <button onclick="autoLoadGarch('eur')" style="background:#166534;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer">🇪🇺 EUR/TJS</button>
+              <button onclick="autoLoadGarch('rub')" style="background:#7c3aed;color:white;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer">🇷🇺 RUB/TJS</button>
+            </div>
             <div class="data-hint">
               📌 Минимум 10 значений · Разделитель: запятая или пробел<br>
               💡 Хронологический порядок: от старого к новому
@@ -2847,6 +2856,11 @@ footer b { color:#fff; }
         <div class="var-form-body">
 
           <div id="varAlertBox" class="alert-box"></div>
+
+          <div style="margin-bottom:10px">
+            <div style="font-size:11px;font-weight:600;color:#1d4ed8;margin-bottom:5px">📥 Авто-загрузка всех рядов</div>
+            <button onclick="autoLoadVAR()" style="background:#1d4ed8;color:white;border:none;padding:6px 12px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;width:100%">⚡ Загрузить ВВП + Инфляция + USD/TJS + Переводы</button>
+          </div>
 
           <div class="form-group">
             <label class="var-var-label"><span class="var-var-dot" style="background:#0050b3"></span>ВВП (темп роста, %)</label>
@@ -4322,6 +4336,7 @@ function showPage(name, btn) {
   if (name === 'datascience') {
     setTimeout(dsRefreshAll, 50);
   }
+  if (name === 'sez') { loadSEZSection(); }
 }
 
 // ============================================================
@@ -7129,6 +7144,129 @@ function setQuestion(text) {
   applyTranslations(saved);
   updateLangButtons(saved);
 })();
+
+// ============================================================
+// GARCH авто-загрузка курсов НБТ
+// ============================================================
+async function autoLoadGarch(currency) {
+  const map = { usd: 'USD/TJS', eur: 'EUR/TJS', rub: 'RUB/TJS' };
+  try {
+    const r = await fetch('/api/rates/history?currency=' + currency + '&limit=60');
+    const d = await r.json();
+    const rates = (d.rates || d.data || []).map(x => typeof x === 'object' ? (x.rate || x.value || x.close) : x).filter(Boolean);
+    if (rates.length < 10) { alert('Недостаточно данных НБТ'); return; }
+    document.getElementById('garchData').value = rates.join(', ');
+    const sel = document.getElementById('garchCurrency');
+    if (sel) { for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value === map[currency]) { sel.selectedIndex = i; break; } } }
+  } catch(e) { alert('Ошибка загрузки: ' + e.message); }
+}
+
+// ============================================================
+// VAR авто-загрузка всех четырёх рядов
+// ============================================================
+async function autoLoadVAR() {
+  try {
+    const r = await fetch('/api/data/macro?indicators=gdp_growth,inflation,usd_tjs,remittances');
+    const d = await r.json();
+    const fill = (id, key) => {
+      const arr = (d[key] || (d.data && d.data[key]) || []).map(x => typeof x === 'object' ? (x.value != null ? x.value : x.val) : x).filter(v => v != null);
+      if (arr.length) document.getElementById(id).value = arr.join(', ');
+    };
+    fill('varGdp', 'gdp_growth');
+    fill('varInflation', 'inflation');
+    fill('varExchange', 'usd_tjs');
+    fill('varRemit', 'remittances');
+  } catch(e) { alert('Ошибка загрузки VAR данных: ' + e.message); }
+}
+
+// ============================================================
+// СЭЗ — подбор, ROI, AI, каталог
+// ============================================================
+async function sezMatch() {
+  const sector = document.getElementById('sez-sector').value;
+  const region = document.getElementById('sez-region-sel').value;
+  const el = document.getElementById('sez-match-res');
+  el.innerHTML = '<div style="color:#64748b;font-size:12px">⏳ Подбираю...</div>';
+  try {
+    const r = await fetch('/api/sez?sector=' + encodeURIComponent(sector) + '&region=' + encodeURIComponent(region));
+    const d = await r.json();
+    const top = (d.matches || d.zones || []).slice(0, 3);
+    const colors = ['#1a4a8a', '#0c7873', '#64748b'];
+    el.innerHTML = top.map((z, i) =>
+      '<div style="border:1px solid #e2e8f0;border-left:3px solid ' + colors[i] + ';border-radius:6px;padding:8px;margin-bottom:6px">' +
+      '<div style="display:flex;justify-content:space-between"><span style="font-weight:600;font-size:12px;color:' + colors[i] + '">' + (i+1) + '. ' + z.name_ru + '</span>' +
+      (z.match_score ? '<span style="background:#eff6ff;color:#1a4a8a;padding:1px 6px;border-radius:8px;font-size:10px">' + z.match_score + '%</span>' : '') + '</div>' +
+      '<div style="font-size:10px;color:#64748b;margin-top:3px">' + z.region + ' · ' + z.area_ha + ' га · ' + z.residents_count + ' резидентов</div>' +
+      '<div style="font-size:10px;color:#475569">' + (z.focus || []).slice(0, 3).join(' · ') + '</div></div>'
+    ).join('');
+  } catch(e) { el.innerHTML = '<div style="color:#991b1b;font-size:11px">❌ ' + e.message + '</div>'; }
+}
+
+async function sezROI() {
+  const sez_id = document.getElementById('roi-sez-id').value;
+  const inv = parseFloat(document.getElementById('roi-inv').value) * 1e6;
+  const rev = parseFloat(document.getElementById('roi-rev').value) * 1e6;
+  const yrs = parseInt(document.getElementById('roi-yrs').value);
+  const el = document.getElementById('roi-res');
+  el.innerHTML = '<div style="color:#64748b;font-size:12px">⏳ Рассчитываю...</div>';
+  try {
+    const r = await fetch('/api/sez/roi', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sez_id, investment_usd: inv, revenue_annual_usd: rev, years: yrs }) });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    el.innerHTML = '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:7px;padding:10px">' +
+      '<div style="font-weight:600;color:#166534;font-size:12px;margin-bottom:6px">' + d.sez + '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:11px">' +
+      '<div>ROI без СЭЗ: <b style="color:#991b1b">' + d.roi_without_sez + '</b></div>' +
+      '<div>ROI с СЭЗ: <b style="color:#166534">' + d.roi_with_sez + '</b></div>' +
+      '<div>Экономия: <b>$' + Math.round(d.tax_savings_usd / 1e3) + 'K</b></div>' +
+      '<div>Окупаемость: <b>' + (d.payback_years ? d.payback_years + ' лет' : 'N/A') + '</b></div></div>' +
+      '<div style="margin-top:6px;font-size:10px;color:#475569">' + d.recommendation + '</div></div>';
+  } catch(e) { el.innerHTML = '<div style="color:#991b1b;font-size:11px">❌ ' + e.message + '</div>'; }
+}
+
+async function sezAI() {
+  const question = document.getElementById('ai-sez-q').value;
+  const country = document.getElementById('ai-sez-country').value;
+  const sector = document.getElementById('ai-sez-sector').value;
+  const amount = document.getElementById('ai-sez-amount').value;
+  const el = document.getElementById('ai-sez-res');
+  el.innerHTML = '<div style="color:#64748b">⏳ AI анализирует...</div>';
+  try {
+    const r = await fetch('/api/sez/ai-match', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ investor_profile: { sector, country, investment_min: amount }, question: question || 'Какую СЭЗ выбрать?' }) });
+    const d = await r.json();
+    el.innerHTML = d.answer || '<div>Нет ответа</div>';
+  } catch(e) { el.innerHTML = '<div style="color:#991b1b">❌ ' + e.message + '</div>'; }
+}
+
+async function loadSEZSection() {
+  try {
+    const r = await fetch('/api/sez');
+    const d = await r.json();
+    const zones = d.zones || [];
+    const res = zones.reduce((s, z) => s + z.residents_count, 0);
+    const inv = zones.reduce((s, z) => s + z.investment_total_mln_usd, 0);
+    const elRes = document.getElementById('sez-stat-residents');
+    const elInv = document.getElementById('sez-stat-invest');
+    if (elRes) elRes.textContent = res;
+    if (elInv) elInv.textContent = '$' + inv + ' млн';
+    const cat = document.getElementById('sez-catalog');
+    if (!cat) return;
+    let html = '<table style="width:100%;border-collapse:collapse;font-size:11px">';
+    html += '<tr style="background:#f8fafc"><th style="padding:8px 12px;text-align:left;border-bottom:1px solid #e2e8f0">СЭЗ</th><th style="padding:8px;text-align:left">Регион</th><th style="padding:8px;text-align:left">Специализация</th><th style="padding:8px;text-align:right">Га</th><th style="padding:8px;text-align:right">Резидентов</th><th style="padding:8px;text-align:right">Инвестиции</th><th style="padding:8px;text-align:center">Льготы</th></tr>';
+    zones.forEach(z => {
+      html += '<tr style="border-bottom:1px solid #f1f5f9"><td style="padding:8px 12px;font-weight:600;color:#0d2342">' + z.name_ru + '<br><span style="font-size:10px;font-weight:400;color:#64748b">' + z.city + '</span></td>' +
+        '<td style="padding:8px;color:#64748b;font-size:10px">' + z.region + '</td>' +
+        '<td style="padding:8px;color:#475569;font-size:10px">' + (z.focus || []).slice(0, 2).join(', ') + '</td>' +
+        '<td style="padding:8px;text-align:right;color:#475569">' + z.area_ha + '</td>' +
+        '<td style="padding:8px;text-align:right;font-weight:600;color:#0c7873">' + z.residents_count + '</td>' +
+        '<td style="padding:8px;text-align:right;color:#1a4a8a;font-weight:600">$' + z.investment_total_mln_usd + ' млн</td>' +
+        '<td style="padding:8px;text-align:center"><span style="background:#dcfce7;color:#166534;padding:2px 7px;border-radius:8px;font-size:10px">0% · ' + z.years_exemption + ' лет</span></td></tr>';
+    });
+    html += '</table>';
+    cat.innerHTML = html;
+  } catch(e) { console.warn('SEZ load:', e.message); }
+}
+
 </script>
 
 <!-- ============================================================
@@ -7282,6 +7420,131 @@ function setQuestion(text) {
       <div class="cge-interp-body" id="cgeInterpText"></div>
     </div>
 
+  </div>
+
+</div>
+
+<!-- ============================================================
+   СТРАНИЦА — СЭЗ ИНВЕСТИЦИОННЫЙ ПОРТАЛ
+============================================================ -->
+<div class="page" id="page-sez">
+
+  <div style="background:#0d2342;padding:20px 24px;border-radius:12px;margin-bottom:16px;color:white">
+    <h2 style="margin:0 0 4px;font-size:18px;font-weight:700">🏭 Инвестиционный портал СЭЗ Тоҷикистон</h2>
+    <p style="margin:0;opacity:0.75;font-size:12px">Министерство экономического развития и торговли РТ · 5 свободных экономических зон · льготы до 25 лет · 0% налоги</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #1a4a8a">
+      <div style="font-size:20px;font-weight:700;color:#1a4a8a">5</div>
+      <div style="font-size:11px;color:#64748b">СЭЗ в РТ</div>
+    </div>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #0c7873">
+      <div style="font-size:20px;font-weight:700;color:#0c7873" id="sez-stat-residents">128</div>
+      <div style="font-size:11px;color:#64748b">Резидентов</div>
+    </div>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #b8860b">
+      <div style="font-size:20px;font-weight:700;color:#b8860b" id="sez-stat-invest">$595 млн</div>
+      <div style="font-size:11px;color:#64748b">Инвестиций всего</div>
+    </div>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #166534">
+      <div style="font-size:20px;font-weight:700;color:#166534">0%</div>
+      <div style="font-size:11px;color:#64748b">Налог на прибыль</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+      <div style="background:#1a4a8a;padding:10px 14px;color:white;font-weight:600;font-size:13px">🎯 Подбор СЭЗ</div>
+      <div style="padding:14px">
+        <label style="font-size:11px;color:#64748b;display:block;margin-bottom:3px">Отрасль</label>
+        <select id="sez-sector" style="width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;margin-bottom:8px">
+          <option value="">Выберите...</option>
+          <option value="текстиль">👕 Текстиль</option>
+          <option value="пищевая">🍞 Пищевая промышленность</option>
+          <option value="химия">⚗️ Химия</option>
+          <option value="логистика">🚛 Логистика</option>
+          <option value="электроника">💻 Электроника / IT</option>
+          <option value="агро">🌾 Агропром</option>
+          <option value="туризм">🏔️ Туризм</option>
+          <option value="удобрения">🌱 Удобрения</option>
+        </select>
+        <label style="font-size:11px;color:#64748b;display:block;margin-bottom:3px">Регион</label>
+        <select id="sez-region-sel" style="width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;margin-bottom:10px">
+          <option value="">Любой</option>
+          <option value="Согдийская">Согдийская область</option>
+          <option value="Хатлонская">Хатлонская область</option>
+          <option value="ГБАО">ГБАО</option>
+        </select>
+        <button onclick="sezMatch()" style="width:100%;background:#1a4a8a;color:white;border:none;padding:9px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">🔍 Найти СЭЗ</button>
+        <div id="sez-match-res" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+      <div style="background:#0c7873;padding:10px 14px;color:white;font-weight:600;font-size:13px">📈 Калькулятор ROI</div>
+      <div style="padding:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+          <div>
+            <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">СЭЗ</label>
+            <select id="roi-sez-id" style="width:100%;padding:6px;border:1px solid #e2e8f0;border-radius:5px;font-size:11px">
+              <option value="sugd">СЭЗ Сугд</option>
+              <option value="panj">СЭЗ Панҷ</option>
+              <option value="dangara">СЭЗ Дангара</option>
+              <option value="ishkashim">СЭЗ Ишкошим</option>
+              <option value="himzovar">СЭЗ Химзовар</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Инвестиции млн $</label>
+            <input type="number" id="roi-inv" value="5" min="0.1" step="0.5" style="width:100%;padding:6px;border:1px solid #e2e8f0;border-radius:5px;font-size:11px;box-sizing:border-box">
+          </div>
+          <div>
+            <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Выручка/год млн $</label>
+            <input type="number" id="roi-rev" value="2" min="0.1" step="0.1" style="width:100%;padding:6px;border:1px solid #e2e8f0;border-radius:5px;font-size:11px;box-sizing:border-box">
+          </div>
+          <div>
+            <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Лет</label>
+            <input type="number" id="roi-yrs" value="10" min="1" max="25" style="width:100%;padding:6px;border:1px solid #e2e8f0;border-radius:5px;font-size:11px;box-sizing:border-box">
+          </div>
+        </div>
+        <button onclick="sezROI()" style="width:100%;background:#0c7873;color:white;border:none;padding:9px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">💰 Рассчитать ROI</button>
+        <div id="roi-res" style="margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:14px">
+    <div style="background:#0d2342;padding:10px 14px;color:white;font-weight:600;font-size:13px">🤖 AI-консультант по инвестициям в СЭЗ</div>
+    <div style="padding:14px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+        <div>
+          <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Страна инвестора</label>
+          <input id="ai-sez-country" type="text" placeholder="Китай, ОАЭ..." style="width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:5px;font-size:12px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Сектор</label>
+          <input id="ai-sez-sector" type="text" placeholder="текстиль, IT..." style="width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:5px;font-size:12px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Объём ($)</label>
+          <input id="ai-sez-amount" type="text" placeholder="5 млн долл..." style="width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:5px;font-size:12px;box-sizing:border-box">
+        </div>
+      </div>
+      <textarea id="ai-sez-q" rows="2" placeholder="Кадом СЭЗ барои саноати нассоҷӣ беҳтар аст? / Какую СЭЗ выбрать для текстиля?" style="width:100%;padding:8px;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;resize:none;box-sizing:border-box;margin-bottom:8px"></textarea>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+        <button onclick="document.getElementById('ai-sez-q').value=this.textContent" style="background:#f1f5f9;border:1px solid #e2e8f0;padding:3px 8px;border-radius:4px;font-size:11px;cursor:pointer">Лучшая СЭЗ для химии</button>
+        <button onclick="document.getElementById('ai-sez-q').value=this.textContent" style="background:#f1f5f9;border:1px solid #e2e8f0;padding:3px 8px;border-radius:4px;font-size:11px;cursor:pointer">Кадом СЭЗ барои IT беҳтар?</button>
+        <button onclick="document.getElementById('ai-sez-q').value=this.textContent" style="background:#f1f5f9;border:1px solid #e2e8f0;padding:3px 8px;border-radius:4px;font-size:11px;cursor:pointer">Процедура регистрации в СЭЗ</button>
+      </div>
+      <button onclick="sezAI()" style="background:#0d2342;color:white;border:none;padding:9px 20px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">🤖 Получить консультацию</button>
+      <div id="ai-sez-res" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+    <div style="background:#1a4a8a;padding:10px 14px;color:white;font-weight:600;font-size:13px">📋 Каталог всех СЭЗ Таджикистана</div>
+    <div id="sez-catalog" style="overflow-x:auto;padding:0"></div>
   </div>
 
 </div>
