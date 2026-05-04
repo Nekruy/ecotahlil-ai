@@ -131,7 +131,9 @@ function getTradeHistory() {
     if (expPairs.length >= 4) {
       const impMap = new Map(impPairs.map(p => [p.year, p.value]));
       return expPairs.map(p => {
-        const imp = impMap.get(p.year) ?? 0;
+        const rawImp = impMap.get(p.year) ?? 0;
+        // В нац.счетах импорт записан как отрицательный — берём модуль
+        const imp = Math.abs(rawImp);
         return {
           year:            p.year,
           export_mln_usd:  Math.round(p.value),
@@ -192,12 +194,30 @@ function getAllHistory() {
  *   'import'        — импорт, млн USD
  *   'trade_balance' — торговый баланс, млн USD
  */
+// Конвертирует индекс роста/ИПЦ в проценты (108.4 → 8.4)
+// Применяется если >50% значений > 20 — признак индексного формата
+function normalizeToPct(values) {
+  if (!values || values.length === 0) return values;
+  const bigCount = values.filter(v => v != null && v > 20).length;
+  if (bigCount > values.length / 2) {
+    return values.map(v => v != null ? Math.round((v - 100) * 100) / 100 : v);
+  }
+  return values;
+}
+
+// Индикаторы из master CSV хранящиеся как индексы роста (нужна нормализация)
+const INDEX_INDICATORS = new Set(['gdp_growth', 'inflation', 'cpi']);
+
 function getDataForForecasting(indicator) {
   // ── 1. Master dataset (primary: 1997–2035, 65 indicators) ──────────────────
   const ml = getMaster();
   if (ml.ready) {
     const series = ml.getDataForForecasting(indicator);
-    if (series.length >= 4) return series;
+    if (series.length >= 4) {
+      return INDEX_INDICATORS.has((indicator || '').toLowerCase())
+        ? normalizeToPct(series)
+        : series;
+    }
   }
 
   // ── 2. Legacy switch (fallback for FX rates and unmapped indicators) ────────

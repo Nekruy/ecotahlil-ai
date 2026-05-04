@@ -1,7 +1,7 @@
 {
   "meta": {
     "name": "EcotahlilAI Unified Dataset",
-    "version": "2.0",
+    "version": "3.0",
     "built_at": "2026-04-30T17:10:14.921Z",
     "quality": {
       "annual_records": 41,
@@ -17,7 +17,11 @@
         "НБТ РТ"
       ]
     },
-    "updated_at": "2026-04-30T17:27:59.736Z"
+    "updated_at": "2026-04-30T17:27:59.736Z",
+    "fixed_at": "2026-05-04T04:26:24.397Z",
+    "fixes": {
+      "remittances_added": 10
+    }
   },
   "annual": [
     {
@@ -394,7 +398,7 @@
       "export_mln_usd": 1143,
       "import_mln_usd": 3898.14,
       "trade_balance": -2755.14,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1985,
       "population_thou": 8451.6,
       "gdp_deflator": 105.45
     },
@@ -412,7 +416,7 @@
       "export_mln_usd": 1130.5,
       "import_mln_usd": 3405.3,
       "trade_balance": -2274.8,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1672,
       "population_thou": 8647,
       "gdp_deflator": 100.54
     },
@@ -430,7 +434,7 @@
       "export_mln_usd": 1450,
       "import_mln_usd": 3149.08,
       "trade_balance": -1699.08,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1873,
       "population_thou": 8837,
       "gdp_deflator": 109.81
     },
@@ -448,7 +452,7 @@
       "export_mln_usd": 1315.5,
       "import_mln_usd": 3608.8,
       "trade_balance": -2293.3,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 2173,
       "population_thou": 9028.9,
       "gdp_deflator": 103.11
     },
@@ -466,7 +470,7 @@
       "export_mln_usd": 1416.75,
       "import_mln_usd": 3837.1,
       "trade_balance": -2420.35,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 2345,
       "population_thou": 9220.2,
       "gdp_deflator": 103.62
     },
@@ -484,7 +488,7 @@
       "export_mln_usd": 1545.4,
       "import_mln_usd": 3560,
       "trade_balance": -2014.6,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1951,
       "population_thou": 9410,
       "gdp_deflator": 101.43
     },
@@ -502,7 +506,7 @@
       "export_mln_usd": 2296.4,
       "import_mln_usd": 4741.1,
       "trade_balance": -2444.7,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 2571,
       "population_thou": 9801.81,
       "gdp_deflator": 108.48
     },
@@ -520,7 +524,7 @@
       "export_mln_usd": 2142,
       "import_mln_usd": 5167.5,
       "trade_balance": -3573.42,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3837,
       "population_thou": 9982.6,
       "gdp_deflator": 108.23,
       "usd_tjs_rate": 11.03,
@@ -541,7 +545,7 @@
       "export_mln_usd": 2104.98,
       "import_mln_usd": 6628.38,
       "trade_balance": -3936.08,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3241,
       "population_thou": 10183.3,
       "gdp_deflator": 103.72,
       "usd_tjs_rate": 10.84,
@@ -562,7 +566,7 @@
       "export_mln_usd": 1947.5,
       "import_mln_usd": 7007.6,
       "trade_balance": -5577.3,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3100,
       "population_thou": 10382.1,
       "gdp_deflator": 108.2,
       "usd_tjs_rate": 10.8,
