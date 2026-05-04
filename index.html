@@ -5541,6 +5541,22 @@ async function runForecast() {
   }
 }
 
+const FORECAST_UNIT_MAP = {
+  'gdp': 'млрд сомони', 'gdp_growth': '% роста', 'inflation': '% год/год',
+  'usd_tjs': 'сомони/$', 'eur_tjs': 'сомони/€', 'rub_tjs': 'сомони/100₽',
+  'remittances': 'млн долл США', 'gdp_per_capita': 'долл США',
+};
+
+function getForecastLabels(indicator, histLen, foreLen, years) {
+  const hasYears = years && years.length > 0;
+  const lastYear = hasYears ? years[years.length - 1] : new Date().getFullYear() - 1;
+  const histLabels = hasYears
+    ? years.slice(-histLen).map(String)
+    : Array.from({ length: histLen }, (_, i) => String(lastYear - histLen + i + 1));
+  const foreLabels = Array.from({ length: foreLen }, (_, i) => String(lastYear + i + 1));
+  return { histLabels, foreLabels };
+}
+
 function renderForecast(result) {
   const { historical, forecast, histLabels, forecastLabels, anomalies, method, periods } = result;
 
@@ -5553,8 +5569,19 @@ function renderForecast(result) {
   };
   document.getElementById('fcMethodBadge').textContent = methodLabels[method] || method;
 
+  // ── Реальные метки времени ──────────────────────────────────────────────────
+  const realLabels = getForecastLabels(
+    window._forecastIndicator || 'gdp_growth',
+    historical.length,
+    forecast.length,
+    window._forecastYears
+  );
+  const unit = FORECAST_UNIT_MAP[window._forecastIndicator] || '';
+  const fcHead2 = document.querySelector('#fcResults .fc-tbl thead th:nth-child(2)');
+  if (fcHead2) fcHead2.textContent = unit ? `Прогноз (${unit})` : 'Прогноз';
+
   // ── График ─────────────────────────────────────────────────────────────────
-  const allLabels = [...histLabels, ...forecastLabels];
+  const allLabels = [...realLabels.histLabels, ...realLabels.foreLabels];
   const histPoints   = historical.map((v, i) => ({ x: i, y: v }));
   const forecastLine = [
     { x: historical.length - 1, y: historical[historical.length - 1] }, // соединение с историей
@@ -5644,7 +5671,7 @@ function renderForecast(result) {
     const cls   = delta > 0 ? 'fc-delta-up' : delta < 0 ? 'fc-delta-down' : 'fc-delta-flat';
     const arrow = delta > 0 ? '▲' : delta < 0 ? '▼' : '—';
     return `<tr>
-      <td>${forecastLabels[i]}</td>
+      <td><b>${realLabels.foreLabels[i]}</b></td>
       <td class="fc-val">${v}</td>
       <td class="${cls}">${arrow} ${Math.abs(pct)}%</td>
     </tr>`;
@@ -5665,7 +5692,7 @@ function renderForecast(result) {
         <div class="anomaly-item">
           <span class="anomaly-badge">${a.direction === 'high' ? '📈 ВЫСОКОЕ' : '📉 НИЗКОЕ'}</span>
           <div class="anomaly-info">
-            <b>${histLabels[a.index]}</b> — значение: <b>${a.value}</b><br>
+            <b>${realLabels.histLabels[a.index] || histLabels[a.index]}</b> — значение: <b>${a.value}</b><br>
             Z-score: ${a.zscore} · Метод: ${a.method}
           </div>
         </div>
@@ -5765,7 +5792,15 @@ function renderVAR(r) {
     const hist = r.historical[i];
     const fore = r.forecasts.map(fv => fv[i]);
     const n    = hist.length, nF = fore.length;
-    const all  = [...hist.map((_, t) => `T${t + 1}`), ...fore.map((_, t) => `T${n + t + 1}`)];
+    const varYrs = window._varYears || [];
+    const lastVarYear = varYrs.length > 0 ? varYrs[varYrs.length - 1] : new Date().getFullYear() - 1;
+    const all = [
+      ...hist.map((_, t) => {
+        const yi = varYrs.length - hist.length + t;
+        return (yi >= 0 && yi < varYrs.length) ? String(varYrs[yi]) : String(lastVarYear - hist.length + t + 1);
+      }),
+      ...fore.map((_, t) => String(lastVarYear + t + 1)),
+    ];
     const clr  = VAR_COLORS[key];
 
     if (varCharts[key]) { varCharts[key].destroy(); }
@@ -5991,8 +6026,16 @@ function renderGarch(r) {
   const nHist = r.historicalVol.length;
   const nFore = r.forecastVol.length;
 
-  const histLabels = r.historicalVol.map((_, i) => `T${i + 1}`);
-  const foreLabels = r.forecastVol.map((_, i) => `T${nHist + i + 1}`);
+  const gDates = window._garchDates || [];
+  const histLabels = r.historicalVol.map((_, i) => {
+    const di = gDates.length - nHist + i;
+    return (di >= 0 && di < gDates.length) ? gDates[di] : `T${i + 1}`;
+  });
+  const foreLabels = r.forecastVol.map((_, i) => {
+    const fd = new Date();
+    fd.setDate(fd.getDate() + i + 1);
+    return fd.toLocaleDateString('ru', { day: 'numeric', month: 'short' });
+  });
   const allLabels  = [...histLabels, ...foreLabels];
 
   // Соединяем исторические и прогнозные (перекрытие на одну точку)
@@ -7183,6 +7226,7 @@ async function autoLoadForecastData(indicator) {
     if (vals.length > 0) {
       window._forecastData      = vals;
       window._forecastIndicator = indicator;
+      window._forecastYears     = (d.years || []).slice(-(vals.length));
       if (info) {
         info.textContent = '✅ ' + vals.length + ' точек (' + (d.period || '') + ') | ' + (d.source || 'МЭРиТ');
         info.style.background = '#f0fdf4'; info.style.borderColor = '#bbf7d0'; info.style.color = '#166534';
@@ -7205,6 +7249,7 @@ async function autoLoadGarchData(currency) {
     if (vals.length >= 10) {
       window._garchData     = vals;
       window._garchCurrency = currency;
+      window._garchDates    = d.dates || [];
       if (info) {
         info.textContent = '✅ ' + vals.length + ' точек (' + (d.period || '') + ') | ' + (d.source || 'НБТ');
         info.style.background = '#f5f3ff'; info.style.borderColor = '#ddd6fe'; info.style.color = '#5b21b6';
@@ -7233,6 +7278,7 @@ async function autoLoadVARData() {
       exchange_rate: rate.values  || [],
       remittances:   remit.values || [],
     };
+    window._varYears = gdp.years || infl.years || rate.years || remit.years || [];
     const counts = [gdp.count||0, infl.count||0, rate.count||0, remit.count||0];
     if (status) status.textContent = '✅ Данные готовы: ' + counts.join('/') + ' точек (ВВП/Инфл/USD/Перев)';
     const upd = (id, d) => { const el = document.getElementById(id); if (el) el.textContent = (d.count||0) + ' точек | ' + (d.period||''); };
