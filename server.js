@@ -466,13 +466,13 @@ const server = http.createServer(async (req, res) => {
         const remH = hdb.getRemittancesHistory();
 
         if (!varData.gdp || varData.gdp.length < 6)
-          varData.gdp = gdpH.map(r => r.gdp_growth || r.gdp_bln_somoni).filter(v => v != null);
+          varData.gdp = hdb.getDataForForecasting('gdp_growth');
         if (!varData.inflation || varData.inflation.length < 6)
-          varData.inflation = infH.map(r => r.cpi || r.inflation).filter(v => v != null);
+          varData.inflation = hdb.getDataForForecasting('inflation'); // нормализовано: %, не индекс
         if (!varData.exchange_rate || varData.exchange_rate.length < 6)
-          varData.exchange_rate = exH.map(r => r.usd_tjs || r.USD).filter(v => v != null);
+          varData.exchange_rate = hdb.getDataForForecasting('usd_tjs');
         if (!varData.remittances || varData.remittances.length < 6)
-          varData.remittances = remH.map(r => r.amount_mln_usd || r.total_mln_usd || r.remittances).filter(v => v != null);
+          varData.remittances = hdb.getDataForForecasting('remittances');
 
         if (dataSource === 'user-provided') dataSource = 'МЭРиТ/НБТ (auto)';
         else dataSource += ' + МЭРиТ/НБТ';
@@ -1405,15 +1405,31 @@ const server = http.createServer(async (req, res) => {
         case 'gdp':
           result = hdb.getYearRange(hdb.getGDPHistory(), from, to);
           break;
-        case 'inflation':
-          result = hdb.getYearRange(hdb.getInflationHistory(), from, to);
+        case 'inflation': {
+          const values = hdb.getDataForForecasting('inflation');
+          const inflYears = hdb.getInflationHistory().map(r => r.year).slice(-values.length);
+          result = {
+            indicator, values, years: inflYears,
+            count: values.length,
+            period: inflYears.length ? `${inflYears[0]}–${inflYears[inflYears.length - 1]}` : '',
+            source: 'МЭРиТ / Агентство по статистике РТ',
+          };
           break;
+        }
         case 'exchange_rates':
           result = hdb.getYearRange(hdb.getExchangeRateHistory(), from, to);
           break;
-        case 'remittances':
-          result = hdb.getYearRange(hdb.getRemittancesHistory(), from, to);
+        case 'remittances': {
+          const values = hdb.getDataForForecasting('remittances');
+          const remitYears = hdb.getRemittancesHistory().map(r => r.year).slice(-values.length);
+          result = {
+            indicator, values, years: remitYears,
+            count: values.length,
+            period: remitYears.length ? `${remitYears[0]}–${remitYears[remitYears.length - 1]}` : '',
+            source: 'НБТ РТ',
+          };
           break;
+        }
         case 'trade':
           result = hdb.getYearRange(hdb.getTradeHistory(), from, to);
           break;
