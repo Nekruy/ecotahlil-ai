@@ -584,6 +584,24 @@ function loadRealCalibration() {
 const _realCal   = loadRealCalibration();
 const _calibration = calibrateFromForecast();
 
+// ─── Базовые данные 2024 для поля calibration ────────────────────────────────
+const _baseData = (() => {
+  try {
+    const ud    = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'unified_dataset.json'), 'utf8'));
+    const r24   = ud.annual.find(r => r.year === 2024) || ud.annual.filter(r => r.gdp_mln_somoni).slice(-1)[0];
+    const nd    = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'new_ministry_data.json'), 'utf8'));
+    const cge24 = nd.cge_forecast?.find(r => r.year === 2024);
+    return {
+      base_year:           r24?.year               || 2024,
+      base_gdp_mln_somoni: r24?.gdp_mln_somoni     || 155784,
+      usd_tjs_base:        cge24?.usd_tjs_rate      || 10.8,
+      data_quality:        'реальные данные МЭРиТ ✅',
+    };
+  } catch (e) {
+    return { base_year: 2024, base_gdp_mln_somoni: 155784, usd_tjs_base: 10.8, data_quality: 'fallback ⚠️' };
+  }
+})();
+
 // ─── Обёртка cgeSimulate с полем calibration ────────────────────────────────
 
 const _cgeSimulateBase = cgeSimulate;
@@ -591,8 +609,13 @@ function cgeSimulateWithCalibration(shock) {
   const result = _cgeSimulateBase(shock);
   return {
     ...result,
+    gdp_change_pct: result.gdp_change,
     calibration: {
       source:                'SAM 2019 + МЭРиТ 1997–2024 + Прогноз 2025–2027',
+      base_year:             _baseData.base_year,
+      base_gdp_mln_somoni:   _baseData.base_gdp_mln_somoni,
+      usd_tjs_base:          _baseData.usd_tjs_base,
+      data_quality:          _baseData.data_quality,
       base_year_gdp:         _calibration.base_year_gdp         ?? 146475,
       forecast_gdp_2025:     _calibration.forecast_gdp_2025     ?? 166065,
       sectors_recalibrated:  _calibration.calibrated             ?? false,

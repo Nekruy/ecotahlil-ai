@@ -30,6 +30,36 @@ const BASE_EXPORT_2025     = _officialFc.export_mln_usd?.[2025]  ?? 2954;    // 
 const BASE_ELECTRICITY_2025 = _officialFc.electricity_gwh?.[2025] ?? 4420;   // млн кВт/с
 const BASE_ALUMINUM_2025   = _officialFc.aluminum_thou_t?.[2025] ?? 89.6;    // тыс. тонн
 
+// ─── Реальные данные 2024 из датасета — для полей base/meta ─────────────────
+const _stressBase = (() => {
+  try {
+    const fsm  = require('fs');
+    const patm = require('path');
+    const ud   = JSON.parse(fsm.readFileSync(patm.join(__dirname, 'data', 'unified_dataset.json'), 'utf8'));
+    const r24  = ud.annual.find(r => r.year === 2024) || ud.annual.filter(r => r.gdp_mln_somoni).slice(-1)[0];
+    const nd   = JSON.parse(fsm.readFileSync(patm.join(__dirname, 'data', 'new_ministry_data.json'), 'utf8'));
+    const cge24 = nd.cge_forecast?.find(r => r.year === 2024);
+    return {
+      year:                r24?.year                                                   || 2024,
+      gdp_mln_somoni:      r24?.gdp_mln_somoni                                        || 155784,
+      gdp_growth_pct:      r24?.gdp_growth_mert                                       || 8.4,
+      inflation_pct:       r24?.inflation_mert                                         || 3.6,
+      export_mln_usd:      cge24?.export_mln_usd    || r24?.export_mln_usd            || 2954,
+      import_mln_usd:      Math.abs(cge24?.import_mln_usd || r24?.import_mln_usd      || 7008),
+      usd_tjs:             cge24?.usd_tjs_rate                                         || 10.8,
+      remittances_mln_usd: r24?.remittances_mln_usd                                   || 3100,
+      dataSource:          'unified_dataset + CGE МЭРиТ РТ (2024)',
+    };
+  } catch (e) {
+    return {
+      year: 2024, gdp_mln_somoni: 155784, gdp_growth_pct: 8.4,
+      inflation_pct: 3.6, export_mln_usd: 2954, import_mln_usd: 7008,
+      usd_tjs: 10.8, remittances_mln_usd: 3100, dataSource: 'константы (fallback)',
+    };
+  }
+})();
+console.log('[stressTest] Базовые данные:', `ВВП=${_stressBase.gdp_mln_somoni}млн год=${_stressBase.year}`);
+
 /** Добавляет поле baseline к результату стресс-теста */
 function addBaseline(result, gdpChange) {
   return {
@@ -439,7 +469,25 @@ function runStressTest(scenario, params) {
     default:
       throw new Error(`Неизвестный сценарий: ${scenario}`);
   }
-  return addBaseline(result, result.gdpChange);
+  const withBaseline = addBaseline(result, result.gdpChange);
+  return {
+    ...withBaseline,
+    gdp_impact_pct: result.gdpChange,
+    base: {
+      year:                _stressBase.year,
+      gdp_mln_somoni:      _stressBase.gdp_mln_somoni,
+      gdp_growth_pct:      _stressBase.gdp_growth_pct,
+      inflation_pct:       _stressBase.inflation_pct,
+      export_mln_usd:      _stressBase.export_mln_usd,
+      import_mln_usd:      _stressBase.import_mln_usd,
+      usd_tjs:             _stressBase.usd_tjs,
+      remittances_mln_usd: _stressBase.remittances_mln_usd,
+    },
+    meta: {
+      dataSource: _stressBase.dataSource,
+      baseYear:   _stressBase.year,
+    },
+  };
 }
 
 module.exports = { runStressTest, scenarioOilPrice, scenarioRemittances, scenarioCropFailure, scenarioHydropower };
