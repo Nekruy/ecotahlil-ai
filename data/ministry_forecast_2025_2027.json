@@ -3,7 +3,8 @@
     "source": "МЭРиТ РТ — Официальный прогноз 2025–2027",
     "file": "data/Forecast_2025_2027.xlsx",
     "sheet": "1",
-    "imported_at": "2026-04-16T08:58:54.803Z"
+    "imported_at": "2026-04-16T08:58:54.803Z",
+    "note": "gdp_growth_real = номинальный рост ВВП минус инфляция МЭРиТ"
   },
   "official_forecast": {
     "population_thou": {
@@ -88,5 +89,28 @@
     "industry_share_2024": 39.5,
     "agriculture_share_2024": 47.3,
     "export_gdp_ratio_2024": 18.7
-  }
+  },
+  "forecast": [
+    {
+      "year": 2025,
+      "gdp_mln_somoni": 166065,
+      "gdp_growth_nominal": 13.37,
+      "gdp_growth_real": 8.37,
+      "inflation_assumed": 5
+    },
+    {
+      "year": 2026,
+      "gdp_mln_somoni": 187536,
+      "gdp_growth_nominal": 12.93,
+      "gdp_growth_real": 7.93,
+      "inflation_assumed": 5
+    },
+    {
+      "year": 2027,
+      "gdp_mln_somoni": 211197,
+      "gdp_growth_nominal": 12.62,
+      "gdp_growth_real": 8.62,
+      "inflation_assumed": 4
+    }
+  ]
 }

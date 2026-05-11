@@ -784,7 +784,7 @@ const server = http.createServer(async (req, res) => {
       const body = await readBody(req);
       const { data, periods, method, currency, indicator } = JSON.parse(body.toString('utf8'));
 
-      const { autoArima, prophet, detectAnomalies, ensembleForecast } = require('./forecasting');
+      const { autoArima, prophet, detectAnomalies, ensembleForecast, backtestArima } = require('./forecasting');
 
       // Авто-загрузка данных НБТ или исторических макро-данных, если data не передан
       let numData = (Array.isArray(data) ? data : []).map(Number).filter(v => !isNaN(v));
@@ -844,6 +844,10 @@ const server = http.createServer(async (req, res) => {
       const histLabels    = numData.map((_, i) => `T${i + 1}`);
       const forecastLabels = Array.from({ length: n }, (_, i) => `T${numData.length + i + 1}`);
 
+      // Walk-forward validation для отображения MAPE в UI
+      let validation = null;
+      try { validation = backtestArima(numData); } catch (_) {}
+
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
         historical: numData,
@@ -851,6 +855,7 @@ const server = http.createServer(async (req, res) => {
         forecastLabels,
         anomalies,
         periods: n,
+        validation,
         ...result,
         meta: { dataSource, dataPoints: numData.length, collectedAt, modelVersion: MODEL_VERSION },
       }));

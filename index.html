@@ -5603,7 +5603,7 @@ function getForecastLabels(indicator, histLen, foreLen, years) {
 }
 
 function renderForecast(result) {
-  const { historical, forecast, histLabels, forecastLabels, anomalies, method, periods } = result;
+  const { historical, forecast, histLabels, forecastLabels, anomalies, method, periods, validation } = result;
 
   document.getElementById('fcResults').style.display = 'block';
   const methodLabels = {
@@ -5612,7 +5612,10 @@ function renderForecast(result) {
     'arima':      '📐 ARIMA(1,1,0)',
     'prophet':    '🔮 Prophet',
   };
-  document.getElementById('fcMethodBadge').textContent = methodLabels[method] || method;
+  const mapeStr = validation?.mape != null
+    ? ` · MAPE ${(+validation.mape).toFixed(1)}% · MAE ${(+validation.mae).toFixed(2)}`
+    : '';
+  document.getElementById('fcMethodBadge').textContent = (methodLabels[method] || method) + mapeStr;
 
   // ── Реальные метки времени ──────────────────────────────────────────────────
   const realLabels = getForecastLabels(

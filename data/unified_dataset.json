@@ -308,9 +308,10 @@
       "export_mln_usd": 791.25,
       "import_mln_usd": 3460.29,
       "trade_balance": -2669.04,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 2254,
       "population_thou": 7519.3,
-      "gdp_deflator": 112.45
+      "gdp_deflator": 112.45,
+      "remittances_source": "World Bank WDI BX.TRF.PWKR.CD.DT"
     },
     {
       "year": 2011,
@@ -326,9 +327,10 @@
       "export_mln_usd": 1821.8,
       "import_mln_usd": 3646.76,
       "trade_balance": -1824.96,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3037,
       "population_thou": 7714.2,
-      "gdp_deflator": 113.32
+      "gdp_deflator": 113.32,
+      "remittances_source": "World Bank WDI BX.TRF.PWKR.CD.DT"
     },
     {
       "year": 2012,
@@ -344,9 +346,10 @@
       "export_mln_usd": 1847.3,
       "import_mln_usd": 4358.9,
       "trade_balance": -2511.6,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3628,
       "population_thou": 7897.3,
-      "gdp_deflator": 111.87
+      "gdp_deflator": 111.87,
+      "remittances_source": "World Bank WDI BX.TRF.PWKR.CD.DT"
     },
     {
       "year": 2013,
@@ -362,9 +365,10 @@
       "export_mln_usd": 1306.77,
       "import_mln_usd": 4836.09,
       "trade_balance": -3529.32,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3900,
       "population_thou": 8074.3,
-      "gdp_deflator": 104.34
+      "gdp_deflator": 104.34,
+      "remittances_source": "World Bank WDI BX.TRF.PWKR.CD.DT"
     },
     {
       "year": 2014,
@@ -380,9 +384,10 @@
       "export_mln_usd": 1229.7,
       "import_mln_usd": 4759.9,
       "trade_balance": -3530.2,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 3455,
       "population_thou": 8256.6,
-      "gdp_deflator": 105.47
+      "gdp_deflator": 105.47,
+      "remittances_source": "World Bank WDI BX.TRF.PWKR.CD.DT"
     },
     {
       "year": 2015,

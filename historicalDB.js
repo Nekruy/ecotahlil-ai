@@ -238,20 +238,27 @@ function getDataForForecasting(indicator) {
     case 'usd_tjs':
     case 'usd': {
       try {
-        const rates = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'rates_timeseries.json'), 'utf8'));
+        // База: exchange_rates_history (1997-2024, 28 лет)
+        const erh = readData('exchange_rates_history.json');
         const byYear = {};
-        rates.forEach(r => {
-          const yr = r.date?.slice(0, 4);
-          if (yr && r.usd != null && parseInt(yr) >= 2010) {
-            if (!byYear[yr]) byYear[yr] = [];
-            byYear[yr].push(r.usd);
-          }
-        });
-        const annualAvg = Object.keys(byYear).sort().map(yr => {
-          const arr = byYear[yr];
-          return Math.round(arr.reduce((a, b) => a + b, 0) / arr.length * 100) / 100;
-        });
-        if (annualAvg.length >= 5) return annualAvg;
+        erh.forEach(r => { if (r.year && r.usd_tjs != null) byYear[r.year] = r.usd_tjs; });
+        // Дополняем/заменяем годовыми средними из rates_timeseries (более гранулярные данные)
+        try {
+          const ts = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'rates_timeseries.json'), 'utf8'));
+          const tsYears = {};
+          ts.forEach(r => {
+            const yr = r.date?.slice(0, 4);
+            if (yr && r.usd != null) {
+              if (!tsYears[yr]) tsYears[yr] = [];
+              tsYears[yr].push(r.usd);
+            }
+          });
+          Object.entries(tsYears).forEach(([yr, arr]) => {
+            byYear[parseInt(yr)] = Math.round(arr.reduce((a, b) => a + b, 0) / arr.length * 100) / 100;
+          });
+        } catch (e) {}
+        const sorted = Object.keys(byYear).map(Number).sort((a, b) => a - b);
+        if (sorted.length >= 5) return sorted.map(yr => byYear[yr]);
       } catch (e) {}
       return readData('exchange_rates_history.json').map(r => r.usd_tjs).filter(v => v != null);
     }
