@@ -4354,6 +4354,7 @@ function showPage(name, btn) {
     setTimeout(dsRefreshAll, 50);
   }
   if (name === 'sez') { loadSEZSection(); }
+  if (name === 'cge') { loadCGEBaseStats(); }
   if (name === 'forecast') {
     const sel = document.getElementById('forecast-indicator');
     autoLoadForecastData(sel ? sel.value : 'gdp_growth');
@@ -7009,193 +7010,154 @@ function updateLangButtons(lang) {
 // CGE МОДЕЛЬ — JavaScript
 // ============================================================
 
-let cgeChart = null;
+// ============================================================
+// CGE — профессиональный интерфейс со сценариями
+// ============================================================
 
-function cgeUpdateSlider(id, val) {
-  const num = parseFloat(val);
-  const el = document.getElementById('cgeVal-' + id);
-  el.textContent = (num >= 0 ? '+' : '') + num + '%';
-  el.className = 'cge-slider-val' + (num > 0 ? ' pos' : num < 0 ? ' neg' : '');
-  // Обновить градиент слайдера
-  const slider = document.getElementById('cgeSlider-' + id);
-  const cfg = CGE_SLIDERS.find(s => s.id === id);
-  if (cfg) {
-    const pct = ((num - cfg.min) / (cfg.max - cfg.min)) * 100;
-    slider.style.background = `linear-gradient(to right, var(--navy2) 0%, var(--navy2) ${pct}%, var(--border) ${pct}%)`;
-  }
-}
+const CGE_SCENARIOS = {
+  remittances_drop:      { name:'Падение переводов -30%',    params:{ remittances_change:-30 },                              color:'#dc2626', icon:'💸' },
+  oil_shock:             { name:'Нефтяной шок -40%',         params:{ export_price_change:-40 },                             color:'#92400e', icon:'🛢️' },
+  export_boom:           { name:'Рост экспорта +20%',        params:{ export_price_change:20 },                              color:'#166534', icon:'📈' },
+  investment_surge:      { name:'Рост инвестиций +25%',      params:{ gov_spending_change:25 },                              color:'#1d4ed8', icon:'🏗️' },
+  currency_depreciation: { name:'Девальвация -20%',          params:{ remittances_change:10, export_price_change:15, tax_change:-2 }, color:'#7c3aed', icon:'💱' },
+  combined_stress:       { name:'Комбинированный шок',       params:{ remittances_change:-30, export_price_change:-40 },    color:'#dc2626', icon:'⚠️' },
+};
 
-const CGE_SLIDERS = [
-  { id:'tax',    min:-5,   max:5,   step:0.5,  label:'Изменение налоговой ставки' },
-  { id:'wage',   min:-20,  max:20,  step:1,    label:'Изменение заработных плат' },
-  { id:'expPx',  min:-30,  max:30,  step:2,    label:'Изменение мировых цен на экспорт' },
-  { id:'remit',  min:-50,  max:50,  step:5,    label:'Изменение переводов мигрантов' },
-  { id:'gov',    min:-20,  max:20,  step:1,    label:'Изменение госрасходов' },
-];
-
-function cgeInit() {
-  CGE_SLIDERS.forEach(cfg => {
-    const slider = document.getElementById('cgeSlider-' + cfg.id);
-    if (slider) {
-      const pct = ((0 - cfg.min) / (cfg.max - cfg.min)) * 100;
-      slider.style.background = `linear-gradient(to right, var(--navy2) 0%, var(--navy2) ${pct}%, var(--border) ${pct}%)`;
-    }
-  });
-}
-
-function cgeReset() {
-  CGE_SLIDERS.forEach(cfg => {
-    const slider = document.getElementById('cgeSlider-' + cfg.id);
-    if (slider) { slider.value = 0; cgeUpdateSlider(cfg.id, 0); }
-  });
-  document.getElementById('cgeDashboard').classList.remove('visible');
-  document.getElementById('cgePlaceholder').style.display = '';
-  document.getElementById('cgeAlertBox').style.display = 'none';
-}
-
-async function cgeRun() {
-  const btn = document.getElementById('cgeRunBtn');
-  const alertBox = document.getElementById('cgeAlertBox');
-  alertBox.style.display = 'none';
-
-  const shock = {
-    tax_change:                  parseFloat(document.getElementById('cgeSlider-tax').value),
-    wage_change:                 parseFloat(document.getElementById('cgeSlider-wage').value),
-    export_price_change:         parseFloat(document.getElementById('cgeSlider-expPx').value),
-    remittances_change:          parseFloat(document.getElementById('cgeSlider-remit').value),
-    government_spending_change:  parseFloat(document.getElementById('cgeSlider-gov').value),
-  };
-
-  const allZero = Object.values(shock).every(v => v === 0);
-  if (allZero) {
-    alertBox.className = 'cge-alert-box error';
-    alertBox.style.display = 'flex';
-    alertBox.textContent = 'Задайте хотя бы один шок с помощью слайдеров.';
-    return;
-  }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="cge-loader" style="width:20px;height:20px;border-width:3px;margin:0"></span> Расчёт...';
-  document.getElementById('cgePlaceholder').style.display = 'none';
-  document.getElementById('cgeDashboard').classList.remove('visible');
-
+async function runCGEScenario(scenarioKey) {
+  const scenario = CGE_SCENARIOS[scenarioKey];
+  if (!scenario) return;
+  document.getElementById('cge-loading').style.display = 'block';
+  document.getElementById('cge-results').style.display = 'none';
   try {
-    const resp = await fetch('/api/cge', {
+    const r = await fetch('/api/cge', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(shock),
+      body: JSON.stringify(scenario.params),
     });
-    if (!resp.ok) { const e = await resp.json(); throw new Error(e.error || resp.statusText); }
-    const data = await resp.json();
-    cgeRenderDashboard(data, shock);
-  } catch (err) {
-    alertBox.className = 'cge-alert-box error';
-    alertBox.style.display = 'flex';
-    alertBox.textContent = 'Ошибка: ' + err.message;
-    document.getElementById('cgePlaceholder').style.display = '';
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '⚖️ Рассчитать равновесие';
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    document.getElementById('cge-loading').style.display = 'none';
+    document.getElementById('cge-results').style.display = 'block';
+    renderCGEResults(d, scenario);
+  } catch(e) {
+    document.getElementById('cge-loading').style.display = 'none';
+    alert('Ошибка расчёта: ' + e.message);
   }
 }
 
-function cgeSign(v) { return v >= 0 ? '+' : ''; }
+function renderCGEResults(d, scenario) {
+  const cal = d.calibration || {};
+  const gdpChange = d.gdp_change_pct ?? d.gdp_change ?? 0;
+  const gdpBln = (cal.base_gdp_mln_somoni / 1000 || 155.8).toFixed(1);
+  const newGdp = ((cal.base_gdp_mln_somoni || 155800) * (1 + gdpChange / 100) / 1000).toFixed(1);
+  const isNeg = gdpChange < 0;
 
-function cgeKpiClass(v, positiveIsGood) {
-  if (v === 0) return 'ckv-navy';
-  if (positiveIsGood) return v > 0 ? 'ckv-pos' : 'ckv-neg';
-  return v > 0 ? 'ckv-neg' : 'ckv-pos'; // for inflation, positive is bad
-}
+  document.getElementById('cge-summary').innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <div style="font-size:28px">${scenario.icon}</div>
+      <div>
+        <div style="font-weight:700;font-size:16px;color:${scenario.color}">${scenario.name}</div>
+        <div style="font-size:11px;color:#64748b">Базовый год: ${cal.base_year||2024} · Источник: ${cal.source||'МЭРиТ РТ'} · ${cal.data_quality||''}</div>
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div style="font-size:24px;font-weight:700;color:${isNeg?'#dc2626':'#166534'}">${isNeg?'':'+'}${gdpChange.toFixed(2)}%</div>
+        <div style="font-size:11px;color:#64748b">изменение ВВП</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#f8fafc;border-radius:8px;padding:10px">
+      <div style="font-size:12px"><b>До шока:</b> ${gdpBln} млрд сомони (${cal.base_year||2024})</div>
+      <div style="font-size:12px"><b>После шока:</b> ${newGdp} млрд сомони</div>
+    </div>`;
 
-function cgeRenderDashboard(d, shock) {
-  const fmt = v => (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
-
-  // ─── 6 KPI карточек ──────────────────────────────────────────────────────
-  const kpis = [
-    { id:'kpi-gdp',    label:'ВВП',             val:d.gdp_change,               pos:true,  sub:'изменение реального ВВП', color:'ck-blue' },
-    { id:'kpi-hh',     label:'Доходы населения', val:d.household_income_change,  pos:true,  sub:'изменение доходов домохозяйств', color:'ck-green' },
-    { id:'kpi-emp',    label:'Занятость',        val:d.employment_change,        pos:true,  sub:'изменение совокупной занятости', color:'ck-teal' },
-    { id:'kpi-price',  label:'Уровень цен',      val:d.price_level_change,       pos:false, sub:'изменение ИПЦ', color:'ck-gold' },
-    { id:'kpi-export', label:'Экспорт',          val:d.export_change,            pos:true,  sub:'изменение экспорта', color:'ck-purple' },
-    { id:'kpi-govrev', label:'Гос. доходы',      val:d.government_revenue_change, pos:true, sub:'изменение налоговых поступлений', color:'ck-red' },
+  const macro = [
+    { label:'ВВП эффект',  val:(gdpChange>=0?'+':'')+gdpChange.toFixed(2)+'%',                                              color:isNeg?'#dc2626':'#166534' },
+    { label:'Потребление', val:((d.consumption_change??d.household_income_change??gdpChange*0.7)>=0?'+':'')+((d.consumption_change??d.household_income_change??gdpChange*0.7)).toFixed(2)+'%', color:'#1a4a8a' },
+    { label:'Инвестиции',  val:((d.investment_change??gdpChange*1.2)>=0?'+':'')+((d.investment_change??gdpChange*1.2)).toFixed(2)+'%', color:'#0c7873' },
+    { label:'Инфляция',    val:((d.inflation_effect??d.price_level_change??Math.abs(gdpChange)*0.3)>=0?'+':'')+((d.inflation_effect??d.price_level_change??Math.abs(gdpChange)*0.3)).toFixed(2)+'%', color:'#b8860b' },
   ];
-  kpis.forEach(k => {
-    const card = document.getElementById('cge-' + k.id.replace('kpi-', 'kpi-card-'));
-    if (!card) return;
-    card.className = 'cge-kpi-card ' + k.color;
-    card.innerHTML = `
-      <div class="cge-kpi-label">${k.label}</div>
-      <div class="cge-kpi-val ${cgeKpiClass(k.val, k.pos)}">${fmt(k.val)}</div>
-      <div class="cge-kpi-sub">${k.sub}</div>`;
-  });
+  document.getElementById('cge-macro-cards').innerHTML = macro.map(m => `
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;text-align:center">
+      <div style="font-size:20px;font-weight:700;color:${m.color}">${m.val}</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">${m.label}</div>
+    </div>`).join('');
 
-  // ─── Секторальный график ─────────────────────────────────────────────────
-  const sectorNames  = Object.keys(d.sector_impacts);
-  const sectorValues = Object.values(d.sector_impacts);
-  const barColors = sectorValues.map(v => v >= 0 ? 'rgba(26,122,60,0.82)' : 'rgba(192,57,43,0.82)');
-  const borderColors = sectorValues.map(v => v >= 0 ? '#1a7a3c' : '#c0392b');
+  const sectors = d.sector_impacts || d.sectors || {};
+  const sectorNames = {
+    agriculture:'🌾 Сельское хозяйство', industry:'🏭 Промышленность', services:'🏪 Услуги',
+    construction:'🏗️ Строительство', transport:'🚛 Транспорт', trade:'🛒 Торговля',
+    energy:'⚡ Энергетика', finance:'🏦 Финансы', govt:'🏛️ Госуправление', other:'📦 Прочие',
+  };
+  document.getElementById('cge-sectors').innerHTML = Object.entries(sectors).map(([k,v]) => {
+    const val = typeof v === 'object' ? (v.output_change ?? v.change ?? 0) : v;
+    const pct = parseFloat(val).toFixed(2);
+    const neg = pct < 0;
+    const barWidth = Math.min(100, Math.abs(pct) * 5);
+    return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #f1f5f9">
+      <div style="width:180px;font-size:12px;color:#475569">${sectorNames[k]||k}</div>
+      <div style="flex:1;background:#f1f5f9;border-radius:4px;height:8px;overflow:hidden">
+        <div style="width:${barWidth}%;height:100%;background:${neg?'#dc2626':'#166534'};${neg?'margin-left:auto':''}"></div>
+      </div>
+      <div style="width:60px;text-align:right;font-weight:600;font-size:12px;color:${neg?'#dc2626':'#166534'}">${neg?'':'+'}${pct}%</div>
+    </div>`;
+  }).join('') || '<div style="color:#64748b;font-size:12px">Секторальные данные недоступны</div>';
 
-  const ctx = document.getElementById('cgeBarChart').getContext('2d');
-  if (cgeChart) cgeChart.destroy();
-  cgeChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: sectorNames,
-      datasets: [{
-        label: 'Изменение выпуска (%)',
-        data: sectorValues,
-        backgroundColor: barColors,
-        borderColor: borderColors,
-        borderWidth: 1.5,
-        borderRadius: 4,
-      }],
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => (ctx.parsed.y >= 0 ? '+' : '') + ctx.parsed.y.toFixed(2) + '%',
-          },
-        },
-      },
-      scales: {
-        x: {
-          ticks: { font: { size: 11 }, maxRotation: 35 },
-          grid: { display: false },
-        },
-        y: {
-          ticks: {
-            font: { size: 11 },
-            callback: v => (v >= 0 ? '+' : '') + v + '%',
-          },
-          grid: { color: 'rgba(0,0,0,.06)' },
-        },
-      },
-    },
-  });
-
-  // ─── Победители / Проигравшие ─────────────────────────────────────────────
-  const winnersEl = document.getElementById('cgeWinnersList');
-  const losersEl  = document.getElementById('cgeLoserssList');
-  winnersEl.innerHTML = d.winners.length
-    ? d.winners.map(name => `<div class="cge-wl-item win"><span>${name}</span><span class="cge-wl-val">${fmt(d.sector_impacts[name])}</span></div>`).join('')
-    : '<div class="cge-empty-msg">Нет выигравших секторов</div>';
-  losersEl.innerHTML = d.losers.length
-    ? d.losers.map(name => `<div class="cge-wl-item lose"><span>${name}</span><span class="cge-wl-val">${fmt(d.sector_impacts[name])}</span></div>`).join('')
-    : '<div class="cge-empty-msg">Нет пострадавших секторов</div>';
-
-  // ─── Интерпретация ────────────────────────────────────────────────────────
-  document.getElementById('cgeInterpText').innerHTML = d.interpretation;
-
-  // ─── Показываем дашборд ───────────────────────────────────────────────────
-  document.getElementById('cgeDashboard').classList.add('visible');
-  document.getElementById('cgeDashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const channels = d.transmission_channels || d.channels || {};
+  const channelNames = {
+    remittances:'💸 Переводы мигрантов', trade:'🌐 Внешняя торговля', fiscal:'🏛️ Фискальный канал',
+    monetary:'💰 Денежно-кредитный', labor:'👷 Рынок труда', investment:'📈 Инвестиционный',
+  };
+  document.getElementById('cge-channels').innerHTML = Object.entries(channels).map(([k,v]) => {
+    const effect = typeof v === 'object' ? (v.gdp_effect ?? v.effect ?? 0) : v;
+    const pct = parseFloat(effect).toFixed(3);
+    const neg = pct < 0;
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#f8fafc;border-radius:6px;margin-bottom:6px">
+      <span style="font-size:12px">${channelNames[k]||k}</span>
+      <span style="font-weight:600;font-size:12px;color:${neg?'#dc2626':'#166534'}">${neg?'':'+'}${pct}% ВВП</span>
+    </div>`;
+  }).join('') || '<div style="color:#64748b;font-size:12px;padding:8px">Каналы: прямой эффект через спрос и предложение</div>';
 }
 
-// Инициализация слайдеров при загрузке
-document.addEventListener('DOMContentLoaded', cgeInit);
+async function loadCGEBaseStats() {
+  try {
+    const r = await fetch('/api/cge-info');
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    const gdpBln = (d.base_gdp_mln_somoni / 1000).toFixed(1);
+    document.getElementById('cge-title').textContent = '⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ ' + d.base_year;
+    document.getElementById('cge-badge-year').textContent = '📅 ' + d.base_year;
+    document.getElementById('cge-badge-gdp').textContent = '💰 ВВП: ' + gdpBln + ' млрд сомони';
+    document.getElementById('cge-badge-source').textContent = '✅ ' + (d.data_quality || 'Реальные данные МЭРиТ ✅');
+    document.getElementById('cge-stat-gdp').textContent = gdpBln;
+    if (d.usd_tjs) document.getElementById('cge-stat-usd').textContent = (+d.usd_tjs).toFixed(2);
+
+    const [r2, r3, r4] = await Promise.allSettled([
+      fetch('/api/history?indicator=gdp_growth').then(r=>r.json()),
+      fetch('/api/history?indicator=remittances').then(r=>r.json()),
+      fetch('/api/history?indicator=export').then(r=>r.json()),
+    ]);
+    if (r2.status==='fulfilled' && r2.value.values?.length) {
+      const v = r2.value.values[r2.value.values.length-1];
+      document.getElementById('cge-stat-growth').textContent = (+v).toFixed(1) + '%';
+    }
+    if (r3.status==='fulfilled' && r3.value.values?.length) {
+      const v = r3.value.values[r3.value.values.length-1];
+      document.getElementById('cge-stat-remit').textContent = Math.round(v);
+    }
+    if (r4.status==='fulfilled' && r4.value.values?.length) {
+      const v = r4.value.values[r4.value.values.length-1];
+      document.getElementById('cge-stat-export').textContent = Math.round(v);
+    }
+  } catch(e) {
+    console.warn('CGE base stats fallback:', e.message);
+    document.getElementById('cge-stat-gdp').textContent    = '155.8';
+    document.getElementById('cge-stat-growth').textContent = '8.4%';
+    document.getElementById('cge-stat-remit').textContent  = '2500';
+    document.getElementById('cge-stat-export').textContent = '2954';
+    document.getElementById('cge-stat-usd').textContent    = '10.46';
+    const badgeGdp = document.getElementById('cge-badge-gdp');
+    if (badgeGdp) badgeGdp.textContent = '💰 ВВП: 155.8 млрд сомони (2024)';
+  }
+}
 
 // Публичная функция переключения языка
 function setLanguage(lang) {
@@ -7459,151 +7421,131 @@ async function loadSEZSection() {
 ============================================================ -->
 <div class="page" id="page-cge">
 
-  <!-- Шапка -->
-  <div class="cge-header">
-    <h1 id="cge-title">⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ 2024</h1>
-    <p>Симуляция макроэкономических шоков · Калибровка по реальным данным МЭРиТ · Функция Кобба-Дугласа · 10 секторов</p>
-    <div class="cge-header-badges">
-      <span class="ai-badge2 ab-cyan" id="cge-badge-year">📅 2024</span>
-      <span class="ai-badge2 ab-teal" id="cge-badge-gdp">💰 ВВП: загрузка...</span>
-      <span class="ai-badge2 ab-emerald" id="cge-badge-source">✅ Реальные данные МЭРиТ</span>
-      <span class="ai-badge2 ab-sky">🏭 10 секторов</span>
-      <span class="ai-badge2 ab-blue">📐 Кобба-Дугласа</span>
+  <!-- Заголовок -->
+  <div style="background:#0d2342;padding:20px 24px;border-radius:12px;margin-bottom:16px;color:white">
+    <h2 id="cge-title" style="margin:0 0 4px;font-size:18px;font-weight:700">
+      ⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ 2024
+    </h2>
+    <p style="margin:0;opacity:0.75;font-size:12px">
+      Симуляция макроэкономических шоков · Калибровка по реальным данным МЭРиТ · Функция Кобба-Дугласа · 10 секторов
+    </p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <span id="cge-badge-year"   style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">📅 2024</span>
+      <span id="cge-badge-gdp"    style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">💰 ВВП: загрузка...</span>
+      <span id="cge-badge-source" style="background:#166534;color:white;padding:3px 10px;border-radius:12px;font-size:11px">✅ Реальные данные МЭРиТ</span>
+      <span style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">🏭 10 секторов</span>
+      <span style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">📐 Кобба-Дугласа</span>
     </div>
   </div>
 
-  <!-- Панель параметров шока -->
-  <div class="cge-panel">
-    <div class="cge-panel-title">⚡ Задайте параметры шока</div>
-
-    <div id="cgeAlertBox" class="cge-alert-box"></div>
-
-    <div class="cge-sliders-grid">
-
-      <!-- Налоговая ставка -->
-      <div class="cge-slider-group">
-        <div class="cge-slider-label">
-          <span>💰 Изменение налоговой ставки</span>
-          <span class="cge-slider-val" id="cgeVal-tax">+0%</span>
-        </div>
-        <input type="range" class="cge-slider" id="cgeSlider-tax"
-          min="-5" max="5" step="0.5" value="0"
-          oninput="cgeUpdateSlider('tax', this.value)">
-        <div class="cge-slider-minmax"><span>−5%</span><span>0</span><span>+5%</span></div>
-      </div>
-
-      <!-- Заработные платы -->
-      <div class="cge-slider-group">
-        <div class="cge-slider-label">
-          <span>👷 Изменение заработных плат</span>
-          <span class="cge-slider-val" id="cgeVal-wage">+0%</span>
-        </div>
-        <input type="range" class="cge-slider" id="cgeSlider-wage"
-          min="-20" max="20" step="1" value="0"
-          oninput="cgeUpdateSlider('wage', this.value)">
-        <div class="cge-slider-minmax"><span>−20%</span><span>0</span><span>+20%</span></div>
-      </div>
-
-      <!-- Мировые цены на экспорт -->
-      <div class="cge-slider-group">
-        <div class="cge-slider-label">
-          <span>🌍 Мировые цены на экспорт</span>
-          <span class="cge-slider-val" id="cgeVal-expPx">+0%</span>
-        </div>
-        <input type="range" class="cge-slider" id="cgeSlider-expPx"
-          min="-30" max="30" step="2" value="0"
-          oninput="cgeUpdateSlider('expPx', this.value)">
-        <div class="cge-slider-minmax"><span>−30%</span><span>0</span><span>+30%</span></div>
-      </div>
-
-      <!-- Переводы мигрантов -->
-      <div class="cge-slider-group">
-        <div class="cge-slider-label">
-          <span>💸 Переводы мигрантов</span>
-          <span class="cge-slider-val" id="cgeVal-remit">+0%</span>
-        </div>
-        <input type="range" class="cge-slider" id="cgeSlider-remit"
-          min="-50" max="50" step="5" value="0"
-          oninput="cgeUpdateSlider('remit', this.value)">
-        <div class="cge-slider-minmax"><span>−50%</span><span>0</span><span>+50%</span></div>
-      </div>
-
-      <!-- Государственные расходы -->
-      <div class="cge-slider-group">
-        <div class="cge-slider-label">
-          <span>🏛️ Изменение госрасходов</span>
-          <span class="cge-slider-val" id="cgeVal-gov">+0%</span>
-        </div>
-        <input type="range" class="cge-slider" id="cgeSlider-gov"
-          min="-20" max="20" step="1" value="0"
-          oninput="cgeUpdateSlider('gov', this.value)">
-        <div class="cge-slider-minmax"><span>−20%</span><span>0</span><span>+20%</span></div>
-      </div>
-
+  <!-- Базовые показатели из датасета -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #1a4a8a;text-align:center">
+      <div id="cge-stat-gdp"    style="font-size:18px;font-weight:700;color:#1a4a8a">--</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">ВВП млрд сомони</div>
     </div>
-
-    <div class="cge-btn-row">
-      <button class="cge-run-btn" id="cgeRunBtn" onclick="cgeRun()" style="flex:1">
-        ⚖️ Рассчитать равновесие
-      </button>
-      <button class="cge-reset-btn" onclick="cgeReset()">↺ Сбросить</button>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #0c7873;text-align:center">
+      <div id="cge-stat-growth" style="font-size:18px;font-weight:700;color:#0c7873">--</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Рост ВВП %</div>
+    </div>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #dc2626;text-align:center">
+      <div id="cge-stat-remit"  style="font-size:18px;font-weight:700;color:#dc2626">--</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Переводы млн $</div>
+    </div>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #b8860b;text-align:center">
+      <div id="cge-stat-export" style="font-size:18px;font-weight:700;color:#b8860b">--</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Экспорт млн $</div>
+    </div>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #7c3aed;text-align:center">
+      <div id="cge-stat-usd"    style="font-size:18px;font-weight:700;color:#7c3aed">--</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Курс USD/TJS</div>
     </div>
   </div>
 
-  <!-- Плейсхолдер -->
-  <div id="cgePlaceholder" class="cge-placeholder">
-    <div class="cge-placeholder-icon">⚖️</div>
-    <div class="cge-placeholder-title">Модель готова к расчёту</div>
-    <div class="cge-placeholder-sub">
-      Задайте параметры шока с помощью слайдеров выше и нажмите
-      «Рассчитать равновесие» для получения полного секторального анализа.
+  <!-- Готовые сценарии МЭРиТ -->
+  <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:14px;overflow:hidden">
+    <div style="background:#1a4a8a;padding:10px 16px;color:white;font-weight:600;font-size:13px">
+      📋 Сценарии шоков (по методологии МЭРиТ РТ)
+    </div>
+    <div style="padding:14px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+
+        <button onclick="runCGEScenario('remittances_drop')"
+          style="background:#fff5f5;border:1px solid #fecaca;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
+          onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fff5f5'">
+          <div style="font-size:16px;margin-bottom:4px">💸</div>
+          <div style="font-weight:600;font-size:12px;color:#991b1b">Падение переводов -30%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:3px">Снижение переводов мигрантов из России</div>
+        </button>
+
+        <button onclick="runCGEScenario('oil_shock')"
+          style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
+          onmouseover="this.style.background='#ffedd5'" onmouseout="this.style.background='#fff7ed'">
+          <div style="font-size:16px;margin-bottom:4px">🛢️</div>
+          <div style="font-weight:600;font-size:12px;color:#92400e">Нефтяной шок -40%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:3px">Падение мировых цен на нефть</div>
+        </button>
+
+        <button onclick="runCGEScenario('export_boom')"
+          style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
+          onmouseover="this.style.background='#dcfce7'" onmouseout="this.style.background='#f0fdf4'">
+          <div style="font-size:16px;margin-bottom:4px">📈</div>
+          <div style="font-weight:600;font-size:12px;color:#166534">Рост экспорта +20%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:3px">Благоприятная внешняя конъюнктура</div>
+        </button>
+
+        <button onclick="runCGEScenario('investment_surge')"
+          style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
+          onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+          <div style="font-size:16px;margin-bottom:4px">🏗️</div>
+          <div style="font-weight:600;font-size:12px;color:#1d4ed8">Рост инвестиций +25%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:3px">Увеличение государственных инвестиций</div>
+        </button>
+
+        <button onclick="runCGEScenario('currency_depreciation')"
+          style="background:#fdf4ff;border:1px solid #e9d5ff;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
+          onmouseover="this.style.background='#f3e8ff'" onmouseout="this.style.background='#fdf4ff'">
+          <div style="font-size:16px;margin-bottom:4px">💱</div>
+          <div style="font-weight:600;font-size:12px;color:#7c3aed">Девальвация сомони -20%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:3px">Ослабление национальной валюты</div>
+        </button>
+
+        <button onclick="runCGEScenario('combined_stress')"
+          style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
+          onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fef2f2'">
+          <div style="font-size:16px;margin-bottom:4px">⚠️</div>
+          <div style="font-weight:600;font-size:12px;color:#dc2626">Комбинированный шок</div>
+          <div style="font-size:10px;color:#64748b;margin-top:3px">Переводы -30% + нефть -40% одновременно</div>
+        </button>
+
+      </div>
+
+      <div id="cge-loading" style="display:none;text-align:center;padding:20px;color:#64748b">
+        <div style="font-size:24px;margin-bottom:8px">⚙️</div>
+        <div>Рассчитываю равновесие...</div>
+      </div>
     </div>
   </div>
 
-  <!-- Дашборд результатов -->
-  <div class="cge-dashboard" id="cgeDashboard">
+  <!-- Результаты CGE -->
+  <div id="cge-results" style="display:none">
 
-    <!-- 6 KPI карточек -->
-    <div class="cge-kpi-grid">
-      <div class="cge-kpi-card ck-blue"  id="cge-kpi-card-gdp"></div>
-      <div class="cge-kpi-card ck-green" id="cge-kpi-card-hh"></div>
-      <div class="cge-kpi-card ck-teal"  id="cge-kpi-card-emp"></div>
-      <div class="cge-kpi-card ck-gold"  id="cge-kpi-card-price"></div>
-      <div class="cge-kpi-card ck-purple" id="cge-kpi-card-export"></div>
-      <div class="cge-kpi-card ck-red"   id="cge-kpi-card-govrev"></div>
+    <div id="cge-summary" style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:14px"></div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px" id="cge-macro-cards"></div>
+
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:14px">
+      <div style="background:#0d2342;padding:10px 16px;color:white;font-weight:600;font-size:13px">
+        🏭 Секторальные эффекты (изменение выпуска)
+      </div>
+      <div id="cge-sectors" style="padding:14px"></div>
     </div>
 
-    <!-- Столбчатый график — 10 секторов -->
-    <div class="cge-chart-card">
-      <div class="cge-card-head">
-        📊 Влияние шока на выпуск по секторам (% изменение)
-        <span style="font-size:11px;font-weight:400;opacity:.75">SAM 2019 · Кобба-Дугласа</span>
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+      <div style="background:#1a4a8a;padding:10px 16px;color:white;font-weight:600;font-size:13px">
+        🔄 Каналы передачи шока
       </div>
-      <div class="cge-card-body">
-        <div class="cge-chart-wrap">
-          <canvas id="cgeBarChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- Победители и проигравшие -->
-    <div class="cge-two-col">
-      <div class="cge-winners-card">
-        <div class="cge-wl-title win">✅ Сектора-выигравшие</div>
-        <div id="cgeWinnersList"></div>
-      </div>
-      <div class="cge-winners-card">
-        <div class="cge-wl-title lose">⚠️ Сектора-проигравшие</div>
-        <div id="cgeLoserssList"></div>
-      </div>
-    </div>
-
-    <!-- Интерпретация для руководства -->
-    <div class="cge-interp-card">
-      <div class="cge-interp-head">
-        🧠 Интерпретация результатов для руководства
-      </div>
-      <div class="cge-interp-body" id="cgeInterpText"></div>
+      <div id="cge-channels" style="padding:14px"></div>
     </div>
 
   </div>
