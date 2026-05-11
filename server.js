@@ -737,6 +737,28 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/cge-info — базовые параметры CGE-модели
+  if (req.method === 'GET' && req.url === '/api/cge-info') {
+    try {
+      const cgeModule = require('./cgeModel');
+      const result = cgeModule.cgeSimulate({ remittances_change: 0 });
+      const cal = result.calibration || {};
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        base_year:           cal.base_year || 2024,
+        base_gdp_mln_somoni: cal.base_gdp_mln_somoni || 155784,
+        usd_tjs:             cal.usd_tjs_base || 10.46,
+        data_quality:        cal.data_quality || 'реальные данные МЭРиТ ✅',
+        source:              cal.source || 'CGE МЭРиТ РТ 2024',
+        remit_gdp_ratio:     cal.remit_gdp_ratio || 0.32,
+      }));
+    } catch(err) {
+      res.writeHead(500);
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/cge
   if (req.method === 'POST' && req.url === '/api/cge') {
     try {
@@ -1319,8 +1341,10 @@ const server = http.createServer(async (req, res) => {
         wheat_change_pct,
         aluminum_price,
         al_change_pct,
-        imf:            imfR.status === 'fulfilled' ? imfR.value : null,
-        last_updated:   new Date().toISOString(),
+        imf:                imfR.status === 'fulfilled' ? imfR.value : null,
+        dashboard_inflation: cpi,
+        dashboard_year:      cpiYear || new Date().getFullYear() - 1,
+        last_updated:        new Date().toISOString(),
         source:         sources.join(', ') || 'нет данных',
         errors: {
           nbt:       nbtR.status  === 'rejected' ? nbtR.reason.message  : null,

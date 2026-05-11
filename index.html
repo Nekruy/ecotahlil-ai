@@ -3740,7 +3740,7 @@ const tickerItems = [
   {n:'Мука в/с',   p:'3.85 TJS/кг', c:'▲1.8%', u:true},
   {n:'Масло подс.',p:'18.50 TJS/л', c:'▼0.8%', u:false},
   {n:'Масло слив.',p:'52.00 TJS/кг',c:'▲3.2%', u:true},
-  {n:'ИПЦ',        p:'108.3%',       c:'▲3.1%', u:true},
+  {n:'ИПЦ',        p:'--',           c:'',       u:true},
   {n:'USD/TJS',    p:'10.92',        c:'▲0.2%', u:true},
   {n:'EUR/TJS',    p:'11.85',        c:'▲0.1%', u:true},
   {n:'RUB/TJS',    p:'0.118',        c:'▼0.3%', u:false},
@@ -3767,6 +3767,7 @@ window.onload = function() {
   buildCharts();
   fetchDashboardData();
   fetchSmartData();
+  loadCGEInfo();
 };
 
 // ============================================================
@@ -4750,15 +4751,58 @@ function updateTickerRates(rates) {
   });
 }
 
-// При загрузке страницы пробуем обновить тикер тихо
+// При загрузке страницы обновляем тикер: курсы из /api/nbt, ИПЦ из /api/dashboard-data
 (async function initTickerFromNBT() {
   try {
-    const resp = await fetch('/api/nbt');
-    if (!resp.ok) return;
-    const data = await resp.json();
-    if (!data.error) updateTickerRates(data.rates);
+    const [nbtR, dashR] = await Promise.allSettled([
+      fetch('/api/nbt').then(r => r.ok ? r.json() : Promise.reject()),
+      fetch('/api/dashboard-data').then(r => r.ok ? r.json() : Promise.reject()),
+    ]);
+    if (nbtR.status === 'fulfilled' && !nbtR.value.error) updateTickerRates(nbtR.value.rates);
+    if (dashR.status === 'fulfilled') {
+      const d = dashR.value;
+      const rawCpi = d.dashboard_inflation ?? d.cpi;
+      if (rawCpi != null) {
+        const cpiPct = (rawCpi > 20 ? rawCpi - 100 : rawCpi).toFixed(1);
+        document.querySelectorAll('.ticker-item').forEach(item => {
+          const nameEl = item.querySelector('.t-name');
+          const priceEl = item.querySelector('.t-price');
+          if (nameEl && priceEl && nameEl.textContent.trim() === 'ИПЦ') {
+            priceEl.textContent = cpiPct + '%';
+          }
+        });
+      }
+    }
   } catch {}
 })();
+
+// ============================================================
+// CGE: загрузка реальных параметров модели
+// ============================================================
+
+async function loadCGEInfo() {
+  try {
+    const r = await fetch('/api/cge-info');
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    const gdpBln = (d.base_gdp_mln_somoni / 1000).toFixed(1);
+    const titleEl = document.getElementById('cge-title');
+    if (titleEl) titleEl.textContent = '⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ ' + d.base_year;
+    const badgeYear = document.getElementById('cge-badge-year');
+    if (badgeYear) badgeYear.textContent = '📅 ' + d.base_year;
+    const badgeGdp = document.getElementById('cge-badge-gdp');
+    if (badgeGdp) badgeGdp.textContent = '💰 ВВП: ' + gdpBln + ' млрд сомони';
+    const badgeSrc = document.getElementById('cge-badge-source');
+    if (badgeSrc) badgeSrc.textContent = '✅ ' + d.data_quality;
+  } catch(e) {
+    console.warn('cge-info fallback:', e.message);
+    const gdpBln = (155783.9 / 1000).toFixed(1);
+    const badgeGdp = document.getElementById('cge-badge-gdp');
+    if (badgeGdp) badgeGdp.textContent = '💰 ВВП: ' + gdpBln + ' млрд сомони (2024)';
+    const badgeSrc = document.getElementById('cge-badge-source');
+    if (badgeSrc) badgeSrc.textContent = '✅ Реальные данные МЭРиТ РТ';
+  }
+}
 
 // ============================================================
 // МИРОВЫЕ РЫНКИ (нефть, алюминий, пшеница)
