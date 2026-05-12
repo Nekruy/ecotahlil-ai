@@ -1573,6 +1573,132 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // ── GET /api/sez — каталог СЭЗ + подбор по сектору/региону ─────────────────
+  if (req.method === 'GET' && req.url.startsWith('/api/sez') && !req.url.startsWith('/api/sez/')) {
+    try {
+      const sezData = require('./sezData');
+      const urlObj  = new URL(req.url, 'http://localhost');
+      const sector  = urlObj.searchParams.get('sector')  || '';
+      const region  = urlObj.searchParams.get('region')  || '';
+      const invStr  = urlObj.searchParams.get('investment_mln');
+      const inv     = invStr ? parseFloat(invStr) : null;
+
+      const stats   = sezData.getSummaryStats();
+      const zones   = (sector || region || inv)
+        ? sezData.matchSEZ(sector, region, inv)
+        : sezData.getAllZones();
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ zones, matches: zones, stats, source: 'МЭРиТ РТ / Закон о СЭЗ' }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/sez/roi — расчёт ROI / NPV с учётом налоговых льгот СЭЗ ──────
+  if (req.method === 'POST' && req.url === '/api/sez/roi') {
+    try {
+      const body = await readBody(req);
+      const { sez_id, investment_usd, revenue_annual_usd, costs_annual_usd, years = 10 } =
+        JSON.parse(body.toString('utf8') || '{}');
+      if (!sez_id || !investment_usd || !revenue_annual_usd) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: 'Укажите sez_id, investment_usd, revenue_annual_usd' }));
+        return;
+      }
+      const sezData = require('./sezData');
+      const result  = sezData.calcROI(sez_id, investment_usd, revenue_annual_usd, costs_annual_usd || null, years);
+      if (!result) {
+        res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: 'СЭЗ не найдена: ' + sez_id }));
+        return;
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/sez/compare — сравнение нескольких СЭЗ по одним параметрам ───
+  if (req.method === 'POST' && req.url === '/api/sez/compare') {
+    try {
+      const body = await readBody(req);
+      const { sez_ids, investment_usd, revenue_annual_usd, costs_annual_usd, years = 10 } =
+        JSON.parse(body.toString('utf8') || '{}');
+      const sezData = require('./sezData');
+      const ids     = sez_ids || sezData.getAllZones().map(z => z.id);
+      const comparisons = ids
+        .map(id => sezData.calcROI(id, investment_usd, revenue_annual_usd, costs_annual_usd || null, years))
+        .filter(Boolean)
+        .sort((a, b) => b.npv_with_sez_usd - a.npv_with_sez_usd);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ comparisons, params: { investment_usd, revenue_annual_usd, costs_annual_usd, years } }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // ── POST /api/sez/ai-match — AI-консультация по выбору СЭЗ (Groq) ─────────
+  if (req.method === 'POST' && req.url === '/api/sez/ai-match') {
+    try {
+      const body = await readBody(req);
+      const { investor_profile = {}, question = 'Какую СЭЗ выбрать?' } = JSON.parse(body.toString('utf8') || '{}');
+
+      const sezData  = require('./sezData');
+      const allZones = sezData.getAllZones();
+      const stats    = sezData.getSummaryStats();
+
+      // Подбор топ-3 по профилю
+      const matches = sezData.matchSEZ(
+        investor_profile.sector || '',
+        investor_profile.region || '',
+        investor_profile.investment_min ? parseFloat(investor_profile.investment_min) : null
+      ).slice(0, 3);
+
+      const zonesContext = allZones.map(z =>
+        `• ${z.name_ru} (${z.city}, ${z.region}): специализация — ${z.focus.slice(0,3).join(', ')}; ` +
+        `площадь ${z.area_ha} га; резидентов ${z.residents_count}; ` +
+        `инвестиций $${z.investment_total_mln_usd} млн; ROI окупаемость ~${z.avg_roi_years} лет; ` +
+        `логистика ${z.logistics_score}/10; ЖД: ${z.infrastructure.rail_access ? 'да' : 'нет'}`
+      ).join('\n');
+
+      const systemPrompt =
+        'Ты — эксперт по инвестиционному климату Таджикистана и специальным экономическим зонам. ' +
+        'Отвечай кратко, профессионально, на русском языке. ' +
+        'Приводи конкретные цифры и сравнения. ' +
+        'Формат ответа: короткие абзацы или маркированный список (markdown).';
+
+      const userPrompt =
+        `Профиль инвестора:\n` +
+        `- Сектор: ${investor_profile.sector || 'не указан'}\n` +
+        `- Страна: ${investor_profile.country || 'не указана'}\n` +
+        `- Планируемые инвестиции: $${investor_profile.investment_min || '?'} млн\n\n` +
+        `Доступные СЭЗ Таджикистана:\n${zonesContext}\n\n` +
+        `Рекомендованные зоны (по скорингу): ${matches.map(m => m.name_ru + ' (' + m.match_score + '%' + ')').join(', ')}\n\n` +
+        `Вопрос: ${question}`;
+
+      const aiAnswer = await groqChat(systemPrompt, userPrompt, 600);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({
+        answer:   aiAnswer,
+        matches:  matches.map(m => ({ id: m.id, name_ru: m.name_ru, match_score: m.match_score, region: m.region })),
+        stats,
+      }));
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
