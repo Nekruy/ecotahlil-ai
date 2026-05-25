@@ -1752,6 +1752,118 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // POST /api/arimax — ARIMA с внешними регрессорами (МВФ-стандарт)
+  if (req.method === 'POST' && req.url === '/api/arimax') {
+    try {
+      const body = await readBody(req);
+      const { indicator = 'gdp_growth', periods = 5 } = JSON.parse(body.toString('utf8'));
+      const hdb = require('./historicalDB');
+      const f   = require('./forecasting');
+
+      const endogenous = hdb.getDataForForecasting(indicator);
+      const exogenous  = {
+        remittances: hdb.getDataForForecasting('remittances'),
+        usd_tjs:     hdb.getDataForForecasting('usd_tjs'),
+      };
+
+      // Алюминий из live_cache (если есть)
+      try {
+        const lc = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'live_cache.json'), 'utf8'));
+        const alPrice = lc.commodities?.aluminum?.price ?? lc.aluminum_price;
+        if (alPrice) exogenous.aluminum = Array(endogenous.length).fill(Number(alPrice));
+      } catch (_) {}
+
+      const result = f.arimaxForecast(endogenous, exogenous, periods);
+
+      // Санитарная проверка
+      if (Array.isArray(result.forecast) && result.forecast.length) {
+        const san = f.sanitizeForTajikistan(result.forecast, indicator);
+        result.forecast  = san.forecast;
+        result.warnings  = san.warnings;
+        result.atypical  = san.atypical;
+      }
+
+      const curYear = new Date().getFullYear();
+      result.years     = Array.from({ length: periods }, (_, i) => curYear + i + 1);
+      result.indicator = indicator;
+      result.source    = 'МЭРиТ РТ + НБТ РТ + внешние факторы';
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/arimax]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // POST /api/bvar — Байесовский VAR (Minnesota Prior)
+  if (req.method === 'POST' && req.url === '/api/bvar') {
+    try {
+      const body = await readBody(req);
+      const { periods = 5, lambda = 0.2 } = JSON.parse(body.toString('utf8'));
+      const hdb = require('./historicalDB');
+      const f   = require('./forecasting');
+
+      const data = {
+        gdp:         hdb.getDataForForecasting('gdp_growth'),
+        inflation:   hdb.getDataForForecasting('inflation'),
+        usd_tjs:     hdb.getDataForForecasting('usd_tjs'),
+        remittances: hdb.getDataForForecasting('remittances'),
+      };
+
+      const result = f.bvarForecast(data, periods, lambda);
+
+      // Санитарная проверка всех рядов
+      if (result.forecast) {
+        for (const [k, fc] of Object.entries(result.forecast)) {
+          const ind = k === 'gdp' ? 'gdp_growth' : k;
+          const san = f.sanitizeForTajikistan(fc, ind);
+          result.forecast[k] = san.forecast;
+          if (san.warnings.length) result[`warnings_${k}`] = san.warnings;
+        }
+      }
+
+      const curYear = new Date().getFullYear();
+      result.years = Array.from({ length: periods }, (_, i) => curYear + i + 1);
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/bvar]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
+  // POST /api/kalman — Фильтр Калмана с EM-подбором параметров
+  if (req.method === 'POST' && req.url === '/api/kalman') {
+    try {
+      const body = await readBody(req);
+      const { indicator = 'gdp_growth', periods = 5, processNoise, measurementNoise } = JSON.parse(body.toString('utf8'));
+      const hdb = require('./historicalDB');
+      const f   = require('./forecasting');
+
+      const data   = hdb.getDataForForecasting(indicator);
+      const result = f.kalmanFilter(data, { periods, processNoise, measurementNoise });
+
+      const curYear = new Date().getFullYear();
+      result.years     = Array.from({ length: periods }, (_, i) => curYear + i + 1);
+      result.indicator = indicator;
+      result.data_points = data.length;
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify(result));
+    } catch (err) {
+      console.error('[/api/kalman]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404);
   res.end('Not found');
 });
