@@ -1292,82 +1292,6 @@ footer b { color:#fff; }
 .src-cache  { background:#f1f5f9; color:#64748b; border:1px solid #cbd5e1; }
 .src-nodata { background:#fff0f0; color:#b91c1c; border:1px solid #fca5a5; }
 
-/* Панель гибридных данных */
-.hybrid-panel {
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:12px;
-  margin:0 24px 18px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-.hybrid-panel-header {
-  background:linear-gradient(135deg,#003580,#0050b3);
-  color:#fff;
-  padding:12px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.hybrid-panel-title { font-size:14px; font-weight:700; }
-.hybrid-panel-meta  { font-size:11px; color:rgba(255,255,255,.7); }
-.hybrid-panel-body  { padding:16px 18px; }
-.hybrid-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:12px;
-}
-.hybrid-item {
-  background:#f8fafc;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:10px 12px;
-}
-.hybrid-item-label { font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px; }
-.hybrid-item-value { font-size:18px; font-weight:800; color:var(--navy); margin-bottom:4px; }
-.hybrid-item-source{ font-size:10px; color:var(--text3); }
-.hybrid-coverage {
-  margin-top:14px;
-  padding-top:12px;
-  border-top:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  gap:16px;
-  flex-wrap:wrap;
-}
-.hybrid-cov-bar {
-  flex:1;
-  min-width:140px;
-  background:#e8edf5;
-  border-radius:4px;
-  height:8px;
-  overflow:hidden;
-}
-.hybrid-cov-fill {
-  height:100%;
-  background:linear-gradient(90deg,#22c55e,#16a34a);
-  border-radius:4px;
-  transition:width .5s ease;
-}
-.hybrid-cov-text { font-size:12px; color:var(--text2); }
-.hybrid-comparison {
-  margin-top:14px;
-  padding-top:12px;
-  border-top:1px solid var(--border);
-}
-.hybrid-comp-title { font-size:11px; font-weight:700; color:var(--text2); margin-bottom:8px; text-transform:uppercase; letter-spacing:.4px; }
-.hybrid-comp-row {
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-  color:var(--text2);
-  margin-bottom:6px;
-}
-.hybrid-comp-row strong { color:var(--navy); }
-
 /* Кнопки загрузки данных */
 .load-data-btn {
   display:inline-flex;
@@ -2139,32 +2063,6 @@ footer b { color:#fff; }
     </div>
   </div>
 
-  <!-- ГИБРИДНАЯ ПАНЕЛЬ ДАННЫХ -->
-  <div class="hybrid-panel" id="hybridPanel">
-    <div class="hybrid-panel-header">
-      <div class="hybrid-panel-title">🔀 Гибридные данные: МЭРиТ + НБТ + МВФ</div>
-      <div class="hybrid-panel-meta" id="hybridMeta">загрузка…</div>
-    </div>
-    <div class="hybrid-panel-body">
-      <div class="hybrid-grid" id="hybridGrid">
-        <div class="hybrid-item"><div class="hybrid-item-label">Хлеб</div><div class="hybrid-item-value" id="hv-bread">—</div><div class="hybrid-item-source" id="hs-bread">загрузка…</div></div>
-        <div class="hybrid-item"><div class="hybrid-item-label">Мука</div><div class="hybrid-item-value" id="hv-flour">—</div><div class="hybrid-item-source" id="hs-flour">загрузка…</div></div>
-        <div class="hybrid-item"><div class="hybrid-item-label">USD/TJS</div><div class="hybrid-item-value" id="hv-usd">—</div><div class="hybrid-item-source" id="hs-usd">загрузка…</div></div>
-        <div class="hybrid-item"><div class="hybrid-item-label">Инфляция</div><div class="hybrid-item-value" id="hv-inflation">—</div><div class="hybrid-item-source" id="hs-inflation">загрузка…</div></div>
-        <div class="hybrid-item"><div class="hybrid-item-label">Рост ВВП</div><div class="hybrid-item-value" id="hv-gdp">—</div><div class="hybrid-item-source" id="hs-gdp">загрузка…</div></div>
-        <div class="hybrid-item"><div class="hybrid-item-label">Говядина</div><div class="hybrid-item-value" id="hv-beef">—</div><div class="hybrid-item-source" id="hs-beef">загрузка…</div></div>
-      </div>
-      <div class="hybrid-coverage">
-        <div style="font-size:12px;color:var(--text2);white-space:nowrap">Районы сегодня: <strong id="hybridCovDistricts">—</strong> / 32</div>
-        <div class="hybrid-cov-bar"><div class="hybrid-cov-fill" id="hybridCovBar" style="width:0%"></div></div>
-        <div class="hybrid-cov-text" id="hybridCovPct">—%</div>
-      </div>
-      <div class="hybrid-comparison" id="hybridComparison" style="display:none">
-        <div class="hybrid-comp-title">Сравнение источников</div>
-        <div id="hybridCompBody"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- ДАННЫЕ МВФ -->
   <div class="imf-section" id="imfSection">
@@ -3400,8 +3298,6 @@ footer b { color:#fff; }
       <span style="font-size:11px;font-weight:400;color:var(--text3)" id="digestDate">—</span>
     </div>
 
-    <!-- Секции гибридных данных в дайджесте -->
-    <div id="hybridDigestSections" style="margin-bottom:14px"></div>
 
     <div class="dp-two-col">
       <!-- Алерты + Топ изменений -->
@@ -3962,102 +3858,13 @@ async function fetchSmartData() {
     const resp = await fetch('/api/smart-data');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     _smartData = await resp.json();
-    renderHybridPanel(_smartData);
     updateTableSources(_smartData);
-    updateDigestSections(_smartData);
     updateStressBaseData(_smartData);
   } catch(e) {
     console.warn('[smart-data]', e.message);
-    const metaEl = document.getElementById('hybridMeta');
-    if (metaEl) metaEl.textContent = '⚠️ Ошибка загрузки';
   }
 }
 
-function renderHybridPanel(d) {
-  const metaEl = document.getElementById('hybridMeta');
-  if (metaEl) {
-    const ts = d.generated_at ? new Date(d.generated_at).toLocaleString('ru-RU') : '';
-    const src = [];
-    if (d.sources_used?.district_reports) src.push('МЭРиТ');
-    if (d.sources_used?.nbt)  src.push('НБТ');
-    if (d.sources_used?.imf)  src.push('МВФ');
-    if (d.sources_used?.worldbank) src.push('ВБ');
-    metaEl.textContent = (src.length ? src.join(' + ') : 'нет данных') + (ts ? ' · ' + ts : '');
-  }
-
-  // Цены
-  function setPriceItem(key, el_v, el_s, unit) {
-    const v = document.getElementById(el_v);
-    const s = document.getElementById(el_s);
-    const item = d.prices && d.prices[key];
-    if (!v || !s) return;
-    if (item && item.value !== null) {
-      v.textContent = (+item.value).toFixed(2) + (unit ? ' ' + unit : '');
-      const noData = !item.fresh ? ' · нет данных за сегодня' : '';
-      s.innerHTML = srcBadge(item.source) + ' ' + (item.date || '') + noData;
-    } else {
-      v.textContent = '—';
-      s.innerHTML = '<span class="src-badge src-nodata">нет данных</span>';
-    }
-  }
-  setPriceItem('bread', 'hv-bread', 'hs-bread', 'TJS');
-  setPriceItem('flour', 'hv-flour', 'hs-flour', 'TJS');
-  setPriceItem('beef',  'hv-beef',  'hs-beef',  'TJS');
-
-  // Макро
-  function setMacroItem(key, el_v, el_s, unit) {
-    const v = document.getElementById(el_v);
-    const s = document.getElementById(el_s);
-    const item = d.macro && d.macro[key];
-    if (!v || !s) return;
-    if (item && item.value !== null) {
-      v.textContent = (+item.value).toFixed(item.unit === 'TJS за 1 USD' ? 4 : 1) + (unit ? ' ' + unit : '');
-      s.innerHTML = srcBadge(item.source) + ' ' + (item.date || '');
-    } else {
-      v.textContent = '—';
-      s.innerHTML = '<span class="src-badge src-nodata">нет данных</span>';
-    }
-  }
-  setMacroItem('usd_tjs',    'hv-usd',      'hs-usd',      '');
-  setMacroItem('inflation',  'hv-inflation', 'hs-inflation', '%');
-  setMacroItem('gdp_growth', 'hv-gdp',       'hs-gdp',       '%');
-
-  // Coverage
-  const dq = d.data_quality;
-  if (dq) {
-    const distEl = document.getElementById('hybridCovDistricts');
-    const barEl  = document.getElementById('hybridCovBar');
-    const pctEl  = document.getElementById('hybridCovPct');
-    if (distEl) distEl.textContent = dq.districts_reported_today;
-    if (barEl)  barEl.style.width  = (dq.coverage || 0) + '%';
-    if (pctEl)  pctEl.textContent  = (dq.coverage || 0) + '%';
-  }
-
-  // Сравнение
-  const cmp = d.comparison;
-  if (cmp) {
-    const compEl  = document.getElementById('hybridComparison');
-    const bodyEl  = document.getElementById('hybridCompBody');
-    if (compEl && bodyEl) {
-      let html = '';
-      if (cmp.ministry_vs_imf?.available) {
-        const m = cmp.ministry_vs_imf;
-        html += `<div class="hybrid-comp-row">
-          МЭРиТ (хлеб): <strong>${m.district_bread_price} TJS</strong>
-          &nbsp;·&nbsp; МВФ инфляция (${m.imf_year}): <strong>${m.imf_inflation}%</strong>
-        </div>`;
-      }
-      if (cmp.ministry_vs_nbt?.available) {
-        const m = cmp.ministry_vs_nbt;
-        html += `<div class="hybrid-comp-row">
-          НБТ USD/TJS: <strong>${m.usd_rate}</strong>
-          &nbsp;·&nbsp; Оборот МЭРиТ: <strong>${m.trade_vol} млн TJS</strong>
-        </div>`;
-      }
-      if (html) { bodyEl.innerHTML = html; compEl.style.display = ''; }
-    }
-  }
-}
 
 function updateTableSources(d) {
   if (!d?.prices) return;
@@ -4118,64 +3925,6 @@ function showToast(msg, type) {
   setTimeout(() => { el.style.display = 'none'; }, 5000);
 }
 
-// Обновление дайджеста с разделами источников
-function updateDigestSections(d) {
-  const sec = document.getElementById('hybridDigestSections');
-  if (!sec || !d) return;
-
-  const dq = d.data_quality || {};
-  const prices = d.prices || {};
-  const macro  = d.macro  || {};
-  const cmp    = d.comparison || {};
-
-  // Раздел МЭРиТ
-  const meritPrices = Object.entries(prices)
-    .filter(([,v]) => v?.value !== null && (v?.source || '').toLowerCase().includes('мэрит'))
-    .map(([k,v]) => `<div class="digest-kv"><span class="digest-kv-key">${v.label||k}</span><span class="digest-kv-val">${(+v.value).toFixed(2)} TJS ${srcBadge(v.source)}</span></div>`)
-    .join('');
-
-  // Раздел международных данных
-  const intlRows = [];
-  if (macro.usd_tjs)    intlRows.push(`<div class="digest-kv"><span class="digest-kv-key">USD/TJS</span><span class="digest-kv-val">${macro.usd_tjs.value} ${srcBadge(macro.usd_tjs.source)}</span></div>`);
-  if (macro.inflation)  intlRows.push(`<div class="digest-kv"><span class="digest-kv-key">Инфляция</span><span class="digest-kv-val">${macro.inflation.value}% ${srcBadge(macro.inflation.source)}</span></div>`);
-  if (macro.gdp_growth) intlRows.push(`<div class="digest-kv"><span class="digest-kv-key">Рост ВВП</span><span class="digest-kv-val">${macro.gdp_growth.value}% ${srcBadge(macro.gdp_growth.source)}</span></div>`);
-  if (macro.gov_debt)   intlRows.push(`<div class="digest-kv"><span class="digest-kv-key">Госдолг</span><span class="digest-kv-val">${macro.gov_debt.value}% ВВП ${srcBadge(macro.gov_debt.source)}</span></div>`);
-
-  // Раздел расхождений
-  const discRows = [];
-  if (cmp.ministry_vs_imf?.available) {
-    const m = cmp.ministry_vs_imf;
-    discRows.push(`<div class="digest-kv"><span class="digest-kv-key">МЭРиТ хлеб vs МВФ инфл.</span><span class="digest-kv-val">${m.district_bread_price} TJS · ${m.imf_inflation}%</span></div>`);
-  }
-  if (cmp.ministry_vs_nbt?.available) {
-    const m = cmp.ministry_vs_nbt;
-    discRows.push(`<div class="digest-kv"><span class="digest-kv-key">Оборот МЭРиТ</span><span class="digest-kv-val">${m.trade_vol} млн TJS · USD ${m.usd_rate}</span></div>`);
-  }
-
-  sec.innerHTML = `
-    <div class="digest-source-section">
-      <div class="digest-source-header dsh-merit">🏛️ Данные МЭРиТ — Районные отчёты
-        <span style="margin-left:auto;font-weight:400">Сдали: ${dq.districts_reported_today||0} / ${dq.total_districts||32} районов (${dq.coverage||0}%)</span>
-      </div>
-      <div class="digest-source-body">
-        ${meritPrices || '<span style="color:var(--text3);font-style:italic">Нет данных от районов за сегодня</span>'}
-      </div>
-    </div>
-    <div class="digest-source-section">
-      <div class="digest-source-header dsh-intl">🌐 Международные данные — МВФ · НБТ · Всемирный банк</div>
-      <div class="digest-source-body">
-        ${intlRows.join('') || '<span style="color:var(--text3);font-style:italic">Нет данных</span>'}
-      </div>
-    </div>
-    ${discRows.length ? `
-    <div class="digest-source-section">
-      <div class="digest-source-header dsh-disc">⚖️ Расхождения: МЭРиТ vs международные данные</div>
-      <div class="digest-source-body">
-        ${discRows.join('')}
-      </div>
-    </div>` : ''}
-  `;
-}
 
 // Обновляем базовые показатели стресс-теста
 let _stressBaseData = {};

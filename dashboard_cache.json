@@ -1,0 +1,206 @@
+{
+  "cpi": 6,
+  "cpi_year": 2016,
+  "usd_tjs": 9.3671,
+  "eur_tjs": 11.0223,
+  "rub_tjs": 0.126,
+  "nbt_date": "12.05.2026",
+  "oil_price": 97.53,
+  "oil_change_pct": 0.99,
+  "wheat_price": 624,
+  "wheat_change_pct": 9.28,
+  "aluminum_price": 3495.75,
+  "al_change_pct": 1.92,
+  "imf": {
+    "source": "imf.org/external/datamapper",
+    "country": "Таджикистан (TJK)",
+    "indicators": {
+      "PCPIPCH": {
+        "label": "Инфляция",
+        "unit": "% год к году",
+        "icon": "📈",
+        "value": 5,
+        "year": 2028,
+        "history": [
+          {
+            "year": 2024,
+            "value": 3.5
+          },
+          {
+            "year": 2025,
+            "value": 3.4
+          },
+          {
+            "year": 2026,
+            "value": 4
+          },
+          {
+            "year": 2027,
+            "value": 4.7
+          },
+          {
+            "year": 2028,
+            "value": 5
+          }
+        ]
+      },
+      "NGDP_RPCH": {
+        "label": "Рост реального ВВП",
+        "unit": "%",
+        "icon": "📊",
+        "value": 4.5,
+        "year": 2028,
+        "history": [
+          {
+            "year": 2024,
+            "value": 8.4
+          },
+          {
+            "year": 2025,
+            "value": 8.4
+          },
+          {
+            "year": 2026,
+            "value": 6
+          },
+          {
+            "year": 2027,
+            "value": 4.8
+          },
+          {
+            "year": 2028,
+            "value": 4.5
+          }
+        ]
+      },
+      "BCA_NGDPD": {
+        "label": "Счёт текущих операций",
+        "unit": "% ВВП",
+        "icon": "⚖️",
+        "value": 1.2,
+        "year": 2028,
+        "history": [
+          {
+            "year": 2024,
+            "value": 6.1
+          },
+          {
+            "year": 2025,
+            "value": 16.6
+          },
+          {
+            "year": 2026,
+            "value": 6.3
+          },
+          {
+            "year": 2027,
+            "value": 2.5
+          },
+          {
+            "year": 2028,
+            "value": 1.2
+          }
+        ]
+      },
+      "GGXWDG_NGDP": {
+        "label": "Государственный долг",
+        "unit": "% ВВП",
+        "icon": "🏛️",
+        "value": 23.4,
+        "year": 2028,
+        "history": [
+          {
+            "year": 2024,
+            "value": 24.9
+          },
+          {
+            "year": 2025,
+            "value": 21.6
+          },
+          {
+            "year": 2026,
+            "value": 21.9
+          },
+          {
+            "year": 2027,
+            "value": 22.3
+          },
+          {
+            "year": 2028,
+            "value": 23.4
+          }
+        ]
+      },
+      "LUR": {
+        "label": "Безработица",
+        "unit": "%",
+        "icon": "👥",
+        "value": 2.5,
+        "year": 2011,
+        "history": [
+          {
+            "year": 2007,
+            "value": 2.5
+          },
+          {
+            "year": 2008,
+            "value": 2.3
+          },
+          {
+            "year": 2009,
+            "value": 2.1
+          },
+          {
+            "year": 2010,
+            "value": 2.2
+          },
+          {
+            "year": 2011,
+            "value": 2.5
+          }
+        ]
+      },
+      "NGDPDPC": {
+        "label": "ВВП на душу населения",
+        "unit": "USD",
+        "icon": "💰",
+        "value": 2086.64,
+        "year": 2028,
+        "history": [
+          {
+            "year": 2024,
+            "value": 1415.97
+          },
+          {
+            "year": 2025,
+            "value": 1693.16
+          },
+          {
+            "year": 2026,
+            "value": 1938.92
+          },
+          {
+            "year": 2027,
+            "value": 2000.6
+          },
+          {
+            "year": 2028,
+            "value": 2086.64
+          }
+        ]
+      }
+    },
+    "fetchedAt": "2026-05-11T10:44:34.659Z",
+    "fromCache": false
+  },
+  "dashboard_inflation": 6,
+  "dashboard_year": 2016,
+  "last_updated": "2026-05-11T10:44:39.107Z",
+  "source": "nbt.tj, worldbank.org, yahoo.finance, imf.org",
+  "errors": {
+    "nbt": null,
+    "worldbank": null,
+    "yahoo": null,
+    "imf": null
+  }
+}
