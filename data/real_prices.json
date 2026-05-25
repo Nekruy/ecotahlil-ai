@@ -1,0 +1,1551 @@
+{
+  "meta": {
+    "source": "МЭРиТ РТ — ГУМАПЭР (Главное управление мониторинга и анализа потребительских рынков)",
+    "periods": [
+      "2020-07-01",
+      "2020-07-17",
+      "2020-10-23",
+      "2021-01-01",
+      "2022-03-30",
+      "2022-04-13",
+      "2022-06-01",
+      "2023-10-13"
+    ],
+    "total_records": 188,
+    "products": [
+      "apple",
+      "beef",
+      "cabbage",
+      "carrot",
+      "chicken",
+      "chickpea",
+      "cucumber",
+      "diesel",
+      "eggs",
+      "fuel_92",
+      "fuel_95",
+      "gas_lpg",
+      "mash",
+      "milk",
+      "mutton",
+      "oil",
+      "onion",
+      "potato",
+      "rice",
+      "sugar",
+      "tea_black",
+      "tea_green",
+      "tomato",
+      "beans",
+      "flour",
+      "flour_kaz"
+    ],
+    "created_at": "2026-05-25T11:20:02.342Z"
+  },
+  "prices": [
+    {
+      "date": "2020-07-01",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 12,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "",
+      "price_tjs": 53.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 1.9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 1.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 24,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 11.6,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 14,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "eggs",
+      "name_original": "Тухм (10 дона)",
+      "unit": "",
+      "price_tjs": 9.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92 (литр)",
+      "unit": "",
+      "price_tjs": 7.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "fuel_95",
+      "name_original": "Бензин АИ-95 (литр)",
+      "unit": "литр",
+      "price_tjs": 7.6,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "",
+      "price_tjs": 4,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 11.8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 4.8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "",
+      "price_tjs": 53.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "",
+      "price_tjs": 12.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 2.7,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "",
+      "price_tjs": 3.1,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "",
+      "price_tjs": 13.7,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "",
+      "price_tjs": 6.4,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 41,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 42,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-01",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 14.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 10.53,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "beans",
+      "name_original": "Лўбиё",
+      "unit": "кг",
+      "price_tjs": 17.96,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 64.43,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 4.11,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 3.44,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 29.68,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 17.71,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 10.05,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 10.76,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 10.06,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 292.77,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "flour_kaz",
+      "name_original": "Орди навъи 1 (Ќазоќ.)",
+      "unit": "50 кг",
+      "price_tjs": 264.77,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 10.27,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "fuel_95",
+      "name_original": "Бензин АИ-95",
+      "unit": "литр",
+      "price_tjs": 11,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 6.57,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 17.04,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 5.68,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 65.34,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 23.81,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 3.01,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 3.97,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 15.91,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 10.11,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 49.96,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 51.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-07-17",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 12.46,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "beans",
+      "name_original": "Лўбиё",
+      "unit": "кг",
+      "price_tjs": 17.8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 52.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 2.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 2.1,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 26,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 13,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 6,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 6.9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 10,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 235,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 6.05,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 4.18,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 16.4,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 4.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 53.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 13.8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 2.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 2.9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 14.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 46.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 47.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2020-10-23",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 5.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 12,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "beans",
+      "name_original": "Лўбиё",
+      "unit": "кг",
+      "price_tjs": 17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 67,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 2.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 6,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 29.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 17.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 4.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 9.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 10,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 242,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "flour_kaz",
+      "name_original": "Орди навъи 1 (Ќазоќистон)",
+      "unit": "50 кг",
+      "price_tjs": 251,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 9.9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 6.9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 16,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 67,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 25.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 1.7,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 4,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 49,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 50,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2021-01-01",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 4.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 9.67,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "beans",
+      "name_original": "Лўбиё",
+      "unit": "кг",
+      "price_tjs": 18,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 63.67,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 5.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 2.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 31.33,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 19.07,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 17.67,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 11.63,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 9.77,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 288.33,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 11.17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "fuel_95",
+      "name_original": "Бензин АИ-95",
+      "unit": "литр",
+      "price_tjs": 11.53,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 6.73,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 18,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 6,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 66,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 24,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 3.17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 4,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 15.53,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 10.17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 50.03,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 51.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-03-30",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 18.67,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 12.11,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "beans",
+      "name_original": "Лўбиё",
+      "unit": "кг",
+      "price_tjs": 18.7,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 71.92,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 4.22,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 2.72,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 32.54,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 19.77,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 15.83,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 11.17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 11.31,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 273.8,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 9.79,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "fuel_95",
+      "name_original": "Бензин АИ-95",
+      "unit": "литр",
+      "price_tjs": 10.16,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 6.63,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 17.33,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 7.5,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 73.15,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 19.79,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 3.08,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 4.7,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 18.03,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 9.94,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 53.14,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 55.07,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-04-13",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 17.72,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 64.1,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 2.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 30.85,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 11.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 9.7,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 298.35,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 10.75,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "fuel_95",
+      "name_original": "Бензин АИ-95",
+      "unit": "литр",
+      "price_tjs": 11.3,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 6.6,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 66.15,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 23.9,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 3.35,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 4,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 15.25,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2022-06-01",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 10.15,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "apple",
+      "name_original": "Себ",
+      "unit": "кг",
+      "price_tjs": 14.46,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "beans",
+      "name_original": "Лўбиё",
+      "unit": "кг",
+      "price_tjs": 19.03,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "beef",
+      "name_original": "Гўшти гов",
+      "unit": "кг",
+      "price_tjs": 75.55,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "cabbage",
+      "name_original": "Карам",
+      "unit": "кг",
+      "price_tjs": 4.01,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "carrot",
+      "name_original": "Сабзї",
+      "unit": "кг",
+      "price_tjs": 3.78,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "chicken",
+      "name_original": "Гўшти мурѓ",
+      "unit": "кг",
+      "price_tjs": 31.24,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "chickpea",
+      "name_original": "Нахўд",
+      "unit": "кг",
+      "price_tjs": 21.92,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "cucumber",
+      "name_original": "Бодиринг",
+      "unit": "кг",
+      "price_tjs": 10.53,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "diesel",
+      "name_original": "Сўзишвории дизелї",
+      "unit": "литр",
+      "price_tjs": 11.44,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "eggs",
+      "name_original": "Тухм",
+      "unit": "10 дона",
+      "price_tjs": 12.41,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "flour",
+      "name_original": "Орди навъи 1 (ватанї)",
+      "unit": "50 кг",
+      "price_tjs": 271.91,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "fuel_92",
+      "name_original": "Бензин АИ-92",
+      "unit": "литр",
+      "price_tjs": 9.74,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "fuel_95",
+      "name_original": "Бензин АИ-95",
+      "unit": "литр",
+      "price_tjs": 10.18,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "gas_lpg",
+      "name_original": "Гази моеъ",
+      "unit": "литр",
+      "price_tjs": 6.11,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "mash",
+      "name_original": "Мош",
+      "unit": "кг",
+      "price_tjs": 16.94,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "milk",
+      "name_original": "Шир",
+      "unit": "литр",
+      "price_tjs": 7.59,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "mutton",
+      "name_original": "Гўшти гўсфанд",
+      "unit": "кг",
+      "price_tjs": 77.93,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "oil",
+      "name_original": "Равѓани растанї",
+      "unit": "литр",
+      "price_tjs": 17.28,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "onion",
+      "name_original": "Бехпиёз",
+      "unit": "кг",
+      "price_tjs": 3.45,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "potato",
+      "name_original": "Картошка",
+      "unit": "кг",
+      "price_tjs": 5.17,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "rice",
+      "name_original": "Биринљ",
+      "unit": "кг",
+      "price_tjs": 21.18,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "sugar",
+      "name_original": "Шакар",
+      "unit": "кг",
+      "price_tjs": 11.2,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "tea_black",
+      "name_original": "Чойи сиёњ",
+      "unit": "кг",
+      "price_tjs": 56.92,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "tea_green",
+      "name_original": "Чойи кабуд",
+      "unit": "кг",
+      "price_tjs": 59.43,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    },
+    {
+      "date": "2023-10-13",
+      "product": "tomato",
+      "name_original": "Помидор",
+      "unit": "кг",
+      "price_tjs": 12.13,
+      "source": "МЭРиТ РТ (ГУМАПЭР)"
+    }
+  ]
+}

@@ -885,6 +885,41 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // GET /api/real-prices — реальные цены из МЭРиТ (без синтетики)
+  // ?product=beef,potato,sugar  — фильтр по товарам (через запятую)
+  // ?date=2023-10-13            — фильтр по дате
+  // ?latest=1                   — только последние цены по каждому товару
+  if (req.method === 'GET' && req.url.startsWith('/api/real-prices')) {
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'real_prices.json'), 'utf8'));
+      const qs = new URL('http://x' + req.url).searchParams;
+      const productFilter = qs.get('product') ? qs.get('product').split(',') : null;
+      const dateFilter    = qs.get('date')    || null;
+      const latestOnly    = qs.get('latest')  === '1';
+
+      let prices = data.prices;
+      if (productFilter) prices = prices.filter(p => productFilter.includes(p.product));
+      if (dateFilter)    prices = prices.filter(p => p.date === dateFilter);
+
+      // Режим latest — по одной последней записи на каждый продукт
+      if (latestOnly) {
+        const latestMap = {};
+        for (const p of prices) {
+          if (!latestMap[p.product] || p.date > latestMap[p.product].date) latestMap[p.product] = p;
+        }
+        prices = Object.values(latestMap).sort((a, b) => a.product.localeCompare(b.product));
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ ...data, prices, count: prices.length }));
+    } catch (err) {
+      console.error('[/api/real-prices]', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   // POST /api/detect-language — определить язык документа
   if (req.method === 'POST' && req.url === '/api/detect-language') {
     try {
@@ -1333,6 +1368,23 @@ const server = http.createServer(async (req, res) => {
 
       if (imfR.status === 'fulfilled') sources.push('imf.org');
 
+      // Реальные цены из МЭРиТ (без синтетики)
+      let realPrices = null;
+      try {
+        const rp = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'real_prices.json'), 'utf8'));
+        const latestMap = {};
+        for (const p of rp.prices) {
+          if (!latestMap[p.product] || p.date > latestMap[p.product].date) latestMap[p.product] = p;
+        }
+        realPrices = {
+          source:     rp.meta.source,
+          last_date:  Object.values(latestMap).map(p => p.date).sort().pop(),
+          total:      rp.meta.total_records,
+          latest:     latestMap,  // { product: {date, price_tjs, unit, ...} }
+        };
+        if (!sources.includes('МЭРиТ РТ')) sources.push('МЭРиТ РТ');
+      } catch (_) {}
+
       const data = {
         cpi,
         cpi_year:       cpiYear,
@@ -1347,6 +1399,7 @@ const server = http.createServer(async (req, res) => {
         aluminum_price,
         al_change_pct,
         imf:                imfR.status === 'fulfilled' ? imfR.value : null,
+        real_prices:        realPrices,  // реальные цены МЭРиТ
         dashboard_inflation: cpi,
         dashboard_year:      cpiYear || new Date().getFullYear() - 1,
         last_updated:        new Date().toISOString(),

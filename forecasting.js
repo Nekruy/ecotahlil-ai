@@ -736,7 +736,9 @@ function garch(data, periods) {
     selectedModel,
     leverage_effect: leverageEffect,
     // GARCH(1,1) параметры
-    omega: round4(omega), alpha: round4(alpha), beta: round4(beta), persistence: round4(persistence),
+    omega: round4(omega), alpha: round4(alpha), beta: round4(beta),
+    persistence: round4(persistence),
+    alpha_plus_beta: round4(persistence), // FIX: алиас для persistence
     // EGARCH(1,1)
     egarch: egarchParams
       ? { omega: egarchParams.omega, alpha: egarchParams.alpha, gamma: egarchParams.gamma, beta: egarchParams.beta, persistence: round4(Math.abs(egarchParams.beta)) }
@@ -824,8 +826,13 @@ function ensembleForecast(data, periods, officialForecast) {
     ci95.upper.push(round2(ensemble[i] + 1.96 * spread));
   }
 
+  // FIX: ci80/ci95 как массив пар [lower, upper] — удобно для перебора
+  const ci80Pairs = ci80.lower.map((v, i) => [v, ci80.upper[i]]);
+  const ci95Pairs = ci95.lower.map((v, i) => [v, ci95.upper[i]]);
+
   const result = {
-    ensemble,
+    forecast: ensemble,    // FIX: алиас — теперь ens.forecast работает
+    ensemble,              // оригинальное поле (обратная совместимость)
     arima:   arimaFc,
     prophet: propFc,
     weights: { arima: round4(wArima), prophet: round4(wProphet) },
@@ -833,8 +840,10 @@ function ensembleForecast(data, periods, officialForecast) {
       arima:   arimaMape   != null ? round4(arimaMape * 100)   : null,
       prophet: prophetMape != null ? round4(prophetMape * 100) : null,
     },
-    ci80,
-    ci95,
+    ci80: ci80Pairs,                        // FIX: массив пар [[lo,hi],...]
+    ci95: ci95Pairs,
+    ci80Raw: ci80,                          // { lower:[], upper:[] } для совместимости
+    ci95Raw: ci95,
     method: 'ensemble',
   };
   if (officialForecast) result.comparison = compareWithOfficial(ensemble, officialForecast);
@@ -1226,6 +1235,17 @@ function var_model(data, periods) {
   // 9. Тест Грейнджера (F-тест)
   const granger = grangerCausalityF(zS, lagOrder, rss, nObs);
 
+  // FIX: плоский именованный объект для удобной итерации
+  const grangerNamed = {};
+  for (let jj = 0; jj < k; jj++) {
+    for (let ii = 0; ii < k; ii++) {
+      if (ii !== jj && granger[jj][ii]) {
+        const key = `${KEYS[jj]}→${KEYS[ii]}`;
+        grangerNamed[key] = granger[jj][ii];
+      }
+    }
+  }
+
   // 10. Интерпретация
   const interpretation = buildVARInterpretation(KEYS, LABELS, A1, granger, forecasts, series, periods, adfResults, lagOrder);
 
@@ -1239,7 +1259,8 @@ function var_model(data, periods) {
     historical:   series,
     forecasts,
     irf,
-    granger,
+    granger:      grangerNamed,   // FIX: плоский именованный объект {key: {pValue,...}}
+    grangerMatrix: granger,       // 2D массив для внутреннего использования
     r2,
     coefficients: A1.map(row => row.map(round4)),
     constants:    constants.map(round4),
@@ -1255,11 +1276,163 @@ function var_model(data, periods) {
   };
 }
 
+// ─── ETS (Exponential Smoothing) с детекцией структурного сдвига ─────────────
+
+/**
+ * Holt-Winters ETS с автодетекцией структурного сдвига.
+ * При обнаружении сдвига использует только послесдвиговые данные для α,β.
+ * @param {number[]} data
+ * @param {number}   periods
+ * @returns {{ forecast: number[], alpha: number, breakPoint: number|null, method: string }}
+ */
+function etsForecast(data, periods) {
+  const nums = validateData(data);
+  const n = nums.length;
+
+  // --- Детекция структурного сдвига (Cusum-подход) ---
+  let breakPoint = null;
+  if (n >= 10) {
+    const overall = mean(nums);
+    const cusumArr = [];
+    let cs = 0;
+    for (let i = 0; i < n; i++) {
+      cs += nums[i] - overall;
+      cusumArr.push(cs);
+    }
+    const maxCS = Math.max(...cusumArr.map(Math.abs));
+    const csThreshold = stdDev(nums) * Math.sqrt(n) * 0.8;
+    if (maxCS > csThreshold) {
+      // Найти точку максимального отклонения после первой трети
+      let maxIdx = Math.floor(n / 3);
+      for (let i = Math.floor(n / 3); i < n - 2; i++) {
+        if (Math.abs(cusumArr[i]) > Math.abs(cusumArr[maxIdx])) maxIdx = i;
+      }
+      // Сдвиг значим только если средние до/после различаются более чем на 1σ
+      const meanBefore = mean(nums.slice(0, maxIdx));
+      const meanAfter  = mean(nums.slice(maxIdx));
+      const sigma = stdDev(nums);
+      if (Math.abs(meanBefore - meanAfter) > sigma * 0.8) {
+        breakPoint = maxIdx;
+      }
+    }
+  }
+
+  // Данные для подбора: после сдвига или полные (с окном 10 точек)
+  const fitData = breakPoint !== null
+    ? nums.slice(breakPoint)
+    : nums.slice(-Math.min(n, 15));  // используем последние 15 точек
+
+  const m = fitData.length;
+  if (m < 3) return { forecast: new Array(periods).fill(nums[n - 1]), alpha: 0.3, breakPoint, method: 'ets-naive' };
+
+  // --- Оптимизация α по минимуму SSE (поиск в сетке) ---
+  let bestAlpha = 0.3, bestSse = Infinity;
+  for (let a = 0.05; a <= 0.95; a += 0.05) {
+    let level = fitData[0], sse = 0;
+    for (let i = 1; i < m; i++) {
+      const pred = level;
+      sse += (fitData[i] - pred) ** 2;
+      level = a * fitData[i] + (1 - a) * level;
+    }
+    if (sse < bestSse) { bestSse = sse; bestAlpha = a; }
+  }
+
+  // --- Holt's двойное сглаживание (тренд) ---
+  let bestAlpha2 = 0.3, bestBeta2 = 0.1, bestSse2 = Infinity;
+  for (let a = 0.1; a <= 0.9; a += 0.1) {
+    for (let b = 0.05; b <= 0.5; b += 0.05) {
+      let level = fitData[0];
+      let trend = fitData.length > 1 ? fitData[1] - fitData[0] : 0;
+      let sse = 0;
+      for (let i = 1; i < m; i++) {
+        const pred = level + trend;
+        sse += (fitData[i] - pred) ** 2;
+        const newLevel = a * fitData[i] + (1 - a) * (level + trend);
+        trend = b * (newLevel - level) + (1 - b) * trend;
+        level = newLevel;
+      }
+      if (sse < bestSse2) { bestSse2 = sse; bestAlpha2 = a; bestBeta2 = b; }
+    }
+  }
+
+  // Финальные параметры
+  let level = fitData[0];
+  let trend = fitData.length > 1 ? fitData[1] - fitData[0] : 0;
+  for (let i = 1; i < m; i++) {
+    const newLevel = bestAlpha2 * fitData[i] + (1 - bestAlpha2) * (level + trend);
+    trend = bestBeta2 * (newLevel - level) + (1 - bestBeta2) * trend;
+    level = newLevel;
+  }
+
+  // Ограничиваем тренд: не более ±0.5 в год (защита от экстраполяции)
+  const boundedTrend = Math.max(-0.5, Math.min(0.5, trend));
+
+  const forecast = [];
+  for (let i = 1; i <= periods; i++) {
+    forecast.push(round2(level + boundedTrend * i));
+  }
+
+  return {
+    forecast,
+    alpha:  round4(bestAlpha2),
+    beta:   round4(bestBeta2),
+    level:  round2(level),
+    trend:  round4(trend),
+    breakPoint,
+    fitDataLength: m,
+    method: breakPoint !== null ? 'ets-holt-post-break' : 'ets-holt',
+  };
+}
+
+// ─── ARIMA с коррекцией систематического смещения ────────────────────────────
+
+/**
+ * Вычисляет среднее систематическое смещение ARIMA на последних
+ * wfSteps точках (walk-forward) и возвращает correctedForecast.
+ * @param {number[]} data
+ * @param {number}   periods
+ * @param {*}        officialForecast
+ */
+function autoArimaBiasAware(data, periods, officialForecast) {
+  const result = autoArima(data, periods, officialForecast);
+  const nums = Array.isArray(data) ? data.map(Number).filter(v => !isNaN(v)) : [];
+  const n = nums.length;
+
+  if (n < 8) return { ...result, biasCorrection: 0, forecastBC: result.forecast };
+
+  // Walk-forward bias на последних 20% (мин 2, макс 6 точек)
+  const wfSteps = Math.min(6, Math.max(2, Math.floor(n * 0.2)));
+  let totalBias = 0, cnt = 0;
+
+  for (let s = wfSteps; s >= 1; s--) {
+    const trainEnd = n - s;
+    if (trainEnd < 5) continue;
+    try {
+      const wf = autoArima(nums.slice(0, trainEnd), 1);
+      const bias = wf.forecast[0] - nums[trainEnd];
+      totalBias += bias;
+      cnt++;
+    } catch (_) {}
+  }
+
+  const biasCorrection = cnt > 0 ? -(totalBias / cnt) : 0;
+  const forecastBC = result.forecast.map(v => round2(v + biasCorrection));
+
+  return {
+    ...result,
+    biasCorrection:  round4(biasCorrection),
+    forecastBC,                      // прогноз с поправкой
+    forecastRaw: result.forecast,    // оригинальный без поправки
+  };
+}
+
 // ─── Экспорт ──────────────────────────────────────────────────────────────────
 
 module.exports = {
   arima: autoArima,   // обратная совместимость — теперь autoArima
   autoArima,
+  autoArimaBiasAware,  // FIX: ARIMA с коррекцией смещения
+  etsForecast,         // FIX: ETS с детекцией структурного сдвига
   prophet,
   detectAnomalies,
   garch,
