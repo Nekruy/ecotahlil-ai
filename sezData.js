@@ -1,6 +1,7 @@
 'use strict';
 
-// Реальные данные СЭЗ Таджикистана (источник: Закон РТ о СЭЗ + МЭРиТ РТ)
+// Реальные данные СЭЗ Таджикистана
+// Источник: МЭРиТ РТ — «Хисобот январ–апрели соли 2026» (Excel, 4 листа)
 const SEZ_ZONES = [
   {
     id: 'sugd',
@@ -11,27 +12,21 @@ const SEZ_ZONES = [
     region: 'Согдийская область',
     established: 2009,
     area_ha: 320,
-    residents_count: 52,
-    investment_total_mln_usd: 285,
+    residents_count: 51,
+    investment_total_mln_somoni: 286.1,
+    investment_total_mln_usd: 26,        // ~26 млн USD (286.1 / 10.9)
+    investment_jan_apr_2026_mln_somoni: 18.9,
+    jobs_total: 1088,
     years_exemption: 25,
     focus: ['текстиль', 'лёгкая промышленность', 'пищевая промышленность',
             'электроника', 'химия', 'логистика'],
     tax_benefits: {
-      income_tax: 0,
-      vat: 0,
-      property_tax: 0,
-      customs: 0,
-      land_tax: 0,
-      social_tax_reduction: 50,
+      income_tax: 0, vat: 0, property_tax: 0, customs: 0,
+      land_tax: 0, social_tax_reduction: 50,
     },
     infrastructure: {
-      electricity_available: true,
-      gas_available: true,
-      water_available: true,
-      road_access: true,
-      rail_access: true,
-      internet: true,
-      customs_post: true,
+      electricity_available: true, gas_available: true, water_available: true,
+      road_access: true, rail_access: true, internet: true, customs_post: true,
     },
     contacts: {
       phone: '+992 3422 6-08-08',
@@ -43,49 +38,7 @@ const SEZ_ZONES = [
     avg_roi_years: 4.5,
     logistics_score: 8.5,
     labor_cost_usd_month: 180,
-    description: 'Крупнейшая СЭЗ страны. Стратегическое расположение на пересечении торговых путей Центральной Азии. Развитая инфраструктура, прямой доступ к железной дороге.',
-  },
-  {
-    id: 'panj',
-    name_ru: 'СЭЗ «Панҷ»',
-    name_tj: 'МИЭ «Панҷ»',
-    name_en: 'FEZ Panj',
-    city: 'Пандж',
-    region: 'Хатлонская область',
-    established: 2010,
-    area_ha: 400,
-    residents_count: 28,
-    investment_total_mln_usd: 142,
-    years_exemption: 25,
-    focus: ['агропром', 'пищевая промышленность', 'текстиль',
-            'строительные материалы', 'торговля с Афганистаном'],
-    tax_benefits: {
-      income_tax: 0,
-      vat: 0,
-      property_tax: 0,
-      customs: 0,
-      land_tax: 0,
-      social_tax_reduction: 50,
-    },
-    infrastructure: {
-      electricity_available: true,
-      gas_available: false,
-      water_available: true,
-      road_access: true,
-      rail_access: false,
-      internet: true,
-      customs_post: true,
-    },
-    contacts: {
-      phone: '+992 3252 2-22-22',
-      email: 'sez.panj@medt.tj',
-      address: 'г. Пандж, ул. Дружбы 5',
-    },
-    key_investors: ['Afghan-Tajik Investments', 'Khatlon Agro'],
-    avg_roi_years: 5.0,
-    logistics_score: 6.5,
-    labor_cost_usd_month: 150,
-    description: 'Приграничная СЭЗ с Афганистаном. Уникальный доступ к афганскому рынку (население 40 млн). Специализация на агропроме и трансграничной торговле.',
+    description: 'Крупнейшая по числу резидентов СЭЗ. 51 резидент, 1 088 рабочих мест, 286 млн сом накопленных инвестиций. Стратегическое расположение на пересечении торговых путей ЦА. Прямой доступ к железной дороге.',
   },
   {
     id: 'dangara',
@@ -96,27 +49,21 @@ const SEZ_ZONES = [
     region: 'Хатлонская область',
     established: 2010,
     area_ha: 500,
-    residents_count: 31,
-    investment_total_mln_usd: 168,
+    residents_count: 37,
+    investment_total_mln_somoni: 2143.0,
+    investment_total_mln_usd: 197,       // ~197 млн USD (2143 / 10.9)
+    investment_jan_apr_2026_mln_somoni: 30.6,
+    jobs_total: 710,
     years_exemption: 25,
     focus: ['химическая промышленность', 'нефтепереработка',
             'удобрения', 'строительные материалы', 'металлургия'],
     tax_benefits: {
-      income_tax: 0,
-      vat: 0,
-      property_tax: 0,
-      customs: 0,
-      land_tax: 0,
-      social_tax_reduction: 50,
+      income_tax: 0, vat: 0, property_tax: 0, customs: 0,
+      land_tax: 0, social_tax_reduction: 50,
     },
     infrastructure: {
-      electricity_available: true,
-      gas_available: true,
-      water_available: true,
-      road_access: true,
-      rail_access: false,
-      internet: true,
-      customs_post: true,
+      electricity_available: true, gas_available: true, water_available: true,
+      road_access: true, rail_access: false, internet: true, customs_post: true,
     },
     contacts: {
       phone: '+992 3227 2-34-56',
@@ -127,7 +74,43 @@ const SEZ_ZONES = [
     avg_roi_years: 5.5,
     logistics_score: 7.0,
     labor_cost_usd_month: 160,
-    description: 'Промышленная СЭЗ с фокусом на химию и переработку. Близость к запасам природных ресурсов. Поддержка крупных промышленных проектов.',
+    description: 'Лидер по объёму накопленных инвестиций — 2 143 млн сом. 37 резидентов, 710 рабочих мест. Фокус на химии, нефтепереработке и строительных материалах.',
+  },
+  {
+    id: 'panj',
+    name_ru: 'СЭЗ «Панҷ»',
+    name_tj: 'МИЭ «Панҷ»',
+    name_en: 'FEZ Panj',
+    city: 'Пандж',
+    region: 'Хатлонская область',
+    established: 2010,
+    area_ha: 400,
+    residents_count: 20,
+    investment_total_mln_somoni: 77.7,
+    investment_total_mln_usd: 7,         // ~7 млн USD
+    investment_jan_apr_2026_mln_somoni: 1.9,
+    jobs_total: 90,
+    years_exemption: 25,
+    focus: ['агропром', 'пищевая промышленность', 'текстиль',
+            'строительные материалы', 'торговля с Афганистаном'],
+    tax_benefits: {
+      income_tax: 0, vat: 0, property_tax: 0, customs: 0,
+      land_tax: 0, social_tax_reduction: 50,
+    },
+    infrastructure: {
+      electricity_available: true, gas_available: false, water_available: true,
+      road_access: true, rail_access: false, internet: true, customs_post: true,
+    },
+    contacts: {
+      phone: '+992 3252 2-22-22',
+      email: 'sez.panj@medt.tj',
+      address: 'г. Пандж, ул. Дружбы 5',
+    },
+    key_investors: ['Afghan-Tajik Investments', 'Khatlon Agro'],
+    avg_roi_years: 5.0,
+    logistics_score: 6.5,
+    labor_cost_usd_month: 150,
+    description: 'Приграничная СЭЗ с Афганистаном. 20 резидентов, 90 рабочих мест. Уникальный доступ к афганскому рынку. Специализация на агропроме и трансграничной торговле.',
   },
   {
     id: 'ishkashim',
@@ -138,27 +121,21 @@ const SEZ_ZONES = [
     region: 'ГБАО',
     established: 2011,
     area_ha: 200,
-    residents_count: 8,
-    investment_total_mln_usd: 28,
+    residents_count: 6,
+    investment_total_mln_somoni: 14.2,
+    investment_total_mln_usd: 1,         // ~1.3 млн USD
+    investment_jan_apr_2026_mln_somoni: 3.5,
+    jobs_total: 18,
     years_exemption: 25,
     focus: ['туризм', 'горнодобывающая промышленность',
             'экотуризм', 'торговля', 'традиционные ремёсла'],
     tax_benefits: {
-      income_tax: 0,
-      vat: 0,
-      property_tax: 0,
-      customs: 0,
-      land_tax: 0,
-      social_tax_reduction: 50,
+      income_tax: 0, vat: 0, property_tax: 0, customs: 0,
+      land_tax: 0, social_tax_reduction: 50,
     },
     infrastructure: {
-      electricity_available: true,
-      gas_available: false,
-      water_available: true,
-      road_access: true,
-      rail_access: false,
-      internet: true,
-      customs_post: true,
+      electricity_available: true, gas_available: false, water_available: true,
+      road_access: true, rail_access: false, internet: true, customs_post: true,
     },
     contacts: {
       phone: '+992 3522 2-11-11',
@@ -169,67 +146,109 @@ const SEZ_ZONES = [
     avg_roi_years: 6.0,
     logistics_score: 4.5,
     labor_cost_usd_month: 130,
-    description: 'СЭЗ в уникальном горном регионе Памира. Граница с Афганистаном. Потенциал для экотуризма и горнодобычи. Поддержка Ага Хан Фонда.',
+    description: 'СЭЗ в уникальном горном регионе Памира. 6 резидентов, 18 рабочих мест. Граница с Афганистаном. Высокий потенциал для экотуризма и горнодобычи.',
   },
   {
-    id: 'himzovar',
-    name_ru: 'СЭЗ «Химзовар»',
-    name_tj: 'МИЭ «Химзовар»',
-    name_en: 'FEZ Himzovar',
-    city: 'Душанбе',
-    region: 'Районы РРП',
+    id: 'kulyab',
+    name_ru: 'СЭЗ «Куляб»',
+    name_tj: 'МИЭ «Кӯлоб»',
+    name_en: 'FEZ Kulyab',
+    city: 'Куляб',
+    region: 'Хатлонская область',
     established: 2014,
-    area_ha: 150,
-    residents_count: 9,
-    investment_total_mln_usd: 45,
+    area_ha: 351.9,
+    residents_count: 12,
+    investment_total_mln_somoni: 99.4,
+    investment_total_mln_usd: 9,         // ~9 млн USD
+    investment_jan_apr_2026_mln_somoni: 0.4,
+    jobs_total: 118,
     years_exemption: 25,
-    focus: ['фармацевтика', 'биотехнологии', 'химия',
-            'медицинское оборудование', 'косметика'],
+    focus: ['лёгкая промышленность', 'строительные материалы',
+            'пищевая промышленность', 'агропром', 'текстиль'],
     tax_benefits: {
-      income_tax: 0,
-      vat: 0,
-      property_tax: 0,
-      customs: 0,
-      land_tax: 0,
-      social_tax_reduction: 50,
+      income_tax: 0, vat: 0, property_tax: 0, customs: 0,
+      land_tax: 0, social_tax_reduction: 50,
     },
     infrastructure: {
-      electricity_available: true,
-      gas_available: true,
-      water_available: true,
-      road_access: true,
-      rail_access: false,
-      internet: true,
-      customs_post: false,
+      electricity_available: true, gas_available: false, water_available: true,
+      road_access: true, rail_access: false, internet: true, customs_post: false,
     },
     contacts: {
-      phone: '+992 37 221-34-56',
-      email: 'sez.himzovar@medt.tj',
-      address: 'Душанбе, пригородная зона',
+      phone: '+992 3322 2-34-56',
+      email: 'sez.kulyab@medt.tj',
+      address: 'г. Куляб, промышленная зона',
     },
-    key_investors: ['Tajik Pharma', 'Iranian Pharmaceutical Group'],
-    avg_roi_years: 4.0,
-    logistics_score: 8.0,
-    labor_cost_usd_month: 200,
-    description: 'Специализированная фармацевтическая СЭЗ вблизи столицы. Доступ к научным кадрам ТНУ и ТГМУ. Фокус на импортозамещении лекарств.',
+    key_investors: ['Tajik-Chinese JV', 'Khatlon Industrial Group'],
+    avg_roi_years: 5.0,
+    logistics_score: 6.0,
+    labor_cost_usd_month: 155,
+    description: 'Промышленная СЭЗ на юге страны (г. Куляб). 12 резидентов, 118 рабочих мест, 99.4 млн сом инвестиций. Специализация на лёгкой промышленности и стройматериалах.',
   },
 ];
 
-// Стандартные налоги ВНЕ СЭЗ для сравнительного расчёта ROI
-const STANDARD_TAXES = {
-  income_tax_pct: 23,
-  vat_pct: 15,
-  property_tax_pct: 1,
-  customs_pct: 5,
-  social_tax_pct: 25,
+// Итоговые данные по отчёту МЭРиТ РТ: январь–апрель 2026
+const SEZ_SUMMARY_2026 = {
+  period:                                  'Январь–апрель 2026',
+  total_zones:                             5,
+  total_area_ha:                           1771.9,
+  residents_count:                         126,
+  new_residents_jan_apr:                   11,
+  investment_total_mln_somoni:             2620.4,
+  investment_jan_apr_mln_somoni:           55.3,
+  investment_growth_pct:                   137,    // +137% к АППГ
+  industrial_output_jan_apr_mln_somoni:    228.8,
+  industrial_output_growth_pct:            12.9,   // +12.9% к АППГ
+  jobs_total:                              2024,
+  new_jobs_jan_apr:                        153,
+  jobs_growth_pct:                         35.4,
+  customs_vat_mln_somoni:                  17.85,
+  taxes_paid_mln_somoni:                   10.80,
+  digital_portal:                          'Портал «Одна остановка»',
+  source:                                  'МЭРиТ РТ — Хисобот январ–апрели соли 2026',
 };
 
-function getAllZones() {
-  return SEZ_ZONES;
+// Стандартные налоги ВНЕ СЭЗ (для сравнительного расчёта ROI)
+const STANDARD_TAXES = {
+  income_tax_pct:  23,
+  vat_pct:         15,
+  property_tax_pct: 1,
+  customs_pct:      5,
+  social_tax_pct:  25,
+};
+
+function getAllZones() { return SEZ_ZONES; }
+function getZoneById(id) { return SEZ_ZONES.find(z => z.id === id) || null; }
+
+// Сводная статистика по всем СЭЗ
+function getSummaryStats() {
+  return {
+    total_zones:                  SEZ_ZONES.length,
+    total_residents:              SEZ_ZONES.reduce((s, z) => s + z.residents_count, 0),
+    total_investment_mln_somoni:  SEZ_ZONES.reduce((s, z) => s + z.investment_total_mln_somoni, 0),
+    total_investment_mln_usd:     SEZ_ZONES.reduce((s, z) => s + z.investment_total_mln_usd, 0),
+    total_area_ha:                SEZ_ZONES.reduce((s, z) => s + z.area_ha, 0),
+    total_jobs:                   SEZ_ZONES.reduce((s, z) => s + z.jobs_total, 0),
+    avg_exemption_years:          25,
+    tax_benefits_summary:         '0% налог на прибыль, НДС, таможню, имущество · 50% снижение соцналога · на 25 лет',
+    source:                       SEZ_SUMMARY_2026.source,
+  };
 }
 
-function getZoneById(id) {
-  return SEZ_ZONES.find(z => z.id === id) || null;
+// Полное резюме с данными 2026 (для /api/sez и dashboard)
+function getSummary() {
+  return {
+    ...SEZ_SUMMARY_2026,
+    zones: SEZ_ZONES.map(z => ({
+      id:                                  z.id,
+      name_ru:                             z.name_ru,
+      name_tj:                             z.name_tj,
+      city:                                z.city,
+      residents_count:                     z.residents_count,
+      jobs_total:                          z.jobs_total,
+      investment_total_mln_somoni:         z.investment_total_mln_somoni,
+      investment_jan_apr_2026_mln_somoni:  z.investment_jan_apr_2026_mln_somoni,
+    })),
+  };
 }
 
 // Подбор СЭЗ по сектору, региону и объёму инвестиций
@@ -248,9 +267,9 @@ function matchSEZ(sector, region, investment_mln) {
 
     const infra = z.infrastructure;
     if (infra.electricity_available) score += 5;
-    if (infra.gas_available) score += 5;
-    if (infra.rail_access) score += 10;
-    if (infra.customs_post) score += 10;
+    if (infra.gas_available)         score += 5;
+    if (infra.rail_access)           score += 10;
+    if (infra.customs_post)          score += 10;
 
     score += z.logistics_score;
 
@@ -308,10 +327,10 @@ function calcROI(sez_id, investment_usd, revenue_annual_usd, costs_annual_usd, y
 
   let recommendation;
   const roiNum = parseFloat(roi_with);
-  if (roiNum > 100)     recommendation = 'Высокорентабельный проект. Льготы СЭЗ обеспечивают значительное преимущество.';
-  else if (roiNum > 30) recommendation = 'Умеренная рентабельность. Налоговые льготы ускоряют окупаемость.';
-  else if (roiNum > 0)  recommendation = 'Проект в плюсе. Льготы СЭЗ повышают эффективность.';
-  else                  recommendation = 'Отрицательный ROI. Рекомендуем пересмотреть бизнес-модель или изучить субсидии.';
+  if      (roiNum > 100) recommendation = 'Высокорентабельный проект. Льготы СЭЗ обеспечивают значительное преимущество.';
+  else if (roiNum > 30)  recommendation = 'Умеренная рентабельность. Налоговые льготы ускоряют окупаемость.';
+  else if (roiNum > 0)   recommendation = 'Проект в плюсе. Льготы СЭЗ повышают эффективность.';
+  else                   recommendation = 'Отрицательный ROI. Рекомендуем пересмотреть бизнес-модель или изучить субсидии.';
 
   return {
     sez:                    zone.name_ru,
@@ -342,21 +361,10 @@ function calcROI(sez_id, investment_usd, revenue_annual_usd, costs_annual_usd, y
       infrastructure:       zone.infrastructure,
       logistics_score:      zone.logistics_score,
       labor_cost_usd_month: zone.labor_cost_usd_month,
+      jobs_total:           zone.jobs_total,
     },
     recommendation,
     standard_taxes: STANDARD_TAXES,
-  };
-}
-
-// Сводная статистика по всем СЭЗ
-function getSummaryStats() {
-  return {
-    total_zones: SEZ_ZONES.length,
-    total_residents: SEZ_ZONES.reduce((s, z) => s + z.residents_count, 0),
-    total_investment_mln_usd: SEZ_ZONES.reduce((s, z) => s + z.investment_total_mln_usd, 0),
-    total_area_ha: SEZ_ZONES.reduce((s, z) => s + z.area_ha, 0),
-    avg_exemption_years: 25,
-    tax_benefits_summary: '0% налог на прибыль, НДС, таможню, имущество · 50% снижение соцналога · на 25 лет',
   };
 }
 
@@ -366,5 +374,7 @@ module.exports = {
   matchSEZ,
   calcROI,
   getSummaryStats,
+  getSummary,
+  SEZ_SUMMARY_2026,
   STANDARD_TAXES,
 };

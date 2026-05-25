@@ -1637,12 +1637,13 @@ const server = http.createServer(async (req, res) => {
       const inv     = invStr ? parseFloat(invStr) : null;
 
       const stats   = sezData.getSummaryStats();
+      const summary = typeof sezData.getSummary === 'function' ? sezData.getSummary() : null;
       const zones   = (sector || region || inv)
         ? sezData.matchSEZ(sector, region, inv)
         : sezData.getAllZones();
 
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ zones, matches: zones, stats, source: 'МЭРиТ РТ / Закон о СЭЗ' }));
+      res.end(JSON.stringify({ zones, matches: zones, stats, summary, source: 'МЭРиТ РТ — Хисобот январ–апрели соли 2026' }));
     } catch (err) {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: err.message }));

@@ -7104,7 +7104,7 @@ function setSEZLang(lang) {
 }
 
 function showSEZTab(tab) {
-  ['catalog','map','match','roi','compare','register','ai'].forEach(t => {
+  ['catalog','map','match','roi','compare','ai'].forEach(t => {
     const el  = document.getElementById('sez-tab-'+t);
     const btn = document.getElementById('seztab-'+t);
     if (el)  el.style.display = t===tab ? 'block' : 'none';
@@ -7123,12 +7123,43 @@ async function loadSEZSection() {
     const r = await fetch('/api/sez');
     const d = await r.json();
     const zones = d.zones || [];
-    const totalRes = zones.reduce((s,z)=>s+z.residents_count,0);
-    const totalInv = zones.reduce((s,z)=>s+z.investment_total_mln_usd,0);
+    const stats = d.stats || {};
+
+    const totalRes     = zones.reduce((s,z)=>s+z.residents_count,0);
+    const totalSomoni  = zones.reduce((s,z)=>s+(z.investment_total_mln_somoni||0),0);
+    const totalJobs    = zones.reduce((s,z)=>s+(z.jobs_total||0),0);
+
     const elR = document.getElementById('sez-total-residents');
     const elI = document.getElementById('sez-total-invest');
     if (elR) elR.textContent = totalRes;
-    if (elI) elI.textContent = '$'+totalInv+' млн';
+    if (elI) elI.textContent = Math.round(totalSomoni).toLocaleString('ru-RU') + ' млн сом';
+
+    // Блок динамики 2026
+    const dynEl = document.getElementById('sez-dynamics-2026');
+    if (dynEl) {
+      const s = d.summary || {};
+      dynEl.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px">
+          <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:9px;text-align:center">
+            <div style="font-size:17px;font-weight:700;color:#166534">+${s.investment_growth_pct||137}%</div>
+            <div style="font-size:9px;color:#475569">Инвестиции янв–апр к АППГ</div>
+          </div>
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:9px;text-align:center">
+            <div style="font-size:17px;font-weight:700;color:#1a4a8a">${(s.investment_jan_apr_mln_somoni||55.3).toFixed(1)} млн</div>
+            <div style="font-size:9px;color:#475569">Инвестиции янв–апр 2026 (сом)</div>
+          </div>
+          <div style="background:#fef9c3;border:1px solid #fde68a;border-radius:8px;padding:9px;text-align:center">
+            <div style="font-size:17px;font-weight:700;color:#b8860b">${(s.industrial_output_jan_apr_mln_somoni||228.8).toFixed(1)} млн</div>
+            <div style="font-size:9px;color:#475569">Выпуск продукции янв–апр (сом)</div>
+          </div>
+          <div style="background:#fdf4ff;border:1px solid #e9d5ff;border-radius:8px;padding:9px;text-align:center">
+            <div style="font-size:17px;font-weight:700;color:#7c3aed">${totalJobs.toLocaleString('ru-RU')}</div>
+            <div style="font-size:9px;color:#475569">Рабочих мест (всего)</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:#64748b;text-align:right">Источник: ${s.source||'МЭРиТ РТ, янв–апр 2026'}</div>`;
+    }
+
     window._sezZones = zones;
     renderSEZCatalog(zones);
   } catch(e) { console.warn('SEZ load:', e.message); }
@@ -7163,8 +7194,8 @@ function renderSEZCatalog(zones) {
             <div style="font-size:9px;color:#64748b">га площадь</div>
           </div>
           <div style="text-align:center;padding:6px;background:#f8fafc;border-radius:6px">
-            <div style="font-weight:700;color:#b8860b;font-size:15px">$${z.investment_total_mln_usd}</div>
-            <div style="font-size:9px;color:#64748b">млн инвест.</div>
+            <div style="font-weight:700;color:#b8860b;font-size:15px">${z.investment_total_mln_somoni||z.investment_total_mln_usd}</div>
+            <div style="font-size:9px;color:#64748b">млн сом инвест.</div>
           </div>
         </div>
         <div style="font-size:11px;color:#475569;margin-bottom:7px;line-height:1.4">${z.description}</div>
@@ -7197,8 +7228,8 @@ function selectSEZForROI(sez_id) {
 function renderSEZMap() {
   const zones = window._sezZones || [];
   if (!zones.length) return;
-  const coords = { sugd:{x:250,y:115}, panj:{x:430,y:310}, dangara:{x:380,y:275}, ishkashim:{x:600,y:240}, himzovar:{x:310,y:195} };
-  const colors = { sugd:'#1a4a8a', panj:'#0c7873', dangara:'#b8860b', ishkashim:'#7c3aed', himzovar:'#dc2626' };
+  const coords = { sugd:{x:250,y:115}, panj:{x:430,y:310}, dangara:{x:380,y:275}, ishkashim:{x:600,y:240}, kulyab:{x:470,y:330} };
+  const colors = { sugd:'#1a4a8a', panj:'#0c7873', dangara:'#b8860b', ishkashim:'#7c3aed', kulyab:'#dc2626' };
   const svg    = document.getElementById('sez-map-points');
   const legend = document.getElementById('sez-map-legend');
   if (!svg||!legend) return;
@@ -7553,11 +7584,11 @@ async function sezAI() {
       <div style="font-size:10px;color:#64748b" data-sez-i18n="zones_count">СЭЗ в РТ</div>
     </div>
     <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px;border-top:3px solid #0c7873;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#0c7873" id="sez-total-residents">128</div>
+      <div style="font-size:20px;font-weight:700;color:#0c7873" id="sez-total-residents">126</div>
       <div style="font-size:10px;color:#64748b" data-sez-i18n="residents">Резидентов</div>
     </div>
     <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px;border-top:3px solid #b8860b;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:#b8860b" id="sez-total-invest">$668 млн</div>
+      <div style="font-size:20px;font-weight:700;color:#b8860b" id="sez-total-invest">2 620 млн сом</div>
       <div style="font-size:10px;color:#64748b" data-sez-i18n="total_invest">Инвестиций</div>
     </div>
     <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:10px;border-top:3px solid #166534;text-align:center">
@@ -7570,6 +7601,9 @@ async function sezAI() {
     </div>
   </div>
 
+  <!-- Динамика январь–апрель 2026 -->
+  <div id="sez-dynamics-2026" style="margin-bottom:12px"></div>
+
   <!-- Вкладки -->
   <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
     <button onclick="showSEZTab('catalog')"  id="seztab-catalog"  style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:#1a4a8a;color:white">Каталог</button>
@@ -7577,7 +7611,6 @@ async function sezAI() {
     <button onclick="showSEZTab('match')"    id="seztab-match"    style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569">Подбор</button>
     <button onclick="showSEZTab('roi')"      id="seztab-roi"      style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569">ROI / NPV</button>
     <button onclick="showSEZTab('compare')"  id="seztab-compare"  style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569">Сравнение</button>
-    <button onclick="showSEZTab('register')" id="seztab-register" style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569">Регистрация</button>
     <button onclick="showSEZTab('ai')"       id="seztab-ai"       style="padding:7px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid #e2e8f0;background:white;color:#475569">AI</button>
   </div>
 
@@ -7651,7 +7684,7 @@ async function sezAI() {
             <option value="panj">СЭЗ Панч — Пандж</option>
             <option value="dangara">СЭЗ Дангара</option>
             <option value="ishkashim">СЭЗ Ишкошим — ГБАО</option>
-            <option value="himzovar">СЭЗ Химзовар — Душанбе</option>
+            <option value="kulyab">СЭЗ Куляб — Куляб</option>
           </select>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
             <div><label style="font-size:11px;color:#64748b;display:block;margin-bottom:2px">Инвестиции (млн $)</label><input type="number" id="roi-inv" value="5" min="0.1" step="0.5" style="width:100%;padding:7px;border:1px solid #e2e8f0;border-radius:5px;font-size:12px;box-sizing:border-box"></div>
@@ -7683,35 +7716,6 @@ async function sezAI() {
   </div>
 
   <!-- РЕГИСТРАЦИЯ -->
-  <div id="sez-tab-register" style="display:none">
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
-      <div style="background:#166534;padding:10px 14px;color:white;font-weight:600;font-size:13px">Пошаговый гид регистрации резидента СЭЗ</div>
-      <div style="padding:16px;display:grid;gap:10px">
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:#f0fdf4;border-radius:8px;border-left:4px solid #166534">
-          <div style="background:#166534;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">1</div>
-          <div><div style="font-weight:600;font-size:13px;color:#166534">Подготовка документов</div><div style="font-size:10px;color:#475569;margin-top:2px">Срок: 2-4 недели</div><ul style="font-size:12px;color:#475569;margin:6px 0 0;padding-left:16px"><li>Бизнес-план проекта (RU или TJ)</li><li>Учредительные документы компании</li><li>Финансовая отчётность за 2 года</li><li>Технико-экономическое обоснование</li><li>Сведения об источнике инвестиций</li></ul></div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:#eff6ff;border-radius:8px;border-left:4px solid #1a4a8a">
-          <div style="background:#1a4a8a;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">2</div>
-          <div><div style="font-weight:600;font-size:13px;color:#1a4a8a">Подача заявки в МЭРиТ</div><div style="font-size:10px;color:#475569;margin-top:2px">Срок рассмотрения: 30 дней</div><div style="font-size:12px;color:#475569;margin-top:6px">г. Душанбе, пр. Рудаки 42 · +992 37 221-45-67 · sez@medt.tj</div></div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:#fef9c3;border-radius:8px;border-left:4px solid #b8860b">
-          <div style="background:#b8860b;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">3</div>
-          <div><div style="font-weight:600;font-size:13px;color:#b8860b">Экспертиза и согласование</div><div style="font-size:10px;color:#475569;margin-top:2px">Срок: 15-30 дней</div><div style="font-size:12px;color:#475569;margin-top:4px">Межведомственная комиссия рассматривает проект. Возможны дополнительные запросы документов.</div></div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:#fdf4ff;border-radius:8px;border-left:4px solid #7c3aed">
-          <div style="background:#7c3aed;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">4</div>
-          <div><div style="font-weight:600;font-size:13px;color:#7c3aed">Подписание договора</div><div style="font-size:10px;color:#475569;margin-top:2px">После одобрения</div><div style="font-size:12px;color:#475569;margin-top:4px">Договор об условиях деятельности. Регистрация и свидетельство резидента СЭЗ.</div></div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:#dcfce7;border-radius:8px;border-left:4px solid #166534">
-          <div style="background:#166534;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">V</div>
-          <div><div style="font-weight:600;font-size:13px;color:#166534">Начало работы — 0% налоги с первого дня</div><div style="font-size:12px;color:#475569;margin-top:4px">0% налог на прибыль · 0% НДС · 0% таможня · 0% налог на имущество · 50% снижение соцналога · 25 лет</div></div>
-        </div>
-        <div style="padding:10px;background:#f1f5f9;border-radius:8px;font-size:11px;color:#475569">Совет: вкладка "AI" отвечает на вопросы по регистрации на русском, таджикском и английском языках.</div>
-      </div>
-    </div>
-  </div>
-
   <!-- AI КОНСУЛЬТАНТ -->
   <div id="sez-tab-ai" style="display:none">
     <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
