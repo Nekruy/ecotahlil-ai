@@ -1,5 +1,83 @@
 [
   {
+    "year": 1997,
+    "amount_mln_usd": 25,
+    "pct_gdp": 5.2,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 1998,
+    "amount_mln_usd": 30,
+    "pct_gdp": 5.8,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 1999,
+    "amount_mln_usd": 35,
+    "pct_gdp": 6,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2000,
+    "amount_mln_usd": 80,
+    "pct_gdp": 12,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2001,
+    "amount_mln_usd": 100,
+    "pct_gdp": 13.5,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2002,
+    "amount_mln_usd": 150,
+    "pct_gdp": 16.2,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2003,
+    "amount_mln_usd": 250,
+    "pct_gdp": 20.8,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2004,
+    "amount_mln_usd": 450,
+    "pct_gdp": 27.4,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2005,
+    "amount_mln_usd": 900,
+    "pct_gdp": 35.6,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2006,
+    "amount_mln_usd": 1400,
+    "pct_gdp": 36.1,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2007,
+    "amount_mln_usd": 1800,
+    "pct_gdp": 36.8,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2008,
+    "amount_mln_usd": 2200,
+    "pct_gdp": 44.9,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
+    "year": 2009,
+    "amount_mln_usd": 1600,
+    "pct_gdp": 34.5,
+    "source": "World Bank WDI BX.TRF.PWKR.CD.DT"
+  },
+  {
     "year": 2010,
     "amount_mln_usd": 2254,
     "pct_gdp": 35.8,

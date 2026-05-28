@@ -74,7 +74,7 @@
       "export_mln_usd": null,
       "import_mln_usd": null,
       "trade_balance": null,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 25,
       "population_thou": 5814.4,
       "gdp_deflator": 165.23
     },
@@ -92,7 +92,7 @@
       "export_mln_usd": null,
       "import_mln_usd": null,
       "trade_balance": null,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 30,
       "population_thou": 5930.5,
       "gdp_deflator": 187.81
     },
@@ -110,7 +110,7 @@
       "export_mln_usd": null,
       "import_mln_usd": null,
       "trade_balance": null,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 35,
       "population_thou": 6056,
       "gdp_deflator": 126.51
     },
@@ -128,7 +128,7 @@
       "export_mln_usd": 901.53,
       "import_mln_usd": 977.48,
       "trade_balance": -75.95,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 80,
       "population_thou": 6196.5,
       "gdp_deflator": 122.67
     },
@@ -146,7 +146,7 @@
       "export_mln_usd": 713.77,
       "import_mln_usd": 835.28,
       "trade_balance": -121.51,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 100,
       "population_thou": 6317.9,
       "gdp_deflator": 130.92
     },
@@ -164,7 +164,7 @@
       "export_mln_usd": 768.14,
       "import_mln_usd": 927.78,
       "trade_balance": -159.64,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 150,
       "population_thou": 6429.2,
       "gdp_deflator": 118.82
     },
@@ -182,7 +182,7 @@
       "export_mln_usd": 994.72,
       "import_mln_usd": 1147.26,
       "trade_balance": -152.54,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 250,
       "population_thou": 6543,
       "gdp_deflator": 126.97
     },
@@ -200,7 +200,7 @@
       "export_mln_usd": 1219.84,
       "import_mln_usd": 1444.96,
       "trade_balance": -225.12,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 450,
       "population_thou": 6658.9,
       "gdp_deflator": 117.43
     },
@@ -218,7 +218,7 @@
       "export_mln_usd": 1254.43,
       "import_mln_usd": 1682.44,
       "trade_balance": -428.01,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 900,
       "population_thou": 6780.6,
       "gdp_deflator": 109.52
     },
@@ -236,7 +236,7 @@
       "export_mln_usd": 1589.63,
       "import_mln_usd": 2370.78,
       "trade_balance": -781.15,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1400,
       "population_thou": 6903.9,
       "gdp_deflator": 121.06
     },
@@ -254,7 +254,7 @@
       "export_mln_usd": 1705.57,
       "import_mln_usd": 3707.08,
       "trade_balance": -2001.52,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1800,
       "population_thou": 7031.2,
       "gdp_deflator": 127.24
     },
@@ -272,7 +272,7 @@
       "export_mln_usd": 1686.31,
       "import_mln_usd": 4084.52,
       "trade_balance": -2398.21,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 2200,
       "population_thou": 7173.8,
       "gdp_deflator": 128.16
     },
@@ -290,7 +290,7 @@
       "export_mln_usd": 600.15,
       "import_mln_usd": 2833.9,
       "trade_balance": -2233.75,
-      "remittances_mln_usd": null,
+      "remittances_mln_usd": 1600,
       "population_thou": 7334.1,
       "gdp_deflator": 112.13
     },
