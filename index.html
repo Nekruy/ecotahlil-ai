@@ -4536,21 +4536,16 @@ async function loadCGEInfo() {
     const d = await r.json();
     if (d.error) throw new Error(d.error);
     const gdpBln = (d.base_gdp_mln_somoni / 1000).toFixed(1);
-    const titleEl = document.getElementById('cge-title');
-    if (titleEl) titleEl.textContent = '⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ ' + d.base_year;
     const badgeYear = document.getElementById('cge-badge-year');
     if (badgeYear) badgeYear.textContent = '📅 ' + d.base_year;
     const badgeGdp = document.getElementById('cge-badge-gdp');
-    if (badgeGdp) badgeGdp.textContent = '💰 ВВП: ' + gdpBln + ' млрд сомони';
-    const badgeSrc = document.getElementById('cge-badge-source');
-    if (badgeSrc) badgeSrc.textContent = '✅ ' + d.data_quality;
+    if (badgeGdp) badgeGdp.textContent = '💰 ММД: ' + gdpBln + ' млрд сомонӣ';
+    const statGdp = document.getElementById('cge-stat-gdp');
+    if (statGdp) statGdp.textContent = gdpBln;
   } catch(e) {
     console.warn('cge-info fallback:', e.message);
-    const gdpBln = (155783.9 / 1000).toFixed(1);
     const badgeGdp = document.getElementById('cge-badge-gdp');
-    if (badgeGdp) badgeGdp.textContent = '💰 ВВП: ' + gdpBln + ' млрд сомони (2024)';
-    const badgeSrc = document.getElementById('cge-badge-source');
-    if (badgeSrc) badgeSrc.textContent = '✅ Реальные данные МЭРиТ РТ';
+    if (badgeGdp) badgeGdp.textContent = '💰 ММД: 155.8 млрд сомонӣ (2024)';
   }
 }
 
@@ -6763,20 +6758,60 @@ function updateLangButtons(lang) {
 // ============================================================
 
 // ============================================================
-// CGE — профессиональный интерфейс со сценариями
+// CGE — профессиональный интерфейс (ЮНФПА, таджикский язык)
 // ============================================================
 
-const CGE_SCENARIOS = {
-  remittances_drop:      { name:'Падение переводов -30%',    params:{ remittances_change:-30 },                              color:'#dc2626', icon:'💸' },
-  oil_shock:             { name:'Нефтяной шок -40%',         params:{ export_price_change:-40 },                             color:'#92400e', icon:'🛢️' },
-  export_boom:           { name:'Рост экспорта +20%',        params:{ export_price_change:20 },                              color:'#166534', icon:'📈' },
-  investment_surge:      { name:'Рост инвестиций +25%',      params:{ gov_spending_change:25 },                              color:'#1d4ed8', icon:'🏗️' },
-  currency_depreciation: { name:'Девальвация -20%',          params:{ remittances_change:10, export_price_change:15, tax_change:-2 }, color:'#7c3aed', icon:'💱' },
-  combined_stress:       { name:'Комбинированный шок',       params:{ remittances_change:-30, export_price_change:-40 },    color:'#dc2626', icon:'⚠️' },
+const CGE_SCENARIOS_TJ = {
+  remittances_drop_30: {
+    name_tj: 'Камшавии ҳаволаҳо −30%', name_ru: 'Падение переводов −30%',
+    params: { remittances_change: -30 }, color: '#dc2626', icon: '💸',
+    description_tj: 'Коҳиши интиқоли пул аз Россия ба 30%. Таъсир ба истеъмоли аҳолӣ, курси сомонӣ ва даромади давлат.',
+  },
+  remittances_drop_50: {
+    name_tj: 'Камшавии ҳаволаҳо −50%', name_ru: 'Падение переводов −50%',
+    params: { remittances_change: -50 }, color: '#991b1b', icon: '⚠️',
+    description_tj: 'Шоки шадид — нисфи ҳаволаҳо қатъ мешавад. Хатари бӯҳрони иқтисодӣ.',
+  },
+  oil_shock_40: {
+    name_tj: 'Нархи нафт −40%', name_ru: 'Нефтяной шок −40%',
+    params: { export_price_change: -15, remittances_change: -10 }, color: '#92400e', icon: '🛢️',
+    description_tj: 'Коҳиши нархи нафт дар бозори ҷаҳонӣ бо таъсири ғайримустақим тавассути Россия.',
+  },
+  export_growth_20: {
+    name_tj: 'Рушди содирот +20%', name_ru: 'Рост экспорта +20%',
+    params: { export_price_change: 20 }, color: '#166534', icon: '📈',
+    description_tj: 'Шароити мусоиди беруна барои содироти Тоҷикистон (алюминий, пахта, маводи хӯрокворӣ).',
+  },
+  gov_invest_15: {
+    name_tj: 'Сармоягузории давлатӣ +15%', name_ru: 'Госинвестиции +15%',
+    params: { government_spending_change: 15 }, color: '#1d4ed8', icon: '🏗️',
+    description_tj: 'Зиёдшавии харочоти сармоявии давлат бо мулипликатори молиявии 1.25.',
+  },
+  combined_crisis: {
+    name_tj: 'Шоки якҷоя (бӯҳрон)', name_ru: 'Комбинированный шок',
+    params: { remittances_change: -30, export_price_change: -40 }, color: '#7c3aed', icon: '🔴',
+    description_tj: 'Ҳаволаҳо −30% ва нархи содирот −40% якбора. Сенарияи бадтарин.',
+  },
+};
+
+// Псевдоним для обратной совместимости с showSection
+const CGE_SCENARIOS = CGE_SCENARIOS_TJ;
+
+const SECTOR_NAMES_TJ = {
+  'Сельское хозяйство': '🌾 Кишоварзӣ',
+  'Горнодобыча':        '⛏️ Маъдан',
+  'Алюминий':           '🏭 Алюминий (ТАЛКО)',
+  'Текстиль':           '🧵 Нассоҷӣ',
+  'Пищевая промышленность': '🍞 Саноати хӯрок',
+  'Строительство':      '🏗️ Сохтмон',
+  'Энергетика':         '⚡ Энергетика',
+  'Торговля':           '🛒 Савдо',
+  'Транспорт':          '🚛 Нақлиёт',
+  'Услуги':             '🏪 Хизматрасонӣ',
 };
 
 async function runCGEScenario(scenarioKey) {
-  const scenario = CGE_SCENARIOS[scenarioKey];
+  const scenario = CGE_SCENARIOS_TJ[scenarioKey];
   if (!scenario) return;
   document.getElementById('cge-loading').style.display = 'block';
   document.getElementById('cge-results').style.display = 'none';
@@ -6791,82 +6826,189 @@ async function runCGEScenario(scenarioKey) {
     document.getElementById('cge-loading').style.display = 'none';
     document.getElementById('cge-results').style.display = 'block';
     renderCGEResults(d, scenario);
+    loadCGEAISummary(d, scenario);
   } catch(e) {
     document.getElementById('cge-loading').style.display = 'none';
-    alert('Ошибка расчёта: ' + e.message);
+    alert('Хатогӣ: ' + e.message);
   }
 }
 
 function renderCGEResults(d, scenario) {
-  const cal = d.calibration || {};
-  const gdpChange = d.gdp_change_pct ?? d.gdp_change ?? 0;
-  const gdpBln = (cal.base_gdp_mln_somoni / 1000 || 155.8).toFixed(1);
-  const newGdp = ((cal.base_gdp_mln_somoni || 155800) * (1 + gdpChange / 100) / 1000).toFixed(1);
-  const isNeg = gdpChange < 0;
+  const gdpChg = d.gdp_change_pct ?? d.gdp_change ?? 0;
+  const cal    = d.calibration || {};
+  const isNeg  = gdpChg < 0;
+  const gdpBln = ((cal.base_gdp_mln_somoni || 155784) / 1000).toFixed(1);
+  const newGdp = ((cal.base_gdp_mln_somoni || 155784) * (1 + gdpChg / 100) / 1000).toFixed(1);
 
-  document.getElementById('cge-summary').innerHTML = `
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-      <div style="font-size:28px">${scenario.icon}</div>
-      <div>
-        <div style="font-weight:700;font-size:16px;color:${scenario.color}">${scenario.name}</div>
-        <div style="font-size:11px;color:#64748b">Базовый год: ${cal.base_year||2024} · Источник: ${cal.source||'МЭРиТ РТ'} · ${cal.data_quality||''}</div>
+  // ХУЛОСАИ АСОСӢ
+  document.getElementById('cge-summary-card').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+      <div style="font-size:36px">${scenario.icon}</div>
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:16px;color:${scenario.color}">${scenario.name_tj}</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px">${scenario.description_tj}</div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:2px">
+          Манбаъ: ${cal.source||'МЭРиТ РТ'} · Соли асосӣ: ${cal.base_year||2024}
+        </div>
       </div>
-      <div style="margin-left:auto;text-align:right">
-        <div style="font-size:24px;font-weight:700;color:${isNeg?'#dc2626':'#166534'}">${isNeg?'':'+'}${gdpChange.toFixed(2)}%</div>
-        <div style="font-size:11px;color:#64748b">изменение ВВП</div>
+      <div style="text-align:center;background:${isNeg?'#fff5f5':'#f0fdf4'};
+        border:2px solid ${isNeg?'#fecaca':'#bbf7d0'};border-radius:10px;padding:14px 20px">
+        <div style="font-size:28px;font-weight:800;color:${isNeg?'#dc2626':'#166534'}">
+          ${isNeg?'':'+'}${gdpChg.toFixed(2)}%
+        </div>
+        <div style="font-size:11px;color:#64748b">тағйири ММД</div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#f8fafc;border-radius:8px;padding:10px">
-      <div style="font-size:12px"><b>До шока:</b> ${gdpBln} млрд сомони (${cal.base_year||2024})</div>
-      <div style="font-size:12px"><b>После шока:</b> ${newGdp} млрд сомони</div>
+      <div style="font-size:12px">
+        <span style="color:#64748b">То шок:</span>
+        <b> ${gdpBln} млрд сомонӣ (${cal.base_year||2024})</b>
+      </div>
+      <div style="font-size:12px">
+        <span style="color:#64748b">Баъд аз шок:</span>
+        <b style="color:${isNeg?'#dc2626':'#166534'}"> ${newGdp} млрд сомонӣ</b>
+      </div>
     </div>`;
 
-  const macro = [
-    { label:'ВВП эффект',  val:(gdpChange>=0?'+':'')+gdpChange.toFixed(2)+'%',                                              color:isNeg?'#dc2626':'#166534' },
-    { label:'Потребление', val:((d.consumption_change??d.household_income_change??gdpChange*0.7)>=0?'+':'')+((d.consumption_change??d.household_income_change??gdpChange*0.7)).toFixed(2)+'%', color:'#1a4a8a' },
-    { label:'Инвестиции',  val:((d.investment_change??gdpChange*1.2)>=0?'+':'')+((d.investment_change??gdpChange*1.2)).toFixed(2)+'%', color:'#0c7873' },
-    { label:'Инфляция',    val:((d.inflation_effect??d.price_level_change??Math.abs(gdpChange)*0.3)>=0?'+':'')+((d.inflation_effect??d.price_level_change??Math.abs(gdpChange)*0.3)).toFixed(2)+'%', color:'#b8860b' },
+  // 4 АГЕНТ
+  const ai    = d.agent_incomes || {};
+  const hh    = ai.households  || {};
+  const firms = ai.firms       || {};
+  const gov   = ai.government  || {};
+  const row   = ai.rest_of_world || {};
+
+  const agents = [
+    {
+      icon:'👨‍👩‍👧', label:'Хонаводаҳо',
+      main: (hh.income_change_pct||0).toFixed(2)+'%', sub:'тағйири даромад',
+      detail:`Истеъмол: ${(hh.consumption_change||0).toFixed(2)}%\nДаромади воқеӣ: ${(hh.real_income_change||0).toFixed(2)}%`,
+      color:'#1a4a8a',
+    },
+    {
+      icon:'🏭', label:'Корхонаҳо',
+      main: (firms.profit_change_pct||0).toFixed(2)+'%', sub:'тағйири фоида',
+      detail:`Сармоягузорӣ: ${(firms.investment_change||0).toFixed(2)}%\nХарочоти музд: ${(firms.wage_cost_effect||0).toFixed(2)}%`,
+      color:'#0c7873',
+    },
+    {
+      icon:'🏛️', label:'Давлат',
+      main: (gov.revenue_change_pct||0).toFixed(2)+'%', sub:'тағйири даромади буҷет',
+      detail:`АДА: ${(gov.vat_change||0).toFixed(2)}%\nМаблағи иҷтимоӣ: ${(gov.social_spending||0).toFixed(2)}%`,
+      color:'#b8860b',
+    },
+    {
+      icon:'🌍', label:'Бозори беруна',
+      main: (d.export_change||0).toFixed(2)+'%', sub:'тағйири содирот',
+      detail:`Воридот: ${(d.import_change||0).toFixed(2)}%\nТарозуи пардохт: ${(row.cab_change||0).toFixed(0)} млн`,
+      color:'#7c3aed',
+    },
   ];
-  document.getElementById('cge-macro-cards').innerHTML = macro.map(m => `
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;text-align:center">
-      <div style="font-size:20px;font-weight:700;color:${m.color}">${m.val}</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">${m.label}</div>
+
+  document.getElementById('cge-agent-cards').innerHTML = agents.map(a => {
+    const v = parseFloat(a.main);
+    return `<div style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:14px;border-top:3px solid ${a.color}">
+      <div style="font-size:22px;margin-bottom:6px">${a.icon}</div>
+      <div style="font-size:12px;font-weight:600;color:#475569;margin-bottom:6px">${a.label}</div>
+      <div style="font-size:22px;font-weight:800;color:${v>=0?'#166534':'#dc2626'}">${v>=0?'+':''}${a.main}</div>
+      <div style="font-size:10px;color:#94a3b8;margin-bottom:8px">${a.sub}</div>
+      <div style="font-size:10px;color:#64748b;white-space:pre-line;background:#f8fafc;border-radius:6px;padding:6px">${a.detail}</div>
+    </div>`;
+  }).join('');
+
+  // СОҲАҲО
+  const sectors = d.sector_impacts || {};
+  document.getElementById('cge-sectors-chart').innerHTML = Object.entries(sectors).map(([k, v]) => {
+    const pct = parseFloat(typeof v === 'object' ? (v.output_change||v.change||0) : v).toFixed(2);
+    const neg = pct < 0;
+    const w   = Math.min(50, Math.abs(pct) * 4);
+    const label = SECTOR_NAMES_TJ[k] || k;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #f1f5f9">
+      <div style="width:190px;font-size:12px;color:#374151">${label}</div>
+      <div style="flex:1;background:#f1f5f9;border-radius:4px;height:10px;overflow:hidden;position:relative">
+        <div style="position:absolute;${neg?'right:50%':'left:50%'};width:${w}%;height:100%;background:${neg?'#dc2626':'#166534'}"></div>
+        <div style="position:absolute;left:50%;width:1px;height:100%;background:#cbd5e1"></div>
+      </div>
+      <div style="width:65px;text-align:right;font-weight:700;font-size:12px;color:${neg?'#dc2626':'#166534'}">${neg?'':'+'}${pct}%</div>
+    </div>`;
+  }).join('') || '<div style="color:#64748b;font-size:12px">Маълумот дастрас нест</div>';
+
+  // МУВОЗИНАТИ 4 БОЗОР
+  const eq = d.equilibrium_markets?.equilibrium || {};
+  document.getElementById('cge-equilibrium').innerHTML = [
+    ['🏷️ Сатҳи нарх',     (eq.price_level_change||0).toFixed(2)+'%', 'Бозори молҳо'],
+    ['💰 Музди меҳнат',   (eq.wage_equilibrium||0).toFixed(2)+'%',   'Бозори меҳнат'],
+    ['📈 Даромади капитал',(eq.capital_return||0).toFixed(2)+'%',     'Бозори капитал'],
+    ['💱 Тасҳеҳи курс',   (eq.exchange_rate_adj||0).toFixed(3),       'Тарозуи пардохт'],
+  ].map(([label, val, market]) => `
+    <div style="display:flex;justify-content:space-between;align-items:center;
+      padding:7px 10px;background:#f8fafc;border-radius:6px;margin-bottom:5px">
+      <div>
+        <div style="font-size:12px;font-weight:600">${label}</div>
+        <div style="font-size:10px;color:#64748b">${market}</div>
+      </div>
+      <div style="font-weight:700;font-size:13px;color:${parseFloat(val)>=0?'#166534':'#dc2626'}">
+        ${parseFloat(val)>=0?'+':''}${val}
+      </div>
     </div>`).join('');
 
-  const sectors = d.sector_impacts || d.sectors || {};
-  const sectorNames = {
-    agriculture:'🌾 Сельское хозяйство', industry:'🏭 Промышленность', services:'🏪 Услуги',
-    construction:'🏗️ Строительство', transport:'🚛 Транспорт', trade:'🛒 Торговля',
-    energy:'⚡ Энергетика', finance:'🏦 Финансы', govt:'🏛️ Госуправление', other:'📦 Прочие',
-  };
-  document.getElementById('cge-sectors').innerHTML = Object.entries(sectors).map(([k,v]) => {
-    const val = typeof v === 'object' ? (v.output_change ?? v.change ?? 0) : v;
-    const pct = parseFloat(val).toFixed(2);
-    const neg = pct < 0;
-    const barWidth = Math.min(100, Math.abs(pct) * 5);
-    return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #f1f5f9">
-      <div style="width:180px;font-size:12px;color:#475569">${sectorNames[k]||k}</div>
-      <div style="flex:1;background:#f1f5f9;border-radius:4px;height:8px;overflow:hidden">
-        <div style="width:${barWidth}%;height:100%;background:${neg?'#dc2626':'#166534'};${neg?'margin-left:auto':''}"></div>
-      </div>
-      <div style="width:60px;text-align:right;font-weight:600;font-size:12px;color:${neg?'#dc2626':'#166534'}">${neg?'':'+'}${pct}%</div>
-    </div>`;
-  }).join('') || '<div style="color:#64748b;font-size:12px">Секторальные данные недоступны</div>';
+  // ДИНАМИКА 5 СОЛ
+  const dyn = d.dynamic_path || [];
+  document.getElementById('cge-dynamic').innerHTML = dyn.length
+    ? `<table style="width:100%;border-collapse:collapse;font-size:11px">
+        <tr style="background:#f8fafc">
+          <th style="padding:5px;text-align:left;color:#475569">Сол</th>
+          <th style="padding:5px;text-align:right;color:#475569">ММД %</th>
+          <th style="padding:5px;text-align:right;color:#475569">Капитал</th>
+        </tr>
+        ${dyn.map(y => `
+          <tr style="border-bottom:1px solid #f1f5f9">
+            <td style="padding:5px;font-weight:600">${y.year}</td>
+            <td style="padding:5px;text-align:right;font-weight:600;color:${y.gdp_growth_pct>=0?'#166534':'#dc2626'}">
+              ${y.gdp_growth_pct>=0?'+':''}${y.gdp_growth_pct}%</td>
+            <td style="padding:5px;text-align:right;color:#64748b">${y.capital_stock}</td>
+          </tr>`).join('')}
+      </table>`
+    : '<div style="color:#64748b;font-size:11px">Маълумот дастрас нест</div>';
+}
 
-  const channels = d.transmission_channels || d.channels || {};
-  const channelNames = {
-    remittances:'💸 Переводы мигрантов', trade:'🌐 Внешняя торговля', fiscal:'🏛️ Фискальный канал',
-    monetary:'💰 Денежно-кредитный', labor:'👷 Рынок труда', investment:'📈 Инвестиционный',
-  };
-  document.getElementById('cge-channels').innerHTML = Object.entries(channels).map(([k,v]) => {
-    const effect = typeof v === 'object' ? (v.gdp_effect ?? v.effect ?? 0) : v;
-    const pct = parseFloat(effect).toFixed(3);
-    const neg = pct < 0;
-    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#f8fafc;border-radius:6px;margin-bottom:6px">
-      <span style="font-size:12px">${channelNames[k]||k}</span>
-      <span style="font-weight:600;font-size:12px;color:${neg?'#dc2626':'#166534'}">${neg?'':'+'}${pct}% ВВП</span>
-    </div>`;
-  }).join('') || '<div style="color:#64748b;font-size:12px;padding:8px">Каналы: прямой эффект через спрос и предложение</div>';
+async function loadCGEAISummary(data, scenario) {
+  const el = document.getElementById('cge-ai-summary');
+  el.innerHTML = '<div style="color:#64748b">⏳ Хулосаи таҳлилӣ тайёр карда мешавад...</div>';
+  try {
+    const gdpChg  = data.gdp_change_pct ?? data.gdp_change ?? 0;
+    const sectors = data.sector_impacts || {};
+    const winners = Object.entries(sectors)
+      .filter(([,v]) => (typeof v==='object'?v.output_change||v.change||0:v) > 0)
+      .map(([k]) => SECTOR_NAMES_TJ[k]||k).slice(0,3).join(', ');
+    const losers  = Object.entries(sectors)
+      .filter(([,v]) => (typeof v==='object'?v.output_change||v.change||0:v) < 0)
+      .map(([k]) => SECTOR_NAMES_TJ[k]||k).slice(0,3).join(', ');
+
+    const r = await fetch('/webhook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `Ман аналитики МЭРиТ РТ ҳастам. Натиҷаи модели CGE барои сенарияи "${scenario.name_tj}":
+- Тағйири ММД: ${gdpChg.toFixed(2)}%
+- Соҳаҳои бурда: ${winners||'нест'}
+- Соҳаҳои зарардида: ${losers||'нест'}
+- Даромади хонаводаҳо: ${(data.agent_incomes?.households?.income_change_pct||0).toFixed(2)}%
+- Даромади буҷет: ${(data.agent_incomes?.government?.revenue_change_pct||0).toFixed(2)}%
+Лутфан хулосаи касбии таҳлилӣ ба забони тоҷикӣ барои роҳбарияти МЭРиТ нависед (3-4 ҷумла).`,
+        language: 'tj',
+      }),
+    });
+    const d = await r.json();
+    el.innerHTML = `
+      <div style="background:#f0fdf4;border-left:4px solid #166534;border-radius:0 8px 8px 0;padding:12px;font-size:13px;line-height:1.7;color:#374151">
+        ${d.response || d.message || 'Хулоса тайёр нашуд'}
+      </div>
+      <div style="margin-top:8px;font-size:10px;color:#94a3b8">
+        🤖 Groq AI · МЭРиТ РТ · ${new Date().toLocaleDateString('ru')}
+      </div>`;
+  } catch(e) {
+    el.innerHTML = `<div style="color:#64748b;font-size:12px">AI хулоса дастрас нест: ${e.message}</div>`;
+  }
 }
 
 async function loadCGEBaseStats() {
@@ -6875,30 +7017,24 @@ async function loadCGEBaseStats() {
     const d = await r.json();
     if (d.error) throw new Error(d.error);
     const gdpBln = (d.base_gdp_mln_somoni / 1000).toFixed(1);
-    document.getElementById('cge-title').textContent = '⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ ' + d.base_year;
-    document.getElementById('cge-badge-year').textContent = '📅 ' + d.base_year;
-    document.getElementById('cge-badge-gdp').textContent = '💰 ВВП: ' + gdpBln + ' млрд сомони';
-    document.getElementById('cge-badge-source').textContent = '✅ ' + (d.data_quality || 'Реальные данные МЭРиТ ✅');
+    const byEl = document.getElementById('cge-badge-year');
+    const bgEl = document.getElementById('cge-badge-gdp');
+    if (byEl) byEl.textContent = '📅 ' + d.base_year;
+    if (bgEl) bgEl.textContent = '💰 ММД: ' + gdpBln + ' млрд сомонӣ';
     document.getElementById('cge-stat-gdp').textContent = gdpBln;
     if (d.usd_tjs) document.getElementById('cge-stat-usd').textContent = (+d.usd_tjs).toFixed(2);
 
     const [r2, r3, r4] = await Promise.allSettled([
-      fetch('/api/history?indicator=gdp_growth').then(r=>r.json()),
-      fetch('/api/history?indicator=remittances').then(r=>r.json()),
-      fetch('/api/history?indicator=export').then(r=>r.json()),
+      fetch('/api/history?indicator=gdp_growth').then(x=>x.json()),
+      fetch('/api/history?indicator=remittances').then(x=>x.json()),
+      fetch('/api/history?indicator=export').then(x=>x.json()),
     ]);
-    if (r2.status==='fulfilled' && r2.value.values?.length) {
-      const v = r2.value.values[r2.value.values.length-1];
-      document.getElementById('cge-stat-growth').textContent = (+v).toFixed(1) + '%';
-    }
-    if (r3.status==='fulfilled' && r3.value.values?.length) {
-      const v = r3.value.values[r3.value.values.length-1];
-      document.getElementById('cge-stat-remit').textContent = Math.round(v);
-    }
-    if (r4.status==='fulfilled' && r4.value.values?.length) {
-      const v = r4.value.values[r4.value.values.length-1];
-      document.getElementById('cge-stat-export').textContent = Math.round(v);
-    }
+    if (r2.status==='fulfilled' && r2.value.values?.length)
+      document.getElementById('cge-stat-growth').textContent = (+r2.value.values.at(-1)).toFixed(1) + '%';
+    if (r3.status==='fulfilled' && r3.value.values?.length)
+      document.getElementById('cge-stat-remit').textContent  = Math.round(r3.value.values.at(-1));
+    if (r4.status==='fulfilled' && r4.value.values?.length)
+      document.getElementById('cge-stat-export').textContent = Math.round(r4.value.values.at(-1));
   } catch(e) {
     console.warn('CGE base stats fallback:', e.message);
     document.getElementById('cge-stat-gdp').textContent    = '155.8';
@@ -6906,8 +7042,8 @@ async function loadCGEBaseStats() {
     document.getElementById('cge-stat-remit').textContent  = '2500';
     document.getElementById('cge-stat-export').textContent = '2954';
     document.getElementById('cge-stat-usd').textContent    = '10.46';
-    const badgeGdp = document.getElementById('cge-badge-gdp');
-    if (badgeGdp) badgeGdp.textContent = '💰 ВВП: 155.8 млрд сомони (2024)';
+    const bgEl = document.getElementById('cge-badge-gdp');
+    if (bgEl) bgEl.textContent = '💰 ММД: 155.8 млрд сомонӣ (2024)';
   }
 }
 
@@ -7428,131 +7564,183 @@ async function sezAI() {
 ============================================================ -->
 <div class="page" id="page-cge">
 
-  <!-- Заголовок -->
-  <div style="background:#0d2342;padding:20px 24px;border-radius:12px;margin-bottom:16px;color:white">
-    <h2 id="cge-title" style="margin:0 0 4px;font-size:18px;font-weight:700">
-      ⚖️ Модель общего равновесия (CGE) — МЭРиТ РТ 2024
-    </h2>
-    <p style="margin:0;opacity:0.75;font-size:12px">
-      Симуляция макроэкономических шоков · Калибровка по реальным данным МЭРиТ · Функция Кобба-Дугласа · 10 секторов
-    </p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-      <span id="cge-badge-year"   style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">📅 2024</span>
-      <span id="cge-badge-gdp"    style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">💰 ВВП: загрузка...</span>
-      <span id="cge-badge-source" style="background:#166534;color:white;padding:3px 10px;border-radius:12px;font-size:11px">✅ Реальные данные МЭРиТ</span>
-      <span style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">🏭 10 секторов</span>
-      <span style="background:rgba(255,255,255,0.15);color:white;padding:3px 10px;border-radius:12px;font-size:11px">📐 Кобба-Дугласа</span>
+  <!-- САРЛАВҲА -->
+  <div style="background:linear-gradient(135deg,#0d2342,#1a4a8a);padding:20px 24px;border-radius:12px;margin-bottom:16px;color:white">
+    <div style="display:flex;justify-content:space-between;align-items:start">
+      <div>
+        <h2 style="margin:0 0 4px;font-size:18px;font-weight:700">
+          ⚖️ Модели мувозинати умумӣ (CGE) — МЭРиТ РТ
+        </h2>
+        <p style="margin:0;opacity:0.75;font-size:12px">
+          Таҳлили таъсири шокҳои иқтисодӣ · Методологияи ЮНФПА/ПРООН · Маълумоти МЭРиТ 2024
+        </p>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <span id="cge-badge-year" style="background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:10px;font-size:11px">📅 2024</span>
+          <span id="cge-badge-gdp"  style="background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:10px;font-size:11px">💰 ММД: бор карда мешавад...</span>
+          <span style="background:#166534;padding:3px 10px;border-radius:10px;font-size:11px">✅ Маълумоти воқеии МЭРиТ</span>
+          <span style="background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:10px;font-size:11px">🏭 10 соҳа</span>
+        </div>
+      </div>
+      <div style="text-align:right;opacity:0.8;font-size:11px;flex-shrink:0">
+        <div>Манбаъ: МЭРиТ РТ</div>
+        <div>CGE Model 2022–2032</div>
+        <div>ЮНФПА / ПРООН</div>
+      </div>
     </div>
   </div>
 
-  <!-- Базовые показатели из датасета -->
+  <!-- НИШОНДИҲАНДАҲОИ АСОСИИ МАКРОИҚТИСОДӢ -->
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px">
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #1a4a8a;text-align:center">
-      <div id="cge-stat-gdp"    style="font-size:18px;font-weight:700;color:#1a4a8a">--</div>
-      <div style="font-size:10px;color:#64748b;margin-top:2px">ВВП млрд сомони</div>
+    <div style="background:white;border-radius:8px;padding:12px;border-top:3px solid #1a4a8a;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+      <div id="cge-stat-gdp"    style="font-size:17px;font-weight:700;color:#1a4a8a">155.8</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">ММД млрд сомонӣ</div>
+      <div style="font-size:9px;color:#94a3b8">асоси 2024</div>
     </div>
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #0c7873;text-align:center">
-      <div id="cge-stat-growth" style="font-size:18px;font-weight:700;color:#0c7873">--</div>
-      <div style="font-size:10px;color:#64748b;margin-top:2px">Рост ВВП %</div>
+    <div style="background:white;border-radius:8px;padding:12px;border-top:3px solid #0c7873;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+      <div id="cge-stat-growth" style="font-size:17px;font-weight:700;color:#0c7873">8.4%</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Рушди ММД</div>
+      <div style="font-size:9px;color:#94a3b8">2024 факт</div>
     </div>
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #dc2626;text-align:center">
-      <div id="cge-stat-remit"  style="font-size:18px;font-weight:700;color:#dc2626">--</div>
-      <div style="font-size:10px;color:#64748b;margin-top:2px">Переводы млн $</div>
+    <div style="background:white;border-radius:8px;padding:12px;border-top:3px solid #dc2626;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+      <div id="cge-stat-remit"  style="font-size:17px;font-weight:700;color:#dc2626">2500</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Ҳаволаҳо млн $</div>
+      <div style="font-size:9px;color:#94a3b8">32% ММД</div>
     </div>
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #b8860b;text-align:center">
-      <div id="cge-stat-export" style="font-size:18px;font-weight:700;color:#b8860b">--</div>
-      <div style="font-size:10px;color:#64748b;margin-top:2px">Экспорт млн $</div>
+    <div style="background:white;border-radius:8px;padding:12px;border-top:3px solid #b8860b;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+      <div id="cge-stat-export" style="font-size:17px;font-weight:700;color:#b8860b">2954</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Содирот млн $</div>
+      <div style="font-size:9px;color:#94a3b8">22% ММД</div>
     </div>
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:8px;padding:12px;border-top:3px solid #7c3aed;text-align:center">
-      <div id="cge-stat-usd"    style="font-size:18px;font-weight:700;color:#7c3aed">--</div>
-      <div style="font-size:10px;color:#64748b;margin-top:2px">Курс USD/TJS</div>
+    <div style="background:white;border-radius:8px;padding:12px;border-top:3px solid #7c3aed;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+      <div id="cge-stat-usd"    style="font-size:17px;font-weight:700;color:#7c3aed">10.46</div>
+      <div style="font-size:10px;color:#64748b;margin-top:2px">Курси USD/TJS</div>
+      <div style="font-size:9px;color:#94a3b8">НБТ 2024</div>
     </div>
   </div>
 
-  <!-- Готовые сценарии МЭРиТ -->
+  <!-- СЕНАРИЯҲО -->
   <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:14px;overflow:hidden">
     <div style="background:#1a4a8a;padding:10px 16px;color:white;font-weight:600;font-size:13px">
-      📋 Сценарии шоков (по методологии МЭРиТ РТ)
+      📋 Сенарияҳои таҳлил — як тугма кофист
     </div>
     <div style="padding:14px">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
-
-        <button onclick="runCGEScenario('remittances_drop')"
-          style="background:#fff5f5;border:1px solid #fecaca;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
-          onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fff5f5'">
-          <div style="font-size:16px;margin-bottom:4px">💸</div>
-          <div style="font-weight:600;font-size:12px;color:#991b1b">Падение переводов -30%</div>
-          <div style="font-size:10px;color:#64748b;margin-top:3px">Снижение переводов мигрантов из России</div>
-        </button>
-
-        <button onclick="runCGEScenario('oil_shock')"
-          style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
-          onmouseover="this.style.background='#ffedd5'" onmouseout="this.style.background='#fff7ed'">
-          <div style="font-size:16px;margin-bottom:4px">🛢️</div>
-          <div style="font-weight:600;font-size:12px;color:#92400e">Нефтяной шок -40%</div>
-          <div style="font-size:10px;color:#64748b;margin-top:3px">Падение мировых цен на нефть</div>
-        </button>
-
-        <button onclick="runCGEScenario('export_boom')"
-          style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
-          onmouseover="this.style.background='#dcfce7'" onmouseout="this.style.background='#f0fdf4'">
-          <div style="font-size:16px;margin-bottom:4px">📈</div>
-          <div style="font-weight:600;font-size:12px;color:#166534">Рост экспорта +20%</div>
-          <div style="font-size:10px;color:#64748b;margin-top:3px">Благоприятная внешняя конъюнктура</div>
-        </button>
-
-        <button onclick="runCGEScenario('investment_surge')"
-          style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
-          onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
-          <div style="font-size:16px;margin-bottom:4px">🏗️</div>
-          <div style="font-weight:600;font-size:12px;color:#1d4ed8">Рост инвестиций +25%</div>
-          <div style="font-size:10px;color:#64748b;margin-top:3px">Увеличение государственных инвестиций</div>
-        </button>
-
-        <button onclick="runCGEScenario('currency_depreciation')"
-          style="background:#fdf4ff;border:1px solid #e9d5ff;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
-          onmouseover="this.style.background='#f3e8ff'" onmouseout="this.style.background='#fdf4ff'">
-          <div style="font-size:16px;margin-bottom:4px">💱</div>
-          <div style="font-weight:600;font-size:12px;color:#7c3aed">Девальвация сомони -20%</div>
-          <div style="font-size:10px;color:#64748b;margin-top:3px">Ослабление национальной валюты</div>
-        </button>
-
-        <button onclick="runCGEScenario('combined_stress')"
-          style="background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:12px;text-align:left;cursor:pointer"
-          onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fef2f2'">
-          <div style="font-size:16px;margin-bottom:4px">⚠️</div>
-          <div style="font-weight:600;font-size:12px;color:#dc2626">Комбинированный шок</div>
-          <div style="font-size:10px;color:#64748b;margin-top:3px">Переводы -30% + нефть -40% одновременно</div>
-        </button>
-
+      <div style="font-size:11px;color:#64748b;margin-bottom:10px">
+        ⬇️ Барои оғози ҳисобкунӣ яке аз сенарияҳоро интихоб кунед:
       </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
 
-      <div id="cge-loading" style="display:none;text-align:center;padding:20px;color:#64748b">
-        <div style="font-size:24px;margin-bottom:8px">⚙️</div>
-        <div>Рассчитываю равновесие...</div>
+        <button onclick="runCGEScenario('remittances_drop_30')"
+          style="background:#fff5f5;border:2px solid #fecaca;border-radius:10px;padding:14px;text-align:left;cursor:pointer"
+          onmouseover="this.style.borderColor='#dc2626';this.style.background='#fee2e2'"
+          onmouseout="this.style.borderColor='#fecaca';this.style.background='#fff5f5'">
+          <div style="font-size:22px;margin-bottom:6px">💸</div>
+          <div style="font-weight:700;font-size:12px;color:#991b1b">Камшавии ҳаволаҳо −30%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">
+            Коҳиши интиқоли пул аз Россия. Таъсир ба истеъмол ва курси асъор.
+          </div>
+          <div style="margin-top:8px;background:#fee2e2;border-radius:5px;padding:4px 8px;font-size:10px;color:#991b1b">Эҳтимол: баланд</div>
+        </button>
+
+        <button onclick="runCGEScenario('remittances_drop_50')"
+          style="background:#fff5f5;border:2px solid #fca5a5;border-radius:10px;padding:14px;text-align:left;cursor:pointer"
+          onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='#fca5a5'">
+          <div style="font-size:22px;margin-bottom:6px">⚠️</div>
+          <div style="font-weight:700;font-size:12px;color:#dc2626">Камшавии ҳаволаҳо −50%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">
+            Шоки шадид. Бӯҳрони иқтисодии Россия ё санксияҳо.
+          </div>
+          <div style="margin-top:8px;background:#fee2e2;border-radius:5px;padding:4px 8px;font-size:10px;color:#991b1b">Сенарияи бадбинона</div>
+        </button>
+
+        <button onclick="runCGEScenario('oil_shock_40')"
+          style="background:#fff7ed;border:2px solid #fed7aa;border-radius:10px;padding:14px;text-align:left;cursor:pointer"
+          onmouseover="this.style.borderColor='#ea580c'" onmouseout="this.style.borderColor='#fed7aa'">
+          <div style="font-size:22px;margin-bottom:6px">🛢️</div>
+          <div style="font-weight:700;font-size:12px;color:#92400e">Нархи нафт −40%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">
+            Коҳиши нархи нафт дар бозори ҷаҳонӣ. Таъсир тавассути Россия.
+          </div>
+          <div style="margin-top:8px;background:#ffedd5;border-radius:5px;padding:4px 8px;font-size:10px;color:#92400e">Таъсири ғайримустақим</div>
+        </button>
+
+        <button onclick="runCGEScenario('export_growth_20')"
+          style="background:#f0fdf4;border:2px solid #bbf7d0;border-radius:10px;padding:14px;text-align:left;cursor:pointer"
+          onmouseover="this.style.borderColor='#16a34a'" onmouseout="this.style.borderColor='#bbf7d0'">
+          <div style="font-size:22px;margin-bottom:6px">📈</div>
+          <div style="font-weight:700;font-size:12px;color:#166534">Рушди содирот +20%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">
+            Шароити мусоиди беруна. Афзоиши нархи алюминий ва пахта.
+          </div>
+          <div style="margin-top:8px;background:#dcfce7;border-radius:5px;padding:4px 8px;font-size:10px;color:#166534">Сенарияи хушбинона</div>
+        </button>
+
+        <button onclick="runCGEScenario('gov_invest_15')"
+          style="background:#eff6ff;border:2px solid #bfdbfe;border-radius:10px;padding:14px;text-align:left;cursor:pointer"
+          onmouseover="this.style.borderColor='#2563eb'" onmouseout="this.style.borderColor='#bfdbfe'">
+          <div style="font-size:22px;margin-bottom:6px">🏗️</div>
+          <div style="font-weight:700;font-size:12px;color:#1d4ed8">Сармоягузории давлатӣ +15%</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">
+            Зиёдшавии харочоти сармоявии давлат. Мулипликатор 1.25.
+          </div>
+          <div style="margin-top:8px;background:#dbeafe;border-radius:5px;padding:4px 8px;font-size:10px;color:#1d4ed8">Сиёсати молиявӣ</div>
+        </button>
+
+        <button onclick="runCGEScenario('combined_crisis')"
+          style="background:#fdf4ff;border:2px solid #e9d5ff;border-radius:10px;padding:14px;text-align:left;cursor:pointer"
+          onmouseover="this.style.borderColor='#9333ea'" onmouseout="this.style.borderColor='#e9d5ff'">
+          <div style="font-size:22px;margin-bottom:6px">🔴</div>
+          <div style="font-weight:700;font-size:12px;color:#7c3aed">Шоки якҷоя</div>
+          <div style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">
+            Ҳаволаҳо −30% + нафт −40% якбора. Сенарияи бӯҳрон.
+          </div>
+          <div style="margin-top:8px;background:#f3e8ff;border-radius:5px;padding:4px 8px;font-size:10px;color:#7c3aed">Стресс-тест</div>
+        </button>
+
       </div>
     </div>
   </div>
 
-  <!-- Результаты CGE -->
+  <!-- БОРИШИ ҲИСОБКУНӢ -->
+  <div id="cge-loading" style="display:none;text-align:center;padding:30px;background:white;border-radius:10px;margin-bottom:14px">
+    <div style="font-size:32px;margin-bottom:8px">⚙️</div>
+    <div style="font-size:14px;color:#64748b">Ҳисобкунӣ идома дорад...</div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:4px">Модели мувозинати умумӣ 10 соҳа</div>
+  </div>
+
+  <!-- НАТИҶАҲО -->
   <div id="cge-results" style="display:none">
 
-    <div id="cge-summary" style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:14px"></div>
+    <div id="cge-summary-card" style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:12px"></div>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px" id="cge-macro-cards"></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px" id="cge-agent-cards"></div>
 
-    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:14px">
+    <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:12px">
       <div style="background:#0d2342;padding:10px 16px;color:white;font-weight:600;font-size:13px">
-        🏭 Секторальные эффекты (изменение выпуска)
+        🏭 Таъсир ба соҳаҳои иқтисод (тағйири истеҳсол, %)
       </div>
-      <div id="cge-sectors" style="padding:14px"></div>
+      <div id="cge-sectors-chart" style="padding:14px"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <div style="background:#1a4a8a;padding:10px 14px;color:white;font-weight:600;font-size:12px">
+          📊 Мувозинати 4 бозор
+        </div>
+        <div id="cge-equilibrium" style="padding:12px"></div>
+      </div>
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <div style="background:#0c7873;padding:10px 14px;color:white;font-weight:600;font-size:12px">
+          📈 Динамика 5 сол
+        </div>
+        <div id="cge-dynamic" style="padding:12px"></div>
+      </div>
     </div>
 
     <div style="background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
-      <div style="background:#1a4a8a;padding:10px 16px;color:white;font-weight:600;font-size:13px">
-        🔄 Каналы передачи шока
+      <div style="background:#0d2342;padding:10px 16px;color:white;font-weight:600;font-size:13px">
+        🤖 Хулосаи таҳлилӣ (AI)
       </div>
-      <div id="cge-channels" style="padding:14px"></div>
+      <div id="cge-ai-summary" style="padding:14px;font-size:13px;line-height:1.7;color:#374151"></div>
     </div>
 
   </div>
