@@ -136,6 +136,7 @@ const MACRO = {
   import_gdp:  0.42,   // импорт / ВВП ≈ 42% (SAM 2019)
   multiplier:  1.25,   // фискальный мультипликатор (открытая малая экономика)
   fx_pass:     0.35,   // коэффициент переноса курса на цены (НБТ оценка)
+  base_gdp_mln: 155784, // базовый ВВП 2024 в млн сомони (МЭРиТ)
   calibration: {
     source:       'SAM 2019 + МЭРиТ РТ 1997–2024',
     remit_basis:  'НБТ, среднее 2015–2024 (27–51% ВВП, пик 2022)',
@@ -143,6 +144,251 @@ const MACRO = {
     updated_at:   '2025-04',
   },
 };
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ИНСТИТУЦИОНАЛЬНЫЕ АГЕНТЫ (стандарт ЮНФПА/ПРООН)
+// Источник: CGE Model Structure, Peter Dovciak, UNFPA
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const AGENTS = {
+  households: {
+    labor_income_share:   0.68,
+    capital_income_share: 0.35,
+    remittances_share:    1.00,
+    transfer_share:       0.85,
+    consumption_share:    0.82,
+    savings_rate:         0.12,
+    tax_rate:             0.06,
+    consumption_basket: {
+      agriculture:   0.28,
+      food:          0.18,
+      manufacturing: 0.14,
+      trade:         0.12,
+      transport:     0.08,
+      services:      0.10,
+      construction:  0.03,
+      energy:        0.04,
+      finance:       0.02,
+      government:    0.01,
+    },
+  },
+  firms: {
+    capital_income_share: 0.55,
+    labor_cost_share:     0.45,
+    investment_rate:      0.25,
+    dividend_rate:        0.30,
+    retained_earnings:    0.45,
+    tax_rate:             0.23,
+  },
+  government: {
+    tax_gdp_ratio:   0.28,
+    expenditure_gdp: 0.30,
+    deficit_gdp:     0.02,
+    revenue_sources: {
+      income_tax: 0.18,
+      vat:        0.35,
+      customs:    0.22,
+      social_tax: 0.15,
+      other:      0.10,
+    },
+    expenditure_structure: {
+      social:         0.35,
+      infrastructure: 0.25,
+      defense:        0.12,
+      education:      0.18,
+      health:         0.10,
+    },
+    multiplier: 1.25,
+  },
+  rest_of_world: {
+    export_gdp:              0.22,
+    import_gdp:              0.42,
+    remittances_gdp:         0.32,
+    fdi_gdp:                 0.04,
+    export_price_elasticity: -1.2,
+    import_price_elasticity:  0.8,
+    armington_elasticity:     1.5,
+  },
+};
+
+// ─── Рыночное равновесие (4 рынка по методологии ЮНФПА) ────────────────────
+function computeEquilibrium(shocks, baseGDP, macro) {
+  const {
+    tax_change: tax = 0,
+    wage_change: wage = 0,
+    export_price_change: expPx = 0,
+    remittances_change: remit = 0,
+    government_spending_change: gov = 0,
+  } = shocks;
+
+  // 1. ТОВАРНЫЙ РЫНОК: совокупный спрос (C + I + G + NX)
+  const dConsumption = (remit * AGENTS.households.consumption_share * macro.remit_gdp)
+    + (wage * AGENTS.households.labor_income_share * AGENTS.households.consumption_share * 0.01);
+
+  const dInvestment = (wage * AGENTS.firms.investment_rate * 0.005)
+    - (tax * AGENTS.firms.tax_rate * 0.3);
+
+  const dGovSpend = gov * macro.gov_gdp / 100;
+
+  const dExport = (expPx * AGENTS.rest_of_world.export_price_elasticity * macro.export_gdp / 100)
+    - (wage * 0.3 * macro.export_gdp / 100);
+
+  const dImport = -(remit * AGENTS.rest_of_world.import_price_elasticity * macro.import_gdp / 200)
+    - (expPx * 0.1 * macro.import_gdp / 100);
+
+  const dPriceLevel = (remit * 0.08) + (wage * 0.12) + (expPx * 0.05) - (tax * 0.03);
+
+  // 2. РЫНОК ТРУДА: равновесная зарплата
+  const laborDemandChange = (dConsumption + dInvestment + dGovSpend) * 0.6 - wage * 0.15;
+  const equilibriumWage   = wage + (laborDemandChange * 0.5);
+
+  // 3. РЫНОК КАПИТАЛА: доходность
+  const capitalReturn = (dInvestment * 2.5) - (tax * AGENTS.firms.tax_rate) + (expPx * 0.1);
+
+  // 4. ПЛАТЁЖНЫЙ БАЛАНС: курс как переменная равновесия
+  const dCAB = (dExport - dImport) * baseGDP / 100 + (remit * macro.remit_gdp * baseGDP / 100);
+  const exchangeRateAdj   = -dCAB / (baseGDP * 0.1);
+  const fxInflationEffect = exchangeRateAdj * macro.fx_pass;
+
+  const gdpChange = (dConsumption + dInvestment + dGovSpend + dExport - dImport)
+    * AGENTS.government.multiplier;
+
+  return {
+    demand_components: {
+      consumption_change:  Math.round(dConsumption * 100) / 100,
+      investment_change:   Math.round(dInvestment * 100) / 100,
+      gov_spending_change: Math.round(dGovSpend * 100) / 100,
+      export_change:       Math.round(dExport * 100) / 100,
+      import_change:       Math.round(dImport * 100) / 100,
+      net_export_change:   Math.round((dExport - dImport) * 100) / 100,
+    },
+    equilibrium: {
+      price_level_change:  Math.round(dPriceLevel * 100) / 100,
+      wage_equilibrium:    Math.round(equilibriumWage * 100) / 100,
+      capital_return:      Math.round(capitalReturn * 100) / 100,
+      exchange_rate_adj:   Math.round(exchangeRateAdj * 1000) / 1000,
+      fx_inflation_effect: Math.round(fxInflationEffect * 100) / 100,
+    },
+    balance_of_payments: {
+      current_account_change: Math.round(dCAB) / baseGDP * 100,
+      export_gdp_new: Math.round((macro.export_gdp + dExport) * 100) / 100,
+      import_gdp_new: Math.round((macro.import_gdp + dImport) * 100) / 100,
+    },
+    gdp_change: Math.round(gdpChange * 100) / 100,
+  };
+}
+
+// ─── Доходы и расходы агентов (Income & Savings, слайды 10-11 ЮНФПА) ────────
+function computeAgentIncomes(shocks, baseGDP, equilibrium, macro) {
+  const {
+    tax_change: tax = 0,
+    wage_change: wage = 0,
+    remittances_change: remit = 0,
+    government_spending_change: gov = 0,
+  } = shocks;
+  const gdpChg = equilibrium.gdp_change;
+
+  // ДОМОХОЗЯЙСТВА
+  const hh_labor_income   = gdpChg * AGENTS.households.labor_income_share * 0.6;
+  const hh_capital_income = gdpChg * AGENTS.households.capital_income_share * 0.3;
+  const hh_remittances    = remit * macro.remit_gdp;
+  const hh_transfers      = gov * AGENTS.government.expenditure_structure.social * 0.5;
+  const hh_total_income   = hh_labor_income + hh_capital_income + hh_remittances + hh_transfers;
+  const hh_consumption    = hh_total_income * AGENTS.households.consumption_share;
+  const hh_savings        = hh_total_income * AGENTS.households.savings_rate;
+  const hh_taxes_paid     = hh_total_income * AGENTS.households.tax_rate;
+
+  // ФИРМЫ
+  const firm_gross_profit = gdpChg * 0.35;
+  const firm_tax          = -tax * 0.23 * 0.5;
+  const firm_wage_cost    = -wage * AGENTS.firms.labor_cost_share * 0.3;
+  const firm_net_profit   = firm_gross_profit + firm_tax + firm_wage_cost;
+  const firm_investment   = firm_net_profit * AGENTS.firms.investment_rate;
+  const firm_dividends    = firm_net_profit * AGENTS.firms.dividend_rate;  // eslint-disable-line no-unused-vars
+
+  // ПРАВИТЕЛЬСТВО
+  const gov_vat_rev       = hh_consumption * 0.15 * 0.8;
+  const gov_customs       = shocks.export_price_change ? shocks.export_price_change * 0.02 : 0;
+  const gov_total_revenue = gov_vat_rev + hh_taxes_paid + gov_customs;
+  const gov_social_spend  = gov * AGENTS.government.expenditure_structure.social;
+  const gov_infra_spend   = gov * AGENTS.government.expenditure_structure.infrastructure;  // eslint-disable-line no-unused-vars
+
+  // ОСТАЛЬНОЙ МИР
+  const row_exports      = equilibrium.demand_components.export_change * baseGDP / 100;
+  const row_imports      = equilibrium.demand_components.import_change * baseGDP / 100;
+  const row_remittances  = remit * macro.remit_gdp * baseGDP / 100;
+
+  return {
+    households: {
+      income_change_pct:  Math.round(hh_total_income * 100) / 100,
+      consumption_change: Math.round(hh_consumption * 100) / 100,
+      savings_change:     Math.round(hh_savings * 100) / 100,
+      remittances_effect: Math.round(hh_remittances * 100) / 100,
+      real_income_change: Math.round((hh_total_income - equilibrium.equilibrium.price_level_change) * 100) / 100,
+    },
+    firms: {
+      profit_change_pct: Math.round(firm_net_profit * 100) / 100,
+      investment_change: Math.round(firm_investment * 100) / 100,
+      wage_cost_effect:  Math.round(firm_wage_cost * 100) / 100,
+    },
+    government: {
+      revenue_change_pct: Math.round(gov_total_revenue * 100) / 100,
+      vat_change:         Math.round(gov_vat_rev * 100) / 100,
+      social_spending:    Math.round(gov_social_spend * 100) / 100,
+      fiscal_balance:     Math.round((gov_total_revenue - gov * macro.gov_gdp) * 100) / 100,
+    },
+    rest_of_world: {
+      export_change_mln: Math.round(row_exports),
+      import_change_mln: Math.round(row_imports),
+      remittances_mln:   Math.round(row_remittances),
+      cab_change:        Math.round(row_exports - row_imports + row_remittances),
+    },
+  };
+}
+
+// ─── Динамическая рекурсивная модель (слайды 28-31 ЮНФПА) ───────────────────
+// Накопление капитала: K(t+1) = K(t)*(1-δ) + I(t)
+function dynamicProjection(baseScenario, years, shocks) {
+  const DEPRECIATION = 0.05;
+  const POP_GROWTH   = 0.025;
+  const TFP_GROWTH   = 0.015;
+
+  const results = [];
+  let capital = 1.0;
+  let labor   = 1.0;
+  let tfp     = 1.0;
+
+  for (let t = 0; t < years; t++) {
+    const investmentRate = AGENTS.firms.investment_rate
+      + (baseScenario.gdp_change * 0.01)
+      + (t === 0 ? (shocks.government_spending_change || 0)
+          * AGENTS.government.expenditure_structure.infrastructure * 0.01 : 0);
+
+    capital = capital * (1 - DEPRECIATION) + investmentRate;
+    labor   = labor   * (1 + POP_GROWTH);
+    tfp     = tfp     * (1 + TFP_GROWTH);
+
+    const alpha  = 0.45;
+    const output = tfp * Math.pow(capital, alpha) * Math.pow(labor, 1 - alpha);
+    const mpl    = (1 - alpha) * tfp * Math.pow(capital, alpha) * Math.pow(labor, -alpha);
+    const mpk    = alpha * tfp * Math.pow(capital, alpha - 1) * Math.pow(labor, 1 - alpha);
+
+    results.push({
+      year:            new Date().getFullYear() + t + 1,
+      gdp_index:       Math.round(output * 1000) / 1000,
+      gdp_growth_pct:  t === 0
+        ? baseScenario.gdp_change
+        : Math.round((output / results[t - 1].gdp_index - 1) * 1000) / 10,
+      capital_stock:   Math.round(capital * 1000) / 1000,
+      labor_force:     Math.round(labor * 1000) / 1000,
+      tfp:             Math.round(tfp * 1000) / 1000,
+      wage_index:      Math.round(mpl * 1000) / 1000,
+      capital_return:  Math.round(mpk * 1000) / 1000,
+      investment_rate: Math.round(investmentRate * 100) / 100,
+    });
+  }
+  return results;
+}
 
 // ─── Функция Кобба-Дугласа ───────────────────────────────────────────────────
 //
@@ -407,6 +653,11 @@ function cgeSimulate(shock) {
   const winners = sorted.filter(([, v]) => v > 0.2).map(([k]) => k);
   const losers  = sorted.filter(([, v]) => v < -0.2).map(([k]) => k);
 
+  // ── Расширенный анализ: ЮНФПА-стандарт ──────────────────────────────────
+  const equilibrium  = computeEquilibrium(shock, MACRO.base_gdp_mln, MACRO);
+  const agentIncomes = computeAgentIncomes(shock, MACRO.base_gdp_mln, equilibrium, MACRO);
+  const dynamicPath  = dynamicProjection({ gdp_change }, 5, shock);
+
   return {
     gdp_change:               parseFloat(gdp_change.toFixed(2)),
     household_income_change,
@@ -419,6 +670,10 @@ function cgeSimulate(shock) {
     winners,
     losers,
     interpretation: _generateInterpretation(shock, gdp_change, sector_impacts, winners, losers, price_level_change, fx_app),
+    equilibrium_markets: equilibrium,
+    agent_incomes:       agentIncomes,
+    dynamic_path:        dynamicPath,
+    methodology: 'CGE Dynamic Recursive Model (UNFPA/UNDP standard, Peter Dovciak)',
     // Метаданные
     meta: {
       fx_appreciation: parseFloat(fx_app.toFixed(2)),
