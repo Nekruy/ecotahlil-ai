@@ -2373,242 +2373,283 @@ footer b { color:#fff; }
 <!-- ============================================================
    СТРАНИЦА 3 — ПРОГНОЗИРОВАНИЕ
 ============================================================ -->
-<div class="page" id="page-forecast">
+<div class="page" id="page-forecast" style="padding:0;background:#0f1923">
 
-  <div class="fc-header">
-    <h1>📈 <span data-i18n="fc.h1">Модели прогнозирования временных рядов</span></h1>
-    <p data-i18n="fc.sub">Прогнозирование макроэкономических показателей методами ARIMA и Prophet с выявлением аномалий</p>
-    <div class="fc-header-badges">
-      <span class="ai-badge2 ab-teal">🎯 AutoARIMA</span>
-      <span class="ai-badge2" style="background:rgba(14,116,144,.2);border:1px solid rgba(14,116,144,.4);color:#67e8f9;">🔀 Ensemble CI</span>
-      <span class="ai-badge2 ab-purple">🔮 Prophet (тренд + сезонность)</span>
-      <span class="ai-badge2 ab-gold">⚠️ Детектор аномалий</span>
-      <span class="ai-badge2 ab-green">📊 Chart.js визуализация</span>
-      <span class="ai-badge2" style="background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.4);color:#c4b5fd;">📉 GARCH(1,1) волатильность</span>
-      <span class="ai-badge2" style="background:rgba(29,78,216,.2);border:1px solid rgba(29,78,216,.4);color:#93c5fd;">📊 VAR(1) взаимосвязи</span>
+  <!-- ═══════════════════════════════════════════════════════════
+       EViews Workbench — Titlebar
+  ════════════════════════════════════════════════════════════ -->
+  <div style="background:#111d2c;border-bottom:1px solid #243447;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-family:'Courier New',Courier,monospace">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:14px">📊</span>
+      <span style="color:#ecf0f1;font-size:13px;font-weight:700;letter-spacing:.5px">Workfile: TAJIKISTAN_MACRO.wf1</span>
+      <span style="background:#1a3a5c;color:#7ecfff;border:1px solid #2c5f8a;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">OLS</span>
+      <span style="background:#1a3a1f;color:#6ee7a0;border:1px solid #2a5c35;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">MLE</span>
+      <span style="background:#3a1a3a;color:#d8b4fe;border:1px solid #5c2a6a;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">GARCH</span>
+      <span style="background:#1a2e3a;color:#93c5fd;border:1px solid #2a4a5c;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700">VAR</span>
+    </div>
+    <div style="color:#6b8099;font-size:11px;font-family:'Courier New',monospace">
+      Sample: 1997–2035 &nbsp;|&nbsp; Master Dataset · 65 indicators &nbsp;|&nbsp; МЭРиТ / НБТ / WB
     </div>
   </div>
 
-  <div class="fc-layout">
+  <!-- ═══════════════════════════════════════════════════════════
+       Tab Bar
+  ════════════════════════════════════════════════════════════ -->
+  <div style="background:#16213e;border-bottom:2px solid #243447;display:flex;align-items:stretch;font-family:'Courier New',Courier,monospace">
+    <button id="fctab-arima" onclick="switchFcTab('arima')"
+      style="background:#2980b9;color:white;border:none;border-bottom:3px solid #f0e68c;padding:10px 20px;font-size:12px;font-weight:700;font-family:'Courier New',monospace;cursor:pointer;letter-spacing:.3px;transition:all .15s">
+      📈 ARIMA / Ensemble / Prophet
+    </button>
+    <button id="fctab-garch" onclick="switchFcTab('garch')"
+      style="background:#34495e;color:#bdc3c7;border:none;border-bottom:3px solid transparent;padding:10px 20px;font-size:12px;font-weight:700;font-family:'Courier New',monospace;cursor:pointer;letter-spacing:.3px;transition:all .15s">
+      📉 GARCH(1,1)
+    </button>
+    <button id="fctab-var" onclick="switchFcTab('var')"
+      style="background:#34495e;color:#bdc3c7;border:none;border-bottom:3px solid transparent;padding:10px 20px;font-size:12px;font-weight:700;font-family:'Courier New',monospace;cursor:pointer;letter-spacing:.3px;transition:all .15s">
+      📊 VAR(1)
+    </button>
+    <div style="flex:1"></div>
+    <div style="display:flex;align-items:center;padding:0 16px;gap:8px">
+      <span style="color:#4a6880;font-size:10px;font-family:'Courier New',monospace">Equation Object</span>
+      <span style="color:#4a6880;font-size:18px">|</span>
+      <span style="color:#4a6880;font-size:10px;font-family:'Courier New',monospace">Graph Object</span>
+      <span style="color:#4a6880;font-size:18px">|</span>
+      <span style="color:#4a6880;font-size:10px;font-family:'Courier New',monospace">Table Object</span>
+    </div>
+  </div>
 
-    <!-- ФОРМА -->
-    <div class="fc-form-card">
-      <div class="fc-form-top">⚙️ <span data-i18n="fc.form.top">Параметры прогноза</span></div>
-      <div class="fc-form-body">
+  <!-- ═══════════════════════════════════════════════════════════
+       TAB PANEL: ARIMA
+  ════════════════════════════════════════════════════════════ -->
+  <div id="fctab-panel-arima" style="display:flex;min-height:calc(100vh - 200px)">
 
-        <div id="fcAlertBox" class="alert-box"></div>
+    <!-- ── Left Spec Panel ── -->
+    <div style="width:295px;min-width:295px;background:#1a2535;border-right:1px solid #243447;display:flex;flex-direction:column;font-family:'Courier New',Courier,monospace;overflow-y:auto">
 
-        <!-- Загрузка данных из источников -->
-        <div class="form-group">
-          <label class="form-label">Загрузить данные</label>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-            <button type="button" class="load-data-btn load-merit-btn" onclick="loadMeritDataToForecast()">
-              📥 Данные МЭРиТ
-            </button>
-            <button type="button" class="load-data-btn load-imf-btn" id="fcLoadImfBtn" onclick="loadIMFDataToForecast()">
-              📥 Данные МВФ
-            </button>
-          </div>
-          <!-- База данных МЭРиТ 10 лет -->
-          <div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px">
-            <div style="font-size:11px;font-weight:700;color:#1e40af;margin-bottom:8px">📚 Master Dataset 1997–2035 · 65 показателей</div>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <select id="fcHistIndicator" style="flex:1;min-width:160px;padding:5px 8px;border:1px solid #bfdbfe;border-radius:6px;font-size:12px;color:#1e40af">
-                <optgroup label="── ВВП ──">
-                  <option value="gdp">ВВП (млн сомони)</option>
-                  <option value="gdp_growth">Рост ВВП (%)</option>
-                  <option value="gdp_real">ВВП реальный (2009 цены)</option>
-                  <option value="gdp_deflator">Дефлятор ВВП</option>
-                  <option value="gdp_per_capita">ВВП на душу (USD)</option>
-                </optgroup>
-                <optgroup label="── Инфляция ──">
-                  <option value="inflation">Инфляция ИПЦ (%)</option>
-                  <option value="food_inflation">Прод. инфляция (%)</option>
-                </optgroup>
-                <optgroup label="── Секторы ──">
-                  <option value="industry">Промышленность</option>
-                  <option value="agriculture">Сельское хозяйство</option>
-                  <option value="construction">Строительство</option>
-                  <option value="transport">Транспорт и связь</option>
-                  <option value="trade">Розничная торговля</option>
-                  <option value="services">Услуги</option>
-                </optgroup>
-                <optgroup label="── Спрос ──">
-                  <option value="consumption">Конечное потребление</option>
-                  <option value="consumption_hh">Потребление домохозяйств</option>
-                  <option value="consumption_gov">Потребление государства</option>
-                  <option value="investment">Инвестиции в ОК</option>
-                  <option value="domestic_demand">Внутренний спрос</option>
-                </optgroup>
-                <optgroup label="── Внешний сектор ──">
-                  <option value="exports">Экспорт (млн сом.)</option>
-                  <option value="imports">Импорт (млн сом.)</option>
-                  <option value="net_exports">Чистый экспорт</option>
-                  <option value="export">Экспорт (млн USD)</option>
-                  <option value="import">Импорт (млн USD)</option>
-                  <option value="trade_balance">Торг. баланс (млн USD)</option>
-                </optgroup>
-                <optgroup label="── Валютный рынок ──">
-                  <option value="usd_tjs">Курс USD/TJS</option>
-                  <option value="eur_tjs">Курс EUR/TJS</option>
-                  <option value="remittances">Переводы (млн $)</option>
-                  <option value="remittances_pct_gdp">Переводы % ВВП</option>
-                </optgroup>
-                <optgroup label="── Доходы и труд ──">
-                  <option value="wages">Оплата труда</option>
-                  <option value="gross_profit">Валовая прибыль</option>
-                  <option value="taxes">Налоги на производство</option>
-                </optgroup>
-              </select>
-              <button type="button" class="load-data-btn load-merit-btn" id="fcHistBtn" onclick="loadHistoricalToForecast()">
-                📥 10 лет
-              </button>
-            </div>
-            <div style="font-size:10px;color:#3b82f6;margin-top:5px">39 значений 1997–2035 · Master Dataset (65 показателей) · МЭРиТ / НБТ / CGE</div>
-          </div>
+      <!-- Object Browser header -->
+      <div style="background:#111d2c;color:#7ecfff;font-size:11px;font-weight:700;padding:7px 12px;border-bottom:1px solid #243447;letter-spacing:.5px;text-transform:uppercase">
+        Object Browser — Quick Open
+      </div>
+
+      <!-- Quick indicator grid -->
+      <div style="padding:10px 10px 6px;border-bottom:1px solid #243447">
+        <div style="color:#6b8099;font-size:10px;margin-bottom:6px;letter-spacing:.3px">SERIES · БЫСТРЫЙ ВЫБОР</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+          <button onclick="autoLoadIndicator('gdp')" style="background:#1e3a5a;color:#7ecfff;border:1px solid #2c5480;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#1e3a5a'">GDP</button>
+          <button onclick="autoLoadIndicator('gdp_growth')" style="background:#1e3a5a;color:#7ecfff;border:1px solid #2c5480;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#1e3a5a'">GDPG%</button>
+          <button onclick="autoLoadIndicator('inflation')" style="background:#1e3a5a;color:#7ecfff;border:1px solid #2c5480;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#1e3a5a'">INFL</button>
+          <button onclick="autoLoadIndicator('industry')" style="background:#1e3a2a;color:#6ee7a0;border:1px solid #2a5035;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#166534'" onmouseout="this.style.background='#1e3a2a'">INDU</button>
+          <button onclick="autoLoadIndicator('agriculture')" style="background:#1e3a2a;color:#6ee7a0;border:1px solid #2a5035;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#166534'" onmouseout="this.style.background='#1e3a2a'">AGRI</button>
+          <button onclick="autoLoadIndicator('investment')" style="background:#1e3a2a;color:#6ee7a0;border:1px solid #2a5035;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#166534'" onmouseout="this.style.background='#1e3a2a'">INV</button>
+          <button onclick="autoLoadIndicator('exports')" style="background:#1e3535;color:#67e8f9;border:1px solid #2a5055;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#0c7873'" onmouseout="this.style.background='#1e3535'">EXP</button>
+          <button onclick="autoLoadIndicator('usd_tjs')" style="background:#1e3535;color:#67e8f9;border:1px solid #2a5055;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#0c7873'" onmouseout="this.style.background='#1e3535'">EXCH</button>
+          <button onclick="autoLoadIndicator('remittances')" style="background:#2a1e3a;color:#c4b5fd;border:1px solid #4a2a6a;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#5b21b6'" onmouseout="this.style.background='#2a1e3a'">REMIT</button>
+          <button onclick="autoLoadIndicator('consumption')" style="background:#2a1e3a;color:#c4b5fd;border:1px solid #4a2a6a;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#5b21b6'" onmouseout="this.style.background='#2a1e3a'">CONS</button>
+          <button onclick="autoLoadIndicator('trade_balance')" style="background:#3a2a1a;color:#fcd34d;border:1px solid #6a4a1a;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#b45309'" onmouseout="this.style.background='#3a2a1a'">TBAL</button>
+          <button onclick="autoLoadIndicator('wages')" style="background:#3a2a1a;color:#fcd34d;border:1px solid #6a4a1a;padding:5px 3px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;transition:background .1s" onmouseover="this.style.background='#b45309'" onmouseout="this.style.background='#3a2a1a'">WAGE</button>
         </div>
+      </div>
 
-        <!-- Метод прогнозирования -->
-        <div style="margin-bottom:16px">
-          <label style="font-size:12px;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px">МЕТОД ПРОГНОЗИРОВАНИЯ</label>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <button onclick="selectMethod('auto-arima')" id="btn-auto-arima"
-              style="background:#1a4a8a;color:white;border:2px solid #1a4a8a;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
-              🎯 AutoARIMA<br><span style="font-size:10px;opacity:0.85;font-weight:400">авто p,d,q по AIC</span>
-            </button>
-            <button onclick="selectMethod('ensemble')" id="btn-ensemble"
-              style="background:white;color:#475569;border:2px solid #e2e8f0;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
-              🔀 Ensemble<br><span style="font-size:10px;opacity:0.7;font-weight:400">ARIMA+Prophet с CI</span>
-            </button>
-            <button onclick="selectMethod('arima')" id="btn-arima"
-              style="background:white;color:#475569;border:2px solid #e2e8f0;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
-              📈 ARIMA (1,1,0)<br><span style="font-size:10px;opacity:0.7;font-weight:400">классический</span>
-            </button>
-            <button onclick="selectMethod('prophet')" id="btn-prophet"
-              style="background:white;color:#475569;border:2px solid #e2e8f0;padding:10px 8px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all 0.2s">
-              🔮 Prophet<br><span style="font-size:10px;opacity:0.7;font-weight:400">сезонный тренд</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Быстрая загрузка данных -->
-        <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:10px;margin-bottom:10px">
-          <div style="font-size:11px;font-weight:600;color:#0369a1;margin-bottom:8px">📥 Быстрая загрузка данных</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">
-            <button onclick="autoLoadIndicator('gdp')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">ВВП</button>
-            <button onclick="autoLoadIndicator('gdp_growth')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Рост ВВП %</button>
-            <button onclick="autoLoadIndicator('inflation')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Инфляция</button>
-            <button onclick="autoLoadIndicator('industry')" style="background:#1a4a8a;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Промышленность</button>
-            <button onclick="autoLoadIndicator('agriculture')" style="background:#166534;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">С/Х</button>
-            <button onclick="autoLoadIndicator('investment')" style="background:#166534;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Инвестиции</button>
-            <button onclick="autoLoadIndicator('exports')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Экспорт</button>
-            <button onclick="autoLoadIndicator('usd_tjs')" style="background:#0c7873;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">USD/TJS</button>
-            <button onclick="autoLoadIndicator('remittances')" style="background:#7c3aed;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Переводы</button>
-            <button onclick="autoLoadIndicator('consumption')" style="background:#7c3aed;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Потребление</button>
-            <button onclick="autoLoadIndicator('trade_balance')" style="background:#b45309;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Торг. баланс</button>
-            <button onclick="autoLoadIndicator('wages')" style="background:#b45309;color:white;border:none;padding:6px 4px;border-radius:5px;font-size:10px;cursor:pointer">Зарплаты</button>
-          </div>
-        </div>
-
-        <!-- Индикатор для прогноза — авто-загрузка из датасета -->
-        <div class="form-group">
-          <label class="form-label">ИНДИКАТОР ДЛЯ ПРОГНОЗА</label>
-          <select id="forecast-indicator" onchange="autoLoadForecastData(this.value)"
-            style="width:100%;padding:9px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;background:white;cursor:pointer;margin-bottom:8px">
-            <option value="gdp_growth">📈 Рост ВВП % (МЭРиТ 1997–2035)</option>
-            <option value="gdp">💰 ВВП млрд сомони (МЭРиТ 1997–2035)</option>
-            <option value="inflation">📊 Инфляция % (МЭРиТ 1997–2035)</option>
-            <option value="usd_tjs">💱 Курс USD/TJS (НБТ 2015–2026)</option>
-            <option value="remittances">💸 Переводы мигрантов млн$ (МБ)</option>
-            <option value="gdp_per_capita">👤 ВВП на душу USD (МЭРиТ)</option>
+      <!-- Master Dataset selector -->
+      <div style="padding:10px;border-bottom:1px solid #243447">
+        <div style="color:#6b8099;font-size:10px;margin-bottom:6px;letter-spacing:.3px">MASTER DATASET · 1997–2035 · 65 SERIES</div>
+        <div style="display:flex;gap:6px">
+          <select id="fcHistIndicator" style="flex:1;padding:5px 6px;background:#0f1923;border:1px solid #2c4a6a;border-radius:3px;font-size:11px;color:#93c5fd;font-family:'Courier New',monospace">
+            <optgroup label="── ВВП ──">
+              <option value="gdp">GDP (млн TJS)</option>
+              <option value="gdp_growth">GDP_GROWTH (%)</option>
+              <option value="gdp_real">GDP_REAL (2009)</option>
+              <option value="gdp_deflator">GDP_DEFL</option>
+              <option value="gdp_per_capita">GDP_CAP (USD)</option>
+            </optgroup>
+            <optgroup label="── Инфляция ──">
+              <option value="inflation">CPI (%)</option>
+              <option value="food_inflation">FOOD_CPI (%)</option>
+            </optgroup>
+            <optgroup label="── Секторы ──">
+              <option value="industry">INDUSTRY</option>
+              <option value="agriculture">AGRI</option>
+              <option value="construction">CONSTR</option>
+              <option value="transport">TRANSP</option>
+              <option value="trade">TRADE</option>
+              <option value="services">SERV</option>
+            </optgroup>
+            <optgroup label="── Спрос ──">
+              <option value="consumption">CONS_TOTAL</option>
+              <option value="consumption_hh">CONS_HH</option>
+              <option value="consumption_gov">CONS_GOV</option>
+              <option value="investment">INV_FC</option>
+              <option value="domestic_demand">DOM_DEMAND</option>
+            </optgroup>
+            <optgroup label="── Внешний сектор ──">
+              <option value="exports">EXP (млн TJS)</option>
+              <option value="imports">IMP (млн TJS)</option>
+              <option value="net_exports">NET_EXP</option>
+              <option value="export">EXP_USD</option>
+              <option value="import">IMP_USD</option>
+              <option value="trade_balance">TBAL_USD</option>
+            </optgroup>
+            <optgroup label="── Валютный рынок ──">
+              <option value="usd_tjs">USD_TJS</option>
+              <option value="eur_tjs">EUR_TJS</option>
+              <option value="remittances">REMIT (млн$)</option>
+              <option value="remittances_pct_gdp">REMIT_PCT</option>
+            </optgroup>
+            <optgroup label="── Доходы и труд ──">
+              <option value="wages">WAGES</option>
+              <option value="gross_profit">PROFIT</option>
+              <option value="taxes">TAXES</option>
+            </optgroup>
           </select>
-          <div id="forecast-data-info" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:11px;color:#166534">
-            ⏳ Данные загружаются автоматически...
-          </div>
-          <textarea id="fcData" class="data-textarea" style="display:none"
-            placeholder="авто-загрузка"></textarea>
+          <button id="fcHistBtn" onclick="loadHistoricalToForecast()"
+            style="background:#1a4a8a;color:#7ecfff;border:1px solid #2c5a9a;padding:5px 8px;border-radius:3px;font-size:10px;cursor:pointer;font-family:'Courier New',monospace;white-space:nowrap">
+            ▶ LOAD
+          </button>
+        </div>
+        <div style="font-size:9px;color:#3d5a75;margin-top:4px">МЭРиТ · НБТ · CGE · 39 obs</div>
+      </div>
+
+      <!-- Alert box -->
+      <div id="fcAlertBox" class="alert-box" style="margin:6px 10px 0"></div>
+
+      <!-- Equation Specification -->
+      <div style="padding:10px;border-bottom:1px solid #243447">
+        <div style="color:#6b8099;font-size:10px;margin-bottom:8px;letter-spacing:.3px">EQUATION SPECIFICATION</div>
+
+        <!-- Indicator select -->
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:4px">Dependent variable:</div>
+        <select id="forecast-indicator" onchange="autoLoadForecastData(this.value)"
+          style="width:100%;padding:6px 8px;background:#0f1923;border:1px solid #2c4a6a;border-radius:3px;font-size:11px;color:#f0e68c;font-family:'Courier New',monospace;margin-bottom:6px;cursor:pointer">
+          <option value="gdp_growth">GDP_GROWTH — Рост ВВП %</option>
+          <option value="gdp">GDP_NOMINAL — ВВП млрд сом.</option>
+          <option value="inflation">CPI — Инфляция %</option>
+          <option value="usd_tjs">USD_TJS — Курс</option>
+          <option value="remittances">REMIT — Переводы млн$</option>
+          <option value="gdp_per_capita">GDP_CAP — ВВП на душу</option>
+        </select>
+        <div id="forecast-data-info" style="background:#0f1923;border:1px solid #1a4a2a;border-radius:3px;padding:6px 8px;font-size:10px;color:#6ee7a0;font-family:'Courier New',monospace;margin-bottom:8px">
+          ⏳ Loading series...
+        </div>
+        <textarea id="fcData" class="data-textarea" style="display:none" placeholder="auto-load"></textarea>
+
+        <!-- Method -->
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:6px">Estimation method:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px">
+          <button onclick="selectMethod('auto-arima')" id="btn-auto-arima"
+            style="background:#1a3a5c;color:#7ecfff;border:2px solid #2c5a8a;padding:7px 4px;border-radius:3px;cursor:pointer;font-size:10px;font-weight:700;text-align:center;font-family:'Courier New',monospace;transition:all .15s">
+            🎯 AutoARIMA<br><span style="font-size:9px;opacity:.8;font-weight:400">AIC selection</span>
+          </button>
+          <button onclick="selectMethod('ensemble')" id="btn-ensemble"
+            style="background:#1e2a3a;color:#6b8099;border:2px solid #243447;padding:7px 4px;border-radius:3px;cursor:pointer;font-size:10px;font-weight:700;text-align:center;font-family:'Courier New',monospace;transition:all .15s">
+            🔀 Ensemble<br><span style="font-size:9px;opacity:.7;font-weight:400">ARIMA+Prophet CI</span>
+          </button>
+          <button onclick="selectMethod('arima')" id="btn-arima"
+            style="background:#1e2a3a;color:#6b8099;border:2px solid #243447;padding:7px 4px;border-radius:3px;cursor:pointer;font-size:10px;font-weight:700;text-align:center;font-family:'Courier New',monospace;transition:all .15s">
+            📈 ARIMA(1,1,0)<br><span style="font-size:9px;opacity:.7;font-weight:400">classical</span>
+          </button>
+          <button onclick="selectMethod('prophet')" id="btn-prophet"
+            style="background:#1e2a3a;color:#6b8099;border:2px solid #243447;padding:7px 4px;border-radius:3px;cursor:pointer;font-size:10px;font-weight:700;text-align:center;font-family:'Courier New',monospace;transition:all .15s">
+            🔮 Prophet<br><span style="font-size:9px;opacity:.7;font-weight:400">seasonal trend</span>
+          </button>
         </div>
 
-        <!-- Периоды -->
-        <div class="form-group">
-          <label class="form-label" data-i18n="fc.horizon.label">Горизонт прогноза</label>
-          <div class="period-group">
-            <button class="period-btn" onclick="selectPeriod(3,this)">3 <span data-i18n="fc.months">мес.</span></button>
-            <button class="period-btn active" onclick="selectPeriod(6,this)">6 <span data-i18n="fc.months">мес.</span></button>
-            <button class="period-btn" onclick="selectPeriod(12,this)">12 <span data-i18n="fc.months">мес.</span></button>
-          </div>
+        <!-- Horizon -->
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:5px">Forecast horizon:</div>
+        <div class="period-group" style="margin-bottom:12px">
+          <button class="period-btn" onclick="selectPeriod(3,this)" style="font-family:'Courier New',monospace;font-size:11px">3 мес.</button>
+          <button class="period-btn active" onclick="selectPeriod(6,this)" style="font-family:'Courier New',monospace;font-size:11px">6 мес.</button>
+          <button class="period-btn" onclick="selectPeriod(12,this)" style="font-family:'Courier New',monospace;font-size:11px">12 мес.</button>
         </div>
 
-        <!-- Кнопка -->
-        <button class="fc-btn" id="fcBtn" onclick="runForecast()">
-          <span>📈</span> <span data-i18n="fc.submit">ПОСТРОИТЬ ПРОГНОЗ</span>
+        <!-- Run button -->
+        <button id="fcBtn" onclick="runForecast()"
+          style="width:100%;background:#c9a84c;color:#0f1923;border:none;padding:10px;border-radius:3px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Courier New',monospace;letter-spacing:.5px;transition:background .15s"
+          onmouseover="this.style.background='#f0d060'" onmouseout="this.style.background='#c9a84c'">
+          ▶▶ RUN FORECAST
         </button>
 
+        <!-- External data loaders -->
+        <div style="display:flex;gap:5px;margin-top:8px">
+          <button type="button" onclick="loadMeritDataToForecast()"
+            style="flex:1;background:#1a2a1a;color:#6ee7a0;border:1px solid #2a4a2a;padding:5px 4px;border-radius:3px;font-size:9px;cursor:pointer;font-family:'Courier New',monospace">
+            📥 МЭРиТ
+          </button>
+          <button type="button" id="fcLoadImfBtn" onclick="loadIMFDataToForecast()"
+            style="flex:1;background:#1a1a2a;color:#93c5fd;border:1px solid #2a2a4a;padding:5px 4px;border-radius:3px;font-size:9px;cursor:pointer;font-family:'Courier New',monospace">
+            📥 МВФ
+          </button>
+        </div>
       </div>
+
+      <!-- Spacer -->
+      <div style="flex:1;min-height:20px"></div>
+
     </div>
 
-    <!-- РЕЗУЛЬТАТЫ -->
-    <div class="fc-result-area" id="fcResultArea">
+    <!-- ── Right Output Area (ARIMA) ── -->
+    <div style="flex:1;background:#0f1923;overflow-y:auto;padding:16px;font-family:'Courier New',Courier,monospace" id="fcResultArea">
 
-      <!-- Плейсхолдер -->
-      <div class="fc-placeholder" id="fcPlaceholder">
-        <div class="rp-icon">📈</div>
-        <div class="rp-title" data-i18n="fc.ph.title">Готов к прогнозированию</div>
-        <div class="rp-text" data-i18n="fc.ph.text">
-          Введите исторические данные, выберите метод<br>
-          и горизонт прогноза — система рассчитает<br>
-          прогноз и выявит аномалии в ряду
+      <!-- Placeholder -->
+      <div id="fcPlaceholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:12px">
+        <div style="font-size:48px">📈</div>
+        <div style="color:#7ecfff;font-size:16px;font-weight:700;letter-spacing:.5px">EViews Output Window</div>
+        <div style="color:#4a6880;font-size:12px;text-align:center;max-width:340px;line-height:1.7">
+          Select a series, choose estimation method<br>
+          and forecast horizon, then click RUN FORECAST
         </div>
-        <div class="rp-steps">
-          <div class="rp-step">① <span data-i18n="fc.step1">Данные</span></div>
-          <div class="rp-step">② <span data-i18n="fc.step2">Метод</span></div>
-          <div class="rp-step">③ <span data-i18n="fc.step3">Период</span></div>
-          <div class="rp-step">④ <span data-i18n="fc.step4">Прогноз</span> →</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <span style="background:#1a2535;color:#6b8099;border:1px solid #243447;padding:4px 10px;border-radius:3px;font-size:10px">① Series</span>
+          <span style="color:#4a6880">→</span>
+          <span style="background:#1a2535;color:#6b8099;border:1px solid #243447;padding:4px 10px;border-radius:3px;font-size:10px">② Method</span>
+          <span style="color:#4a6880">→</span>
+          <span style="background:#1a2535;color:#6b8099;border:1px solid #243447;padding:4px 10px;border-radius:3px;font-size:10px">③ Horizon</span>
+          <span style="color:#4a6880">→</span>
+          <span style="background:#c9a84c;color:#0f1923;border:none;padding:4px 10px;border-radius:3px;font-size:10px;font-weight:700">▶▶ RUN</span>
         </div>
       </div>
 
-      <!-- МЭРиТ vs Модели (скрыт по умолчанию) -->
-      <div id="mert-comparison-block" style="margin-top:16px;display:none">
-        <div style="background:#0d2342;color:white;padding:10px 14px;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center">
-          <span style="font-size:13px;font-weight:600">📋 vs Прогноз МЭРиТ 2025–2027</span>
-          <button onclick="loadMERTComparison()" style="background:#c9a84c;color:#0d2342;border:none;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer">Загрузить</button>
+      <!-- МЭРиТ vs Models comparison (hidden by default) -->
+      <div id="mert-comparison-block" style="margin-bottom:16px;display:none">
+        <div style="background:#0d2342;color:#7ecfff;padding:8px 14px;border-radius:4px 4px 0 0;display:flex;justify-content:space-between;align-items:center;border:1px solid #1a3a5c;border-bottom:none;font-size:12px;font-family:'Courier New',monospace">
+          <span>// МЭРиТ Forecast Comparison 2025–2027</span>
+          <button onclick="loadMERTComparison()" style="background:#c9a84c;color:#0d2342;border:none;padding:3px 10px;border-radius:3px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Courier New',monospace">LOAD</button>
         </div>
-        <div id="mert-comparison-content" style="background:white;border:1px solid #e2e8f0;border-top:none;padding:12px;border-radius:0 0 8px 8px">
-          <div style="color:#94a3b8;font-size:12px">Нажмите "Загрузить" для сравнения с официальным прогнозом МЭРиТ</div>
+        <div id="mert-comparison-content" style="background:#0f1923;border:1px solid #1a3a5c;padding:12px;border-radius:0 0 4px 4px">
+          <div style="color:#4a6880;font-size:11px;font-family:'Courier New',monospace">// Press LOAD to compare with МЭРиТ official forecast</div>
         </div>
       </div>
 
-      <!-- Блок с результатами (скрыт по умолчанию) -->
+      <!-- Results (hidden by default) -->
       <div id="fcResults" style="display:none">
 
-        <!-- График -->
-        <div class="fc-chart-card">
-          <div class="fc-card-header">
-            <span>📊 График прогноза</span>
-            <span id="fcMethodBadge" style="font-size:11px;opacity:.8"></span>
+        <!-- Chart card -->
+        <div style="background:#1a2535;border:1px solid #243447;border-radius:4px;margin-bottom:14px">
+          <div style="background:#111d2c;padding:8px 14px;border-bottom:1px solid #243447;display:flex;justify-content:space-between;align-items:center;border-radius:4px 4px 0 0">
+            <span style="color:#7ecfff;font-size:12px;font-weight:700;font-family:'Courier New',monospace">// Graph: Forecast vs Historical</span>
+            <span id="fcMethodBadge" style="color:#f0e68c;font-size:11px;font-family:'Courier New',monospace"></span>
           </div>
-          <div class="fc-card-body">
-            <div class="fc-chart-wrap">
+          <div style="padding:14px">
+            <div style="position:relative;height:260px">
               <canvas id="forecastChart"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- Таблицы -->
-        <div class="fc-table-row">
+        <!-- Tables row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
 
-          <!-- Таблица прогноза -->
-          <div class="fc-chart-card">
-            <div class="fc-card-header">
-              <span>🔮 Прогнозные значения</span>
+          <!-- Forecast table -->
+          <div style="background:#1a2535;border:1px solid #243447;border-radius:4px">
+            <div style="background:#111d2c;padding:7px 12px;border-bottom:1px solid #243447;border-radius:4px 4px 0 0">
+              <span style="color:#7ecfff;font-size:11px;font-weight:700;font-family:'Courier New',monospace">// Table: Forecast Values</span>
             </div>
-            <div class="fc-card-body" style="padding:0">
-              <table class="fc-tbl">
+            <div style="padding:0;overflow-x:auto">
+              <table style="width:100%;border-collapse:collapse;font-family:'Courier New',monospace;font-size:11px">
                 <thead>
-                  <tr>
-                    <th>Период</th>
-                    <th>Прогноз</th>
-                    <th>Изменение</th>
+                  <tr style="background:#0f1923">
+                    <th style="padding:6px 10px;color:#6b8099;font-weight:700;text-align:left;border-bottom:1px solid #243447">Period</th>
+                    <th style="padding:6px 10px;color:#6b8099;font-weight:700;text-align:right;border-bottom:1px solid #243447">Forecast</th>
+                    <th style="padding:6px 10px;color:#6b8099;font-weight:700;text-align:right;border-bottom:1px solid #243447">Change</th>
                   </tr>
                 </thead>
                 <tbody id="fcForecastTable"></tbody>
@@ -2616,13 +2657,13 @@ footer b { color:#fff; }
             </div>
           </div>
 
-          <!-- Аномалии -->
-          <div class="fc-chart-card">
-            <div class="fc-card-header">
-              <span>⚠️ Аномалии в данных</span>
-              <span id="fcAnomalyCount" style="font-size:11px;opacity:.8"></span>
+          <!-- Anomalies -->
+          <div style="background:#1a2535;border:1px solid #243447;border-radius:4px">
+            <div style="background:#111d2c;padding:7px 12px;border-bottom:1px solid #243447;border-radius:4px 4px 0 0;display:flex;justify-content:space-between">
+              <span style="color:#7ecfff;font-size:11px;font-weight:700;font-family:'Courier New',monospace">// Anomaly Detection</span>
+              <span id="fcAnomalyCount" style="color:#f0e68c;font-size:10px;font-family:'Courier New',monospace"></span>
             </div>
-            <div class="fc-card-body">
+            <div style="padding:10px">
               <div id="fcAnomaliesList"></div>
             </div>
           </div>
@@ -2634,274 +2675,301 @@ footer b { color:#fff; }
 
   </div>
 
-  <!-- ══════════ GARCH(1,1) СЕКЦИЯ ══════════ -->
-  <div class="garch-section">
-    <div class="garch-section-title">
-      📉 GARCH(1,1) — Моделирование волатильности курса валют
-    </div>
+  <!-- ═══════════════════════════════════════════════════════════
+       TAB PANEL: GARCH
+  ════════════════════════════════════════════════════════════ -->
+  <div id="fctab-panel-garch" style="display:none;min-height:calc(100vh - 200px)">
 
-    <div class="garch-layout">
+    <!-- ── Left Spec Panel (GARCH) ── -->
+    <div style="width:295px;min-width:295px;background:#1a2535;border-right:1px solid #243447;display:flex;flex-direction:column;font-family:'Courier New',Courier,monospace;overflow-y:auto">
 
-      <!-- ФОРМА -->
-      <div class="garch-form-card">
-        <div class="garch-form-top">⚙️ Параметры GARCH-модели</div>
-        <div class="garch-form-body">
+      <div style="background:#111d2c;color:#d8b4fe;font-size:11px;font-weight:700;padding:7px 12px;border-bottom:1px solid #243447;letter-spacing:.5px;text-transform:uppercase">
+        Object Browser — GARCH Equation
+      </div>
 
-          <div id="garchAlertBox" class="alert-box"></div>
+      <div style="padding:12px;border-bottom:1px solid #243447">
 
-          <!-- Валюта -->
-          <div class="form-group">
-            <label class="form-label">Валютная пара</label>
-            <select id="garchCurrency" class="garch-select">
-              <option value="USD/TJS">🇺🇸 USD/TJS — Доллар США к сомони</option>
-              <option value="EUR/TJS">🇪🇺 EUR/TJS — Евро к сомони</option>
-              <option value="RUB/TJS">🇷🇺 RUB/TJS — Российский рубль к сомони</option>
-            </select>
-          </div>
+        <div id="garchAlertBox" class="alert-box" style="margin-bottom:8px"></div>
 
-          <!-- Валютная пара — авто-загрузка из НБТ -->
-          <div class="form-group" style="margin-top:14px">
-            <label class="form-label">ВАЛЮТНАЯ ПАРА</label>
-            <select id="garch-currency-sel" onchange="autoLoadGarchData(this.value)"
-              style="width:100%;padding:9px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:13px;background:white;cursor:pointer;margin-bottom:8px">
-              <option value="usd">USD/TJS — Доллар США (НБТ РТ)</option>
-              <option value="eur">EUR/TJS — Евро (НБТ РТ)</option>
-              <option value="rub">RUB/TJS — Российский рубль (НБТ РТ)</option>
-            </select>
-            <div id="garch-data-info" style="background:#f5f3ff;border:1px solid #ddd6fe;border-radius:6px;padding:8px 12px;font-size:11px;color:#5b21b6">
-              ⏳ Загружаются данные НБТ РТ...
-            </div>
-            <textarea id="garchData" class="data-textarea" style="display:none"
-              placeholder="авто-загрузка"></textarea>
-          </div>
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:5px">Currency pair (sync):</div>
+        <!-- Hidden original select for JS compat -->
+        <select id="garchCurrency" style="display:none">
+          <option value="USD/TJS">USD/TJS</option>
+          <option value="EUR/TJS">EUR/TJS</option>
+          <option value="RUB/TJS">RUB/TJS</option>
+        </select>
+        <select id="garch-currency-sel" onchange="autoLoadGarchData(this.value)"
+          style="width:100%;padding:7px 8px;background:#0f1923;border:1px solid #3a2a6a;border-radius:3px;font-size:11px;color:#d8b4fe;font-family:'Courier New',monospace;margin-bottom:8px;cursor:pointer">
+          <option value="usd">USD_TJS — Доллар США (НБТ)</option>
+          <option value="eur">EUR_TJS — Евро (НБТ)</option>
+          <option value="rub">RUB_TJS — Рос. рубль (НБТ)</option>
+        </select>
+        <div id="garch-data-info" style="background:#0f1923;border:1px solid #2a1a4a;border-radius:3px;padding:6px 8px;font-size:10px;color:#d8b4fe;font-family:'Courier New',monospace;margin-bottom:10px">
+          ⏳ Loading НБТ data...
+        </div>
+        <textarea id="garchData" class="data-textarea" style="display:none" placeholder="auto-load"></textarea>
 
-          <!-- Горизонт прогноза -->
-          <div class="form-group" style="margin-top:14px">
-            <label class="form-label">Горизонт прогноза (дней)</label>
-            <div class="period-group" style="grid-template-columns:repeat(4,1fr)">
-              <button class="period-btn" onclick="selectGarchPeriod(5,this)">5</button>
-              <button class="period-btn active" onclick="selectGarchPeriod(10,this)">10</button>
-              <button class="period-btn" onclick="selectGarchPeriod(20,this)">20</button>
-              <button class="period-btn" onclick="selectGarchPeriod(30,this)">30</button>
-            </div>
-          </div>
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:6px">Variance equation:</div>
+        <div style="background:#0f1923;border:1px solid #243447;border-radius:3px;padding:8px 10px;font-size:10px;color:#d8b4fe;line-height:1.8;margin-bottom:10px">
+          σ²<sub>t</sub> = ω + α·r²<sub>t-1</sub> + β·σ²<sub>t-1</sub><br>
+          <span style="color:#6b8099">Est. method: MLE (Nelder-Mead)</span><br>
+          <span style="color:#6b8099">Forecast: E[σ²<sub>t+h</sub>] = σ̄² + (α+β)<sup>h</sup>·(σ²<sub>t</sub>−σ̄²)</span>
+        </div>
 
-          <!-- Кнопка -->
-          <button class="garch-btn" id="garchBtn" onclick="runGarch()" style="margin-top:18px">
-            <span>📉</span> РАССЧИТАТЬ ВОЛАТИЛЬНОСТЬ
-          </button>
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:5px">Forecast horizon (days):</div>
+        <div class="period-group" style="grid-template-columns:repeat(4,1fr);margin-bottom:12px">
+          <button class="period-btn" onclick="selectGarchPeriod(5,this)" style="font-family:'Courier New',monospace;font-size:11px">5d</button>
+          <button class="period-btn active" onclick="selectGarchPeriod(10,this)" style="font-family:'Courier New',monospace;font-size:11px">10d</button>
+          <button class="period-btn" onclick="selectGarchPeriod(20,this)" style="font-family:'Courier New',monospace;font-size:11px">20d</button>
+          <button class="period-btn" onclick="selectGarchPeriod(30,this)" style="font-family:'Courier New',monospace;font-size:11px">30d</button>
+        </div>
 
-          <!-- Пояснение метода -->
-          <div style="margin-top:16px;padding:12px;background:#f5f3ff;border-radius:8px;border:1px solid #e9d5ff;font-size:11px;color:#6d28d9;line-height:1.6">
-            <b>GARCH(1,1):</b> σ²<sub>t</sub> = ω + α·r²<sub>t-1</sub> + β·σ²<sub>t-1</sub><br>
-            Параметры оцениваются через максимальное правдоподобие (метод Нелдера–Мида).<br>
-            Прогноз: E[σ²<sub>t+h</sub>] = σ̄² + (α+β)<sup>h</sup>·(σ²<sub>t</sub> − σ̄²)
-          </div>
+        <button id="garchBtn" onclick="runGarch()"
+          style="width:100%;background:#5b21b6;color:white;border:none;padding:10px;border-radius:3px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Courier New',monospace;letter-spacing:.5px;transition:background .15s"
+          onmouseover="this.style.background='#7c3aed'" onmouseout="this.style.background='#5b21b6'">
+          ▶▶ RUN GARCH
+        </button>
 
+      </div>
+
+      <!-- Risk zones legend -->
+      <div style="padding:10px;border-bottom:1px solid #243447">
+        <div style="color:#6b8099;font-size:10px;margin-bottom:6px;letter-spacing:.3px">VOLATILITY ZONES</div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-size:10px;font-family:'Courier New',monospace">
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;background:#22c55e;border-radius:2px;opacity:.7"></div><span style="color:#6b8099">LOW &lt;5%</span></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;background:#eab308;border-radius:2px;opacity:.7"></div><span style="color:#6b8099">MODERATE 5–15%</span></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;background:#f97316;border-radius:2px;opacity:.7"></div><span style="color:#6b8099">HIGH 15–25%</span></div>
+          <div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;background:#ef4444;border-radius:2px;opacity:.7"></div><span style="color:#6b8099">CRITICAL &gt;25%</span></div>
         </div>
       </div>
 
-      <!-- РЕЗУЛЬТАТЫ -->
-      <div class="garch-result-area" id="garchResultArea">
+      <div style="flex:1"></div>
+    </div>
 
-        <div class="garch-placeholder" id="garchPlaceholder">
-          <div style="font-size:42px">📉</div>
-          <div style="font-weight:800;font-size:15px;color:var(--navy)">Готов к анализу волатильности</div>
-          <div style="font-size:13px;color:var(--text3);max-width:280px">
-            Введите исторические курсы, выберите пару и горизонт — GARCH(1,1) оценит параметры и построит прогноз волатильности
-          </div>
-        </div>
+    <!-- ── Right Output Area (GARCH) ── -->
+    <div style="flex:1;background:#0f1923;overflow-y:auto;padding:16px;font-family:'Courier New',Courier,monospace" id="garchResultArea">
 
-        <div id="garchResults" style="display:none">
-
-          <!-- Параметры модели -->
-          <div class="garch-params-row" id="garchParamsRow"></div>
-
-          <!-- Сигнал для руководства -->
-          <div id="garchSignalBlock" style="margin-bottom:16px"></div>
-
-          <!-- График волатильности -->
-          <div class="garch-chart-card">
-            <div class="garch-card-header">
-              <span>📊 Условная волатильность курса (дневная, %)</span>
-              <span id="garchCurrencyBadge" style="font-size:11px;opacity:.8"></span>
-            </div>
-            <div class="garch-card-body">
-              <div class="garch-chart-wrap">
-                <canvas id="garchChart"></canvas>
-              </div>
-              <div class="garch-legend">
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#7c3aed"></div>Историческая волатильность</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#f97316;border:2px dashed #f97316;background:transparent"></div>Прогноз</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:rgba(124,58,237,.25)"></div>±1σ доверительный интервал</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:rgba(124,58,237,.1)"></div>±2σ доверительный интервал</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#22c55e;opacity:.4"></div>Низкий риск (&lt;5%)</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#eab308;opacity:.4"></div>Умеренный (5–15%)</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#f97316;opacity:.4"></div>Высокий (15–25%)</div>
-                <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#ef4444;opacity:.4"></div>Критический (&gt;25%)</div>
-              </div>
-            </div>
-          </div>
-
+      <div id="garchPlaceholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:12px">
+        <div style="font-size:48px">📉</div>
+        <div style="color:#d8b4fe;font-size:16px;font-weight:700;letter-spacing:.5px">GARCH Equation Object</div>
+        <div style="color:#4a6880;font-size:12px;text-align:center;max-width:340px;line-height:1.7">
+          Select currency pair, set forecast horizon<br>
+          then click RUN GARCH to estimate σ²
         </div>
       </div>
 
+      <div id="garchResults" style="display:none">
+
+        <!-- Parameters row -->
+        <div id="garchParamsRow" class="garch-params-row"></div>
+
+        <!-- Signal block -->
+        <div id="garchSignalBlock" style="margin-bottom:14px"></div>
+
+        <!-- Volatility chart -->
+        <div style="background:#1a2535;border:1px solid #243447;border-radius:4px;margin-bottom:14px">
+          <div style="background:#111d2c;padding:8px 14px;border-bottom:1px solid #243447;display:flex;justify-content:space-between;align-items:center;border-radius:4px 4px 0 0">
+            <span style="color:#d8b4fe;font-size:12px;font-weight:700;font-family:'Courier New',monospace">// Graph: Conditional Volatility σ_t (daily %)</span>
+            <span id="garchCurrencyBadge" style="color:#f0e68c;font-size:11px;font-family:'Courier New',monospace"></span>
+          </div>
+          <div style="padding:14px">
+            <div class="garch-chart-wrap">
+              <canvas id="garchChart"></canvas>
+            </div>
+            <div class="garch-legend" style="margin-top:8px">
+              <div class="garch-legend-item"><div class="garch-legend-dot" style="background:#7c3aed"></div>Historical σ</div>
+              <div class="garch-legend-item"><div class="garch-legend-dot" style="background:transparent;border:2px dashed #f97316"></div>Forecast</div>
+              <div class="garch-legend-item"><div class="garch-legend-dot" style="background:rgba(124,58,237,.25)"></div>±1σ CI</div>
+              <div class="garch-legend-item"><div class="garch-legend-dot" style="background:rgba(124,58,237,.1)"></div>±2σ CI</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
   </div>
 
-  <!-- ══════════ VAR(1) СЕКЦИЯ ══════════ -->
-  <div class="var-section">
-    <div class="var-section-title">📊 VAR(1) — Векторная авторегрессия макроэкономических показателей</div>
+  <!-- ═══════════════════════════════════════════════════════════
+       TAB PANEL: VAR
+  ════════════════════════════════════════════════════════════ -->
+  <div id="fctab-panel-var" style="display:none;min-height:calc(100vh - 200px)">
 
-    <div class="var-layout">
+    <!-- ── Left Spec Panel (VAR) ── -->
+    <div style="width:295px;min-width:295px;background:#1a2535;border-right:1px solid #243447;display:flex;flex-direction:column;font-family:'Courier New',Courier,monospace;overflow-y:auto">
 
-      <!-- ФОРМА -->
-      <div class="var-form-card">
-        <div class="var-form-top">⚙️ Параметры VAR-модели</div>
-        <div class="var-form-body">
-
-          <div id="varAlertBox" class="alert-box"></div>
-
-          <!-- Данные VAR — авто-загрузка из МЭРиТ + НБТ -->
-          <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;margin-bottom:12px">
-            <div style="font-size:12px;font-weight:600;color:#1d4ed8;margin-bottom:8px">
-              📊 Данные загружаются автоматически из МЭРиТ + НБТ
-            </div>
-            <div id="var-data-status" style="font-size:11px;color:#475569;margin-bottom:8px">⏳ Загрузка...</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #1a4a8a;font-size:11px">
-                <b style="color:#1a4a8a">ВВП рост %</b><br>
-                <span id="var-gdp-info" style="color:#64748b">загрузка...</span>
-              </div>
-              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #dc2626;font-size:11px">
-                <b style="color:#dc2626">Инфляция %</b><br>
-                <span id="var-infl-info" style="color:#64748b">загрузка...</span>
-              </div>
-              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #059669;font-size:11px">
-                <b style="color:#059669">USD/TJS</b><br>
-                <span id="var-rate-info" style="color:#64748b">загрузка...</span>
-              </div>
-              <div style="background:white;padding:6px 10px;border-radius:5px;border-left:3px solid #d97706;font-size:11px">
-                <b style="color:#d97706">Переводы млн$</b><br>
-                <span id="var-remit-info" style="color:#64748b">загрузка...</span>
-              </div>
-            </div>
-          </div>
-          <!-- скрытые textarea для совместимости с runVAR -->
-          <textarea id="varGdp"       style="display:none"></textarea>
-          <textarea id="varInflation" style="display:none"></textarea>
-          <textarea id="varExchange"  style="display:none"></textarea>
-          <textarea id="varRemit"     style="display:none"></textarea>
-
-          <div class="form-group">
-            <label class="form-label">Горизонт прогноза</label>
-            <div class="period-group">
-              <button class="period-btn" onclick="selectVarPeriod(3,this)">3 пер.</button>
-              <button class="period-btn active" onclick="selectVarPeriod(6,this)">6 пер.</button>
-              <button class="period-btn" onclick="selectVarPeriod(12,this)">12 пер.</button>
-            </div>
-          </div>
-
-          <button class="var-btn" id="varBtn" onclick="runVAR()">
-            <span>📊</span> ПОСТРОИТЬ VAR-МОДЕЛЬ
-          </button>
-
-          <div style="margin-top:14px;padding:12px;background:#eff6ff;border-radius:8px;border:1px solid #bfdbfe;font-size:11px;color:#1e40af;line-height:1.7">
-            <b>VAR(1):</b> Y<sub>t</sub> = c + A·Y<sub>t-1</sub> + ε<sub>t</sub><br>
-            Оценка МНК отдельно для каждого уравнения.<br>
-            Z-нормализация перед оценкой для стабильности.<br>
-            Минимум: 6 наблюдений по каждому показателю.
-          </div>
-
-        </div>
+      <div style="background:#111d2c;color:#93c5fd;font-size:11px;font-weight:700;padding:7px 12px;border-bottom:1px solid #243447;letter-spacing:.5px;text-transform:uppercase">
+        Object Browser — VAR System
       </div>
 
-      <!-- РЕЗУЛЬТАТЫ -->
-      <div class="var-result-area">
+      <div style="padding:12px;border-bottom:1px solid #243447">
 
-        <div class="var-placeholder" id="varPlaceholder">
-          <div style="font-size:42px">📊</div>
-          <div style="font-weight:800;font-size:15px;color:var(--navy)">Готов к VAR-анализу</div>
-          <div style="font-size:13px;color:var(--text3);max-width:300px">
-            Введите временные ряды 4 макроэкономических показателей — система оценит VAR(1), проверит причинность Грейнджера и построит импульсные отклики
+        <div id="varAlertBox" class="alert-box" style="margin-bottom:8px"></div>
+
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:6px">System variables (auto-loaded):</div>
+
+        <div style="background:#0f1923;border:1px solid #243447;border-radius:3px;padding:8px;margin-bottom:8px">
+          <div id="var-data-status" style="font-size:10px;color:#6b8099;margin-bottom:6px;font-family:'Courier New',monospace">⏳ Loading...</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+            <div style="background:#0f1923;padding:5px 8px;border-radius:3px;border-left:3px solid #1a4a8a;font-size:10px">
+              <b style="color:#7ecfff">GDP_GROWTH</b><br>
+              <span id="var-gdp-info" style="color:#4a6880">loading...</span>
+            </div>
+            <div style="background:#0f1923;padding:5px 8px;border-radius:3px;border-left:3px solid #dc2626;font-size:10px">
+              <b style="color:#fca5a5">CPI</b><br>
+              <span id="var-infl-info" style="color:#4a6880">loading...</span>
+            </div>
+            <div style="background:#0f1923;padding:5px 8px;border-radius:3px;border-left:3px solid #059669;font-size:10px">
+              <b style="color:#6ee7a0">USD_TJS</b><br>
+              <span id="var-rate-info" style="color:#4a6880">loading...</span>
+            </div>
+            <div style="background:#0f1923;padding:5px 8px;border-radius:3px;border-left:3px solid #d97706;font-size:10px">
+              <b style="color:#fcd34d">REMIT</b><br>
+              <span id="var-remit-info" style="color:#4a6880">loading...</span>
+            </div>
           </div>
         </div>
 
-        <div id="varResults" style="display:none">
+        <!-- Hidden textareas for runVAR compat -->
+        <textarea id="varGdp"       style="display:none"></textarea>
+        <textarea id="varInflation" style="display:none"></textarea>
+        <textarea id="varExchange"  style="display:none"></textarea>
+        <textarea id="varRemit"     style="display:none"></textarea>
 
-          <!-- R² уравнений -->
-          <div class="var-r2-row" id="varR2Row"></div>
-
-          <!-- Графики прогноза 2×2 -->
-          <div class="var-chart-card">
-            <div class="var-card-header">
-              <span>📈 Прогноз VAR(1) — все переменные</span>
-              <span id="varPeriodsBadge" style="font-size:11px;opacity:.8"></span>
-            </div>
-            <div class="var-card-body">
-              <div class="var-charts-grid">
-                <div>
-                  <div class="var-mini-title"><span class="var-var-dot" style="background:#0050b3"></span>ВВП (%)</div>
-                  <div class="var-mini-chart"><canvas id="varChartGdp"></canvas></div>
-                </div>
-                <div>
-                  <div class="var-mini-title"><span class="var-var-dot" style="background:#dc2626"></span>Инфляция (%)</div>
-                  <div class="var-mini-chart"><canvas id="varChartInflation"></canvas></div>
-                </div>
-                <div>
-                  <div class="var-mini-title"><span class="var-var-dot" style="background:#16a34a"></span>Курс USD/TJS</div>
-                  <div class="var-mini-chart"><canvas id="varChartExchange"></canvas></div>
-                </div>
-                <div>
-                  <div class="var-mini-title"><span class="var-var-dot" style="background:#d97706"></span>Переводы (млрд $)</div>
-                  <div class="var-mini-chart"><canvas id="varChartRemit"></canvas></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Грейнджер + матрица коэф. -->
-          <div class="var-two-col">
-
-            <div class="var-chart-card" style="margin:0">
-              <div class="var-card-header">🔗 Тест причинности Грейнджера</div>
-              <div class="var-card-body" style="padding:12px">
-                <div style="font-size:10px;color:var(--text3);margin-bottom:8px">↓ причина &nbsp;→&nbsp; следствие · ✅ значимо (|t|&gt;1.96) · t-статистика</div>
-                <div id="varGrangerTable"></div>
-              </div>
-            </div>
-
-            <div class="var-chart-card" style="margin:0">
-              <div class="var-card-header">📐 Матрица коэффициентов A</div>
-              <div class="var-card-body" style="padding:12px">
-                <div style="font-size:10px;color:var(--text3);margin-bottom:8px">A[строка][столбец] — влияние столбца на строку (стандартизованные)</div>
-                <div id="varCoeffTable"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- IRF -->
-          <div class="var-chart-card">
-            <div class="var-card-header">
-              <span>⚡ Импульсные функции отклика (IRF)</span>
-              <span style="font-size:11px;opacity:.8">реакция переменных на единичный шок (в σ)</span>
-            </div>
-            <div class="var-card-body">
-              <div class="var-irf-grid" id="varIrfGrid"></div>
-            </div>
-          </div>
-
-          <!-- Интерпретация -->
-          <div class="var-interp">
-            <div class="var-interp-title">📋 Интерпретация для руководства</div>
-            <div class="var-interp-body" id="varInterpretation"></div>
-          </div>
-
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:5px">VAR specification:</div>
+        <div style="background:#0f1923;border:1px solid #243447;border-radius:3px;padding:8px 10px;font-size:10px;color:#93c5fd;line-height:1.8;margin-bottom:10px">
+          Y<sub>t</sub> = c + A·Y<sub>t-1</sub> + ε<sub>t</sub><br>
+          <span style="color:#6b8099">Est: OLS equation-by-equation</span><br>
+          <span style="color:#6b8099">Norm: Z-score before estimation</span><br>
+          <span style="color:#6b8099">Min obs: 6 per series</span>
         </div>
+
+        <div style="color:#8a9ab0;font-size:10px;margin-bottom:5px">Forecast horizon:</div>
+        <div class="period-group" style="margin-bottom:12px">
+          <button class="period-btn" onclick="selectVarPeriod(3,this)" style="font-family:'Courier New',monospace;font-size:11px">3 per.</button>
+          <button class="period-btn active" onclick="selectVarPeriod(6,this)" style="font-family:'Courier New',monospace;font-size:11px">6 per.</button>
+          <button class="period-btn" onclick="selectVarPeriod(12,this)" style="font-family:'Courier New',monospace;font-size:11px">12 per.</button>
+        </div>
+
+        <button id="varBtn" onclick="runVAR()"
+          style="width:100%;background:#1a3a5c;color:#7ecfff;border:1px solid #2c5a8a;padding:10px;border-radius:3px;font-size:12px;font-weight:800;cursor:pointer;font-family:'Courier New',monospace;letter-spacing:.5px;transition:background .15s"
+          onmouseover="this.style.background='#2980b9'" onmouseout="this.style.background='#1a3a5c'">
+          ▶▶ RUN VAR SYSTEM
+        </button>
+
       </div>
 
+      <div style="flex:1"></div>
     </div>
+
+    <!-- ── Right Output Area (VAR) ── -->
+    <div style="flex:1;background:#0f1923;overflow-y:auto;padding:16px;font-family:'Courier New',Courier,monospace">
+
+      <div id="varPlaceholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:12px">
+        <div style="font-size:48px">📊</div>
+        <div style="color:#93c5fd;font-size:16px;font-weight:700;letter-spacing:.5px">VAR System Object</div>
+        <div style="color:#4a6880;font-size:12px;text-align:center;max-width:360px;line-height:1.7">
+          4 macro series auto-loaded · GDP Growth, CPI, USD/TJS, Remittances<br>
+          Click RUN VAR to estimate, run Granger tests &amp; build IRFs
+        </div>
+      </div>
+
+      <div id="varResults" style="display:none">
+
+        <!-- R² row -->
+        <div id="varR2Row" class="var-r2-row" style="margin-bottom:14px"></div>
+
+        <!-- 2×2 forecast charts -->
+        <div style="background:#1a2535;border:1px solid #243447;border-radius:4px;margin-bottom:14px">
+          <div style="background:#111d2c;padding:8px 14px;border-bottom:1px solid #243447;display:flex;justify-content:space-between;align-items:center;border-radius:4px 4px 0 0">
+            <span style="color:#93c5fd;font-size:12px;font-weight:700;font-family:'Courier New',monospace">// Graph: VAR(1) Multi-Step Forecast</span>
+            <span id="varPeriodsBadge" style="color:#f0e68c;font-size:11px;font-family:'Courier New',monospace"></span>
+          </div>
+          <div style="padding:14px">
+            <div class="var-charts-grid">
+              <div>
+                <div class="var-mini-title" style="font-family:'Courier New',monospace;font-size:10px;color:#7ecfff"><span class="var-var-dot" style="background:#0050b3"></span>GDP_GROWTH (%)</div>
+                <div class="var-mini-chart"><canvas id="varChartGdp"></canvas></div>
+              </div>
+              <div>
+                <div class="var-mini-title" style="font-family:'Courier New',monospace;font-size:10px;color:#fca5a5"><span class="var-var-dot" style="background:#dc2626"></span>CPI (%)</div>
+                <div class="var-mini-chart"><canvas id="varChartInflation"></canvas></div>
+              </div>
+              <div>
+                <div class="var-mini-title" style="font-family:'Courier New',monospace;font-size:10px;color:#6ee7a0"><span class="var-var-dot" style="background:#16a34a"></span>USD_TJS</div>
+                <div class="var-mini-chart"><canvas id="varChartExchange"></canvas></div>
+              </div>
+              <div>
+                <div class="var-mini-title" style="font-family:'Courier New',monospace;font-size:10px;color:#fcd34d"><span class="var-var-dot" style="background:#d97706"></span>REMIT (bln$)</div>
+                <div class="var-mini-chart"><canvas id="varChartRemit"></canvas></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Granger + Coeff matrix -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+
+          <div style="background:#1a2535;border:1px solid #243447;border-radius:4px">
+            <div style="background:#111d2c;padding:7px 12px;border-bottom:1px solid #243447;border-radius:4px 4px 0 0">
+              <span style="color:#93c5fd;font-size:11px;font-weight:700;font-family:'Courier New',monospace">// Granger Causality Test</span>
+            </div>
+            <div style="padding:10px">
+              <div style="font-size:9px;color:#4a6880;margin-bottom:6px;font-family:'Courier New',monospace">↓ cause → effect · ✅ sig (|t|&gt;1.96)</div>
+              <div id="varGrangerTable"></div>
+            </div>
+          </div>
+
+          <div style="background:#1a2535;border:1px solid #243447;border-radius:4px">
+            <div style="background:#111d2c;padding:7px 12px;border-bottom:1px solid #243447;border-radius:4px 4px 0 0">
+              <span style="color:#93c5fd;font-size:11px;font-weight:700;font-family:'Courier New',monospace">// Coefficient Matrix A</span>
+            </div>
+            <div style="padding:10px">
+              <div style="font-size:9px;color:#4a6880;margin-bottom:6px;font-family:'Courier New',monospace">A[row][col] — col→row influence (standardized)</div>
+              <div id="varCoeffTable"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- IRF -->
+        <div style="background:#1a2535;border:1px solid #243447;border-radius:4px;margin-bottom:14px">
+          <div style="background:#111d2c;padding:8px 14px;border-bottom:1px solid #243447;border-radius:4px 4px 0 0;display:flex;justify-content:space-between;align-items:center">
+            <span style="color:#93c5fd;font-size:12px;font-weight:700;font-family:'Courier New',monospace">// Impulse Response Functions (IRF)</span>
+            <span style="color:#6b8099;font-size:10px;font-family:'Courier New',monospace">response to 1σ shock</span>
+          </div>
+          <div style="padding:14px">
+            <div class="var-irf-grid" id="varIrfGrid"></div>
+          </div>
+        </div>
+
+        <!-- Interpretation -->
+        <div style="background:#111d2c;border:1px solid #1a3a5c;border-radius:4px">
+          <div style="padding:8px 14px;border-bottom:1px solid #1a3a5c">
+            <span style="color:#f0e68c;font-size:12px;font-weight:700;font-family:'Courier New',monospace">// Management Summary</span>
+          </div>
+          <div style="padding:12px">
+            <div id="varInterpretation" class="var-interp-body"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       Status Bar
+  ════════════════════════════════════════════════════════════ -->
+  <div style="background:#111d2c;border-top:1px solid #243447;padding:5px 16px;display:flex;align-items:center;gap:16px;font-family:'Courier New',Courier,monospace;font-size:10px">
+    <span style="color:#4a6880">Workfile: TAJIKISTAN_MACRO.wf1 · Sample 1997–2035</span>
+    <span style="color:#243447">|</span>
+    <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:#6ee7a0;display:inline-block"></span><span style="color:#4a6880">МЭРиТ РТ</span></span>
+    <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:#7ecfff;display:inline-block"></span><span style="color:#4a6880">НБТ РТ</span></span>
+    <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:#fcd34d;display:inline-block"></span><span style="color:#4a6880">World Bank WDI</span></span>
+    <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:#d8b4fe;display:inline-block"></span><span style="color:#4a6880">CGE Model</span></span>
+    <div style="flex:1"></div>
+    <span style="color:#2c4a6a">EViews Workbench · МЭРиТ РТ · v2026</span>
   </div>
 
 </div>
@@ -5141,6 +5209,19 @@ const FORECAST_URL = '/forecast';
 let fcMethod  = 'auto-arima';
 let fcPeriods = 6;
 let forecastChartInstance = null;
+
+function switchFcTab(tab) {
+  ['arima','garch','var'].forEach(t => {
+    const panel = document.getElementById('fctab-panel-' + t);
+    const btn   = document.getElementById('fctab-' + t);
+    if (!panel || !btn) return;
+    const active = (t === tab);
+    panel.style.display  = active ? 'flex' : 'none';
+    btn.style.background = active ? '#2980b9' : '#34495e';
+    btn.style.color      = active ? 'white'   : '#bdc3c7';
+    btn.style.borderBottom = active ? '3px solid #f0e68c' : '3px solid transparent';
+  });
+}
 
 function selectMethod(method) {
   fcMethod = method;
