@@ -486,6 +486,7 @@ function estimateEGARCH(retsPct) {
   const SQRT2PI  = Math.sqrt(2 / Math.PI);
 
   function negLogLik([omega, alpha, gamma, beta]) {
+    if (Math.abs(beta) >= 0.999) return 1e15;
     let logH = initLogH, ll = 0;
     for (let t = 0; t < n; t++) {
       const h = Math.exp(logH);
@@ -595,31 +596,30 @@ function backtestGARCH(nums) {
 function garch(data, periods) {
   let nums = Array.isArray(data) ? data.map(Number).filter(v => !isNaN(v)) : [];
   let dataSource = 'user-provided';
+  let periodsPerYear = 252;  // дефолт: дневные данные
 
-  // Автозагрузка: rates_timeseries.json → historicalDB (в порядке приоритета)
-  if (nums.length < 30) {
-    try {
-      const ratesRaw = JSON.parse(fs.readFileSync(TIMESERIES_FILE, 'utf8'));
-      const usdData  = ratesRaw.map(r => r.usd).filter(Boolean);
+  // Всегда читаем файл: частота по датам + автозагрузка данных если мало
+  try {
+    const ratesRaw = JSON.parse(fs.readFileSync(TIMESERIES_FILE, 'utf8'));
+    // Авто-определение частоты по полю date (независимо от источника данных)
+    const dates = ratesRaw.filter(r => r.usd && r.date)
+                           .map(r => new Date(r.date).getTime());
+    if (dates.length >= 2) {
+      let s = 0;
+      for (let i = 1; i < dates.length; i++) s += (dates[i] - dates[i - 1]) / 86400000;
+      periodsPerYear = Math.round(365.25 / (s / (dates.length - 1)));
+    }
+    // Данные — только если пользовательских мало
+    if (nums.length < 30) {
+      const usdData = ratesRaw.map(r => r.usd).filter(Boolean);
       if (usdData.length > nums.length) {
         nums = usdData;
         dataSource = 'НБТ РТ (авто)';
       }
-    } catch (_) {}
-  }
-  // Второй фолбэк: годовые курсы из historicalDB (если NBT мало)
-  if (nums.length < 10) {
-    try {
-      const hdb      = require('./historicalDB');
-      const histData = hdb.getDataForForecasting('usd_tjs').filter(v => v != null);
-      if (histData.length > nums.length) {
-        nums = histData;
-        dataSource = 'МЭРиТ/НБТ исторические (авто)';
-      }
-    } catch (_) {}
-  }
+    }
+  } catch (_) {}
 
-  if (nums.length < 10) throw new Error('Для GARCH необходимо минимум 10 точек данных');
+  if (nums.length < 24) throw new Error('Для GARCH необходимо минимум 24 точки данных');
 
   // 1. Логарифмические доходности в %
   const rets = [], retsPct = [];
@@ -694,7 +694,7 @@ function garch(data, periods) {
 
   // 7. Уровень риска
   const currentDailyVol = round4(Math.sqrt(Math.max(0, lastH)));
-  const annualizedVol   = round4(Math.sqrt(Math.max(0, lastH)) * Math.sqrt(252));
+  const annualizedVol   = round4(Math.sqrt(Math.max(0, lastH)) * Math.sqrt(periodsPerYear));
 
   let riskLevel, signal;
   if (annualizedVol < 5) {
