@@ -1078,14 +1078,174 @@ function selectVARLags(normalizedSeries, maxLag = 4) {
   return { optimalLag: bestLag, aicByLag };
 }
 
+// ─── VECM helpers: Cholesky, Jacobi eigenvalues, Johansen trace, Engle-Granger ─
+
+/** Cholesky: A = L L^T → нижнетреугольная L */
+function choleskyLower(A) {
+  const n = A.length;
+  const L = matCreate(n, n);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j <= i; j++) {
+      let s = A[i][j];
+      for (let r = 0; r < j; r++) s -= L[i][r] * L[j][r];
+      L[i][j] = i === j ? Math.sqrt(Math.max(s, 1e-14)) : (L[j][j] > 1e-14 ? s / L[j][j] : 0);
+    }
+  }
+  return L;
+}
+
+/** Прямая подстановка: решение L x = b */
+function fwdSub(L, b) {
+  const n = L.length, x = new Array(n).fill(0);
+  for (let i = 0; i < n; i++) {
+    let acc = b[i];
+    for (let j = 0; j < i; j++) acc -= L[i][j] * x[j];
+    x[i] = L[i][i] > 1e-14 ? acc / L[i][i] : 0;
+  }
+  return x;
+}
+
+/** Собственные значения симметричной матрицы (итерации Якоби) */
+function symmEigenvalues(A) {
+  const n = A.length;
+  const M = A.map(row => [...row]);
+  for (let iter = 0; iter < 200 * n * n; iter++) {
+    let p = 0, q = 1, maxOff = 0;
+    for (let i = 0; i < n; i++)
+      for (let j = i + 1; j < n; j++)
+        if (Math.abs(M[i][j]) > maxOff) { maxOff = Math.abs(M[i][j]); p = i; q = j; }
+    if (maxOff < 1e-10) break;
+    const theta = (M[q][q] - M[p][p]) / (2 * M[p][q]);
+    const t = theta >= 0
+      ? 1 / (theta + Math.sqrt(1 + theta ** 2))
+      : 1 / (theta - Math.sqrt(1 + theta ** 2));
+    const c = 1 / Math.sqrt(1 + t ** 2), s = t * c;
+    const Mpq = M[p][q];
+    M[p][p] -= t * Mpq; M[q][q] += t * Mpq; M[p][q] = M[q][p] = 0;
+    for (let r = 0; r < n; r++) {
+      if (r === p || r === q) continue;
+      const Mrp = M[r][p], Mrq = M[r][q];
+      M[r][p] = M[p][r] = c * Mrp - s * Mrq;
+      M[r][q] = M[q][r] = s * Mrp + c * Mrq;
+    }
+  }
+  return Array.from({ length: n }, (_, i) => M[i][i]);
+}
+
+/**
+ * Тест следа Йохансена (VAR(1), константа в КЕ).
+ * Возвращает { cointegrationRank, traceStats, eigenvalues, critVals }.
+ */
+function johansenTrace(series) {
+  const k = series.length, T = series[0].length, nn = T - 1;
+  const dY = series.map(s => s.slice(1).map((v, i) => v - s[i]));
+  const Y0 = series.map(s => s.slice(0, nn));
+  const mom = (A, B) => {
+    const Mk = matCreate(k, k);
+    for (let i = 0; i < k; i++)
+      for (let j = 0; j < k; j++) {
+        let acc = 0;
+        for (let t = 0; t < nn; t++) acc += A[i][t] * B[j][t];
+        Mk[i][j] = acc / nn;
+      }
+    return Mk;
+  };
+  try {
+    const S00 = mom(dY, dY), S11 = mom(Y0, Y0);
+    const S10 = mom(Y0, dY), S01 = matTranspose(S10);
+    const A   = matMul(matMul(S10, matInverse(S00)), S01); // симметричная PSD
+    const L   = choleskyLower(S11);
+    // M = L^{-1} A L^{-T} (симметричная) — канонические корреляции
+    const LinvA = matCreate(k, k);
+    for (let j = 0; j < k; j++) {
+      const x = fwdSub(L, A.map(row => row[j]));
+      for (let i = 0; i < k; i++) LinvA[i][j] = x[i];
+    }
+    const LT = matTranspose(L), M = matCreate(k, k);
+    for (let i = 0; i < k; i++) {
+      const x = new Array(k).fill(0);
+      for (let r = k - 1; r >= 0; r--) {
+        let acc2 = LinvA[i][r];
+        for (let c = r + 1; c < k; c++) acc2 -= LT[r][c] * x[c];
+        x[r] = LT[r][r] > 1e-14 ? acc2 / LT[r][r] : 0;
+      }
+      for (let j = 0; j < k; j++) M[i][j] = x[j];
+    }
+    // Симметризация для устранения числового шума
+    for (let i = 0; i < k; i++)
+      for (let j = i + 1; j < k; j++)
+        M[i][j] = M[j][i] = (M[i][j] + M[j][i]) / 2;
+    const raw = symmEigenvalues(M);
+    raw.sort((a, b) => b - a);
+    const lambdas = raw.map(l => Math.max(0, Math.min(l, 0.9999)));
+    // Критические значения 95%, Osterwald-Lenum 1992, константа в КЕ
+    const cv95 = { 4: [47.21, 29.68, 15.41, 3.76], 3: [29.68, 15.41, 3.76], 2: [15.41, 3.76], 1: [3.76] };
+    const crit = cv95[k] || cv95[4];
+    let rank = 0;
+    const traceStats = [];
+    for (let r = 0; r < k; r++) {
+      let stat = 0;
+      for (let i = r; i < k; i++) stat -= nn * Math.log(1 - lambdas[i]);
+      traceStats.push(round4(stat));
+      if (stat > (crit[r] ?? Infinity)) rank = r + 1; else break;
+    }
+    return { cointegrationRank: rank, traceStats, eigenvalues: lambdas.map(l => round4(l)), critVals: crit };
+  } catch (_) {
+    return { cointegrationRank: 0, traceStats: [], eigenvalues: [], critVals: [] };
+  }
+}
+
+/**
+ * VECM оценка + прогноз (Engle-Granger двухшаговый, rank=1).
+ * Шаг 1: OLS y₀ ~ c + Σbᵢyᵢ → вектор коинтеграции β
+ * Шаг 2: Δyᵢ,t = μᵢ + αᵢ·ECT_{t-1} + εᵢ,t
+ */
+function vecmFit(series, rank, periods) {
+  const k = series.length, T = series[0].length;
+  // Шаг 1: коинтеграционный вектор
+  const Xc  = series[0].map((_, t) => [1, ...series.slice(1).map(s => s[t])]);
+  const XcT = matTranspose(Xc);
+  const beta0 = matVecMul(matMul(matInverse(matMul(XcT, Xc)), XcT), series[0]);
+  // beta0 = [c, b₁, ..., b_{k-1}]
+  // Шаг 2: ECT
+  const ect = series[0].map((v, t) => {
+    let fit = beta0[0];
+    for (let i = 1; i < k; i++) fit += beta0[i] * series[i][t];
+    return v - fit;
+  });
+  // Шаг 3: VECM уравнения
+  const dY = series.map(s => s.slice(1).map((v, i) => v - s[i]));
+  const Xv  = ect.slice(0, T - 1).map(z => [1, z]);
+  const XvT = matTranspose(Xv);
+  const proj = matMul(matInverse(matMul(XvT, Xv)), XvT);
+  const alphas = [], mus = [];
+  for (let i = 0; i < k; i++) {
+    const p = matVecMul(proj, dY[i]);
+    mus.push(p[0]); alphas.push(p[1]);
+  }
+  // Шаг 4: прогноз
+  const forecasts = [];
+  let yNow = series.map(s => s[T - 1]);
+  for (let h = 0; h < periods; h++) {
+    let z = yNow[0] - beta0[0];
+    for (let i = 1; i < k; i++) z -= beta0[i] * yNow[i];
+    const yNext = yNow.map((v, i) => round4(v + mus[i] + alphas[i] * z));
+    forecasts.push(yNext);
+    yNow = yNext;
+  }
+  return { forecasts, ect, beta0, alphas, mus, isStable: alphas[0] < 0 };
+}
+
 // ─── Интерпретация VAR ────────────────────────────────────────────────────────
 
-function buildVARInterpretation(keys, labels, A1, granger, forecasts, series, periods, adfResults, lagOrder) {
+function buildVARInterpretation(keys, labels, A1, granger, forecasts, series, periods, adfResults, lagOrder, modelType = 'var-levels') {
   const k       = keys.length;
   const lastObs = keys.map((_, i) => series[i][series[i].length - 1]);
   const lines   = [];
 
-  lines.push(`Анализ VAR(${lagOrder}) макроэкономических показателей Таджикистана. Горизонт прогноза: ${periods} периодов.`);
+  const typeLabel = modelType === 'var-diff' ? 'VAR(Δ, разности)' : 'VAR(уровни)';
+  lines.push(`Анализ ${typeLabel}(${lagOrder}) макроэкономических показателей Таджикистана. Горизонт прогноза: ${periods} периодов.`);
+  if (modelType === 'var-diff') lines.push('Ряды I(1) без коинтеграции — модель оценена на первых разностях (долгосрочные связи не моделируются).');
   lines.push('');
 
   // ADF тесты
@@ -1195,33 +1355,147 @@ function var_model(data, periods) {
 
   const series = raw.map(s => s.slice(0, T));
 
-  // 2. ADF-тест для каждого ряда
-  const adfResults = [];
-  for (let i = 0; i < k; i++) {
-    const res = adfTest(series[i]);
-    adfResults.push({ variable: i, ...res });
+  // 2. ADF на уровнях и первых разностях → определяем I(1)
+  const adfLevels = series.map(s => adfTest(s));
+  const adfDiffs  = series.map(s => {
+    const d = s.slice(1).map((v, i) => v - s[i]);
+    return d.length >= 4 ? adfTest(d) : { stationary: true, tStat: 0, pValue: 1 };
+  });
+  const isI1       = series.map((_, i) => !adfLevels[i].stationary && adfDiffs[i].stationary);
+  const adfResults = adfLevels.map((r, i) => ({ variable: i, ...r }));
+
+  // 3. Выбор спецификации: VECM / VAR(Δ) / VAR(уровни)
+  let modelType     = 'var-levels';
+  let workSeries    = series;
+  let vecmFitResult = null;
+  let johansen      = null;
+
+  if (isI1.every(Boolean)) {
+    johansen = johansenTrace(series);
+    if (johansen.cointegrationRank >= 1) {
+      try {
+        vecmFitResult = vecmFit(series, johansen.cointegrationRank, periods);
+        modelType = 'vecm';
+      } catch (_) {
+        johansen.cointegrationRank = 0;
+      }
+    }
+    if (modelType !== 'vecm') {
+      modelType  = 'var-diff';
+      workSeries = series.map(s => s.slice(1).map((v, i) => v - s[i]));
+      const minL = Math.min(...workSeries.map(s => s.length));
+      workSeries = workSeries.map(s => s.slice(-minL));
+    }
+  } else if (adfLevels.some(r => !r.stationary)) {
+    // Смешанная интеграция: ВСЕ нестационарные ряды — в разностях, I(0) — в уровнях
+    modelType  = 'var-mixed';
+    const base = series.map(s => s.slice(1).map((v, i) => v - s[i]));
+    const lvl  = series.map(s => s.slice(1));
+    workSeries = series.map((_, i) => !adfLevels[i].stationary ? base[i] : lvl[i]);
+    const minL = Math.min(...workSeries.map(s => s.length));
+    workSeries = workSeries.map(s => s.slice(-minL));
   }
 
-  // 3. Z-нормализация
-  const mu  = series.map(mean);
-  const sig = series.map(s => { const sd = stdDev(s); return sd > 1e-10 ? sd : 1; });
-  const zS  = series.map((s, i) => s.map(v => (v - mu[i]) / sig[i]));
+  // ── VECM ветка ────────────────────────────────────────────────────────────
+  if (modelType === 'vecm' && vecmFitResult) {
+    const adfTestsNamed = {};
+    for (let i = 0; i < k; i++)
+      adfTestsNamed[KEYS[i]] = { ...adfResults[i], label: LABELS[KEYS[i]] };
 
-  // 4. Выбор оптимального лага (1..4)
-  const maxPossibleLag = Math.min(4, Math.floor((T - k - 1) / k));
+    const cointegrationInfo = {
+      rank:        johansen.cointegrationRank,
+      traceStats:  johansen.traceStats,
+      eigenvalues: johansen.eigenvalues,
+      critVals:    johansen.critVals,
+      beta:        vecmFitResult.beta0,
+      alphas:      vecmFitResult.alphas,
+      mus:         vecmFitResult.mus,
+    };
+
+    const lines = [
+      `Модель VECM(1) — ранг коинтеграции r=${johansen.cointegrationRank} (тест Йохансена).`,
+      `Все ${k} ряда I(1), обнаружена долгосрочная связь — VECM сохраняет её (в отличие от VAR(Δ)).`,
+      '',
+      'СЛЕД-СТАТИСТИКА ЙОХАНСЕНА:',
+      ...johansen.traceStats.map((stat, r) =>
+        `  H₀: rank≤${r}: λ_trace=${stat} ${stat > (johansen.critVals[r] || 0)
+          ? `> CV=${johansen.critVals[r]} → отвергается ✓`
+          : `≤ CV=${johansen.critVals[r]} → принимается`}`),
+      '',
+      'КОИНТЕГРАЦИОННЫЙ ВЕКТОР β (β₀=1):',
+      `  ${KEYS.map((k2, i) => `${i === 0 ? 'c' : LABELS[k2]}: ${round4(vecmFitResult.beta0[i])}`).join(', ')}`,
+      '',
+      'СКОРОСТИ РЕГУЛИРОВКИ α (α < 0 = стабилизация):',
+      ...KEYS.map((k2, i) =>
+        `  • ${LABELS[k2]}: α=${round4(vecmFitResult.alphas[i])} ${vecmFitResult.alphas[i] < 0 ? '✓' : '⚠ положительное — проверьте данные'}`),
+      '',
+      'ПРОГНОЗ (1-й период вперёд):',
+      ...KEYS.map((k2, i) => {
+        const last = series[i][series[i].length - 1];
+        const next = vecmFitResult.forecasts[0][i];
+        const pct  = last !== 0 ? ((next - last) / Math.abs(last) * 100).toFixed(1) : '—';
+        return `  • ${LABELS[k2]}: ${next >= last ? '↑' : '↓'} ${Math.abs(pct)}% (${round4(last)} → ${next})`;
+      }),
+    ];
+
+    return {
+      keys: KEYS, labels: LABELS, historical: series,
+      forecasts:   vecmFitResult.forecasts,
+      irf: [], granger: {}, grangerMatrix: [],
+      r2: KEYS.map(() => null),
+      coefficients: [], constants: [],
+      interpretation: lines.join('\n'),
+      periods, lagOrder: 1, optimalLag: 1, aicByLag: {},
+      adfTests: adfTestsNamed, dataSource, modelType,
+      cointegration: cointegrationInfo,
+      validation: { lagOrder: 1, dataPoints: T, dataSource, modelType },
+      meta: { dataSource, dataPoints: T, collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
+    };
+  }
+
+  // ── VAR ветка (уровни или разности) ──────────────────────────────────────
+  const T2 = Math.min(...workSeries.map(s => s.length));
+  if (T2 < k + 3) throw new Error(`Недостаточно наблюдений после преобразования (${T2})`);
+
+  const mu  = workSeries.map(mean);
+  const sig = workSeries.map(s => { const sd = stdDev(s); return sd > 1e-10 ? sd : 1; });
+  const zS  = workSeries.map((s, i) => s.map(v => (v - mu[i]) / sig[i]));
+
+  // Строгий лимит лага: не более 2, и T/(3k) наблюдений на параметр
+  const maxPossibleLag = Math.min(2, Math.floor((T2 - k - 1) / (3 * k)));
   const { optimalLag, aicByLag } = maxPossibleLag >= 1
     ? selectVARLags(zS, maxPossibleLag)
     : { optimalLag: 1, aicByLag: {} };
-  const lagOrder = optimalLag;
+  const lagOrder = Math.max(1, optimalLag);
 
-  // 5. Оценка VAR(lagOrder)
   const { Afull, A1, constants, rss, seMatrix, n: nObs } = estimateVARp(zS, lagOrder);
-
-  // 6. Прогноз (денормализация)
   const zForecasts = forecastVARp(Afull, constants, zS, lagOrder, periods);
-  const forecasts  = zForecasts.map(zv => zv.map((z, i) => round4(z * sig[i] + mu[i])));
 
-  // 7. R² каждого уравнения
+  // Денормализация: var-diff и var-mixed накапливают уровни
+  let forecasts;
+  if (modelType === 'var-diff') {
+    let prev = series.map(s => s[s.length - 1]);
+    forecasts = zForecasts.map(zv => {
+      const deltas = zv.map((z, i) => z * sig[i] + mu[i]);
+      const levels = prev.map((lv, i) => round4(lv + deltas[i]));
+      prev = levels;
+      return levels;
+    });
+  } else if (modelType === 'var-mixed') {
+    let prev = series.map(s => s[s.length - 1]);
+    forecasts = zForecasts.map(zv => {
+      const transformed = zv.map((z, i) => z * sig[i] + mu[i]);
+      const levels = series.map((_, i) => {
+        if (!adfLevels[i].stationary) return round4(prev[i] + transformed[i]);
+        return round4(transformed[i]);
+      });
+      prev = levels;
+      return levels;
+    });
+  } else {
+    forecasts = zForecasts.map(zv => zv.map((z, i) => round4(z * sig[i] + mu[i])));
+  }
+
   const r2 = zS.map((s, i) => {
     const resp = s.slice(lagOrder);
     const mR   = mean(resp);
@@ -1229,49 +1503,33 @@ function var_model(data, periods) {
     return tss > 0 ? round4(1 - rss[i] / tss) : 0;
   });
 
-  // 8. IRF (использует A1 для совместимости)
-  const irf = computeIRF(A1, Math.min(periods, 8));
-
-  // 9. Тест Грейнджера (F-тест)
+  const irf    = computeIRF(A1, Math.min(periods, 8));
   const granger = grangerCausalityF(zS, lagOrder, rss, nObs);
 
-  // FIX: плоский именованный объект для удобной итерации
   const grangerNamed = {};
-  for (let jj = 0; jj < k; jj++) {
-    for (let ii = 0; ii < k; ii++) {
-      if (ii !== jj && granger[jj][ii]) {
-        const key = `${KEYS[jj]}→${KEYS[ii]}`;
-        grangerNamed[key] = granger[jj][ii];
-      }
-    }
-  }
+  for (let jj = 0; jj < k; jj++)
+    for (let ii = 0; ii < k; ii++)
+      if (ii !== jj && granger[jj][ii])
+        grangerNamed[`${KEYS[jj]}→${KEYS[ii]}`] = granger[jj][ii];
 
-  // 10. Интерпретация
-  const interpretation = buildVARInterpretation(KEYS, LABELS, A1, granger, forecasts, series, periods, adfResults, lagOrder);
+  const interpretation = buildVARInterpretation(
+    KEYS, LABELS, A1, granger, forecasts, series, periods, adfResults, lagOrder, modelType
+  );
 
-  // ADF tests keyed by variable name
   const adfTestsNamed = {};
   for (let i = 0; i < k; i++) adfTestsNamed[KEYS[i]] = { ...adfResults[i], label: LABELS[KEYS[i]] };
 
   return {
-    keys:         KEYS,
-    labels:       LABELS,
-    historical:   series,
-    forecasts,
-    irf,
-    granger:      grangerNamed,   // FIX: плоский именованный объект {key: {pValue,...}}
-    grangerMatrix: granger,       // 2D массив для внутреннего использования
+    keys: KEYS, labels: LABELS, historical: series,
+    forecasts, irf,
+    granger: grangerNamed, grangerMatrix: granger,
     r2,
     coefficients: A1.map(row => row.map(round4)),
     constants:    constants.map(round4),
-    interpretation,
-    periods,
-    lagOrder,
-    optimalLag:   lagOrder,
-    aicByLag,
-    adfTests:     adfTestsNamed,
-    dataSource,
-    validation: { lagOrder, dataPoints: T, dataSource },
+    interpretation, periods, lagOrder, optimalLag: lagOrder, aicByLag,
+    adfTests: adfTestsNamed, dataSource, modelType,
+    cointegration: johansen ? { rank: johansen.cointegrationRank, traceStats: johansen.traceStats } : null,
+    validation: { lagOrder, dataPoints: T, dataSource, modelType },
     meta: { dataSource, dataPoints: T, collectedAt: new Date().toISOString(), modelVersion: MODEL_VERSION },
   };
 }
@@ -1561,88 +1819,231 @@ function arimaxForecast(endogenous, exogenous, periods) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// BVAR — Байесовский VAR (Minnesota Prior)
-// Оптимален для малых выборок (10-20 точек) — стандарт МВФ / ФРС / ЕЦБ
+// ═══════════════════════════════════════════════════════════════════════════════
+// BVAR — Байесовский VAR (полный Minnesota Prior, авто-выбор λ)
+// Стандарт МВФ / ФРС / ЕЦБ для коротких макроэкономических рядов
+// Решение: (XtX + σᵢ²·Λ)⁻¹·(XtY + σᵢ²·Λ·β₀), β₀ = RW приор
+// Λ: затухание по лагу l = (l/λ)², θ=0.5 для чужих лагов
+// λ: выбирается по holdout MAPE (сетка 6 значений)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /**
- * Байесовский VAR с Minnesota Prior.
- * Prior: коэффициенты к собственным лагам ближе к 1, к чужим ближе к 0.
- * Сжатие λ: 0.1 (сильное) … 0.5 (слабое).
+ * Байесовский VAR с полным Minnesota Prior.
  * @param {{ gdp, inflation, usd_tjs, remittances }} data
  * @param {number} periods
- * @param {number} lambda  — гиперпараметр Minnesota Prior
+ * @param {number} [lambda]  — начальная подсказка; будет заменён авто-выбором
  */
 function bvarForecast(data, periods, lambda) {
-  const lam  = typeof lambda === 'number' ? lambda : 0.2;
-  const VARS = ['gdp', 'inflation', 'usd_tjs', 'remittances'];
-  const avail = VARS.filter(v => Array.isArray(data[v]) && data[v].length >= 6);
+  const VARS  = ['gdp', 'inflation', 'usd_tjs', 'remittances'];
+  const P     = 1;      // фиксированный лаг для коротких рядов
+  const THETA = 0.5;    // жёсткость чужих лагов
 
+  const avail = VARS.filter(v => Array.isArray(data[v]) && data[v].length >= 6);
   if (avail.length < 2) return { error: 'Недостаточно переменных (нужно ≥ 2)', forecast: {} };
 
-  const n = Math.min(...avail.map(v => data[v].length));
-  const k = avail.length;
-  const p = 1; // лаг = 1 для малых выборок
+  const N    = Math.min(...avail.map(v => data[v].length));
+  const k    = avail.length;
+  const nPar = k * P + 1; // intercept + k*P коэффициентов
 
-  // ── Нормализация ───────────────────────────────────────────────────────────
-  const mu  = {}, sg = {};
-  avail.forEach(v => {
-    const arr = data[v].slice(-n);
-    mu[v] = arr.reduce((a, b) => a + b, 0) / arr.length;
-    sg[v] = Math.sqrt(arr.map(x => (x - mu[v]) ** 2).reduce((a, b) => a + b, 0) / arr.length) || 1;
+  // ADF-based prior means: I(0) → 0 (mean reversion), I(1) → 1 (random walk)
+  const priorMeans = avail.map(v => {
+    try { return adfTest(data[v].slice(-N)).stationary ? 0 : 1; }
+    catch (_) { return 1; }
   });
-  const Z = {};
-  avail.forEach(v => { Z[v] = data[v].slice(-n).map(x => (x - mu[v]) / sg[v]); });
 
-  // ── Ridge с Minnesota diagonal prior ─────────────────────────────────────
-  const forecasts = {};
-  avail.forEach(target => {
-    const T   = n - p;
-    const Y   = Z[target].slice(p);
-    const X   = Y.map((_, t) => avail.flatMap(v => [Z[v][t]]));  // lag-1
-    const nc  = X[0].length;
+  // ── Нормализация на первых n наблюдениях из окна N ─────────────────────────
+  function normSlice(n) {
+    const raw = avail.map(v => data[v].slice(-N).slice(0, n));
+    const mu  = raw.map(arr => arr.reduce((s, x) => s + x, 0) / arr.length);
+    const sg  = raw.map((arr, i) => {
+      const m  = mu[i];
+      const sd = Math.sqrt(arr.reduce((s, x) => s + (x - m) ** 2, 0) / arr.length);
+      return sd || 1;
+    });
+    const Z = raw.map((arr, i) => arr.map(x => (x - mu[i]) / sg[i]));
+    return { mu, sg, Z };
+  }
 
-    // Строим XtX + prior
-    const XtX = Array.from({ length: nc }, (_, i) =>
-      Array.from({ length: nc }, (_, j) => X.reduce((s, r) => s + r[i] * r[j], 0))
-    );
-    const XtY = Array.from({ length: nc }, (_, i) => X.reduce((s, r, t) => s + r[i] * Y[t], 0));
-
-    // Minnesota: собственный лаг (i === targetIdx) сжимается мягче
-    const targetIdx = avail.indexOf(target);
-    for (let i = 0; i < nc; i++) {
-      XtX[i][i] += i === targetIdx ? lam : lam * 4;
+  // ── Design-матрица и отклики ──────────────────────────────────────────────
+  function mkXY(Z) {
+    const n = Z[0].length, T = n - P;
+    const X = [];
+    for (let t = 0; t < T; t++) {
+      const row = [1];
+      for (let l = 1; l <= P; l++)
+        for (let j = 0; j < k; j++) row.push(Z[j][t + P - l]);
+      X.push(row);
     }
+    return { X, Y: Z.map(s => s.slice(P)), T };
+  }
 
-    // Решение диагональным приближением (быстро и устойчиво)
-    const betas = XtX.map((row, i) => XtY[i] / (XtX[i][i] || 1));
+  // ── AR(1) σ² для масштабирования Minnesota приора ────────────────────────
+  function arSig2(Z, Y, T) {
+    return avail.map((_, i) => {
+      const yi = Y[i], xi = Z[i].slice(0, T).map(v => [1, v]);
+      try {
+        const xit = matTranspose(xi);
+        const c   = matVecMul(matMul(matInverse(matMul(xit, xi)), xit), yi);
+        let rss = 0;
+        for (let t = 0; t < T; t++) rss += (yi[t] - c[0] - c[1] * Z[i][t]) ** 2;
+        return Math.max(rss / Math.max(T - 2, 1), 1e-6);
+      } catch (_) { return 1.0; }
+    });
+  }
 
-    // Прогноз
-    const hist = avail.map(v => [...Z[v]]);
-    const fcst = [];
-    for (let h = 0; h < periods; h++) {
-      const row = avail.map((_, vi) => hist[vi][hist[vi].length - 1]);
-      const pred = betas.reduce((s, b, i) => s + b * row[i], 0);
-      fcst.push(pred);
-      const ti = avail.indexOf(target);
-      hist[ti].push(pred);
-      // Добавляем noise-dampened значения для других переменных
-      avail.forEach((v, vi) => {
-        if (vi !== ti) hist[vi].push(hist[vi][hist[vi].length - 1]);
-      });
+  // ── Precision-вектор Minnesota Prior ────────────────────────────────────
+  function mkPrec(eqIdx, lam, s2) {
+    const prec = new Array(nPar).fill(0); // intercept: 0 (flat)
+    let col = 1;
+    for (let l = 1; l <= P; l++) {
+      for (let j = 0; j < k; j++) {
+        const base = (l / lam) ** 2 / Math.max(s2[eqIdx], 1e-10);
+        prec[col++] = j === eqIdx
+          ? base                                               // собственный лаг
+          : base / (THETA ** 2) * (s2[j] / Math.max(s2[eqIdx], 1e-10)); // чужой лаг
+      }
     }
+    return prec;
+  }
 
-    // Денормализация
-    forecasts[target] = fcst.map(v => round2(v * sg[target] + mu[target]));
+  // ── Оценка одного BVAR-уравнения (ПОЛНОЕ матричное решение) ─────────────
+  function fitEq(eqIdx, lam, X, Yi, XtX, s2) {
+    const prec  = mkPrec(eqIdx, lam, s2);
+    const s2i   = s2[eqIdx];
+    const beta0 = new Array(nPar).fill(0);
+    beta0[1 + eqIdx] = priorMeans[eqIdx]; // I(1) → 1 (RW), I(0) → 0 (mean-revert)
+    // A β = rhs : A = XtX + σᵢ²·Λ, rhs = XtY + σᵢ²·Λ·β₀
+    const A   = XtX.map((row, r) => row.map((v, c) => r === c ? v + s2i * prec[r] : v));
+    const XtY = matVecMul(matTranspose(X), Yi);
+    const rhs = XtY.map((v, j) => v + s2i * prec[j] * beta0[j]);
+    try {
+      const Ainv  = matInverse(A);
+      const beta  = matVecMul(Ainv, rhs);
+      let rss = 0;
+      for (let t = 0; t < X.length; t++) {
+        let fit = 0;
+        for (let j = 0; j < nPar; j++) fit += beta[j] * X[t][j];
+        rss += (Yi[t] - fit) ** 2;
+      }
+      return { beta, Ainv, s2Post: rss / Math.max(X.length - nPar, 1) };
+    } catch (_) {
+      const beta = new Array(nPar).fill(0);
+      beta[1 + eqIdx] = 0.5;
+      return { beta, Ainv: matCreate(nPar, nPar), s2Post: s2[eqIdx] };
+    }
+  }
+
+  // ── Выбор λ по holdout MAPE (скользящее окно по GDP) ────────────────────
+  const nHold    = Math.max(3, Math.min(5, Math.floor(N * 0.2)));
+  const nTrn     = N - nHold;
+  const lamGrid  = [0.05, 0.1, 0.15, 0.2, 0.3, 0.5];
+  let selectedLam = typeof lambda === 'number' ? lambda : 0.2;
+  let bestMapeVal = Infinity;
+
+  if (nTrn >= k + P + 3 && nHold >= 3) {
+    for (const lam of lamGrid) {
+      let apeSum = 0, cnt = 0;
+      for (let step = 0; step < nHold; step++) {
+        const nT = nTrn + step;
+        const { mu: mT, sg: sT, Z: ZT } = normSlice(nT);
+        const { X: XT, Y: YT, T: TT } = mkXY(ZT);
+        if (TT < nPar + 1) continue;
+        const s2T   = arSig2(ZT, YT, TT);
+        const XtXT  = matMul(matTranspose(XT), XT);
+        const eq0   = fitEq(0, lam, XT, YT[0], XtXT, s2T);
+        const lastX = [1, ...ZT.map(s => s[s.length - 1])];
+        const predZ = eq0.beta.reduce((s, b, j) => s + b * lastX[j], 0);
+        const rawNext = data[avail[0]].slice(-N)[nT];
+        if (!isFinite(rawNext)) continue;
+        const actualZ = (rawNext - mT[0]) / sT[0];
+        if (Math.abs(actualZ) > 1e-10) {
+          apeSum += Math.abs(predZ - actualZ) / Math.abs(actualZ) * 100;
+          cnt++;
+        }
+      }
+      if (cnt > 0 && apeSum / cnt < bestMapeVal) {
+        bestMapeVal = apeSum / cnt;
+        selectedLam = lam;
+      }
+    }
+  }
+
+  // ── Полная оценка BVAR на всех N точках ──────────────────────────────────
+  const { mu, sg, Z } = normSlice(N);
+  const { X, Y: Ymat, T } = mkXY(Z);
+  const XtXfull = matMul(matTranspose(X), X);
+  const sig2    = arSig2(Z, Ymat, T);
+  const eqs     = avail.map((_, i) => fitEq(i, selectedLam, X, Ymat[i], XtXfull, sig2));
+
+  // ── Прогноз с апостериорными ДИ 95% ──────────────────────────────────────
+  const fcstZ  = avail.map(() => []);
+  const ciZ    = avail.map(() => []);
+  const hist   = Z.map(s => [...s]);
+
+  for (let h = 0; h < periods; h++) {
+    const xNew = [1, ...hist.map(s => s[s.length - 1])];
+    avail.forEach((_, i) => {
+      const { beta, Ainv, s2Post } = eqs[i];
+      const predZ = beta.reduce((s, b, j) => s + b * xNew[j], 0);
+      fcstZ[i].push(predZ);
+      hist[i].push(predZ);
+      // Предиктивная дисперсия: σ²·(1 + x'·Ainv·x)·расширение по горизонту
+      const xAinvx = xNew.reduce(
+        (s, xi, r) => s + xi * xNew.reduce((s2, xj, c) => s2 + xj * Ainv[r][c], 0), 0
+      );
+      const varH = s2Post * (1 + xAinvx) * (1 + 0.4 * h);
+      const sdH  = Math.sqrt(Math.max(varH, 1e-10));
+      ciZ[i].push({ lower: predZ - 1.96 * sdH, upper: predZ + 1.96 * sdH });
+    });
+  }
+
+  // ── Денормализация ────────────────────────────────────────────────────────
+  const forecast  = {};
+  const ci95      = {};
+  avail.forEach((v, i) => {
+    forecast[v] = fcstZ[i].map(z => round2(z * sg[i] + mu[i]));
+    ci95[v]     = ciZ[i].map(ci => ({
+      lower: round2(ci.lower * sg[i] + mu[i]),
+      upper: round2(ci.upper * sg[i] + mu[i]),
+    }));
   });
+
+  // ── Интерпретация ─────────────────────────────────────────────────────────
+  const intrpLines = [
+    `BVAR(${P}) — Minnesota Prior, λ=${selectedLam} (авто, holdout MAPE ≈ ${round2(bestMapeVal)}%).`,
+    `Полное решение: (XtX + σᵢ²·Λ)⁻¹·(XtY + σᵢ²·Λ·β₀).`,
+    `β₀: RW (1 для собственного лага-1), затухание (l/λ)², θ=${THETA} для чужих лагов.`,
+    '',
+    'АПОСТЕРИОРНЫЕ КОЭФФИЦИЕНТЫ (лаг 1, выборка нормирована):',
+    ...avail.map((v, i) => {
+      const b   = eqs[i].beta;
+      const own = round4(b[1 + i]);
+      const cross = avail
+        .map((vj, j) => j !== i ? `${vj}:${round4(b[1 + j])}` : null)
+        .filter(Boolean).join(', ');
+      return `  • ${v}: own=${own}${cross ? ', cross=[' + cross + ']' : ''}`;
+    }),
+    '',
+    'ПРОГНОЗ + 95% ДИ (1-й период вперёд):',
+    ...avail.map((v, i) => {
+      const last = data[v][data[v].length - 1];
+      const next = forecast[v][0];
+      const ci   = ci95[v][0];
+      const pct  = last !== 0 ? ((next - last) / Math.abs(last) * 100).toFixed(1) : '—';
+      return `  • ${v}: ${next >= last ? '↑' : '↓'} ${Math.abs(pct)}% (${round2(last)} → ${next}) [ДИ: ${ci.lower}…${ci.upper}]`;
+    }),
+  ];
 
   return {
-    forecast: forecasts,
-    model:     `BVAR(${p}) λ=${lam} Minnesota Prior`,
-    variables: avail,
-    lambda:    lam,
+    forecast,
+    ci95,
+    model:          `BVAR(${P}) λ=${selectedLam} Minnesota Prior (full solve)`,
+    variables:      avail,
+    lambda:         selectedLam,
+    lambdaSelected: selectedLam,
+    interpretation: intrpLines.join('\n'),
     periods,
-    note: 'Байесовский VAR с Minnesota Prior — оптимален для малых выборок (стандарт МВФ/ФРС/ЕЦБ)',
+    note: 'Байесовский VAR с полным Minnesota Prior — стандарт МВФ/ФРС/ЕЦБ для малых выборок',
   };
 }
 
