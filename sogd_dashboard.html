@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Согдийская область · Отчёт 2027–2029</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#F4F7FB; --surface:#FFFFFF; --surface-2:#FBFCFE;
+  --ink:#14202E; --muted:#5E6E83; --line:#E6ECF3;
+  --primary:#15507A; --primary-soft:#E7F0F7;
+  --teal:#0E9C95; --teal-soft:rgba(14,156,149,.12);
+  --gold:#C8912A; --gold-soft:rgba(200,145,42,.12);
+  --up:#1F9D6B; --flat:#8493A6;
+  --shadow:0 1px 2px rgba(20,32,46,.04),0 8px 24px rgba(20,32,46,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.5}
+h1,h2,h3,.num{font-family:'Manrope',sans-serif}
+.flag{height:4px;display:flex}
+.flag i{flex:1}.flag .r{background:#cc0000}.flag .w{background:#fff;flex:2}.flag .g{background:#006600}
+
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);
+  padding:14px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.crest{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#15507A,#0E9C95);
+  display:grid;place-items:center;color:#fff;font-weight:800;font-family:'Manrope';font-size:17px}
+.org h1{font-size:15px;font-weight:700;letter-spacing:.1px}
+.org p{font-size:12px;color:var(--muted)}
+.topbar .spacer{flex:1}
+.lang{display:flex;gap:6px}
+.lang button{border:1px solid var(--line);background:var(--surface);border-radius:8px;
+  padding:5px 11px;font-size:12px;color:var(--muted);cursor:pointer;font-family:inherit;font-weight:600}
+.lang button.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:26px 28px 60px}
+
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:6px}
+.hero h2{font-size:26px;font-weight:800;letter-spacing:-.3px}
+.hero .sub{color:var(--muted);font-size:13.5px;margin-top:3px}
+.srcbadge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);
+  color:var(--gold);border:1px solid rgba(200,145,42,.3);border-radius:999px;
+  padding:7px 14px;font-size:12.5px;font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0 6px}
+@media(max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:16px 17px;box-shadow:var(--shadow)}
+.kpi .lab{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;line-height:1.35}
+.kpi .val{font-family:'Manrope';font-weight:800;font-size:27px;margin-top:8px;line-height:1}
+.kpi .un{font-size:12px;color:var(--muted);font-weight:600;margin-left:3px}
+.kpi .delta{font-size:12.5px;font-weight:600;margin-top:8px;display:inline-flex;gap:4px;align-items:center}
+.delta.up{color:var(--up)}.delta.flat{color:var(--flat)}
+.hint{width:15px;height:15px;border-radius:50%;background:var(--line);color:var(--muted);
+  font-size:10px;display:inline-grid;place-items:center;cursor:help;font-weight:700;flex-shrink:0}
+.hint:hover{background:var(--teal);color:#fff}
+
+.section{margin-top:26px}
+.sechead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.sechead .ic{width:30px;height:30px;border-radius:9px;background:var(--primary-soft);
+  display:grid;place-items:center;font-size:15px}
+.sechead h3{font-size:16.5px;font-weight:700}
+.sechead .tag{margin-left:auto;font-size:11.5px;color:var(--muted);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:7px;padding:4px 9px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:20px 22px}
+.grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
+@media(max-width:980px){.grid2{grid-template-columns:1fr}}
+.cwrap{position:relative;height:280px;margin-top:6px}
+.cwrap.sm{height:250px}
+.legend{display:flex;gap:15px;font-size:12px;color:var(--muted);flex-wrap:wrap;margin-top:2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:13px;height:3px;border-radius:2px;display:inline-block}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--muted);font-weight:600;padding:0 10px 9px 0;border-bottom:1px solid var(--line)}
+th.n,td.n{text-align:right;padding-right:0}
+td{padding:11px 10px 11px 0;border-bottom:1px solid #F1F5F9}
+tr:last-child td{border-bottom:0}
+td.nm{font-weight:500}
+td.n{font-family:'Manrope';font-weight:700;font-variant-numeric:tabular-nums}
+.chg{font-size:12px;font-weight:600;color:var(--up)}
+.chg.flat{color:var(--flat)}
+
+.explain{background:linear-gradient(180deg,#fff,var(--surface-2));border:1px solid var(--line);
+  border-left:4px solid var(--teal);border-radius:14px;padding:17px 20px;margin-top:16px}
+.explain h4{font-size:12.5px;font-weight:700;color:var(--teal);text-transform:uppercase;
+  letter-spacing:.07em;margin-bottom:7px;font-family:'Manrope'}
+.explain p{font-size:14px;color:#243446;line-height:1.6}
+
+.footnote{margin-top:26px;font-size:12.5px;color:var(--muted);background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:14px 18px;line-height:1.55}
+.footnote b{color:var(--ink)}
+
+.tip{position:fixed;z-index:50;max-width:250px;background:var(--ink);color:#fff;font-size:12px;
+  line-height:1.4;padding:9px 11px;border-radius:9px;pointer-events:none;opacity:0;transition:.12s;
+  box-shadow:0 8px 24px rgba(0,0,0,.2)}
+</style>
+</head>
+<body>
+<div class="flag"><i class="r"></i><i class="w"></i><i class="g"></i></div>
+
+<div class="topbar">
+  <div class="crest">Eco</div>
+  <div class="org">
+    <h1>Министерство экономического развития и торговли РТ</h1>
+    <p>EcotahlilAI · Отчёты территорий</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="lang">
+    <button id="lTg">ТҶ</button><button id="lRu" class="on">РУС</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <h2 id="ttl">Согдийская область</h2>
+      <div class="sub" id="sub">Прогноз социально-экономического развития на 2027–2029 годы</div>
+    </div>
+    <div class="srcbadge" id="srcb">📄 Официальный отчёт области · 17 из 34 форм</div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <!-- ИНВЕСТИЦИИ -->
+  <div class="section">
+    <div class="sechead">
+      <div class="ic">💰</div><h3 id="s1h">Инвестиции в основной капитал</h3>
+      <div class="tag">Форма 12</div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="legend">
+          <span><i style="background:#15507A"></i> Всего инвестиций</span>
+          <span><i style="background:#0E9C95"></i> Госбюджет</span>
+          <span><i style="background:#C8912A"></i> Иностранный капитал</span>
+        </div>
+        <div class="cwrap"><canvas id="chInv"></canvas></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th id="th1">Источник</th><th class="n">2025</th><th class="n">2029</th><th class="n">Рост</th></tr></thead>
+          <tbody id="tbInv"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="explain">
+      <h4 id="e1h">Что показывают данные</h4>
+      <p id="e1p">Инвестиции в основной капитал растут с <b>4 229,5 до 5 947,7 млн сомони</b> — прирост 40,6% за пять лет. Наиболее динамичный источник — государственный бюджет (рост почти вдвое, с 594 до 1 161,2 млн), тогда как иностранный капитал увеличивается умереннее (с 385 до 489 млн). Это означает, что рост инвестиций в области опирается преимущественно на внутренние государственные ресурсы.</p>
+    </div>
+  </div>
+
+  <!-- ПРОМЫШЛЕННОСТЬ -->
+  <div class="section">
+    <div class="sechead">
+      <div class="ic">🏭</div><h3 id="s2h">Создание новых промышленных предприятий</h3>
+      <div class="tag">Форма 5</div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="legend">
+          <span><i style="background:#15507A"></i> Обрабатывающая</span>
+          <span><i style="background:#0E9C95"></i> Пищевая</span>
+          <span><i style="background:#C8912A"></i> Добывающая</span>
+        </div>
+        <div class="cwrap"><canvas id="chInd"></canvas></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th id="th2">Отрасль</th><th class="n">2025</th><th class="n">2029</th><th class="n">Рост</th></tr></thead>
+          <tbody id="tbInd"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="explain">
+      <h4 id="e2h">Что показывают данные</h4>
+      <p id="e2p">Число предприятий обрабатывающей промышленности вырастет с <b>1 175 до 1 635</b> единиц. Самый быстрый относительный рост — в добывающей отрасли: с 72 до 172 предприятий (в 2,4 раза), хотя в абсолютных числах она остаётся небольшой. Пищевая промышленность растёт стабильно и равномерно — примерно по 30 предприятий в год.</p>
+    </div>
+  </div>
+
+  <!-- ЗДРАВООХРАНЕНИЕ -->
+  <div class="section">
+    <div class="sechead">
+      <div class="ic">🏥</div><h3 id="s3h">Здравоохранение</h3>
+      <div class="tag">Форма 24</div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="legend">
+          <span><i style="background:#0E9C95"></i> Мощность амбулаторий (приёмов в смену)</span>
+          <span><i style="background:#15507A"></i> Медучреждения (ед.)</span>
+        </div>
+        <div class="cwrap sm"><canvas id="chMed"></canvas></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr><th id="th3">Показатель</th><th class="n">2025</th><th class="n">2029</th><th class="n">Рост</th></tr></thead>
+          <tbody id="tbMed"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="explain">
+      <h4 id="e3h">Что показывают данные</h4>
+      <p id="e3p">Сеть медицинских учреждений расширяется: с <b>1 139 до 1 196</b> единиц, мощность амбулаторно-поликлинических учреждений растёт с 22 369 до 22 687 приёмов в смену. При этом коечный фонд остаётся неизменным — 15 725 коек все пять лет. То есть развитие идёт по пути амбулаторного звена, а не стационарного.</p>
+    </div>
+  </div>
+
+  <div class="footnote" id="fn">
+    <b>Об источнике данных.</b> Показатели импортированы из официального отчёта Согдийской области по формам МЭРиТ (17 из 34 форм, 153 показателя). Формы, отсутствующие в исходном документе или имеющие иную структуру строк, оставлены незаполненными — данные не досчитывались и не моделировались. Значения приведены в объёмных величинах; темпы роста рассчитаны системой.
+  </div>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script>
+/* ── Реальные данные из sogd_export.json (импорт официального отчёта) ── */
+const YEARS=[2025,2026,2027,2028,2029];
+const D={
+  inv:[
+    {ru:'Инвестиции в основной капитал — всего',tg:'Маблағгузорӣ ба сармояи асосӣ — ҳамагӣ',v:[4229.5,4502.4,4851.1,5323.8,5947.7],c:'#15507A'},
+    {ru:'Государственный бюджет',tg:'Буҷети давлатӣ',v:[594,689.2,813.2,967.7,1161.2],c:'#0E9C95'},
+    {ru:'Иностранный капитал',tg:'Сармояи хориҷӣ',v:[385,400.1,420.1,449.5,489],c:'#C8912A'},
+  ],
+  ind:[
+    {ru:'Обрабатывающая промышленность',tg:'Саноати коркард',v:[1175,1290,1405,1520,1635],c:'#15507A'},
+    {ru:'Пищевая промышленность',tg:'Истеҳсоли маводи хӯрока',v:[372,402,432,462,492],c:'#0E9C95'},
+    {ru:'Добывающая промышленность',tg:'Саноати истихроҷи маъдан',v:[72,97,122,147,172],c:'#C8912A'},
+  ],
+  med:[
+    {ru:'Мощность амбулаторий (приёмов в смену)',tg:'Иқтидори муассисаҳои амбулаторӣ',v:[22369,22467,22570,22644,22687],c:'#0E9C95'},
+    {ru:'Медицинские учреждения (ед.)',tg:'Муассисаҳои тиббӣ (воҳид)',v:[1139,1157,1170,1182,1196],c:'#15507A'},
+    {ru:'Больничные койки',tg:'Кати беморхонаҳо',v:[15725,15725,15725,15725,15725],c:'#8493A6',noChart:true},
+  ],
+};
+const T={
+  ru:{ttl:'Согдийская область',sub:'Прогноз социально-экономического развития на 2027–2029 годы',
+    src:'📄 Официальный отчёт области · 17 из 34 форм',
+    s1:'Инвестиции в основной капитал',s2:'Создание новых промышленных предприятий',s3:'Здравоохранение',
+    th1:'Источник',th2:'Отрасль',th3:'Показатель',eh:'Что показывают данные'},
+  tg:{ttl:'Вилояти Суғд',sub:'Дурнамои рушди иҷтимоию иқтисодӣ барои солҳои 2027–2029',
+    src:'📄 Ҳисоботи расмии вилоят · 17 аз 34 шакл',
+    s1:'Маблағгузорӣ ба сармояи асосӣ',s2:'Таъсиси корхонаҳои нави саноатӣ',s3:'Тандурустӣ',
+    th1:'Манбаъ',th2:'Соҳа',th3:'Нишондиҳанда',eh:'Маълумот чӣ нишон медиҳад'},
+};
+let lang='ru';
+const fmt=n=>n>=1000?n.toLocaleString('ru-RU'):String(n).replace('.',',');
+const grow=(a,b)=>((b-a)/a*100);
+
+function kpis(){
+  const inv=D.inv[0].v, ind=D.ind[0].v, med=D.med[1].v, bud=D.inv[1].v;
+  const items=[
+    {l:lang==='ru'?'Инвестиции, 2029':'Сармоягузорӣ, 2029',v:fmt(inv[4]),u:'млн сомони',d:grow(inv[0],inv[4]),
+     h:'Объём инвестиций в основной капитал из всех источников на конец прогнозного периода.'},
+    {l:lang==='ru'?'Госбюджет, 2029':'Буҷети давлатӣ, 2029',v:fmt(bud[4]),u:'млн сомони',d:grow(bud[0],bud[4]),
+     h:'Инвестиции из государственного бюджета — самый быстрорастущий источник.'},
+    {l:lang==='ru'?'Обраб. предприятия, 2029':'Корхонаҳои коркард, 2029',v:fmt(ind[4]),u:'ед.',d:grow(ind[0],ind[4]),
+     h:'Число предприятий обрабатывающей промышленности области.'},
+    {l:lang==='ru'?'Медучреждения, 2029':'Муассисаҳои тиббӣ, 2029',v:fmt(med[4]),u:'ед.',d:grow(med[0],med[4]),
+     h:'Количество медицинских учреждений в области.'},
+  ];
+  document.getElementById('kpis').innerHTML=items.map(i=>`
+    <div class="kpi"><div class="lab">${i.l} <span class="hint" data-t="${i.h}">?</span></div>
+      <div class="val">${i.v}<span class="un">${i.u}</span></div>
+      <div class="delta ${i.d>0.5?'up':'flat'}">${i.d>0.5?'▲':'▪'} ${i.d.toFixed(1).replace('.',',')}% ${lang==='ru'?'к 2025':'нисбат ба 2025'}</div>
+    </div>`).join('');
+  bindHints();
+}
+
+function rows(el,arr){
+  document.getElementById(el).innerHTML=arr.map(r=>{
+    const g=grow(r.v[0],r.v[4]);
+    return `<tr><td class="nm">${lang==='ru'?r.ru:r.tg}</td>
+      <td class="n">${fmt(r.v[0])}</td><td class="n">${fmt(r.v[4])}</td>
+      <td class="n"><span class="chg ${g>0.5?'':'flat'}">${g>0.5?'+':''}${g.toFixed(1).replace('.',',')}%</span></td></tr>`;
+  }).join('');
+}
+
+const charts={};
+function line(id,arr,fill){
+  if(charts[id])charts[id].destroy();
+  charts[id]=new Chart(document.getElementById(id),{
+    type:'line',
+    data:{labels:YEARS,datasets:arr.filter(a=>!a.noChart).map(a=>({
+      label:lang==='ru'?a.ru:a.tg,data:a.v,borderColor:a.c,backgroundColor:fill?a.c+'22':'transparent',
+      borderWidth:2.6,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:a.c,tension:.3,fill:!!fill}))},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:700},
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,
+        callbacks:{label:c=>c.dataset.label+': '+fmt(c.parsed.y)}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#8493A6',font:{size:11.5}}},
+        y:{grid:{color:'#EEF2F7'},ticks:{color:'#8493A6',font:{size:11.5},
+          callback:v=>v>=1000?(v/1000).toFixed(v>=10000?0:1)+'к':v}}},
+      interaction:{mode:'index',intersect:false}}
+  });
+}
+function bars(id,arr){
+  if(charts[id])charts[id].destroy();
+  charts[id]=new Chart(document.getElementById(id),{
+    type:'bar',
+    data:{labels:YEARS,datasets:arr.map(a=>({label:lang==='ru'?a.ru:a.tg,data:a.v,
+      backgroundColor:a.c,borderRadius:5,barPercentage:.72,categoryPercentage:.75}))},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:700},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.parsed.y)}}},
+      scales:{x:{grid:{display:false},stacked:false,ticks:{color:'#8493A6',font:{size:11.5}}},
+        y:{grid:{color:'#EEF2F7'},ticks:{color:'#8493A6',font:{size:11.5}}}}}
+  });
+}
+
+function render(){
+  const t=T[lang];
+  document.getElementById('ttl').textContent=t.ttl;
+  document.getElementById('sub').textContent=t.sub;
+  document.getElementById('srcb').textContent=t.src;
+  document.getElementById('s1h').textContent=t.s1;
+  document.getElementById('s2h').textContent=t.s2;
+  document.getElementById('s3h').textContent=t.s3;
+  document.getElementById('th1').textContent=t.th1;
+  document.getElementById('th2').textContent=t.th2;
+  document.getElementById('th3').textContent=t.th3;
+  ['e1h','e2h','e3h'].forEach(id=>document.getElementById(id).textContent=t.eh);
+  kpis();
+  rows('tbInv',D.inv); rows('tbInd',D.ind); rows('tbMed',D.med);
+  line('chInv',D.inv,true); bars('chInd',D.ind); line('chMed',D.med,false);
+}
+
+const tip=document.getElementById('tip');
+function bindHints(){document.querySelectorAll('.hint').forEach(h=>{
+  h.onmouseenter=()=>{tip.textContent=h.dataset.t;tip.style.opacity=1;
+    const r=h.getBoundingClientRect();tip.style.left=Math.min(r.left,window.innerWidth-260)+'px';
+    tip.style.top=(r.bottom+8)+'px';};
+  h.onmouseleave=()=>tip.style.opacity=0;});}
+
+document.getElementById('lRu').onclick=()=>{lang='ru';
+  document.getElementById('lRu').classList.add('on');document.getElementById('lTg').classList.remove('on');render();};
+document.getElementById('lTg').onclick=()=>{lang='tg';
+  document.getElementById('lTg').classList.add('on');document.getElementById('lRu').classList.remove('on');render();};
+
+render();
+</script>
+</body>
+</html>

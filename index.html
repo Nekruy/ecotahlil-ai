@@ -2010,7 +2010,34 @@ footer b { color:#fff; }
   <a class="nav-tab" href="/report" style="text-decoration:none">
     📝 <span data-i18n="nav.report">Отчёт по ценам</span>
   </a>
+  <!-- Модуль форм территорий — видимость по роли (см. скрипт ниже) -->
+  <a class="nav-tab" id="tab-terrforms" href="/forms" style="text-decoration:none;display:none">
+    🗂️ Отчёты территории
+  </a>
+  <a class="nav-tab" id="tab-central" href="/central" style="text-decoration:none;display:none">
+    📥 Приём отчётов
+  </a>
+  <a class="nav-tab" id="tab-dashboards" href="/dashboards" style="text-decoration:none;display:none">
+    📊 Дашборды
+  </a>
 </nav>
+<script>
+/* Пункты меню форм территорий — по auth-роли (общий токен medt_token) */
+(function(){
+  var t = localStorage.getItem('medt_token');
+  if (!t) return;
+  fetch('/auth/me', { headers: { Authorization: 'Bearer ' + t } })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (!d || !d.user) return;
+      var role = d.user.role;
+      var show = function(id){ var e = document.getElementById(id); if (e) e.style.display = 'flex'; };
+      if (role === 'district') show('tab-terrforms');
+      if (role === 'admin' || role === 'region') { show('tab-central'); show('tab-dashboards'); }
+    })
+    .catch(function(){});
+})();
+</script>
 
 <!-- ============================================================
    СТРАНИЦА 1 — МОНИТОРИНГ ЦЕН

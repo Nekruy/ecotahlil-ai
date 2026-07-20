@@ -86,6 +86,8 @@ function groqChat(systemPrompt, userContent, maxTokens = 4000) {
 // ─── Инициализация базы данных ───────────────────────────────────────────────
 const { initDB, saveReport: dbSaveReport, getReports: dbGetReports } = require('./database');
 const authModule = require('./auth');
+// Модуль форм территорий (форма района, экран центра, дашборды) — общий порт/авторизация
+const formsModule = require('./schemas/formServer');
 
 // ─── File text extraction ────────────────────────────────────────────────────
 
@@ -1865,6 +1867,21 @@ const server = http.createServer(async (req, res) => {
       res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: err.message }));
     }
+    return;
+  }
+
+  // ── Модуль форм территорий (форма района, центр, дашборды) ──
+  // По списку путей formsModule.ownsPath решает, его ли это запрос, — существующие
+  // маршруты выше имеют приоритет, поэтому вкладки и API не затрагиваются.
+  try {
+    const formsPath = new URL(req.url, 'http://x').pathname;
+    if (formsModule.ownsPath(formsPath, req.method)) {
+      await formsModule.handle(req, res);
+      return;
+    }
+  } catch (e) {
+    console.error('[forms mount]', e.message);
+    if (!res.headersSent) { res.writeHead(500); res.end('forms error'); }
     return;
   }
 

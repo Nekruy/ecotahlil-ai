@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дашборд территории · EcotahlilAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#F4F7FB; --surface:#FFFFFF; --surface-2:#FBFCFE;
+  --ink:#14202E; --muted:#5E6E83; --line:#E6ECF3;
+  --primary:#15507A; --primary-soft:#E7F0F7;
+  --teal:#0E9C95; --teal-soft:rgba(14,156,149,.12);
+  --gold:#C8912A; --gold-soft:rgba(200,145,42,.12);
+  --up:#1F9D6B; --flat:#8493A6; --down:#C0392B;
+  --shadow:0 1px 2px rgba(20,32,46,.04),0 8px 24px rgba(20,32,46,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.5}
+h1,h2,h3,.num{font-family:'Manrope',sans-serif}
+a{color:inherit;text-decoration:none}
+.flag{height:4px;display:flex}
+.flag i{flex:1}.flag .r{background:#cc0000}.flag .w{background:#fff;flex:2}.flag .g{background:#006600}
+
+.topbar{background:var(--surface);border-bottom:1px solid var(--line);
+  padding:14px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.crest{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#15507A,#0E9C95);
+  display:grid;place-items:center;color:#fff;font-weight:800;font-family:'Manrope';font-size:17px}
+.org h1{font-size:15px;font-weight:700;letter-spacing:.1px}
+.org p{font-size:12px;color:var(--muted)}
+.topbar .spacer{flex:1}
+.back{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-weight:600}
+.back:hover{background:var(--primary-soft);color:var(--primary)}
+.lang{display:flex;gap:6px}
+.lang button{border:1px solid var(--line);background:var(--surface);border-radius:8px;
+  padding:5px 11px;font-size:12px;color:var(--muted);cursor:pointer;font-family:inherit;font-weight:600}
+.lang button.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.wrap{max-width:1240px;margin:0 auto;padding:26px 28px 60px}
+
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:6px}
+.hero h2{font-size:26px;font-weight:800;letter-spacing:-.3px}
+.hero .sub{color:var(--muted);font-size:13.5px;margin-top:3px}
+.srcbadge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);
+  color:var(--gold);border:1px solid rgba(200,145,42,.3);border-radius:999px;
+  padding:7px 14px;font-size:12.5px;font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0 6px}
+@media(max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:16px 17px;box-shadow:var(--shadow)}
+.kpi .lab{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;line-height:1.35}
+.kpi .val{font-family:'Manrope';font-weight:800;font-size:27px;margin-top:8px;line-height:1}
+.kpi .un{font-size:12px;color:var(--muted);font-weight:600;margin-left:3px}
+.kpi .delta{font-size:12.5px;font-weight:600;margin-top:8px;display:inline-flex;gap:4px;align-items:center}
+.delta.up{color:var(--up)}.delta.flat{color:var(--flat)}.delta.down{color:var(--down)}
+
+.section{margin-top:26px}
+.sechead{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.sechead .ic{width:30px;height:30px;border-radius:9px;background:var(--primary-soft);
+  display:grid;place-items:center;font-size:15px}
+.sechead h3{font-size:16.5px;font-weight:700}
+.sechead .tag{margin-left:auto;font-size:11.5px;color:var(--muted);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:7px;padding:4px 9px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);padding:20px 22px}
+.grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
+@media(max-width:980px){.grid2{grid-template-columns:1fr}}
+.cwrap{position:relative;height:280px;margin-top:6px}
+.legend{display:flex;gap:15px;font-size:12px;color:var(--muted);flex-wrap:wrap;margin-top:2px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:13px;height:3px;border-radius:2px;display:inline-block}
+
+.tblscroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--muted);font-weight:600;padding:0 10px 9px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+th.n,td.n{text-align:right;padding-right:0}
+td{padding:11px 10px 11px 0;border-bottom:1px solid #F1F5F9}
+tr:last-child td{border-bottom:0}
+td.nm{font-weight:500;min-width:200px}
+td.n{font-family:'Manrope';font-weight:700;font-variant-numeric:tabular-nums}
+.chg{font-size:12px;font-weight:600;color:var(--up)}
+.chg.flat{color:var(--flat)}.chg.down{color:var(--down)}
+
+.explain{background:linear-gradient(180deg,#fff,var(--surface-2));border:1px solid var(--line);
+  border-left:4px solid var(--teal);border-radius:14px;padding:14px 18px;margin-top:14px}
+.explain h4{font-size:12px;font-weight:700;color:var(--teal);text-transform:uppercase;
+  letter-spacing:.07em;margin-bottom:6px;font-family:'Manrope'}
+.explain p{font-size:13.5px;color:#243446;line-height:1.55}
+
+.footnote{margin-top:26px;font-size:12.5px;color:var(--muted);background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:14px 18px;line-height:1.55}
+.footnote b{color:var(--ink)}
+.notice{margin:40px auto;max-width:520px;text-align:center;color:var(--muted);font-size:14px;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px}
+.notice a{color:var(--primary);font-weight:600}
+.tip{position:fixed;z-index:50;max-width:250px;background:var(--ink);color:#fff;font-size:12px;
+  line-height:1.4;padding:9px 11px;border-radius:9px;pointer-events:none;opacity:0;transition:.12s;
+  box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.hint{width:15px;height:15px;border-radius:50%;background:var(--line);color:var(--muted);
+  font-size:10px;display:inline-grid;place-items:center;cursor:help;font-weight:700;flex-shrink:0}
+.hint:hover{background:var(--teal);color:#fff}
+</style>
+</head>
+<body>
+<div class="flag"><i class="r"></i><i class="w"></i><i class="g"></i></div>
+
+<div class="topbar">
+  <div class="crest">Eco</div>
+  <div class="org">
+    <h1 id="org1">Министерство экономического развития и торговли РТ</h1>
+    <p id="org2">EcotahlilAI · Отчёты территорий</p>
+  </div>
+  <div class="spacer"></div>
+  <a class="back" href="/central" id="back">← Центр</a>
+  <div class="lang">
+    <button id="lTg">ТҶ</button><button id="lRu" class="on">РУС</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <h2 id="ttl">…</h2>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="srcbadge" id="srcb"></div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+  <div id="sections"></div>
+  <div class="footnote" id="fn" style="display:none"></div>
+  <div id="notice"></div>
+</div>
+
+<div class="tip" id="tip"></div>
+
+<script>
+const TOKEN_KEY='medt_token', LANG_KEY='medt_form_lang';
+const YEARS=[2025,2026,2027,2028,2029];
+const PALETTE=['#15507A','#0E9C95','#C8912A','#8493A6','#B4557A','#5C8A3A','#3A6EA5','#C2603A'];
+const ICONS={'5':'🏭','6':'⚡','8':'📦','9':'💧','12':'💰','15':'🚜','16':'🌾','18':'🏗️',
+  '21':'🛒','22':'🚚','24':'🏥','26':'🏫','28':'🎓','29':'👥','30':'🏘️','31':'💵','32':'📡','33':'🏢'};
+const L={
+  ru:{org2:'EcotahlilAI · Отчёты территорий',back:'← Центр',
+      cols:'Показатель',growth:'Рост',whatShow:'Что показывают данные',
+      dashboard:'Дашборд территории',forms:'форм',indicators:'показателей',values:'значений',
+      up:'растут',flat:'без изменений',down:'снижаются',topGrow:'Наибольший рост',
+      note:'Об источнике данных.',needLogin:'Чтобы открыть дашборд, войдите через ',
+      centerLink:'экран центра',noData:'По этой территории пока нет импортированных данных.',
+      noTerr:'Территория не указана. Откройте дашборд из экрана центра (клик по строке).',
+      forbid:'Доступ к этой территории ограничен вашей ролью.'},
+  tg:{org2:'EcotahlilAI · Ҳисоботи ҳудудҳо',back:'← Марказ',
+      cols:'Нишондиҳанда',growth:'Афзоиш',whatShow:'Маълумот чӣ нишон медиҳад',
+      dashboard:'Дашбордаи ҳудуд',forms:'шакл',indicators:'нишондиҳанда',values:'қиймат',
+      up:'меафзоянд',flat:'бетағйир',down:'коҳиш',topGrow:'Афзоиши бештарин',
+      note:'Дар бораи манбаи маълумот.',needLogin:'Барои кушодани дашборд, ворид шавед аз ',
+      centerLink:'экрани марказ',noData:'Барои ин ҳудуд ҳоло маълумоти воридшуда нест.',
+      noTerr:'Ҳудуд муайян нашуд. Дашбордро аз экрани марказ кушоед.',
+      forbid:'Дастрасӣ ба ин ҳудуд бо нақши шумо маҳдуд аст.'}
+};
+
+let lang=localStorage.getItem(LANG_KEY)||'ru';
+let DATA=null;
+const $=s=>document.querySelector(s);
+const params=new URLSearchParams(location.search);
+const territory=params.get('territory');
+
+function tr(k){return (L[lang]||L.ru)[k];}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(n){ if(n==null||!isFinite(n)) return '—'; return n>=1000?Number(n).toLocaleString('ru-RU'):String(n).replace('.',','); }
+function firstVal(v){ for(const y of YEARS) if(v[y]!=null&&isFinite(v[y])) return {y,val:v[y]}; return null; }
+function lastVal(v){ for(let i=YEARS.length-1;i>=0;i--){const y=YEARS[i]; if(v[y]!=null&&isFinite(v[y])) return {y,val:v[y]};} return null; }
+function growth(v){ const a=firstVal(v),b=lastVal(v); if(!a||!b||a.y===b.y||a.val===0) return null; return (b.val-a.val)/a.val*100; }
+function shortName(nm){ const s=nm.replace(/\s*\([^()]*\)\s*$/,'').trim(); return s.length>34?s.slice(0,33)+'…':s; }
+function gclass(g){ return g==null?'flat':g>0.5?'':g<-0.5?'down':'flat'; }
+function gtext(g){ if(g==null) return '—'; const s=g>0.5?'+':''; return s+g.toFixed(1).replace('.',',')+'%'; }
+
+const charts=[];
+function makeChart(canvas,indicators){
+  const top=indicators.slice().sort((a,b)=>{const la=lastVal(a.values),lb=lastVal(b.values);return (lb?lb.val:0)-(la?la.val:0);}).slice(0,5);
+  const fill=top.length===1;
+  const ds=top.map((ind,i)=>{const c=PALETTE[i%PALETTE.length];
+    return {label:lang==='ru'?ind.name_ru:ind.name_tg,data:YEARS.map(y=>ind.values[y]),
+      borderColor:c,backgroundColor:fill?c+'22':'transparent',borderWidth:2.6,pointRadius:0,
+      pointHoverRadius:5,pointHoverBackgroundColor:c,tension:.3,fill:fill,spanGaps:true};});
+  charts.push(new Chart(canvas,{type:'line',
+    data:{labels:YEARS,datasets:ds},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:600},
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,
+        callbacks:{label:c=>c.dataset.label+': '+fmt(c.parsed.y)}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#8493A6',font:{size:11.5}}},
+        y:{grid:{color:'#EEF2F7'},ticks:{color:'#8493A6',font:{size:11.5},
+          callback:v=>v>=1000?(v/1000).toFixed(v>=10000?0:1)+'к':v}}},
+      interaction:{mode:'index',intersect:false}}}));
+  return top;
+}
+
+function tableYears(tbl){
+  let mn=null,mx=null;
+  for(const ind of tbl.indicators) for(const y of YEARS)
+    if(ind.values[y]!=null&&isFinite(ind.values[y])){ if(mn==null||y<mn)mn=y; if(mx==null||y>mx)mx=y; }
+  return {mn:mn||YEARS[0],mx:mx||YEARS[YEARS.length-1]};
+}
+
+function summary(tbl){
+  let up=0,flat=0,down=0,top=null;
+  for(const ind of tbl.indicators){ const g=growth(ind.values);
+    if(g==null){flat++;continue;}
+    if(g>0.5)up++; else if(g<-0.5)down++; else flat++;
+    if(top==null||g>top.g) top={g,nm:lang==='ru'?ind.name_ru:ind.name_tg};
+  }
+  let s=tbl_i(tbl.indicators.length)+'. '+tr('up')+': '+up+', '+tr('flat')+': '+flat+', '+tr('down')+': '+down+'.';
+  if(top&&top.g>0.5) s+=' '+tr('topGrow')+' — «'+esc(shortName(top.nm))+'» ('+gtext(top.g)+').';
+  return s;
+}
+function tbl_i(n){ return (lang==='ru'?'Показателей':'Нишондиҳандаҳо')+': '+n; }
+
+function renderKpis(){
+  const picks=[];
+  for(const t of DATA.tables){ if(picks.length>=4)break; if(t.indicators[0]) picks.push(t.indicators[0]); }
+  for(const t of DATA.tables){ for(let i=1;i<t.indicators.length&&picks.length<4;i++) picks.push(t.indicators[i]); }
+  $('#kpis').innerHTML=picks.slice(0,4).map(ind=>{
+    const lv=lastVal(ind.values),g=growth(ind.values);
+    const gc=g==null?'flat':g>0.5?'up':g<-0.5?'down':'flat';
+    const arrow=g>0.5?'▲':g<-0.5?'▼':'▪';
+    return '<div class="kpi"><div class="lab">'+esc(shortName(lang==='ru'?ind.name_ru:ind.name_tg))+
+      (lv?', '+lv.y:'')+'</div>'+
+      '<div class="val">'+fmt(lv?lv.val:null)+(ind.unit?'<span class="un">'+esc(ind.unit)+'</span>':'')+'</div>'+
+      '<div class="delta '+gc+'">'+arrow+' '+gtext(g)+' '+(lang==='ru'?'к 2025':'нисбат ба 2025')+'</div></div>';
+  }).join('');
+}
+
+function renderSections(){
+  const box=$('#sections'); box.innerHTML='';
+  DATA.tables.forEach((tbl,ti)=>{
+    const ic=ICONS[tbl.num]||'📊';
+    const ttl=lang==='ru'?tbl.name_ru:tbl.name_tg;
+    const yy=tableYears(tbl);
+    const sec=document.createElement('div'); sec.className='section';
+    const rows=tbl.indicators.map(ind=>{
+      const g=growth(ind.values);
+      return '<tr><td class="nm">'+esc(lang==='ru'?ind.name_ru:ind.name_tg)+
+        (ind.unit?' <span style="color:var(--muted);font-weight:400">· '+esc(ind.unit)+'</span>':'')+'</td>'+
+        '<td class="n">'+fmt(ind.values[yy.mn])+'</td>'+
+        '<td class="n">'+fmt(ind.values[yy.mx])+'</td>'+
+        '<td class="n"><span class="chg '+gclass(g)+'">'+gtext(g)+'</span></td></tr>';
+    }).join('');
+    sec.innerHTML=
+      '<div class="sechead"><div class="ic">'+ic+'</div><h3>'+esc(ttl)+'</h3>'+
+        '<div class="tag">'+(lang==='ru'?'Форма ':'Шакл ')+esc(tbl.num)+'</div></div>'+
+      '<div class="grid2">'+
+        '<div class="card"><div class="legend" id="lg'+ti+'"></div><div class="cwrap"><canvas id="ch'+ti+'"></canvas></div></div>'+
+        '<div class="card"><div class="tblscroll"><table><thead><tr><th>'+tr('cols')+
+          '</th><th class="n">'+yy.mn+'</th><th class="n">'+yy.mx+'</th><th class="n">'+tr('growth')+
+          '</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>'+
+      '</div>'+
+      '<div class="explain"><h4>'+tr('whatShow')+'</h4><p>'+summary(tbl)+'</p></div>';
+    box.appendChild(sec);
+    const top=makeChart($('#ch'+ti),tbl.indicators);
+    $('#lg'+ti).innerHTML=top.map((ind,i)=>'<span><i style="background:'+PALETTE[i%PALETTE.length]+
+      '"></i> '+esc(shortName(lang==='ru'?ind.name_ru:ind.name_tg))+'</span>').join('');
+  });
+}
+
+function renderMeta(){
+  const t=DATA.territory;
+  const name=lang==='ru'?(t.name_ru||t.login):(t.name_tg||t.login);
+  document.title=name+' · '+tr('dashboard');
+  $('#ttl').textContent=name;
+  $('#sub').textContent=(lang==='ru'?'Прогноз социально-экономического развития':'Дурнамои рушди иҷтимоию иқтисодӣ')+
+    (DATA.tables[0]&&DATA.tables[0].cycle?' · '+DATA.tables[0].cycle:'');
+  const sl=lang==='ru'?DATA.sourceLabel.ru:DATA.sourceLabel.tg;
+  $('#srcb').textContent='📄 '+sl+' · '+DATA.filledTables+' '+(lang==='ru'?'из':'аз')+' '+DATA.totalTables+' '+tr('forms');
+  $('#org2').textContent=tr('org2'); $('#back').textContent=tr('back');
+  const indTotal=DATA.tables.reduce((a,t)=>a+t.indicators.length,0);
+  $('#fn').style.display='';
+  $('#fn').innerHTML='<b>'+tr('note')+'</b> '+
+    (lang==='ru'
+      ? 'Показатели территории «'+esc(name)+'»: заполнено <b>'+DATA.filledTables+' из '+DATA.totalTables+' форм</b> ('+indTotal+' показателей, '+DATA.filledCells+' значений). Источник — '+esc(sl)+'. Формы, отсутствующие в исходнике или с иной структурой строк, оставлены незаполненными: данные не досчитывались и не моделировались. Значения — объёмные; темпы роста рассчитаны системой.'
+      : 'Нишондиҳандаҳои ҳудуди «'+esc(name)+'»: пур шудааст <b>'+DATA.filledTables+' аз '+DATA.totalTables+' шакл</b> ('+indTotal+' нишондиҳанда, '+DATA.filledCells+' қиймат). Манбаъ — '+esc(sl)+'. Шаклҳое, ки дар ҳуҷҷати аслӣ нестанд ё сохтори дигар доранд, холӣ монданд.');
+}
+
+function render(){
+  if(!DATA) return;
+  charts.forEach(c=>c.destroy()); charts.length=0;
+  renderMeta(); renderKpis(); renderSections(); bindHints();
+}
+
+function showNotice(html){ $('#notice').innerHTML='<div class="notice">'+html+'</div>'; }
+
+async function load(){
+  if(!territory){ showNotice(tr('noTerr')); return; }
+  const token=localStorage.getItem(TOKEN_KEY);
+  if(!token){ showNotice(tr('needLogin')+'<a href="/central">'+tr('centerLink')+'</a>.'); return; }
+  let r;
+  try{ r=await fetch('/dashboard-data?territory='+encodeURIComponent(territory),{headers:{Authorization:'Bearer '+token}}); }
+  catch(e){ showNotice('Ошибка сети'); return; }
+  if(r.status===401){ showNotice(tr('needLogin')+'<a href="/central">'+tr('centerLink')+'</a>.'); return; }
+  if(r.status===403){ showNotice(tr('forbid')); return; }
+  if(!r.ok){ showNotice('Ошибка загрузки ('+r.status+')'); return; }
+  DATA=await r.json();
+  if(!DATA.tables||!DATA.tables.length){ renderMeta(); showNotice(tr('noData')); return; }
+  render();
+}
+
+const tip=$('#tip');
+function bindHints(){document.querySelectorAll('.hint').forEach(h=>{
+  h.onmouseenter=()=>{tip.textContent=h.dataset.t;tip.style.opacity=1;
+    const r=h.getBoundingClientRect();tip.style.left=Math.min(r.left,window.innerWidth-260)+'px';tip.style.top=(r.bottom+8)+'px';};
+  h.onmouseleave=()=>tip.style.opacity=0;});}
+
+function setLang(l){ lang=l; localStorage.setItem(LANG_KEY,l);
+  $('#lRu').classList.toggle('on',l==='ru'); $('#lTg').classList.toggle('on',l==='tg');
+  document.documentElement.lang=l; if(DATA&&DATA.tables&&DATA.tables.length) render(); else renderMeta&&(DATA?renderMeta():0); }
+$('#lRu').onclick=()=>setLang('ru'); $('#lTg').onclick=()=>setLang('tg');
+$('#lRu').classList.toggle('on',lang==='ru'); $('#lTg').classList.toggle('on',lang==='tg');
+
+load();
+</script>
+</body>
+</html>

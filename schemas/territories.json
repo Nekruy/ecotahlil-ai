@@ -1,0 +1,299 @@
+[
+  {
+    "login": "sogd",
+    "type": "region",
+    "name_ru": "Согдийская область",
+    "name_tg": "вилояти Суғд",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "dushanbe",
+    "type": "city",
+    "name_ru": "г. Душанбе",
+    "name_tg": "ш. Душанбе",
+    "region": "Душанбе",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "khujand",
+    "type": "city",
+    "name_ru": "г. Худжанд",
+    "name_tg": "ш. Хуҷанд",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "isfara",
+    "type": "city",
+    "name_ru": "г. Исфара",
+    "name_tg": "ш. Исфара",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "istaravshan",
+    "type": "city",
+    "name_ru": "г. Истаравшан",
+    "name_tg": "ш. Истаравшан",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "penjakent",
+    "type": "city",
+    "name_ru": "г. Пенджикент",
+    "name_tg": "ш. Панҷакент",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "konibodom",
+    "type": "city",
+    "name_ru": "г. Канибадам",
+    "name_tg": "ш. Конибодом",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "buston",
+    "type": "city",
+    "name_ru": "г. Бустон",
+    "name_tg": "ш. Бӯстон",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "mastchoh",
+    "type": "district",
+    "name_ru": "Матчинский район",
+    "name_tg": "ноҳияи Мастчоҳ",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "spitamen",
+    "type": "district",
+    "name_ru": "Спитаменский район",
+    "name_tg": "ноҳияи Спитамен",
+    "region": "Согд",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "kulob",
+    "type": "city",
+    "name_ru": "г. Куляб",
+    "name_tg": "ш. Кӯлоб",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "qurghonteppa",
+    "type": "city",
+    "name_ru": "г. Бохтар (Курган-Тюбе)",
+    "name_tg": "ш. Бохтар",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "vakhsh",
+    "type": "district",
+    "name_ru": "Вахшский район",
+    "name_tg": "ноҳияи Вахш",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "danghara",
+    "type": "district",
+    "name_ru": "Дангаринский район",
+    "name_tg": "ноҳияи Данғара",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "muminobod",
+    "type": "district",
+    "name_ru": "Муминабадский район",
+    "name_tg": "ноҳияи Муъминобод",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "vose",
+    "type": "district",
+    "name_ru": "Восейский район",
+    "name_tg": "ноҳияи Восеъ",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "hamadoni",
+    "type": "district",
+    "name_ru": "Хамадонийский район",
+    "name_tg": "ноҳияи Ҳамадонӣ",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "shahrituz",
+    "type": "district",
+    "name_ru": "Шахритусский район",
+    "name_tg": "ноҳияи Шаҳритус",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "panj",
+    "type": "district",
+    "name_ru": "Пянджский район",
+    "name_tg": "ноҳияи Панҷ",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "baljuvon",
+    "type": "district",
+    "name_ru": "Бальджуванский район",
+    "name_tg": "ноҳияи Балҷувон",
+    "region": "Хатлон",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "khorog",
+    "type": "city",
+    "name_ru": "г. Хорог",
+    "name_tg": "ш. Хоруғ",
+    "region": "ГБАО",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "ishkoshim",
+    "type": "district",
+    "name_ru": "Ишкашимский район",
+    "name_tg": "ноҳияи Ишкошим",
+    "region": "ГБАО",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "rushan",
+    "type": "district",
+    "name_ru": "Рушанский район",
+    "name_tg": "ноҳияи Рӯшон",
+    "region": "ГБАО",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "shugnan",
+    "type": "district",
+    "name_ru": "Шугнанский район",
+    "name_tg": "ноҳияи Шуғнон",
+    "region": "ГБАО",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "murghob",
+    "type": "district",
+    "name_ru": "Мургабский район",
+    "name_tg": "ноҳияи Мурғоб",
+    "region": "ГБАО",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "tursunzoda",
+    "type": "city",
+    "name_ru": "г. Турсунзаде",
+    "name_tg": "ш. Турсунзода",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "hisor",
+    "type": "city",
+    "name_ru": "г. Гиссар",
+    "name_tg": "ш. Ҳисор",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "varzob",
+    "type": "district",
+    "name_ru": "Варзобский район",
+    "name_tg": "ноҳияи Варзоб",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "rudaki",
+    "type": "district",
+    "name_ru": "район Рудаки",
+    "name_tg": "ноҳияи Рӯдакӣ",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "faizobod",
+    "type": "district",
+    "name_ru": "Файзабадский район",
+    "name_tg": "ноҳияи Файзобод",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "nurobod",
+    "type": "district",
+    "name_ru": "Нурабадский район",
+    "name_tg": "ноҳияи Нуробод",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "rasht",
+    "type": "district",
+    "name_ru": "Раштский район",
+    "name_tg": "ноҳияи Рашт",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  },
+  {
+    "login": "tavildara",
+    "type": "district",
+    "name_ru": "Тавильдаринский район",
+    "name_tg": "ноҳияи Тавилдара",
+    "region": "РРП",
+    "lat": null,
+    "lng": null
+  }
+]
